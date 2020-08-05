@@ -1,0 +1,4 @@
+#!/bin/bash
+
+rsync -av -e 'ssh -p 21212' ./build/ refapi@176.9.145.71:reference.api.rees46.com/public/
+rsync -av -e 'ssh -p 21212' --delete ./build/ refapi@176.9.145.71:reference.api.rees46.com/public/
