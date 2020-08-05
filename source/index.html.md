@@ -35,8 +35,6 @@ This parameter identifies your shop.
 curl "https://api.rees46.com/?shop_id=357382bf66ac0ce2f1722677c59511"
 ```
 
-Make sure to replace `357382bf66ac0ce2f1722677c59511` with your API key.
-
 <aside class="notice">
 You must replace <code>357382bf66ac0ce2f1722677c59511</code> with your shop's API key.
 </aside>
