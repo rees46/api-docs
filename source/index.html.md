@@ -11,6 +11,8 @@ toc_footers:
   - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
 
 includes:
+  - search
+  - mobile_push_tokens
   - errors
 
 search: true
@@ -78,33 +80,4 @@ ssid | false | Is mandatory if you have it. Request without `ssid` will generate
 v | true | Version. Just use `3` as value.
 seance | true | User's temporary identifier for the current session. Must be regenerated every time user starts new session. Just unique string: `uuid8` is ok.
 referrer | false | Referrer page URL for web integration.
-
-# Mobile push tokens
-
-## Create new token
-
-```shell
-curl -d "ssid=SSID&shop_id=SHOPID&token=TOKEN&platform=PLATFORM" https://api.rees46.com/mobile_push_tokens
-```
-
-> The above command returns JSON structured like this:
-
-```json
-{}
-```
-
-This endpoint creates new token for the user, identified by `ssid` parameter.
-
-### HTTP Request
-
-`POST https://api.rees46.com/mobile_push_tokens`
-
-### Query Parameters
-
-Parameter | Required | Description
---------- | ------- | -----------
-ssid | true | Session ID of the user. You get it from `init` method in SDK.
-platform | true | Identifies platform: `ios` or `android`
-token | true | Unique mobile push token from iOS or Android.
-shop_id | true | Your API key
 
