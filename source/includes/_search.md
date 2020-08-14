@@ -46,5 +46,6 @@ filters | false | Optional escaped JSON string with filter parameters. For examp
 price_min | false | Min price
 price_max | false | Max price
 colors | false | Comma separated list of colors
+exclude | false | Comma separated list of products IDs to exclude from search results 
 email | false | It's only for S2S integration, when service doesn't have user's session. Mobile SDK doesn't use it.
 
