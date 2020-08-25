@@ -11,7 +11,7 @@ Service provides methods to manage user's subscriptions
 ### Subscribe user to mailings
 
 ```shell
-curl -d "shop_id=SHOPID&shop_secret=SECRET&email=my@email.com&event=subscribed&segment_id=SEGMENT_ID" \
+curl -d "shop_id=SHOPID&shop_secret=SECRET&email=my@email.com&event=subscription&segment_id=SEGMENT_ID" \
 https://api.rees46.com/subscriptions/manage
 ```
 
@@ -26,8 +26,8 @@ Parameter | Required | Description
 shop_id | true | Your API key
 shop_secret | true | Secret API key
 email | true | User's email
-event | true | Event to process: `subscribed`
-segment_id | false | Segment ID to put subscribed user (only for `subscribed` event).
+event | true | Event to process: `subscription`
+segment_id | false | Segment ID to put subscribed user
 
 
 ### Unsubscribe user from mailings
@@ -35,7 +35,7 @@ segment_id | false | Segment ID to put subscribed user (only for `subscribed` ev
 Use this method to unsubscribe user from all types of mailings:
 
 ```shell
-curl -d "shop_id=SHOPID&shop_secret=SECRET&email=my@email.com&&event=unsubscribed" \
+curl -d "shop_id=SHOPID&shop_secret=SECRET&email=my@email.com&&event=unsubscription" \
 https://api.rees46.com/subscriptions/manage
 ```
 
@@ -50,7 +50,7 @@ Parameter | Required | Description
 shop_id | true | Your API key
 shop_secret | true | Secret API key
 email | true | User's email
-event | true | Event to process: `unsubscribed`
+event | true | Event to process: `unsubscription`
 
 
 ### Email is bounced
@@ -58,7 +58,7 @@ event | true | Event to process: `unsubscribed`
 Use this method only for hard bounces. Don't use it for soft bounce, because it purges email from database forever.
 
 ```shell
-curl -d "shop_id=SHOPID&shop_secret=SECRET&email=my@email.com&event=bounced" \
+curl -d "shop_id=SHOPID&shop_secret=SECRET&email=my@email.com&event=hardbounce" \
 https://api.rees46.com/subscriptions/manage
 ```
 
@@ -73,14 +73,14 @@ Parameter | Required | Description
 shop_id | true | Your API key
 shop_secret | true | Secret API key
 email | true | User's email
-event | true | Event to process: `bounced`
+event | true | Event to process: `hardbounce`
 
 ### Email is complained
 
 Use this method on FBL request (user marked email as spam):
 
 ```shell
-curl -d "shop_id=SHOPID&shop_secret=SECRET&email=my@email.com&event=complained" \
+curl -d "shop_id=SHOPID&shop_secret=SECRET&email=my@email.com&event=complaint" \
 https://api.rees46.com/subscriptions/manage
 ```
 
@@ -95,4 +95,4 @@ Parameter | Required | Description
 shop_id | true | Your API key
 shop_secret | true | Secret API key
 email | true | User's email
-event | true | Event to process: `complained`
+event | true | Event to process: `complaint`
