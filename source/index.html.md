@@ -12,6 +12,7 @@ toc_footers:
 
 includes:
   - search
+  - subscriptions
   - mobile_push_tokens
   - errors
 
