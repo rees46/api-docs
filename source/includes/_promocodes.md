@@ -7,7 +7,7 @@ Note: unique promo codes are limited. Store fetched promo code during user's ses
 ## Fetch promo code
 
 ```shell
-curl https://api.rees46.com/promocodes/fetch?ssid=SSID&shop_id=SHOPID&id=ID
+curl https://api.rees46.com/promo_codes/fetch?ssid=SSID&shop_id=SHOPID&id=ID
 ```
 
 ```javascript
@@ -22,7 +22,7 @@ r46("get_promo_code", {list_id: PROMOCODE_LIST_ID}, success_callback, error_call
 
 ### HTTP Request
 
-`GET https://api.rees46.com/promocodes/fetch`
+`GET https://api.rees46.com/promo_codes/fetch`
 
 ### Query Parameters
 
