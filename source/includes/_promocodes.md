@@ -11,13 +11,13 @@ curl -d "ssid=SSID&shop_id=SHOPID&list_id=ID" https://api.rees46.com/promocodes/
 ```
 
 ```javascript
-r46("get_promo_code", 'PromoCodeListID', success_callback, error_callback);
+r46("get_promo_code", {list_id: PROMOCODE_LIST_ID}, success_callback, error_callback);
 ```
 
 > The above command returns JSON structured like this:
 
 ```json
-{"code":  "UNIQUE_ID"}
+{"code":  "UNIQUE_CODE"}
 ```
 
 ### HTTP Request
