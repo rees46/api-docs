@@ -1,0 +1,174 @@
+# Net Promoter Score
+
+Endpoints to work with NPS service.
+
+Glossary:
+
+* Process category: separate process you which quality you want to measure. Examples: `Delivery of online purchase`, `Delivery of offline purchase`, `Online checkout quality`, `Customer service`, etc.
+* Channel: channel where review was received from. Examples: `website`, `ios_application`, `pos`, `callcenter`, `android_application`.
+
+## NPS categories
+
+This endpoints returns a list of active categories. Categories list can be customized on NPS settings page in backoffice.
+
+Note: if you provide any of user identifiers (see query params table), questions and "thank you" messages can be personalized.
+
+```shell
+curl https://api.rees46.com/nps/categories?shop_id=SHOPID&email=email@example.com&locale=en
+```
+
+```javascript
+r46('nps', 'categories', success, failure);
+```
+
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+    "id": 1, 
+    "code": "website", 
+    "name": "Online checkout quality",
+    "promoter_question": "Which features do you value/use the most?",
+    "passive_question": "How can we improve your experience?",
+    "detractor_question": "What was missing or disappointing in your experience with us?",
+    "promoter_success": "Thanks for your feedback, Mr. John Smith. It’s great to hear that you’re a fan of our product. Your feedback helps us discover new opportunities to improve and make sure you have the best possible experience.",
+    "passive_success": "Thanks for your feedback. Our goal is to create the best possible product, and your thoughts, ideas, and suggestions play a major role in helping us identify opportunities to improve.",
+    "detractor_success": "Thanks for your feedback. We highly value all ideas and suggestions from our customers, whether they’re positive or critical. In the future, our team might reach out to you to learn more about how we can further improve our services so that it exceeds your expectations."
+  },
+  {
+    "id": 3, 
+    "code": "delivery",
+    "name": "Delivery quality survey",
+    "promoter_question": "Which features do you value/use the most?",
+    "passive_question": "How can we improve your experience?",
+    "detractor_question": "What was missing or disappointing in your experience with us?",
+    "promoter_success": "Thanks for your feedback, Mr. John Smith. It’s great to hear that you’re a fan of our product. Your feedback helps us discover new opportunities to improve and make sure you have the best possible experience.",
+    "passive_success": "Thanks for your feedback. Our goal is to create the best possible product, and your thoughts, ideas, and suggestions play a major role in helping us identify opportunities to improve.",
+    "detractor_success": "Thanks for your feedback. We highly value all ideas and suggestions from our customers, whether they’re positive or critical. In the future, our team might reach out to you to learn more about how we can further improve our services so that it exceeds your expectations."
+  }
+]
+```
+
+### HTTP Request
+
+`GET https://api.rees46.com/nps/categories`
+
+### Query Parameters
+
+Parameter | Type | Required | Description
+--------- | ------- | -------  | -----------
+shop_id | String | true | Your API key
+did | String | false | Device ID of the user. SDK handles it automatically.
+email | String | false | User's email
+phone | String | false | User's phone
+loyalty_id | String | false | User's loyalty ID
+locale | String | false | Locale of messages
+
+
+## NPS channels
+
+Get list of available channels, from which NPS review can be created. Channels list can be customized on NPS settings page in backoffice. 
+
+```shell
+curl https://api.rees46.com/nps/channels?shop_id=SHOPID
+```
+
+```javascript
+r46('nps', 'channels', success, failure);
+```
+
+
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+    "id": 1, 
+    "code": "website", 
+    "name": "Online checkout quality"
+  },
+  {
+    "id": 2, 
+    "code": "ios_app",
+    "name": "iOS mobile app"
+  },
+  {
+    "id": 3, 
+    "code": "ios_app",
+    "name": "iOS mobile app"
+  },
+  {
+    "id": 4, 
+    "code": "pos",
+    "name": "POS terminal"
+  }
+]
+```
+
+### HTTP Request
+
+`GET https://api.rees46.com/nps/channels`
+
+### Query Parameters
+
+Parameter | Type | Required | Description
+--------- | ------- | -------  | -----------
+shop_id | String | true | Your API key
+
+
+
+
+
+## Save review 
+
+Create an NPS review for the specific survey and user. To identify user you can use one of the listed identifiers:
+
+- device ID - for web and mobile apps. This ID is used automatically by our SDK.
+- email - any channel.
+- phone - any channel.
+- loyalty ID - any channel, usually POS.
+- order ID - any channel, usually POS.
+
+<aside class="notice">
+If user rated more than one process category, you have to send separate request for each category.
+</aside>
+
+### HTTP Request
+
+`POST https://api.rees46.com/nps/create`
+
+### Query Parameters
+
+> Form data format:
+
+```json 
+    {
+        "status": "success",
+        "message": ""
+    }
+```
+
+```json 
+    {
+        "status": "error",
+        "message": ""
+    }
+``` 
+
+One of the listed user identifiers is required: `did`, `email`, `phone`, `loyalty_id`, `order_id`.
+
+Parameter | Type | Required | Description
+--------- | ------- | ------- | -----------
+shop_id | String | true | Your API key
+shop_secret | String | true | Your secret API key
+did | String | false | Device ID of the user. SDK handles it automatically.
+email | String | false | User's email
+phone | String | false | User's phone
+loyalty_id | String | false | User's loyalty ID
+order_id | String | false | Order ID, related to the current survey
+channel_id | String | true | NPS channel ID
+category_id | String | true | NPS process category ID
+rate | Integer | true | Score of the rated process
+comment | String | false | Optional answer to the follow-up question
+

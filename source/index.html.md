@@ -16,6 +16,7 @@ includes:
   - subscriptions
   - mobile_push_tokens
   - promocodes
+  - nps
   - errors
 
 search: true
