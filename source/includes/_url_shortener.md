@@ -61,8 +61,6 @@ The endpoint allows to create 1 to N shortened URLs. Use batch request to shorte
 
 ### HTTP Request
 
-
-
 Method | Endpoint | Content-type
 --------- | --------- | ---------
 POST | https://api.rees46.com/url/create | application/json
@@ -70,6 +68,10 @@ POST | https://api.rees46.com/url/create | application/json
 ### Query Parameters
 
 This is JSON request. All data must be send as JSON body. Do not forget to set `Content-type: application/json`.
+
+<aside class="notice">
+The "code" param is available only for on-premise setup. SaaS doesn't support it.
+</aside>
 
 Parameter | Type | Required | Description
 --------- | ------- | ------- | -----------
@@ -79,3 +81,4 @@ links | Array | true | List of URLs to shorten. At least 1 element must present.
 url | String | true | Source URL to shorted. Must be present in each element if `list` array.
 lifetime | Integer | false | Number of days shortened link to be alive. Link will be deleted after this number of days. Min value: `1`. Max value: `90`. Default value: `30`. Try not to use large numbers, because number of unique shortened URLs is limited.
 code | String | false | Use `code` property to manually create links with specified URL. Keep in mind: every time you set `code` manually, it overrides previous link with the same code.
+
