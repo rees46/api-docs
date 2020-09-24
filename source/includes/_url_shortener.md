@@ -61,9 +61,11 @@ The endpoint allows to create 1 to N shortened URLs. Use batch request to shorte
 
 ### HTTP Request
 
-`POST https://api.rees46.com/url/create`
 
-Content-type: `application/json`
+
+Method | Endpoint | Content-type
+--------- | --------- | ---------
+POST | https://api.rees46.com/url/create | application/json
 
 ### Query Parameters
 
