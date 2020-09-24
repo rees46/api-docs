@@ -17,6 +17,7 @@ includes:
   - mobile_push_tokens
   - promocodes
   - nps
+  - url_shortener
   - errors
 
 search: true
