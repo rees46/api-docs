@@ -144,15 +144,16 @@ If user rated more than one process category, you have to send separate request 
 
 ```json 
     {
-        "status": "success",
-        "message": ""
+        "status": "success"
     }
 ```
 
 ```json 
     {
         "status": "error",
-        "message": ""
+        "payload": {
+          "message": "error message"
+        }
     }
 ``` 
 
