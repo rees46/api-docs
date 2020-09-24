@@ -22,12 +22,12 @@ Content-type: application/json
         },
         {
             "url": "https://example.com/page/2/?utm_source=source...",
-            "lifetime": 60,
+            "lifetime": 60
         },
         {
             "url": "https://example.com/page/3/?utm_source=source...",
             "code": "a",
-            "lifetime": 10,
+            "lifetime": 10
         }
     ]
 }
