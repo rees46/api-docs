@@ -169,8 +169,8 @@ email | String | false | User's email
 phone | String | false | User's phone
 loyalty_id | String | false | User's loyalty ID
 order_id | String | false | Order ID, related to the current survey
-channel_id | String | true | NPS channel ID
-category_id | String | true | NPS process category ID
+channel | String | true | NPS channel code
+category | String | true | NPS process category code
 rate | Integer | true | Score of the rated process
 comment | String | false | Optional answer to the follow-up question
 
