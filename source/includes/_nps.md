@@ -164,6 +164,7 @@ Parameter | Type | Required | Description
 shop_id | String | true | Your API key
 shop_secret | String | true | Your secret API key
 did | String | false | Device ID of the user. SDK handles it automatically.
+seance | true | Temporary user session ID. Required when sending NPS with `did` identifier.
 email | String | false | User's email
 phone | String | false | User's phone
 loyalty_id | String | false | User's loyalty ID
