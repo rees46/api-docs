@@ -1,0 +1,165 @@
+# Sending mobile push notifications
+
+## Default payload structure
+
+```json
+{
+  "aps": {
+    "alert": {
+      "title": "...",
+      "subtitle": "...",
+      "body": "...",
+      "badge": 1
+    }
+  },
+  "event": { 
+    "type": "...",
+    "uri": "..."
+  },
+  "src": {
+    "type": "...",
+    "id": "..."
+  }
+}
+```
+
+Parameter | Required | Description
+--------- | ------- | -----------
+aps.alert.title | true | The title of the notification. Apple Watch displays this string in the short look notification interface. Specify a string that is quickly understood by the user.
+aps.alert.subtitle | true | Additional information that explains the purpose of the notification.
+aps.alert.body | true | The content of the alert message.
+aps.alert.badge | true | The number to display in a badge on your app’s icon. Specify 0 to remove the current badge, if any.
+event | false | Optional object with additional data.
+event.type | true | Type of the notification: `web`, `category`, `product`, `custom`.
+event.uri | true | Resource identificator depending on the type of event. See examples below.
+src | true | Information about a campaign (source of the message).
+src.type | true | Type of a campaign: `bulk`, `chain`, `transactional`.
+src.id | true | Type of a campaign. String.
+
+<aside class="notice">
+If `src` section is present, each tracked event must be populated with this data to track campaign's efficiency.
+</aside>
+
+## Basic message
+
+```json
+{
+  "aps": {
+    "alert": {
+      "title": "Welcome aboard!",
+      "subtitle": "Greeting message.",
+      "body": "Hey, it's nice to know you're with us now. Check new updates in our application.",
+      "badge": 1
+    }
+  },
+  "src": {
+    "type": "bulk",
+    "id": "33631"
+  }
+}
+```
+
+This kind of message can be used to attract attention and open home screen of the application.
+
+## Open web link
+
+```json
+{
+  "aps": {
+    "alert": {
+      "title": "Only today",
+      "subtitle": "Special Offer",
+      "body": "This special offer for Dyson products only for you!",
+      "badge": 1
+    }
+  },
+  "event": { 
+    "type": "web",
+    "uri": "https://example.com/landing/promo"
+  },
+  "src": {
+    "type": "bulk",
+    "id": "XFMjM4VAF4"
+  }
+}
+```
+
+Usually used for promo campaigns when final action is to open some URL in web view.
+
+## Open category
+
+```json
+{
+  "aps": {
+    "alert": {
+      "title": "Black Friday!",
+      "subtitle": "Discount",
+      "body": "Check our big sale from this category",
+      "badge": 1
+    }
+  },
+  "event": { 
+    "type": "category",
+    "uri": "BFRIDAY_CATEGORY_ID"
+  },
+  "src": {
+    "type": "chain",
+    "id": "72CONd54uF"
+  }
+}
+```
+
+Suitable to open specific category by it's ID. For example for bulk messages about discounts.
+
+## Open product
+
+```json
+{
+  "aps": {
+    "alert": {
+      "title": "...",
+      "subtitle": "...",
+      "body": "...",
+      "badge": 1
+    }
+  },
+  "event": { 
+    "type": "product",
+    "uri": "PRODUCT123"
+  },
+  "src": {
+    "type": "chain",
+    "id": "ugLxQ7KrnL"
+  }
+}
+```
+
+Suitable to open specific product by it's ID. For example for triggered messages.
+
+## Open custom page
+
+```json
+{
+  "aps": {
+    "alert": {
+      "title": "...",
+      "subtitle": "...",
+      "body": "...",
+      "badge": 1
+    }
+  },
+  "event": { 
+    "type": "custom",
+    "uri": "order/status/36"
+  },
+  "src": {
+    "type": "transactional",
+    "id": "order_delivered"
+  }
+}
+```
+
+Can be used to open any resource by custom data. For example for transactional messages to show order status.
+
+
+
