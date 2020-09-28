@@ -12,7 +12,7 @@ Service provides access to product recommendations endpoint.
 
 Parameter | Required | Description
 --------- | ------- | -----------
-ssid | true | Session ID of the user. You get it from `init` method in SDK.
+did | true | Device ID. You get it from `init` method in SDK.
 shop_id | true | Your API key
 seance | true | Temporary user session ID
 recommender_type | true | Always `dynamic`

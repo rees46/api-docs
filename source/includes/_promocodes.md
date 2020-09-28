@@ -7,7 +7,7 @@ Note: unique promo codes are limited. Store fetched promo code during user's ses
 ## Fetch promo code
 
 ```shell
-curl https://api.rees46.com/promo_codes/fetch?ssid=SSID&shop_id=SHOPID&id=ID
+curl https://api.rees46.com/promo_codes/fetch?did=DEVICE_ID&shop_id=SHOPID&id=ID
 ```
 
 ```javascript
@@ -28,7 +28,7 @@ r46("get_promo_code", {list_id: PROMOCODE_LIST_ID}, success_callback, error_call
 
 Parameter | Required | Description
 --------- | ------- | -----------
-ssid | true | Session ID of the user. You get it from `init` method in SDK.
+did | true | Device ID. You get it from `init` method in SDK.
 shop_id | true | Your API key
 seance | true | Temporary user session ID
 id | true | Promo codes list ID

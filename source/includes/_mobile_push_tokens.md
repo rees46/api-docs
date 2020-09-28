@@ -3,7 +3,7 @@
 ## Create new token
 
 ```shell
-curl -d "ssid=SSID&shop_id=SHOPID&token=TOKEN&platform=PLATFORM" https://api.rees46.com/mobile_push_tokens
+curl -d "did=DEVICE_ID&shop_id=SHOPID&token=TOKEN&platform=PLATFORM" https://api.rees46.com/mobile_push_tokens
 ```
 
 > The above command returns JSON structured like this:
@@ -12,7 +12,7 @@ curl -d "ssid=SSID&shop_id=SHOPID&token=TOKEN&platform=PLATFORM" https://api.ree
 {}
 ```
 
-This endpoint creates new token for the user, identified by `ssid` parameter.
+This endpoint creates new token for the user, identified by `did` parameter.
 
 ### HTTP Request
 
@@ -22,7 +22,7 @@ This endpoint creates new token for the user, identified by `ssid` parameter.
 
 Parameter | Required | Description
 --------- | ------- | -----------
-ssid | true | Session ID of the user. You get it from `init` method in SDK.
+did | true | Device ID. You get it from `init` method in SDK.
 platform | true | Identifies platform: `ios` or `android`
 token | true | Unique mobile push token from iOS or Android.
 shop_id | true | Your API key

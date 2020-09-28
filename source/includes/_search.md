@@ -12,7 +12,7 @@ Service provides 2 types of search: instant (typeahead) and full search.
 
 Parameter | Required | Description
 --------- | ------- | -----------
-ssid | true | Session ID of the user. You get it from `init` method in SDK.
+did | true | Device ID. You get it from `init` method in SDK.
 shop_id | true | Your API key
 seance | true | Temporary user session ID
 type | true | In this case: "instant_search"
@@ -28,7 +28,7 @@ search_query | true | Search query
 
 Parameter | Required | Description
 --------- | ------- | -----------
-ssid | true | Session ID of the user. You get it from `init` method in SDK.
+did | true | Device ID. You get it from `init` method in SDK.
 shop_id | true | Your API key
 seance | true | Temporary user session ID
 type | true | In this case: "full_search"
