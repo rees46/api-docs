@@ -1,6 +1,6 @@
 # Net Promoter Score
 
-Endpoints to work with NPS service.
+Endpoints is used to work with NPS service.
 
 Glossary:
 

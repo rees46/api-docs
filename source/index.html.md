@@ -16,6 +16,7 @@ includes:
   - subscriptions
   - mobile_push_tokens
   - mobile_push_notifications
+  - profile
   - promocodes
   - nps
   - url_shortener
