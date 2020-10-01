@@ -5,12 +5,13 @@ language_tabs:
   - shell
   - javascript
   - swift
+  - android
 
 toc_footers:
-  - <a href='#'>Sign Up for a Developer Key</a>
-  - <a href='https://github.com/slatedocs/slate'>Documentation Powered by Slate</a>
+  - <a href='https://app.rees46.com/customers/sign_up' target='_blank'>Sign Up for a Developer Key</a>
 
 includes:
+  - tracking
   - recommendations
   - search
   - subscriptions
@@ -42,11 +43,11 @@ To authorize, send all requests with `shop_id` parameter. You can send it both i
 This parameter identifies your shop.
 
 ```shell
-curl "https://api.rees46.com/?shop_id=357382bf66ac0ce2f1722677c59511"
+curl "https://api.rees46.com/?shop_id=SHOPID"
 ```
 
 <aside class="notice">
-You must replace <code>357382bf66ac0ce2f1722677c59511</code> with your shop's API key.
+You must replace <code>SHOPID</code> with your shop's API key.
 </aside>
 
 # Initialize
