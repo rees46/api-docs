@@ -15,16 +15,16 @@ Read the https://reference.api.rees46.com for usage details.
 
 Install `rvm`: https://rvm.io
 
-Install ruby 2.3.x using rvm:
+Install ruby 2.7.x using rvm:
 
 ```shell
-rvm install 2.3.1
+rvm install 2.7.0
 ```
 
-Use ruby 2.3.1:
+Use ruby 2.7.0:
 
 ```
-rvm 2.3.1
+rvm 2.7.0
 ```
 
 Install gem bundler, if not present:
