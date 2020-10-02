@@ -80,6 +80,11 @@ Send this event when user opens product's details page.
 
 
 ## User viewed a category
+
+Send this event when user opens category page.
+
+
+
 ## User searched something
 ## User added product to cart
 ## User removed product from cart
