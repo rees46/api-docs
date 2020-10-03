@@ -130,6 +130,8 @@ Create an NPS review for the specific survey and user. To identify user you can 
 - loyalty ID - any channel, usually POS.
 - order ID - any channel, usually POS.
 
+If there is existing review from the same user, channel, category and date, it will be updated instead of creating new one.
+
 <aside class="notice">
 If user rated more than one process category, you have to send separate request for each category.
 </aside>
