@@ -50,7 +50,7 @@ Parameter | Type | Required | Description
 --------- | ------- | -------  | -----------
 email | String | false | User's email 
 phone_number | String | false | User's phone
-loyalty_card | String | false | User's loyalty ID
+loyalty_id | String | false | User's loyalty ID
 location_id | String | false | User's location (city) ID
 loyalty_card_location | String | false | Location (city) ID where user got their loyalty card
 digests | Boolean | false | Subscribe user to bulk emails
