@@ -122,6 +122,29 @@ shop_id | String | true | Your API key
 
 ## Save review 
 
+```swift
+// Basic usage
+sdk.review(rate: 3, channel: "ios_app", category: "checkout") { _ in
+  print("Review is posted")
+}
+
+// Rate order
+sdk.review(rate: 6, channel: "ios_app", category: "checkout", order_id: "ORDER-3341") { _ in
+  print("Review is posted")
+}
+
+// With comment
+sdk.review(rate: 9, channel: "ios_app", category: "checkout", comment: "Nice application, thank you!") { _ in
+  print("Review is posted")
+}
+
+// With comment and order_id
+sdk.review(rate: 10, channel: "ios_app", category: "checkout", order_id: "ORDER-3341", comment: "Nice application, thank you!") { _ in
+  print("Review is posted")
+}
+```
+
+
 Create an NPS review for the specific survey and user. To identify user you can use one of the listed identifiers:
 
 - device ID - for web and mobile apps. This ID is used automatically by our SDK.
