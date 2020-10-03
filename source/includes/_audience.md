@@ -1,0 +1,59 @@
+# Audience
+
+This section allows to manage users, their subscriptions and segments.
+
+## Import users
+
+```shell
+curl -i -X POST -H "Content-Type: application/json" --data-binary "@data.json" https://api.rees46.com/profile/set
+
+# data.json
+{
+  "shop_id": "1234567890",
+  "shop_secret": "0987654321",
+  "segment_id": "123",
+  "audience": [
+    {
+      "email": "test@example.com",
+      "triggers": true,
+      "digests": true,
+      "loyalty_card": "123454321",
+      "phone_number": "9991005000",
+      "location_id": "107001",
+      "loyalty_card_location": "107001",
+      "child": true
+    }
+  ]
+}
+```
+
+
+
+Upload audience to database. You can upload users to the default segment or put it in the specific segment. At the same time you can subscribe or unsubscribe users from any kind of email campaigns.
+
+### Query Parameters
+
+Parameter | Type | Required | Description
+--------- | ------- | -------  | -----------
+shop_id | String | true | Your API key
+shop_secret | String | true | Your API secret key
+segment_id | Integer | false | Segment ID
+audience | Array | true | Array of user data objects (see below)
+
+Properties of audience elements:
+
+<aside class="notice">
+One of properties must present: email, phone_number, loyalty_id
+</aside>
+
+Parameter | Type | Required | Description
+--------- | ------- | -------  | -----------
+email | String | false | User's email 
+phone_number | String | false | User's phone
+loyalty_card | String | false | User's loyalty ID
+location_id | String | false | User's location (city) ID
+loyalty_card_location | String | false | Location (city) ID where user got their loyalty card
+digests | Boolean | false | Subscribe user to bulk emails
+triggers | Boolean | false | Subscribe user to drip campaigns (triggered emails)
+child | Boolean | false | User has kids
+

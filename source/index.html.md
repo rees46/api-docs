@@ -21,6 +21,7 @@ includes:
   - mobile_push_tokens
   - mobile_push_notifications
   - profile
+  - audience
   - promocodes
   - nps
   - url_shortener
