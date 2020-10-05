@@ -196,6 +196,6 @@ loyalty_id | String | false | User's loyalty ID
 order_id | String | false | Order ID, related to the current survey
 channel | String | true | NPS channel code
 category | String | true | NPS process category code
-rate | Integer | true | Score of the rated process
+rate | Integer | true | Score of the rated process: 1..10
 comment | String | false | Optional answer to the follow-up question
 
