@@ -122,6 +122,20 @@ shop_id | String | true | Your API key
 
 ## Save review 
 
+```javascript 
+
+// Full form
+r46.review(channel, category, rating, comment, order_id, success, failure);
+
+// Short version
+r46.review(channel, category, rating);
+
+// With comment
+r46.review(channel, category, rating, comment, order_id, success, failure);
+
+```
+
+
 ```swift
 // Basic usage
 sdk.review(rate: 3, channel: "ios_app", category: "checkout") { _ in
@@ -165,13 +179,15 @@ If user rated more than one process category, you have to send separate request 
 
 ### Query Parameters
 
-> Form data format:
+> Response on success:
 
 ```json 
     {
         "status": "success"
     }
 ```
+
+> Response on failure:
 
 ```json 
     {
