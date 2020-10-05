@@ -125,10 +125,10 @@ shop_id | String | true | Your API key
 ```javascript 
 
 // Full form
-r46("nps", "review", {channel: "channel_code", category: "category_code", rate: rating_from_1_to_10, comment: "Some comment"}, success, failure);
+r46("nps", "review", {channel: "channel_code", category: "category_code", rate: 7, comment: "Some comment"}, success, failure);
 
 // Without comment
-r46("nps", "review", {channel: "channel_code", category: "category_code", rate: rating_from_1_to_10}, success, failure);
+r46("nps", "review", {channel: "channel_code", category: "category_code", rate: 10}, success, failure);
 
 ```
 
