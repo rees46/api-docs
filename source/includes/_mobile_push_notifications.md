@@ -150,7 +150,8 @@ Suitable to open specific product by it's ID. For example for triggered messages
   },
   "event": { 
     "type": "custom",
-    "uri": "order/status/36"
+    "uri": "order/status/36",
+    "payload": {}
   },
   "src": {
     "type": "transactional",
