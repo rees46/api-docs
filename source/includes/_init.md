@@ -2,15 +2,19 @@
 
 ## Start session
 
-`GET https://api.rees46.com/init_script`
+`GET https://api.rees46.com/init`
 
 ```shell
-curl https://api.rees46.com/init_script?ssid=SSID&shop_id=SHOPID&v=3&seance=SEANCE_ID&referrer=REF_URL
+curl https://api.rees46.com/init?ssid=SSID&shop_id=SHOPID&v=3&seance=SEANCE_ID&referrer=REF_URL
 ```
 
 ```javascript
-(function(r){window.r46=window.r46||function(){(r46.q=r46.q||[]).push(arguments)};var s=document.getElementsByTagName(r)[0],rs=document.createElement(r);rs.async=1;rs.src='//cdn.rees46.com/v3.js';s.parentNode.insertBefore(rs,s);})('script');
-r46('init', 'SHOPID');
+(function(r){
+    window.r46=window.r46||function(){(r46.q=r46.q||[]).push(arguments)};
+    var s=document.getElementsByTagName(r)[0],rs=document.createElement(r);
+    rs.async=1;rs.src='//cdn.rees46.com/v3.js';s.parentNode.insertBefore(rs,s);
+})('script');
+r46('init', 'SHOPID', success, failure);
 ```
 
 ```swift
