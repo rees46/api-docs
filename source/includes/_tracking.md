@@ -237,4 +237,36 @@ r46('track', 'purchase', {
 });
 ```
 ## User added product to favorites 
+```shell
+#Full request
+curl 'http://api.rees46.com/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/x-www-form-urlencoded' \
+    --data-raw 'event=wish&shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT[A or B]&item_id[0]=PRODUCT_ID'
+
+#Short request with minimum required parameters
+curl 'http://api.rees46.com/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/x-www-form-urlencoded' \
+    --data-raw 'event=wish&shop_id=SHOP_ID&did=DEVICE_ID&item_id[0]=PRODUCT_ID'
+```
+```javascript
+r46('track', 'wish', product_id);
+```
 ## User removed product from favorites 
+```shell
+#Full request
+curl 'http://api.rees46.com/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/x-www-form-urlencoded' \
+    --data-raw 'event=remove_wish&shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT[A or B]&item_id[0]=PRODUCT_ID'
+
+#Short request with minimum required parameters
+curl 'http://api.rees46.com/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/x-www-form-urlencoded' \
+    --data-raw 'event=remove_wish&shop_id=SHOP_ID&did=DEVICE_ID&item_id[0]=PRODUCT_ID'
+```
+```javascript
+r46('track', 'remove_wish', product_id);
+```
