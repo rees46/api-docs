@@ -29,21 +29,21 @@ SDKs already handle these parameters out of the box.
 ```shell
 // Full request without widget recommendation identifiers
 curl 'http://api.rees46.com/push' \
-    -X POST \
+    -X 'POST' \
     -H 'Content-Type: application/x-www-form-urlencoded' \
-    --data-raw 'event=view&shop_id=SHOP_ID&did=DEVICE_ID&ssid=SESSION_ID&seance=SEANCE_ID&segment=SEGMENT[A or B]&item_id[0]=PRODUCT_ID&is_available[0]=PRODUCT_AVABILITY[0 or 1]&price[0]=PRODUCT_PRICE
+    --data-raw 'event=view&shop_id=SHOP_ID&did=DEVICE_ID&ssid=SESSION_ID&seance=SEANCE_ID&segment=SEGMENT[A or B]&item_id[0]=PRODUCT_ID&is_available[0]=PRODUCT_AVABILITY[0 or 1]&price[0]=PRODUCT_PRICE'
 
 // Full request without widget recommendation identifiers
 curl 'http://api.rees46.com/push' \
-    -X POST \
+    -X 'POST' \
     -H 'Content-Type: application/x-www-form-urlencoded' \
     --data-raw 'event=view&shop_id=SHOP_ID&did=DEVICE_ID&ssid=SESSION_ID&seance=SEANCE_ID&segment=SEGMENT[A or B]&item_id[0]=PRODUCT_ID&is_available[0]=PRODUCT_AVABILITY[0 or 1]&price[0]=PRODUCT_PRICE&recommended_by=dynamic&recommended_code=UNIQUE_RECOMMENDER_CODE'
 
 // Short request with minimum required parameters
 curl 'http://api.rees46.com/push' \
-    -X POST \
+    -X 'POST' \
     -H 'Content-Type: application/x-www-form-urlencoded' \
-    --data-raw 'event=view&shop_id=SHOP_ID&did=DEVICE_ID&item_id[0]=PRODUCT_ID
+    --data-raw 'event=view&shop_id=SHOP_ID&did=DEVICE_ID&item_id[0]=PRODUCT_ID'
 ```
 
 ```javascript
