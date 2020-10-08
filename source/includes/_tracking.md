@@ -27,19 +27,19 @@ SDKs already handle these parameters out of the box.
 ## User viewed a product
 
 ```shell
-// Full request without widget recommendation identifiers
+#Full request without widget recommendation identifiers
 curl 'http://api.rees46.com/push' \
     -X 'POST' \
     -H 'Content-Type: application/x-www-form-urlencoded' \
     --data-raw 'event=view&shop_id=SHOP_ID&did=DEVICE_ID&ssid=SESSION_ID&seance=SEANCE_ID&segment=SEGMENT[A or B]&item_id[0]=PRODUCT_ID&is_available[0]=PRODUCT_AVAIBILITY[0 or 1]'
 
-// Full request without widget recommendation identifiers
+#Full request without widget recommendation identifiers
 curl 'http://api.rees46.com/push' \
     -X 'POST' \
     -H 'Content-Type: application/x-www-form-urlencoded' \
     --data-raw 'event=view&shop_id=SHOP_ID&did=DEVICE_ID&ssid=SESSION_ID&seance=SEANCE_ID&segment=SEGMENT[A or B]&item_id[0]=PRODUCT_ID&is_available[0]=PRODUCT_AVAIBILITY[0 or 1]&recommended_by=dynamic&recommended_code=UNIQUE_RECOMMENDER_CODE'
 
-// Short request with minimum required parameters
+#Short request with minimum required parameters
 curl 'http://api.rees46.com/push' \
     -X 'POST' \
     -H 'Content-Type: application/x-www-form-urlencoded' \
@@ -98,13 +98,13 @@ Send this event when user opens product's details page.
 ## User viewed a category
 
 ```shell
-// Full request
+#Full request
 curl 'http://api.rees46.com/push' \
     -X 'POST' \
     -H 'Content-Type: application/x-www-form-urlencoded' \
     --data-raw 'event=category&shop_id=SHOP_ID&did=DEVICE_ID&ssid=SESSION_ID&seance=SEANCE_ID&segment=SEGMENT[A or B]&category_id=CATEGORY_ID'
 
-// Short request with minimum required parameters
+#Short request with minimum required parameters
 curl 'http://api.rees46.com/push' \
     -X 'POST' \
     -H 'Content-Type: application/x-www-form-urlencoded' \
@@ -122,13 +122,13 @@ Send this event when user opens category page.
 ## User searched something
 
 ```shell
-// Full request
+#Full request
 curl 'http://api.rees46.com/push' \
     -X 'POST' \
     -H 'Content-Type: application/x-www-form-urlencoded' \
     --data-raw 'event=search&shop_id=SHOP_ID&did=DEVICE_ID&ssid=SESSION_ID&seance=SEANCE_ID&segment=SEGMENT[A or B]&search_query=URL_ENCODED_SEARCH_QUERY'
 
-// Short request with minimum required parameters
+#Short request with minimum required parameters
 curl 'http://api.rees46.com/push' \
     -X 'POST' \
     -H 'Content-Type: application/x-www-form-urlencoded' \
@@ -141,25 +141,25 @@ r46('track', 'search', search_query);
 
 ## User added product to cart
 ```shell
-//Full request for a single product without widget recommendation identifiers
+#Full request for a single product without widget recommendation identifiers
 curl 'http://api.rees46.com/push' \
     -X 'POST' \
     -H 'Content-Type: application/x-www-form-urlencoded' \
     --data-raw 'event=cart&shop_id=SHOP_ID&did=DEVICE_ID&ssid=SESSION_ID&seance=SEANCE_ID&segment=SEGMENT[A or B]&item_id[0]=PRODUCT_ID&is_available[0]=PRODUCT_AVAILABILITY[0 or 1]&amount[0]=PRODUCT_QUANTITY'
 
-//Full request for a single product with widget recommendation identifiers
+#Full request for a single product with widget recommendation identifiers
 curl 'http://api.rees46.com/push' \
     -X 'POST' \
     -H 'Content-Type: application/x-www-form-urlencoded' \
     --data-raw 'event=cart&shop_id=SHOP_ID&did=DEVICE_ID&ssid=SESSION_ID&seance=SEANCE_ID&segment=SEGMENT[A or B]&item_id[0]=PRODUCT_ID&is_available[0]=PRODUCT_AVAILABILITY[0 or 1]&amount[0]=PRODUCT_QUANTITY&recommended_by=dynamic&recommended_code=UNIQUE_RECOMMENDER_CODE'
 
-//Short request for a single product with minimum required parameters
+#Short request for a single product with minimum required parameters
 curl 'http://api.rees46.com/push' \
     -X 'POST' \
     -H 'Content-Type: application/x-www-form-urlencoded' \
     --data-raw 'event=cart&shop_id=SHOP_ID&did=DEVICE_ID&item_id[0]=PRODUCT_ID&is_available[0]=PRODUCT_AVAILABILITY[0 or 1]&amount[0]=PRODUCT_QUANTITY'
 
-//Full request to send the full current cart
+#Full request to send the full current cart
 curl 'http://api.rees46.com/push' \
     -X 'POST' \
     -H 'Content-Type: application/x-www-form-urlencoded' \
