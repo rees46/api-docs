@@ -31,13 +31,13 @@ SDKs already handle these parameters out of the box.
 curl 'http://api.rees46.com/push' \
     -X 'POST' \
     -H 'Content-Type: application/x-www-form-urlencoded' \
-    --data-raw 'event=view&shop_id=SHOP_ID&did=DEVICE_ID&ssid=SESSION_ID&seance=SEANCE_ID&segment=SEGMENT[A or B]&item_id[0]=PRODUCT_ID&is_available[0]=PRODUCT_AVABILITY[0 or 1]'
+    --data-raw 'event=view&shop_id=SHOP_ID&did=DEVICE_ID&ssid=SESSION_ID&seance=SEANCE_ID&segment=SEGMENT[A or B]&item_id[0]=PRODUCT_ID&is_available[0]=PRODUCT_AVAIBILITY[0 or 1]'
 
 // Full request without widget recommendation identifiers
 curl 'http://api.rees46.com/push' \
     -X 'POST' \
     -H 'Content-Type: application/x-www-form-urlencoded' \
-    --data-raw 'event=view&shop_id=SHOP_ID&did=DEVICE_ID&ssid=SESSION_ID&seance=SEANCE_ID&segment=SEGMENT[A or B]&item_id[0]=PRODUCT_ID&is_available[0]=PRODUCT_AVABILITY[0 or 1]&recommended_by=dynamic&recommended_code=UNIQUE_RECOMMENDER_CODE'
+    --data-raw 'event=view&shop_id=SHOP_ID&did=DEVICE_ID&ssid=SESSION_ID&seance=SEANCE_ID&segment=SEGMENT[A or B]&item_id[0]=PRODUCT_ID&is_available[0]=PRODUCT_AVAIBILITY[0 or 1]&recommended_by=dynamic&recommended_code=UNIQUE_RECOMMENDER_CODE'
 
 // Short request with minimum required parameters
 curl 'http://api.rees46.com/push' \
@@ -140,6 +140,59 @@ r46('track', 'search', search_query);
 ```
 
 ## User added product to cart
+```shell
+//Full request for a single product without widget recommendation identifiers
+curl 'http://api.rees46.com/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/x-www-form-urlencoded' \
+    --data-raw 'event=cart&shop_id=SHOP_ID&did=DEVICE_ID&ssid=SESSION_ID&seance=SEANCE_ID&segment=SEGMENT[A or B]&item_id[0]=PRODUCT_ID&is_available[0]=PRODUCT_AVAILABILITY[0 or 1]&amount[0]=PRODUCT_QUANTITY'
+
+//Full request for a single product with widget recommendation identifiers
+curl 'http://api.rees46.com/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/x-www-form-urlencoded' \
+    --data-raw 'event=cart&shop_id=SHOP_ID&did=DEVICE_ID&ssid=SESSION_ID&seance=SEANCE_ID&segment=SEGMENT[A or B]&item_id[0]=PRODUCT_ID&is_available[0]=PRODUCT_AVAILABILITY[0 or 1]&amount[0]=PRODUCT_QUANTITY&recommended_by=dynamic&recommended_code=UNIQUE_RECOMMENDER_CODE'
+
+//Short request for a single product with minimum required parameters
+curl 'http://api.rees46.com/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/x-www-form-urlencoded' \
+    --data-raw 'event=cart&shop_id=SHOP_ID&did=DEVICE_ID&item_id[0]=PRODUCT_ID&is_available[0]=PRODUCT_AVAILABILITY[0 or 1]&amount[0]=PRODUCT_QUANTITY'
+
+//Full request to send the full current cart
+curl 'http://api.rees46.com/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/x-www-form-urlencoded' \
+    --data-raw 'event=cart&shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMEN[A or B]&item_id[0]=1ST_PRODUCT_ID&amount[0]=1ST_PRODUCT_QUANTITY&item_id[1]=2ND_PRODUCT_ID&amount[1]=2ND_PRODUCT_QUANTITY&...&item_id[LAST_INDEX]=LAST_PRODUCT_ID&amount[LAST_INDEX]=LAST_PRODUCT_QUANTITY&full_cart=true'
+```
+
+```javascript
+//Short request for a single product
+r46('track', 'cart', id);
+
+//Full request for a single product with widget recommendation identifiers
+r46('track', 'cart', {
+    id: PRODUCT_ID,
+    amount: PRODUCT_QUANTITY,
+    stock: true,
+    recommended_by: 'dynamic',
+    recommended_code: 'UNIQUE_RECOMMENDER_CODE'
+});
+
+//Full request to send the full current cart
+r46('track', 'cart', [
+    {
+        id: 1ST_PRODUCT_ID,
+        amount: 1ST_PRODUCT_QUANTITY
+    },
+    ...
+    {
+        id: LAST_PRODUCT_ID,
+        amount: LAST_PRODUCT_QUANTITY
+    }
+]);
+
+```
 ## User removed product from cart
 ## User purchased products 
 ## User added product to favorites 
