@@ -31,13 +31,13 @@ SDKs already handle these parameters out of the box.
 curl 'http://api.rees46.com/push' \
     -X 'POST' \
     -H 'Content-Type: application/x-www-form-urlencoded' \
-    --data-raw 'event=view&shop_id=SHOP_ID&did=DEVICE_ID&ssid=SESSION_ID&seance=SEANCE_ID&segment=SEGMENT[A or B]&item_id[0]=PRODUCT_ID&is_available[0]=PRODUCT_AVAIBILITY[0 or 1]'
+    --data-raw 'event=view&shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT[A or B]&item_id[0]=PRODUCT_ID&is_available[0]=PRODUCT_AVAIBILITY[0 or 1]'
 
 #Full request without widget recommendation identifiers
 curl 'http://api.rees46.com/push' \
     -X 'POST' \
     -H 'Content-Type: application/x-www-form-urlencoded' \
-    --data-raw 'event=view&shop_id=SHOP_ID&did=DEVICE_ID&ssid=SESSION_ID&seance=SEANCE_ID&segment=SEGMENT[A or B]&item_id[0]=PRODUCT_ID&is_available[0]=PRODUCT_AVAIBILITY[0 or 1]&recommended_by=dynamic&recommended_code=UNIQUE_RECOMMENDER_CODE'
+    --data-raw 'event=view&shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT[A or B]&item_id[0]=PRODUCT_ID&is_available[0]=PRODUCT_AVAIBILITY[0 or 1]&recommended_by=dynamic&recommended_code=UNIQUE_RECOMMENDER_CODE'
 
 #Short request with minimum required parameters
 curl 'http://api.rees46.com/push' \
@@ -102,7 +102,7 @@ Send this event when user opens product's details page.
 curl 'http://api.rees46.com/push' \
     -X 'POST' \
     -H 'Content-Type: application/x-www-form-urlencoded' \
-    --data-raw 'event=category&shop_id=SHOP_ID&did=DEVICE_ID&ssid=SESSION_ID&seance=SEANCE_ID&segment=SEGMENT[A or B]&category_id=CATEGORY_ID'
+    --data-raw 'event=category&shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT[A or B]&category_id=CATEGORY_ID'
 
 #Short request with minimum required parameters
 curl 'http://api.rees46.com/push' \
@@ -126,7 +126,7 @@ Send this event when user opens category page.
 curl 'http://api.rees46.com/push' \
     -X 'POST' \
     -H 'Content-Type: application/x-www-form-urlencoded' \
-    --data-raw 'event=search&shop_id=SHOP_ID&did=DEVICE_ID&ssid=SESSION_ID&seance=SEANCE_ID&segment=SEGMENT[A or B]&search_query=URL_ENCODED_SEARCH_QUERY'
+    --data-raw 'event=search&shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT[A or B]&search_query=URL_ENCODED_SEARCH_QUERY'
 
 #Short request with minimum required parameters
 curl 'http://api.rees46.com/push' \
@@ -145,13 +145,13 @@ r46('track', 'search', search_query);
 curl 'http://api.rees46.com/push' \
     -X 'POST' \
     -H 'Content-Type: application/x-www-form-urlencoded' \
-    --data-raw 'event=cart&shop_id=SHOP_ID&did=DEVICE_ID&ssid=SESSION_ID&seance=SEANCE_ID&segment=SEGMENT[A or B]&item_id[0]=PRODUCT_ID&is_available[0]=PRODUCT_AVAILABILITY[0 or 1]&amount[0]=PRODUCT_QUANTITY'
+    --data-raw 'event=cart&shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT[A or B]&item_id[0]=PRODUCT_ID&is_available[0]=PRODUCT_AVAILABILITY[0 or 1]&amount[0]=PRODUCT_QUANTITY'
 
 #Full request for a single product with widget recommendation identifiers
 curl 'http://api.rees46.com/push' \
     -X 'POST' \
     -H 'Content-Type: application/x-www-form-urlencoded' \
-    --data-raw 'event=cart&shop_id=SHOP_ID&did=DEVICE_ID&ssid=SESSION_ID&seance=SEANCE_ID&segment=SEGMENT[A or B]&item_id[0]=PRODUCT_ID&is_available[0]=PRODUCT_AVAILABILITY[0 or 1]&amount[0]=PRODUCT_QUANTITY&recommended_by=dynamic&recommended_code=UNIQUE_RECOMMENDER_CODE'
+    --data-raw 'event=cart&shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT[A or B]&item_id[0]=PRODUCT_ID&is_available[0]=PRODUCT_AVAILABILITY[0 or 1]&amount[0]=PRODUCT_QUANTITY&recommended_by=dynamic&recommended_code=UNIQUE_RECOMMENDER_CODE'
 
 #Short request for a single product with minimum required parameters
 curl 'http://api.rees46.com/push' \
@@ -194,6 +194,23 @@ r46('track', 'cart', [
 
 ```
 ## User removed product from cart
+```shell
+#Full request
+curl 'http://api.rees46.com/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/x-www-form-urlencoded' \
+    --data-raw 'event=remove_from_cart&shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT[A or B]&item_id[0]=PRODUCT_ID'
+
+#Short request for a single product with minimum required parameters
+curl 'http://api.rees46.com/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/x-www-form-urlencoded' \
+    --data-raw 'event=remove_from_cart&shop_id=SHOP_ID&did=gN7WW9zXpM&item_id[0]=PRODUCT_ID'
+```
+```javascript
+//Full request for a single product
+r46('track', 'remove_from_cart', product_id);
+```
 ## User purchased products 
 ## User added product to favorites 
 ## User removed product from favorites 
