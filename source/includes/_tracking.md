@@ -120,6 +120,25 @@ Send this event when user opens category page.
 
 
 ## User searched something
+
+```shell
+// Full request
+curl 'http://api.rees46.com/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/x-www-form-urlencoded' \
+    --data-raw 'event=search&shop_id=SHOP_ID&did=DEVICE_ID&ssid=SESSION_ID&seance=SEANCE_ID&segment=SEGMENT[A or B]&search_query=URL_ENCODED_SEARCH_QUERY'
+
+// Short request with minimum required parameters
+curl 'http://api.rees46.com/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/x-www-form-urlencoded' \
+    --data-raw 'event=search&shop_id=SHOP_ID&did=DEVICE_ID&search_query=URL_ENCODED_SEARCH_QUERY'
+```
+
+```javascript
+r46('track', 'search', search_query);
+```
+
 ## User added product to cart
 ## User removed product from cart
 ## User purchased products 
