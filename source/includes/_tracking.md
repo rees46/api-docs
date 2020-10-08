@@ -212,5 +212,29 @@ curl 'http://api.rees46.com/push' \
 r46('track', 'remove_from_cart', product_id);
 ```
 ## User purchased products 
+```shell
+#Full request
+curl 'http://api.rees46.com/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/x-www-form-urlencoded' \
+    --data-raw 'event=purchase&shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT[A or B]&order_id=ORDER_NUMBER&order_price=TOTAL_ORDER_PRICE&item_id[0]=1ST_PRODUCT_ID&amount[0]=1ST_PRODUCT_QUANTITY&price[0]=1ST_PRODUCT_PRICE&is_available[0]=1ST_PRODUCT_AVAILABILITY[0 or 1]&item_id[1]=2ND_PRODUCT_ID&amount[1]=2ND_PRODUCT_QUANTITY&price[1]=2ND_PRODUCT_PRICE&is_available[1]=2ND_PRODUCTAVAILABILITY[0 or 1]&...&item_id[LAST_INDEX]=LAST_PRODUCT_ID&amount[LAST_INDEX]=LAST_PRODUCT_QUANTITY&price[LAST_INDEX]=LAST_PRODUCT_PRICE&is_available[LAST_INDEX]=LAST_PRODUCTAVAILABILITY[0 or 1]'
+
+#Short request with minimum required parameters
+curl 'http://api.rees46.com/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/x-www-form-urlencoded' \
+    --data-raw 'event=purchase&shop_id=SHOP_ID&did=DEVICE_ID&item_id[0]=1ST_PRODUCT_ID&amount[0]=1ST_PRODUCT_QUANTITY&item_id[1]=2ND_PRODUCT_ID&amount[1]=2ND_PRODUCT_QUANTITY&...&item_id[LAST_INDEX]=LAST_PRODUCT_ID&amount[LAST_INDEX]=LAST_PRODUCT_QUANTITY'
+```
+```javascript
+//Full request
+r46('track', 'purchase', {
+    products: [
+        {id: 37, price: 318, amount: 3, stock: true},
+        {id: 187, price: 5000, amount: 1, stock: false}
+    ],
+    order: 'N318',
+    order_price: 29999
+});
+```
 ## User added product to favorites 
 ## User removed product from favorites 
