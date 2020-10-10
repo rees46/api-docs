@@ -80,6 +80,10 @@ bonuses | Numeric | false | Describes how much of order's value was paid by bonu
 delivery | Numeric | false | Describes price of order's delivery
 discount | Numeric | false | Describes discount value of the order.
 
+<aside class="notice">
+How to check if everything is correct: `total == cash + bonuses + delivery - discount`
+</aside>
+
 Description of `items` objects:
 
 Parameter | Type | Required | Description
