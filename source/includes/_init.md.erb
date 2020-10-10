@@ -1,34 +1,121 @@
 # Initialize
 
-## Start session
-
-`GET https://<%= config[:api_endpoint] %>/init`
+## Setup
 
 ```shell
-curl https://<%= config[:api_endpoint] %>/init?did=DEVICE_ID&shop_id=SHOPID&v=3&seance=SEANCE_ID&referrer=REF_URL
+# No setup is needed
 ```
 
 ```javascript
+// Put this code in the <head> section of web page.
 (function(r){
     window.<%= config[:js_sdk_name] %>=window.<%= config[:js_sdk_name] %>||function(){(<%= config[:js_sdk_name] %>.q=<%= config[:js_sdk_name] %>.q||[]).push(arguments)};
     var s=document.getElementsByTagName(r)[0],rs=document.createElement(r);
     rs.async=1;rs.src='//<%= config[:cdn_name] %>/v3.js';s.parentNode.insertBefore(rs,s);
 })('script');
-<%= config[:js_sdk_name] %>('init', 'SHOPID', success, failure);
+```
+
+```swift
+// Cocoapods: just put this line in your Podfile
+pod <%= config[:ios_sdk_package_name] %>
+
+// Swift package manager (XCode >= 11)
+// 1. Click File menu
+// 2. Swift Packages
+// 3. Add Package Dependency...
+// 4. Specify the git URL for REES46 SDK repo: <%= config[:ios_sdk_repo] %>
+```
+
+```java
+// 1. Add to dependencies:
+implementation 'com.personalizatio:rees46-sdk:1.2.1'
+
+// 2. Append to repositories:
+repositories {
+    maven {
+        url  "https://dl.bintray.com/pnixx/maven"
+    }
+}
+
+// 3. Append to your project build.gradle
+buildscript {
+	dependencies {
+		...
+		classpath 'com.google.gms:google-services:4.3.2'
+	}
+}
+
+// 4. Append to your app module build.gradle after line apply
+//    plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+
+// 5. Create your app in the Firebase console
+//    and copy file google-services.json to your app root path.
+//    Sync gradle now.
+```
+
+Before using API you have to setup SDK.
+
+## Start session
+
+```shell
+curl https://<%= config[:api_endpoint] %>/init?did=DEVICE_ID&shop_id=SHOP_ID&v=3&seance=SEANCE_ID&referrer=REF_URL
+```
+
+```javascript
+// Put this line right after setup code
+<%= config[:js_sdk_name] %>('init', 'SHOP_ID', success, failure);
 ```
 
 ```swift
 import <%= config[:ios_sdk_package_name] %>
-var sdk = createPersonalizationSDK(shopId: "SHOPID")
+var sdk = createPersonalizationSDK(shopId: "SHOP_ID")
 ```
+
+```java
+// 1. Add code to your application
+public class SampleApplication extends Application {
+	public void onCreate() {
+		super.onCreate();
+
+		//Initialize
+		<%= config[:android_sdk_package_name] %>.initialize(getApplicationContext(), SHOP_ID);
+
+		//Notification callback
+		<%= config[:android_sdk_package_name] %>.setOnMessageListener(new MessagingService.OnMessageListener() {
+			@Override
+			public void onMessage(Map<String, String> data) {
+
+				//----->
+				//Show your custom notification
+				//----->
+
+			}
+		});
+	}
+}
+
+// 2. For On-Premise integration need use initialize with custom api domain:
+<%= config[:android_sdk_package_name] %>.initialize(getApplicationContext(), SHOP_ID, API_DOMAIN);
+
+// 3. Check AndroidManifest.xml and add android:name=".SampleApplication" to application item.
+<application
+		...
+		android:name=".SampleApplication"
+```
+
+`GET https://<%= config[:api_endpoint] %>/init`
 
 Before using SDK or API you have to initialize SDK. Initialization takes current user identifier and requests API for project settings and this user preferences.
 
-If you don't have device identifier (for new device), you have to request API's `init` method to generate new one. Store this identifier (it's named `did`) in local storage of mobile application or in database: you'll need it for the future requests to API.
+Depending on platform there are different requirements when to run init:
 
-<aside class="notice">
-This method must be requested on every opened page on the website. And only once, when you launch mobile app.
-</aside>
+- cURL: on every page render
+- Web: on every opened page (even for single-page applications)
+- iOS: on each application launch
+- Android: on each application launch
+
+If you don't have device identifier (first launch on new device), you have to request API's `init` method to generate new one. Store this identifier (it's named `did`) in local storage of mobile application or in database: you'll need it for the future requests to API.
 
 
 ### Query Parameters
@@ -38,6 +125,6 @@ Parameter | Required | Description
 shop_id | true | Your API key
 did | false | Is mandatory if you have it. Request without `did` will generate new one in our DB. Use it as device ID for future requests.
 v | true | Version. Just use `3` as value.
-seance | true | User's temporary identifier for the current session. Must be regenerated every time user starts new session. Just unique string: `uuid8` is ok.
+seance | true | User's temporary identifier for the current session. Must be regenerated every time user starts new session. Unique string. This parameter is handled automatically in all SDKs.
 referrer | false | Referrer page URL for web integration.
 

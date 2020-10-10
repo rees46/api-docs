@@ -21,6 +21,14 @@ curl https://<%= config[:api_endpoint] %>/nps/categories?shop_id=SHOPID&email=em
 <%= config[:js_sdk_name] %>('nps', 'categories', success, failure);
 ```
 
+```swift
+// Not described yet
+```
+
+```java
+// Not described yet
+```
+
 > The above command returns JSON structured like this:
 
 ```json
@@ -78,6 +86,14 @@ curl https://<%= config[:api_endpoint] %>/nps/channels?shop_id=SHOPID
 <%= config[:js_sdk_name] %>('nps', 'channels', success, failure);
 ```
 
+```swift
+// Not described yet
+```
+
+```java
+// Not described yet
+```
+
 
 > The above command returns JSON structured like this:
 
@@ -118,12 +134,14 @@ shop_id | String | true | Your API key
 
 
 
-
-
 ## Save review
 
-```javascript
 
+```shell
+// Not allowed
+```
+
+```javascript
 // Full form
 <%= config[:js_sdk_name] %>("nps", "review", {
     channel: "channel_code",
@@ -138,7 +156,6 @@ shop_id | String | true | Your API key
     category: "category_code",
     rate: 10
 }, success, failure);
-
 ```
 
 
@@ -162,6 +179,10 @@ sdk.review(rate: 9, channel: "ios_app", category: "checkout", comment: "Nice app
 sdk.review(rate: 10, channel: "ios_app", category: "checkout", order_id: "ORDER-3341", comment: "Nice application, thank you!") { _ in
   print("Review is posted")
 }
+```
+
+```java
+// Not described yet
 ```
 
 
