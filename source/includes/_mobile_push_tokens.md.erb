@@ -3,7 +3,7 @@
 ## Create new token
 
 ```shell
-curl -d "did=DEVICE_ID&shop_id=SHOPID&token=TOKEN&platform=PLATFORM" https://api.rees46.com/mobile_push_tokens
+curl -d "did=DEVICE_ID&shop_id=SHOPID&token=TOKEN&platform=PLATFORM" https://<%= config[:api_endpoint] %>/mobile_push_tokens
 ```
 
 > The above command returns JSON structured like this:
@@ -16,7 +16,7 @@ This endpoint creates new token for the user, identified by `did` parameter.
 
 ### HTTP Request
 
-`POST https://api.rees46.com/mobile_push_tokens`
+`POST https://<%= config[:api_endpoint] %>/mobile_push_tokens`
 
 ### Query Parameters
 

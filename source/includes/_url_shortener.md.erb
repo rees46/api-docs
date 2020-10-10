@@ -12,7 +12,7 @@ Content-type: application/json
 
 > Body example
 
-```json 
+```json
 {
     "shop_id": "...",
     "shop_secret": "...",
@@ -39,7 +39,7 @@ Content-type: application/json
 curl --header "Content-Type: application/json" \
   --request POST \
   --data '{"shop_id":"...","shop_secret":"...","links":[{"url":"https://example.com/page/1"},{"url":"https://example.com/page/1","code":"a"}]}' \
-  https://api.rees46.com/url/create
+  https://<%= config[:api_endpoint] %>/url/create
 ```
 
 > Response example:
@@ -48,11 +48,11 @@ curl --header "Content-Type: application/json" \
 [
   {
     "source": "https://example.com/page/1",
-    "url": "https://r46.dev/x27FyAlR"
+    "url": "https://<%= config[:js_sdk_name] %>.dev/x27FyAlR"
   },
   {
     "source": "https://example.com/page/2",
-    "url": "https://r46.dev/a"
+    "url": "https://<%= config[:js_sdk_name] %>.dev/a"
   }
 ]
 ```
@@ -63,7 +63,7 @@ The endpoint allows to create 1 to N shortened URLs. Use batch request to shorte
 
 Method | Endpoint | Content-type
 --------- | --------- | ---------
-POST | https://api.rees46.com/url/create | application/json
+POST | https://<%= config[:api_endpoint] %>/url/create | application/json
 
 ### Query Parameters
 

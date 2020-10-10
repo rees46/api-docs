@@ -14,11 +14,11 @@ This endpoints returns a list of active categories. Categories list can be custo
 Note: if you provide any of user identifiers (see query params table), questions and "thank you" messages can be personalized.
 
 ```shell
-curl https://api.rees46.com/nps/categories?shop_id=SHOPID&email=email@example.com&locale=en
+curl https://<%= config[:api_endpoint] %>/nps/categories?shop_id=SHOPID&email=email@example.com&locale=en
 ```
 
 ```javascript
-r46('nps', 'categories', success, failure);
+<%= config[:js_sdk_name] %>('nps', 'categories', success, failure);
 ```
 
 > The above command returns JSON structured like this:
@@ -26,8 +26,8 @@ r46('nps', 'categories', success, failure);
 ```json
 [
   {
-    "id": 1, 
-    "code": "website", 
+    "id": 1,
+    "code": "website",
     "name": "Online checkout quality",
     "promoter_question": "Which features do you value/use the most?",
     "passive_question": "How can we improve your experience?",
@@ -37,7 +37,7 @@ r46('nps', 'categories', success, failure);
     "detractor_success": "Thanks for your feedback. We highly value all ideas and suggestions from our customers, whether they’re positive or critical. In the future, our team might reach out to you to learn more about how we can further improve our services so that it exceeds your expectations."
   },
   {
-    "id": 3, 
+    "id": 3,
     "code": "delivery",
     "name": "Delivery quality survey",
     "promoter_question": "Which features do you value/use the most?",
@@ -52,7 +52,7 @@ r46('nps', 'categories', success, failure);
 
 ### HTTP Request
 
-`GET https://api.rees46.com/nps/categories`
+`GET https://<%= config[:api_endpoint] %>/nps/categories`
 
 ### Query Parameters
 
@@ -68,14 +68,14 @@ locale | String | false | Locale of messages
 
 ## NPS channels
 
-Get list of available channels, from which NPS review can be created. Channels list can be customized on NPS settings page in backoffice. 
+Get list of available channels, from which NPS review can be created. Channels list can be customized on NPS settings page in backoffice.
 
 ```shell
-curl https://api.rees46.com/nps/channels?shop_id=SHOPID
+curl https://<%= config[:api_endpoint] %>/nps/channels?shop_id=SHOPID
 ```
 
 ```javascript
-r46('nps', 'channels', success, failure);
+<%= config[:js_sdk_name] %>('nps', 'channels', success, failure);
 ```
 
 
@@ -84,22 +84,22 @@ r46('nps', 'channels', success, failure);
 ```json
 [
   {
-    "id": 1, 
-    "code": "website", 
+    "id": 1,
+    "code": "website",
     "name": "Online checkout quality"
   },
   {
-    "id": 2, 
+    "id": 2,
     "code": "ios_app",
     "name": "iOS mobile app"
   },
   {
-    "id": 3, 
+    "id": 3,
     "code": "ios_app",
     "name": "iOS mobile app"
   },
   {
-    "id": 4, 
+    "id": 4,
     "code": "pos",
     "name": "POS terminal"
   }
@@ -108,7 +108,7 @@ r46('nps', 'channels', success, failure);
 
 ### HTTP Request
 
-`GET https://api.rees46.com/nps/channels`
+`GET https://<%= config[:api_endpoint] %>/nps/channels`
 
 ### Query Parameters
 
@@ -120,22 +120,22 @@ shop_id | String | true | Your API key
 
 
 
-## Save review 
+## Save review
 
-```javascript 
+```javascript
 
 // Full form
-r46("nps", "review", {
-    channel: "channel_code", 
-    category: "category_code", 
-    rate: 7, 
+<%= config[:js_sdk_name] %>("nps", "review", {
+    channel: "channel_code",
+    category: "category_code",
+    rate: 7,
     comment: "Some comment"
 }, success, failure);
 
 // Without comment
-r46("nps", "review", {
-    channel: "channel_code", 
-    category: "category_code", 
+<%= config[:js_sdk_name] %>("nps", "review", {
+    channel: "channel_code",
+    category: "category_code",
     rate: 10
 }, success, failure);
 
@@ -181,13 +181,13 @@ If user rated more than one process category, you have to send separate request 
 
 ### HTTP Request
 
-`POST https://api.rees46.com/nps/create`
+`POST https://<%= config[:api_endpoint] %>/nps/create`
 
 ### Query Parameters
 
 > Response on success:
 
-```json 
+```json
     {
         "status": "success"
     }
@@ -195,14 +195,14 @@ If user rated more than one process category, you have to send separate request 
 
 > Response on failure:
 
-```json 
+```json
     {
         "status": "error",
         "payload": {
           "message": "error message"
         }
     }
-``` 
+```
 
 One of the listed user identifiers is required: `did`, `email`, `phone`, `loyalty_id`, `order_id`.
 

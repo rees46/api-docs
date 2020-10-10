@@ -5,7 +5,7 @@ This section allows to manage users, their subscriptions and segments.
 ## Import users
 
 ```shell
-curl -i -X POST -H "Content-Type: application/json" --data-binary "@data.json" https://api.rees46.com/profile/set
+curl -i -X POST -H "Content-Type: application/json" --data-binary "@data.json" https://<%= config[:api_endpoint] %>/profile/set
 
 # data.json
 {
@@ -48,7 +48,7 @@ One of properties must present: email, phone_number, loyalty_id
 
 Parameter | Type | Required | Description
 --------- | ------- | -------  | -----------
-email | String | false | User's email 
+email | String | false | User's email
 phone_number | String | false | User's phone
 loyalty_id | String | false | User's loyalty ID
 location_id | String | false | User's location (city) ID

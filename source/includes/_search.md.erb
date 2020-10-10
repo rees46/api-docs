@@ -6,7 +6,7 @@ Service provides 2 types of search: instant (typeahead) and full search.
 
 ### HTTP Request
 
-`GET https://api.rees46.com/search`
+`GET https://<%= config[:api_endpoint] %>/search`
 
 ### Query Parameters
 
@@ -22,7 +22,7 @@ search_query | true | Search query
 
 ### HTTP Request
 
-`GET https://api.rees46.com/search`
+`GET https://<%= config[:api_endpoint] %>/search`
 
 ### Query Parameters
 
@@ -36,8 +36,8 @@ search_query | true | Search query
 limit | false | Limit of results
 offset | false | Offset of results
 category_limit | false | How many categories for sidebar filter to return
-categories | false | Comma separated list of categories to filter 
-extended | false | It's better to use `true` for full search results 
+categories | false | Comma separated list of categories to filter
+extended | false | It's better to use `true` for full search results
 sort_by | false | Sort by parameter: `popular`, `price`, `discount`
 sort_dir | false | Sort direction: `asc` or `desc` (default)
 locations | false | Comma separated list of locations IDs
@@ -46,6 +46,6 @@ filters | false | Optional escaped JSON string with filter parameters. For examp
 price_min | false | Min price
 price_max | false | Max price
 colors | false | Comma separated list of colors
-exclude | false | Comma separated list of products IDs to exclude from search results 
+exclude | false | Comma separated list of products IDs to exclude from search results
 email | false | It's only for S2S integration, when service doesn't have user's session. Mobile SDK doesn't use it.
 

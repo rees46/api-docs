@@ -7,25 +7,22 @@ language_tabs:
   - swift: iOS
   - java: Android
 
-toc_footers:
-  - <a href='https://app.rees46.com/customers/sign_up' target='_blank'>Sign Up for a Developer Key</a>
-
 includes:
-  - intro
-  - auth
-  - init
-  - tracking
-  - recommendations
-  - search
-  - subscriptions
-  - mobile_push_tokens
-  - mobile_push_notifications
-  - profile
-  - audience
-  - promocodes
-  - nps
-  - url_shortener
-  - errors
+  - intro.md.erb
+  - auth.md.erb
+  - init.md.erb
+  - tracking.md.erb
+  - recommendations.md.erb
+  - search.md.erb
+  - subscriptions.md.erb
+  - mobile_push_tokens.md.erb
+  - mobile_push_notifications.md.erb
+  - profile.md.erb
+  - audience.md.erb
+  - promocodes.md.erb
+  - nps.md.erb
+  - url_shortener.md.erb
+  - errors.md.erb
 
 search: true
 

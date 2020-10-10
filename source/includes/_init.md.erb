@@ -1,0 +1,43 @@
+# Initialize
+
+## Start session
+
+`GET https://<%= config[:api_endpoint] %>/init`
+
+```shell
+curl https://<%= config[:api_endpoint] %>/init?did=DEVICE_ID&shop_id=SHOPID&v=3&seance=SEANCE_ID&referrer=REF_URL
+```
+
+```javascript
+(function(r){
+    window.<%= config[:js_sdk_name] %>=window.<%= config[:js_sdk_name] %>||function(){(<%= config[:js_sdk_name] %>.q=<%= config[:js_sdk_name] %>.q||[]).push(arguments)};
+    var s=document.getElementsByTagName(r)[0],rs=document.createElement(r);
+    rs.async=1;rs.src='//<%= config[:cdn_name] %>/v3.js';s.parentNode.insertBefore(rs,s);
+})('script');
+<%= config[:js_sdk_name] %>('init', 'SHOPID', success, failure);
+```
+
+```swift
+import <%= config[:ios_sdk_package_name] %>
+var sdk = createPersonalizationSDK(shopId: "SHOPID")
+```
+
+Before using SDK or API you have to initialize SDK. Initialization takes current user identifier and requests API for project settings and this user preferences.
+
+If you don't have device identifier (for new device), you have to request API's `init` method to generate new one. Store this identifier (it's named `did`) in local storage of mobile application or in database: you'll need it for the future requests to API.
+
+<aside class="notice">
+This method must be requested on every opened page on the website. And only once, when you launch mobile app.
+</aside>
+
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+shop_id | true | Your API key
+did | false | Is mandatory if you have it. Request without `did` will generate new one in our DB. Use it as device ID for future requests.
+v | true | Version. Just use `3` as value.
+seance | true | User's temporary identifier for the current session. Must be regenerated every time user starts new session. Just unique string: `uuid8` is ok.
+referrer | false | Referrer page URL for web integration.
+

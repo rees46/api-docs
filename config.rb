@@ -39,6 +39,12 @@ end
 activate :relative_assets
 set :relative_links, true
 
+set :api_endpoint, 'api.rees46.com'
+set :cdn_endpoint, 'cdn.rees46.com'
+set :js_sdk_name, 'r46'
+set :ios_sdk_package_name, 'REES46'
+set :service_name, 'REES46'
+
 # Build Configuration
 configure :build do
   # We do want to hash woff and woff2 as there's a bug where woff2 will use
