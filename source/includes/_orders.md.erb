@@ -1,0 +1,89 @@
+# Orders
+
+This section describes how to import orders, change its' statuses and structure.
+
+## Import orders
+
+```shell
+curl -i -X POST -H "Content-Type: application/json" --data-binary "@data.json" https://<%= config[:api_endpoint] %>/sync/orders
+
+# data.json
+{
+  "shop_id": "DvLWN2ZTMZ",
+  "shop_secret": "EIxTuot8sj",
+  "orders": [
+    {
+      "id": "yKsvZbWpCL",
+      "status": "Delivered",
+      "channel": "website",
+      "date": 1602338740,
+      "offline": false,
+      "email": "user@example.com",
+      "phone": "+15554443322",
+      "loyalty_card": "000-33-444-111",
+      "location_id": "7701123",
+      "promocode": "vxawxSi9Uy",
+      "value": {
+        "total": 200.13,
+        "cash": 190,
+        "bonuses": 15,
+        "delivery": 20,
+        "discount": 24.87
+      },
+      "items": [
+        {
+          "id": "ITEM-ID-1",
+          "price": 205,
+          "quantity": 1
+        },
+        ...
+      ]
+    },
+    ...
+  ]
+}
+```
+
+If a request contains orders with IDs which are already saved in our database, statuses and structure of this orders will be updated.
+
+### Query Parameters
+
+Parameter | Type | Required | Description
+--------- | ------- | -------  | -----------
+shop_id | String | true | Your API key
+shop_secret | String | true | Your API secret key
+orders | Array | true | List of orders. See description below.
+
+Description of `orders` objects:
+
+Parameter | Type | Required | Description
+--------- | ------- | -------  | -----------
+status | String | true | Order's status
+channel | String | true | Channel where order was updated
+date | Integer | true | Date and time when order status changed
+offline | Boolean | false | Flags orders as offline. Default `false`.
+email | String | false | User's email
+phone | String | false | User's phone
+loyalty_id | String | false | User's loyalty ID
+location_id | String | false | User's location (city) ID
+promocode | String | false | Promo code used in the order
+value | Object | true | Describes order's value parts. See below.
+items | Array | true | Describes order's products. See below.
+
+Description of `value` object:
+
+Parameter | Type | Required | Description
+--------- | ------- | -------  | -----------
+total | Numeric | true | Order's total value
+cash | Numeric | false | Describes how much of order's value was paid by real money.
+bonuses | Numeric | false | Describes how much of order's value was paid by bonuses.
+delivery | Numeric | false | Describes price of order's delivery
+discount | Numeric | false | Describes discount value of the order.
+
+Description of `items` objects:
+
+Parameter | Type | Required | Description
+--------- | ------- | -------  | -----------
+id | String | true | ID of purchased product
+price | Numeric | true | Price of 1 unit of purchased product
+quantity | Integer | true | Quantity of mentioned products in the order.

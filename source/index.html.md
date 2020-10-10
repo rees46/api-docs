@@ -19,6 +19,7 @@ includes:
   - mobile_push_notifications.md.erb
   - profile.md.erb
   - audience.md.erb
+  - orders.md.erb
   - promocodes.md.erb
   - nps.md.erb
   - url_shortener.md.erb
