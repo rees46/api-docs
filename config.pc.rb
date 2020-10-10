@@ -39,13 +39,13 @@ end
 activate :relative_assets
 set :relative_links, true
 
-set :api_endpoint, 'api.rees46.com'
-set :cdn_endpoint, 'cdn.rees46.com'
-set :js_sdk_name, 'r46'
-set :ios_sdk_package_name, 'REES46'
-set :service_name, 'REES46'
-set :logo, 'r46.logo.png'
-set :favicon, 'r46.favicon.ico'
+set :api_endpoint, 'api.personaclick.com'
+set :cdn_endpoint, 'cdn.personaclick.com'
+set :js_sdk_name, 'personaclick'
+set :ios_sdk_package_name, 'PersonaClick'
+set :service_name, 'PersonaClick'
+set :logo, 'pc.logo.png'
+set :favicon, 'pc.favicon.ico'
 
 # Build Configuration
 configure :build do
