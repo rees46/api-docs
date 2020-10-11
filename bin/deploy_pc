@@ -1,0 +1,8 @@
+#!/bin/bash
+
+./configure pc
+
+bundle exec middleman build
+
+rsync -av -e 'ssh -p 21212' ./build/ refapi@94.130.90.232:reference.api.personaclick.com/public/
+rsync -av -e 'ssh -p 21212' --delete ./build/ refapi@94.130.90.232:reference.api.personaclick.com/public/

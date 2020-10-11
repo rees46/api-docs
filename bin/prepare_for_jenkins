@@ -6,5 +6,4 @@ ruby -v
 bundle -v
 
 bundle install
-bundle exec middleman build
 

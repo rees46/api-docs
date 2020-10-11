@@ -44,13 +44,11 @@ pipeline {
         }
         stage('Deploy') {
             steps {
-                sh 'bin/deploy'
+                sh 'bin/deploy_r46'
+                sh 'bin/deploy_pc'
                 slackSend channel: "#dev-builds", message: "Build is ok: ${env.JOB_NAME} ${env.BUILD_NUMBER} commit: ${env.GIT_COMMIT} by  ${env.GIT_AUTHOR_NAME}"
-
             }
         }
-
-
 
     }
     post {
