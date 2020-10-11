@@ -1,6 +1,6 @@
 #!/bin/bash
 
-./configure pc
+./configure.sh pc
 
 bundle exec middleman build
 

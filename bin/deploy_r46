@@ -1,6 +1,6 @@
 #!/bin/bash
 
-./configure r46
+./configure.sh r46
 
 bundle exec middleman build
 
