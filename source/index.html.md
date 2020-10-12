@@ -1,5 +1,5 @@
 ---
-title: REES46 API Reference
+title: API Reference
 
 language_tabs:
   - shell: cURL

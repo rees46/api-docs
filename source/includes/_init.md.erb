@@ -23,12 +23,12 @@ pod <%= config[:ios_sdk_package_name] %>
 // 1. Click File menu
 // 2. Swift Packages
 // 3. Add Package Dependency...
-// 4. Specify the git URL for REES46 SDK repo: <%= config[:ios_sdk_repo] %>
+// 4. Specify the git URL for SDK repo: <%= config[:ios_sdk_repo] %>
 ```
 
 ```java
 // 1. Add to dependencies:
-implementation 'com.personalizatio:rees46-sdk:1.2.1'
+implementation 'com.personalizatio:<%= config[:android_sdk_package_code] %>-sdk:1.2.1'
 
 // 2. Append to repositories:
 repositories {
