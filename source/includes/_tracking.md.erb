@@ -24,6 +24,28 @@ event | String | true | Type of an event
 
 SDKs already handle these parameters out of the box.
 
+## Source tracking
+
+```shell
+# No code implementation
+```
+
+```javascript
+// It's done automatically. You don't have to do anything.
+```
+
+```swift
+// Track launch from drip campaign (chain).
+// Message ID and source will be provided in mobile push payload
+sdk.trackSource(source: .chain, code: "MESSAGE_ID")
+```
+
+```java
+// Pending implementation
+```
+
+For mobile apps you have to track all app launches, happened by drip campaigns, mailings and push notifications. It will allow to track campaigns efficiency properly.
+
 ## User viewed a product
 
 ```shell
@@ -88,7 +110,29 @@ curl 'http://<%= config[:api_endpoint] %>/push' \
 ```
 
 ```swift
+// Plain tracking
+sdk.track(event: .productView(id: "PRODUCT_ID")) { trackResponse in
+    print("Product viewed callback")
+    switch trackResponse {
+    case let .success(response):
+        print("Successful")
+    case let .failure(error):
+        switch error {
+        case .custom(let customError):
+            print("Error: ", customError)
+        default:
+            print("Error: ", error.localizedDescription)
+        }
+        fatalError("Task failed successfully")
+    }
+}
 
+
+// Tracking after product recommendation click
+let recData = RecomendedBy(type: .dynamic, code: "beb620922934b6ba2d6a3fb82b8b3271")
+sdk.track(event: .productView(id: "PRODUCT_ID"), recommendedBy: recData) { trackResponse in
+    // ...
+}
 ```
 
 Send this event when user opens product's details page.
@@ -115,6 +159,12 @@ curl 'http://<%= config[:api_endpoint] %>/push' \
 <%= config[:js_sdk_name] %>('track', 'category', category_id);
 ```
 
+```swift
+sdk.track(event: .categoryView(id: "CATEGORY_ID")) { trackResponse in
+    // ... see product viewed event for details about a callback
+}
+```
+
 Send this event when user opens category page.
 
 
@@ -139,7 +189,10 @@ curl 'http://<%= config[:api_endpoint] %>/push' \
 <%= config[:js_sdk_name] %>('track', 'search', search_query);
 ```
 
+
+
 ## User added product to cart
+
 ```shell
 #Full request for a single product without widget recommendation identifiers
 curl 'http://<%= config[:api_endpoint] %>/push' \
@@ -182,8 +235,8 @@ curl 'http://<%= config[:api_endpoint] %>/push' \
 //Full request to send the full current cart
 <%= config[:js_sdk_name] %>('track', 'cart', [
     {
-        id: 1ST_PRODUCT_ID,
-        amount: 1ST_PRODUCT_QUANTITY
+        id: FIRST_PRODUCT_ID,
+        amount: FIRST_PRODUCT_QUANTITY
     },
     ...
     {
@@ -191,9 +244,29 @@ curl 'http://<%= config[:api_endpoint] %>/push' \
         amount: LAST_PRODUCT_QUANTITY
     }
 ]);
-
 ```
+
+```swift
+// Track product added to cart
+sdk.track(event: .productAddedToCart(id: "PRODUCT_ID")) { trackResponse in
+    // ... see product viewed event for details about a callback
+}
+
+// Sync full cart (automatically adds and removes products)
+sdk.track(event: .synchronizeCart(ids: ["PRODUCT_ID_1", "PRODUCT_ID_2"])) { trackResponse in
+    // ... see product viewed event for details about a callback
+}
+```
+
+```java
+// Not described yet
+```
+
+
+
+
 ## User removed product from cart
+
 ```shell
 #Full request
 curl 'http://<%= config[:api_endpoint] %>/push' \
@@ -207,11 +280,25 @@ curl 'http://<%= config[:api_endpoint] %>/push' \
     -H 'Content-Type: application/x-www-form-urlencoded' \
     --data-raw 'event=remove_from_cart&shop_id=SHOP_ID&did=gN7WW9zXpM&item_id[0]=PRODUCT_ID'
 ```
+
 ```javascript
 //Full request for a single product
 <%= config[:js_sdk_name] %>('track', 'remove_from_cart', product_id);
 ```
+
+```swift
+sdk.track(event: .productRemovedFromCart(id: "PRODUCT_ID")) { trackResponse in
+    // ... see product viewed event for details about a callback
+}
+```
+
+```java
+// Not described yet
+```
+
+
 ## User purchased products
+
 ```shell
 #Full request
 curl 'http://<%= config[:api_endpoint] %>/push' \
@@ -236,24 +323,53 @@ curl 'http://<%= config[:api_endpoint] %>/push' \
     order_price: 29999
 });
 ```
+
+
+```swift
+// Track product added to cart
+sdk.track(event: .productAddedToCart(id: "PRODUCT_ID")) { trackResponse in
+    // ... see product viewed event for details about a callback
+}
+```
+
+```java
+// Not described yet
+```
+
 ## User added product to favorites
+
 ```shell
-#Full request
+# Full request
 curl 'http://<%= config[:api_endpoint] %>/push' \
     -X 'POST' \
     -H 'Content-Type: application/x-www-form-urlencoded' \
     --data-raw 'event=wish&shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT[A or B]&item_id[0]=PRODUCT_ID'
 
-#Short request with minimum required parameters
+# Short request with minimum required parameters
 curl 'http://<%= config[:api_endpoint] %>/push' \
     -X 'POST' \
     -H 'Content-Type: application/x-www-form-urlencoded' \
     --data-raw 'event=wish&shop_id=SHOP_ID&did=DEVICE_ID&item_id[0]=PRODUCT_ID'
 ```
+
 ```javascript
 <%= config[:js_sdk_name] %>('track', 'wish', product_id);
 ```
+
+```java
+// Not described yet
+```
+
+```swift
+sdk.track(event: .orderCreated(orderId: "123", totalValue: 33.3, products: [(id: "PRODUCT_ID_1", amount: 3), (id: "PRODUCT_ID_2", amount: 1)])) { trackResponse in
+    // ... see product viewed event for details about a callback
+}
+```
+
+
 ## User removed product from favorites
+
+
 ```shell
 #Full request
 curl 'http://<%= config[:api_endpoint] %>/push' \
@@ -267,6 +383,17 @@ curl 'http://<%= config[:api_endpoint] %>/push' \
     -H 'Content-Type: application/x-www-form-urlencoded' \
     --data-raw 'event=remove_wish&shop_id=SHOP_ID&did=DEVICE_ID&item_id[0]=PRODUCT_ID'
 ```
+
 ```javascript
 <%= config[:js_sdk_name] %>('track', 'remove_wish', product_id);
+```
+
+```swift
+sdk.track(event: .productRemovedToFavorities(id: "PRODUCT_ID")) { trackResponse in
+    // ... see product viewed event for details about a callback
+}
+```
+
+```java
+// Not described yet
 ```
