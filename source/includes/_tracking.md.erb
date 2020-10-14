@@ -140,9 +140,9 @@ Send this event when user opens product's details page.
 |Parameter|Type|Requirement|Description|
 | ------------ | ------------ | ------------ | ----------- |
 |id|number/string|required|The ID of the product being viewed|
-|stock|boolean|optionally|Product availability. If defined, it overwrites the value received from the product feed (XML) and HTTP-import of the product catalog.|
-|recommended_by|string|optionally|If a product from a recommendation widget was opened in a popup or a website uses a "single page" architecture, this parameter must contain the value "dynamic".|
-|recommended_code|string|optionally|If a product from the recommendations widget was opened in the pop-up or the site uses a "single page" architecture, this parameter must contain a unique code of the recommendations widget, available in the account in the "data-recommender-code" attribute for each widget.|
+|stock|boolean|optional|Product availability. If defined, it overwrites the value received from the product feed (XML) and HTTP-import of the product catalog.|
+|recommended_by|string|optional|If a product from a recommendation widget was opened in a popup or a website uses a "single page" architecture, this parameter must contain the value "dynamic".|
+|recommended_code|string|optional|If a product from the recommendations widget was opened in the pop-up or the site uses a "single page" architecture, this parameter must contain a unique code of the recommendations widget, available in the account in the "data-recommender-code" attribute for each widget.|
 
 
 ## User viewed a category
