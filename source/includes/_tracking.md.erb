@@ -173,6 +173,9 @@ sdk.track(event: .categoryView(id: "CATEGORY_ID")) { trackResponse in
 
 Send this event when user opens category page.
 
+|Parameter|Type|Requirement|Description|
+| ------------ | ------------ | ------------ | ----------- |
+|category_id|number/string|required|The ID of the category being viewed|
 
 
 ## User searched something
@@ -195,6 +198,9 @@ curl 'http://<%= config[:api_endpoint] %>/push' \
 <%= config[:js_sdk_name] %>('track', 'search', search_query);
 ```
 
+|Parameter|Type|Requirement|Description|
+| ------------ | ------------ | ------------ | ----------- |
+|search_query|string|required|The search query text|
 
 
 ## User added product to cart
