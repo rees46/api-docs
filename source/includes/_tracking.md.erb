@@ -137,7 +137,9 @@ sdk.track(event: .productView(id: "PRODUCT_ID"), recommendedBy: recData) { track
 
 Send this event when user opens product's details page.
 
-    <%= config[:js_sdk_name] %>("track", "view", params);
+```javascript
+<%= config[:js_sdk_name] %>("track", "view", params);
+```
 
 |Parameter|Type|Requirement|Description|
 | ------------ | ------------ | ------------ | ----------- |
