@@ -137,10 +137,6 @@ sdk.track(event: .productView(id: "PRODUCT_ID"), recommendedBy: recData) { track
 
 Send this event when user opens product's details page.
 
-|Syntax|
-| ------------ |
-|<%= config[:js_sdk_name] %>("track", "view", params);|
-
 |Parameter|Type|Requirement|Description|
 | ------------ | ------------ | ------------ | ----------- |
 |id|number/string|required|The ID of the product being viewed|
@@ -176,10 +172,6 @@ sdk.track(event: .categoryView(id: "CATEGORY_ID")) { trackResponse in
 ```
 
 Send this event when user opens category page.
-
-|Syntax|
-| ------------ |
-|<%= config[:js_sdk_name] %>("track", "category", category_id);|
 
 |Parameter|Type|Requirement|Description|
 | ------------ | ------------ | ------------ | ----------- |
