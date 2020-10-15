@@ -71,40 +71,40 @@ curl 'http://<%= config[:api_endpoint] %>/push' \
 ```javascript
 
 // Simple track
-<%= config[:js_sdk_name] %>('track', 'view', {
+<%= config[:js_sdk_name] %>("track", "view", {
     id: 37,
     stock: true
 });
 
 // Also notify the product is in stock (if it was not in stock)
-<%= config[:js_sdk_name] %>('track', 'view', {
+<%= config[:js_sdk_name] %>("track", "view", {
     id: 37,
     stock: true
 });
 
 // Or not in stock now (to prevent recommending it on the next requests)
-<%= config[:js_sdk_name] %>('track', 'view', {
+<%= config[:js_sdk_name] %>("track", "view", {
     id: 37,
     stock: false
 });
 
 // Track if product was viewed after click on product recommendations
-<%= config[:js_sdk_name] %>('track', 'view', {
+<%= config[:js_sdk_name] %>("track", "view", {
     id: 37,
-    recommended_by: 'dynamic',
-    recommender_code: 'jkIWdXSRfwVyK'
+    recommended_by: "dynamic",
+    recommender_code: "jkIWdXSRfwVyK"
 });
 
 // Track if product was viewed after click on suggest results
-<%= config[:js_sdk_name] %>('track', 'view', {
+<%= config[:js_sdk_name] %>("track", "view", {
     id: 37,
-    recommended_by: 'instant_search',
+    recommended_by: "instant_search"
 });
 
 // ... or on full results
-<%= config[:js_sdk_name] %>('track', 'view', {
+<%= config[:js_sdk_name] %>("track", "view", {
     id: 37,
-    recommended_by: 'full_search',
+    recommended_by: "full_search"
 });
 
 ```
@@ -137,8 +137,6 @@ sdk.track(event: .productView(id: "PRODUCT_ID"), recommendedBy: recData) { track
 
 Send this event when user opens product's details page.
 
-`<%= config[:js_sdk_name] %>("track", "view", params);`
-
 |Syntax|
 | ------------ |
 |<%= config[:js_sdk_name] %>("track", "view", params);|
@@ -168,7 +166,7 @@ curl 'http://<%= config[:api_endpoint] %>/push' \
 ```
 
 ```javascript
-<%= config[:js_sdk_name] %>('track', 'category', category_id);
+<%= config[:js_sdk_name] %>("track", "category", 100500);
 ```
 
 ```swift
@@ -178,6 +176,10 @@ sdk.track(event: .categoryView(id: "CATEGORY_ID")) { trackResponse in
 ```
 
 Send this event when user opens category page.
+
+|Syntax|
+| ------------ |
+|<%= config[:js_sdk_name] %>("track", "category", category_id);|
 
 |Parameter|Type|Requirement|Description|
 | ------------ | ------------ | ------------ | ----------- |
