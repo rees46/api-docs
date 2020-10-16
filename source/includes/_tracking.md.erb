@@ -137,8 +137,6 @@ sdk.track(event: .productView(id: "PRODUCT_ID"), recommendedBy: recData) { track
 
 Send this event when user opens product's details page.
 
-------------
-
 ### JS SDK syntax
 |Syntax|
 | ------------ |
@@ -151,8 +149,6 @@ Send this event when user opens product's details page.
 |stock|boolean|optional|Product availability. If defined, it overwrites the value received from the product feed (XML) and HTTP-import of the product catalog.|
 |recommended_by|string|required in some cases|If a product from a recommendation widget was opened in a popup or a website uses a "single page" architecture, this parameter must contain the value "dynamic".|
 |recommended_code|string|required in some cases|If a product from the recommendations widget was opened in the pop-up or the site uses a "single page" architecture, this parameter must contain a unique code of the recommendations widget, available in the account in the "data-recommender-code" attribute for each widget.|
-
-------------
 
 ## User viewed a category
 
@@ -182,8 +178,6 @@ sdk.track(event: .categoryView(id: "CATEGORY_ID")) { trackResponse in
 
 Send this event when user opens category page.
 
-------------
-
 ### JS SDK syntax
 |Syntax|
 | ------------ |
@@ -193,8 +187,6 @@ Send this event when user opens category page.
 |Parameter|Type|Requirement|Description|
 | ------------ | ------------ | ------------ | ----------- |
 |category_id|number/string|required|The ID of the category being viewed|
-
-------------
 
 ## User searched something
 
@@ -216,8 +208,6 @@ curl 'http://<%= config[:api_endpoint] %>/push' \
 <%= config[:js_sdk_name] %>('track', 'search', search_query);
 ```
 
-------------
-
 ### JS SDK syntax
 |Syntax|
 | ------------ |
@@ -227,8 +217,6 @@ curl 'http://<%= config[:api_endpoint] %>/push' \
 |Parameter|Type|Requirement|Description|
 | ------------ | ------------ | ------------ | ----------- |
 |search_query|string|required|The search query text|
-
-------------
 
 ## User added product to cart
 
@@ -301,8 +289,6 @@ sdk.track(event: .synchronizeCart(ids: ["PRODUCT_ID_1", "PRODUCT_ID_2"])) { trac
 // Not described yet
 ```
 
-------------
-
 ### JS SDK syntax (short request for a single product)
 |Syntax|
 | ------------ |
@@ -312,8 +298,6 @@ sdk.track(event: .synchronizeCart(ids: ["PRODUCT_ID_1", "PRODUCT_ID_2"])) { trac
 |Parameter|Type|Requirement|Description|
 | ------------ | ------------ | ------------ | ----------- |
 |id|number/string|required|The ID of the product added to the cart|
-
-------------
 
 ### JS SDK syntax (full request for a single product)
 |Syntax|
@@ -328,8 +312,6 @@ sdk.track(event: .synchronizeCart(ids: ["PRODUCT_ID_1", "PRODUCT_ID_2"])) { trac
 |stock|boolean|optional|Product availability. If defined, it overwrites the value received from the product feed (XML) and HTTP-import of the product catalog.|
 |recommended_by|string|required in some cases|If a product from a recommendation widget was opened in a popup or a website uses a "single page" architecture, this parameter must contain the value "dynamic".|
 |recommended_code|string|required in some cases|If a product from the recommendations widget was opened in the pop-up or the site uses a "single page" architecture, this parameter must contain a unique code of the recommendations widget, available in the account in the "data-recommender-code" attribute for each widget.|
-
-------------
 
 ## User removed product from cart
 
