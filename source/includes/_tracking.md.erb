@@ -405,6 +405,28 @@ sdk.track(event: .productAddedToCart(id: "PRODUCT_ID")) { trackResponse in
 // Not described yet
 ```
 
+### JS SDK syntax
+|Syntax|
+| ------------ |
+|<%= config[:js_sdk_name] %>("track", "remove_from_cart", {params});|
+
+### JS SDK Parameters
+|Parameter|Type|Requirement|Description|
+| ------------ | ------------ | ------------ | ------------ |
+|products|array|required|An array of objects with product information in the order. Description of parameters in the table below.|
+|order|number/string|optional|Order number in the store. If not defined, the internal order numbering system will be used. In this case synchronization of order status is impossible.|
+|order_price|number|optional|The final cost of the order including all discounts, bonuses, and additional services. If not defined, the cost of the order is calculated from the data in the product database without discounts and additional services.|
+|delivery_type|string|optional|Method of delivery. Available values: "self_pickup", "delivery", "pickup_point"|
+
+Description of parameters in the objects of the "products" array:
+
+|Parameter|Type|Requirement|Description|
+| ------------ | ------------ | ------------ | ------------ |
+|id|number/string|required|The ID of the product in the order|
+|amount|number|required|Product quantity|
+|price|number|optional|Product cost per unit|
+|stock|boolean|optional|Product availability. It may be useful when a single product is sold to exclude it from the recommendations at once.|
+
 ## User added product to favorites
 
 ```shell
