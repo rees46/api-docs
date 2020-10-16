@@ -207,7 +207,11 @@ curl 'http://<%= config[:api_endpoint] %>/push' \
 ```javascript
 <%= config[:js_sdk_name] %>('track', 'search', search_query);
 ```
+|JS SDK syntax|
+| ------------ |
+|<%= config[:js_sdk_name] %>("track", "search", search_query);|
 
+### JS SDK Parameters
 |Parameter|Type|Requirement|Description|
 | ------------ | ------------ | ------------ | ----------- |
 |search_query|string|required|The search query text|
