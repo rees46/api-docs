@@ -295,6 +295,18 @@ sdk.track(event: .synchronizeCart(ids: ["PRODUCT_ID_1", "PRODUCT_ID_2"])) { trac
 |Parameter|Type|Requirement|Description|
 | ------------ | ------------ | ------------ | ----------- |
 |id|number/string|required|The ID of the product added to the cart|
+|JS SDK syntax (full request for a single product)|
+| ------------ |
+|<%= config[:js_sdk_name] %>("track", "cart", {params});|
+
+### JS SDK Parameters
+|Parameter|Type|Requirement|Description|
+| ------------ | ------------ | ------------ | ------------ |
+|id|number/string|required|The ID of the product added to the cart|
+|amount|number|optional|Product quantity|
+|stock|boolean|optional|Product availability. If defined, it overwrites the value received from the product feed (XML) and HTTP-import of the product catalog.|
+|recommended_by|string|required in some cases|If a product from a recommendation widget was opened in a popup or a website uses a "single page" architecture, this parameter must contain the value "dynamic".|
+|recommended_code|string|required in some cases|If a product from the recommendations widget was opened in the pop-up or the site uses a "single page" architecture, this parameter must contain a unique code of the recommendations widget, available in the account in the "data-recommender-code" attribute for each widget.|
 
 
 ## User removed product from cart
