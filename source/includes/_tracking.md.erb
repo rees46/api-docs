@@ -137,7 +137,8 @@ sdk.track(event: .productView(id: "PRODUCT_ID"), recommendedBy: recData) { track
 
 Send this event when user opens product's details page.
 
-|JS SDK syntax|
+### JS SDK syntax
+|Syntax|
 | ------------ |
 |<%= config[:js_sdk_name] %>("track", "view", {params});|
 
@@ -178,7 +179,8 @@ sdk.track(event: .categoryView(id: "CATEGORY_ID")) { trackResponse in
 
 Send this event when user opens category page.
 
-|JS SDK syntax|
+### JS SDK syntax
+|Syntax|
 | ------------ |
 |<%= config[:js_sdk_name] %>("track", "category", category_id);|
 
@@ -207,7 +209,8 @@ curl 'http://<%= config[:api_endpoint] %>/push' \
 ```javascript
 <%= config[:js_sdk_name] %>('track', 'search', search_query);
 ```
-|JS SDK syntax|
+### JS SDK syntax
+|Syntax|
 | ------------ |
 |<%= config[:js_sdk_name] %>("track", "search", search_query);|
 
@@ -296,6 +299,8 @@ sdk.track(event: .synchronizeCart(ids: ["PRODUCT_ID_1", "PRODUCT_ID_2"])) { trac
 |Parameter|Type|Requirement|Description|
 | ------------ | ------------ | ------------ | ----------- |
 |id|number/string|required|The ID of the product added to the cart|
+
+------------
 
 ### JS SDK syntax (full request for a single product)
 |Syntax|
