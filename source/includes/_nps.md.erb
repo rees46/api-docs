@@ -18,7 +18,7 @@ curl https://<%= config[:api_endpoint] %>/nps/categories?shop_id=SHOPID&email=em
 ```
 
 ```javascript
-<%= config[:js_sdk_name] %>('nps', 'categories', success, failure);
+<%= config[:js_sdk_name] %>('nps', 'categories', {params}, success, failure);
 ```
 
 ```swift
@@ -66,8 +66,8 @@ curl https://<%= config[:api_endpoint] %>/nps/categories?shop_id=SHOPID&email=em
 
 Parameter | Type | Required | Description
 --------- | ------- | -------  | -----------
-shop_id | String | true | Your API key
-did | String | false | Device ID of the user. SDK handles it automatically.
+shop_id | String | true | Your API key. JS SDK handles it automatically.
+did | String | false | Device ID of the user. JS SDK handles it automatically.
 email | String | false | User's email
 phone | String | false | User's phone
 loyalty_id | String | false | User's loyalty ID
@@ -83,7 +83,7 @@ curl https://<%= config[:api_endpoint] %>/nps/channels?shop_id=SHOPID
 ```
 
 ```javascript
-<%= config[:js_sdk_name] %>('nps', 'channels', success, failure);
+<%= config[:js_sdk_name] %>('nps', 'channels', {}, success, failure);
 ```
 
 ```swift
@@ -130,7 +130,7 @@ curl https://<%= config[:api_endpoint] %>/nps/channels?shop_id=SHOPID
 
 Parameter | Type | Required | Description
 --------- | ------- | -------  | -----------
-shop_id | String | true | Your API key
+shop_id | String | true | Your API key. JS SDK handles it automatically.
 
 
 
