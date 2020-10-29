@@ -14,7 +14,7 @@ This endpoints returns a list of active categories. Categories list can be custo
 Note: if you provide any of user identifiers (see query params table), questions and "thank you" messages can be personalized.
 
 ```shell
-curl https://<%= config[:api_endpoint] %>/nps/categories?shop_id=SHOPID&email=email@example.com&locale=en
+curl https://<%= config[:api_endpoint] %>/nps/categories?shop_id=SHOPID
 ```
 
 ```javascript
@@ -67,11 +67,6 @@ curl https://<%= config[:api_endpoint] %>/nps/categories?shop_id=SHOPID&email=em
 Parameter | Type | Required | Description
 --------- | ------- | -------  | -----------
 shop_id | String | true | Your API key. JS SDK handles it automatically.
-did | String | false | Device ID of the user. JS SDK handles it automatically.
-email | String | false | User's email
-phone | String | false | User's phone
-loyalty_id | String | false | User's loyalty ID
-locale | String | false | Locale of messages
 
 
 ## NPS channels
