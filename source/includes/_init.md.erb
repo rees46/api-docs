@@ -11,7 +11,7 @@
 (function(r){
     window.<%= config[:js_sdk_name] %>=window.<%= config[:js_sdk_name] %>||function(){(<%= config[:js_sdk_name] %>.q=<%= config[:js_sdk_name] %>.q||[]).push(arguments)};
     var s=document.getElementsByTagName(r)[0],rs=document.createElement(r);
-    rs.async=1;rs.src='//<%= config[:cdn_name] %>/v3.js';s.parentNode.insertBefore(rs,s);
+    rs.async=1;rs.src='//<%= config[:cdn_endpoint] %>/v3.js';s.parentNode.insertBefore(rs,s);
 })('script');
 ```
 
