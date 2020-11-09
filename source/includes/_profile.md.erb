@@ -4,11 +4,25 @@ Endpoints is used to work with user's profile.
 
 ## Save profile settings
 
-This method overrides profile's settings.
 
 ```shell
 curl -d "shop_id=SHOPID&shop_secret=SHOP_SECRET&email=EMAIL&fieldname=FIELDVALUE" https://<%= config[:api_endpoint] %>/profile/set
 ```
+
+```javascript
+<%= config[:js_sdk_name] %>('profile', 'set', {
+    "first_name": "Jane",
+    "last_name": "Smith",
+    "kids": [
+        {"gender": "m", "birthday": "2017-06-04"},
+        {"gender": "f", "birthday": "2014-02-10"},
+        {"gender": "m", "birthday": "2014-03-17"}
+    ]
+});
+```
+
+This method overrides profile's settings.
+
 ### Query Parameters
 
 Parameter | Type | Required | Description
