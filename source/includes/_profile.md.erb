@@ -76,3 +76,15 @@ vds | String | Vehicle VDS/VIN number
 ### Custom properties
 
 Additionally you can update any custom property, you've created in CRM.
+
+## Read profile info
+
+```javascript
+<%= config[:js_sdk_name] %>('profile', 'get', function(profile) {
+    // Here you can use all properties of profile's object
+    console.log(profile.gender);
+    console.log(profile.fashion.sizes.shoe);
+});
+```
+
+You can read profile info from CRM using API or SDK.
