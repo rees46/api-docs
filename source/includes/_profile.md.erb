@@ -17,3 +17,48 @@ shop_id | String | true | Your API key
 shop_secret | String | true | Your API secret key
 email | String | true | User's email
 
+### Default properties
+
+You can update any standard profile property. All standard properties are listed here:
+
+Parameter | Type | Description
+--------- | ------- | -----------
+id | String | User ID in your platform
+email | String | User's email
+fb_id | String | User's Facebook ID
+vk_id | String | User's VK ID
+telegram_id | String | User's Telegram ID
+loyalty_id | String | User's loyalty program ID
+loyalty_card_location | String | Location ID where user's loyalty card was issued
+loyalty_status | String | User's loyalty program status
+loyalty_bonuses | Integer | User's bonuses amount
+loyalty_bonuses_to_next_level | Integer | User's bonuses amount left for the next level
+gender | String | User's gender: `m` or `f`
+location | String | User's location code
+first_name | String | User's first name
+last_name | String | User's last name
+phone | String | User's phone number
+age | Integer | User's age in years
+birthday | Date | User's birthday in SQL format: YYYY-MM-DD
+bought_something | Bool | User bought something ever
+kids | Array | List of kids (see below)
+auto | Array | List of auto vehicles (see below)
+
+Kid object properties:
+
+Parameter | Type | Description
+--------- | ------- | -----------
+gender | String | Kid's gender
+birthday | Date | Kid's birthday in SQL format: YYYY-MM-DD
+
+Auto object properties:
+
+Parameter | Type | Description
+--------- | ------- | -----------
+brand | String | Vehicle brand
+model | String | Vehicle model
+vds | String | Vehicle VDS/VIN number
+
+### Custom properties
+
+Additionally you can update any custom property, you've created in CRM.
