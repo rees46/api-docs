@@ -99,7 +99,7 @@ curl https://<%= config[:api_endpoint] %>/profile?loyalty_id=...&shop_id=...&sho
 });
 ```
 
-> Method returns this JSON structure
+> REST method returns this JSON structure
 
 ```json
 {
@@ -149,6 +149,34 @@ curl https://<%= config[:api_endpoint] %>/profile?loyalty_id=...&shop_id=...&sho
       ]
     }
   ]
+}
+```
+
+> JS SDK method returns simplified anonimous structure to prevent data stealing
+
+```json
+  "fashion_sizes": ["..."],
+
+  "gender": "m or f",
+
+  "cosmetic_hair": ["..."],
+  "allergy": "bool",
+  "cosmetic_skin": ["..."],
+  "cosmetic_perfume": ["..."],
+
+  "compatibility": null,
+  "vds": null,
+
+  "jewelry": null,
+
+  "realty": ["..."],
+
+  "children": ["..."],
+  "child_gender": "m or f",
+
+  "pets": ["..."],
+
+  "income_level": "cheap"
 }
 ```
 
