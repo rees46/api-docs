@@ -79,6 +79,18 @@ Additionally you can update any custom property, you've created in CRM.
 
 ## Read profile info
 
+
+```shell
+# Using email as user identifier
+curl https://<%= config[:api_endpoint] %>/profile?email=...&shop_id=...&shop_secret=...
+
+# Using phone as user identifier
+curl https://<%= config[:api_endpoint] %>/profile?phone=...&shop_id=...&shop_secret=...
+
+# Using loyalty_id as user identifier
+curl https://<%= config[:api_endpoint] %>/profile?loyalty_id=...&shop_id=...&shop_secret=...
+```
+
 ```javascript
 <%= config[:js_sdk_name] %>('profile', 'get', function(profile) {
     // Here you can use all properties of profile's object
@@ -87,4 +99,60 @@ Additionally you can update any custom property, you've created in CRM.
 });
 ```
 
+> Method returns this JSON structure
+
+```json
+{
+  "first_name": "...",
+  "last_name": "...",
+  "email": "...",
+  "phone": "...",
+  "fb_id": "...",
+  "vk_id": "...",
+  "telegram_id": "...",
+  "loyalty_id": "...",
+  "loyalty_card_location": "...",
+  "loyalty_status": "...",
+  "loyalty_bonuses": "...",
+  "loyalty_bonuses_to_next_level": "...",
+  "gender": "...",
+  "location": "...",
+  "age": "...",
+  "birthday": "...",
+  "bought_something": "...",
+  "tags": [
+    "...",
+    "..."
+  ],
+  "custom_properties": {
+    "prop_key_1": "prop_value",
+    "prop_key_2": "prop_value"
+  },
+  "orders": [
+    {
+      "id": "...",
+      "value": "...",
+      "status": "...",
+      "items": [
+        {
+          "id": "...",
+          "price": "...",
+          "name": "...",
+          "quantity": "..."
+        },
+        {
+          "id": "...",
+          "price": "...",
+          "name": "...",
+          "quantity": "..."
+        }
+      ]
+    }
+  ]
+}
+```
+
+
 You can read profile info from CRM using API or SDK.
+
+In case of using REST API (when using email, loyalty_id or phone number as user ID), you must provide secret key to the method.
