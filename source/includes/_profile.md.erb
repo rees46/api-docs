@@ -38,11 +38,12 @@ You can update any standard profile property. All standard properties are listed
 Parameter | Type | Description
 --------- | ------- | -----------
 id | String | User ID in your platform
-email | String | User's email
+email* | String | User's email
+phone* | String | User's phone number
+loyalty_id* | String | User's loyalty program ID
 fb_id | String | User's Facebook ID
 vk_id | String | User's VK ID
 telegram_id | String | User's Telegram ID
-loyalty_id | String | User's loyalty program ID
 loyalty_card_location | String | Location ID where user's loyalty card was issued
 loyalty_status | String | User's loyalty program status
 loyalty_bonuses | Integer | User's bonuses amount
@@ -51,12 +52,14 @@ gender | String | User's gender: `m` or `f`
 location | String | User's location code
 first_name | String | User's first name
 last_name | String | User's last name
-phone | String | User's phone number
 age | Integer | User's age in years
 birthday | Date | User's birthday in SQL format: YYYY-MM-DD
 bought_something | Bool | User bought something ever
 kids | Array | List of kids (see below)
 auto | Array | List of auto vehicles (see below)
+
+> * One of identifiers must present in request: email, phone or loyalty_id. It's used to identify user.
+
 
 Kid object properties:
 
