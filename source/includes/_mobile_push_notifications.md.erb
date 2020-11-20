@@ -29,7 +29,16 @@
 
 ```json
 {
-  ...
+  "title": "...",
+  "body": "...",
+  "icon": "...",
+  "type": "...",
+  "id": "...",
+  "url": "...",
+  "actions": "[{\"action\": "\b0\", \"title\": \"...\"}, ...]",
+  "action_urls": "[...]",
+  "image": "...",
+  "event": "{\"type\": \"...\", \"uri\": \"...\"}"
 }
 ```
 
@@ -70,6 +79,17 @@ If `src` section is present, each tracked event must be populated with this data
 }
 ```
 
+> For Android
+
+```json
+{
+  "title": "Welcome aboard!",
+  "body": "Hey, it's nice to know you're with us now. Check new updates in our application.",
+  "type": "bulk",
+  "id": "33631"
+}
+```
+
 This kind of message can be used to attract attention and open home screen of the application.
 
 ## Open web link
@@ -95,6 +115,20 @@ This kind of message can be used to attract attention and open home screen of th
 }
 ```
 
+> For Android
+
+```json
+{
+  "title": "Only today",
+  "body": "This special offer for Dyson products only for you!",
+  "type": "bulk",
+  "id": "XFMjM4VAF4",
+  "actions": "[{\"action\": "\b0\", \"title\": \"...\"}, ...]",
+  "event": "{\"type\": \"web\", \"uri\": \"https://example.com/landing/promo\"}"
+}
+```
+
+
 Usually used for promo campaigns when final action is to open some URL in web view.
 
 ## Open category
@@ -117,6 +151,18 @@ Usually used for promo campaigns when final action is to open some URL in web vi
     "type": "chain",
     "id": "72CONd54uF"
   }
+}
+```
+
+> For Android
+
+```json
+{
+  "title": "Black Friday!",
+  "body": "Check our big sale from this category",
+  "type": "chain",
+  "id": "72CONd54uF",
+  "event": "{\"type\": \"category\", \"uri\": \"BFRIDAY_CATEGORY_ID\"}"
 }
 ```
 
@@ -145,6 +191,18 @@ Suitable to open specific category by it's ID. For example for bulk messages abo
 }
 ```
 
+> For Android
+
+```json
+{
+  "title": "...",
+  "body": "...",
+  "type": "chain",
+  "id": "ugLxQ7KrnL",
+  "event": "{\"type\": \"product\", \"uri\": \"PRODUCT123\"}"
+}
+```
+
 Suitable to open specific product by it's ID. For example for triggered messages.
 
 ## Open custom page
@@ -168,6 +226,18 @@ Suitable to open specific product by it's ID. For example for triggered messages
     "type": "transactional",
     "id": "order_delivered"
   }
+}
+```
+
+> For Android
+
+```json
+{
+  "title": "...",
+  "body": "...",
+  "type": "transactional",
+  "id": "order_delivered",
+  "event": "{\"type\": \"custom\", \"uri\": \"order/status/36\", \"payload\": {}}"
 }
 ```
 
