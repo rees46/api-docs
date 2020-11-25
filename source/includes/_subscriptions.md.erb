@@ -96,3 +96,59 @@ shop_id | true | Your API key
 shop_secret | true | Secret API key
 email | true | User's email
 event | true | Event to process: `complaint`
+
+
+
+
+
+## Check subscription status
+
+```shell
+curl https://<%= config[:api_endpoint] %>/subscriptions/check
+```
+
+```javascript
+// No implementation. See CURL
+```
+
+```swift
+// No implementation. See CURL
+```
+
+```java
+// No implementation. See CURL
+```
+
+> Response example
+
+```json
+{
+    "bulk": false,
+    "chains": false,
+    "transactional": false,
+    "invalid": false,
+    "blacklisted": false,
+    "bounced": false,
+    "suppressed": false
+}
+```
+
+
+Checks email's subscription status.
+
+Parameter | Type | Required | Description
+--------- | ------- | -------  | -----------
+shop_id | String | true | Your API key
+email | String | true | User's email
+
+Response flags:
+
+Property | Type | Description
+--------- | -------  | -----------
+bulk | Boolean | Email is subscribed to bulk emails
+chains | Boolean | Email is subscribed to chain messages / Drip campaigns
+transactional | Boolean | Email is subscribed to transactional emails
+invalid | Boolean | Email is invalid or disposal email
+blacklisted | Boolean | Email is blacklisted (spam trap, hard bounce)
+bounced | Boolean | Email is hard bounced
+suppressed | Boolean | Email is suppressed due to complaint
