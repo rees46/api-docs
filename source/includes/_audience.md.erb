@@ -5,7 +5,7 @@ This section allows to manage users, their subscriptions and segments.
 ## Import users
 
 ```shell
-curl -i -X POST -H "Content-Type: application/json" --data-binary "@data.json" https://<%= config[:api_endpoint] %>/profile/set
+curl -i -X POST -H "Content-Type: application/json" --data-binary "@data.json" https://<%= config[:api_endpoint] %>/import/audience
 
 # data.json
 {
@@ -17,8 +17,8 @@ curl -i -X POST -H "Content-Type: application/json" --data-binary "@data.json" h
       "email": "test@example.com",
       "triggers": true,
       "digests": true,
-      "loyalty_card": "123454321",
-      "phone_number": "9991005000",
+      "loyalty_id": "123454321",
+      "phoner": "9991005000",
       "location_id": "107001",
       "loyalty_card_location": "107001",
       "child": true
