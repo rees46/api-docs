@@ -23,6 +23,10 @@ curl -i -X POST -H "Content-Type: application/json" --data-binary "@data.json" h
       "loyalty_card": "000-33-444-111",
       "location_id": "7701123",
       "promocode": "vxawxSi9Uy",
+      "delivery_type": "courier",
+      "delivery_address": "Rouse st, 13",
+      "delivery_date": "2021-12-21",
+      "delivery_time": "15:00",
       "value": {
         "total": 200.13,
         "cash": 190,
@@ -58,6 +62,7 @@ Description of `orders` objects:
 
 Parameter | Type | Required | Description
 --------- | ------- | -------  | -----------
+id | String | true | Order ID
 status | String | true | Order's status
 channel | String | true | Channel where order was updated
 date | Integer | true | Date and time when order status changed
@@ -67,6 +72,10 @@ phone | String | false | User's phone
 loyalty_id | String | false | User's loyalty ID
 location_id | String | false | User's location (city) ID
 promocode | String | false | Promo code used in the order
+delivery_type | String | false | Delivery type
+delivery_address | String | false | Destination address for CRM
+delivery_date | Date | false | Planned delivery date. Format: "YYYY-MM-DD"
+delivery_time | Time | false | Planned delivery time. Format: "HH:MM"
 value | Object | true | Describes order's value parts. See below.
 items | Array | true | Describes order's products. See below.
 
