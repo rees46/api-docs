@@ -129,6 +129,79 @@ shop_id | String | true | Your API key. JS SDK handles it automatically.
 
 
 
+
+
+
+
+
+
+## NPS reviews
+
+Get list of published NPS reviews. Limited to 1000 reviews per request.
+
+```shell
+curl https://<%= config[:api_endpoint] %>/nps/reviews?shop_id=SHOPID&shop_secret=SECRET
+```
+
+```javascript
+// Not needed. See cURL.
+```
+
+```swift
+// Not needed. See cURL.
+```
+
+```java
+// Not needed. See cURL.
+```
+
+
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+    "id": 1,
+    "channel": "email",
+    "category": "delivery",
+    "score": 7,
+    "comment": "Lorem ipsum",
+    "client_id": 1515915625535836508
+  },
+  {
+    "id": 2,
+    "channel": "popup",
+    "category": "checkout",
+    "score": 9,
+    "comment": null,
+    "client_id": 1515915625535836508
+  }
+]
+```
+
+### HTTP Request
+
+`GET https://<%= config[:api_endpoint] %>/nps/reviews`
+
+### Query Parameters
+
+Parameter | Type | Required | Description
+--------- | ------- | -------  | -----------
+shop_id | String | true | Your API key.
+shop_secret | String | true | Your API secret key.
+date_from | String | false | Filter by date: start date.
+date_to | String | false | Filter by date: end date.
+channel | String | false | Channel code.
+category | String | false | Category code.
+
+
+
+
+
+
+
+
+
 ## Save review
 
 
