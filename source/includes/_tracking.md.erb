@@ -415,7 +415,12 @@ sdk.track(event: .productAddedToCart(id: "PRODUCT_ID")) { trackResponse in
 | ------------ | ------------ | ------------ | ------------ |
 |products|array|required|An array of objects with product information in the order. Description of parameters in the table below.|
 |order|number/string|optional|Order number in the store. If not defined, the internal order numbering system will be used. In this case synchronization of order status is impossible.|
+|promocode|string|optional|Promo code used in transaction.|
 |order_price|number|optional|The final cost of the order including all discounts, bonuses, and additional services. If not defined, the cost of the order is calculated from the data in the product database without discounts and additional services.|
+|order_cash|number|optional|How much a customer paid with real money.|
+|order_bonuses|number|optional|How much a customer paid with bonuses.|
+|order_delivery|number|optional|Delivery fee.|
+|order_discount|number|optional|Order discount.|
 |delivery_type|string|optional|Method of delivery. Available values: "self_pickup", "delivery", "pickup_point"|
 
 Description of parameters in the objects of the "products" array:
