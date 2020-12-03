@@ -41,7 +41,7 @@ set :relative_links, true
 
 set :api_endpoint, 'api.products.kameleoon.com'
 set :cdn_endpoint, 'static.products.kameleoon.com'
-set :js_sdk_name, 'kameleoon'
+set :js_sdk_name, 'KameleoonProducts'
 set :ios_sdk_package_name, 'Kameleoon'
 set :ios_sdk_repo, 'https://github.com/kameleoon/ios-sdk.git'
 set :android_sdk_package_name, 'Kameleoon'
