@@ -29,7 +29,11 @@ Parameter | Type | Required | Description
 --------- | ------- | -------  | -----------
 shop_id | String | true | Your API key
 shop_secret | String | true | Your API secret key
-email | String | true | User's email
+email* | String | User's email
+phone* | String | User's phone number
+loyalty_id* | String | User's loyalty program ID
+
+> * One of identifiers must present in request: email, phone or loyalty_id. It's used to identify user.
 
 ### Default properties
 
@@ -38,9 +42,6 @@ You can update any standard profile property. All standard properties are listed
 Parameter | Type | Description
 --------- | ------- | -----------
 id | String | User ID in your platform
-email* | String | User's email
-phone* | String | User's phone number
-loyalty_id* | String | User's loyalty program ID
 fb_id | String | User's Facebook ID
 vk_id | String | User's VK ID
 telegram_id | String | User's Telegram ID
@@ -58,7 +59,6 @@ bought_something | Bool | User bought something ever
 kids | Array | List of kids (see below)
 auto | Array | List of auto vehicles (see below)
 
-> * One of identifiers must present in request: email, phone or loyalty_id. It's used to identify user.
 
 
 Kid object properties:
