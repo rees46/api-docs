@@ -316,6 +316,7 @@ curl https://<%= config[:api_endpoint] %>/subscriptions/changes?shop_id=...&shop
     "contact": "email1@example.com",
     "campaign_type": "chain",
     "event": "subscribe",
+    "channel": "popup",
     "datetime": "2020-09-24 14:42:36",
     "ip": "192.168.0.1"
   },
@@ -324,6 +325,16 @@ curl https://<%= config[:api_endpoint] %>/subscriptions/changes?shop_id=...&shop
     "contact": "email2@example.com",
     "campaign_type": "bulk",
     "event": "unsubscribe",
+    "channel": "unsubscribe_page",
+    "datetime": "2020-09-23 14:43:36",
+    "ip": "192.168.2.27"
+  },
+  {
+    "contact_type": "email",
+    "contact": "email3@example.com",
+    "campaign_type": "bulk",
+    "event": "hard_bounced",
+    "channel": "email_processing",
     "datetime": "2020-09-23 14:43:36",
     "ip": "192.168.2.27"
   },
@@ -332,6 +343,7 @@ curl https://<%= config[:api_endpoint] %>/subscriptions/changes?shop_id=...&shop
     "contact": "+19990009999",
     "campaign_type": "transactional",
     "event": "subscribe",
+    "channel": "crm",
     "datetime": "2020-09-25 14:43:36",
     "ip": "192.168.2.27"
   },
