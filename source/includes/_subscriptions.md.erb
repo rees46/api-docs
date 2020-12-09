@@ -1,6 +1,6 @@
 # Subscriptions
 
-Service provides methods to manage user's subscriptions
+Service provides methods to manage user's subscriptions to email/SMS channels
 
 ## Manage subscriptions
 
@@ -8,49 +8,102 @@ Service provides methods to manage user's subscriptions
 
 `POST https://<%= config[:api_endpoint] %>/subscriptions/manage`
 
-### Subscribe user to a channel
+### Change user's subscription to different channels and campaigns types
 
 ```shell
-curl -d "shop_id=SHOPID&shop_secret=SECRET&email=my@email.com&event=subscription&segment_id=SEGMENT_ID" \
+
+# Full example
+curl -d "shop_id=SHOPID&shop_secret=SECRET&email=my@email.com&phone=+10000000000&email_bulk=true&email_chain=true&email_transactional=true&sms_bulk=true&sms_chain=true&sms_transactional=true" \
+https://<%= config[:api_endpoint] %>/subscriptions/manage
+
+# Change only specific subscriptions
+curl -d "shop_id=SHOPID&shop_secret=SECRET&email=my@email.com&phone=+10000000000&email_bulk=true&email_chain=true&sms_chain=true&sms_transactional=true" \
+https://<%= config[:api_endpoint] %>/subscriptions/manage
+
+# Change without phone
+curl -d "shop_id=SHOPID&shop_secret=SECRET&email=my@email.com&email_bulk=true&email_chain=true&sms_chain=true&sms_transactional=true" \
+https://<%= config[:api_endpoint] %>/subscriptions/manage
+
+# Change without email
+curl -d "shop_id=SHOPID&shop_secret=SECRET&phone=+10000000000&email_bulk=true&email_chain=true&sms_chain=true&sms_transactional=true" \
+https://<%= config[:api_endpoint] %>/subscriptions/manage
+
+# Doesn't work, because there is no identifier
+curl -d "shop_id=SHOPID&shop_secret=SECRET&email_bulk=true&email_chain=true&sms_chain=true&sms_transactional=true" \
 https://<%= config[:api_endpoint] %>/subscriptions/manage
 ```
 
-> The above command returns JSON structured like this:
+```javascript
 
-```json
-{'status':  'success'}
+// Subscribe user to all kids of email campaigns and SMS
+<%= config[:js_sdk_name] %>('subscription', 'manage', {
+    email: 'my@example.com',
+    phone: '+100000000000',
+    email_bulk: true,
+    email_chain: true,
+    email_transactional: true,
+    sms_bulk: true,
+    sms_chain: true,
+    sms_transactional: true
+});
+
+// Change only specific subscriptions
+<%= config[:js_sdk_name] %>('subscription', 'manage', {
+    email: 'my@example.com',
+    phone: '+100000000000',
+    email_chain: true,
+    sms_bulk: true,
+    sms_transactional: true
+});
+
+// Change without phone
+<%= config[:js_sdk_name] %>('subscription', 'manage', {
+    email: 'my@example.com',
+    email_chain: true,
+    sms_bulk: true,
+    sms_transactional: true
+});
+
+// Change without email
+<%= config[:js_sdk_name] %>('subscription', 'manage', {
+    phone: '+100000000000',
+    email_chain: true,
+    sms_bulk: true,
+    sms_transactional: true
+});
+
+// Change by `did` only
+<%= config[:js_sdk_name] %>('subscription', 'manage', {
+    email_chain: true,
+    sms_bulk: true,
+});
 ```
 
-Parameter | Required | Description
---------- | ------- | -----------
-shop_id | true | Your API key
-shop_secret | true | Secret API key
-email | true | User's email
-event | true | Event to process: `subscription`
-segment_id | false | Segment ID to put subscribed user
-
-
-### Unsubscribe user from mailings
-
-Use this method to unsubscribe user from all types of mailings:
-
-```shell
-curl -d "shop_id=SHOPID&shop_secret=SECRET&email=my@email.com&&event=unsubscription" \
-https://<%= config[:api_endpoint] %>/subscriptions/manage
+```swift
+// No implementation. See CURL
 ```
 
-> The above command returns JSON structured like this:
-
-```json
-{'status':  'success'}
+```java
+// No implementation. See CURL
 ```
 
-Parameter | Required | Description
---------- | ------- | -----------
-shop_id | true | Your API key
-shop_secret | true | Secret API key
-email | true | User's email
-event | true | Event to process: `unsubscription`
+The method changes user's subscription to different channels (`email`, `sms`) and campaigns types (`bulk`, `chain`, `transactional`).
+
+Parameter | Type | Required | Description
+--------- | ------- | ------- | -----------
+shop_id | String | true | Your API key
+shop_secret | String | true* | Secret API key. Required only for REST integration.
+email | String | true* | User's email
+phone | String | true* | User's email
+did | String | true* | Users device ID. It's handled automatically on JS SDK and don't needed in REST API
+email_bulk | Boolean | false | Subscribe user to email bulk campaigns
+email_chain | Boolean | false | Subscribe user to email drip/trigger campaigns
+email_transactional | Boolean | false | Subscribe user to email transactional campaigns
+sms_bulk | Boolean | false | Subscribe user to SMS bulk campaigns
+sms_chain | Boolean | false | Subscribe user to SMS drip/trigger campaigns
+sms_transactional | Boolean | false | Subscribe user to SMS transactional campaigns
+
+
 
 
 
@@ -71,7 +124,7 @@ curl -d "shop_id=SHOPID&shop_secret=SECRET&email=my@email.com&event=hardbounce" 
 https://<%= config[:api_endpoint] %>/subscriptions/manage
 
 # Response:
-{'status':  'success'}
+{"status":  "success"}
 ```
 
 ```javascript
@@ -90,12 +143,12 @@ https://<%= config[:api_endpoint] %>/subscriptions/manage
 ```
 
 
-Parameter | Required | Description
---------- | ------- | -----------
-shop_id | true | Your API key
-shop_secret | true | Secret API key. Required only for REST integration.
-email | true | User's email
-event | true | Event to process: `hard_bounced`
+Parameter | Type | Required | Description
+--------- | ------- | ------- | -----------
+shop_id | String | true | Your API key
+shop_secret | String | true | Secret API key. Required only for REST integration.
+email | String | true | User's email
+event | String | true | Event to process: `hard_bounced`
 
 ### Email is complained
 
@@ -106,7 +159,7 @@ curl -d "shop_id=SHOPID&shop_secret=SECRET&email=my@email.com&event=complaint" \
 https://<%= config[:api_endpoint] %>/subscriptions/manage
 
 # Response:
-{'status':  'success'}
+{"status":  "success"}
 ```
 
 ```javascript
@@ -124,12 +177,12 @@ https://<%= config[:api_endpoint] %>/subscriptions/manage
 // No implementation. See CURL
 ```
 
-Parameter | Required | Description
---------- | ------- | -----------
-shop_id | true | Your API key
-shop_secret | true | Secret API key. Required only for REST integration.
-email | true | User's email
-event | true | Event to process: `complained`
+Parameter | Type | Required | Description
+--------- | ------- | -------  | -----------
+shop_id | String | true | Your API key
+shop_secret | String | true | Secret API key. Required only for REST integration.
+email | String | true | User's email
+event | String | true | Event to process: `complained`
 
 
 ### Email is blacklisted
@@ -141,7 +194,7 @@ curl -d "shop_id=SHOPID&shop_secret=SECRET&email=my@email.com&event=blacklisted"
 https://<%= config[:api_endpoint] %>/subscriptions/manage
 
 # Response:
-{'status':  'success'}
+{"status":  "success"}
 ```
 
 ```javascript
@@ -159,12 +212,12 @@ https://<%= config[:api_endpoint] %>/subscriptions/manage
 // No implementation. See CURL
 ```
 
-Parameter | Required | Description
---------- | ------- | -----------
-shop_id | true | Your API key
-shop_secret | true | Secret API key. Required only for REST integration.
-email | true | User's email
-event | true | Event to process: `blacklisted`
+Parameter | Type | Required | Description
+--------- | ------- | -------  | -----------
+shop_id | String | true | Your API key
+shop_secret | String | true | Secret API key. Required only for REST integration.
+email | String | true | User's email
+event | String | true | Event to process: `blacklisted`
 
 
 
