@@ -312,36 +312,28 @@ curl https://<%= config[:api_endpoint] %>/subscriptions/changes?shop_id=...&shop
 ```json
 [
   {
-    "email": "email1@example.com",
-    "phone": null,
-    "email_bulk": false,
-    "email_chain": false,
-    "email_transactional": false,
-    "email_invalid": false,
-    "email_blacklisted": false,
-    "email_bounced": false,
-    "email_suppressed": false,
-    "web_push": false,
-    "mobile_push": false,
-    "sms_bulk": false,
-    "sms_chain": false,
-    "sms_transactional": false,
+    "contact_type": "email",
+    "contact": "email1@example.com",
+    "campaign_type": "chain",
+    "event": "subscribe",
+    "datetime": "2020-09-24 14:42:36",
+    "ip": "192.168.0.1"
   },
   {
-    "email": "email2@example.com",
-    "phone": "+1000000000000",
-    "email_bulk": false,
-    "email_chain": false,
-    "email_transactional": false,
-    "email_invalid": false,
-    "email_blacklisted": false,
-    "email_bounced": false,
-    "email_suppressed": false,
-    "web_push": false,
-    "mobile_push": false,
-    "sms_bulk": false,
-    "sms_chain": false,
-    "sms_transactional": false,
+    "contact_type": "email",
+    "contact": "email2@example.com",
+    "campaign_type": "bulk",
+    "event": "unsubscribe",
+    "datetime": "2020-09-23 14:43:36",
+    "ip": "192.168.2.27"
+  },
+  {
+    "contact_type": "sms",
+    "contact": "+19990009999",
+    "campaign_type": "transactional",
+    "event": "subscribe",
+    "datetime": "2020-09-25 14:43:36",
+    "ip": "192.168.2.27"
   },
   ...
 ]
