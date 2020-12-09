@@ -123,13 +123,18 @@ curl https://<%= config[:api_endpoint] %>/subscriptions/check
 
 ```json
 {
-    "bulk": false,
-    "chains": false,
-    "transactional": false,
-    "invalid": false,
-    "blacklisted": false,
-    "bounced": false,
-    "suppressed": false
+    "email_bulk": false,
+    "email_chain": false,
+    "email_transactional": false,
+    "email_invalid": false,
+    "email_blacklisted": false,
+    "email_bounced": false,
+    "email_suppressed": false,
+    "web_push": false,
+    "mobile_push": false,
+    "sms_bulk": false,
+    "sms_chain": false,
+    "sms_transactional": false,
 }
 ```
 
