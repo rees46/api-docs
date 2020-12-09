@@ -266,7 +266,9 @@ Checks email's subscription status.
 Parameter | Type | Required | Description
 --------- | ------- | -------  | -----------
 shop_id | String | true | Your API key
-email | String | true | User's email
+shop_secret | String | true | Secret API key
+email | String | true* | User's email
+phone | String | true* | User's phone.
 
 Response flags:
 
@@ -284,3 +286,75 @@ mobile_push | Boolean | User has mobile push token
 sms_bulk | Boolean | User has phone and subscribed to bulk SMS campaigns
 sms_chain | Boolean | User has phone and subscribed to drip SMS campaigns (triggers)
 sms_transactional | Boolean | User has phone and subscribed to transactional SMS campaigns
+
+
+
+## Changed subscriptions list
+
+```shell
+curl https://<%= config[:api_endpoint] %>/subscriptions/changes?shop_id=...&shop_secret=...
+```
+
+```javascript
+// No implementation. See CURL
+```
+
+```swift
+// No implementation. See CURL
+```
+
+```java
+// No implementation. See CURL
+```
+
+> Response example
+
+```json
+[
+  {
+    "email": "email1@example.com",
+    "phone": null,
+    "email_bulk": false,
+    "email_chain": false,
+    "email_transactional": false,
+    "email_invalid": false,
+    "email_blacklisted": false,
+    "email_bounced": false,
+    "email_suppressed": false,
+    "web_push": false,
+    "mobile_push": false,
+    "sms_bulk": false,
+    "sms_chain": false,
+    "sms_transactional": false,
+  },
+  {
+    "email": "email2@example.com",
+    "phone": "+1000000000000",
+    "email_bulk": false,
+    "email_chain": false,
+    "email_transactional": false,
+    "email_invalid": false,
+    "email_blacklisted": false,
+    "email_bounced": false,
+    "email_suppressed": false,
+    "web_push": false,
+    "mobile_push": false,
+    "sms_bulk": false,
+    "sms_chain": false,
+    "sms_transactional": false,
+  },
+  ...
+]
+```
+
+This method returns users with changed subscriptions statuses during 24 hours.
+
+Returns an array of users with email or/and phone, who changed subscriptions status during last 24 hours.
+
+### Parameters
+
+Parameter | Type | Required | Description
+--------- | ------- | -------  | -----------
+shop_id | String | true | Your API key
+shop_secret | String | true | Secret API key
+
