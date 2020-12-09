@@ -53,6 +53,15 @@ email | true | User's email
 event | true | Event to process: `unsubscription`
 
 
+
+
+
+## System operations: complaint, hard bounce and blacklist
+
+This method is used to mark email with specific status.
+
+`POST https://<%= config[:api_endpoint] %>/subscriptions/manage`
+
 ### Email is bounced
 
 Use this method only for hard bounces. Don't use it for soft bounce, because it purges email from database forever.
@@ -60,20 +69,33 @@ Use this method only for hard bounces. Don't use it for soft bounce, because it 
 ```shell
 curl -d "shop_id=SHOPID&shop_secret=SECRET&email=my@email.com&event=hardbounce" \
 https://<%= config[:api_endpoint] %>/subscriptions/manage
-```
 
-> The above command returns JSON structured like this:
-
-```json
+# Response:
 {'status':  'success'}
 ```
+
+```javascript
+<%= config[:js_sdk_name] %>('subscription', 'manage', {
+    email: 'my@example.com',
+    hard_bounced: true
+});
+```
+
+```swift
+// No implementation. See CURL
+```
+
+```java
+// No implementation. See CURL
+```
+
 
 Parameter | Required | Description
 --------- | ------- | -----------
 shop_id | true | Your API key
-shop_secret | true | Secret API key
+shop_secret | true | Secret API key. Required only for REST integration.
 email | true | User's email
-event | true | Event to process: `hardbounce`
+event | true | Event to process: `hard_bounced`
 
 ### Email is complained
 
@@ -82,20 +104,67 @@ Use this method on FBL request (user marked email as spam):
 ```shell
 curl -d "shop_id=SHOPID&shop_secret=SECRET&email=my@email.com&event=complaint" \
 https://<%= config[:api_endpoint] %>/subscriptions/manage
+
+# Response:
+{'status':  'success'}
 ```
 
-> The above command returns JSON structured like this:
+```javascript
+<%= config[:js_sdk_name] %>('subscription', 'manage', {
+    email: 'my@example.com',
+    complained: true
+});
+```
 
-```json
-{'status':  'success'}
+```swift
+// No implementation. See CURL
+```
+
+```java
+// No implementation. See CURL
 ```
 
 Parameter | Required | Description
 --------- | ------- | -----------
 shop_id | true | Your API key
-shop_secret | true | Secret API key
+shop_secret | true | Secret API key. Required only for REST integration.
 email | true | User's email
-event | true | Event to process: `complaint`
+event | true | Event to process: `complained`
+
+
+### Email is blacklisted
+
+Use this method to add email to black list:
+
+```shell
+curl -d "shop_id=SHOPID&shop_secret=SECRET&email=my@email.com&event=blacklisted" \
+https://<%= config[:api_endpoint] %>/subscriptions/manage
+
+# Response:
+{'status':  'success'}
+```
+
+```javascript
+<%= config[:js_sdk_name] %>('subscription', 'manage', {
+    email: 'my@example.com',
+    blacklisted: true
+});
+```
+
+```swift
+// No implementation. See CURL
+```
+
+```java
+// No implementation. See CURL
+```
+
+Parameter | Required | Description
+--------- | ------- | -----------
+shop_id | true | Your API key
+shop_secret | true | Secret API key. Required only for REST integration.
+email | true | User's email
+event | true | Event to process: `blacklisted`
 
 
 
