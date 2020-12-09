@@ -4,7 +4,6 @@ Endpoints is used to work with user's profile.
 
 ## Save profile settings
 
-
 ```shell
 curl -d "shop_id=SHOPID&shop_secret=SHOP_SECRET&email=EMAIL&fieldname=FIELDVALUE" https://<%= config[:api_endpoint] %>/profile/set
 ```
@@ -61,8 +60,6 @@ bought_something | Bool | User bought something ever
 kids | Array | List of kids (see below)
 auto | Array | List of auto vehicles (see below)
 
-
-
 Kid object properties:
 
 Parameter | Type | Description
@@ -82,8 +79,9 @@ vds | String | Vehicle VDS/VIN number
 
 Additionally you can update any custom property, you've created in CRM.
 
-## Read profile info
 
+
+## Read profile info
 
 ```shell
 # Using email as user identifier
@@ -157,9 +155,10 @@ curl https://<%= config[:api_endpoint] %>/profile?loyalty_id=...&shop_id=...&sho
 }
 ```
 
-> JS SDK method returns simplified anonimous structure to prevent data stealing
+> JS SDK method returns simplified anonymous structure to prevent data stealing
 
 ```json
+{
   "fashion_sizes": ["..."],
 
   "gender": "m or f",
@@ -189,3 +188,4 @@ curl https://<%= config[:api_endpoint] %>/profile?loyalty_id=...&shop_id=...&sho
 You can read profile info from CRM using API or SDK.
 
 In case of using REST API (when using email, loyalty_id or phone number as user ID), you must provide secret key to the method.
+

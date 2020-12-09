@@ -1,0 +1,138 @@
+# Segments
+
+The endpoint is used to put or remove user to/from static segment.
+
+## Add user to a segment
+
+```shell
+# Using all possible identifiers
+curl -d "shop_id=SHOPID&shop_secret=SHOP_SECRET&email=EMAIL&phone=PHONE&event=add&segment_id=SEGMENT_ID" https://<%= config[:api_endpoint] %>/segments/add
+
+# With phone only
+curl -d "shop_id=SHOPID&shop_secret=SHOP_SECRET&phone=PHONE&event=add&segment_id=SEGMENT_ID" https://<%= config[:api_endpoint] %>/segments/add
+
+# With email only
+curl -d "shop_id=SHOPID&shop_secret=SHOP_SECRET&email=EMAIL&event=add&segment_id=SEGMENT_ID" https://<%= config[:api_endpoint] %>/segments/add
+```
+
+```javascript
+
+// Using all possible identifiers
+<%= config[:js_sdk_name] %>('segment', 'add', {
+    "email": "jane@example.com",
+    "phone": "+10000000000",
+    "segment_id": "SEGMENT_ID"
+});
+
+// With phone only
+<%= config[:js_sdk_name] %>('segment', 'add', {
+    "phone": "+10000000000",
+    "segment_id": "SEGMENT_ID"
+});
+
+// With email only
+<%= config[:js_sdk_name] %>('segment', 'add', {
+    "email": "jane@example.com",
+    "segment_id": "SEGMENT_ID"
+});
+
+// Without any contacts: `did` is used automatically
+<%= config[:js_sdk_name] %>('segment', 'add', {
+    "segment_id": "SEGMENT_ID"
+});
+```
+
+```swift
+// Not implemented yet
+```
+
+```java
+// Not implemented yet
+```
+
+This method adds user to a specific static segment.
+
+`POST https://<%= config[:api_endpoint] %>/segments/add`
+
+### Query Parameters
+
+Parameter | Type | Required | Description
+--------- | ------- | -------  | -----------
+shop_id | String | true | Your API key
+shop_secret | String | true | Your API secret key
+did* | String | User's device ID. Only for JS/iOS/Android SDK
+email* | String | User's email
+phone* | String | User's phone number
+segment_id | String | Segment ID
+
+<aside class="notice">
+One of identifiers (marked by *) must present in request: email or phone. It's used to identify user. In case of API request, you can't use `did` parameter. In case of JS SDK you can omit `email` and `phone` fields and `did` will be used to find right user.
+</aside>
+
+
+## Remove user from a segment
+
+```shell
+# Using all possible identifiers
+curl -d "shop_id=SHOPID&shop_secret=SHOP_SECRET&email=EMAIL&phone=PHONE&event=remove&segment_id=SEGMENT_ID" https://<%= config[:api_endpoint] %>/segments/remove
+
+# With phone only
+curl -d "shop_id=SHOPID&shop_secret=SHOP_SECRET&phone=PHONE&event=remove&segment_id=SEGMENT_ID" https://<%= config[:api_endpoint] %>/segments/remove
+
+# With email only
+curl -d "shop_id=SHOPID&shop_secret=SHOP_SECRET&email=EMAIL&event=remove&segment_id=SEGMENT_ID" https://<%= config[:api_endpoint] %>/segments/remove
+```
+
+```javascript
+
+// Using all possible identifiers
+<%= config[:js_sdk_name] %>('segment', 'remove', {
+    "email": "jane@example.com",
+    "phone": "+10000000000",
+    "segment_id": "SEGMENT_ID"
+});
+
+// With phone only
+<%= config[:js_sdk_name] %>('segment', 'remove', {
+    "phone": "+10000000000",
+    "segment_id": "SEGMENT_ID"
+});
+
+// With email only
+<%= config[:js_sdk_name] %>('segment', 'remove', {
+    "email": "jane@example.com",
+    "segment_id": "SEGMENT_ID"
+});
+
+// Without any contacts: `did` is used automatically
+<%= config[:js_sdk_name] %>('segment', 'remove', {
+    "segment_id": "SEGMENT_ID"
+});
+```
+
+```swift
+// Not implemented yet
+```
+
+```java
+// Not implemented yet
+```
+
+This method removes user from a specific static segment.
+
+`POST https://<%= config[:api_endpoint] %>/segments/remove`
+
+### Query Parameters
+
+Parameter | Type | Required | Description
+--------- | ------- | -------  | -----------
+shop_id | String | true | Your API key
+shop_secret | String | true | Your API secret key
+did* | String | User's device ID. Only for JS/iOS/Android SDK
+email* | String | User's email
+phone* | String | User's phone number
+segment_id | String | Segment ID
+
+<aside class="notice">
+One of identifiers (marked by *) must present in request: email or phone. It's used to identify user. In case of API request, you can't use `did` parameter. In case of JS SDK you can omit `email` and `phone` fields and `did` will be used to find right user.
+</aside>
