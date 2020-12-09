@@ -362,3 +362,14 @@ Parameter | Type | Required | Description
 shop_id | String | true | Your API key
 shop_secret | String | true | Secret API key
 
+### Response properties
+
+Parameter | Type | Description
+--------- | -------  | -----------
+contact_type | String | Type of contact: `sms` or `email`
+contact | String | Contact value
+campaign_type | String | Type of campaigns: `bulk`, `chain`, `transactional`
+event | String | Type of event: `subscribe`, `unsubscribe`, `hard_bounced`, `complained`, `blacklisted`
+channel | String | Channel of event: `api`, `js_sdk`, `unsubscribe_page`, `email_processing`, etc
+datetime | String | Date and time in `YYYY-MM-DD H:i:s` format
+ip | String | IP from where request was received. Can be empty for some kinds of `channel` parameter.
