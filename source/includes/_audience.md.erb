@@ -15,14 +15,34 @@ curl -i -X POST -H "Content-Type: application/json" --data-binary "@data.json" h
   "audience": [
     {
       "email": "test@example.com",
-      "triggers": true,
-      "digests": true,
       "loyalty_id": "123454321",
       "phone": "9991005000",
-      "location_id": "107001",
-      "loyalty_card_location": "107001",
-      "child": true
-    }
+      "id": "",
+      "fb_id": "",
+      "vk_id": "",
+      "telegram_id": "",
+      "loyalty_card_location": "",
+      "loyalty_status": "",
+      "loyalty_bonuses": "",
+      "loyalty_bonuses_to_next_level": "",
+      "gender": "",
+      "location": "",
+      "first_name": "",
+      "last_name": "",
+      "age": "",
+      "birthday": "",
+      "bought_something": "",
+      "kids": [
+        {"birthday": "2014-06-03", "gender": "f"},
+        {"birthday": "2017-04-01", "gender": "m"},
+      ],
+      "auto": [
+        {"brand": "Mini", "model": "Countryman", "vds": "1234567"},
+        {"brand": "Toyota", "model": "Corolla", "vds": "987655431"},
+      ],
+    },
+    {...},
+    {...},
   ]
 }
 ```
@@ -39,9 +59,9 @@ curl -i -X POST -H "Content-Type: application/json" --data-binary "@data.json" h
 // No implementation is needed in Android SDK
 ```
 
-
-
 Upload audience to database. You can upload users to the default segment or put it in the specific segment. At the same time you can subscribe or unsubscribe users from any kind of email campaigns.
+
+
 
 ### Query Parameters
 
@@ -52,20 +72,45 @@ shop_secret | String | true | Your API secret key
 segment_id | Integer | false | Segment ID
 audience | Array | true | Array of user data objects (see below)
 
-Properties of audience elements:
+### Audience element properties
 
-<aside class="notice">
-One of properties must present: email, phone_number, loyalty_id
-</aside>
+You can update any standard profile property. All standard properties are listed here:
 
-Parameter | Type | Required | Description
---------- | ------- | -------  | -----------
-email | String | false | User's email
-phone_number | String | false | User's phone
-loyalty_id | String | false | User's loyalty ID
-location_id | String | false | User's location (city) ID
-loyalty_card_location | String | false | Location (city) ID where user got their loyalty card
-digests | Boolean | false | Subscribe user to bulk emails
-triggers | Boolean | false | Subscribe user to drip campaigns (triggered emails)
-child | Boolean | false | User has kids
+Parameter | Type | Description
+--------- | ------- | -----------
+id | String | User ID in your platform
+fb_id | String | User's Facebook ID
+vk_id | String | User's VK ID
+telegram_id | String | User's Telegram ID
+loyalty_card_location | String | Location ID where user's loyalty card was issued
+loyalty_status | String | User's loyalty program status
+loyalty_bonuses | Integer | User's bonuses amount
+loyalty_bonuses_to_next_level | Integer | User's bonuses amount left for the next level
+gender | String | User's gender: `m` or `f`
+location | String | User's location code
+first_name | String | User's first name
+last_name | String | User's last name
+age | Integer | User's age in years
+birthday | Date | User's birthday in SQL format: YYYY-MM-DD
+bought_something | Bool | User bought something ever
+kids | Array | List of kids (see below)
+auto | Array | List of auto vehicles (see below)
 
+Kid object properties:
+
+Parameter | Type | Description
+--------- | ------- | -----------
+gender | String | Kid's gender
+birthday | Date | Kid's birthday in SQL format: YYYY-MM-DD
+
+Auto object properties:
+
+Parameter | Type | Description
+--------- | ------- | -----------
+brand | String | Vehicle brand
+model | String | Vehicle model
+vds | String | Vehicle VDS/VIN number
+
+### Custom properties
+
+Additionally you can update any custom property, you've created in CRM.
