@@ -32,14 +32,35 @@ curl -i -X POST -H "Content-Type: application/json" --data-binary "@data.json" h
       "age": "",
       "birthday": "",
       "bought_something": true,
-      "kids": [
-        {"birthday": "2014-06-03", "gender": "f"},
-        {"birthday": "2017-04-01", "gender": "m"},
-      ],
+      "email_bulk": true,
+      "email_chain": true,
+      "email_transactional": true,
+      "sms_bulk": true,
+      "sms_chain": true,
+      "sms_transactional": true,
       "auto": [
-        {"brand": "Mini", "model": "Countryman", "vds": "1234567"},
-        {"brand": "Toyota", "model": "Corolla", "vds": "987655431"},
+        {
+          "brand": "Mini",
+          "model": "Countryman",
+          "vds": "1234567"
+        },
+        {
+          "brand": "Toyota",
+          "model": "Corolla",
+          "vds": "987655431"
+        }
       ],
+      "kids": [
+        {
+          "birthday": "2014-06-03",
+          "gender": "f"
+          },
+        {
+          "birthday": "2017-04-01",
+          "gender": "m"
+        }
+      ],
+
     },
     {...},
     {...},
@@ -98,6 +119,13 @@ birthday | Date | User's birthday in SQL format: YYYY-MM-DD
 bought_something | Bool | User bought something ever
 kids | Array | List of kids (see below)
 auto | Array | List of auto vehicles (see below)
+email_bulk | Boolean | Subscribe user to email bulk campaigns
+email_chain | Boolean | Subscribe user to email drip/trigger campaigns
+email_transactional | Boolean | Subscribe user to email transactional campaigns
+sms_bulk | Boolean | Subscribe user to SMS bulk campaigns
+sms_chain | Boolean | Subscribe user to SMS drip/trigger campaigns
+sms_transactional | Boolean | Subscribe user to SMS transactional campaigns
+
 
 <aside class="notice">
 At least of identifiers (marked by *) must present in request: email, phone or loyalty_id. It's used to identify user.
