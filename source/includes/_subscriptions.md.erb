@@ -120,7 +120,7 @@ This method is used to mark email with specific status.
 Use this method only for hard bounces. Don't use it for soft bounce, because it purges email from database forever.
 
 ```shell
-curl -d "shop_id=SHOPID&shop_secret=SECRET&email=my@email.com&event=hardbounce" \
+curl -d "shop_id=SHOPID&shop_secret=SECRET&email=my@email.com&event=hard_bounced" \
 https://<%= config[:api_endpoint] %>/subscriptions/manage
 
 # Response:
@@ -155,7 +155,7 @@ event | String | true | Event to process: `hard_bounced`
 Use this method on FBL request (user marked email as spam):
 
 ```shell
-curl -d "shop_id=SHOPID&shop_secret=SECRET&email=my@email.com&event=complaint" \
+curl -d "shop_id=SHOPID&shop_secret=SECRET&email=my@email.com&event=complained" \
 https://<%= config[:api_endpoint] %>/subscriptions/manage
 
 # Response:
