@@ -113,7 +113,7 @@ sms_transactional | Boolean | false | Subscribe user to SMS transactional campai
 
 This method is used to mark email with specific status.
 
-`POST https://<%= config[:api_endpoint] %>/subscriptions/manage`
+`POST https://<%= config[:api_endpoint] %>/subscriptions/callback`
 
 ### Email is bounced
 
@@ -121,17 +121,14 @@ Use this method only for hard bounces. Don't use it for soft bounce, because it 
 
 ```shell
 curl -d "shop_id=SHOPID&shop_secret=SECRET&email=my@email.com&event=hard_bounced" \
-https://<%= config[:api_endpoint] %>/subscriptions/manage
+https://<%= config[:api_endpoint] %>/subscriptions/callback
 
 # Response:
 {"status":  "success"}
 ```
 
 ```javascript
-<%= config[:js_sdk_name] %>('subscription', 'manage', {
-    email: 'my@example.com',
-    hard_bounced: true
-});
+// No implementation. See CURL
 ```
 
 ```swift
@@ -156,17 +153,14 @@ Use this method on FBL request (user marked email as spam):
 
 ```shell
 curl -d "shop_id=SHOPID&shop_secret=SECRET&email=my@email.com&event=complained" \
-https://<%= config[:api_endpoint] %>/subscriptions/manage
+https://<%= config[:api_endpoint] %>/subscriptions/callback
 
 # Response:
 {"status":  "success"}
 ```
 
 ```javascript
-<%= config[:js_sdk_name] %>('subscription', 'manage', {
-    email: 'my@example.com',
-    complained: true
-});
+// No implementation. See CURL
 ```
 
 ```swift
@@ -191,17 +185,14 @@ Use this method to add email to black list:
 
 ```shell
 curl -d "shop_id=SHOPID&shop_secret=SECRET&email=my@email.com&event=blacklisted" \
-https://<%= config[:api_endpoint] %>/subscriptions/manage
+https://<%= config[:api_endpoint] %>/subscriptions/callback
 
 # Response:
 {"status":  "success"}
 ```
 
 ```javascript
-<%= config[:js_sdk_name] %>('subscription', 'manage', {
-    email: 'my@example.com',
-    blacklisted: true
-});
+// No implementation. See CURL
 ```
 
 ```swift
