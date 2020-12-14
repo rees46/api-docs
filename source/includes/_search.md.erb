@@ -49,3 +49,59 @@ colors | false | Comma separated list of colors
 exclude | false | Comma separated list of products IDs to exclude from search results
 email | false | It's only for S2S integration, when service doesn't have user's session. Mobile SDK doesn't use it.
 
+
+## Search queries with zero results
+
+This method returns a list of queries which return zero results and number of usages of this queries during previous 2 weeks.
+
+For server-to-server integration only.
+
+### HTTP Request
+
+`GET https://<%= config[:api_endpoint] %>/search/no_result_queries`
+
+```shell
+curl https://<%= config[:api_endpoint] %>/search/no_result_queries?shop_id=...&shop_secret=...
+```
+
+```javascript
+// No implementation. See CURL
+```
+
+```swift
+// No implementation. See CURL
+```
+
+```java
+// No implementation. See CURL
+```
+
+> Response example
+
+```json
+[
+  {
+    "query": "iphone 4s",
+    "quantity": 3844
+  },
+  {
+    "contact_type": "covfefe",
+    "quantity": 384491
+  },
+  ...
+]
+```
+
+### Parameters
+
+Parameter | Type | Required | Description
+--------- | ------- | -------  | -----------
+shop_id | String | true | Your API key
+shop_secret | String | true | Secret API key
+
+### Response properties
+
+Parameter | Type | Description
+--------- | -------  | -----------
+query | String | Search query value
+quantity | Integer | Number of query usages during 2 weeks
