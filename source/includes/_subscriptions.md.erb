@@ -282,6 +282,12 @@ sms_transactional | Boolean | User has phone and subscribed to transactional SMS
 
 ## Changed subscriptions list
 
+This method returns users with changed subscriptions statuses during 24 hours.
+
+Returns an array of users with email or/and phone, who changed subscriptions status during last 24 hours.
+
+`GET https://<%= config[:api_endpoint] %>/subscriptions/changes`
+
 ```shell
 curl https://<%= config[:api_endpoint] %>/subscriptions/changes?shop_id=...&shop_secret=...
 ```
@@ -341,10 +347,6 @@ curl https://<%= config[:api_endpoint] %>/subscriptions/changes?shop_id=...&shop
   ...
 ]
 ```
-
-This method returns users with changed subscriptions statuses during 24 hours.
-
-Returns an array of users with email or/and phone, who changed subscriptions status during last 24 hours.
 
 ### Parameters
 
