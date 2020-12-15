@@ -25,6 +25,7 @@ includes:
   - nps.md.erb
   - multi_messaging.md.erb
   - url_shortener.md.erb
+  - products.md.erb
   - errors.md.erb
 
 search: true
