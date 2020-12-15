@@ -78,7 +78,7 @@ delivery_date | Date | false | Planned delivery date. Format: "YYYY-MM-DD"
 delivery_time | Time | false | Planned delivery time. Format: "HH:MM"
 payment_type | String | false | Payment type. Can by any string value. Ex: cash, card, wire.
 value | Object | true | Describes order's value parts. See below.
-items | Array | true | Describes order's products. See below.
+items* | Array | true | Describes order's products. See below.
 
 Description of `value` object:
 
@@ -101,3 +101,7 @@ Parameter | Type | Required | Description
 id | String | true | ID of purchased product
 price | Numeric | true | Price of 1 unit of purchased product
 quantity | Integer | true | Quantity of mentioned products in the order.
+
+<aside class="notice">
+  Object `items` is required when you create order. You can omit it when you update order's status.
+</aside>
