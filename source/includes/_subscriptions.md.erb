@@ -257,7 +257,7 @@ Checks email's subscription status.
 Parameter | Type | Required | Description
 --------- | ------- | -------  | -----------
 shop_id | String | true | Your API key
-shop_secret | String | true | Secret API key. Can be sent as header.
+shop_secret | String | true | Secret API key. Can be sent as header `X-Shop-Secret`.
 email | String | true* | User's email
 phone | String | true* | User's phone.
 
@@ -353,7 +353,7 @@ curl https://<%= config[:api_endpoint] %>/subscriptions/changes?shop_id=...&shop
 Parameter | Type | Required | Description
 --------- | ------- | -------  | -----------
 shop_id | String | true | Your API key
-shop_secret | String | true | Secret API key. Can be sent as header.
+shop_secret | String | true | Secret API key. Can be sent as header `X-Shop-Secret`.
 
 ### Response properties
 
