@@ -15,6 +15,7 @@
     }
   },
   "mutable-content": 1,
+  "image_url": "...",
   "event": {
     "type": "...",
     "uri": "..."
@@ -50,6 +51,8 @@ aps.alert.title | true | The title of the notification. Apple Watch displays thi
 aps.alert.subtitle | true | Additional information that explains the purpose of the notification.
 aps.alert.body | true | The content of the alert message.
 aps.alert.badge | true | The number to display in a badge on your app’s icon. Specify 0 to remove the current badge, if any.
+aps.alert.image_url | false | Link to image/icon.
+aps.alert.mutable-content | true | Always "1" for iOS.
 event | false | Optional object with additional data.
 event.type | true | Type of the notification: `web`, `category`, `product`, `custom`.
 event.uri | true | Resource identificator depending on the type of event. See examples below.
@@ -76,6 +79,7 @@ If `src` section is present, each tracked event must be populated with this data
     }
   },
   "mutable-content": 1,
+  "image_url": "...",
   "src": {
     "type": "bulk",
     "id": "33631"
@@ -111,6 +115,7 @@ This kind of message can be used to attract attention and open home screen of th
     }
   },
   "mutable-content": 1,
+  "image_url": "...",
   "event": {
     "type": "web",
     "uri": "https://example.com/landing/promo"
@@ -153,6 +158,7 @@ Usually used for promo campaigns when final action is to open some URL in web vi
     }
   },
   "mutable-content": 1,
+  "image_url": "...",
   "event": {
     "type": "category",
     "uri": "BFRIDAY_CATEGORY_ID"
@@ -193,6 +199,7 @@ Suitable to open specific category by it's ID. For example for bulk messages abo
     }
   },
   "mutable-content": 1,
+  "image_url": "...",
   "event": {
     "type": "product",
     "uri": "PRODUCT123"
@@ -233,6 +240,7 @@ Suitable to open specific product by it's ID. For example for triggered messages
     }
   },
   "mutable-content": 1,
+  "image_url": "...",
   "event": {
     "type": "custom",
     "uri": "order/status/36",
