@@ -69,12 +69,12 @@ curl https://<%= config[:api_endpoint] %>/products/subscribers/stock?shop_id=...
   {
     "id": "ID1",
     "quantity": 337,
-    "last_subscription": "2020-01-12 13:23:13"
+    "date": "2020-01-12"
   },
   {
     "id": "ID2",
     "quantity": 13,
-    "last_subscription": "2020-08-11 12:33:41"
+    "date": "2020-08-11"
   }
 ]
 ```
@@ -96,7 +96,7 @@ Parameter | Type | Description
 --------- | -------  | -----------
 id | String | Product ID
 subscribers | Integer | Number of subscribers for the product
-last_subscription | String | Date and time of the last subscription
+date | String | Date of the last subscription
 
 
 
@@ -125,12 +125,12 @@ curl https://<%= config[:api_endpoint] %>/products/subscribers/price?shop_id=...
   {
     "id": "ID1",
     "quantity": 337,
-    "last_subscription": "2020-01-12 13:23:13"
+    "date": "2020-01-12"
   },
   {
     "id": "ID2",
     "quantity": 13,
-    "last_subscription": "2020-08-11 12:33:41"
+    "date": "2020-08-11"
   }
 ]
 ```
@@ -152,4 +152,4 @@ Parameter | Type | Description
 --------- | -------  | -----------
 id | String | Product ID
 subscribers | Integer | Number of subscribers for the product
-last_subscription | String | Date and time of the last subscription
+date | String | Date of the last subscription
