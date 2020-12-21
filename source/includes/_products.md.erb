@@ -68,11 +68,13 @@ curl https://<%= config[:api_endpoint] %>/products/subscribers/stock?shop_id=...
 [
   {
     "id": "ID1",
+    "barcode": "BC101",
     "quantity": 337,
     "date": "2020-01-12"
   },
   {
     "id": "ID2",
+    "barcode": "BC102",
     "quantity": 13,
     "date": "2020-08-11"
   }
@@ -95,6 +97,7 @@ shop_secret | String | true | Shop secret key
 Parameter | Type | Description
 --------- | -------  | -----------
 id | String | Product ID
+barcode | String | Product barcode
 subscribers | Integer | Number of subscribers for the product
 date | String | Date of the last subscription
 
@@ -124,11 +127,13 @@ curl https://<%= config[:api_endpoint] %>/products/subscribers/price?shop_id=...
 [
   {
     "id": "ID1",
+    "barcode": "BC101",
     "quantity": 337,
     "date": "2020-01-12"
   },
   {
     "id": "ID2",
+    "barcode": "BC102",
     "quantity": 13,
     "date": "2020-08-11"
   }
@@ -151,5 +156,6 @@ shop_secret | String | true | Shop secret key
 Parameter | Type | Description
 --------- | -------  | -----------
 id | String | Product ID
+barcode | String | Product barcode
 subscribers | Integer | Number of subscribers for the product
 date | String | Date of the last subscription
