@@ -7,11 +7,11 @@ Note: unique promo codes are limited. Store fetched promo code during user's ses
 ## Fetch promo code
 
 ```shell
-curl https://<%= config[:api_endpoint] %>/promo_codes/fetch?did=DEVICE_ID&shop_id=SHOPID&id=ID
+curl https://<%= config[:api_endpoint] %>/promo_codes/fetch?did=DEVICE_ID&shop_id=SHOPID&id=PROMOCODE_LIST_ID
 ```
 
 ```javascript
-<%= config[:js_sdk_name] %>("get_promo_code", {list_id: PROMOCODE_LIST_ID}, success_callback, error_callback);
+<%= config[:js_sdk_name] %>("get_promo_code", {id: PROMOCODE_LIST_ID}, success_callback, error_callback);
 ```
 
 > The above command returns JSON structured like this:
