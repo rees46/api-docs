@@ -28,12 +28,12 @@ Parameter | Type | Required | Description
 --------- | ------- | -------  | -----------
 shop_id | String | true | Your API key
 shop_secret | String | true | Your API secret key
-email* | String | User's email
-phone* | String | User's phone number
-loyalty_id* | String | User's loyalty program ID
+email* | String | true | User's email
+phone* | String | true | User's phone number
+loyalty_id | String | false | User's loyalty program ID
 
 <aside class="notice">
-At least of identifiers (marked by *) must present in request: email, phone or loyalty_id. It's used to identify user.
+At least of identifiers (marked by *) must present in request: email or phone. It's used to identify user.
 </aside>
 
 ### Default properties
@@ -90,9 +90,6 @@ curl https://<%= config[:api_endpoint] %>/profile?email=...&shop_id=...&shop_sec
 
 # Using phone as user identifier
 curl https://<%= config[:api_endpoint] %>/profile?phone=...&shop_id=...&shop_secret=...
-
-# Using loyalty_id as user identifier
-curl https://<%= config[:api_endpoint] %>/profile?loyalty_id=...&shop_id=...&shop_secret=...
 ```
 
 ```javascript
@@ -188,5 +185,5 @@ curl https://<%= config[:api_endpoint] %>/profile?loyalty_id=...&shop_id=...&sho
 
 You can read profile info from CRM using API or SDK.
 
-In case of using REST API (when using email, loyalty_id or phone number as user ID), you must provide secret key to the method.
+In case of using REST API (when using email or phone number as user ID), you must provide secret key to the method.
 

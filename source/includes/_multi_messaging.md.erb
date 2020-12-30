@@ -80,8 +80,8 @@ shop_id | String | true | Your API key
 shop_secret | String | true | Your API secret key
 email* | String | true | User's email
 phone* | String | true | User's phone number
-loyalty_id* | String | true | User's loyalty program ID
+loyalty_id | String | false | User's loyalty program ID
 campaign_id | Integer | true | Multi-channel campaign ID
 variables | Object | true | Object of key-pair variables for template parser. See example.
 
-> * One of identifiers must present in request: email, phone or loyalty_id. It's used to identify user.
+> * One of identifiers must present in request: email or phone. It's used to identify user.
