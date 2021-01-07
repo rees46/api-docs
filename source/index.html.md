@@ -23,6 +23,7 @@ includes:
   - orders.md.erb
   - promocodes.md.erb
   - nps.md.erb
+  - sms.md.erb
   - multi_messaging.md.erb
   - url_shortener.md.erb
   - products.md.erb
