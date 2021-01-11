@@ -247,7 +247,7 @@ curl https://<%= config[:api_endpoint] %>/subscriptions/check
     "mobile_push": false,
     "sms_bulk": false,
     "sms_chain": false,
-    "sms_transactional": false,
+    "sms_transactional": false
 }
 ```
 
@@ -355,6 +355,9 @@ Parameter | Type | Required | Description
 shop_id | String | true | Your API key
 shop_secret | String | true | Secret API key. Can be sent as header `X-Shop-Secret`.
 event | String | false | Filter by event: `subscribe`, `unsubscribe`, `blacklisted`, `complained`, `hard_bounced`.
+from | String | false | Date `from` in `YYYY-MM-DD` format. Default value: 1 day ago.
+to | String | false | Date `to` in `YYYY-MM-DD` format. Default value: current date.
+
 
 ### Response properties
 
