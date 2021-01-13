@@ -149,3 +149,52 @@ vds | String | Vehicle VDS/VIN number
 ### Custom properties
 
 Additionally you can update any custom property, you've created in CRM.
+
+
+
+
+## Import suppressed emails
+
+```shell
+curl -i -X POST -H "Content-Type: application/json" --data-binary "@data.json" https://<%= config[:api_endpoint] %>/import/suppressed
+
+# data.json
+{
+  "shop_id": "1234567890",
+  "shop_secret": "0987654321",
+  "audience": [
+    { "email": "test@example.com" },
+    { "email": "test2@example.com" },
+  ]
+}
+```
+
+```javascript
+// No implementation is needed in JS SDK
+```
+
+```swift
+// No implementation is needed in iOS SDK
+```
+
+```java
+// No implementation is needed in Android SDK
+```
+
+Upload suppressed emails to database. All emails from this list will be unsubscribed from emails and marked as suppressed.
+
+
+
+### Query Parameters
+
+Parameter | Type | Required | Description
+--------- | ------- | -------  | -----------
+shop_id | String | true | Your API key
+shop_secret | String | true | Your API secret key
+audience | Array | true | Array of user data objects (see below)
+
+### Audience element properties
+
+Parameter | Type | Description
+--------- | ------- | -----------
+email | String | User's email
