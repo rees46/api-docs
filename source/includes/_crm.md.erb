@@ -1,0 +1,42 @@
+# CRM
+
+This section collects CRM-related methods.
+
+## Bulk search by attribute
+
+```shell
+curl -i -X POST -H "Content-Type: application/json" --data-binary "@data.json" https://<%= config[:api_endpoint] %>/crm/search/bulk
+
+# data.json
+{
+  "shop_id": "1234567890",
+  "shop_secret": "0987654321",
+  "by": "loyalty_id",
+  "ids": ["L01", "L02"]
+}
+```
+
+```javascript
+// No implementation is needed in JS SDK
+```
+
+```swift
+// No implementation is needed in iOS SDK
+```
+
+```java
+// No implementation is needed in Android SDK
+```
+
+Methods tries to find a collection of users by list of identifiers. Identifiers can be: email, phone, loyalty_id.
+
+### Query Parameters
+
+Parameter | Type | Required | Description
+--------- | ------- | -------  | -----------
+shop_id | String | true | Your API key
+shop_secret | String | true | Your API secret key
+by | String | true | Type of identifier. Supported: `loyalty_id`
+ids | Array | true | Array of identifiers
+
+
