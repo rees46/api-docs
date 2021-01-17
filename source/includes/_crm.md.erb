@@ -28,6 +28,23 @@ curl -i -X POST -H "Content-Type: application/json" --data-binary "@data.json" h
 // No implementation is needed in Android SDK
 ```
 
+> Response structure
+
+```json
+[
+  {
+    "email": "email@example.com",
+    "phone": "11111111111",
+    "loyalty_id": "L01",
+  },
+  {
+    "email": "email2@example.com",
+    "phone": null,
+    "loyalty_id": "L02",
+  }
+]
+```
+
 Methods tries to find a collection of users by list of identifiers. Identifiers can be: email, phone, loyalty_id.
 
 ### Query Parameters
