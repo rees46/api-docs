@@ -136,3 +136,56 @@ segment_id | String | Segment ID
 <aside class="notice">
 At least one of identifiers (marked by *) must present in request: email or phone. It's used to identify user. In case of API request, you can't use `did` parameter. In case of JS SDK you can omit `email` and `phone` fields and `did` will be used to find right user.
 </aside>
+
+## Get user segments
+
+```shell
+# Using all possible identifiers
+curl "shop_id=SHOPID&shop_secret=SHOP_SECRET&email=EMAIL&phone=PHONE&event=get" https://<%= config[:api_endpoint] %>/segments/get
+
+# With phone only
+curl "shop_id=SHOPID&shop_secret=SHOP_SECRET&phone=PHONE&event=get" https://<%= config[:api_endpoint] %>/segments/get
+
+# With email only
+curl "shop_id=SHOPID&shop_secret=SHOP_SECRET&email=EMAIL&event=get" https://<%= config[:api_endpoint] %>/segments/get
+```
+
+```javascript
+
+// Using all possible identifiers
+<%= config[:js_sdk_name] %>('segment', 'get', function(segments) {
+    // segments (type: array of objects)
+    // each object has the following properties:
+    // "id" as Segment ID
+    // "type" as Segment Type ("dynamic", "static")
+});
+
+```
+
+```swift
+// Not implemented yet
+```
+
+```java
+// Not implemented yet
+```
+
+The method returns an array of segments of the current user.
+
+`GET https://<%= config[:api_endpoint] %>/segments/get`
+
+### Query Parameters
+
+Parameter | Type | Required | Description
+--------- | ------- | -------  | -----------
+shop_id | String | true | Your API key
+shop_secret | String | true | Your API secret key
+did* | String | User's device ID. Only for JS/iOS/Android SDK
+email* | String | User's email
+phone* | String | User's phone number
+
+<aside class="notice">
+One of identifiers (marked by *) must present in request: email or phone. It's used to identify user. In case of API request, you can't use `did` parameter. In case of JS SDK you can omit `email` and `phone` fields and `did` will be used to find right user.
+</aside>
+
+
