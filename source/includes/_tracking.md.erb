@@ -405,6 +405,10 @@ sdk.track(event: .productAddedToCart(id: "PRODUCT_ID")) { trackResponse in
 // Not described yet
 ```
 
+<aside class="notice">
+If you want to debug purchase tracking, keep in mind: if you send event for existing order (by `order_id`), platform doesn't create new events with the same `order_id`. For test purposes, you can use random `order_id` or just omit it (platform will generate fake `order_id`).
+</aside>
+
 ### JS SDK syntax
 |Syntax|
 | ------------ |
