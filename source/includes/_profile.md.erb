@@ -44,13 +44,19 @@ Parameter | Type | Required | Description
 --------- | ------- | -------  | -----------
 shop_id | String | true | Your API key
 shop_secret | String | true | Your API secret key
+did* | String | true | User's email
 email* | String | true | User's email
 phone* | String | true | User's phone number
 loyalty_id | String | false | User's loyalty program ID
 
 <aside class="notice">
-At least of identifiers (marked by *) must present in request: email or phone. It's used to identify user.
+At least of identifiers (marked by *) must present in request: did, email or phone. It's used to identify user.
 </aside>
+
+<aside class="notice">
+If `did` is present, `secret_key` is not needed.
+</aside>
+
 
 ### Default properties
 
