@@ -24,7 +24,7 @@ In templates you can use variables and operators to customize final content. Tem
 ## Sending message
 
 ```shell
-curl -i -X POST -H "Content-Type: application/json" --data-binary "@data.json" https://<%= config[:api_endpoint] %>/multimessage/send
+curl -i -X POST -H "Content-Type: application/json" --data-binary "@data.json" https://<%= config[:api_endpoint] %>/multi/post
 
 # data.json
 {
@@ -32,7 +32,7 @@ curl -i -X POST -H "Content-Type: application/json" --data-binary "@data.json" h
   "shop_secret": "EIxTuot8sj",
   "email": "...",
   "phone": "...",
-  "campaign_id": "...",
+  "code": "...",
   "variables": {
     "first_name": "John",
     "last_name": "Connor",
@@ -79,7 +79,7 @@ shop_id | String | true | Your API key
 shop_secret | String | true | Your API secret key
 email* | String | true | User's email
 phone* | String | true | User's phone number
-campaign_id | Integer | true | Multi-channel campaign ID
+code | String | true | Multi-channel campaign unique code
 variables | Object | true | Object of key-pair variables for template parser. See example.
 
 > * One of identifiers must present in request: email or phone. It's used to identify user.
