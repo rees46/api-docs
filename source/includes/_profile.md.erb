@@ -47,7 +47,6 @@ shop_secret | String | true | Your API secret key
 did* | String | true | User's email
 email* | String | true | User's email
 phone* | String | true | User's phone number
-loyalty_id | String | false | User's loyalty program ID
 
 <aside class="notice">
 At least of identifiers (marked by *) must present in request: did, email or phone. It's used to identify user.
@@ -64,6 +63,7 @@ You can update any standard profile property. All standard properties are listed
 
 Parameter | Type | Description
 --------- | ------- | -----------
+loyalty_id | String | User's loyalty program ID
 id | String | User ID in your platform
 fb_id | String | User's Facebook ID
 vk_id | String | User's VK ID
