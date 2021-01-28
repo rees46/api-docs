@@ -40,7 +40,16 @@ curl http://api.rees46.com/recommend/RECOMMENDER_CODE?shop_id=SHOP_ID&did=DEVICE
 ```
 
 ```swift
-// coming soon
+// Basic request
+sdk.recommend(blockId: "BLOCK_ID") { recommendResult in
+  print("Callback")
+}
+
+// Request with additional data (for example with product ID)
+sdk.recommend(blockId: "block_id", currentProductId: "PRODUCT_ID") { recommendResult in
+  print("Callback")
+}
+
 ```
 
 ```java
