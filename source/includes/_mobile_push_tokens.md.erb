@@ -6,6 +6,12 @@
 curl -d "did=DEVICE_ID&shop_id=SHOPID&token=TOKEN&platform=PLATFORM" https://<%= config[:api_endpoint] %>/mobile_push_tokens
 ```
 
+```swift
+sdk.setPushTokenNotification(token: "TOKEN_STRING") { (tokenResponse) in
+  print("Token set response")
+}
+```
+
 > The above command returns JSON structured like this:
 
 ```json

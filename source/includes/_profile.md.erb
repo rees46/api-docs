@@ -29,7 +29,9 @@ curl -d "shop_id=SHOPID&shop_secret=SHOP_SECRET&email=EMAIL&fieldname=FIELDVALUE
     firstName: ...,
     lastName: ...,
     location: ...,
-    gender: ...)
+    gender: ...) { (profileDataResp) in
+      print("Profile data callback")
+    }
 ```
 
 ```java
