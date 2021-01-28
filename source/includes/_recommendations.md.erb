@@ -5,29 +5,29 @@ Service provides access to product recommendations endpoint.
 ## Request product recommendations
 
 ```shell
-// without additional params
-http://api.rees46.com/recommend/RECOMMENDER_CODE?shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT_A_or_B
+# without additional params
+curl http://api.rees46.com/recommend/RECOMMENDER_CODE?shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT_A_or_B
 
-// with product_id
-http://api.rees46.com/recommend/RECOMMENDER_CODE?shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT_A_or_B&item_id=PRODUCT_ID
+# with product_id
+curl http://api.rees46.com/recommend/RECOMMENDER_CODE?shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT_A_or_B&item_id=PRODUCT_ID
 
-// with category_id
-http://api.rees46.com/recommend/RECOMMENDER_CODE?shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT_A_or_B&category=CATEGORY_ID
+# with category_id
+curl http://api.rees46.com/recommend/RECOMMENDER_CODE?shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT_A_or_B&category=CATEGORY_ID
 
-// with category list
-http://api.rees46.com/recommend/RECOMMENDER_CODE?shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT_A_or_B&categories=CATEGORY_ID_1,CAREGORY_ID_2,CATEGORY_ID_3
+# with category list
+curl http://api.rees46.com/recommend/RECOMMENDER_CODE?shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT_A_or_B&categories=CATEGORY_ID_1,CAREGORY_ID_2,CATEGORY_ID_3
 
-// with search query
-http://api.rees46.com/recommend/RECOMMENDER_CODE?shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT_A_or_B&search_query=To%20be%20or%20not%20to%20be
+# with search query
+curl http://api.rees46.com/recommend/RECOMMENDER_CODE?shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT_A_or_B&search_query=To%20be%20or%20not%20to%20be
 
-// with excluded categories
-http://api.rees46.com/recommend/RECOMMENDER_CODE?shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&&exclude=CATEGORY_ID_1,CAREGORY_ID_2,CATEGORY_ID_3
+# with excluded categories
+curl http://api.rees46.com/recommend/RECOMMENDER_CODE?shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&&exclude=CATEGORY_ID_1,CAREGORY_ID_2,CATEGORY_ID_3
 
-// with a limited number of products
-http://api.rees46.com/recommend/RECOMMENDER_CODE?shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT_A_or_B&limit=NUMBER_OF_PRODUCTS
+# with a limited number of products
+curl http://api.rees46.com/recommend/RECOMMENDER_CODE?shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT_A_or_B&limit=NUMBER_OF_PRODUCTS
 
-// with brand list
-http://api.rees46.com/recommend/RECOMMENDER_CODE?shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT_A_or_B&brands=BRAND_NAME_1,BRAND_NAME_2,BRAND_NAME_3
+# with brand list
+curl http://api.rees46.com/recommend/RECOMMENDER_CODE?shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT_A_or_B&brands=BRAND_NAME_1,BRAND_NAME_2,BRAND_NAME_3
 
 ```
 
