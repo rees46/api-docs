@@ -60,7 +60,6 @@ shop_id | true | Your API key
 seance | true | Temporary user session ID
 recommender_code | true | ID of product recommendations block. You get it from blocks management UI.
 resize_image | false | Image size (px) to resize. Supported: 120, 140, 160, 180, 200, 220.
-locations | false | Location ID
 extended | false | Supports: `1` or empty. If `1`, it will return all information about recommended products. If omit, it returns only products IDs.
 
 ### JS SDK syntax
@@ -88,6 +87,8 @@ extended | false | Supports: `1` or empty. If `1`, it will return all informatio
 |exclude_brands|array|optionally|Array with brand names. If used, the API response will exclude the products of the listed brands. Brands must be specified in the XML product feed.|
 |categories|array|optionally|Array with category IDs. If used, the API response will only return products that are included in the listed categories.|
 |discount|boolean|optionally|If used with "true" value, then only those products, the value of which is less than the "oldprice" value, will be returned in the API response. The old price must be specified in the XML product feed.|
+|extended|number|optionally|Supports: `1` or empty. If `1`, it will return all information about recommended products. If omit, it returns only products IDs.|
+
 
 ### API response
 |Name|Type|Description|
