@@ -1,0 +1,63 @@
+# Chats
+
+Section describes how to save external chats' logs.
+
+## Save chat log
+
+```shell
+curl -i -X POST -H "Content-Type: application/json" --data-binary "@data.json" https://<%= config[:api_endpoint] %>/chat_reports
+
+# data.json for email
+{
+  "shop_id": "DvLWN2ZTMZ",
+  "shop_secret": "EIxTuot8sj",
+  "platform": "...",
+  "code": "...",
+  "email": "...",
+  "data": {...}
+}
+
+# data.json for phone
+{
+  "shop_id": "DvLWN2ZTMZ",
+  "shop_secret": "EIxTuot8sj",
+  "code": "...",
+  "platform": "...",
+  "phone": "...",
+  "data": {...}
+}
+```
+
+```javascript
+// REST API only. See cURL.
+```
+
+```swift
+// REST API only. See cURL.
+```
+
+```java
+// REST API only. See cURL.
+```
+
+### Requirements
+
+Endpoint: `POST https://<%= config[:api_endpoint] %>/chat_reports`
+
+Content type: `form-data`
+
+### Query Parameters
+
+Parameter | Type | Required | Description
+--------- | ------- | -------  | -----------
+shop_id | String | true | Your API key
+shop_secret | String | true | Your API secret key
+code | String | true | Conversation unique code
+platform | String | true | Platfrom code. Supported: `livetex`
+phone* | String | true | User's phone number
+email* | String | true | User's email
+data | Object | true | Conversation raw data as stringified JSON object
+
+<aside class="notice">
+At least of identifiers (marked by *) must present in request: did, email or phone. It's used to identify user.
+</aside>
