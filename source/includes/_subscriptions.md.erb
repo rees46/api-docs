@@ -363,10 +363,40 @@ to | String | false | Date `to` in `YYYY-MM-DD` format. Default value: current d
 
 Parameter | Type | Description
 --------- | -------  | -----------
-contact_type | String | Type of contact: `sms` or `email`
+contact_type | String | Type of contact: `sms`, `email`, `mpush`, `wpush`
 contact | String | Contact value
 campaign_type | String | Type of campaigns: `bulk`, `chain`, `transactional`
 event | String | Type of event: `subscribe`, `unsubscribe`, `hard_bounced`, `complained`, `blacklisted`
 channel | String | Channel of event: `api`, `js_sdk`, `unsubscribe_page`, `email_processing`, etc
 datetime | String | Date and time in `YYYY-MM-DD H:i:s` format
 ip | String | IP from where request was received. Can be empty for some kinds of `channel` parameter.
+
+### Event descriptions:
+
+| Event | Description |
+| --- | --- |
+| subscribe | User is subscribed for messages (email, sms) |
+| unsubscribe | User is unsubscribed |
+| hard_bounced | User's contact is hard bounced (not existing email, phone) |
+| complained | User is complained (FBL). As result: unsubscribed and suppressed |
+| blacklisted | User is blacklisted |
+
+### Channel descriptions
+
+| Event | Description |
+| --- | --- |
+|email_feedback_processing| Mailing feedback processing (FBL, bounce worker, automatic unsubscribe) |
+|api| Log from `subscriptions/manage` method |
+|api_callback| Log from `subscriptions/callback` method |
+|js_sdk| Event from JS SDK. Reserved |
+|mobile_sdk| Event from Mobile SDK. Reserved |
+|push_attributes| Event from `event/push_attributes` method. Deprecated |
+|auto_collector| Event from `auto_collector` service |
+|popup| Subscription from pop-up |
+|import| Subscription from audience import |
+|crm| Subscription management in CRM UI |
+|bulk_sending| Automatic bounce worker while sending bulk mailing |
+|transactional_sending| Automatic bounce worker while sending transactional mailing |
+|unsubscribe_page| User clicked on "unsubscribe" link in email sent by <%= config[:service_name] %> |
+|resubscribe_page|  User clicked on "re-subscribe" link on <%= config[:service_name] %>'s "unsubscribe" page |
+
