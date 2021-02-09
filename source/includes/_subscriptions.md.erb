@@ -146,6 +146,7 @@ shop_id | String | true | Your API key
 shop_secret | String | true | Secret API key. Required only for REST integration.
 email | String | true | User's email
 event | String | true | Event to process: `hard_bounced`
+external_unsubscribe | String | false | If param is present and has any value, channel of this event will be `external_unsubscribe_page` instead of `api_callback`
 
 ### Email is complained
 
@@ -400,4 +401,5 @@ ip | String | IP from where request was received. Can be empty for some kinds of
 |transactional_sending| Automatic bounce worker while sending transactional mailing |
 |unsubscribe_page| User clicked on "unsubscribe" link in email sent by <%= config[:service_name] %> |
 |resubscribe_page|  User clicked on "re-subscribe" link on <%= config[:service_name] %>'s "unsubscribe" page |
+|external_unsubscribe_page| User clicked on "unsubscribe" link in email sent by external ESP |
 
