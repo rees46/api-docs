@@ -109,7 +109,7 @@ sms_transactional | Boolean | false | Subscribe user to SMS transactional campai
 
 
 
-## System operations: complaint, hard bounce and blacklist
+## System operations: unsubscribe, complaint, hard bounce and blacklist
 
 This method is used to mark email with specific status.
 
@@ -146,7 +146,6 @@ shop_id | String | true | Your API key
 shop_secret | String | true | Secret API key. Required only for REST integration.
 email | String | true | User's email
 event | String | true | Event to process: `hard_bounced`
-external_unsubscribe | String | false | If param is present and has any value, channel of this event will be `external_unsubscribe_page` instead of `api_callback`
 
 ### Email is complained
 
@@ -212,6 +211,36 @@ email | String | true | User's email
 event | String | true | Event to process: `blacklisted`
 
 
+### Email is unsubscribed
+
+Use this method to unsubscribe email:
+
+```shell
+curl -d "shop_id=SHOPID&shop_secret=SECRET&email=my@email.com&event=unsubscribed" \
+https://<%= config[:api_endpoint] %>/subscriptions/callback
+
+# Response:
+{"status":  "success"}
+```
+
+```javascript
+// No implementation. See CURL
+```
+
+```swift
+// No implementation. See CURL
+```
+
+```java
+// No implementation. See CURL
+```
+
+Parameter | Type | Required | Description
+--------- | ------- | -------  | -----------
+shop_id | String | true | Your API key
+shop_secret | String | true | Secret API key. Required only for REST integration.
+email | String | true | User's email
+event | String | true | Event to process: `unsubscribed`
 
 
 
