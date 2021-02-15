@@ -498,3 +498,50 @@ sdk.track(event: .productRemovedToFavorities(id: "PRODUCT_ID")) { trackResponse 
 ```java
 // Not described yet
 ```
+
+## User clicked on mobile push
+
+```shell
+curl 'http://<%= config[:api_endpoint] %>/web_push_subscriptions/clicked' \
+    -X 'POST' \
+    -H 'Content-Type: application/x-www-form-urlencoded' \
+    --data-raw 'shop_id=SHOP_ID&code=CODE&type=mobile_push_transactional'
+
+```
+
+```javascript
+// No implementation.
+```
+
+```swift
+// Implementation pending
+```
+
+```java
+// User data
+HashMap<String, String> params = new HashMap<>();
+params.put("email", "email@example.com");
+<%= config[:android_sdk_package_name] %>.profile(params);
+
+//For tracking notification opened
+if( getIntent().getExtras() != null ) {
+	<%= config[:android_sdk_package_name] %>.notificationClicked(getIntent().getExtras());
+}
+```
+
+When user clicks on mobile push notification in mobile app, you have to send event to API with `code` and `type` parameters.
+
+This method uses separate endpoint:
+
+Endpoint: `POST https://<%= config[:api_endpoint] %>/web_push_subscriptions/clicked`
+
+### Required params
+
+All events require at least these parameters:
+
+Parameter | Type | Required | Description
+--------- | ------- | -------  | -----------
+shop_id | String | true | Your API key
+code | String | true | Message identifier. Value can be taken from push's JSON payload. For Android it's located in `id` property. In iOS SDK it's `src.id`
+type | String | true | Message type. Value can be taken from push's JSON payload. For Android it's located in `type` property. In iOS SDK it's `src.type`
+
