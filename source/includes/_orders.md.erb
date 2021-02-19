@@ -49,6 +49,7 @@ curl -i -X POST -H "Content-Type: application/json" --data-binary "@data.json" h
 ```
 
 If a request contains orders with IDs which are already saved in our database, statuses and structure of this orders will be updated.
+NB! Don't use the API method simultaneously with the JS SDK "purchase" event on the frontend.
 
 ### Query Parameters
 
