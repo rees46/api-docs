@@ -6,28 +6,28 @@ Service provides access to product recommendations endpoint.
 
 ```shell
 # without additional params
-curl http://api.rees46.com/recommend/RECOMMENDER_CODE?shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT_A_or_B
+curl http://<%= config[:api_endpoint] %>/recommend/RECOMMENDER_CODE?shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT_A_or_B
 
 # with product_id
-curl http://api.rees46.com/recommend/RECOMMENDER_CODE?shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT_A_or_B&item_id=PRODUCT_ID
+curl http://<%= config[:api_endpoint] %>/recommend/RECOMMENDER_CODE?shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT_A_or_B&item_id=PRODUCT_ID
 
 # with category_id
-curl http://api.rees46.com/recommend/RECOMMENDER_CODE?shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT_A_or_B&category=CATEGORY_ID
+curl http://<%= config[:api_endpoint] %>/recommend/RECOMMENDER_CODE?shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT_A_or_B&category=CATEGORY_ID
 
 # with category list
-curl http://api.rees46.com/recommend/RECOMMENDER_CODE?shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT_A_or_B&categories=CATEGORY_ID_1,CAREGORY_ID_2,CATEGORY_ID_3
+curl http://<%= config[:api_endpoint] %>/recommend/RECOMMENDER_CODE?shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT_A_or_B&categories=CATEGORY_ID_1,CAREGORY_ID_2,CATEGORY_ID_3
 
 # with search query
-curl http://api.rees46.com/recommend/RECOMMENDER_CODE?shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT_A_or_B&search_query=To%20be%20or%20not%20to%20be
+curl http://<%= config[:api_endpoint] %>/recommend/RECOMMENDER_CODE?shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT_A_or_B&search_query=To%20be%20or%20not%20to%20be
 
 # with excluded categories
-curl http://api.rees46.com/recommend/RECOMMENDER_CODE?shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&&exclude=CATEGORY_ID_1,CAREGORY_ID_2,CATEGORY_ID_3
+curl http://<%= config[:api_endpoint] %>/recommend/RECOMMENDER_CODE?shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&&exclude=CATEGORY_ID_1,CAREGORY_ID_2,CATEGORY_ID_3
 
 # with a limited number of products
-curl http://api.rees46.com/recommend/RECOMMENDER_CODE?shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT_A_or_B&limit=NUMBER_OF_PRODUCTS
+curl http://<%= config[:api_endpoint] %>/recommend/RECOMMENDER_CODE?shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT_A_or_B&limit=NUMBER_OF_PRODUCTS
 
 # with brand list
-curl http://api.rees46.com/recommend/RECOMMENDER_CODE?shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT_A_or_B&brands=BRAND_NAME_1,BRAND_NAME_2,BRAND_NAME_3
+curl http://<%= config[:api_endpoint] %>/recommend/RECOMMENDER_CODE?shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT_A_or_B&brands=BRAND_NAME_1,BRAND_NAME_2,BRAND_NAME_3
 
 ```
 
@@ -102,9 +102,9 @@ extended | false | Supports: `1` or empty. If `1`, it will return all informatio
 ### API response
 |Name|Type|Description|
 | :------------ | :------------ | :------------ |
-|html|string|HTML-code of the block with products. The template is customized in the REES46 personal account.|
+|html|string|HTML-code of the block with products. The template is customized in the <%= config[:service_name] %> personal account.|
 |title|string|The block title. Corresponds to the value of the "Action" element in the block rules.|
 |products|array|Array with product IDs.|
-|id|number|Unique block identifier. Corresponds to the block ID in the list of blocks in the REES46 personal account.|
+|id|number|Unique block identifier. Corresponds to the block ID in the list of blocks in the <%= config[:service_name] %> personal account.|
 
 
