@@ -96,7 +96,12 @@ Parameter | Type | Required | Description
 --------- | ------- | -------  | -----------
 shop_id | String | true | Your API key
 shop_secret | String | true | Your API secret key
-by | String | true | Type of identifier. Supported: `loyalty_id`, `birthday`
+by | String | true | Type of identifier. See below.
 ids | Array | true | Array of identifiers
 
+### Supported identifiers
 
+Identifier | Description | Restrictions
+--------- | ------- | -------
+loyalty_id | Loyalty ID | No restrictions
+birthday | Birthday | Format: `YYYY-MM-DD`. Processing only 5 valid dates. Other dates are skipped
