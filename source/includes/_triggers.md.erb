@@ -9,7 +9,7 @@ Trigger subscription methods that require explicit user action.
 ```
 
 ```javascript
-// Subscription
+// Subscribing
 <%= config[:js_sdk_name] %>('subscribe_trigger', 'product_price_decrease', {email: 'John.Doe@store.com', item: '3323', price: 160});
 
 // Unsubscribing from specific products
@@ -27,7 +27,28 @@ Trigger subscription methods that require explicit user action.
 // No code implementation
 ```
 
-Soon
+### JS SDK syntax
+|Syntax|
+| ------------ |
+|<%= config[:js_sdk_name] %>('subscribe_trigger', 'product_price_decrease', params);|
+
+### JS SDK Parameters
+|Parameter|Type|Requirement|Description|
+| ------------ | ------------ | ------------ | ----------- |
+|email|string|required|Subscriber Email|
+|item|number/string|required|The ID of the product to which the user will be subscribed|
+|price|number/string|required|The current product price|
+
+### JS SDK syntax
+|Syntax|
+| ------------ |
+|<%= config[:js_sdk_name] %>('unsubscribe_trigger', 'product_price_decrease', params);|
+
+### JS SDK Parameters
+|Parameter|Type|Requirement|Description|
+| ------------ | ------------ | ------------ | ----------- |
+|email|string|required|Subscriber Email|
+|item_ids|array|required|The IDs of the products from which the user will unsubscribe, or an empty array for full unsubscription|
 
 ## Back in Stock
 
@@ -36,7 +57,7 @@ Soon
 ```
 
 ```javascript
-// Subscription
+// Subscribing
 <%= config[:js_sdk_name] %>('subscribe_trigger', 'product_available', {email: 'John.Doe@store.com', item: '3323'});
 
 // Unsubscribing from specific products
@@ -54,4 +75,25 @@ Soon
 // No code implementation
 ```
 
-Soon
+### JS SDK syntax
+|Syntax|
+| ------------ |
+|<%= config[:js_sdk_name] %>('subscribe_trigger', 'product_available', params);|
+
+### JS SDK Parameters
+|Parameter|Type|Requirement|Description|
+| ------------ | ------------ | ------------ | ----------- |
+|email|string|required|Subscriber Email|
+|item|number/string|required|The ID of the product to which the user will be subscribed|
+
+### JS SDK syntax
+|Syntax|
+| ------------ |
+|<%= config[:js_sdk_name] %>('unsubscribe_trigger', 'product_available', params);|
+
+### JS SDK Parameters
+|Parameter|Type|Requirement|Description|
+| ------------ | ------------ | ------------ | ----------- |
+|email|string|required|Subscriber Email|
+|item_ids|array|required|The IDs of the products from which the user will unsubscribe, or an empty array for full unsubscription|
+
