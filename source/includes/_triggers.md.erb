@@ -1,0 +1,57 @@
+# Triggers
+
+Trigger subscription methods that require explicit user action.
+
+## Price drop
+
+```shell
+# No code implementation
+```
+
+```javascript
+// Subscription
+<%= config[:js_sdk_name] %>('subscribe_trigger', 'product_price_decrease', {email: 'John.Doe@store.com', item: '3323', price: 160});
+
+// Unsubscribing from specific products
+<%= config[:js_sdk_name] %>('unsubscribe_trigger', 'product_price_decrease', {email: 'John.Doe@store.com', item_ids: [3323, 100500, 'ABCDEF']});
+
+// Unsubscribing from all products
+<%= config[:js_sdk_name] %>('unsubscribe_trigger', 'product_price_decrease', {email: 'John.Doe@store.com', item_ids: []});
+```
+
+```swift
+// No code implementation
+```
+
+```java
+// No code implementation
+```
+
+Soon
+
+## Back in Stock
+
+```shell
+# No code implementation
+```
+
+```javascript
+// Subscription
+<%= config[:js_sdk_name] %>('subscribe_trigger', 'product_available', {email: 'John.Doe@store.com', item: '3323'});
+
+// Unsubscribing from specific products
+<%= config[:js_sdk_name] %>('unsubscribe_trigger', 'product_available', {email: 'John.Doe@store.com', item_ids: [3323, 100500, 'ABCDEF']});
+
+// Unsubscribing from all products
+<%= config[:js_sdk_name] %>('unsubscribe_trigger', 'product_available', {email: 'John.Doe@store.com', item_ids: []});
+```
+
+```swift
+// No code implementation
+```
+
+```java
+// No code implementation
+```
+
+Soon
