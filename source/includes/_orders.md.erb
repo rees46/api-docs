@@ -1,6 +1,6 @@
 # Orders
 
-This section describes how to import orders, change its' statuses and structure.
+This section describes how to import orders, change its' statuses, structure and other.
 
 ## Import orders
 
@@ -109,3 +109,22 @@ quantity | Integer | true | Quantity of mentioned products in the order.
 <aside class="notice">
   Object `items` is required when you create order. You can send it as empty array when updating order's status.
 </aside>
+
+
+
+## Get users last order products
+
+```shell
+curl https://<%= config[:api_endpoint] %>/orders/last_for_user?shop_id=SHOP_ID&did=DID&seance=SEANCE_ID
+```
+
+If a request fetches user's last purchase and returns list of purchased products. If there was not purchases, empty array is returned.
+
+### Query Parameters
+
+Parameter | Type | Required | Description
+--------- | ------- | -------  | -----------
+shop_id | String | true | Your API key
+did | String | true | Users device ID
+seance | String | true | Users session ID
+
