@@ -21,6 +21,8 @@ shop_id | String | true | Your API key
 did | String | true | Device ID
 seance | String | true | User's current session
 event | String | true | Type of an event
+stream | String | false | Data stream code. Alphanumeric string (letters, numbers only). Max length: 16. Default: null (means "web"). Can be "ios", "android" or any other string. Used to distinguish between mobile apps, web and other events sources
+
 
 SDKs already handle these parameters out of the box.
 
