@@ -1,8 +1,98 @@
 # Promo codes
 
-Service provides endpoint for unique promo codes fetching.
+Service provides endpoints for promo codes management.
 
-Note: unique promo codes are limited. Store fetched promo code during user's session.
+
+## List of promo codes lists
+
+```shell
+curl https://<%= config[:api_endpoint] %>/promo_codes?shop_id=SHOPID&shop_secret=SHOP_SECRET
+```
+
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+    "name": "Abandoned cart trigger discount codes",
+    "available": 3744
+  }
+]
+```
+
+This method returns list of existing promo codes lists with count of available promo codes in each list.
+
+### HTTP Request
+
+`GET https://<%= config[:api_endpoint] %>/promo_codes`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+shop_id | true | Your API key
+shop_secret | true | Your API secret key
+
+### Errors
+
+When promo secret key is wrong, method returns 403 error.
+
+
+
+
+## Upload promo codes
+
+> Headers
+
+```
+Content-type: application/json
+```
+
+> Body example
+
+```json
+{
+    "shop_id": "...",
+    "shop_secret": "...",
+    "id": "...",
+    "codes": [ "code1", "code2", "code3" ]
+}
+```
+
+> Request example
+
+```shell
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data-binary "@data.json" \
+  https://<%= config[:api_endpoint] %>/promo_codes
+```
+
+Method uploads list of unique promo codes to the selected list. All non-unique promo codes will be excluded.
+
+
+### HTTP Request
+
+`POST https://<%= config[:api_endpoint] %>/promo_codes`
+
+`Content-Type: application/json`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+shop_id | true | Your API key
+shop_secret | true | Your API secret key
+id | true | Promo codes list ID
+codes | true | List of promo codes
+
+### Errors
+
+When promo codes list is empty, method returns 404 error.
+
+
+
+
 
 ## Fetch promo code
 
@@ -19,6 +109,11 @@ curl https://<%= config[:api_endpoint] %>/promo_codes/fetch?did=DEVICE_ID&shop_i
 ```json
 {"code":  "UNIQUE_CODE"}
 ```
+
+Method provides service for unique promo codes fetching.
+
+Note: unique promo codes are limited. Store fetched promo code during user's session.
+
 
 ### HTTP Request
 
