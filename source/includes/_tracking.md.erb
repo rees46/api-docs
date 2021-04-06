@@ -515,7 +515,7 @@ curl 'http://<%= config[:api_endpoint] %>/push/custom' \
 curl 'http://<%= config[:api_endpoint] %>/push/custom' \
     -X 'POST' \
     -H 'Content-Type: application/x-www-form-urlencoded' \
-    --data-raw 'event=my_event&shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&variable_1=value1&variable_2=value2'
+    --data-raw 'event=my_event&shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&category=EVENT_CATEGORY&label=EVENT_LABEL&value=EVENT_VALUE'
 ```
 
 ```javascript
@@ -525,8 +525,9 @@ curl 'http://<%= config[:api_endpoint] %>/push/custom' \
 
 // Tracking with custom parameters
 <%= config[:js_sdk_name] %>("track", "my_event", {
-    var_1: "value_1",
-    var_2: "value_2"
+    category: "event category",
+    label: "event label",
+    value: 100
 });
 ```
 
@@ -543,7 +544,15 @@ curl 'http://<%= config[:api_endpoint] %>/push/custom' \
 Before tracking custom events, register it in "Settings > Custom events".
 </aside>
 
-Custom event can be tracked in simple mode (just event name) and advanced mode (with any custom parameters).
+Custom event can be tracked in simple mode (just event name) and advanced mode (with 3 optional parameters).
+
+Optional parameters:
+
+|Parameter|Type|Requirement|Description|
+| ------------ | ------------ | ------------ | ------------ |
+| category | String | optional | Event category |
+| label | String | optional | Event label |
+| value | Integer | optional | Event value |
 
 
 ## User clicked on mobile push
