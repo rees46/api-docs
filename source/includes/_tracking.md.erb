@@ -501,6 +501,51 @@ sdk.track(event: .productRemovedToFavorities(id: "PRODUCT_ID")) { trackResponse 
 // Not described yet
 ```
 
+
+## Track custom event
+
+```shell
+# Basic tracking
+curl 'http://<%= config[:api_endpoint] %>/push/custom' \
+    -X 'POST' \
+    -H 'Content-Type: application/x-www-form-urlencoded' \
+    --data-raw 'event=my_event&shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID'
+
+# With custom parameters
+curl 'http://<%= config[:api_endpoint] %>/push/custom' \
+    -X 'POST' \
+    -H 'Content-Type: application/x-www-form-urlencoded' \
+    --data-raw 'event=my_event&shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&variable_1=value1&variable_2=value2'
+```
+
+```javascript
+
+// Simple tracking
+<%= config[:js_sdk_name] %>("track", "my_event");
+
+// Tracking with custom parameters
+<%= config[:js_sdk_name] %>("track", "my_event", {
+    var_1: "value_1",
+    var_2: "value_2"
+});
+```
+
+```swift
+// Not implemented yet
+```
+
+```java
+// Not implemented yet
+```
+
+
+<aside class="notice">
+Before tracking custom events, register it in "Settings > Custom events".
+</aside>
+
+Custom event can be tracked in simple mode (just event name) and advanced mode (with any custom parameters).
+
+
 ## User clicked on mobile push
 
 ```shell
