@@ -532,7 +532,11 @@ curl 'http://<%= config[:api_endpoint] %>/push/custom' \
 ```
 
 ```swift
-// Not implemented yet
+// Simple custom event tracking
+sdk.trackEvent(event: "something_happened")
+
+// With parameters
+sdk.trackEvent(event: "something_happened", category: "important", label: "banner_click", value: 42)
 ```
 
 ```java
