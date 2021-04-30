@@ -582,14 +582,19 @@ sdk.notificationClicked(code: "i7ykuagkjgfs", type: "mobile_push_transactional")
 ```
 
 ```java
-// User data
-HashMap<String, String> params = new HashMap<>();
-params.put("email", "email@example.com");
-<%= config[:android_sdk_package_name] %>.profile(params);
+// Add notification identification data to the intent
+intent.putExtra(<%= config[:android_sdk_package_name] %>.NOTIFICATION_TYPE, data.get("type"));
+intent.putExtra(<%= config[:android_sdk_package_name] %>.NOTIFICATION_ID, data.get("id"));
 
-//For tracking notification opened
-if( getIntent().getExtras() != null ) {
-	<%= config[:android_sdk_package_name] %>.notificationClicked(getIntent().getExtras());
+// Add click tracking in the method of activity creation
+@Override
+	protected void onCreate(Bundle savedInstanceState) {
+       super.onCreate(savedInstanceState);
+       //For tracking notification opened
+       if( getIntent().getExtras() != null ) {
+       	 <%= config[:android_sdk_package_name] %>.notificationClicked(getIntent().getExtras());
+       }
+...
 }
 ```
 

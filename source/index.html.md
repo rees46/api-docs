@@ -6,6 +6,7 @@ language_tabs:
   - javascript: JavaScript
   - swift: iOS
   - java: Android
+  - jsx: React Native
 
 includes:
   - intro.md.erb
