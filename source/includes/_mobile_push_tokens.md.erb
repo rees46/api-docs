@@ -12,6 +12,41 @@ sdk.setPushTokenNotification(token: "TOKEN_STRING") { (tokenResponse) in
 }
 ```
 
+```java
+TBD
+```
+
+```jsx
+// To collect push tokens, you have to make some adjustments to the app:
+
+// ** For iOS:
+
+// Open your /ios/{projectName}/AppDelegate.m file, and add the following: At the top of the file, import the Firebase SDK:
+#import <Firebase.h>
+
+// Open a terminal window and navigate to the location of the Xcode project for your app
+
+cd ios/
+pod install
+```
+
+```jsx
+// ** For Android
+
+// In your android/build.gradle
+
+buildscript {
+    dependencies {
+        ...
+        //Add this \/
+        classpath 'com.google.gms:google-services:4.3.4'
+    }
+}
+
+// In your android/app/build.gradle add
+apply plugin: 'com.google.gms.google-services'
+```
+
 > The above command returns JSON structured like this:
 
 ```json

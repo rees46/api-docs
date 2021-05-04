@@ -55,7 +55,25 @@ apply plugin: 'com.google.gms.google-services'
 ```
 
 ```jsx
-TBD
+// Add required packages:
+yarn add <%= config[:rn_sdk_package_code] %>/rn-sdk
+yarn add @react-native-async-storage/async-storage
+yarn add react-native-device-info
+
+// For push notifications also add:
+yarn add react-native-push-notification
+yarn add @react-native-firebase/app
+yarn add @react-native-firebase/messaging
+```
+
+```jsx
+// On application launch initialize the SDK:
+import <%= config[:rn_sdk_package_name] %> from '<%= config[:rn_sdk_package_code] %>/rn-sdk';
+...
+const sdk = new <%= config[:rn_sdk_package_name] %>("YOUR_SHOP_ID", "Stream");
+
+// Initialization is async, so you have a method to test, if SDK is initialized or not:
+sdk.isInit(); // returns true/false
 ```
 
 
