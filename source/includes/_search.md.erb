@@ -11,6 +11,21 @@ sdk.suggest(query: "ipho") { searchResult in
 }
 ```
 
+```jsx
+const type = 'instant_search';
+let search_query = 'your_search_text';
+sdk.search({
+  type,
+  search_query,
+  // other params
+})
+  .then((res) => {
+    console.log(res);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+```
 
 ### HTTP Request
 
@@ -39,6 +54,23 @@ sdk.search(query: "laptop", limit: nil, offset: nil, categoryLimit: nil, categor
   print("Full search callback")
 }
 ```
+
+```jsx
+const type = 'full_search';
+let search_query = 'your_search_text';
+sdk.search({
+  type,
+  search_query,
+  // other params
+})
+  .then((res) => {
+    console.log(res);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+```
+
 
 ### HTTP Request
 

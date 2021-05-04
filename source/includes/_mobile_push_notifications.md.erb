@@ -1,5 +1,55 @@
 # Sending mobile push notifications
 
+```jsx
+// Simple init
+sdk.initPush();
+
+//onClick listener
+sdk.initPush(onClickCallback);
+
+// onReceivetive listener
+sdk.initPush(false, onReceiveCallback);
+
+// you can use different callback for notification, when app is in background.
+sdk.initPush(false, onReceiveCallback, onBackgroundReceiveCallback);
+
+// If onBackgroundReceiveCallback not specified, used onReceiveCallback listener.
+
+// onClickCallback params
+{
+  "bigPictureUrl": "MESSAGE_IMAGE",
+  "channelId": "personaclick-push",
+  "data": {
+    "id": "MESSAGE_ID",
+    "type": "MESSAGE_TYPE"
+  },
+  "foreground": true,
+  "id": "MESSAGE_ID",
+  "largeIconUrl": "MESSAGE_ICON",
+  "message": "MESSAGE_BODY",
+  "title": "MESSAGE_TITLE",
+  "userInteraction": true
+}
+// onReceiveCallBack, onBackgroundReceiveCallback params
+{
+  "data": {
+    "action_urls": "[]",
+    "actions": "[]",
+    "body": "MESSAGE_BODY",
+    "icon": "MESSAGE_ICON",
+    "id": "MESSAGE_ID",
+    "image": "MESSAGE_IMAGE",
+    "title": "MESSAGE_TITLE",
+    "type": "MESSAGE_TYPE"
+  },
+  "from": "MESSAGE_FROM",
+  "messageId": "FMC_MESSAGE_ID",
+  "sentTime": TIMESTAMP,
+  "ttl": TTL_VALUE
+}
+```
+
+
 ## Default payload structure
 
 > For iOS

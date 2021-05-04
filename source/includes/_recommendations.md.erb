@@ -56,6 +56,27 @@ sdk.recommend(blockId: "block_id", currentProductId: "PRODUCT_ID") { recommendRe
 // coming soon
 ```
 
+```jsx
+
+const recommender_code = 'recommender_code';
+
+const params = {
+  item: 100500,
+  exclude: [3, 14, 159, 26535],
+  search_query: "To be or not to be"
+ // other params
+};
+
+sdk.recommend(recommender_code, params)
+  .then((res) => {
+    console.log(res);
+  })
+  .catch((error) => {
+    console.log(error);
+  });
+```
+
+
 ### HTTP Request
 
 `GET https://<%= config[:api_endpoint] %>/recommend/{%recommender_code%}`

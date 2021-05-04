@@ -46,6 +46,10 @@ sdk.trackSource(source: .chain, code: "MESSAGE_ID")
 // Pending implementation
 ```
 
+```jsx
+// See click on push notification
+```
+
 For mobile apps you have to track all app launches, happened by drip campaigns, mailings and push notifications. It will allow to track campaigns efficiency properly.
 
 ## User viewed a product
@@ -137,6 +141,40 @@ sdk.track(event: .productView(id: "PRODUCT_ID"), recommendedBy: recData) { track
 }
 ```
 
+```jsx
+
+// View product (simple)
+sdk.track("view", 37);
+
+// View product (extended, try to avoid)
+sdk.track("view", {
+    id: 37,
+    stock: true
+});
+
+// View product after click on recommender block
+sdk.track("view", {
+  id: PRODUCT_ID,
+  recommended_by: 'dynamic',
+  recommended_code: 'UNIQUE_RECOMMENDER_CODE'
+});
+
+// View product after search results (instant search)
+sdk.track("view", {
+  id: PRODUCT_ID,
+  recommended_by: 'full_search',
+  recommended_code: QUERY_STRING
+});
+
+// View product after search results (full search)
+sdk.track("view", {
+  id: PRODUCT_ID,
+  recommended_by: 'instant_search',
+  recommended_code: QUERY_STRING
+});
+
+```
+
 Send this event when user opens product's details page.
 
 ### JS SDK syntax
@@ -178,6 +216,10 @@ sdk.track(event: .categoryView(id: "CATEGORY_ID")) { trackResponse in
 }
 ```
 
+```jsx
+sdk.track("category", 100500);
+```
+
 Send this event when user opens category page.
 
 ### JS SDK syntax
@@ -208,6 +250,10 @@ curl 'http://<%= config[:api_endpoint] %>/push' \
 
 ```javascript
 <%= config[:js_sdk_name] %>('track', 'search', search_query);
+```
+
+```jsx
+sdk.track("search", "This is a search example");
 ```
 
 ### JS SDK syntax
@@ -291,6 +337,19 @@ sdk.track(event: .synchronizeCart(ids: ["PRODUCT_ID_1", "PRODUCT_ID_2"])) { trac
 // Not described yet
 ```
 
+```jsx
+// Add to cart (simple)
+sdk.track("cart", id);
+
+// Add to cart (from recommender block)
+sdk.track("cart", {
+  id: PRODUCT_ID,
+  amount: PRODUCT_QUANTITY,
+  recommended_by: 'dynamic',
+  recommended_code: 'UNIQUE_RECOMMENDER_CODE'
+});
+```
+
 ### JS SDK syntax (short request for a single product)
 |Syntax|
 | ------------ |
@@ -357,6 +416,10 @@ sdk.track(event: .productRemovedFromCart(id: "PRODUCT_ID")) { trackResponse in
 // Not described yet
 ```
 
+```jsx
+sdk.track("remove_from_cart", id);
+```
+
 ### JS SDK syntax (full request for a single product)
 |Syntax|
 | ------------ |
@@ -405,6 +468,18 @@ sdk.track(event: .productAddedToCart(id: "PRODUCT_ID")) { trackResponse in
 
 ```java
 // Not described yet
+```
+
+```jsx
+sdk.track("purchase", {
+  products: [
+      {id: 37, price: 318, amount: 3},
+      {id: 187, price: 5000, amount: 1}
+  ],
+  order: 'N318',
+  order_price: 29999
+});
+
 ```
 
 <aside class="notice">
@@ -469,6 +544,10 @@ sdk.track(event: .orderCreated(orderId: "123", totalValue: 33.3, products: [(id:
 }
 ```
 
+```jsx
+sdk.track("wish", id);
+```
+
 
 ## User removed product from favorites
 
@@ -499,6 +578,10 @@ sdk.track(event: .productRemovedToFavorities(id: "PRODUCT_ID")) { trackResponse 
 
 ```java
 // Not described yet
+```
+
+```jsx
+sdk.track("remove_wish", id);
 ```
 
 
@@ -545,6 +628,18 @@ sdk.trackEvent(event: "something_happened", category: "important", label: "banne
 
 // Tracking with additional parameters
 <%= config[:android_sdk_package_name] %>.track("my_event", "event category", "event label", 100);
+```
+
+```jsx
+// Simple tracking
+sdk.trackEvent('my_event');
+
+// Tracking with custom parameters
+sdk.trackEvent('my_event', {
+  category: "event category",
+  label: "event label",
+  value: 100
+});
 ```
 
 
@@ -596,6 +691,20 @@ intent.putExtra(<%= config[:android_sdk_package_name] %>.NOTIFICATION_ID, data.g
        }
 ...
 }
+```
+
+```jsx
+// Code and type are received in push notification structure
+const params = {
+  code: 'CODE',
+  type: 'TYPE'
+};
+
+// Track when user clicked the notification
+sdk.notificationClicked(params);
+
+// Track when the notification is received and diplayed
+sdk.notificationReceived(params);
 ```
 
 When user clicks on mobile push notification in mobile app, you have to send event to API with `code` and `type` parameters.
