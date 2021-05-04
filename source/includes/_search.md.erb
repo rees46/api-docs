@@ -15,8 +15,8 @@ sdk.suggest(query: "ipho") { searchResult in
 const type = 'instant_search';
 let search_query = 'your_search_text';
 sdk.search({
-  type,
-  search_query,
+  type: type,
+  search_query: search_query,
   // other params
 })
   .then((res) => {
