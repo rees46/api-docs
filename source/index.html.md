@@ -32,7 +32,7 @@ includes:
   - url_shortener.md.erb
   - products.md.erb
   - chats.md.erb
-  - errors.md.erb
+  - errors.md.erb 
 
 search: true
 
