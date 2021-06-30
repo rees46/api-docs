@@ -118,7 +118,8 @@ extended | false | Supports: `1` or empty. If `1`, it will return all informatio
 |categories|array|optionally|Array with category IDs. If used, the API response will only return products that are included in the listed categories.|
 |discount|boolean|optionally|If used with "true" value, then only those products, the value of which is less than the "oldprice" value, will be returned in the API response. The old price must be specified in the XML product feed.|
 |extended|number|optionally|Supports: `1` or empty. If `1`, it will return all information about recommended products. If omit, it returns only products IDs.|
-
+|prevent_shuffle|boolean|optionally|If true, it disables shuffling of products in the response.|
+|page|number|optionally|The parameter for creating pagination, by default 1. Returns the number of products based on the limit per page.|
 
 ### API response
 |Name|Type|Description|
