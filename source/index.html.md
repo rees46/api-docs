@@ -31,6 +31,7 @@ includes:
   - multi_messaging.md.erb
   - url_shortener.md.erb
   - products.md.erb
+  - categories.md.erb
   - chats.md.erb
   - errors.md.erb 
 
