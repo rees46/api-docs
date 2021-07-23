@@ -1,8 +1,26 @@
 # Categories
 
-## HTTP Request
+Service provides access to categories endpoint.
+
+## Request categories
+
+```shell
+curl https://<%= config[:api_endpoint] %>/products/categories
+```
+
+### HTTP Request
 
 `GET https://<%= config[:api_endpoint] %>/products/categories`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+shop_id | true | Your API key
+shop_secret | true | Your Secret key
+depth | false | (0 - root categories, 1 - root and first level of childs, etc.),
+exclude | false | An array of categories to exclude from the response
+only_discount | false | boolean. Only categories with discount products.
 
 > Response example
 
@@ -48,13 +66,3 @@
    }
 ]
 ```
-
-## Query Parameters
-
-Parameter | Required | Description
---------- | ------- | -----------
-shop_id | true | Your API key
-shop_secret | true | Your Secret key
-depth | false | (0 - root categories, 1 - root and first level of childs, etc.),
-exclude | false | An array of categories to exclude from the response
-only_discount | false | boolean. Only categories with discount products.
