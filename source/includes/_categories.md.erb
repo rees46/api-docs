@@ -1,0 +1,60 @@
+# categories
+
+## HTTP Request
+
+`GET https://<%= config[:api_endpoint] %>/products/categories`
+
+> Response example
+
+```json
+[
+  {
+    :id=>19,
+    :external_id=>"482",
+    :name=>"Jewelry",
+    :url=>"https://demo.rees46.com/categories/jewelry",
+    :parent_id=>nil,
+    :parent_external_id=>nil,
+    :children=> [
+      {
+        :id=>31,
+        :external_id=>"483",
+        :name=>"Rings",
+        :url=>"https://demo.rees46.com/categories/rings",
+        :parent_id=>19,
+        :parent_external_id=>"482",
+        :children=>[]
+      }
+    ]
+  },
+  {
+    :id=>4,
+    :external_id=>"479",
+    :name=>"Baby & Kids",
+    :url=>"https://demo.rees46.com/categories/baby",
+    :parent_id=>nil,
+    :parent_external_id=>nil,
+    :children=>[
+      {
+        :id=>9,
+        :external_id=>"480",
+        :name=>"Clothing Sets",
+        :url=>"https://demo.rees46.com/categories/baby-kids-clothing-sets",
+        :parent_id=>4,
+        :parent_external_id=>"479",
+        :children=>[]
+      }
+    ]
+   }
+]
+```
+
+## Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+shop_id | true | Your API key
+shop_secret | true | Your Secret key
+depth | false | (0 - root categories, 1 - root and first level of childs, etc.),
+exclude | false | An array of categories to exclude from the response
+only_discount | false | boolean. Only categories with discount products.
