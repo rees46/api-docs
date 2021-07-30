@@ -33,6 +33,7 @@ includes:
   - products.md.erb
   - categories.md.erb
   - chats.md.erb
+  - communications.md.erb
   - errors.md.erb 
 
 search: true
