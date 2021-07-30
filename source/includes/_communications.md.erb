@@ -1,4 +1,4 @@
-# Сommunications
+# Communications
 
 Section describes how to save, read or edit external communication's logs.
 
@@ -88,6 +88,56 @@ Content type: `application/json`
 | call_theme  | String  | true     | Сommunication's theme                      |
 | comment     | String  | true     | Сommunication's comment                    |
 | status      | String  | true     | Сommunication's status in external system  |
+
+<aside class="notice">
+At least of identifiers (marked by *) must present in request: did, email or phone. It's used to identify user.
+</aside>
+
+
+## Read communication log
+
+The query returns the last 20 communications as an array with items sorted by time
+
+```shell
+# Using phone as user identifier
+curl https://<%= config[:api_endpoint] %>/crm/client_calls?&shop_id=...&shop_secret=...phone=...
+
+# Using email as user identifier
+curl https://<%= config[:api_endpoint] %>/crm/client_calls?&shop_id=...&shop_secret=...email=...
+
+# Using did as user identifier
+curl https://<%= config[:api_endpoint] %>/crm/client_calls?&shop_id=...&shop_secret=...did=...
+```
+
+```javascript
+// REST API only. See cURL.
+```
+
+```swift
+// REST API only. See cURL.
+```
+
+```java
+// REST API only. See cURL.
+```
+
+```jsx
+// REST API only. See cURL.
+```
+
+### Requirements
+
+Endpoint: `GET https://<%= config[:api_endpoint] %>/crm/client_calls`
+
+### Query Parameters
+
+| Parameter   | Type    | Required | Description                                |
+|-------------|---------|----------|--------------------------------------------|
+| shop_id     | String  | true     | Your API key                               |
+| shop_secret | String  | true     | Your API secret key                        |
+| phone*      | String  | true     | User's phone number                        |
+| email*      | String  | true     | User's email                               |
+| did*        | String  | true     | User's did                                 |
 
 <aside class="notice">
 At least of identifiers (marked by *) must present in request: did, email or phone. It's used to identify user.
