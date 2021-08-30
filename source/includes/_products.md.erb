@@ -159,3 +159,95 @@ id | String | Product ID
 barcode | String | Product barcode
 subscribers | Integer | Number of subscribers for the product
 date | String | Date of the last subscription
+
+
+## Get status of subscription for product price drop
+
+```shell
+// No implementation. See JavaScript
+```
+
+```javascript
+<%= config[:js_sdk_name] %>("check_trigger", "product_price_decrease", params, success, error);
+```
+
+```swift
+// No implementation. See JavaScript
+```
+
+```java
+// No implementation. See JavaScript
+```
+
+> API method returns this boolean status
+
+
+Returns boolean status of subscription.
+
+
+### Query Parameters
+
+Parameter | Type     | Required | Description
+--------- | -------- | -------- | -----------
+params    | Object   | true     | Object with request parameters.
+success   | Function | true     | Callback-function, where the API response will be passed to. Response type: object.
+error     | Function | false    | Callback-function to be called when an error occurs (any HTTP status code other than 200).
+
+### Request parameters
+
+Parameter  | Type          | Required | Description
+---------- | ------------- | -------- | -----------
+item       | string/number | true     | Product ID
+email      | string	       | false    | Email for subscription checking
+phone      | string	       | false    | Phone for subscription checking
+loyalty_id | string	       | false    | Loyalty ID for subscription checking
+
+<aside class="notice">
+If no *email*, *phone*, or *loyalty_id* is specified, only the user's current device will be checked. It won't take into account subscriptions performed on the user's other devices.
+</aside>
+
+
+## Get status of subscription for product price drop
+
+```shell
+// No implementation. See JavaScript
+```
+
+```javascript
+<%= config[:js_sdk_name] %>("check_trigger", "product_available", params, success, error);
+```
+
+```swift
+// No implementation. See JavaScript
+```
+
+```java
+// No implementation. See JavaScript
+```
+
+> API method returns this boolean status
+
+
+Returns boolean status of subscription.
+
+
+### Query Parameters
+
+Parameter | Type     | Required | Description
+--------- | -------- | -------- | -----------
+params    | Object   | true     | Object with request parameters.
+success   | Function | true     | Callback-function, where the API response will be passed to. Response type: object.
+error     | Function | false    | Callback-function to be called when an error occurs (any HTTP status code other than 200).
+
+### Request parameters
+
+Parameter  | Type          | Required | Description
+---------- | ------------- | -------- | -----------
+item       | string/number | true     | Product ID
+email      | string	       | false    | Email for subscription checking
+phone      | string	       | false    | Phone for subscription checking
+loyalty_id | string	       | false    | Loyalty ID for subscription checking
+
+<aside class="notice">
+If no *email*, *phone*, or *loyalty_id* is specified, only the user's current device will be checked. It won't take into account subscriptions performed on the user's other devices.
+</aside>
