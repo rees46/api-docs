@@ -70,13 +70,21 @@ curl https://<%= config[:api_endpoint] %>/products/subscribers/stock?shop_id=...
     "id": "ID1",
     "barcode": "BC101",
     "quantity": 337,
-    "date": "2020-01-12"
+    "date": "2020-01-12",
+    "contacts": [
+      "email@email.com",
+      "email@email.com"
+    ]
   },
   {
     "id": "ID2",
     "barcode": "BC102",
     "quantity": 13,
-    "date": "2020-08-11"
+    "date": "2020-08-11",
+    "contacts": [
+      "email@email.com",
+      "email@email.com"
+    ]
   }
 ]
 ```
@@ -129,20 +137,28 @@ curl https://<%= config[:api_endpoint] %>/products/subscribers/price?shop_id=...
     "id": "ID1",
     "barcode": "BC101",
     "quantity": 337,
-    "date": "2020-01-12"
+    "date": "2020-01-12",
+    "contacts": [
+      "email@email.com",
+      "email@email.com"
+    ]
   },
   {
     "id": "ID2",
     "barcode": "BC102",
     "quantity": 13,
-    "date": "2020-08-11"
+    "date": "2020-08-11",
+    "contacts": [
+      "email@email.com",
+      "email@email.com"
+    ]
   }
 ]
 ```
 
 Returns list of products and a number of subscribers for each product's price drop.
 
-`GET https://<%= config[:api_endpoint] %>/products/subscribers/stock`
+`GET https://<%= config[:api_endpoint] %>/products/subscribers/price`
 
 ### Query Parameters
 
