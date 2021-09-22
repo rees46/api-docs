@@ -4,6 +4,13 @@ Service provides 2 types of search: instant (typeahead) and full search.
 
 ## Instant search
 
+```javascript
+<%= config[:js_sdk_name] %>("suggest", {search_query: "To be or not to be"}, function(response) {
+  // the functionality of rendering a block of instant search
+}, function(error) {
+  // when something went wrong
+});
+```
 ```swift
 // Instant search
 sdk.suggest(query: "ipho") { searchResult in
@@ -45,7 +52,7 @@ sdk.search({
 
 ```javascript
 <%= config[:js_sdk_name] %>("search", {search_query: "To be or not to be", page: 2, limit: 15, brands: ["Alas", "poor", "Yorick"], categories: [1, 146, 100500], filters: {'key':['value'], 'key':['value']}, sort_by: "price", order: "asc"}, function(response) {
-  // the functionality of rendering a block of product recommendations
+  // the functionality of rendering a block of full search
 }, function(error) {
   // when something went wrong
 });
