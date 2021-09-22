@@ -33,16 +33,23 @@ sdk.search({
 
 ### Query Parameters
 
-Parameter | Required | Description
---------- | ------- | -----------
-did | true | Device ID. You get it from `init` method in SDK.
-shop_id | true | Your API key
-seance | true | Temporary user session ID
-type | true | In this case: "instant_search"
-search_query | true | Search query
+| Parameter     | Required | Description                                      |
+| ------------- | -------- | ------------------------------------------------ |
+| did           | true     | Device ID. You get it from `init` method in SDK. |
+| shop_id       | true     | Your API key                                     |
+| seance        | true     | Temporary user session ID                        |
+| type          | true     | In this case: "instant_search"                   |
+| search_query  | true     | Search query                                     |
 
 ## Full search
 
+```javascript
+<%= config[:js_sdk_name] %>("search", {search_query: "To be or not to be", page: 2, limit: 15, brands: ["Alas", "poor", "Yorick"], categories: [1, 146, 100500], filters: {'key':['value'], 'key':['value']}, sort_by: "price", order: "asc"}, function(response) {
+  // the functionality of rendering a block of product recommendations
+}, function(error) {
+  // when something went wrong
+});
+```
 ```swift
 // Basic full search
 sdk.search(query: "iphone") { searchResult in
@@ -78,30 +85,81 @@ sdk.search({
 
 ### Query Parameters
 
-Parameter | Required | Description
---------- | ------- | -----------
-did | true | Device ID. You get it from `init` method in SDK.
-shop_id | true | Your API key
-seance | true | Temporary user session ID
-type | true | In this case: "full_search"
-search_query | true | Search query
-limit | false | Limit of results
-offset | false | Offset of results
-category_limit | false | How many categories for sidebar filter to return
-categories | false | Comma separated list of categories to filter
-extended | false | It's better to use `true` for full search results
-sort_by | false | Sort by parameter: `popular`, `price`, `discount`
-sort_dir | false | Sort direction: `asc` or `desc` (default)
-locations | false | Comma separated list of locations IDs
-brands | false | Comma separated list of brands to filter
-filters | false | Optional escaped JSON string with filter parameters. For example: `{"bluetooth":["yes"],"offers":["15% cashback"],"weight":["1.6"]}`
-price_min | false | Min price
-price_max | false | Max price
-colors | false | Comma separated list of colors
-exclude | false | Comma separated list of products IDs to exclude from search results
-email | false | It's only for S2S integration, when service doesn't have user's session. Mobile SDK doesn't use it.
-no_clarification | false | Disable clarified search (true, false, default: false). Don't use it. God mode only.
+| Parameter        | Required  | Description                                                                                                                          |
+| ---------------- | --------- | ------------------------------------------------------------------------------------------------------------------------------------ |
+| did              | true      | Device ID. You get it from `init` method in SDK.                                                                                     |
+| shop_id          | true      | Your API key                                                                                                                         |
+| seance           | true      | Temporary user session ID                                                                                                            |
+| type             | true      | In this case: "full_search"                                                                                                          |
+| search_query     | true      | Search query                                                                                                                         |
+| limit            | false     | Limit of results                                                                                                                     |
+| offset           | false     | Offset of results                                                                                                                    |
+| category_limit   | false     | How many categories for sidebar filter to return                                                                                     |
+| categories       | false     | Comma separated list of categories to filter                                                                                         |
+| extended         | false     | It's better to use `true` for full search results                                                                                    |
+| sort_by          | false     | Sort by parameter: `popular`, `price`, `discount`                                                                                    |
+| sort_dir         | false     | Sort direction: `asc` or `desc` (default)                                                                                            |
+| locations        | false     | Comma separated list of locations IDs                                                                                                |
+| brands           | false     | Comma separated list of brands to filter                                                                                             |
+| filters          | false     | Optional escaped JSON string with filter parameters. For example: `{"bluetooth":["yes"],"offers":["15% cashback"],"weight":["1.6"]}` |
+| price_min        | false     | Min price                                                                                                                            |
+| price_max        | false     | Max price                                                                                                                            |
+| colors           | false     | Comma separated list of colors                                                                                                       |
+| exclude          | false     | Comma separated list of products IDs to exclude from search results                                                                  |
+| email            | false     | It's only for S2S integration, when service doesn't have user's session. Mobile SDK doesn't use it.                                  |
+| no_clarification | false     | Disable clarified search (true, false, default: false). Don't use it. God mode only.                                                 |
 
+
+### API response
+| Name                  | Type          | Description                                                                                                                                                                                             |
+| :-------------------- | :------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| brands                | array         | Array with information about brands. Each object has the following properties:                                                                                                                          |
+|                       |               |   * name – brand name (string)                                                                                                                                                                          |
+|                       |               |   * picture – brand picture (string)                                                                                                                                                                    |
+| categories            | array         | Array with information about categories. Each object has the following properties:                                                                                                                      |
+|                       |               |   * alias – category alias (string)                                                                                                                                                                     |
+|                       |               |   * id – category id (string)                                                                                                                                                                           |
+|                       |               |   * name – category name (string)                                                                                                                                                                       |
+|                       |               |   * parent – parent category id (string)                                                                                                                                                                |
+|                       |               |   * url – category url (string)                                                                                                                                                                         |
+| filters               | array         | Array with information about filters. Each object has the following properties:                                                                                                                         |
+|                       |               |   * filter – fitler object. Has the following properties:                                                                                                                                               |
+|                       |               |     * count – total count of products whith this parameters (number)                                                                                                                                    |
+|                       |               |     * values – array of values (object). Has the following properties:                                                                                                                                  |
+|                       |               |       * value – value label. (string)                                                                                                                                                                   |
+|                       |               |       * count – cont of products whith this parameter (number)                                                                                                                                          |
+| html                  | string        | HTML-code of the block with products. The template is customized in the <%= config[:service_name] %> personal account.                                                                                  |
+| price_range           | object        | Min and max price of products. Has the following properties:                                                                                                                                            |
+|                       |               |   * min – min price (number)                                                                                                                                                                            |
+|                       |               |   * max – max price (number)                                                                                                                                                                            |
+| products              | array         | Array with information about products. Each object has the following properties:                                                                                                                        |
+|                       |               |   * brand – product brand (string)                                                                                                                                                                      |
+|                       |               |   * currency – product currency (string, corresponds to the currency of the personal account in <%= config[:service_name] %>, or a custom value specified in the shop settings in the personal account) |
+|                       |               |   * id – product ID (string)                                                                                                                                                                            |
+|                       |               |   * is_new – product property (boolean, default - null)                                                                                                                                                 |
+|                       |               |   * name – product name (string)                                                                                                                                                                        |
+|                       |               |   * old_price – product old price (string, default - 0)                                                                                                                                                 |
+|                       |               |   * picture – product's picture URL in the <%= config[:service_name] %> storage (string)                                                                                                                |
+|                       |               |   * price – product price (number)                                                                                                                                                                      |
+|                       |               |   * price_formatted – product price with currency (string)                                                                                                                                              |
+|                       |               |   * url – product URL (string)                                                                                                                                                                          |
+|                       |               |                                                                                                                                                                                                         |
+|                       |               |   Additional properties. If a parameter "extended" is passed in the request                                                                                                                             |
+|                       |               |   * barcode – product barcode (string)                                                                                                                                                                  |
+|                       |               |   * categories – product categories (array). Has the following properties:                                                                                                                              |
+|                       |               |     * id – category id (string)                                                                                                                                                                         |
+|                       |               |     * name – category name (string)                                                                                                                                                                     |
+|                       |               |     * parent – parent category id (string)                                                                                                                                                              |
+|                       |               |     * params – array with information about params. Each object has the following properties:                                                                                                           |
+|                       |               |       * key – param name (string)                                                                                                                                                                       |
+|                       |               |       * values – array of values (array)                                                                                                                                                                |
+| products_total        | number        | Total count of products                                                                                                                                                                                 |
+| search_query          | string        | Search query                                                                                                                                                                                            |
+| book_authors          | array         | Reserved                                                                                                                                                                                                |
+| collections           | array         | Reserved                                                                                                                                                                                                |
+| keywords              | array         | Reserved                                                                                                                                                                                                |
+| queries               | array         | Reserved                                                                                                                                                                                                |
+| virtual_categories    | array         | Reserved                                                                                                                                                                                                |
 
 
 
