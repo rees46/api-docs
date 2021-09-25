@@ -34,6 +34,7 @@ includes:
   - categories.md.erb
   - chats.md.erb
   - communications.md.erb
+  - utilities.md.erb
   - errors.md.erb 
 
 search: true
