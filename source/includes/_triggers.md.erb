@@ -51,8 +51,6 @@ This feature gives the customers an option to choose if they want to receive a n
 | ------------ | ------------ | ------------ | ------------------------------------------------------------------------------------------------------- |
 | email        | string       | required     | Subscriber Email                                                                                        |
 | item         | string       | required     | Product ID                                                                                              |
-| properties   | object       | optional     | Product properties:                                                                                     |
-| fashion_size | string       | optional     | Product size                                                                                            |
 | item_ids     | array        | required     | The IDs of the products from which the user will unsubscribe, or an empty array for full unsubscription |
 
 ## Back in Stock
@@ -99,8 +97,11 @@ This feature helps you recover sales lost due to out-of-stock items by giving yo
 |<%= config[:js_sdk_name] %>('unsubscribe_trigger', 'product_available', params);|
 
 ### JS SDK Parameters
-|Parameter|Type|Requirement|Description|
-| ------------ | ------------ | ------------ | ----------- |
-|email|string|required|Subscriber Email|
-|item_ids|array|required|The IDs of the products from which the user will unsubscribe, or an empty array for full unsubscription|
+| Parameter    | Type         | Requirement  | Description                                                                                             |
+| ------------ | ------------ | ------------ | ------------------------------------------------------------------------------------------------------- |
+| email        | string       | required     | Subscriber Email                                                                                        |
+| item         | string       | required     | Product ID                                                                                              |
+| properties   | object       | optional     | Product properties:                                                                                     |
+| fashion_size | string       | optional     | Product size                                                                                            |
+| item_ids     | array        | required     | The IDs of the products from which the user will unsubscribe, or an empty array for full unsubscription |
 
