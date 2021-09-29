@@ -647,15 +647,31 @@ sdk.trackEvent('my_event', {
 Before tracking custom events, register it in "Settings > Custom events".
 </aside>
 
+### Query Parameters
+
+| Parameter    | Type    | Required | Description             |
+| ------------ | ------- | -------  | ----------------------- |
+| shop_id      | String  | true     | Your API key            |
+| email*       | String  | true     | User's email            |
+| phone*       | String  | true     | User's phone number     |
+| loyalty_id*  | String  | true     | User's loyalty card id  |
+| external_id* | String  | true     | User's shop internal id |
+
+<aside class="notice">
+ At least of identifiers (marked by *) must present in request: email, phone, loyalty_id or external_id. It's used to identify user.
+</aside>
+
+
+### Optional parameters
+
 Custom event can be tracked in simple mode (just event name) and advanced mode (with 3 optional parameters).
 
-Optional parameters:
 
-|Parameter|Type|Requirement|Description|
-| ------------ | ------------ | ------------ | ------------ |
-| category | String | optional | Event category |
-| label | String | optional | Event label |
-| value | Integer | optional | Event value |
+| Parameter    | Type         | Requirement  | Description    |
+| ------------ | ------------ | ------------ | -------------- |
+| category     | String       | optional     | Event category |
+| label        | String       | optional     | Event label    |
+| value        | Integer      | optional     | Event value    |
 
 
 ## User clicked on mobile push
