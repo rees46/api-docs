@@ -47,10 +47,13 @@ This feature gives the customers an option to choose if they want to receive a n
 |<%= config[:js_sdk_name] %>('unsubscribe_trigger', 'product_price_decrease', params);|
 
 ### JS SDK Parameters
-|Parameter|Type|Requirement|Description|
-| ------------ | ------------ | ------------ | ----------- |
-|email|string|required|Subscriber Email|
-|item_ids|array|required|The IDs of the products from which the user will unsubscribe, or an empty array for full unsubscription|
+| Parameter    | Type         | Requirement  | Description                                                                                             |
+| ------------ | ------------ | ------------ | ------------------------------------------------------------------------------------------------------- |
+| email        | string       | required     | Subscriber Email                                                                                        |
+| item         | string       | required     | Product ID                                                                                              |
+| properties   | object       | optional     | Product properties:                                                                                     |
+| fashion_size | string       | optional     | Product size                                                                                            |
+| item_ids     | array        | required     | The IDs of the products from which the user will unsubscribe, or an empty array for full unsubscription |
 
 ## Back in Stock
 
@@ -60,7 +63,7 @@ This feature gives the customers an option to choose if they want to receive a n
 
 ```javascript
 // Subscribing
-<%= config[:js_sdk_name] %>('subscribe_trigger', 'product_available', {email: 'John.Doe@store.com', item: '3323'});
+<%= config[:js_sdk_name] %>('subscribe_trigger', 'product_available', {email: 'John.Doe@store.com', item: '3323', properties: {fashion_size: "XL"}});
 
 // Unsubscribing from specific products
 <%= config[:js_sdk_name] %>('unsubscribe_trigger', 'product_available', {email: 'John.Doe@store.com', item_ids: [3323, 100500, 'ABCDEF']});
