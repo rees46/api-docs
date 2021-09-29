@@ -592,13 +592,13 @@ sdk.track("remove_wish", id);
 curl 'http://<%= config[:api_endpoint] %>/push/custom' \
     -X 'POST' \
     -H 'Content-Type: application/x-www-form-urlencoded' \
-    --data-raw 'event=my_event&shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID'
+    --data-raw 'event=my_event&shop_id=SHOP_ID&phone=PHONE&email=EMAIL&loyalty_id=LOYALTY_ID&external_id=EXTERNAL_ID'
 
 # With custom parameters
 curl 'http://<%= config[:api_endpoint] %>/push/custom' \
     -X 'POST' \
     -H 'Content-Type: application/x-www-form-urlencoded' \
-    --data-raw 'event=my_event&shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&category=EVENT_CATEGORY&label=EVENT_LABEL&value=EVENT_VALUE'
+    --data-raw 'event=my_event&shop_id=SHOP_ID&phone=PHONE&email=EMAIL&loyalty_id=LOYALTY_ID&external_id=EXTERNAL_ID&category=EVENT_CATEGORY&label=EVENT_LABEL&value=EVENT_VALUE'
 ```
 
 ```javascript
