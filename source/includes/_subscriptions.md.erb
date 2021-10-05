@@ -266,6 +266,7 @@ curl https://<%= config[:api_endpoint] %>/subscriptions/check
 
 ```json
 {
+    "exists": false,
     "email_bulk": false,
     "email_chain": false,
     "email_transactional": false,
@@ -295,6 +296,7 @@ Response flags:
 
 Property | Type | Description
 --------- | -------  | -----------
+exists | Boolean | Check if user with specified contact is present in CDP
 email_bulk | Boolean | Email is subscribed to bulk emails
 email_chain | Boolean | Email is subscribed to drip campaigns (triggers)
 email_transactional | Boolean | Email is subscribed to transactional emails
