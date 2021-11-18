@@ -111,6 +111,44 @@ quantity | Integer | true | Quantity of mentioned products in the order.
 </aside>
 
 
+## Change order status
+
+You can change order's status, structure, value and other information. Just send new request with the same order ID and order will be updated.
+
+If you only want to change order status, you can send same request as above, but with limited parameters:
+
+```shell
+curl -i -X POST -H "Content-Type: application/json" --data-binary "@data.json" https://<%= config[:api_endpoint] %>/sync/orders
+
+# data.json
+{
+  "shop_id": "DvLWN2ZTMZ",
+  "shop_secret": "EIxTuot8sj",
+  "orders": [
+    {
+      "id": "yKsvZbWpCL",
+      "status": "Cancelled"
+    },
+    ...
+  ]
+}
+```
+
+### Query Parameters
+
+Parameter | Type | Required | Description
+--------- | ------- | -------  | -----------
+shop_id | String | true | Your API key
+shop_secret | String | true | Your API secret key
+orders | Array | true | List of orders. See description below.
+
+Description of `orders` objects:
+
+Parameter | Type | Required | Description
+--------- | ------- | -------  | -----------
+id | String | true | Order ID
+status | String | true | Order's status
+
 
 ## Get users last order products
 
