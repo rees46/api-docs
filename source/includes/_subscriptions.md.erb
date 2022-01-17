@@ -280,8 +280,12 @@ curl https://<%= config[:api_endpoint] %>/subscriptions/check
     "email_blacklisted": false,
     "email_bounced": false,
     "email_suppressed": false,
-    "web_push": false,
-    "mobile_push": false,
+    "web_push_bulk": false,
+    "web_push_chain": false,
+    "web_push_transactional": false,
+    "mobile_push_bulk": false,
+    "mobile_push_chain": false,
+    "mobile_push_transactional": false,
     "sms_bulk": false,
     "sms_chain": false,
     "sms_transactional": false
@@ -310,8 +314,12 @@ email_invalid | Boolean | Email is invalid or disposal email
 email_blacklisted | Boolean | Email is blacklisted (spam trap, etc)
 email_bounced | Boolean | Email is hard bounced
 email_suppressed | Boolean | Email is suppressed due to complaint
-web_push | Boolean | User has web push token
-mobile_push | Boolean | User has mobile push token
+web_push_bulk | Boolean | User has phone and subscribed to bulk Web push campaigns
+web_push_chain | Boolean | User has phone and subscribed to drip Web push campaigns (triggers)
+web_push_transactional | Boolean | User has phone and subscribed to transactional Web push campaigns
+mobile_push_bulk | Boolean | User has phone and subscribed to bulk Mobile push campaigns
+mobile_push_chain | Boolean | User has phone and subscribed to drip Mobile push campaigns (triggers)
+mobile_push_transactional | Boolean | User has phone and subscribed to transactional Mobile push campaigns
 sms_bulk | Boolean | User has phone and subscribed to bulk SMS campaigns
 sms_chain | Boolean | User has phone and subscribed to drip SMS campaigns (triggers)
 sms_transactional | Boolean | User has phone and subscribed to transactional SMS campaigns
