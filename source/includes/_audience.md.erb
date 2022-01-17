@@ -38,6 +38,8 @@ curl -i -X POST -H "Content-Type: application/json" --data-binary "@data.json" h
       "sms_bulk": true,
       "sms_chain": true,
       "sms_transactional": true,
+      "mobile_token": "TOKEN",
+      "mobile_token_platform": "PLATFORM",
       "auto": [
         {
           "brand": "Mini",
@@ -125,6 +127,8 @@ email_transactional | Boolean | Subscribe user to email transactional campaigns
 sms_bulk | Boolean | Subscribe user to SMS bulk campaigns
 sms_chain | Boolean | Subscribe user to SMS drip/trigger campaigns
 sms_transactional | Boolean | Subscribe user to SMS transactional campaigns
+mobile_token | String | Unique mobile push token from iOS or Android
+mobile_token_platform | String | Identifies platform: `ios` for APNs or `android` for Firebase
 
 
 <aside class="notice">
