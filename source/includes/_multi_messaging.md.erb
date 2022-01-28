@@ -24,7 +24,7 @@ In templates you can use variables and operators to customize final content. Tem
 ## Sending message
 
 ```shell
-curl -i -X POST -H "Content-Type: application/json" --data-binary "@data.json" https://<%= config[:api_endpoint] %>/multi/transactional
+curl -i -X POST -H "Content-Type: application/json" --data-binary "@data.json" https://<%= config[:api_endpoint] %>/transact
 
 # data.json
 {
@@ -65,7 +65,7 @@ When sending a message, you must to send:
 
 ### Requirements
 
-Endpoint: `GET https://<%= config[:api_endpoint] %>/multi/transactional`
+Endpoint: `GET https://<%= config[:api_endpoint] %>/transact`
 
 Content type: `application/json`
 
