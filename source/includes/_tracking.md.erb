@@ -61,7 +61,7 @@ curl 'http://<%= config[:api_endpoint] %>/push' \
     -H 'Content-Type: application/x-www-form-urlencoded' \
     --data-raw 'event=view&shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT[A or B]&item_id[0]=PRODUCT_ID&is_available[0]=PRODUCT_AVAIBILITY[0 or 1]'
 
-#Full request without widget recommendation identifiers
+#Full request with widget recommendation identifiers
 curl 'http://<%= config[:api_endpoint] %>/push' \
     -X 'POST' \
     -H 'Content-Type: application/x-www-form-urlencoded' \
@@ -72,6 +72,12 @@ curl 'http://<%= config[:api_endpoint] %>/push' \
     -X 'POST' \
     -H 'Content-Type: application/x-www-form-urlencoded' \
     --data-raw 'event=view&shop_id=SHOP_ID&did=DEVICE_ID&item_id[0]=PRODUCT_ID'
+
+#Request with JSON
+curl 'http://<%= config[:api_endpoint] %>/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/json' \
+    --data-raw '{"event":"view", "shop_id":SHOP_ID, "did":DEVICE_ID, items:[{"id":PRODUCT_ID}]}'
 ```
 
 ```javascript
@@ -292,6 +298,12 @@ curl 'http://<%= config[:api_endpoint] %>/push' \
     -X 'POST' \
     -H 'Content-Type: application/x-www-form-urlencoded' \
     --data-raw 'event=cart&shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMEN[A or B]&item_id[0]=1ST_PRODUCT_ID&amount[0]=1ST_PRODUCT_QUANTITY&item_id[1]=2ND_PRODUCT_ID&amount[1]=2ND_PRODUCT_QUANTITY&...&item_id[LAST_INDEX]=LAST_PRODUCT_ID&amount[LAST_INDEX]=LAST_PRODUCT_QUANTITY&full_cart=true'
+
+#Request with JSON
+curl 'http://<%= config[:api_endpoint] %>/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/json' \
+    --data-raw '{"event":"cart", "shop_id":SHOP_ID, "did":DEVICE_ID, items:[{"id":PRODUCT_ID, "amount":PRODUCT_QUANTITY}], "full_cart":true}'
 ```
 
 ```javascript
@@ -445,6 +457,12 @@ curl 'http://<%= config[:api_endpoint] %>/push' \
     -X 'POST' \
     -H 'Content-Type: application/x-www-form-urlencoded' \
     --data-raw 'event=purchase&shop_id=SHOP_ID&did=DEVICE_ID&item_id[0]=1ST_PRODUCT_ID&amount[0]=1ST_PRODUCT_QUANTITY&item_id[1]=2ND_PRODUCT_ID&amount[1]=2ND_PRODUCT_QUANTITY&...&item_id[LAST_INDEX]=LAST_PRODUCT_ID&amount[LAST_INDEX]=LAST_PRODUCT_QUANTITY'
+
+#Request with JSON
+curl 'http://<%= config[:api_endpoint] %>/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/json' \
+    --data-raw '{"event":"purchase", "shop_id":SHOP_ID, "did":DEVICE_ID, "order_id":ORDER_NUMBER, "order_price":TOTAL_ORDER_PRICE, items:[{"id":PRODUCT_ID, "amount":PRODUCT_QUANTITY, "price":PRODUCT_PRICE}]}'
 ```
 ```javascript
 //Full request
