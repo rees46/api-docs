@@ -1,74 +1,73 @@
+SUCCESS_STAGE = 'build'
+STEPS = 'build Testing REES46 PersonaClick Kameleoon'
+def stepPublisher(step, style) {
+   rabbitMQPublisher(rabbitName: 'rabbit', exchange: '', routingKey: 'notification', conversion: false,
+      data: "{\"type\":\"deploy\",\"project\":\"${JOB_NAME}\",\"style\":\"${style}\",\"step\":\"${step}\",\"message\":\"${GIT_COMMIT_MSG}\",\"commit\":\"${GIT_COMMIT}\",\"url\":\"${COMMIT_URL}\",\"author\":\"${GIT_COMMIT_AUTHOR}\",\"console\":\"${BUILD_URL}console\",\"steps\":\"${STEPS}\"}")
+}
+
 pipeline {
     agent any
 
-    parameters {
-
-      string(name: 'CHANNEL_NAME',
-             description: 'Default Slack channel to send messages to',
-             defaultValue: '#dev-builds')
-
-      string(name: 'BASE_URL',
-             description: 'Default Slack BASE URL',
-             defaultValue: 'https://rees46.slack.com/services/hooks/jenkins-ci')
-
-      string(name: 'TOKEN_ID',
-             description: 'Default Slack secret Credential token id (from jenkins Credential)',
-             defaultValue: 'rees46_slack_id')
-
-    }	
-    
-    environment {
-      // Slack configuration
-      SLACK_COLOR_DANGER  = '#E01563'
-      SLACK_COLOR_INFO    = '#6ECADC'
-      SLACK_COLOR_WARNING = '#FFC300'
-      SLACK_COLOR_GOOD    = '#3EB991'
-    }
-    	
     stages {
         stage('Build') {
             steps {
-              echo "Sending message to Slack"
-              slackSend (color: "${env.SLACK_COLOR_INFO}",
-                    channel: "${params.CHANNEL_NAME}",
-                    baseUrl: "${params.BASE_URL}",
-                    tokenCredentialId: "${params.TOKEN_ID}",
-                    message: "*STARTED:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}")
               sh 'bin/prepare_for_jenkins'
+              script {
+                env.GIT_COMMIT_MSG = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim()
+                env.GIT_COMMIT_AUTHOR = sh (script: 'git log -1 --pretty=%an ${GIT_COMMIT}', returnStdout: true).trim()
+                env.COMMIT_URL = "https://bitbucket.org/mkechinov/rees46-rails/commits/${GIT_COMMIT}"
+              }
             }
         }
         stage('Testing') {
             steps {
+                script {
+                    SUCCESS_STAGE = 'testing'
+                }
+                stepPublisher(SUCCESS_STAGE, 'SECONDARY')
                 sh 'bin/testing'
             }
         }
-        stage('Deploy') {
+        stage('REES46') {
             steps {
+                script {
+                    SUCCESS_STAGE = 'rees46'
+                }
+                stepPublisher(SUCCESS_STAGE, 'SECONDARY')
                 sh 'bin/deploy_r46'
+            }
+        }
+        stage('PersonaClick') {
+            steps {
+                script {
+                    SUCCESS_STAGE = 'PersonaClick'
+                }
+                stepPublisher(SUCCESS_STAGE, 'SECONDARY')
                 sh 'bin/deploy_pc'
-		sh 'bin/deploy_kameleoon'
-                slackSend channel: "#dev-builds", message: "Build is ok: ${env.JOB_NAME} ${env.BUILD_NUMBER} commit: ${env.GIT_COMMIT} by  ${env.GIT_AUTHOR_NAME}"
+            }
+        }
+        stage('Kameleoon') {
+            steps {
+                script {
+                    SUCCESS_STAGE = 'Kameleoon'
+                }
+                stepPublisher(SUCCESS_STAGE, 'SECONDARY')
+		            sh 'bin/deploy_kameleoon'
             }
         }
 
     }
     post {
       failure {
-        echo "Sending message to Slack"
-        slackSend (color: "${env.SLACK_COLOR_DANGER}",
-                    channel: "${params.CHANNEL_NAME}",
-                    baseUrl: "${params.BASE_URL}",
-                    tokenCredentialId: "${params.TOKEN_ID}",
-                    message: "*FAILED:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}")
+        stepPublisher(SUCCESS_STAGE, 'ERROR')
+      }
+
+      aborted {
+        stepPublisher(SUCCESS_STAGE, 'WARNING')
       }
 
       success {
-        echo "Sending message to Slack"
-        slackSend (color: "${env.SLACK_COLOR_GOOD}",
-                    channel: "${params.CHANNEL_NAME}",
-                    baseUrl: "${params.BASE_URL}",
-                    tokenCredentialId: "${params.TOKEN_ID}",
-                    message: "*SUCCESS:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}")
-      }	
+        stepPublisher(SUCCESS_STAGE, 'SUCCESS')
+      }
     }
 }
