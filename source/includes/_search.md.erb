@@ -21,7 +21,7 @@ sdk.suggest(query: "ipho") { searchResult in
 //Instant search
 SearchParams params = new SearchParams();
 params.put(SearchParams.Parameter.LOCATIONS, "location");
-REES46.search("SEARCH_QUERY", SearchParams.TYPE.INSTANT, params, new Api.OnApiCallbackListener() {
+<%= config[:android_sdk_package_name]%>.search("SEARCH_QUERY", SearchParams.TYPE.INSTANT, params, new Api.OnApiCallbackListener() {
     @Override
     public void onSuccess(JSONObject response) {
         Log.i(TAG, "Search response: " + response.toString());
@@ -29,7 +29,7 @@ REES46.search("SEARCH_QUERY", SearchParams.TYPE.INSTANT, params, new Api.OnApiCa
 });
 
 //Search blank request
-REES46.search_blank(new Api.OnApiCallbackListener() {
+<%= config[:android_sdk_package_name]%>.search_blank(new Api.OnApiCallbackListener() {
     @Override
     public void onSuccess(JSONObject response) {
         Log.i(T.TAG, "Search response: " + response.toString());
@@ -98,7 +98,7 @@ params.put(SearchParams.Parameter.FILTERS, filters);
 
 //Disable clarification search
 params.put(SearchParams.Parameter.NO_CLARIFICATION, true);
-REES46.search("SEARCH_QUERY", SearchParams.TYPE.FULL, params, new Api.OnApiCallbackListener() {
+<%= config[:android_sdk_package_name]%>.search("SEARCH_QUERY", SearchParams.TYPE.FULL, params, new Api.OnApiCallbackListener() {
     @Override
     public void onSuccess(JSONObject response) {
         Log.i(TAG, "Search response: " + response.toString());

@@ -56,7 +56,7 @@ sdk.recommend(blockId: "block_id", currentProductId: "PRODUCT_ID") { recommendRe
 Params params = new Params();
 params.put(Params.Parameter.EXTENDED, true);
 params.put(Params.Parameter.ITEM, "37");
-REES46.recommend("RECOMMENDER_CODE", params, new Api.OnApiCallbackListener() {
+<%= config[:android_sdk_package_name]%>.recommend("RECOMMENDER_CODE", params, new Api.OnApiCallbackListener() {
     @Override
     public void onSuccess(JSONObject response) {
         Log.i(TAG, "Recommender response: " + response.toString());
