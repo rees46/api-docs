@@ -17,7 +17,25 @@ sdk.suggest(query: "ipho") { searchResult in
   print("Suggest callback")
 }
 ```
+```java
+//Instant search
+SearchParams params = new SearchParams();
+params.put(SearchParams.Parameter.LOCATIONS, "location");
+REES46.search("SEARCH_QUERY", SearchParams.TYPE.INSTANT, params, new Api.OnApiCallbackListener() {
+    @Override
+    public void onSuccess(JSONObject response) {
+        Log.i(TAG, "Search response: " + response.toString());
+    }
+});
 
+//Search blank request
+REES46.search_blank(new Api.OnApiCallbackListener() {
+    @Override
+    public void onSuccess(JSONObject response) {
+        Log.i(T.TAG, "Search response: " + response.toString());
+    }
+});
+```
 ```jsx
 const type = 'instant_search';
 let search_query = 'your_search_text';
@@ -68,7 +86,25 @@ sdk.search(query: "laptop", limit: nil, offset: nil, categoryLimit: nil, categor
   print("Full search callback")
 }
 ```
+```java
+//Full search
+SearchParams params = new SearchParams();
+params.put(SearchParams.Parameter.LOCATIONS, "location");
 
+//Additional filters
+SearchParams.SearchFilters filters = new SearchParams.SearchFilters();
+filters.put("voltage", new String[] {"11.1", "14.8"});
+params.put(SearchParams.Parameter.FILTERS, filters);
+
+//Disable clarification search
+params.put(SearchParams.Parameter.NO_CLARIFICATION, true);
+REES46.search("SEARCH_QUERY", SearchParams.TYPE.FULL, params, new Api.OnApiCallbackListener() {
+    @Override
+    public void onSuccess(JSONObject response) {
+        Log.i(TAG, "Search response: " + response.toString());
+    }
+});
+```
 ```jsx
 const type = 'full_search';
 let search_query = 'your_search_text';

@@ -43,7 +43,7 @@ sdk.trackSource(source: .chain, code: "MESSAGE_ID")
 ```
 
 ```java
-// Pending implementation
+REES46.track(Params.TrackEvent.VIEW, "37");
 ```
 
 ```jsx
@@ -222,6 +222,10 @@ sdk.track(event: .categoryView(id: "CATEGORY_ID")) { trackResponse in
 }
 ```
 
+```java
+REES46.track(Params.TrackEvent.CATEGORY, (new Params()).put(Params.Parameter.CATEGORY_ID, "100"));
+```
+
 ```jsx
 sdk.track("category", 100500);
 ```
@@ -343,10 +347,40 @@ sdk.track(event: .productAddedToCart(id: "PRODUCT_ID")) { trackResponse in
 sdk.track(event: .synchronizeCart(ids: ["PRODUCT_ID_1", "PRODUCT_ID_2"])) { trackResponse in
     // ... see product viewed event for details about a callback
 }
+
+// Sync full cart with products quantity (automatically adds and removes products)
+sdk.track(event: .synchronizeCart(items: [CartItem(productId: "784"), CartItem(productId: "785", quantity: 3)]  )) { _ in
+  print("Cart is synced callback")
+}
 ```
 
 ```java
-// Not described yet
+//Add to cart (simple)
+REES46.track(Params.TrackEvent.CART, "37");
+
+//Add to cart (extended)
+Params cart = new Params();
+cart
+	.put(new Params.Item("37")
+		.set(Params.Item.COLUMN.FASHION_SIZE, "M")
+		.set(Params.Item.COLUMN.AMOUNT, 2)
+	)
+	.put(new Params.RecommendedBy(Params.RecommendedBy.TYPE.RECOMMENDATION, "e9ddb9cdc66285fac40c7a897760582a"));
+REES46.track(Params.TrackEvent.CART, cart);
+
+//Tracking full cart
+Params full_cart = new Params();
+full_cart
+    .put(Params.Parameter.FULL_CART, true)
+    .put(new Params.Item("37")
+        .set(Params.Item.COLUMN.AMOUNT, 2)
+        .set(Params.Item.COLUMN.FASHION_SIZE, "M")
+    )
+    .put(new Params.Item("40")
+        .set(Params.Item.COLUMN.AMOUNT, 1)
+        .set(Params.Item.COLUMN.FASHION_SIZE, "M")
+    );
+REES46.track(Params.TrackEvent.CART, full_cart);
 ```
 
 ```jsx
@@ -485,7 +519,13 @@ sdk.track(event: .productAddedToCart(id: "PRODUCT_ID")) { trackResponse in
 ```
 
 ```java
-// Not described yet
+Params purchase = new Params();
+purchase
+	.put(new Params.Item("37"))
+	.put(Params.Parameter.ORDER_ID, "100234")
+	.put(Params.Parameter.ORDER_PRICE, 100500)
+	.put(new Params.RecommendedBy(Params.RecommendedBy.TYPE.RECOMMENDATION, "e9ddb9cdc66285fac40c7a897760582a"));
+REES46.track(Params.TrackEvent.PURCHASE, purchase);
 ```
 
 ```jsx
@@ -554,7 +594,7 @@ curl 'http://<%= config[:api_endpoint] %>/push' \
 ```
 
 ```java
-// Not described yet
+REES46.track(Params.TrackEvent.WISH, "37");
 ```
 
 ```swift
@@ -596,7 +636,7 @@ sdk.track(event: .productRemovedToFavorities(id: "PRODUCT_ID")) { trackResponse 
 ```
 
 ```java
-// Not described yet
+REES46.track(Params.TrackEvent.REMOVE_FROM_WISH, "37");
 ```
 
 ```jsx

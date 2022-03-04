@@ -89,7 +89,7 @@ curl --location --request POST 'https://<%= config[:api_endpoint] %>/subscriptio
     "shop_id":"SHOP_ID",
     "email":"EMAIL",
     "item_id":"11111",
-    "properties[fashion_size]":"XL"
+    "properties": {"fashion_size":"XL"}
 }'
 
 # Unsubscribing from specific products
