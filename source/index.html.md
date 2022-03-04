@@ -17,6 +17,7 @@ includes:
   - search.md.erb
   - subscriptions.md.erb
   - triggers.md.erb
+  - transactionals.md.erb
   - mobile_push_tokens.md.erb
   - mobile_push_notifications.md.erb
   - profile.md.erb
