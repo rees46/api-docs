@@ -5,7 +5,33 @@ Trigger subscription methods that require explicit user action.
 ## Price drop
 
 ```shell
-# No code implementation
+# Subscribing
+curl --location --request POST 'https://<%= config[:api_endpoint] %>/subscriptions/subscribe_for_product_price' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "shop_id":"SHOP_ID",
+    "email":"EMAIL",
+    "item_id":"11111",
+    "price": "1000"
+}'
+
+# Unsubscribing from specific products
+curl --location --request POST 'https://<%= config[:api_endpoint] %>/subscriptions/unsubscribe_from_product_price' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "shop_id":"SHOP_ID",
+    "email":"EMAIL",
+    "item_ids":"11111, 22222, 333333"
+}'
+
+# Unsubscribing from all products
+curl --location --request POST 'https://<%= config[:api_endpoint] %>/subscriptions/unsubscribe_from_product_price' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "shop_id":"SHOP_ID",
+    "email":"EMAIL",
+    "item_ids":""
+}'
 ```
 
 ```javascript
@@ -56,7 +82,33 @@ This feature gives the customers an option to choose if they want to receive a n
 ## Back in Stock
 
 ```shell
-# No code implementation
+# Subscribing
+curl --location --request POST 'https://<%= config[:api_endpoint] %>/subscriptions/subscribe_for_product_available' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "shop_id":"SHOP_ID",
+    "email":"EMAIL",
+    "item_id":"11111",
+    "properties[fashion_size]":"XL"
+}'
+
+# Unsubscribing from specific products
+curl --location --request POST 'https://<%= config[:api_endpoint] %>/subscriptions/unsubscribe_from_product_available' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "shop_id":"SHOP_ID",
+    "email":"EMAIL",
+    "item_ids":"11111, 22222, 333333"
+}'
+
+# Unsubscribing from all products
+curl --location --request POST 'https://<%= config[:api_endpoint] %>/subscriptions/unsubscribe_from_product_available' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "shop_id":"SHOP_ID",
+    "email":"EMAIL",
+    "item_ids":""
+}'
 ```
 
 ```javascript
