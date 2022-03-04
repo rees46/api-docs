@@ -28,7 +28,7 @@ pod <%= config[:ios_sdk_package_name] %>
 
 ```java
 // 1. Add to dependencies:
-implementation 'com.rees46:<%= config[:android_sdk_package_code] %>-sdk:+'
+implementation 'com.<%= config[:android_sdk_package_code] %>:<%= config[:android_sdk_package_code] %>-sdk:+'
 implementation 'com.google.firebase:firebase-bom:29.0.3'
 implementation 'com.google.firebase:firebase-messaging:23.0.0'
 
