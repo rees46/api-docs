@@ -43,7 +43,7 @@ sdk.trackSource(source: .chain, code: "MESSAGE_ID")
 ```
 
 ```java
-REES46.track(Params.TrackEvent.VIEW, "37");
+<%= config[:android_sdk_package_name]%>.track(Params.TrackEvent.VIEW, "37");
 ```
 
 ```jsx
@@ -223,7 +223,7 @@ sdk.track(event: .categoryView(id: "CATEGORY_ID")) { trackResponse in
 ```
 
 ```java
-REES46.track(Params.TrackEvent.CATEGORY, (new Params()).put(Params.Parameter.CATEGORY_ID, "100"));
+<%= config[:android_sdk_package_name]%>.track(Params.TrackEvent.CATEGORY, (new Params()).put(Params.Parameter.CATEGORY_ID, "100"));
 ```
 
 ```jsx
@@ -356,7 +356,7 @@ sdk.track(event: .synchronizeCart(items: [CartItem(productId: "784"), CartItem(p
 
 ```java
 //Add to cart (simple)
-REES46.track(Params.TrackEvent.CART, "37");
+<%= config[:android_sdk_package_name]%>.track(Params.TrackEvent.CART, "37");
 
 //Add to cart (extended)
 Params cart = new Params();
@@ -366,7 +366,7 @@ cart
 		.set(Params.Item.COLUMN.AMOUNT, 2)
 	)
 	.put(new Params.RecommendedBy(Params.RecommendedBy.TYPE.RECOMMENDATION, "e9ddb9cdc66285fac40c7a897760582a"));
-REES46.track(Params.TrackEvent.CART, cart);
+<%= config[:android_sdk_package_name]%>.track(Params.TrackEvent.CART, cart);
 
 //Tracking full cart
 Params full_cart = new Params();
@@ -380,7 +380,7 @@ full_cart
         .set(Params.Item.COLUMN.AMOUNT, 1)
         .set(Params.Item.COLUMN.FASHION_SIZE, "M")
     );
-REES46.track(Params.TrackEvent.CART, full_cart);
+<%= config[:android_sdk_package_name]%>.track(Params.TrackEvent.CART, full_cart);
 ```
 
 ```jsx
@@ -525,7 +525,7 @@ purchase
 	.put(Params.Parameter.ORDER_ID, "100234")
 	.put(Params.Parameter.ORDER_PRICE, 100500)
 	.put(new Params.RecommendedBy(Params.RecommendedBy.TYPE.RECOMMENDATION, "e9ddb9cdc66285fac40c7a897760582a"));
-REES46.track(Params.TrackEvent.PURCHASE, purchase);
+<%= config[:android_sdk_package_name]%>.track(Params.TrackEvent.PURCHASE, purchase);
 ```
 
 ```jsx
@@ -594,7 +594,7 @@ curl 'http://<%= config[:api_endpoint] %>/push' \
 ```
 
 ```java
-REES46.track(Params.TrackEvent.WISH, "37");
+<%= config[:android_sdk_package_name]%>.track(Params.TrackEvent.WISH, "37");
 ```
 
 ```swift
@@ -636,7 +636,7 @@ sdk.track(event: .productRemovedToFavorities(id: "PRODUCT_ID")) { trackResponse 
 ```
 
 ```java
-REES46.track(Params.TrackEvent.REMOVE_FROM_WISH, "37");
+<%= config[:android_sdk_package_name]%>.track(Params.TrackEvent.REMOVE_FROM_WISH, "37");
 ```
 
 ```jsx
