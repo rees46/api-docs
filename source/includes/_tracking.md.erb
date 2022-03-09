@@ -343,11 +343,6 @@ sdk.track(event: .productAddedToCart(id: "PRODUCT_ID")) { trackResponse in
     // ... see product viewed event for details about a callback
 }
 
-// Sync full cart (automatically adds and removes products)
-sdk.track(event: .synchronizeCart(ids: ["PRODUCT_ID_1", "PRODUCT_ID_2"])) { trackResponse in
-    // ... see product viewed event for details about a callback
-}
-
 // Sync full cart with products quantity (automatically adds and removes products)
 sdk.track(event: .synchronizeCart(items: [CartItem(productId: "784"), CartItem(productId: "785", quantity: 3)]  )) { _ in
   print("Cart is synced callback")
