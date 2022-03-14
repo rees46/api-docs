@@ -35,7 +35,16 @@ curl -d "shop_id=SHOPID&shop_secret=SHOP_SECRET&email=EMAIL&fieldname=FIELDVALUE
 ```
 
 ```java
-  // TBD
+  HashMap<String, String> params = new HashMap<>();
+  params.put("email", "email@example.com");
+  <%= config[:android_sdk_package_name]%>.profile(params);
+  //With callback
+  <%= config[:android_sdk_package_name]%>.profile(params, new Api.OnApiCallbackListener() {
+      @Override
+      public void onSuccess(JSONObject response) {
+          Log.i(TAG, "Response: " + response.toString());
+      }
+  });
 ```
 
 ```jsx
