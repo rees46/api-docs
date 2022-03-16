@@ -11,6 +11,8 @@ curl --location --request POST 'https://<%= config[:api_endpoint] %>/subscriptio
 --data-raw '{
     "shop_id":"SHOP_ID",
     "email":"EMAIL",
+    "phone":"PHONE",
+    "did":"DeviceID",
     "item_id":"11111",
     "price": "1000"
 }'
@@ -21,6 +23,8 @@ curl --location --request POST 'https://<%= config[:api_endpoint] %>/subscriptio
 --data-raw '{
     "shop_id":"SHOP_ID",
     "email":"EMAIL",
+    "phone":"PHONE",
+    "did":"DeviceID",
     "item_ids":"11111, 22222, 333333"
 }'
 
@@ -30,6 +34,8 @@ curl --location --request POST 'https://<%= config[:api_endpoint] %>/subscriptio
 --data-raw '{
     "shop_id":"SHOP_ID",
     "email":"EMAIL",
+    "phone":"PHONE",
+    "did":"DeviceID",
     "item_ids":""
 }'
 ```
@@ -56,28 +62,40 @@ curl --location --request POST 'https://<%= config[:api_endpoint] %>/subscriptio
 This feature gives the customers an option to choose if they want to receive a notification when the price of the item they want has dropped.
 
 ### JS SDK syntax
-|Syntax|
-| ------------ |
-|<%= config[:js_sdk_name] %>('subscribe_trigger', 'product_price_decrease', params);|
+| Syntax                                                                              |
+|-------------------------------------------------------------------------------------|
+| <%= config[:js_sdk_name] %>('subscribe_trigger', 'product_price_decrease', params); |
 
 ### JS SDK Parameters
-|Parameter|Type|Requirement|Description|
-| ------------ | ------------ | ------------ | ----------- |
-|email|string|required|Subscriber Email|
-|item|number/string|required|The ID of the product to which the user will be subscribed|
-|price|number/string|required|The current product price|
+| Parameter | Type          | Requirement | Description                                                |
+|-----------|---------------|-------------|------------------------------------------------------------|
+| email*    | string        | required    | Subscriber Email                                           |
+| phone*    | string        | required    | Subscriber Phone                                           |
+| did*      | string        | required    | Subscriber Did                                             |
+| item      | number/string | required    | The ID of the product to which the user will be subscribed |
+| price     | number/string | required    | The current product price                                  |
+
+<aside class="notice">
+At least of identifiers (marked by *) must present in request: did, email or phone. It's used to identify user.
+</aside>
 
 ### JS SDK syntax
-|Syntax|
-| ------------ |
-|<%= config[:js_sdk_name] %>('unsubscribe_trigger', 'product_price_decrease', params);|
+| Syntax                                                                                |
+|---------------------------------------------------------------------------------------|
+| <%= config[:js_sdk_name] %>('unsubscribe_trigger', 'product_price_decrease', params); |
 
 ### JS SDK Parameters
-| Parameter    | Type         | Requirement  | Description                                                                                             |
-| ------------ | ------------ | ------------ | ------------------------------------------------------------------------------------------------------- |
-| email        | string       | required     | Subscriber Email                                                                                        |
-| item         | string       | required     | Product ID                                                                                              |
-| item_ids     | array        | required     | The IDs of the products from which the user will unsubscribe, or an empty array for full unsubscription |
+| Parameter | Type         | Requirement  | Description                                                                                             |
+|-----------| ------------ | ------------ |---------------------------------------------------------------------------------------------------------|
+| email*    | string       | required     | Subscriber Email                                                                                        |
+| phone*    | string       | required     | Subscriber Phone                                                                                        |
+| did*      | string       | required     | Subscriber Did                                                                                          |
+| item      | string       | required     | Product ID                                                                                              |
+| item_ids  | array        | required     | The IDs of the products from which the user will unsubscribe, or an empty array for full unsubscription |
+
+<aside class="notice">
+At least of identifiers (marked by *) must present in request: did, email or phone. It's used to identify user.
+</aside>
 
 ## Back in Stock
 
@@ -89,6 +107,8 @@ curl --location --request POST 'https://<%= config[:api_endpoint] %>/subscriptio
     "shop_id":"SHOP_ID",
     "email":"EMAIL",
     "item_id":"11111",
+    "phone":"PHONE",
+    "did":"DeviceID",
     "properties": {"fashion_size":"XL"}
 }'
 
@@ -98,6 +118,8 @@ curl --location --request POST 'https://<%= config[:api_endpoint] %>/subscriptio
 --data-raw '{
     "shop_id":"SHOP_ID",
     "email":"EMAIL",
+    "phone":"PHONE",
+    "did":"DeviceID",
     "item_ids":"11111, 22222, 333333"
 }'
 
@@ -107,6 +129,8 @@ curl --location --request POST 'https://<%= config[:api_endpoint] %>/subscriptio
 --data-raw '{
     "shop_id":"SHOP_ID",
     "email":"EMAIL",
+    "phone":"PHONE",
+    "did":"DeviceID",
     "item_ids":""
 }'
 ```
@@ -133,27 +157,39 @@ curl --location --request POST 'https://<%= config[:api_endpoint] %>/subscriptio
 This feature helps you recover sales lost due to out-of-stock items by giving your customers an option to choose if they want to receive a notification when the item they want is back in stock.
 
 ### JS SDK syntax
-|Syntax|
-| ------------ |
-|<%= config[:js_sdk_name] %>('subscribe_trigger', 'product_available', params);|
+| Syntax                                                                         |
+|--------------------------------------------------------------------------------|
+| <%= config[:js_sdk_name] %>('subscribe_trigger', 'product_available', params); |
 
 ### JS SDK Parameters
-|Parameter|Type|Requirement|Description|
-| ------------ | ------------ | ------------ | ----------- |
-|email|string|required|Subscriber Email|
-|item|number/string|required|The ID of the product to which the user will be subscribed|
+| Parameter | Type          | Requirement  | Description                                                |
+|-----------|---------------|--------------|------------------------------------------------------------|
+| email*    | string        | required     | Subscriber Email                                           |
+| phone*    | string        | required     | Subscriber Phone                                           |
+| did*      | string        | required     | Subscriber Did                                             |
+| item      | number/string | required     | The ID of the product to which the user will be subscribed |
+
+<aside class="notice">
+At least of identifiers (marked by *) must present in request: did, email or phone. It's used to identify user.
+</aside>
 
 ### JS SDK syntax
-|Syntax|
-| ------------ |
-|<%= config[:js_sdk_name] %>('unsubscribe_trigger', 'product_available', params);|
+| Syntax                                                                           |
+|----------------------------------------------------------------------------------|
+| <%= config[:js_sdk_name] %>('unsubscribe_trigger', 'product_available', params); |
 
 ### JS SDK Parameters
 | Parameter    | Type         | Requirement  | Description                                                                                             |
-| ------------ | ------------ | ------------ | ------------------------------------------------------------------------------------------------------- |
-| email        | string       | required     | Subscriber Email                                                                                        |
+|--------------| ------------ | ------------ |---------------------------------------------------------------------------------------------------------|
+| email*       | string       | required     | Subscriber Email                                                                                        |
+| phone*       | string       | required     | Subscriber Phone                                                                                        |
+| did*         | string       | required     | Subscriber Did                                                                                          |
 | item         | string       | required     | Product ID                                                                                              |
 | properties   | object       | optional     | Product properties:                                                                                     |
 | fashion_size | string       | optional     | Product size                                                                                            |
 | item_ids     | array        | required     | The IDs of the products from which the user will unsubscribe, or an empty array for full unsubscription |
+
+<aside class="notice">
+At least of identifiers (marked by *) must present in request: did, email or phone. It's used to identify user.
+</aside>
 
