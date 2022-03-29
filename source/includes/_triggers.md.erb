@@ -56,10 +56,10 @@ curl --location --request POST 'https://<%= config[:api_endpoint] %>/subscriptio
 sdk.subscribeForPriceDrop(id: "PRODUCT_ID", currentPrice: 333.49);
 
 // Subscribe for specific email
-sdk.subscribeForPriceDrop(id: "PRODUCT_ID", currentPrice: 333.49, email: 'mail@example.com');
+sdk.subscribeForPriceDrop(id: "PRODUCT_ID", currentPrice: 333.49, email: "mail@example.com");
 
 // Subscribe for specific phone
-sdk.subscribeForPriceDrop(id: "PRODUCT_ID", currentPrice: 333.49, phone: '+19999999999');
+sdk.subscribeForPriceDrop(id: "PRODUCT_ID", currentPrice: 333.49, phone: "+19999999999");
 ```
 
 ```java
@@ -158,10 +158,10 @@ curl --location --request POST 'https://<%= config[:api_endpoint] %>/subscriptio
 sdk.subscribeForBackInStock(id: "PRODUCT_ID");
 
 // Subscribe for specific email
-sdk.subscribeForBackInStock(id: "PRODUCT_ID", email: 'mail@example.com');
+sdk.subscribeForBackInStock(id: "PRODUCT_ID", email: "mail@example.com");
 
 // Subscribe for specific phone
-sdk.subscribeForBackInStock(id: "PRODUCT_ID", phone: '+19999999999');
+sdk.subscribeForBackInStock(id: "PRODUCT_ID", phone: "+19999999999");
 ```
 
 ```java
