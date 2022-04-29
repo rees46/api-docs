@@ -731,7 +731,7 @@ Custom event can be tracked in simple mode (just event name) and advanced mode (
 ## User clicked on mobile push
 
 ```shell
-curl 'http://<%= config[:api_endpoint] %>/web_push_subscriptions/clicked' \
+curl 'http://<%= config[:api_endpoint] %>/track/clicked' \
     -X 'POST' \
     -H 'Content-Type: application/x-www-form-urlencoded' \
     --data-raw 'shop_id=SHOP_ID&code=CODE&type=mobile_push_transactional'
@@ -781,7 +781,7 @@ When user clicks on mobile push notification in mobile app, you have to send eve
 
 This method uses separate endpoint:
 
-Endpoint: `POST https://<%= config[:api_endpoint] %>/web_push_subscriptions/clicked`
+Endpoint: `POST https://<%= config[:api_endpoint] %>/track/clicked`
 
 ### Required params
 
