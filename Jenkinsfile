@@ -24,7 +24,7 @@ pipeline {
                 script {
                     SUCCESS_STAGE = 'testing'
                 }
-                stepPublisher(SUCCESS_STAGE, 'SECONDARY')
+//                 stepPublisher(SUCCESS_STAGE, 'SECONDARY')
                 sh 'bin/testing'
             }
         }
