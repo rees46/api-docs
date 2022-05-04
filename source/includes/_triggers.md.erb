@@ -63,7 +63,14 @@ sdk.subscribeForPriceDrop(id: "PRODUCT_ID", currentPrice: 333.49, phone: "+19999
 ```
 
 ```java
-// No code implementation
+// Subscribe
+REES46.subscribeForPriceDrop("PRODUCT_ID", 333.49);
+
+// Subscribe for specific email
+REES46.subscribeForPriceDrop("PRODUCT_ID", 333.49, "mail@example.com");
+
+// Subscribe for specific phone
+REES46.subscribeForPriceDrop("PRODUCT_ID", 333.49, null, "+19999999999");
 ```
 
 This feature gives the customers an option to choose if they want to receive a notification when the price of the item they want has dropped.
@@ -165,7 +172,14 @@ sdk.subscribeForBackInStock(id: "PRODUCT_ID", phone: "+19999999999");
 ```
 
 ```java
-// No code implementation
+// Subscribe
+REES46.subscribeForBackInStock("PRODUCT_ID");
+
+// Subscribe for specific email
+REES46.subscribeForBackInStock("PRODUCT_ID", "mail@example.com");
+
+// Subscribe for specific phone
+REES46.subscribeForBackInStock("PRODUCT_ID", null, "+19999999999");
 ```
 
 This feature helps you recover sales lost due to out-of-stock items by giving your customers an option to choose if they want to receive a notification when the item they want is back in stock.
