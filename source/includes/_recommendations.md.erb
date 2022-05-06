@@ -91,50 +91,50 @@ sdk.recommend(recommender_code, params)
 
 ### Query Parameters
 
-Parameter | Required | Description
---------- | ------- | -----------
-did | true | Device ID. You get it from `init` method in SDK.
-shop_id | true | Your API key
-seance | true | Temporary user session ID
-recommender_code | true | ID of product recommendations block. You get it from blocks management UI.
-resize_image | false | Image size (px) to resize. Supported: 120, 140, 160, 180, 200, 220.
-extended | false | Supports: `1` or empty. If `1`, it will return all information about recommended products. If omit, it returns only products IDs.
+| Parameter        | Required   | Description                                                                                                                       |
+|------------------|------------|-----------------------------------------------------------------------------------------------------------------------------------|
+| did              | true       | Device ID. You get it from `init` method in SDK.                                                                                  |
+| shop_id          | true       | Your API key                                                                                                                      |
+| seance           | true       | Temporary user session ID                                                                                                         |
+| recommender_code | true       | ID of product recommendations block. You get it from blocks management UI.                                                        |
+| resize_image     | false      | Image size (px) to resize. Supported: 120, 140, 160, 180, 200, 220.                                                               |
+|  extended        | false      | Supports: `1` or empty. If `1`, it will return all information about recommended products. If omit, it returns only products IDs. |
 
 ### JS SDK syntax
-|Syntax|
-| ------------ |
-|<%= config[:js_sdk_name] %>("recommend", code, params, success, error);|
+| Syntax                                                                  |
+|-------------------------------------------------------------------------|
+| <%= config[:js_sdk_name] %>("recommend", code, params, success, error); |
 
-|Name|Type|Requirement|Description|
-| ------------ | ------------ | ------------ | ----------- |
-|code|string|required|Unique code of the recommendation block. See this value in the "data-recommender-code" attribute of the block created in account|
-|params|object|required|Object with request parameters|
-|success|function|required in some cases|A callback function, to which the API response will be passed. Response type: **object**.|
-|error|function|optionally|A callback function that will be called when an error occurs (any HTTP status code other than 200)|
+| Name    | Type     | Requirement            | Description                                                                                                                      |
+|---------|----------|------------------------|----------------------------------------------------------------------------------------------------------------------------------|
+| code    | string   | required               | Unique code of the recommendation block. See this value in the "data-recommender-code" attribute of the block created in account |
+| params  | object   | required               | Object with request parameters                                                                                                   |
+| success | function | required in some cases | A callback function, to which the API response will be passed. Response type: **object**.                                        |
+| error   | function | optionally             | A callback function that will be called when an error occurs (any HTTP status code other than 200)                               |
 
 ### Request parameters
-|Name|Type|Requirement|Description|
-| ------------ | ------------ | ------------ | ----------- |
-|item|number/string|required in some cases|Product ID. This parameter is mandatory for the requests of blocks that use the algorithms "Similar" and "Also bought".|
-|exclude|array|optionally|Product IDs array, which should be excluded from the recommended products list.|
-|category|number/string|required in some cases|Category ID. This parameter is mandatory for all blocks set on category pages.|
-|search_query|string|required in some cases|The text of the search query. This parameter is mandatory for the requests of blocks that use the "Search" algorithm.|
-|limit|number|optionally|A maximum number of products in the API response.|
-|locations|array|optionally|Array with location IDs. If used, the API response will return products available in the listed locations. Locations must be specified in the XML product feed.|
-|brands|array|optionally|Array with brand names. If used, only the products of the listed brands will be returned in the API response. Brands must be specified in the XML product feed.|
-|exclude_brands|array|optionally|Array with brand names. If used, the API response will exclude the products of the listed brands. Brands must be specified in the XML product feed.|
-|categories|array|optionally|Array with category IDs. If used, the API response will only return products that are included in the listed categories.|
-|discount|boolean|optionally|If used with "true" value, then only those products, the value of which is less than the "oldprice" value, will be returned in the API response. The old price must be specified in the XML product feed.|
-|extended|number|optionally|Supports: `1` or empty. If `1`, it will return all information about recommended products. If omit, it returns only products IDs.|
-|prevent_shuffle|boolean|optionally|If true, it disables shuffling of products in the response.|
-|page|number|optionally|The parameter for creating pagination, by default 1. Returns the number of products based on the limit per page.|
+| Name            | Type          | Requirement            | Description                                                                                                                                                                                               |
+|-----------------|---------------|------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| item            | number/string | required in some cases | Product ID. This parameter is mandatory for the requests of blocks that use the algorithms "Similar" and "Also bought".                                                                                   |
+| exclude         | array         | optionally             | Product IDs array, which should be excluded from the recommended products list.                                                                                                                           |
+| category        | number/string | required in some cases | Category ID. This parameter is mandatory for all blocks set on category pages.                                                                                                                            |
+| search_query    | string        | required in some cases | The text of the search query. This parameter is mandatory for the requests of blocks that use the "Search" algorithm.                                                                                     |
+| limit           | number        | optionally             | A maximum number of products in the API response.                                                                                                                                                         |
+| locations       | array         | optionally             | Array with location IDs. If used, the API response will return products available in the listed locations. Locations must be specified in the XML product feed.                                           |
+| brands          | array         | optionally             | Array with brand names. If used, only the products of the listed brands will be returned in the API response. Brands must be specified in the XML product feed.                                           |
+| exclude_brands  | array         | optionally             | Array with brand names. If used, the API response will exclude the products of the listed brands. Brands must be specified in the XML product feed.                                                       |
+| categories      | array         | optionally             | Array with category IDs. If used, the API response will only return products that are included in the listed categories.                                                                                  |
+| discount        | boolean       | optionally             | If used with "true" value, then only those products, the value of which is less than the "oldprice" value, will be returned in the API response. The old price must be specified in the XML product feed. |
+| extended        | number        | optionally             | Supports: `1` or empty. If `1`, it will return all information about recommended products. If omit, it returns only products IDs.                                                                         |
+| prevent_shuffle | boolean       | optionally             | If true, it disables shuffling of products in the response.                                                                                                                                               |
+| page            | number        | optionally             | The parameter for creating pagination, by default 1. Returns the number of products based on the limit per page.                                                                                          |
 
 ### API response
-|Name|Type|Description|
-| :------------ | :------------ | :------------ |
-|html|string|HTML-code of the block with products. The template is customized in the <%= config[:service_name] %> personal account.|
-|title|string|The block title. Corresponds to the value of the "Action" element in the block rules.|
-|products|array|Array with product IDs.|
-|id|number|Unique block identifier. Corresponds to the block ID in the list of blocks in the <%= config[:service_name] %> personal account.|
+| Name     | Type   | Description                                                                                                                      |
+|:---------|:-------|:---------------------------------------------------------------------------------------------------------------------------------|
+| html     | string | HTML-code of the block with products. The template is customized in the <%= config[:service_name] %> personal account.           |
+| title    | string | The block title. Corresponds to the value of the "Action" element in the block rules.                                            |
+| products | array  | Array with product IDs.                                                                                                          |
+| id       | number | Unique block identifier. Corresponds to the block ID in the list of blocks in the <%= config[:service_name] %> personal account. |
 
 
