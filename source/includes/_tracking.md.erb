@@ -15,13 +15,13 @@ To track assisted events, you need to user `recommendedBy` (or `recommended_by`,
 
 All events require at least these parameters:
 
-Parameter | Type | Required | Description
---------- | ------- | -------  | -----------
-shop_id | String | true | Your API key
-did | String | true | Device ID
-seance | String | true | User's current session
-event | String | true | Type of an event
-stream | String | false | Data stream code. Alphanumeric string (letters, numbers only). Max length: 16. Default: null (means "web"). Can be "ios", "android" or any other string. Used to distinguish between mobile apps, web and other events sources
+| Parameter  | Type   | Required   | Description                                                                                                                                                                                                                    |
+|------------|--------|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| shop_id    | String | true       | Your API key                                                                                                                                                                                                                   |
+| did        | String | true       | Device ID                                                                                                                                                                                                                      |
+| seance     | String | true       | User's current session                                                                                                                                                                                                         |
+| event      | String | true       | Type of an event                                                                                                                                                                                                               |
+| stream     | String | false      | Data stream code. Alphanumeric string (letters, numbers only). Max length: 16. Default: null (means "web"). Can be "ios", "android" or any other string. Used to distinguish between mobile apps, web and other events sources |
 
 
 SDKs already handle these parameters out of the box.
@@ -392,39 +392,39 @@ sdk.track("cart", {
 ```
 
 ### JS SDK syntax (short request for a single product)
-|Syntax|
-| ------------ |
-|<%= config[:js_sdk_name] %>("track", "cart", id);|
+| Syntax                                            |
+|---------------------------------------------------|
+| <%= config[:js_sdk_name] %>("track", "cart", id); |
 
 ### JS SDK Parameters
-|Parameter|Type|Requirement|Description|
-| ------------ | ------------ | ------------ | ----------- |
-|id|number/string|required|The ID of the product added to the cart|
+| Parameter  | Type          | Requirement  | Description                             |
+|------------|---------------|--------------|-----------------------------------------|
+| id         | number/string | required     | The ID of the product added to the cart |
 
 ### JS SDK syntax (full request for a single product)
-|Syntax|
-| ------------ |
-|<%= config[:js_sdk_name] %>("track", "cart", {params});|
+| Syntax                                                  |
+|---------------------------------------------------------|
+| <%= config[:js_sdk_name] %>("track", "cart", {params}); |
 
 ### JS SDK Parameters
-|Parameter|Type|Requirement|Description|
-| ------------ | ------------ | ------------ | ------------ |
-|id|number/string|required|The ID of the product added to the cart|
-|amount|number|optional|Product quantity|
-|stock|boolean|optional|Product availability. If defined, it overwrites the value received from the product feed (XML) and HTTP-import of the product catalog.|
-|recommended_by|string|required in some cases|If a product from a recommendation widget was opened in a popup or a website uses a "single page" architecture, this parameter must contain the value "dynamic".|
-|recommended_code|string|required in some cases|If a product from the recommendations widget was opened in the pop-up or the site uses a "single page" architecture, this parameter must contain a unique code of the recommendations widget, available in the account in the "data-recommender-code" attribute for each widget.|
+| Parameter        | Type          | Requirement            | Description                                                                                                                                                                                                                                                                      |
+|------------------|---------------|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id               | number/string | required               | The ID of the product added to the cart                                                                                                                                                                                                                                          |
+| amount           | number        | optional               | Product quantity                                                                                                                                                                                                                                                                 |
+| stock            | boolean       | optional               | Product availability. If defined, it overwrites the value received from the product feed (XML) and HTTP-import of the product catalog.                                                                                                                                           |
+| recommended_by   | string        | required in some cases | If a product from a recommendation widget was opened in a popup or a website uses a "single page" architecture, this parameter must contain the value "dynamic".                                                                                                                 |
+| recommended_code | string        | required in some cases | If a product from the recommendations widget was opened in the pop-up or the site uses a "single page" architecture, this parameter must contain a unique code of the recommendations widget, available in the account in the "data-recommender-code" attribute for each widget. |
 
 ### JS SDK syntax (request to send the full current cart)
-|Syntax|
-| ------------ |
-|<%= config[:js_sdk_name] %>("track", "cart", [{params}, ..., {params}]);|
+| Syntax                                                                   |
+|--------------------------------------------------------------------------|
+| <%= config[:js_sdk_name] %>("track", "cart", [{params}, ..., {params}]); |
 
 ### JS SDK Parameters
-|Parameter|Type|Requirement|Description|
-| ------------ | ------------ | ------------ | ------------ |
-|id|number/string|required|The ID of the product added to the cart|
-|amount|number|optional|Product quantity|
+| Parameter  | Type          | Requirement  | Description                             |
+|------------|---------------|--------------|-----------------------------------------|
+| id         | number/string | required     | The ID of the product added to the cart |
+| amount     | number        | optional     | Product quantity                        |
 
 ## User removed product from cart
 
@@ -462,14 +462,14 @@ sdk.track("remove_from_cart", id);
 ```
 
 ### JS SDK syntax (full request for a single product)
-|Syntax|
-| ------------ |
-|<%= config[:js_sdk_name] %>("track", "remove_from_cart", id);|
+| Syntax                                                        |
+|---------------------------------------------------------------|
+| <%= config[:js_sdk_name] %>("track", "remove_from_cart", id); |
 
 ### JS SDK Parameters
-|Parameter|Type|Requirement|Description|
-| ------------ | ------------ | ------------ | ------------ |
-|id|number/string|required|The ID of the product removed from the cart|
+| Parameter  | Type          | Requirement  | Description                                 |
+|------------|---------------|--------------|---------------------------------------------|
+| id         | number/string | required     | The ID of the product removed from the cart |
 
 
 ## User purchased products
@@ -540,33 +540,33 @@ If you want to debug purchase tracking, keep in mind: if you send event for exis
 </aside>
 
 ### JS SDK syntax
-|Syntax|
-| ------------ |
-|<%= config[:js_sdk_name] %>("track", "purchase", {params});|
+| Syntax                                                      |
+|-------------------------------------------------------------|
+| <%= config[:js_sdk_name] %>("track", "purchase", {params}); |
 
 ### JS SDK Parameters
-|Parameter|Type|Requirement|Description|
-| ------------ | ------------ | ------------ | ------------ |
-|products|array|required|An array of objects with product information in the order. Description of parameters in the table below.|
-|order|number/string|optional|Order number in the store. If not defined, the internal order numbering system will be used. In this case synchronization of order status is impossible.|
-|promocode|string|optional|Promo code used in transaction.|
-|order_price|number|optional|The final cost of the order including all discounts, bonuses, and additional services. If not defined, the cost of the order is calculated from the data in the product database without discounts and additional services.|
-|order_cash|number|optional|How much a customer paid with real money.|
-|order_bonuses|number|optional|How much a customer paid with bonuses.|
-|order_delivery|number|optional|Delivery fee.|
-|order_discount|number|optional|Order discount.|
-|delivery_type|string|optional|Method of delivery. Available values: "self_pickup", "delivery", "pickup_point"|
-|payment_type|string|optional|Payment type. Can by any string value. Ex: cash, card, wire.
-|tax_free|boolean|optional|Tax free
+| Parameter      | Type          | Requirement  | Description                                                                                                                                                                                                                 |
+|----------------|---------------|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| products       | array         | required     | An array of objects with product information in the order. Description of parameters in the table below.                                                                                                                    |
+| order          | number/string | optional     | Order number in the store. If not defined, the internal order numbering system will be used. In this case synchronization of order status is impossible.                                                                    |
+| promocode      | string        | optional     | Promo code used in transaction.                                                                                                                                                                                             |
+| order_price    | number        | optional     | The final cost of the order including all discounts, bonuses, and additional services. If not defined, the cost of the order is calculated from the data in the product database without discounts and additional services. |
+| order_cash     | number        | optional     | How much a customer paid with real money.                                                                                                                                                                                   |
+| order_bonuses  | number        | optional     | How much a customer paid with bonuses.                                                                                                                                                                                      |
+| order_delivery | number        | optional     | Delivery fee.                                                                                                                                                                                                               |
+| order_discount | number        | optional     | Order discount.                                                                                                                                                                                                             |
+| delivery_type  | string        | optional     | Method of delivery. Available values: "self_pickup", "delivery", "pickup_point"                                                                                                                                             |
+| payment_type   | string        | optional     | Payment type. Can by any string value. Ex: cash, card, wire.                                                                                                                                                                |
+| tax_free       | boolean       | optional     | Tax free                                                                                                                                                                                                                    |
 
 Description of parameters in the objects of the "products" array:
 
-|Parameter|Type|Requirement|Description|
-| ------------ | ------------ | ------------ | ------------ |
-|id|number/string|required|The ID of the product in the order|
-|amount|number|required|Product quantity|
-|price|number|optional|Product cost per unit|
-|stock|boolean|optional|Product availability. It may be useful when a single product is sold to exclude it from the recommendations at once.|
+| Parameter  | Type          | Requirement  | Description                                                                                                          |
+|------------|---------------|--------------|----------------------------------------------------------------------------------------------------------------------|
+| id         | number/string | required     | The ID of the product in the order                                                                                   |
+| amount     | number        | required     | Product quantity                                                                                                     |
+| price      | number        | optional     | Product cost per unit                                                                                                |
+| stock      | boolean       | optional     | Product availability. It may be useful when a single product is sold to exclude it from the recommendations at once. |
 
 ## User added product to favorites
 
@@ -787,9 +787,9 @@ Endpoint: `POST https://<%= config[:api_endpoint] %>/track/clicked`
 
 All events require at least these parameters:
 
-Parameter | Type | Required | Description
---------- | ------- | -------  | -----------
-shop_id | String | true | Your API key
-code | String | true | Message identifier. Value can be taken from push's JSON payload. For Android it's located in `id` property. In iOS SDK it's `src.id`
-type | String | true | Message type. Value can be taken from push's JSON payload. For Android it's located in `type` property. In iOS SDK it's `src.type`
+| Parameter | Type   | Required   | Description                                                                                                                          |
+|-----------|--------|------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| shop_id   | String | true       | Your API key                                                                                                                         |
+| code      | String | true       | Message identifier. Value can be taken from push's JSON payload. For Android it's located in `id` property. In iOS SDK it's `src.id` |
+|  type     | String | true       | Message type. Value can be taken from push's JSON payload. For Android it's located in `type` property. In iOS SDK it's `src.type`   |
 

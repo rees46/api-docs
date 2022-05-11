@@ -39,8 +39,8 @@ end
 activate :relative_assets
 set :relative_links, true
 
-set :api_endpoint, 'api.rees46.com'
-set :cdn_endpoint, 'cdn.rees46.com'
+set :api_endpoint, 'api.rees46.ru'
+set :cdn_endpoint, 'cdn.rees46.ru'
 set :js_sdk_name, 'r46'
 set :ios_sdk_package_name, 'REES46'
 set :ios_sdk_repo, 'https://github.com/rees46/ios-sdk.git'
