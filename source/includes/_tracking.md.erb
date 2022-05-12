@@ -497,8 +497,8 @@ curl 'http://<%= config[:api_endpoint] %>/push' \
 //Full request
 <%= config[:js_sdk_name] %>('track', 'purchase', {
     products: [
-        {id: 37, price: 318, amount: 3, stock: true},
-        {id: 187, price: 5000, amount: 1, stock: false}
+        {id: 37, price: 318, amount: 3},
+        {id: 187, price: 5000, amount: 1}
     ],
     order: 'N318',
     order_price: 29999
@@ -561,12 +561,13 @@ If you want to debug purchase tracking, keep in mind: if you send event for exis
 
 Description of parameters in the objects of the "products" array:
 
-| Parameter  | Type          | Requirement  | Description                                                                                                          |
-|------------|---------------|--------------|----------------------------------------------------------------------------------------------------------------------|
-| id         | number/string | required     | The ID of the product in the order                                                                                   |
-| amount     | number        | required     | Product quantity                                                                                                     |
-| price      | number        | optional     | Product cost per unit                                                                                                |
-| stock      | boolean       | optional     | Product availability. It may be useful when a single product is sold to exclude it from the recommendations at once. |
+| Parameter | Type          | Requirement | Description                                                             |
+|-----------|---------------|-------------|-------------------------------------------------------------------------|
+| id        | number/string | required    | The ID of the product in the order                                      |
+| amount    | number        | required    | Product quantity                                                        |
+| price     | number        | optional    | Product cost per unit                                                   |
+| barcode   | string        | optional    | Item barcode                                                            |
+| line_id   | string        | optional    | Unique identifier of the item position in the order on the store's side |
 
 ## User added product to favorites
 
