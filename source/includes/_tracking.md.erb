@@ -178,17 +178,17 @@ sdk.track("view", {
 Send this event when user opens product's details page.
 
 ### JS SDK syntax
-|Syntax|
-| ------------ |
-|<%= config[:js_sdk_name] %>("track", "view", {params});|
+| Syntax                                                  |
+|---------------------------------------------------------|
+| <%= config[:js_sdk_name] %>("track", "view", {params}); |
 
 ### JS SDK Parameters
-|Parameter|Type|Requirement|Description|
-| ------------ | ------------ | ------------ | ----------- |
-|id|number/string|required|The ID of the product being viewed|
-|stock|boolean|optional|Product availability. If defined, it overwrites the value received from the product feed (XML) and HTTP-import of the product catalog.|
-|recommended_by|string|required in some cases|If a product from a recommendation widget was opened in a popup or a website uses a "single page" architecture, this parameter must contain the value "dynamic".|
-|recommended_code|string|required in some cases|If a product from the recommendations widget was opened in the pop-up or the site uses a "single page" architecture, this parameter must contain a unique code of the recommendations widget, available in the account in the "data-recommender-code" attribute for each widget.|
+| Parameter        | Type          | Requirement            | Description                                                                                                                                                                                                                                                                      |
+|------------------|---------------|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id               | number/string | required               | The ID of the product being viewed                                                                                                                                                                                                                                               |
+| stock            | boolean       | optional               | Product availability. If defined, it overwrites the value received from the product feed (XML) and HTTP-import of the product catalog.                                                                                                                                           |
+| recommended_by   | string        | required in some cases | If a product from a recommendation widget was opened in a popup or a website uses a "single page" architecture, this parameter must contain the value "dynamic".                                                                                                                 |
+| recommended_code | string        | required in some cases | If a product from the recommendations widget was opened in the pop-up or the site uses a "single page" architecture, this parameter must contain a unique code of the recommendations widget, available in the account in the "data-recommender-code" attribute for each widget. |
 
 ## User viewed a category
 
@@ -227,14 +227,14 @@ sdk.track("category", 100500);
 Send this event when user opens category page.
 
 ### JS SDK syntax
-|Syntax|
-| ------------ |
-|<%= config[:js_sdk_name] %>("track", "category", category_id);|
+| Syntax                                                         |
+|----------------------------------------------------------------|
+| <%= config[:js_sdk_name] %>("track", "category", category_id); |
 
 ### JS SDK Parameters
-|Parameter|Type|Requirement|Description|
-| ------------ | ------------ | ------------ | ----------- |
-|category_id|number/string|required|The ID of the category being viewed|
+| Parameter   | Type          | Requirement  | Description                         |
+|-------------|---------------|--------------|-------------------------------------|
+| category_id | number/string | required     | The ID of the category being viewed |
 
 ## User searched something
 
@@ -261,14 +261,14 @@ sdk.track("search", "This is a search example");
 ```
 
 ### JS SDK syntax
-|Syntax|
-| ------------ |
-|<%= config[:js_sdk_name] %>("track", "search", search_query);|
+| Syntax                                                        |
+|---------------------------------------------------------------|
+| <%= config[:js_sdk_name] %>("track", "search", search_query); |
 
 ### JS SDK Parameters
-|Parameter|Type|Requirement|Description|
-| ------------ | ------------ | ------------ | ----------- |
-|search_query|string|required|The search query text|
+| Parameter    | Type   | Requirement  | Description           |
+|--------------|--------|--------------|-----------------------|
+| search_query | string | required     | The search query text |
 
 ## User added product to cart
 
@@ -617,13 +617,13 @@ sdk.track("remove_wish", id);
 curl 'https://<%= config[:api_endpoint] %>/push/custom' \
     -X 'POST' \
     -H 'Content-Type: application/json' \
-    --data-raw '{"event":"my_event", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "seance":"SEANCE_ID"}'
+    --data-raw '{"event":"my_event", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "seance":"SEANCE_ID", "time": "1652648400"}'
 
 # With other identifiers
 curl 'https://<%= config[:api_endpoint] %>/push/custom' \
     -X 'POST' \
     -H 'Content-Type: application/json' \
-    --data-raw '{"event":"my_event", "shop_id":"SHOP_ID", "email":"EMAIL", "phone":"PHONE", "loyalty_id":"LOYALTY_ID", "external_id":"EXTERNAL_ID"}'
+    --data-raw '{"event":"my_event", "shop_id":"SHOP_ID", "email":"EMAIL", "phone":"PHONE", "loyalty_id":"LOYALTY_ID", "external_id":"EXTERNAL_ID", "time": "1652648400"}'
 
 # With custom parameters
 curl 'https://<%= config[:api_endpoint] %>/push/custom' \
@@ -680,13 +680,13 @@ Before tracking custom events, register it in "Settings > Custom events".
 
 ### Query Parameters
 
-| Parameter    | Type    | Required | Description             |
-| ------------ | ------- | -------  | ----------------------- |
-| shop_id      | String  | true     | Your API key            |
-| email*       | String  | true     | User's email            |
-| phone*       | String  | true     | User's phone number     |
-| loyalty_id*  | String  | true     | User's loyalty card id  |
-| external_id* | String  | true     | User's shop internal id |
+| Parameter      | Type      | Required   | Description               |
+|----------------|-----------|------------|---------------------------|
+| shop_id        | String    | true       | Your API key              |
+| email*         | String    | true       | User's email              |
+| phone*         | String    | true       | User's phone number       |
+| loyalty_id*    | String    | true       | User's loyalty card id    |
+| external_id*   | String    | true       | User's shop internal id   |
 
 <aside class="notice">
  At least of identifiers (marked by *) must present in request: email, phone, loyalty_id or external_id. It's used to identify user.
@@ -698,11 +698,16 @@ Before tracking custom events, register it in "Settings > Custom events".
 Custom event can be tracked in simple mode (just event name) and advanced mode (with 3 optional parameters).
 
 
-| Parameter    | Type         | Requirement  | Description    |
-| ------------ | ------------ | ------------ | -------------- |
-| category     | String       | optional     | Event category |
-| label        | String       | optional     | Event label    |
-| value        | Integer      | optional     | Event value    |
+| Parameter   | Type        | Requirement      | Description      |
+|-------------|-------------|------------------|------------------|
+| category    | String      | optional         | Event category   |
+| label       | String      | optional         | Event label      |
+| value       | Integer     | optional         | Event value      |
+| time*       | Timestamp   | optional         | Event time       |
+
+<aside class="notice">
+ * - works only in Curl method
+</aside>
 
 
 ## User clicked on mobile push
