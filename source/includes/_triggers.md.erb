@@ -123,7 +123,7 @@ curl --location --request POST 'https://<%= config[:api_endpoint] %>/subscriptio
     "item_id":"11111",
     "phone":"PHONE",
     "did":"DeviceID",
-    "properties": {"fashion_size":"XL"}
+    "properties": {"fashion_size":"XL", "barcode": "222222"}
 }'
 
 # Unsubscribing from specific products
@@ -151,7 +151,7 @@ curl --location --request POST 'https://<%= config[:api_endpoint] %>/subscriptio
 
 ```javascript
 // Subscribing
-<%= config[:js_sdk_name] %>('subscribe_trigger', 'product_available', {email: 'John.Doe@store.com', item: '3323', properties: {fashion_size: "XL"}});
+<%= config[:js_sdk_name] %>('subscribe_trigger', 'product_available', {email: 'John.Doe@store.com', item: '3323', properties: {fashion_size: "XL", barcode: "222222"}});
 
 // Unsubscribing from specific products
 <%= config[:js_sdk_name] %>('unsubscribe_trigger', 'product_available', {email: 'John.Doe@store.com', item_ids: [3323, 100500, 'ABCDEF']});
