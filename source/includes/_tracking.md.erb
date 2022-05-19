@@ -617,19 +617,25 @@ sdk.track("remove_wish", id);
 curl 'https://<%= config[:api_endpoint] %>/push/custom' \
     -X 'POST' \
     -H 'Content-Type: application/json' \
-    --data-raw '{"event":"my_event", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "seance":"SEANCE_ID", "time": "1652648400"}'
+    --data-raw '{"event":"my_event", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "seance":"SEANCE_ID"}'
 
 # With other identifiers
 curl 'https://<%= config[:api_endpoint] %>/push/custom' \
     -X 'POST' \
     -H 'Content-Type: application/json' \
-    --data-raw '{"event":"my_event", "shop_id":"SHOP_ID", "email":"EMAIL", "phone":"PHONE", "loyalty_id":"LOYALTY_ID", "external_id":"EXTERNAL_ID", "time": "1652648400"}'
+    --data-raw '{"event":"my_event", "shop_id":"SHOP_ID", "email":"EMAIL", "phone":"PHONE", "loyalty_id":"LOYALTY_ID", "external_id":"EXTERNAL_ID"}'
 
 # With custom parameters
 curl 'https://<%= config[:api_endpoint] %>/push/custom' \
     -X 'POST' \
     -H 'Content-Type: application/json' \
     --data-raw '{"event":"my_event", "shop_id":"SHOP_ID", "email":"EMAIL", "phone":"PHONE", "loyalty_id":"LOYALTY_ID", "external_id":"EXTERNAL_ID", "category":"event category", "label":"event label", "value":100}'
+
+# With custom time
+curl 'https://<%= config[:api_endpoint] %>/push/custom' \
+    -X 'POST' \
+    -H 'Content-Type: application/json' \
+    --data-raw '{"event":"my_event", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "seance":"SEANCE_ID", "time": "1652648400"}'
 ```
 
 ```javascript
