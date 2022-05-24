@@ -36,6 +36,8 @@ curl -i -X POST -H "Content-Type: application/json" --data-binary "@data.json" h
       "gift_package":true,
       "value": {
         "total": 200.13,
+      },
+      "payment_structure": {
         "cash": 190,
         "bonuses": 15,
         "delivery": 20,
@@ -56,6 +58,7 @@ curl -i -X POST -H "Content-Type: application/json" --data-binary "@data.json" h
           "line_id": "195204003541-22323443-123434",
           "cancel_reason": "over size",
         },
+}
         ...
       ]
     },
