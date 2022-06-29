@@ -252,6 +252,13 @@ curl 'https://<%= config[:api_endpoint] %>/push' \
     --data-raw '{"event":"search", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "search_query":"SEARCH_QUERY"}'
 ```
 
+```swift
+// Added in iOS SDK 2.1.0
+sdk.track(event: .search(query: "red shoes")) { trackResponse in
+    // ...
+}
+```
+
 ```javascript
 <%= config[:js_sdk_name] %>('track', 'search', search_query);
 ```
