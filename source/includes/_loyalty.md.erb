@@ -1,0 +1,55 @@
+# Loyalty program
+
+Service provides endpoints for loyalty program management.
+
+
+## Balance
+> Request example
+
+```shell
+curl 'https://api.rees46.ru/loyalty/basic/balance?shop_id=SHOP_ID&shop_secret=SHOP_SECRET&phone=PHONE&order_price=ORDER_PRICE'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "confirmed": 123,
+    "pending": 456,
+    "expiring": 789,
+    "expire_in": "2022-12-12 23:59:59 UTC",
+    "available_in_order": 0
+}
+```
+
+Method return current bonuses balance.
+
+### HTTP Request
+
+`GET https://<%= config[:api_endpoint] %>/loyalty/basic/balance`
+
+### Query Parameters
+
+| Parameter    | Required | Description                          |
+|--------------|----------|--------------------------------------|
+| shop_id      | true     | Your API key                         |
+| shop_secret  | true     | Your API secret key                  |
+| email*       | true     | User's email                         |
+| phone*       | true     | User's phone number                  |
+| expire_in    | optional | Bonuses expiration date (DD-MM-YYYY) |
+| order_price  | optional | Order total                          |
+
+<aside class="notice">
+At least of identifiers (marked by *) must present in request: email, phone. It's used to identify user.
+</aside>
+
+
+### API response
+
+| Name                | Type     | Description                            |
+|---------------------|----------|----------------------------------------|
+| confirmed           | Float    | Available bonuses                      |
+| pending             | Float    | Pending bonuses                        |
+| expiring            | Float    | Bonuses that will be expired           |
+| expire_in           | Float    | Expiring period                        |
+| available_in_order  | Datetime | Available bonuses for use in the order |
