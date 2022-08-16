@@ -78,38 +78,38 @@ curl 'https://<%= config[:api_endpoint] %>/push' \
 
 // Simple track
 <%= config[:js_sdk_name] %>("track", "view", {
-    id: 37,
+    id: "37",
     stock: true
 });
 
 // Also notify the product is in stock (if it was not in stock)
 <%= config[:js_sdk_name] %>("track", "view", {
-    id: 37,
+    id: "37",
     stock: true
 });
 
 // Or not in stock now (to prevent recommending it on the next requests)
 <%= config[:js_sdk_name] %>("track", "view", {
-    id: 37,
+    id: "37",
     stock: false
 });
 
 // Track if product was viewed after click on product recommendations
 <%= config[:js_sdk_name] %>("track", "view", {
-    id: 37,
+    id: "37",
     recommended_by: "dynamic",
     recommended_code: "jkIWdXSRfwVyK"
 });
 
 // Track if product was viewed after click on suggest results
 <%= config[:js_sdk_name] %>("track", "view", {
-    id: 37,
+    id: "37",
     recommended_by: "instant_search"
 });
 
 // ... or on full results
 <%= config[:js_sdk_name] %>("track", "view", {
-    id: 37,
+    id: "37",
     recommended_by: "full_search"
 });
 
@@ -144,11 +144,11 @@ sdk.track(event: .productView(id: "PRODUCT_ID"), recommendedBy: recData) { track
 ```jsx
 
 // View product (simple)
-sdk.track("view", 37);
+sdk.track("view", "37");
 
 // View product (extended, try to avoid)
 sdk.track("view", {
-    id: 37,
+    id: "37",
     stock: true
 });
 
@@ -183,12 +183,12 @@ Send this event when user opens product's details page.
 | <%= config[:js_sdk_name] %>("track", "view", {params}); |
 
 ### JS SDK Parameters
-| Parameter        | Type          | Requirement            | Description                                                                                                                                                                                                                                                                      |
-|------------------|---------------|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| id               | number/string | required               | The ID of the product being viewed                                                                                                                                                                                                                                               |
-| stock            | boolean       | optional               | Product availability. If defined, it overwrites the value received from the product feed (XML) and HTTP-import of the product catalog.                                                                                                                                           |
-| recommended_by   | string        | required in some cases | If a product from a recommendation widget was opened in a popup or a website uses a "single page" architecture, this parameter must contain the value "dynamic".                                                                                                                 |
-| recommended_code | string        | required in some cases | If a product from the recommendations widget was opened in the pop-up or the site uses a "single page" architecture, this parameter must contain a unique code of the recommendations widget, available in the account in the "data-recommender-code" attribute for each widget. |
+| Parameter        | Type     | Requirement            | Description                                                                                                                                                                                                                                                                      |
+|------------------|----------|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id               | string   | required               | The ID of the product being viewed                                                                                                                                                                                                                                               |
+| stock            | boolean  | optional               | Product availability. If defined, it overwrites the value received from the product feed (XML) and HTTP-import of the product catalog.                                                                                                                                           |
+| recommended_by   | string   | required in some cases | If a product from a recommendation widget was opened in a popup or a website uses a "single page" architecture, this parameter must contain the value "dynamic".                                                                                                                 |
+| recommended_code | string   | required in some cases | If a product from the recommendations widget was opened in the pop-up or the site uses a "single page" architecture, this parameter must contain a unique code of the recommendations widget, available in the account in the "data-recommender-code" attribute for each widget. |
 
 ## User viewed a category
 
@@ -207,7 +207,7 @@ curl 'https://<%= config[:api_endpoint] %>/push' \
 ```
 
 ```javascript
-<%= config[:js_sdk_name] %>("track", "category", 100500);
+<%= config[:js_sdk_name] %>("track", "category", "100500");
 ```
 
 ```swift
@@ -221,7 +221,7 @@ sdk.track(event: .categoryView(id: "CATEGORY_ID")) { trackResponse in
 ```
 
 ```jsx
-sdk.track("category", 100500);
+sdk.track("category", "100500");
 ```
 
 Send this event when user opens category page.
@@ -232,9 +232,9 @@ Send this event when user opens category page.
 | <%= config[:js_sdk_name] %>("track", "category", category_id); |
 
 ### JS SDK Parameters
-| Parameter   | Type          | Requirement  | Description                         |
-|-------------|---------------|--------------|-------------------------------------|
-| category_id | number/string | required     | The ID of the category being viewed |
+| Parameter   | Type     | Requirement  | Description                         |
+|-------------|----------|--------------|-------------------------------------|
+| category_id | string   | required     | The ID of the category being viewed |
 
 ## User searched something
 
@@ -307,7 +307,7 @@ curl 'https://<%= config[:api_endpoint] %>/push' \
 
 ```javascript
 //Short request for a single product
-<%= config[:js_sdk_name] %>('track', 'cart', id);
+<%= config[:js_sdk_name] %>('track', 'cart', 'id');
 
 //Full request for a single product with widget recommendation identifiers
 <%= config[:js_sdk_name] %>('track', 'cart', {
@@ -375,7 +375,7 @@ full_cart
 
 ```jsx
 // Add to cart (simple)
-sdk.track("cart", id);
+sdk.track("cart", "id");
 
 // Add to cart (from recommender block)
 sdk.track("cart", {
@@ -389,7 +389,7 @@ sdk.track("cart", {
 ### JS SDK syntax (short request for a single product)
 | Syntax                                            |
 |---------------------------------------------------|
-| <%= config[:js_sdk_name] %>("track", "cart", id); |
+| <%= config[:js_sdk_name] %>("track", "cart", "id"); |
 
 ### JS SDK Parameters
 | Parameter  | Type          | Requirement  | Description                             |
@@ -402,13 +402,13 @@ sdk.track("cart", {
 | <%= config[:js_sdk_name] %>("track", "cart", {params}); |
 
 ### JS SDK Parameters
-| Parameter        | Type          | Requirement            | Description                                                                                                                                                                                                                                                                      |
-|------------------|---------------|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| id               | number/string | required               | The ID of the product added to the cart                                                                                                                                                                                                                                          |
-| amount           | number        | optional               | Product quantity                                                                                                                                                                                                                                                                 |
-| stock            | boolean       | optional               | Product availability. If defined, it overwrites the value received from the product feed (XML) and HTTP-import of the product catalog.                                                                                                                                           |
-| recommended_by   | string        | required in some cases | If a product from a recommendation widget was opened in a popup or a website uses a "single page" architecture, this parameter must contain the value "dynamic".                                                                                                                 |
-| recommended_code | string        | required in some cases | If a product from the recommendations widget was opened in the pop-up or the site uses a "single page" architecture, this parameter must contain a unique code of the recommendations widget, available in the account in the "data-recommender-code" attribute for each widget. |
+| Parameter          | Type            | Requirement            | Description                                                                                                                                                                                                                                                                      |
+|--------------------|-----------------|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id                 | string          | required               | The ID of the product added to the cart                                                                                                                                                                                                                                          |
+| amount             | number          | optional               | Product quantity                                                                                                                                                                                                                                                                 |
+| stock              | boolean         | optional               | Product availability. If defined, it overwrites the value received from the product feed (XML) and HTTP-import of the product catalog.                                                                                                                                           |
+| recommended_by     | string          | required in some cases | If a product from a recommendation widget was opened in a popup or a website uses a "single page" architecture, this parameter must contain the value "dynamic".                                                                                                                 |
+| recommended_code   | string          | required in some cases | If a product from the recommendations widget was opened in the pop-up or the site uses a "single page" architecture, this parameter must contain a unique code of the recommendations widget, available in the account in the "data-recommender-code" attribute for each widget. |
 
 ### JS SDK syntax (request to send the full current cart)
 | Syntax                                                                   |
@@ -416,10 +416,10 @@ sdk.track("cart", {
 | <%= config[:js_sdk_name] %>("track", "cart", [{params}, ..., {params}]); |
 
 ### JS SDK Parameters
-| Parameter  | Type          | Requirement  | Description                             |
-|------------|---------------|--------------|-----------------------------------------|
-| id         | number/string | required     | The ID of the product added to the cart |
-| amount     | number        | optional     | Product quantity                        |
+| Parameter  | Type     | Requirement  | Description                             |
+|------------|----------|--------------|-----------------------------------------|
+| id         | string   | required     | The ID of the product added to the cart |
+| amount     | number   | optional     | Product quantity                        |
 
 ## User removed product from cart
 
@@ -439,7 +439,7 @@ curl 'https://<%= config[:api_endpoint] %>/push' \
 
 ```javascript
 //Full request for a single product
-<%= config[:js_sdk_name] %>('track', 'remove_from_cart', id);
+<%= config[:js_sdk_name] %>('track', 'remove_from_cart', 'id');
 ```
 
 ```swift
@@ -457,14 +457,14 @@ sdk.track("remove_from_cart", id);
 ```
 
 ### JS SDK syntax (full request for a single product)
-| Syntax                                                        |
-|---------------------------------------------------------------|
-| <%= config[:js_sdk_name] %>("track", "remove_from_cart", id); |
+| Syntax                                                            |
+|-------------------------------------------------------------------|
+| <%= config[:js_sdk_name] %>("track", "remove_from_cart", "id");   |
 
 ### JS SDK Parameters
 | Parameter  | Type          | Requirement  | Description                                 |
 |------------|---------------|--------------|---------------------------------------------|
-| id         | number/string | required     | The ID of the product removed from the cart |
+| id         | string | required     | The ID of the product removed from the cart |
 
 
 ## User purchased products
@@ -516,8 +516,8 @@ purchase
 ```jsx
 sdk.track("purchase", {
   products: [
-      {id: 37, price: 318, amount: 3},
-      {id: 187, price: 5000, amount: 1}
+      {id: "37", price: 318, amount: 3},
+      {id: "187", price: 5000, amount: 1}
   ],
   order: 'N318',
   order_price: 29999
@@ -535,28 +535,28 @@ If you want to debug purchase tracking, keep in mind: if you send event for exis
 | <%= config[:js_sdk_name] %>("track", "purchase", {params}); |
 
 ### JS SDK Parameters
-| Parameter      | Type          | Requirement  | Description                                                                                                                                                                                                                 |
-|----------------|---------------|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| products       | array         | required     | An array of objects with product information in the order. Description of parameters in the table below.                                                                                                                    |
-| order          | number/string | optional     | Order number in the store. If not defined, the internal order numbering system will be used. In this case synchronization of order status is impossible.                                                                    |
-| promocode      | string        | optional     | Promo code used in transaction.                                                                                                                                                                                             |
-| order_price    | number        | optional     | The final cost of the order including all discounts, bonuses, and additional services. If not defined, the cost of the order is calculated from the data in the product database without discounts and additional services. |
-| order_cash     | number        | optional     | How much a customer paid with real money.                                                                                                                                                                                   |
-| order_bonuses  | number        | optional     | How much a customer paid with bonuses.                                                                                                                                                                                      |
-| order_delivery | number        | optional     | Delivery fee.                                                                                                                                                                                                               |
-| order_discount | number        | optional     | Order discount.                                                                                                                                                                                                             |
-| delivery_type  | string        | optional     | Method of delivery. Available values: "self_pickup", "delivery", "pickup_point"                                                                                                                                             |
-| payment_type   | string        | optional     | Payment type. Can by any string value. Ex: cash, card, wire.                                                                                                                                                                |
-| tax_free       | boolean       | optional     | Tax free                                                                                                                                                                                                                    |
+| Parameter      | Type     | Requirement  | Description                                                                                                                                                                                                                 |
+|----------------|----------|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| products       | array    | required     | An array of objects with product information in the order. Description of parameters in the table below.                                                                                                                    |
+| order          | string   | optional     | Order number in the store. If not defined, the internal order numbering system will be used. In this case synchronization of order status is impossible.                                                                    |
+| promocode      | string   | optional     | Promo code used in transaction.                                                                                                                                                                                             |
+| order_price    | number   | optional     | The final cost of the order including all discounts, bonuses, and additional services. If not defined, the cost of the order is calculated from the data in the product database without discounts and additional services. |
+| order_cash     | number   | optional     | How much a customer paid with real money.                                                                                                                                                                                   |
+| order_bonuses  | number   | optional     | How much a customer paid with bonuses.                                                                                                                                                                                      |
+| order_delivery | number   | optional     | Delivery fee.                                                                                                                                                                                                               |
+| order_discount | number   | optional     | Order discount.                                                                                                                                                                                                             |
+| delivery_type  | string   | optional     | Method of delivery. Available values: "self_pickup", "delivery", "pickup_point"                                                                                                                                             |
+| payment_type   | string   | optional     | Payment type. Can by any string value. Ex: cash, card, wire.                                                                                                                                                                |
+| tax_free       | boolean  | optional     | Tax free                                                                                                                                                                                                                    |
 
 Description of parameters in the objects of the "products" array:
 
-| Parameter | Type          | Requirement | Description                                                             |
-|-----------|---------------|-------------|-------------------------------------------------------------------------|
-| id        | number/string | required    | The ID of the product in the order                                      |
-| amount    | number        | required    | Product quantity                                                        |
-| price     | number        | optional    | Product cost per unit                                                   |
-| line_id   | string        | optional    | Unique identifier of the item position in the order on the store's side |
+| Parameter | Type    | Requirement | Description                                                             |
+|-----------|---------|-------------|-------------------------------------------------------------------------|
+| id        | string  | required    | The ID of the product in the order                                      |
+| amount    | number  | required    | Product quantity                                                        |
+| price     | number  | optional    | Product cost per unit                                                   |
+| line_id   | string  | optional    | Unique identifier of the item position in the order on the store's side |
 
 ## User added product to favorites
 
