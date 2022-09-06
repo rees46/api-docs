@@ -42,16 +42,16 @@ Returns basic product info.
 | Parameter | Type   | Required   | Description  |
 |-----------|--------|------------|--------------|
 | shop_id   | String | true       | Your API key |
-|  item_id  | String | true       | Product ID   |
+| item      | String | true       | Product ID   |
 
 ## Get product stats
 
 ```shell
-curl https://<%= config[:api_endpoint] %>/products/counters?shop_id=...&item_id=...
+curl https://<%= config[:api_endpoint] %>/products/counters?shop_id=...&item=...
 ```
 
 ```javascript
-<%= config[:js_sdk_name] %>('products', 'counters', ITEM_ID, success, error)
+<%= config[:js_sdk_name] %>('products', 'counters', ITEM, success, error)
 ```
 
 ```swift
@@ -66,10 +66,16 @@ curl https://<%= config[:api_endpoint] %>/products/counters?shop_id=...&item_id=
 
 ```json
 {
-  "view": "...",
-  "view_now": "...",
-  "cart": "...",
-  "purchase": "..."
+  "daily": {
+    "view": 123,
+    "cart": 456,
+    "purchase": 789
+  },
+  "now": {
+    "view": 123,
+    "cart": 456,
+    "purchase": 789
+  }
 }
 ```
 
@@ -243,20 +249,20 @@ Returns boolean status of subscription.
 
 ### Query Parameters
 
-Parameter | Type     | Required | Description
---------- | -------- | -------- | -----------
-params    | Object   | true     | Object with request parameters.
-success   | Function | true     | Callback-function, where the API response will be passed to. Response type: object.
-error     | Function | false    | Callback-function to be called when an error occurs (any HTTP status code other than 200).
+| Parameter | Type     | Required | Description                                                                                |
+|-----------|----------|----------|--------------------------------------------------------------------------------------------|
+| params    | Object   | true     |  Object with request parameters.                                                           |
+| success   | Function | true     | Callback-function, where the API response will be passed to. Response type: object.        |
+|  error    | Function | false    | Callback-function to be called when an error occurs (any HTTP status code other than 200). |
 
 ### Request parameters
 
-Parameter  | Type          | Required | Description
----------- | ------------- | -------- | -----------
-item       | string/number | true     | Product ID
-email      | string	       | false    | Email for subscription checking
-phone      | string	       | false    | Phone for subscription checking
-loyalty_id | string	       | false    | Loyalty ID for subscription checking
+| Parameter   | Type          | Required | Description                          |
+|-------------|---------------|----------|--------------------------------------|
+| item        | string/number | true     | Product ID                           |
+| email       | string 	      | false    | Email for subscription checking      |
+| phone       | string 	      | false    | Phone for subscription checking      |
+|  loyalty_id | string 	      | false    | Loyalty ID for subscription checking |
 
 <aside class="notice">
 If no *email*, *phone*, or *loyalty_id* is specified, only the user's current device will be checked. It won't take into account subscriptions performed on the user's other devices.
@@ -289,20 +295,20 @@ Returns boolean status of subscription.
 
 ### Query Parameters
 
-Parameter | Type     | Required | Description
---------- | -------- | -------- | -----------
-params    | Object   | true     | Object with request parameters.
-success   | Function | true     | Callback-function, where the API response will be passed to. Response type: object.
-error     | Function | false    | Callback-function to be called when an error occurs (any HTTP status code other than 200).
+| Parameter | Type     | Required | Description                                                                                |
+|-----------|----------|----------|--------------------------------------------------------------------------------------------|
+| params    | Object   | true     | Object with request parameters.                                                            |
+| success   | Function | true     | Callback-function, where the API response will be passed to. Response type: object.        |
+|  error    | Function | false    | Callback-function to be called when an error occurs (any HTTP status code other than 200). |
 
 ### Request parameters
 
-Parameter  | Type          | Required | Description
----------- | ------------- | -------- | -----------
-item       | string/number | true     | Product ID
-email      | string	       | false    | Email for subscription checking
-phone      | string	       | false    | Phone for subscription checking
-loyalty_id | string	       | false    | Loyalty ID for subscription checking
+| Parameter   | Type          | Required | Description                          |
+|-------------|---------------|----------|--------------------------------------|
+| item        | string/number | true     | Product ID                           |
+| email       | string        | false    | Email for subscription checking      |
+| phone       | string        | false    | Phone for subscription checking      |
+|  loyalty_id | string        | false    | Loyalty ID for subscription checking |
 
 <aside class="notice">
 If no *email*, *phone*, or *loyalty_id* is specified, only the user's current device will be checked. It won't take into account subscriptions performed on the user's other devices.

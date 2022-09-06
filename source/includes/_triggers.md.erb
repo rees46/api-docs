@@ -178,7 +178,12 @@ sdk.subscribeForBackInStock(id: "PRODUCT_ID", phone: "+19999999999");
 <%= config[:android_sdk_package_name]%>.subscribeForBackInStock("PRODUCT_ID", "mail@example.com");
 
 // Subscribe for specific phone
-<%= config[:android_sdk_package_name]%>.subscribeForBackInStock("PRODUCT_ID", null, "+19999999999");
+<%= config[:android_sdk_package_name]%>.subscribeForBackInStock("PRODUCT_ID", "+19999999999");
+
+// Subscribe with product size
+JSONObject properties = new JSONObject();
+properties.put("fashion_size", "XL");
+<%= config[:android_sdk_package_name]%>.subscribeForBackInStock("PRODUCT_ID", properties, "mail@example.com", null, null);
 ```
 
 This feature helps you recover sales lost due to out-of-stock items by giving your customers an option to choose if they want to receive a notification when the item they want is back in stock.
