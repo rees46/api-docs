@@ -43,7 +43,18 @@ curl -d "shop_id=SHOPID&shop_secret=SHOP_SECRET&email=EMAIL&segment_id=SEGMENT_I
 ```
 
 ```swift
-// Not implemented yet
+// By `did` only
+sdk.addToSegment(segmentId: "333")
+
+// With a email (`did` will be switched to the owner of the email)
+sdk.addToSegment(segmentId: "333", email: "my@example.com")
+
+// With a phone number (`did` will be switched to the owner of the phone number)
+sdk.addToSegment(segmentId: "333", phone: "+10000000000")
+
+// With both (`did` will be switched to the owner of primary contact)
+sdk.addToSegment(segmentId: "333", email: "my@example.com", phone: "+10000000000")
+
 ```
 
 ```java
@@ -111,7 +122,17 @@ curl -d "shop_id=SHOPID&shop_secret=SHOP_SECRET&email=EMAIL&segment_id=SEGMENT_I
 ```
 
 ```swift
-// Not implemented yet
+// By `did` only
+sdk.removeFromSegment(segmentId: "333")
+
+// With a email (`did` will be switched to the owner of the email)
+sdk.removeFromSegment(segmentId: "333", email: "my@example.com")
+
+// With a phone number (`did` will be switched to the owner of the phone number)
+sdk.removeFromSegment(segmentId: "333", phone: "+10000000000")
+
+// With both (`did` will be switched to the owner of primary contact)
+sdk.removeFromSegment(segmentId: "333", email: "my@example.com", phone: "+10000000000")
 ```
 
 ```java
