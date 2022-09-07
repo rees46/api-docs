@@ -80,7 +80,22 @@ https://<%= config[:api_endpoint] %>/subscriptions/manage
 ```
 
 ```swift
-// No implementation. See CURL
+// With `did` only
+sdk.manageSubscription(bulkEmail: true)
+
+// With email and phone
+sdk.manageSubscription(email: "my@example.com", phone: "+10000000000", emailBulk: true, smsBulk: true)
+
+// Unsubscribe from bulk SMS and email
+sdk.manageSubscription(emailBulk: false, smsBulk: false)
+
+// With everything
+sdk.manageSubscription(email: "my@example.com", phone: "+10000000000",
+  emailBulk: true, emailChain: true, emailTransactional: true,
+  smsBulk: true, smsChain: true, smsTransactional: true,
+  webPushBulk: true, webPushChain: true, webPushTransactional: true,
+  mobilePushBulk: true, mobilePushChain: true, mobilePushTransactional: true
+  )
 ```
 
 ```java
@@ -343,22 +358,7 @@ curl https://<%= config[:api_endpoint] %>/subscriptions/changes?shop_id=...&shop
 ```
 
 ```swift
-// With `did` only
-sdk.manageSubscription(bulkEmail: true)
-
-// With email and phone
-sdk.manageSubscription(email: "my@example.com", phone: "+10000000000", emailBulk: true, smsBulk: true)
-
-// Unsubscribe from bulk SMS and email
-sdk.manageSubscription(emailBulk: false, smsBulk: false)
-
-// With everything
-sdk.manageSubscription(email: "my@example.com", phone: "+10000000000",
-  emailBulk: true, emailChain: true, emailTransactional: true,
-  smsBulk: true, smsChain: true, smsTransactional: true,
-  webPushBulk: true, webPushChain: true, webPushTransactional: true,
-  mobilePushBulk: true, mobilePushChain: true, mobilePushTransactional: true
-  )
+// No implementation. See CURL
 ```
 
 ```java
