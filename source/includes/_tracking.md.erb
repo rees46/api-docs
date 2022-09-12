@@ -740,20 +740,7 @@ sdk.notificationReceived(code: "i7ykuagkjgfs", type: "mobile_push_transactional"
 ```
 
 ```java
-// Add notification identification data to the intent
-intent.putExtra(<%= config[:android_sdk_package_name] %>.NOTIFICATION_TYPE, data.get("type"));
-intent.putExtra(<%= config[:android_sdk_package_name] %>.NOTIFICATION_ID, data.get("id"));
-
-// Add recieve tracking in the method of activity creation
-@Override
-	protected void onCreate(Bundle savedInstanceState) {
-       super.onCreate(savedInstanceState);
-       //For tracking notification ercieved
-       if( getIntent().getExtras() != null ) {
-       	 <%= config[:android_sdk_package_name] %>.notificationReceived(getIntent().getExtras());
-       }
-...
-}
+// Automatically called from SDK when receiving data from firebase
 ```
 
 ```jsx
@@ -809,13 +796,12 @@ intent.putExtra(<%= config[:android_sdk_package_name] %>.NOTIFICATION_ID, data.g
 // Add click tracking in the method of activity creation
 @Override
 	protected void onCreate(Bundle savedInstanceState) {
-       super.onCreate(savedInstanceState);
-       //For tracking notification clicked
-       if( getIntent().getExtras() != null ) {
-       	 <%= config[:android_sdk_package_name] %>.notificationClicked(getIntent().getExtras());
-       }
-...
-}
+    super.onCreate(savedInstanceState);
+    //For tracking notification clicked
+    if( getIntent().getExtras() != null ) {
+     <%= config[:android_sdk_package_name] %>.notificationClicked(getIntent().getExtras());
+    }
+  }
 ```
 
 ```jsx
@@ -863,20 +849,7 @@ sdk.notificationClosed(code: "i7ykuagkjgfs", type: "mobile_push_transactional")
 ```
 
 ```java
-// Add notification identification data to the intent
-intent.putExtra(<%= config[:android_sdk_package_name] %>.NOTIFICATION_TYPE, data.get("type"));
-intent.putExtra(<%= config[:android_sdk_package_name] %>.NOTIFICATION_ID, data.get("id"));
-
-// Add close tracking in the method of activity creation
-@Override
-	protected void onCreate(Bundle savedInstanceState) {
-       super.onCreate(savedInstanceState);
-       //For tracking notification closed
-       if( getIntent().getExtras() != null ) {
-       	 <%= config[:android_sdk_package_name] %>.notificationClosed(getIntent().getExtras());
-       }
-...
-}
+// No implementation.
 ```
 
 ```jsx
