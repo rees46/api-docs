@@ -748,7 +748,7 @@ intent.putExtra(<%= config[:android_sdk_package_name] %>.NOTIFICATION_ID, data.g
 @Override
 	protected void onCreate(Bundle savedInstanceState) {
        super.onCreate(savedInstanceState);
-       //For tracking notification opened
+       //For tracking notification ercieved
        if( getIntent().getExtras() != null ) {
        	 <%= config[:android_sdk_package_name] %>.notificationReceived(getIntent().getExtras());
        }
@@ -810,7 +810,7 @@ intent.putExtra(<%= config[:android_sdk_package_name] %>.NOTIFICATION_ID, data.g
 @Override
 	protected void onCreate(Bundle savedInstanceState) {
        super.onCreate(savedInstanceState);
-       //For tracking notification opened
+       //For tracking notification clicked
        if( getIntent().getExtras() != null ) {
        	 <%= config[:android_sdk_package_name] %>.notificationClicked(getIntent().getExtras());
        }
@@ -867,13 +867,13 @@ sdk.notificationClosed(code: "i7ykuagkjgfs", type: "mobile_push_transactional")
 intent.putExtra(<%= config[:android_sdk_package_name] %>.NOTIFICATION_TYPE, data.get("type"));
 intent.putExtra(<%= config[:android_sdk_package_name] %>.NOTIFICATION_ID, data.get("id"));
 
-// Add click tracking in the method of activity creation
+// Add close tracking in the method of activity creation
 @Override
 	protected void onCreate(Bundle savedInstanceState) {
        super.onCreate(savedInstanceState);
        //For tracking notification closed
        if( getIntent().getExtras() != null ) {
-       	 <%= config[:android_sdk_package_name] %>.notificationReceived(getIntent().getExtras());
+       	 <%= config[:android_sdk_package_name] %>.notificationClosed(getIntent().getExtras());
        }
 ...
 }
