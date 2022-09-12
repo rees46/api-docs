@@ -732,7 +732,7 @@ curl 'https://<%= config[:api_endpoint] %>/track/received' \
 ```
 
 ```javascript
-// No implementation.
+// No implementation
 ```
 
 ```swift
@@ -781,7 +781,7 @@ curl 'https://<%= config[:api_endpoint] %>/track/clicked' \
 ```
 
 ```javascript
-// No implementation.
+// No implementation
 ```
 
 ```swift
@@ -841,7 +841,7 @@ curl 'https://<%= config[:api_endpoint] %>/track/closed' \
 ```
 
 ```javascript
-// No implementation.
+// No implementation
 ```
 
 ```swift
@@ -849,18 +849,11 @@ sdk.notificationClosed(code: "i7ykuagkjgfs", type: "mobile_push_transactional")
 ```
 
 ```java
-// Not supported.
+// Not supported
 ```
 
 ```jsx
-// Code and type are received in push notification structure
-const params = {
-  code: 'CODE',
-  type: 'TYPE'
-};
-
-// Track when the notification is closed
-sdk.notificationClosed(params);
+// Not supported
 ```
 
 When user clicks on mobile push notification in mobile app, you have to send event to API with `code` and `type` parameters.
