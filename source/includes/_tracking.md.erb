@@ -722,6 +722,67 @@ Custom event can be tracked in simple mode (just event name) and advanced mode (
  * - works only in Curl method
 </aside>
 
+## User received on mobile push
+
+```shell
+curl 'https://<%= config[:api_endpoint] %>/track/received' \
+    -X 'POST' \
+    -H 'Content-Type: application/json' \
+    --data-raw '{"shop_id":"SHOP_ID", "code":"CODE", "type":"TYPE"}'
+```
+
+```javascript
+// No implementation.
+```
+
+```swift
+sdk.notificationReceived(code: "i7ykuagkjgfs", type: "mobile_push_transactional")
+```
+
+```java
+// Add notification identification data to the intent
+intent.putExtra(<%= config[:android_sdk_package_name] %>.NOTIFICATION_TYPE, data.get("type"));
+intent.putExtra(<%= config[:android_sdk_package_name] %>.NOTIFICATION_ID, data.get("id"));
+
+// Add recieve tracking in the method of activity creation
+@Override
+	protected void onCreate(Bundle savedInstanceState) {
+       super.onCreate(savedInstanceState);
+       //For tracking notification opened
+       if( getIntent().getExtras() != null ) {
+       	 <%= config[:android_sdk_package_name] %>.notificationReceived(getIntent().getExtras());
+       }
+...
+}
+```
+
+```jsx
+// Code and type are received in push notification structure
+const params = {
+  code: 'CODE',
+  type: 'TYPE'
+};
+
+// Track when the notification is received and displayed
+sdk.notificationReceived(params);
+```
+
+When user clicks on mobile push notification in mobile app, you have to send event to API with `code` and `type` parameters.
+
+This method uses separate endpoint:
+
+Endpoint: `POST https://<%= config[:api_endpoint] %>/track/received`
+
+### Required params
+
+All events require at least these parameters:
+
+| Parameter | Type   | Required   | Description                                                                                                                          |
+|-----------|--------|------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| shop_id   | String | true       | Your API key                                                                                                                         |
+| code      | String | true       | Message identifier. Value can be taken from push's JSON payload. For Android it's located in `id` property. In iOS SDK it's `src.id` |
+| type      | String | true       | Message type. Value can be taken from push's JSON payload. For Android it's located in `type` property. In iOS SDK it's `src.type`   |
+
 
 ## User clicked on mobile push
 
@@ -766,9 +827,6 @@ const params = {
 
 // Track when user clicked the notification
 sdk.notificationClicked(params);
-
-// Track when the notification is received and diplayed
-sdk.notificationReceived(params);
 ```
 
 When user clicks on mobile push notification in mobile app, you have to send event to API with `code` and `type` parameters.
@@ -787,3 +845,63 @@ All events require at least these parameters:
 | code      | String | true       | Message identifier. Value can be taken from push's JSON payload. For Android it's located in `id` property. In iOS SDK it's `src.id` |
 |  type     | String | true       | Message type. Value can be taken from push's JSON payload. For Android it's located in `type` property. In iOS SDK it's `src.type`   |
 
+## User closed on mobile push
+
+```shell
+curl 'https://<%= config[:api_endpoint] %>/track/closed' \
+    -X 'POST' \
+    -H 'Content-Type: application/json' \
+    --data-raw '{"shop_id":"SHOP_ID", "code":"CODE", "type":"TYPE"}'
+```
+
+```javascript
+// No implementation.
+```
+
+```swift
+sdk.notificationClosed(code: "i7ykuagkjgfs", type: "mobile_push_transactional")
+```
+
+```java
+// Add notification identification data to the intent
+intent.putExtra(<%= config[:android_sdk_package_name] %>.NOTIFICATION_TYPE, data.get("type"));
+intent.putExtra(<%= config[:android_sdk_package_name] %>.NOTIFICATION_ID, data.get("id"));
+
+// Add click tracking in the method of activity creation
+@Override
+	protected void onCreate(Bundle savedInstanceState) {
+       super.onCreate(savedInstanceState);
+       //For tracking notification closed
+       if( getIntent().getExtras() != null ) {
+       	 <%= config[:android_sdk_package_name] %>.notificationReceived(getIntent().getExtras());
+       }
+...
+}
+```
+
+```jsx
+// Code and type are received in push notification structure
+const params = {
+  code: 'CODE',
+  type: 'TYPE'
+};
+
+// Track when the notification is closed
+sdk.notificationClosed(params);
+```
+
+When user clicks on mobile push notification in mobile app, you have to send event to API with `code` and `type` parameters.
+
+This method uses separate endpoint:
+
+Endpoint: `POST https://<%= config[:api_endpoint] %>/track/closed`
+
+### Required params
+
+All events require at least these parameters:
+
+| Parameter | Type   | Required   | Description                                                                                                                          |
+|-----------|--------|------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| shop_id   | String | true       | Your API key                                                                                                                         |
+| code      | String | true       | Message identifier. Value can be taken from push's JSON payload. For Android it's located in `id` property. In iOS SDK it's `src.id` |
+| type      | String | true       | Message type. Value can be taken from push's JSON payload. For Android it's located in `type` property. In iOS SDK it's `src.type`   |
