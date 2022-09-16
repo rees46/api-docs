@@ -384,6 +384,19 @@ sdk.track("cart", {
   recommended_by: 'dynamic',
   recommended_code: 'UNIQUE_RECOMMENDER_CODE'
 });
+
+//Full request to send the full current cart
+sdk.track("cart", [
+  {
+    id: FIRST_PRODUCT_ID,
+    amount: FIRST_PRODUCT_QUANTITY
+  },
+  ...
+  {
+    id: LAST_PRODUCT_ID,
+    amount: LAST_PRODUCT_QUANTITY
+  }
+]);
 ```
 
 ### JS SDK syntax (short request for a single product)
