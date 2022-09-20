@@ -58,13 +58,71 @@ sdk.search({
 
 ### Query Parameters
 
-| Parameter     | Required | Description                                      |
-| ------------- | -------- | ------------------------------------------------ |
-| did           | true     | Device ID. You get it from `init` method in SDK. |
-| shop_id       | true     | Your API key                                     |
-| seance        | true     | Temporary user session ID                        |
-| type          | true     | In this case: "instant_search"                   |
-| search_query  | true     | Search query                                     |
+| Parameter       | Required   | Description                                        |
+|-----------------|------------|----------------------------------------------------|
+| did             | true       | Device ID. You get it from `init` method in SDK.   |
+| shop_id         | true       | Your API key                                       |
+| seance          | true       | Temporary user session ID                          |
+| type            | true       | In this case: "instant_search"                     |
+| search_query    | true       | Search query                                       |
+
+### API response
+| Name                   | Type   | Description                                                                                                                                                                                           |
+|:-----------------------|:-------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| search_query           | string | Search query                                                                                                                                                                                          |
+| categories             | array  | Array with information about categories. Each object has the following properties:                                                                                                                    |
+|                        |        | * id – category id (string)                                                                                                                                                                           |
+|                        |        | * name – category name (string)                                                                                                                                                                       |
+|                        |        | * url – category url (string)                                                                                                                                                                         | queries          | array  | Array with information about queries. Each object has the following properties:                                                                                                                       |
+|                        |        | * count – count of products in category (number)                                                                                                                                                      |
+| filters                | array  | Array with information about filters. Each object has the following properties:                                                                                                                       |
+|                        |        | * filter – fitler object. Has the following properties:                                                                                                                                               |
+|                        |        | * count – total count of products whith this parameters (number)                                                                                                                                      |
+|                        |        | * values – array of values (object). Has the following properties:                                                                                                                                    |
+|                        |        | * value – value label. (string)                                                                                                                                                                       |
+|                        |        | * count – cont of products whith this parameter (number)                                                                                                                                              |
+| html                   | string | HTML-code of the block with products. The template is customized in the <%= config[:service_name] %> personal account.                                                                                |
+| price_range            | object | Min and max price of products. Has the following properties:                                                                                                                                          |
+|                        |        | * min – min price (number)                                                                                                                                                                            |
+|                        |        | * max – max price (number)                                                                                                                                                                            |
+| products               | array  | Array with information about products. Each object has the following properties:                                                                                                                      |
+|                        |        | * description – product description (string)                                                                                                                                                          |
+|                        |        | * url – absolute product URL (string)                                                                                                                                                                 |
+|                        |        | * url_handle – relative product URL (string)                                                                                                                                                          |
+|                        |        | * picture – product's picture URL in the <%= config[:service_name] %> storage (string)                                                                                                                |
+|                        |        | * name – product name (string)                                                                                                                                                                        |
+|                        |        | * price – product price (number / int)                                                                                                                                                                |
+|                        |        | * price_full – product price (number / float)                                                                                                                                                         |
+|                        |        | * price_formatted – product price with currency (string)                                                                                                                                              |
+|                        |        | * price_full_formatted – product price with currency (string)                                                                                                                                         |
+|                        |        | * image_url - absolute product's picture URL in the <%= config[:service_name] %> storage (string)                                                                                                     |
+|                        |        | * image_url_handle - relative product's picture URL in the <%= config[:service_name] %> storage (string)                                                                                              |
+|                        |        | * image_url_resized - product image resizes url (array)                                                                                                                                               |
+|                        |        | * currency – product currency (string, corresponds to the currency of the personal account in <%= config[:service_name] %>, or a custom value specified in the shop settings in the personal account) |
+|                        |        | * id – product ID (string)                                                                                                                                                                            |
+|                        |        | * old_price – product old price (number / int, default - 0)                                                                                                                                           |
+|                        |        | * old_price_full – product old price (number / float)                                                                                                                                                 |
+|                        |        | * old_price_formatted – product old price with currency (string)                                                                                                                                      |
+|                        |        | * old_price_full_formatted – product old price with currency (string)                                                                                                                                 |
+|                        |        | Additional properties. If a parameter "extended" is passed in the request                                                                                                                             |
+|                        |        | * categories – product categories (array). Has the following properties:                                                                                                                              |
+|                        |        | * id – category id (string)                                                                                                                                                                           |
+|                        |        | * name – category name (string)                                                                                                                                                                       |
+|                        |        | * parent_id – parent category id (string)                                                                                                                                                             |
+|                        |        | * url - category url                                                                                                                                                                                  |
+|                        |        | * category_ids - product categories ids (array).                                                                                                                                                      |                                                                                                                                                                 |
+| search_query_redirects | array  | Array with information about redirects. Each object has the following properties:                                                                                                                     |
+|                        |        | * query – search query (string)                                                                                                                                                                       |
+|                        |        | * redirect_link – Url for redirect (string)                                                                                                                                                           |
+|                        |        | * deep_link – Url for mobile apps (string)                                                                                                                                                            |
+| products_total         | number | Total count of products                                                                                                                                                                               |
+| book_author            | array  | Reserved                                                                                                                                                                                              |
+| book_editor            | array  | Reserved                                                                                                                                                                                              |
+| book_publisher         | array  | Reserved                                                                                                                                                                                              |
+| book_series            | array  | Reserved                                                                                                                                                                                              |
+| book_illustrator       | array  | Reserved                                                                                                                                                                                              |
+| book_isbn              | array  | Reserved                                                                                                                                                                                              |
+| book_isbn_vars         | array  | Reserved                                                                                                                                                                                              |
 
 ## Full search
 
@@ -128,81 +186,81 @@ sdk.search({
 
 ### Query Parameters
 
-| Parameter        | Required  | Description                                                                                                                          |
-|------------------| --------- | ------------------------------------------------------------------------------------------------------------------------------------ |
-| did              | true      | Device ID. You get it from `init` method in SDK.                                                                                     |
-| shop_id          | true      | Your API key                                                                                                                         |
-| seance           | true      | Temporary user session ID                                                                                                            |
-| type             | true      | In this case: "full_search"                                                                                                          |
-| search_query     | true      | Search query                                                                                                                         |
-| limit            | false     | Limit of results                                                                                                                     |
-| offset           | false     | Offset of results                                                                                                                    |
-| category_limit   | false     | How many categories for sidebar filter to return                                                                                     |
-| categories       | false     | Comma separated list of categories to filter                                                                                         |
-| extended         | false     | It's better to use `true` for full search results                                                                                    |
-| sort_by          | false     | Sort by parameter: `popular`, `price`, `discount`                                                                                    |
-| order            | false     | Sort direction: `asc` or `desc` (default)                                                                                            |
-| locations        | false     | Comma separated list of locations IDs                                                                                                |
-| brands           | false     | Comma separated list of brands to filter                                                                                             |
-| filters          | false     | Optional escaped JSON string with filter parameters. For example: `{"bluetooth":["yes"],"offers":["15% cashback"],"weight":["1.6"]}` |
-| price_min        | false     | Min price                                                                                                                            |
-| price_max        | false     | Max price                                                                                                                            |
-| colors           | false     | Comma separated list of colors                                                                                                       |
-| exclude          | false     | Comma separated list of products IDs to exclude from search results                                                                  |
-| email            | false     | It's only for S2S integration, when service doesn't have user's session. Mobile SDK doesn't use it.                                  |
-| no_clarification | false     | Disable clarified search (true, false, default: false). Don't use it. God mode only.                                                 |
+| Parameter        | Required | Description                                                                                                                           |
+|------------------|----------|---------------------------------------------------------------------------------------------------------------------------------------|
+| did              | true     | Device ID. You get it from `init` method in SDK.                                                                                      |
+| shop_id          | true     | Your API key                                                                                                                          |
+| seance           | true     | Temporary user session ID                                                                                                             |
+| type             | true     | In this case: "full_search"                                                                                                           |
+| search_query     | true     | Search query                                                                                                                          |
+| limit            | false    | Limit of results                                                                                                                      |
+| offset           | false    | Offset of results                                                                                                                     |
+| category_limit   | false    | How many categories for sidebar filter to return                                                                                      |
+| categories       | false    | Comma separated list of categories to filter                                                                                          |
+| extended         | false    | It's better to use `true` for full search results                                                                                     |
+| sort_by          | false    | Sort by parameter: `popular`, `price`, `discount`                                                                                     |
+| order            | false    | Sort direction: `asc` or `desc` (default)                                                                                             |
+| locations        | false    | Comma separated list of locations IDs                                                                                                 |
+| brands           | false    | Comma separated list of brands to filter                                                                                              |
+| filters          | false    | Optional escaped JSON string with filter parameters. For example: `{"bluetooth":["yes"],"offers":["15% cashback"],"weight":["1.6"]}`  |
+| price_min        | false    | Min price                                                                                                                             |
+| price_max        | false    | Max price                                                                                                                             |
+| colors           | false    | Comma separated list of colors                                                                                                        |
+| exclude          | false    | Comma separated list of products IDs to exclude from search results                                                                   |
+| email            | false    | It's only for S2S integration, when service doesn't have user's session. Mobile SDK doesn't use it.                                   |
+| no_clarification | false    | Disable clarified search (true, false, default: false). Don't use it. God mode only.                                                  |
 
 
 ### API response
-| Name                  | Type          | Description                                                                                                                                                                                             |
-| :-------------------- | :------------ | :------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| brands                | array         | Array with information about brands. Each object has the following properties:                                                                                                                          |
-|                       |               |   * name – brand name (string)                                                                                                                                                                          |
-|                       |               |   * picture – brand picture (string)                                                                                                                                                                    |
-| categories            | array         | Array with information about categories. Each object has the following properties:                                                                                                                      |
-|                       |               |   * alias – category alias (string)                                                                                                                                                                     |
-|                       |               |   * id – category id (string)                                                                                                                                                                           |
-|                       |               |   * name – category name (string)                                                                                                                                                                       |
-|                       |               |   * parent – parent category id (string)                                                                                                                                                                |
-|                       |               |   * url – category url (string)                                                                                                                                                                         |
-| filters               | array         | Array with information about filters. Each object has the following properties:                                                                                                                         |
-|                       |               |   * filter – fitler object. Has the following properties:                                                                                                                                               |
-|                       |               |     * count – total count of products whith this parameters (number)                                                                                                                                    |
-|                       |               |     * values – array of values (object). Has the following properties:                                                                                                                                  |
-|                       |               |       * value – value label. (string)                                                                                                                                                                   |
-|                       |               |       * count – cont of products whith this parameter (number)                                                                                                                                          |
-| html                  | string        | HTML-code of the block with products. The template is customized in the <%= config[:service_name] %> personal account.                                                                                  |
-| price_range           | object        | Min and max price of products. Has the following properties:                                                                                                                                            |
-|                       |               |   * min – min price (number)                                                                                                                                                                            |
-|                       |               |   * max – max price (number)                                                                                                                                                                            |
-| products              | array         | Array with information about products. Each object has the following properties:                                                                                                                        |
-|                       |               |   * brand – product brand (string)                                                                                                                                                                      |
-|                       |               |   * currency – product currency (string, corresponds to the currency of the personal account in <%= config[:service_name] %>, or a custom value specified in the shop settings in the personal account) |
-|                       |               |   * id – product ID (string)                                                                                                                                                                            |
-|                       |               |   * is_new – product property (boolean, default - null)                                                                                                                                                 |
-|                       |               |   * name – product name (string)                                                                                                                                                                        |
-|                       |               |   * old_price – product old price (string, default - 0)                                                                                                                                                 |
-|                       |               |   * picture – product's picture URL in the <%= config[:service_name] %> storage (string)                                                                                                                |
-|                       |               |   * price – product price (number)                                                                                                                                                                      |
-|                       |               |   * price_formatted – product price with currency (string)                                                                                                                                              |
-|                       |               |   * url – product URL (string)                                                                                                                                                                          |
-|                       |               |                                                                                                                                                                                                         |
-|                       |               |   Additional properties. If a parameter "extended" is passed in the request                                                                                                                             |
-|                       |               |   * barcode – product barcode (string)                                                                                                                                                                  |
-|                       |               |   * categories – product categories (array). Has the following properties:                                                                                                                              |
-|                       |               |     * id – category id (string)                                                                                                                                                                         |
-|                       |               |     * name – category name (string)                                                                                                                                                                     |
-|                       |               |     * parent – parent category id (string)                                                                                                                                                              |
-|                       |               |     * params – array with information about params. Each object has the following properties:                                                                                                           |
-|                       |               |       * key – param name (string)                                                                                                                                                                       |
-|                       |               |       * values – array of values (array)                                                                                                                                                                |
-| products_total        | number        | Total count of products                                                                                                                                                                                 |
-| search_query          | string        | Search query                                                                                                                                                                                            |
-| book_authors          | array         | Reserved                                                                                                                                                                                                |
-| collections           | array         | Reserved                                                                                                                                                                                                |
-| keywords              | array         | Reserved                                                                                                                                                                                                |
-| queries               | array         | Reserved                                                                                                                                                                                                |
-| virtual_categories    | array         | Reserved                                                                                                                                                                                                |
+| Name               | Type   | Description                                                                                                                                                                                           |
+|:-------------------|:-------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| brands             | array  | Array with information about brands. Each object has the following properties:                                                                                                                        |
+|                    |        | * name – brand name (string)                                                                                                                                                                          |
+|                    |        | * picture – brand picture (string)                                                                                                                                                                    |
+| categories         | array  | Array with information about categories. Each object has the following properties:                                                                                                                    |
+|                    |        | * alias – category alias (string)                                                                                                                                                                     |
+|                    |        | * id – category id (string)                                                                                                                                                                           |
+|                    |        | * name – category name (string)                                                                                                                                                                       |
+|                    |        | * parent – parent category id (string)                                                                                                                                                                |
+|                    |        | * url – category url (string)                                                                                                                                                                         |
+| filters            | array  | Array with information about filters. Each object has the following properties:                                                                                                                       |
+|                    |        | * filter – fitler object. Has the following properties:                                                                                                                                               |
+|                    |        | * count – total count of products whith this parameters (number)                                                                                                                                      |
+|                    |        | * values – array of values (object). Has the following properties:                                                                                                                                    |
+|                    |        | * value – value label. (string)                                                                                                                                                                       |
+|                    |        | * count – cont of products whith this parameter (number)                                                                                                                                              |
+| html               | string | HTML-code of the block with products. The template is customized in the <%= config[:service_name] %> personal account.                                                                                |
+| price_range        | object | Min and max price of products. Has the following properties:                                                                                                                                          |
+|                    |        | * min – min price (number)                                                                                                                                                                            |
+|                    |        | * max – max price (number)                                                                                                                                                                            |
+| products           | array  | Array with information about products. Each object has the following properties:                                                                                                                      |
+|                    |        | * brand – product brand (string)                                                                                                                                                                      |
+|                    |        | * currency – product currency (string, corresponds to the currency of the personal account in <%= config[:service_name] %>, or a custom value specified in the shop settings in the personal account) |
+|                    |        | * id – product ID (string)                                                                                                                                                                            |
+|                    |        | * is_new – product property (boolean, default - null)                                                                                                                                                 |
+|                    |        | * name – product name (string)                                                                                                                                                                        |
+|                    |        | * old_price – product old price (string, default - 0)                                                                                                                                                 |
+|                    |        | * picture – product's picture URL in the <%= config[:service_name] %> storage (string)                                                                                                                |
+|                    |        | * price – product price (number)                                                                                                                                                                      |
+|                    |        | * price_formatted – product price with currency (string)                                                                                                                                              |
+|                    |        | * url – product URL (string)                                                                                                                                                                          |
+|                    |        |                                                                                                                                                                                                       |
+|                    |        | Additional properties. If a parameter "extended" is passed in the request                                                                                                                             |
+|                    |        | * barcode – product barcode (string)                                                                                                                                                                  |
+|                    |        | * categories – product categories (array). Has the following properties:                                                                                                                              |
+|                    |        | * id – category id (string)                                                                                                                                                                           |
+|                    |        | * name – category name (string)                                                                                                                                                                       |
+|                    |        | * parent – parent category id (string)                                                                                                                                                                |
+|                    |        | * params – array with information about params. Each object has the following properties:                                                                                                             |
+|                    |        | * key – param name (string)                                                                                                                                                                           |
+|                    |        | * values – array of values (array)                                                                                                                                                                    |
+| products_total     | number | Total count of products                                                                                                                                                                               |
+| search_query       | string | Search query                                                                                                                                                                                          |
+| book_authors       | array  | Reserved                                                                                                                                                                                              |
+| collections        | array  | Reserved                                                                                                                                                                                              |
+| keywords           | array  | Reserved                                                                                                                                                                                              |
+| queries            | array  | Reserved                                                                                                                                                                                              |
+| virtual_categories | array  | Reserved                                                                                                                                                                                              |
 
 
 
@@ -245,21 +303,20 @@ curl https://<%= config[:api_endpoint] %>/search/no_result_queries?shop_id=...&s
   {
     "contact_type": "covfefe",
     "quantity": 384491
-  },
-  ...
+  }
 ]
 ```
 
 ### Parameters
 
-Parameter | Type | Required | Description
---------- | ------- | -------  | -----------
-shop_id | String | true | Your API key
-shop_secret | String | true | Secret API key
+| Parameter    | Type   | Required   | Description    |
+|--------------|--------|------------|----------------|
+| shop_id      | String | true       | Your API key   |
+|  shop_secret | String | true       | Secret API key |
 
 ### Response properties
 
-Parameter | Type | Description
---------- | -------  | -----------
-query | String | Search query value
-quantity | Integer | Number of query usages during 2 weeks
+| Parameter | Type    | Description                           |
+|-----------|---------|---------------------------------------|
+| query     | String  | Search query value                    |
+|  quantity | Integer | Number of query usages during 2 weeks |
