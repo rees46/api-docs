@@ -77,10 +77,7 @@ curl 'https://<%= config[:api_endpoint] %>/push' \
 ```javascript
 
 // Simple track
-<%= config[:js_sdk_name] %>("track", "view", {
-    id: "37",
-    stock: true
-});
+<%= config[:js_sdk_name] %>("track", "view", "37");
 
 // Also notify the product is in stock (if it was not in stock)
 <%= config[:js_sdk_name] %>("track", "view", {
@@ -88,7 +85,7 @@ curl 'https://<%= config[:api_endpoint] %>/push' \
     stock: true
 });
 
-// Or not in stock now (to prevent recommending it on the next requests)
+// Or not in stock anymore (to prevent recommending it on the next requests)
 <%= config[:js_sdk_name] %>("track", "view", {
     id: "37",
     stock: false
