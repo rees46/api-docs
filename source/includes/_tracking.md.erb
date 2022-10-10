@@ -505,10 +505,9 @@ curl 'https://<%= config[:api_endpoint] %>/push' \
 });
 ```
 
-
 ```swift
 // Track product added to cart
-sdk.track(event: .productAddedToCart(id: "PRODUCT_ID")) { trackResponse in
+sdk.track(event: .orderCreated(orderId: "123", totalValue: 33.3, products: [(id: "PRODUCT_ID_1", amount: 3), (id: "PRODUCT_ID_2", amount: 1)])) { trackResponse in
     // ... see product viewed event for details about a callback
 }
 ```
@@ -587,7 +586,7 @@ curl 'https://<%= config[:api_endpoint] %>/push' \
 ```
 
 ```swift
-sdk.track(event: .orderCreated(orderId: "123", totalValue: 33.3, products: [(id: "PRODUCT_ID_1", amount: 3), (id: "PRODUCT_ID_2", amount: 1)])) { trackResponse in
+sdk.track(event: .productAddToFavorities(id: "PRODUCT_ID")) { trackResponse in
     // ... see product viewed event for details about a callback
 }
 ```
@@ -721,12 +720,12 @@ Before tracking custom events, register it in "Settings > Custom events".
 Custom event can be tracked in simple mode (just event name) and advanced mode (with 3 optional parameters).
 
 
-| Parameter   | Type        | Requirement      | Description      |
-|-------------|-------------|------------------|------------------|
-| category    | String      | optional         | Event category   |
-| label       | String      | optional         | Event label      |
-| value       | Integer     | optional         | Event value      |
-| time*       | Timestamp   | optional         | Event time       |
+| Parameter | Type        | Requirement      | Description      |
+|-----------|-------------|------------------|------------------|
+| category  | String      | optional         | Event category   |
+| label     | String      | optional         | Event label      |
+| value     | Integer     | optional         | Event value      |
+| time*     | Timestamp   | optional         | Event time       |
 
 <aside class="notice">
  * - works only in Curl method
