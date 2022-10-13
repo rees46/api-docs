@@ -472,9 +472,9 @@ sdk.track("remove_from_cart", id);
 | <%= config[:js_sdk_name] %>("track", "remove_from_cart", "id");   |
 
 ### JS SDK Parameters
-| Parameter  | Type          | Requirement  | Description                                 |
-|------------|---------------|--------------|---------------------------------------------|
-| id         | string | required     | The ID of the product removed from the cart |
+| Parameter | Type   | Requirement | Description                                 |
+|-----------|--------|-------------|---------------------------------------------|
+| id        | string | required    | The ID of the product removed from the cart |
 
 
 ## User purchased products
@@ -518,6 +518,7 @@ purchase
 	.put(new Params.Item("37"))
 	.put(Params.Parameter.ORDER_ID, "100234")
 	.put(Params.Parameter.ORDER_PRICE, 100500)
+  .put(Params.Parameter.DELIVERY_ADDRESS, "1860 street")
 	.put(new Params.RecommendedBy(Params.RecommendedBy.TYPE.RECOMMENDATION, "e9ddb9cdc66285fac40c7a897760582a"));
 <%= config[:android_sdk_package_name]%>.track(Params.TrackEvent.PURCHASE, purchase);
 ```

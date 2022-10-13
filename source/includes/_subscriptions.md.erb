@@ -99,36 +99,44 @@ sdk.manageSubscription(email: "my@example.com", phone: "+10000000000",
 ```
 
 ```java
-// No implementation. See CURL
+// With `did` only
+HashMap<String, Boolean> subscriptions = new HashMap<>();
+subscriptions.put("email_bulk", true);
+<%= config[:android_sdk_package_name]%>.manageSubscription(null, null, subscriptions);
+
+// With email and phone
+HashMap<String, Boolean> subscriptions = new HashMap<>();
+subscriptions.put("email_bulk", true);
+<%= config[:android_sdk_package_name]%>.manageSubscription("my@example.com", "+10000000000", subscriptions);
+
+// Unsubscribe from bulk SMS and email
+HashMap<String, Boolean> subscriptions = new HashMap<>();
+subscriptions.put("email_bulk", false);
+subscriptions.put("sms_bulk", false);
+<%= config[:android_sdk_package_name]%>.manageSubscription(null, null, subscriptions);
 ```
 
 The method changes user's subscription to different channels (`email`, `sms`) and campaigns types (`bulk`, `chain`, `transactional`).
 
-Parameter | Type | Required | Description
---------- | ------- | ------- | -----------
-shop_id | String | true | Your API key
-shop_secret | String | true* | Secret API key. Required only for REST integration.
-email | String | true* | User's email
-phone | String | true* | User's email
-did | String | true* | Users device ID. It's handled automatically on JS SDK and don't needed in REST API
-email_bulk | Boolean | false | Subscribe user to email bulk campaigns
-email_chain | Boolean | false | Subscribe user to email drip/trigger campaigns
-email_transactional | Boolean | false | Subscribe user to email transactional campaigns
-sms_bulk | Boolean | false | Subscribe user to SMS bulk campaigns
-sms_chain | Boolean | false | Subscribe user to SMS drip/trigger campaigns
-sms_transactional | Boolean | false | Subscribe user to SMS transactional campaigns
-web_push_bulk | Boolean | false | Subscribe user to Web push bulk campaigns
-web_push_chain | Boolean | false | Subscribe user to Web push drip/trigger campaigns
-web_push_transactional | Boolean | false | Subscribe user to Web push transactional campaigns
-mobile_push_bulk | Boolean | false | Subscribe user to Mobile push bulk campaigns
-mobile_push_chain | Boolean | false | Subscribe user to Mobile push drip/trigger campaigns
-mobile_push_transactional | Boolean | false | Subscribe user to Mobile push transactional campaigns
-
-
-
-
-
-
+| Parameter                 | Type    | Required | Description                                                                        |
+|---------------------------|---------|----------|------------------------------------------------------------------------------------|
+| shop_id                   | String  | true     | Your API key                                                                       |
+| shop_secret               | String  | true*    | Secret API key. Required only for REST integration.                                |
+| email                     | String  | true*    | User's email                                                                       |
+| phone                     | String  | true*    | User's email                                                                       |
+| did                       | String  | true*    | Users device ID. It's handled automatically on JS SDK and don't needed in REST API |
+| email_bulk                | Boolean | false    | Subscribe user to email bulk campaigns                                             |
+| email_chain               | Boolean | false    | Subscribe user to email drip/trigger campaigns                                     |
+| email_transactional       | Boolean | false    | Subscribe user to email transactional campaigns                                    |
+| sms_bulk                  | Boolean | false    | Subscribe user to SMS bulk campaigns                                               |
+| sms_chain                 | Boolean | false    | Subscribe user to SMS drip/trigger campaigns                                       |
+| sms_transactional         | Boolean | false    | Subscribe user to SMS transactional campaigns                                      |
+| web_push_bulk             | Boolean | false    | Subscribe user to Web push bulk campaigns                                          |
+| web_push_chain            | Boolean | false    | Subscribe user to Web push drip/trigger campaigns                                  |
+| web_push_transactional    | Boolean | false    | Subscribe user to Web push transactional campaigns                                 |
+| mobile_push_bulk          | Boolean | false    | Subscribe user to Mobile push bulk campaigns                                       |
+| mobile_push_chain         | Boolean | false    | Subscribe user to Mobile push drip/trigger campaigns                               |
+| mobile_push_transactional | Boolean | false    | Subscribe user to Mobile push transactional campaigns                              |
 
 ## System operations: unsubscribe, complaint, hard bounce and blacklist
 
@@ -160,13 +168,12 @@ https://<%= config[:api_endpoint] %>/subscriptions/callback
 // No implementation. See CURL
 ```
 
-
-Parameter | Type | Required | Description
---------- | ------- | ------- | -----------
-shop_id | String | true | Your API key
-shop_secret | String | true | Secret API key. Required only for REST integration.
-email | String | true | User's email
-event | String | true | Event to process: `hard_bounced`
+| Parameter   | Type   | Required | Description                                         |
+|-------------|--------|----------|-----------------------------------------------------|
+| shop_id     | String | true     | Your API key                                        |
+| shop_secret | String | true     | Secret API key. Required only for REST integration. |
+| email       | String | true     | User's email                                        |
+| event       | String | true     | Event to process: `hard_bounced`                    |
 
 ### Email is complained
 
@@ -192,13 +199,12 @@ https://<%= config[:api_endpoint] %>/subscriptions/callback
 // No implementation. See CURL
 ```
 
-Parameter | Type | Required | Description
---------- | ------- | -------  | -----------
-shop_id | String | true | Your API key
-shop_secret | String | true | Secret API key. Required only for REST integration.
-email | String | true | User's email
-event | String | true | Event to process: `complained`
-
+| Parameter   | Type   | Required | Description                                         |
+|-------------|--------|----------|-----------------------------------------------------|
+| shop_id     | String | true     | Your API key                                        |
+| shop_secret | String | true     | Secret API key. Required only for REST integration. |
+| email       | String | true     | User's email                                        |
+| event       | String | true     | Event to process: `complained`                      |
 
 ### Email is blacklisted
 
@@ -224,13 +230,12 @@ https://<%= config[:api_endpoint] %>/subscriptions/callback
 // No implementation. See CURL
 ```
 
-Parameter | Type | Required | Description
---------- | ------- | -------  | -----------
-shop_id | String | true | Your API key
-shop_secret | String | true | Secret API key. Required only for REST integration.
-email | String | true | User's email
-event | String | true | Event to process: `blacklisted`
-
+| Parameter   | Type   | Required | Description                                         |
+|-------------|--------|----------|-----------------------------------------------------|
+| shop_id     | String | true     | Your API key                                        |
+| shop_secret | String | true     | Secret API key. Required only for REST integration. |
+| email       | String | true     | User's email                                        |
+| event       | String | true     | Event to process: `blacklisted`                     |
 
 ### Email is unsubscribed
 
@@ -256,14 +261,12 @@ https://<%= config[:api_endpoint] %>/subscriptions/callback
 // No implementation. See CURL
 ```
 
-Parameter | Type | Required | Description
---------- | ------- | -------  | -----------
-shop_id | String | true | Your API key
-shop_secret | String | true | Secret API key. Required only for REST integration.
-email | String | true | User's email
-event | String | true | Event to process: `unsubscribed`
-
-
+| Parameter   | Type   | Required | Description                                         |
+|-------------|--------|----------|-----------------------------------------------------|
+| shop_id     | String | true     | Your API key                                        |
+| shop_secret | String | true     | Secret API key. Required only for REST integration. |
+| email       | String | true     | User's email                                        |
+| event       | String | true     | Event to process: `unsubscribed`                    |
 
 ## Check subscription status
 
@@ -307,39 +310,36 @@ curl https://<%= config[:api_endpoint] %>/subscriptions/check
 }
 ```
 
-
 Checks email's subscription status.
 
-Parameter | Type | Required | Description
---------- | ------- | -------  | -----------
-shop_id | String | true | Your API key
-shop_secret | String | true | Secret API key. Can be sent as header `X-Shop-Secret`.
-email | String | true* | User's email
-phone | String | true* | User's phone.
+| Parameter   | Type   | Required | Description                                            |
+|-------------|--------|----------|--------------------------------------------------------|
+| shop_id     | String | true     | Your API key                                           |
+| shop_secret | String | true     | Secret API key. Can be sent as header `X-Shop-Secret`. |
+| email       | String | true*    | User's email                                           |
+| phone       | String | true*    | User's phone.                                          |
 
 Response flags:
 
-Property | Type | Description
---------- | -------  | -----------
-exists | Boolean | Check if user with specified contact is present in CDP
-email_bulk | Boolean | Email is subscribed to bulk emails
-email_chain | Boolean | Email is subscribed to drip campaigns (triggers)
-email_transactional | Boolean | Email is subscribed to transactional emails
-email_invalid | Boolean | Email is invalid or disposal email
-email_blacklisted | Boolean | Email is blacklisted (spam trap, etc)
-email_bounced | Boolean | Email is hard bounced
-email_suppressed | Boolean | Email is suppressed due to complaint
-web_push_bulk | Boolean | User has phone and subscribed to bulk Web push campaigns
-web_push_chain | Boolean | User has phone and subscribed to drip Web push campaigns (triggers)
-web_push_transactional | Boolean | User has phone and subscribed to transactional Web push campaigns
-mobile_push_bulk | Boolean | User has phone and subscribed to bulk Mobile push campaigns
-mobile_push_chain | Boolean | User has phone and subscribed to drip Mobile push campaigns (triggers)
-mobile_push_transactional | Boolean | User has phone and subscribed to transactional Mobile push campaigns
-sms_bulk | Boolean | User has phone and subscribed to bulk SMS campaigns
-sms_chain | Boolean | User has phone and subscribed to drip SMS campaigns (triggers)
-sms_transactional | Boolean | User has phone and subscribed to transactional SMS campaigns
-
-
+| Property                  | Type    | Description                                                            |
+|---------------------------|---------|------------------------------------------------------------------------|
+| exists                    | Boolean | Check if user with specified contact is present in CDP                 |
+| email_bulk                | Boolean | Email is subscribed to bulk emails                                     |
+| email_chain               | Boolean | Email is subscribed to drip campaigns (triggers)                       |
+| email_transactional       | Boolean | Email is subscribed to transactional emails                            |
+| email_invalid             | Boolean | Email is invalid or disposal email                                     |
+| email_blacklisted         | Boolean | Email is blacklisted (spam trap, etc)                                  |
+| email_bounced             | Boolean | Email is hard bounced                                                  |
+| email_suppressed          | Boolean | Email is suppressed due to complaint                                   |
+| web_push_bulk             | Boolean | User has phone and subscribed to bulk Web push campaigns               |
+| web_push_chain            | Boolean | User has phone and subscribed to drip Web push campaigns (triggers)    |
+| web_push_transactional    | Boolean | User has phone and subscribed to transactional Web push campaigns      |
+| mobile_push_bulk          | Boolean | User has phone and subscribed to bulk Mobile push campaigns            |
+| mobile_push_chain         | Boolean | User has phone and subscribed to drip Mobile push campaigns (triggers) |
+| mobile_push_transactional | Boolean | User has phone and subscribed to transactional Mobile push campaigns   |
+| sms_bulk                  | Boolean | User has phone and subscribed to bulk SMS campaigns                    |
+| sms_chain                 | Boolean | User has phone and subscribed to drip SMS campaigns (triggers)         |
+| sms_transactional         | Boolean | User has phone and subscribed to transactional SMS campaigns           |
 
 ## Changed subscriptions list
 
@@ -411,56 +411,55 @@ curl https://<%= config[:api_endpoint] %>/subscriptions/changes?shop_id=...&shop
 
 ### Parameters
 
-Parameter | Type | Required | Description
---------- | ------- | -------  | -----------
-shop_id | String | true | Your API key.
-shop_secret | String | true | Secret API key. Can be sent as header `X-Shop-Secret`.
-event | String | false | Filter by event.
-channel | String | false | Filter by channel.
-from | String | false | Date `from` in `YYYY-MM-DD` format. Default value: 1 day ago.
-to | String | false | Date `to` in `YYYY-MM-DD` format. Default value: current date.
-email | String | false | Find only logs with specified email.
-phone | String | false | Find only logs with specified phone.
-
+| Parameter   | Type   | Required | Description                                                    |
+|-------------|--------|----------|----------------------------------------------------------------|
+| shop_id     | String | true     | Your API key.                                                  |
+| shop_secret | String | true     | Secret API key. Can be sent as header `X-Shop-Secret`.         |
+| event       | String | false    | Filter by event.                                               |
+| channel     | String | false    | Filter by channel.                                             |
+| from        | String | false    | Date `from` in `YYYY-MM-DD` format. Default value: 1 day ago.  |
+| to          | String | false    | Date `to` in `YYYY-MM-DD` format. Default value: current date. |
+| email       | String | false    | Find only logs with specified email.                           |
+| phone       | String | false    | Find only logs with specified phone.                           |
 
 ### Response properties
 
-Parameter | Type | Description
---------- | -------  | -----------
-contact_type | String | Type of contact: `sms`, `email`, `mpush`, `wpush`
-contact | String | Contact value
-campaign_type | String | Type of campaigns: `bulk`, `chain`, `transactional`, `everything`
-event | String | Type of event: `subscribe`, `unsubscribe`, `hard_bounced`, `complained`, `blacklisted`
-channel | String | Channel of event: `api`, `js_sdk`, `unsubscribe_page`, `email_processing`, etc
-datetime | String | Date and time in `YYYY-MM-DD H:i:s` format
-ip | String | IP from where request was received. Can be empty for some kinds of `channel` parameter.
+| Parameter     | Type   | Description                                                                             |
+|---------------|--------|-----------------------------------------------------------------------------------------|
+| contact_type  | String | Type of contact: `sms`, `email`, `mpush`, `wpush`                                       |
+| contact       | String | Contact value                                                                           |
+| campaign_type | String | Type of campaigns: `bulk`, `chain`, `transactional`, `everything`                       |
+| event         | String | Type of event: `subscribe`, `unsubscribe`, `hard_bounced`, `complained`, `blacklisted`  |
+| channel       | String | Channel of event: `api`, `js_sdk`, `unsubscribe_page`, `email_processing`, etc          |
+| datetime      | String | Date and time in `YYYY-MM-DD H:i:s` format                                              |
+| ip            | String | IP from where request was received. Can be empty for some kinds of `channel` parameter. |
 
 ### Event descriptions:
 
-| Event | Description |
-| --- | --- |
-| subscribe | User is subscribed for messages (email, sms) |
-| unsubscribe | User is unsubscribed |
-| hard_bounced | User's contact is hard bounced (not existing email, phone) |
-| complained | User is complained (FBL). As result: unsubscribed and suppressed |
-| blacklisted | User is blacklisted |
+| Event        | Description                                                      |
+|--------------|------------------------------------------------------------------|
+| subscribe    | User is subscribed for messages (email, sms)                     |
+| unsubscribe  | User is unsubscribed                                             |
+| hard_bounced | User's contact is hard bounced (not existing email, phone)       |
+| complained   | User is complained (FBL). As result: unsubscribed and suppressed |
+| blacklisted  | User is blacklisted                                              |
 
 ### Channel descriptions
 
-| Event | Description |
-| --- | --- |
-|email_feedback_processing| Mailing feedback processing (FBL, bounce worker, automatic unsubscribe) |
-|api| Log from `subscriptions/manage` method |
-|api_callback| Log from `subscriptions/callback` method |
-|js_sdk| Event from JS SDK. Reserved |
-|mobile_sdk| Event from Mobile SDK. Reserved |
-|push_attributes| Event from `event/push_attributes` method. Deprecated |
-|auto_collector| Event from `auto_collector` service |
-|popup| Subscription from pop-up |
-|import| Subscription from audience import |
-|crm| Subscription management in CRM UI |
-|bulk_sending| Automatic bounce worker while sending bulk mailing |
-|transactional_sending| Automatic bounce worker while sending transactional mailing |
-|unsubscribe_page| User clicked on "unsubscribe" link in email sent by <%= config[:service_name] %> |
-|resubscribe_page|  User clicked on "re-subscribe" link on <%= config[:service_name] %>'s "unsubscribe" page |
+| Event                     | Description                                                                              |
+|---------------------------|------------------------------------------------------------------------------------------|
+| email_feedback_processing | Mailing feedback processing (FBL, bounce worker, automatic unsubscribe)                  |
+| api                       | Log from `subscriptions/manage` method                                                   |
+| api_callback              | Log from `subscriptions/callback` method                                                 |
+| js_sdk                    | Event from JS SDK. Reserved                                                              |
+| mobile_sdk                | Event from Mobile SDK. Reserved                                                          |
+| push_attributes           | Event from `event/push_attributes` method. Deprecated                                    |
+| auto_collector            | Event from `auto_collector` service                                                      |
+| popup                     | Subscription from pop-up                                                                 |
+| import                    | Subscription from audience import                                                        |
+| crm                       | Subscription management in CRM UI                                                        |
+| bulk_sending              | Automatic bounce worker while sending bulk mailing                                       |
+| transactional_sending     | Automatic bounce worker while sending transactional mailing                              |
+| unsubscribe_page          | User clicked on "unsubscribe" link in email sent by <%= config[:service_name] %>         |
+| resubscribe_page          | User clicked on "re-subscribe" link on <%= config[:service_name] %>'s "unsubscribe" page |
 

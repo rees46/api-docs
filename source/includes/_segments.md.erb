@@ -58,7 +58,17 @@ sdk.addToSegment(segmentId: "333", email: "my@example.com", phone: "+10000000000
 ```
 
 ```java
-// Not implemented yet
+// By `did` only
+<%= config[:android_sdk_package_name] %>.addToSegment("333", null, null);
+
+// With a email (`did` will be switched to the owner of the email)
+<%= config[:android_sdk_package_name] %>.addToSegment("333", "my@example.com", null);
+
+// With a phone number (`did` will be switched to the owner of the phone number)
+<%= config[:android_sdk_package_name] %>.addToSegment("333", null, "+10000000000");
+
+// With both (`did` will be switched to the owner of primary contact)
+<%= config[:android_sdk_package_name] %>.addToSegment("333", "my@example.com", "+10000000000");
 ```
 
 This method adds user to a specific static segment.
@@ -67,14 +77,14 @@ This method adds user to a specific static segment.
 
 ### Query Parameters
 
-Parameter | Type | Required | Description
---------- | ------- | -------  | -----------
-shop_id | String | true | Your API key
-shop_secret | String | true | Your API secret key
-did* | String | User's device ID. Only for JS/iOS/Android SDK
-email* | String | User's email
-phone* | String | User's phone number
-segment_id | String | Segment ID
+| Parameter   | Type   | Required                                      | Description         |
+|-------------|--------|-----------------------------------------------|---------------------|
+| shop_id     | String | true                                          | Your API key        |
+| shop_secret | String | true                                          | Your API secret key |
+| did*        | String | User's device ID. Only for JS/iOS/Android SDK |                     |
+| email*      | String | User's email                                  |                     |
+| phone*      | String | User's phone number                           |                     |
+| segment_id  | String | Segment ID                                    |                     |
 
 <aside class="notice">
 One of identifiers (marked by *) must present in request: email or phone. It's used to identify user. In case of API request, you can't use `did` parameter. In case of JS SDK you can omit `email` and `phone` fields and `did` will be used to find right user.
@@ -136,7 +146,17 @@ sdk.removeFromSegment(segmentId: "333", email: "my@example.com", phone: "+100000
 ```
 
 ```java
-// Not implemented yet
+// By `did` only
+<%= config[:android_sdk_package_name] %>.removeFromSegment("333", null, null);
+
+// With a email (`did` will be switched to the owner of the email)
+<%= config[:android_sdk_package_name] %>.removeFromSegment("333", "my@example.com", null);
+
+// With a phone number (`did` will be switched to the owner of the phone number)
+<%= config[:android_sdk_package_name] %>.removeFromSegment("333", null, "+10000000000");
+
+// With both (`did` will be switched to the owner of primary contact)
+<%= config[:android_sdk_package_name] %>.removeFromSegment("333", "my@example.com", "+10000000000");
 ```
 
 This method removes user from a specific static segment.
@@ -145,14 +165,14 @@ This method removes user from a specific static segment.
 
 ### Query Parameters
 
-Parameter | Type | Required | Description
---------- | ------- | -------  | -----------
-shop_id | String | true | Your API key
-shop_secret | String | true | Your API secret key
-did* | String | User's device ID. Only for JS/iOS/Android SDK
-email* | String | User's email
-phone* | String | User's phone number
-segment_id | String | Segment ID
+| Parameter   | Type   | Required                                      | Description         |
+|-------------|--------|-----------------------------------------------|---------------------|
+| shop_id     | String | true                                          | Your API key        |
+| shop_secret | String | true                                          | Your API secret key |
+| did*        | String | User's device ID. Only for JS/iOS/Android SDK |                     |
+| email*      | String | User's email                                  |                     |
+| phone*      | String | User's phone number                           |                     |
+| segment_id  | String | Segment ID                                    |                     |
 
 <aside class="notice">
 At least one of identifiers (marked by *) must present in request: email or phone. It's used to identify user. In case of API request, you can't use `did` parameter. In case of JS SDK you can omit `email` and `phone` fields and `did` will be used to find right user.
@@ -187,7 +207,12 @@ sdk->getCurrentSegment()
 ```
 
 ```java
-<%= config[:android_sdk_package_name]%>.getSegment()
+<%= config[:android_sdk_package_name]%>.getCurrentSegment(new Api.OnApiCallbackListener() {
+  @Override
+  public void onSuccess(JSONArray segments) {
+    // segments (type: array of objects)
+  }
+});
 ```
 
 > Response structure
@@ -212,13 +237,13 @@ The method returns an array of segments of the current user.
 
 ### Query Parameters
 
-Parameter | Type | Required | Description
---------- | ------- | -------  | -----------
-shop_id | String | true | Your API key
-shop_secret | String | true | Your API secret key
-did* | String | User's device ID. Only for JS/iOS/Android SDK
-email* | String | User's email
-phone* | String | User's phone number
+| Parameter   | Type   | Required                                      | Description         |
+|-------------|--------|-----------------------------------------------|---------------------|
+| shop_id     | String | true                                          | Your API key        |
+| shop_secret | String | true                                          | Your API secret key |
+| did*        | String | User's device ID. Only for JS/iOS/Android SDK |                     |
+| email*      | String | User's email                                  |                     |
+| phone*      | String | User's phone number                           |                     |
 
 <aside class="notice">
 One of identifiers (marked by *) must present in request: email or phone. It's used to identify user. In case of API request, you can't use `did` parameter. In case of JS SDK you can omit `email` and `phone` fields and `did` will be used to find right user.
