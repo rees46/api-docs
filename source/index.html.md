@@ -36,6 +36,7 @@ includes:
   - categories.md.erb
   - chats.md.erb
   - communications.md.erb
+  - reputation.md.erb
   - utilities.md.erb
   - errors.md.erb 
 
