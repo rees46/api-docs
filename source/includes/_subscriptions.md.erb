@@ -347,7 +347,7 @@ Response flags:
 
 This method returns users with changed subscriptions statuses during defined dates range (default 24 hours).
 
-Returns an array of users with email or/and phone, who changed subscriptions status during last 24 hours.
+Returns an array of users with email or/and phone, who changed subscriptions status during last 24 hours. Sorted by time ascending.
 
 `GET https://<%= config[:api_endpoint] %>/subscriptions/changes`
 
@@ -413,16 +413,18 @@ curl https://<%= config[:api_endpoint] %>/subscriptions/changes?shop_id=...&shop
 
 ### Parameters
 
-| Parameter   | Type   | Required | Description                                                    |
-|-------------|--------|----------|----------------------------------------------------------------|
-| shop_id     | String | true     | Your API key.                                                  |
-| shop_secret | String | true     | Secret API key. Can be sent as header `X-Shop-Secret`.         |
-| event       | String | false    | Filter by event.                                               |
-| channel     | String | false    | Filter by channel.                                             |
-| from        | String | false    | Date `from` in `YYYY-MM-DD` format. Default value: 1 day ago.  |
-| to          | String | false    | Date `to` in `YYYY-MM-DD` format. Default value: current date. |
-| email       | String | false    | Find only logs with specified email.                           |
-| phone       | String | false    | Find only logs with specified phone.                           |
+| Parameter   | Type    | Required | Description                                                    |
+|-------------|---------|----------|----------------------------------------------------------------|
+| shop_id     | String  | true     | Your API key.                                                  |
+| shop_secret | String  | true     | Secret API key. Can be sent as header `X-Shop-Secret`.         |
+| event       | String  | false    | Filter by event.                                               |
+| channel     | String  | false    | Filter by channel.                                             |
+| from        | String  | false    | Date `from` in `YYYY-MM-DD` format. Default value: 1 day ago.  |
+| to          | String  | false    | Date `to` in `YYYY-MM-DD` format. Default value: current date. |
+| email       | String  | false    | Find only logs with specified email.                           |
+| phone       | String  | false    | Find only logs with specified phone.                           |
+| offset      | Integer | false    | Offset from the beginning of the selected dataset. Min: 0.     |
+| limit       | Integer | false    | Limit of the returned dataset size. Max: 20000.                |
 
 ### Response properties
 
