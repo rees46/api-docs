@@ -67,3 +67,68 @@ curl https://<%= config[:api_endpoint] %>/products/categories
    }
 ]
 ```
+
+# Dynamic filter guide for category
+
+## Request
+
+```shell
+curl https://<%= config[:api_endpoint] %>/category/{%category_id%}
+```
+
+### HTTP Request
+
+`GET https://<%= config[:api_endpoint] %>/category/{%category_id%}`
+
+### Query Parameters
+
+| Parameter        | Required | Description                                                                                                                          |
+|------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------|
+| did              | true     | Device ID. You get it from `init` method in SDK.                                                                                     |
+| shop_id          | true     | Your API key                                                                                                                         |
+| seance           | true     | Temporary user session ID                                                                                                            |
+| limit            | false    | Limit of results                                                                                                                     |
+| page             | false    | Page of results                                                                                                                      |
+| locations        | false    | Comma separated list of locations IDs                                                                                                |
+| brands           | false    | Comma separated list of brands to filter                                                                                             |
+| filters          | false    | Optional escaped JSON string with filter parameters. For example: `{"bluetooth":["yes"],"offers":["15% cashback"],"weight":["1.6"]}` |
+
+
+### API response
+| Name               | Type   | Description                                                                                                                                                                                           |
+|:-------------------|:-------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| brands             | array  | Array with information about brands. Each object has the following properties:                                                                                                                        |
+|                    |        | * name – brand name (string)                                                                                                                                                                          |
+|                    |        | * picture – brand picture (string)                                                                                                                                                                    |
+| filters            | array  | Array with information about filters. Each object has the following properties:                                                                                                                       |
+|                    |        | * filter – fitler object. Has the following properties:                                                                                                                                               |
+|                    |        | * count – total count of products whith this parameters (number)                                                                                                                                      |
+|                    |        | * values – array of values (object). Has the following properties:                                                                                                                                    |
+|                    |        | * value – value label. (string)                                                                                                                                                                       |
+|                    |        | * count – cont of products whith this parameter (number)                                                                                                                                              |
+| price_range        | object | Min and max price of products. Has the following properties:                                                                                                                                          |
+|                    |        | * min – min price (number)                                                                                                                                                                            |
+|                    |        | * max – max price (number)                                                                                                                                                                            |
+| products           | array  | Array with information about products. Each object has the following properties:                                                                                                                      |
+|                    |        | * brand – product brand (string)                                                                                                                                                                      |
+|                    |        | * currency – product currency (string, corresponds to the currency of the personal account in <%= config[:service_name] %>, or a custom value specified in the shop settings in the personal account) |
+|                    |        | * id – product ID (string)                                                                                                                                                                            |
+|                    |        | * is_new – product property (boolean, default - null)                                                                                                                                                 |
+|                    |        | * name – product name (string)                                                                                                                                                                        |
+|                    |        | * old_price – product old price (string, default - 0)                                                                                                                                                 |
+|                    |        | * picture – product's picture URL in the <%= config[:service_name] %> storage (string)                                                                                                                |
+|                    |        | * price – product price (number)                                                                                                                                                                      |
+|                    |        | * price_formatted – product price with currency (string)                                                                                                                                              |
+|                    |        | * url – product URL (string)                                                                                                                                                                          |
+|                    |        |                                                                                                                                                                                                       |
+|                    |        | Additional properties. If a parameter "extended" is passed in the request                                                                                                                             |
+|                    |        | * barcode – product barcode (string)                                                                                                                                                                  |
+|                    |        | * categories – product categories (array). Has the following properties:                                                                                                                              |
+|                    |        | * id – category id (string)                                                                                                                                                                           |
+|                    |        | * name – category name (string)                                                                                                                                                                       |
+|                    |        | * parent – parent category id (string)                                                                                                                                                                |
+|                    |        | * params – array with information about params. Each object has the following properties:                                                                                                             |
+|                    |        | * key – param name (string)                                                                                                                                                                           |
+|                    |        | * values – array of values (array)                                                                                                                                                                    |
+| products_total     | number | Total count of products                                                                                                                                                                               |
+
