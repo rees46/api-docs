@@ -14,53 +14,54 @@ curl https://<%= config[:api_endpoint] %>/products/categories
 
 ### Query Parameters
 
-Parameter | Required | Description
---------- | ------- | -----------
-shop_id | true | Your API key
-shop_secret | true | Your Secret key
-depth | false | (0 - root categories, 1 - root and first level of childs, etc.),
-exclude | false | An array of categories to exclude from the response
-only_discount | false | boolean. Only categories with discount products.
+| Parameter     | Required   | Description                                                     |
+|---------------|------------|-----------------------------------------------------------------|
+| shop_id       | true       | Your API key                                                    |
+| shop_secret   | true       | Your Secret key                                                 |
+| depth         | false      | (0 - root categories, 1 - root and first level of childs, etc.) |
+| exclude       | false      | An array of categories to exclude from the response             |
+| only_discount | false      | Boolean. Only categories with discount products.                |
+| locations     | false      | String. Comma separated list of locations IDs                   |
 
 > Response example
 
 ```json
 [
   {
-    :id=>19,
-    :external_id=>"482",
-    :name=>"Jewelry",
-    :url=>"https://demo.site.com/categories/jewelry",
-    :parent_id=>nil,
-    :parent_external_id=>nil,
-    :children=> [
+    "id": 19,
+    "external_id": "482",
+    "name": "Jewelry",
+    "url": "https://demo.site.com/categories/jewelry",
+    "parent_id": null,
+    "parent_external_id": null,
+    "children":  [
       {
-        :id=>31,
-        :external_id=>"483",
-        :name=>"Rings",
-        :url=>"https://demo.site.com/categories/rings",
-        :parent_id=>19,
-        :parent_external_id=>"482",
-        :children=>[]
+        "id": 31,
+        "external_id": "483",
+        "name": "Rings",
+        "url": "https://demo.site.com/categories/rings",
+        "parent_id": 19,
+        "parent_external_id": "482",
+        "children": []
       }
     ]
   },
   {
-    :id=>4,
-    :external_id=>"479",
-    :name=>"Baby & Kids",
-    :url=>"https://demo.site.com/categories/baby",
-    :parent_id=>nil,
-    :parent_external_id=>nil,
-    :children=>[
+    "id": 4,
+    "external_id": "479",
+    "name": "Baby & Kids",
+    "url": "https://demo.site.com/categories/baby",
+    "parent_id": null,
+    "parent_external_id": null,
+    "children": [
       {
-        :id=>9,
-        :external_id=>"480",
-        :name=>"Clothing Sets",
-        :url=>"https://demo.site.com/categories/baby-kids-clothing-sets",
-        :parent_id=>4,
-        :parent_external_id=>"479",
-        :children=>[]
+        "id": 9,
+        "external_id": "480",
+        "name": "Clothing Sets",
+        "url": "https://demo.site.com/categories/baby-kids-clothing-sets",
+        "parent_id": 4,
+        "parent_external_id": "479",
+        "children": []
       }
     ]
    }
