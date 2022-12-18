@@ -207,3 +207,42 @@ If a request fetches user's last purchase and returns list of purchased products
 | shop_id   | String | true       | Your API key     |
 | did       | String | true       | Users device ID  |
 | seance    | String | true       | Users session ID |
+
+
+
+## Get user's orders
+
+```shell
+curl https://<%= config[:api_endpoint] %>/orders/by_user?shop_id=SHOP_ID&shop_secret=SHOP_SECRET&did=DID&date_from=YYYY-MM-DD
+```
+
+```javascript
+// Not supported
+```
+
+```swift
+// Not supported
+```
+
+```java
+// Not supported
+```
+
+```jsx
+// Not supported
+```
+
+Returns a list of user's orders (ascending by date and internal ID). User is identified by `did`, `email`, `phone`, `loyalty_id` or `external_id`.
+
+### Query Parameters
+
+| Parameter   | Type   | Required | Description               |
+|-------------|--------|----------|---------------------------|
+| shop_id     | String | true     | Your API key              |
+| shop_secret | String | true     | Your API secret key       |
+| did         | String | false    | User's device ID          |
+| email       | String | false     | User's email              |
+| phone       | String | false     | User's phone              |
+| loyalty_id  | String | false     | User's loyalty ID         |
+| external_id | String | false     | User's external ID        |
+| date_from   | Date   | false     | Date in YYYY-MM-DD format |
