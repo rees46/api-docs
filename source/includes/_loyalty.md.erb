@@ -146,13 +146,12 @@ At least of identifiers (marked by *) must present in request: email, phone. It'
 | confirmation | String | Response message  |
 | confirmed    | int    | Validated bonuses |
 
-
 ## Decrease bonuses
 
 > Request example
 
 ```shell
-curl --location --request POST 'https://api.rees46.ru/loyalty/basic/use_bonus_points?phone=PHONE&shop_id=SHOP_ID&shop_secret=SHOP_SECRET&bonus_points=BONUS_POINTS&sms_code=SMS_CODE'
+curl --location --request POST 'https://api.rees46.ru/loyalty/basic/use_bonus_points_confirmed?phone=PHONE&shop_id=SHOP_ID&shop_secret=SHOP_SECRET&bonus_points=BONUS_POINTS&sms_code=SMS_CODE'
 ```
 
 > The above command returns JSON structured like this:
@@ -164,7 +163,53 @@ curl --location --request POST 'https://api.rees46.ru/loyalty/basic/use_bonus_po
 }
 ```
 
-Method validate SMS code.
+Method decrease bonuses.
+
+### HTTP Request
+
+`POST https://<%= config[:api_endpoint] %>/loyalty/basic/use_bonus_points_confirmed`
+
+### Query Parameters
+
+| Parameter    | Required | Description                             |
+|--------------|----------|-----------------------------------------|
+| shop_id      | true     | Your API key                            |
+| shop_secret  | true     | Your API secret key                     |
+| email*       | true     | User's email                            |
+| phone*       | true     | User's phone number                     |
+| bonus_points | true     | Bonuses, which client wants to validate |
+| sms_code     | true     | SMS code                                |
+
+<aside class="notice">
+At least of identifiers (marked by *) must present in request: email, phone. It's used to identify user.
+</aside>
+
+
+### API response
+
+| Name      | Type   | Description       |
+|-----------|--------|-------------------|
+| status    | String | Response status   |
+| confirmed | int    | Validated bonuses |
+
+## Decrease bonuses without SMS code
+
+> Request example
+
+```shell
+curl --location --request POST 'https://api.rees46.ru/loyalty/basic/use_bonus_points?phone=PHONE&shop_id=SHOP_ID&shop_secret=SHOP_SECRET&bonus_points=BONUS_POINTS'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "confirmation": "success",
+    "confirmed": 123456
+}
+```
+
+Method decrease bonuses without SMS code.
 
 ### HTTP Request
 
@@ -179,7 +224,6 @@ Method validate SMS code.
 | email*       | true     | User's email                            |
 | phone*       | true     | User's phone number                     |
 | bonus_points | true     | Bonuses, which client wants to validate |
-| sms_code     | true     | SMS code                                |
 
 <aside class="notice">
 At least of identifiers (marked by *) must present in request: email, phone. It's used to identify user.
