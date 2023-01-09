@@ -484,7 +484,7 @@ sdk.track("remove_from_cart", id);
 curl 'https://<%= config[:api_endpoint] %>/push' \
     -X 'POST' \
     -H 'Content-Type: application/json' \
-    --data-raw '{"event":"purchase", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "seance":"SEANCE_ID", "segment":"A or B", "items":[{"id":"PRODUCT_ID", "price": PRODUCT_PRICE, "amount": PRODUCT_QUANTITY}], "order_id":"ORDER_NUMBER", "order_price":TOTAL_ORDER_PRICE}'
+    --data-raw '{"event":"purchase", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "email":"john.doe@examplemail.com", "phone": "4400114527199", "seance":"SEANCE_ID", "segment":"A or B", "items":[{"id":"PRODUCT_ID", "price": PRODUCT_PRICE, "amount": PRODUCT_QUANTITY}], "order_id":"ORDER_NUMBER", "order_price":TOTAL_ORDER_PRICE}'
 
 #Short request with minimum required parameters
 curl 'https://<%= config[:api_endpoint] %>/push' \
@@ -496,6 +496,8 @@ curl 'https://<%= config[:api_endpoint] %>/push' \
 ```javascript
 //Full request
 <%= config[:js_sdk_name] %>('track', 'purchase', {
+	  email: "john.doe@examplemail.com",
+	  phone: "4400114527199",
     products: [
         {id: 37, price: 318, amount: 3},
         {id: 187, price: 5000, amount: 1}
@@ -549,6 +551,8 @@ If you want to debug purchase tracking, keep in mind: if you send event for exis
 |----------------|----------|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | products       | array    | required     | An array of objects with product information in the order. Description of parameters in the table below.                                                                                                                    |
 | order          | string   | optional     | Order number in the store. If not defined, the internal order numbering system will be used. In this case synchronization of order status is impossible.                                                                    |
+| email          | string   | optional     | Client email.                                                                                                                                                                                                               |
+| phone          | string   | optional     | Client phone.                                                                                                                                                                                                               |
 | promocode      | string   | optional     | Promo code used in transaction.                                                                                                                                                                                             |
 | order_price    | number   | optional     | The final cost of the order including all discounts, bonuses, and additional services. If not defined, the cost of the order is calculated from the data in the product database without discounts and additional services. |
 | order_cash     | number   | optional     | How much a customer paid with real money.                                                                                                                                                                                   |
