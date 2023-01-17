@@ -313,3 +313,40 @@ Returns boolean status of subscription.
 <aside class="notice">
 If no *email*, *phone*, or *loyalty_id* is specified, only the user's current device will be checked. It won't take into account subscriptions performed on the user's other devices.
 </aside>
+
+
+## List not widgetable products
+
+```shell
+curl https://<%= config[:api_endpoint] %>/products/not_widgetable?shop_id=...&shop_secret=...
+```
+
+```javascript
+// No implementation. See shell
+```
+
+```swift
+// No implementation. See shell
+```
+
+```java
+// No implementation. See shell
+```
+
+> API method returns a list like this:
+
+```
+{
+  "status": "success",
+  "data": {
+    "items": [
+      { "uniqid": "YOUR_SKU", "name": "...", "url": "...", "image_url": "", "price": ..., "image_downloading_error": "..."},
+      { "uniqid": "YOUR_SKU", "name": "...", "url": "...", "image_url": "", "price": ..., "image_downloading_error": "..."},
+    ]
+  }
+}
+```
+
+Returns a list of `avaiable` and `not ignored` products which are not `widgetable`: can't be displayed in search, recommendations and messages due to missing one of mandatory parameters (`name`, `price`, `url` or `image_url`) or failed to fetch product's photo during import operation.
+
+
