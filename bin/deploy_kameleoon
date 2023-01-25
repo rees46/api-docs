@@ -8,5 +8,5 @@ set -e
 
 bundle exec middleman build
 
-rsync -av -e 'ssh -p 21212' ./build/ refapi@95.216.99.81:reference.products.kameleoon.com /public/
+rsync -av -e 'ssh -p 21212' ./build/ refapi@95.216.99.81:reference.products.kameleoon.com/public/
 rsync -av -e 'ssh -p 21212' --delete ./build/ refapi@95.216.99.81:reference.products.kameleoon.com/public/
