@@ -1,8 +1,9 @@
+import groovy.json.JsonOutput
 SUCCESS_STAGE = 'build'
 STEPS = 'build Testing REES46 PersonaClick Kameleoon'
 def stepPublisher(step, style) {
    rabbitMQPublisher(rabbitName: 'rabbit', exchange: '', routingKey: 'notification', conversion: false,
-      data: "{\"type\":\"deploy\",\"project\":\"${JOB_NAME}\",\"style\":\"${style}\",\"step\":\"${step}\",\"message\":\"${GIT_COMMIT_MSG}\",\"commit\":\"${GIT_COMMIT}\",\"url\":\"${COMMIT_URL}\",\"author\":\"${GIT_COMMIT_AUTHOR}\",\"console\":\"${BUILD_URL}console\",\"steps\":\"${STEPS}\"}")
+      data: JsonOutput.toJson([type: "deploy", project: JOB_NAME, style: style, step: step, message: GIT_COMMIT_MSG, commit: GIT_COMMIT, url: COMMIT_URL, author: GIT_COMMIT_AUTHOR, console: "${BUILD_URL}console", steps: STEPS]))
 }
 
 pipeline {
