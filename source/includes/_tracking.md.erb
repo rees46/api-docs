@@ -517,7 +517,7 @@ sdk.track(event: .orderCreated(orderId: "123", totalValue: 33.3, products: [(id:
 ```java
 Params purchase = new Params();
 purchase
-	.put(new Params.Item("37"))
+	.put(new Params.Item("37").set(Params.Item.COLUMN.AMOUNT, 2).set(Params.Item.COLUMN.PRICE, 100))
 	.put(Params.Parameter.ORDER_ID, "100234")
 	.put(Params.Parameter.ORDER_PRICE, 100500)
   .put(Params.Parameter.DELIVERY_ADDRESS, "1860 street")
