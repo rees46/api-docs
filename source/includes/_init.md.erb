@@ -16,8 +16,22 @@
 ```
 
 ```swift
-// Cocoapods: just put this line in your Podfile
-pod '<%= config[:ios_sdk_package_name] %>'
+// Cocoapods
+target 'REES46_Example' do
+  // ...
+  // Add this
+  pod '<%= config[:ios_sdk_package_name] %>'
+  // ...
+end
+// ... and this (to be able to run it on simulators
+post_install do |installer|
+  installer.pods_project.build_configurations.each do |config|
+    config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
+  end
+end
+
+
+
 
 // Swift package manager (XCode >= 11)
 // 1. Click File menu
