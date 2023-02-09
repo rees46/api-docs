@@ -23,7 +23,7 @@ target '...' do
   pod '<%= config[:ios_sdk_package_name] %>'
   // ...
 end
-// ... and this (to be able to run it on simulators
+// ... and this (to be able to run it on simulators):
 post_install do |installer|
   installer.pods_project.build_configurations.each do |config|
     config.build_settings["EXCLUDED_ARCHS[sdk=iphonesimulator*]"] = "arm64"
