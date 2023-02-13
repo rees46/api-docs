@@ -331,7 +331,7 @@ curl 'https://<%= config[:api_endpoint] %>/push' \
 
 ```swift
 // Track product added to cart
-sdk.track(event: .productAddedToCart(id: "PRODUCT_ID")) { trackResponse in
+sdk.track(event: .productAddedToCart(id: "PRODUCT_ID", amount: 3)) { trackResponse in
     // ... see product viewed event for details about a callback
 }
 
