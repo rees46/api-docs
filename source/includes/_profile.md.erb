@@ -20,6 +20,18 @@ curl -d "shop_id=SHOPID&shop_secret=SHOP_SECRET&email=EMAIL&fieldname=FIELDVALUE
 });
 ```
 
+```javascript
+//An example of using custom fields by type
+<%= config[:js_sdk_name] %>('profile', 'set', {
+    "string": "sdsdfsdfsdf",
+    "int": 123,
+    "float": 123.12,
+    "list_element": ["first", "second"],
+    "json": {"key": "val", "key2": "val2"},
+    "data": "06.02.2023"
+});
+```
+
 ```swift
   sdk.setProfileData(userEmail: 'email@example.com',
     userPhone: '10000000000',
