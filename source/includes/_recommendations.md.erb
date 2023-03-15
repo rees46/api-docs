@@ -5,6 +5,10 @@ Service provides access to product recommendations endpoint.
 ## Request product recommendations
 
 ```shell
+
+// No implementation is needed in HTTP
+
+<!---
 # without additional params
 curl http://<%= config[:api_endpoint] %>/recommend/RECOMMENDER_CODE?shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT_A_or_B
 
@@ -28,7 +32,7 @@ curl http://<%= config[:api_endpoint] %>/recommend/RECOMMENDER_CODE?shop_id=SHOP
 
 # with brand list
 curl http://<%= config[:api_endpoint] %>/recommend/RECOMMENDER_CODE?shop_id=SHOP_ID&did=DEVICE_ID&seance=SEANCE_ID&segment=SEGMENT_A_or_B&brands=BRAND_NAME_1,BRAND_NAME_2,BRAND_NAME_3
-
+--->
 ```
 
 ```javascript
