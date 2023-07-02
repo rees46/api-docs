@@ -250,3 +250,55 @@ One of identifiers (marked by *) must present in request: email or phone. It's u
 </aside>
 
 
+
+
+## Check if a user is in a segment
+
+```shell
+# Using all possible identifiers
+curl "shop_id=SHOPID&shop_secret=SHOP_SECRET&email=EMAIL&phone=PHONE" https://<%= config[:api_endpoint] %>/segments/includes
+
+# With phone only
+curl "shop_id=SHOPID&shop_secret=SHOP_SECRET&phone=PHONE" https://<%= config[:api_endpoint] %>/segments/includes
+
+# With email only
+curl "shop_id=SHOPID&shop_secret=SHOP_SECRET&email=EMAIL" https://<%= config[:api_endpoint] %>/segments/includes
+```
+
+```javascript
+// Not implemented
+```
+
+```swift
+// Not implemented
+```
+
+```java
+// Not implemented
+```
+
+> Response structure
+
+```json
+true
+```
+
+
+The method returns TRUE|FALSE if a user identified by any identifier is included in a segment.
+
+`GET https://<%= config[:api_endpoint] %>/segments/includes`
+
+### Query Parameters
+
+| Parameter   | Type    | Required | Description          |
+|-------------|---------|----------|----------------------|
+| shop_id     | String  | true     | Your API key         |
+| shop_secret | String  | true     | Your API secret key  |
+| email       | String  | true*    | User's email         |
+| phone       | String  | true*    | User's phone number  |
+| segment_id  | Integer | true     | Segment ID           |
+
+<aside class="notice">
+One of identifiers (marked by *) must be present in request: email or phone. It's used to identify user.
+</aside>
+
