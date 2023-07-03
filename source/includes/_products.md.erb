@@ -5,7 +5,21 @@ Service is used to manage products and categories.
 ## Request product list
 
 ```shell
+# Basic
 curl https://<%= config[:api_endpoint] %>/products?shop_id=...&did=...&seance=...
+
+# Filter by brands
+curl https://<%= config[:api_endpoint] %>/products?shop_id=...&did=...&seance=...&brands=BRAND_1,BRAND_2
+
+# Filter by categories
+curl https://<%= config[:api_endpoint] %>/products?shop_id=...&did=...&seance=...&categories=CATEGORY_1,CATEGORY_2
+
+# Filter by locations
+curl https://<%= config[:api_endpoint] %>/products?shop_id=...&did=...&seance=...&locations=LOCATION_1,LOCATION_2
+
+# Filter by params
+curl https://<%= config[:api_endpoint] %>/products?shop_id=...&did=...&seance=...&filters={"PARAM_NAME_1": ["PARAM_VALUE_1", "PARAM_VALUE_2"], "PARAM_NAME_2": ["PARAM_VALUE_1", "PARAM_VALUE_2"]}
+
 ```
 
 ```javascript
