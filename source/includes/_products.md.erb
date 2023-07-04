@@ -17,6 +17,9 @@ curl https://<%= config[:api_endpoint] %>/products?shop_id=...&did=...&seance=..
 # Filter by locations
 curl https://<%= config[:api_endpoint] %>/products?shop_id=...&did=...&seance=...&locations=LOCATION_1,LOCATION_2
 
+# Filter by locations
+curl https://<%= config[:api_endpoint] %>/products?shop_id=...&did=...&seance=...&merchants=MERCHANT_1,MERCHANT_2
+
 # Filter by params
 curl https://<%= config[:api_endpoint] %>/products?shop_id=...&did=...&seance=...&filters={"PARAM_NAME_1": ["PARAM_VALUE_1", "PARAM_VALUE_2"], "PARAM_NAME_2": ["PARAM_VALUE_1", "PARAM_VALUE_2"]}
 
@@ -43,17 +46,18 @@ curl https://<%= config[:api_endpoint] %>/products?shop_id=...&did=...&seance=..
 
 ### Query Parameters
 
-| Parameter   | Required | Description                                                                                                                          |
-|-------------|----------|--------------------------------------------------------------------------------------------------------------------------------------|
-| did         | true     | Device ID. You get it from `init` method in SDK.                                                                                     |
-| shop_id     | true     | Your API key                                                                                                                         |
-| seance      | true     | Temporary user session ID                                                                                                            |
-| limit       | false    | Limit of results                                                                                                                     |
-| page        | false    | Page of results                                                                                                                      |
-| locations   | false    | Comma separated list of locations IDs                                                                                                |
-| brands      | false    | Comma separated list of brands to filter                                                                                             |
-| categories  | false    | Comma separated list of categories to filter                                                                                         |
-| filters     | false    | Optional escaped JSON string with filter parameters. For example: `{"bluetooth":["yes"],"offers":["15% cashback"],"weight":["1.6"]}` |
+| Parameter  | Required | Description                                                                                                                          |
+|------------|----------|--------------------------------------------------------------------------------------------------------------------------------------|
+| did        | true     | Device ID. You get it from `init` method in SDK.                                                                                     |
+| shop_id    | true     | Your API key                                                                                                                         |
+| seance     | true     | Temporary user session ID                                                                                                            |
+| limit      | false    | Limit of results                                                                                                                     |
+| page       | false    | Page of results                                                                                                                      |
+| locations  | false    | Comma separated list of locations IDs                                                                                                |
+| brands     | false    | Comma separated list of brands to filter                                                                                             |
+| merchants  | false    | Comma separated list of merchants to filter                                                                                          |
+| categories | false    | Comma separated list of categories to filter                                                                                         |
+| filters    | false    | Optional escaped JSON string with filter parameters. For example: `{"bluetooth":["yes"],"offers":["15% cashback"],"weight":["1.6"]}` |
 
 
 ### API response
