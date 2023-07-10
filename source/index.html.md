@@ -34,6 +34,7 @@ includes:
   - url_shortener.md.erb
   - products.md.erb
   - categories.md.erb
+  - notifications.md.erb
   - chats.md.erb
   - communications.md.erb
   - reputation.md.erb

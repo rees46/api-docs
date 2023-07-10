@@ -1,0 +1,75 @@
+# Notifications center
+
+Section describes the notifications center endpoints.
+
+## Return all messages sent to a user
+
+```shell
+curl https://<%= config[:api_endpoint] %>/notifications?shop_id=...&shop_secret=...&email=...&date_from=YYYY-MM-DD
+curl https://<%= config[:api_endpoint] %>/notifications?shop_id=...&shop_secret=...&phone=...&date_from=YYYY-MM-DD
+curl https://<%= config[:api_endpoint] %>/notifications?shop_id=...&shop_secret=...&loyalty_id=...&date_from=YYYY-MM-DD
+curl https://<%= config[:api_endpoint] %>/notifications?shop_id=...&shop_secret=...&external_id=...&date_from=YYYY-MM-DD
+
+Response format:
+
+{
+  "status": "success",
+  "payload": {
+    "messages": [
+      {
+        "type": "trigger",
+        "campaign_id": ...,
+        "code": "...",
+        "date": "2023-07-06",
+        "sent_at": "2023-07-06T14:25:21.000Z",
+        "subject": "...",
+        "body": "...",
+        "url": "...",
+        "icon": "...",
+        "picture": "...",
+        "statistics": {
+          "opened": true,
+          "clicked": false,
+          "hard_bounced": false,
+          "soft_bounced": false,
+          "complained": false,
+          "unsubscribed": false,
+          "purchased": false
+        }
+      }, ...
+    ]
+  }
+}
+```
+
+```javascript
+// REST API only. See cURL.
+```
+
+```swift
+// REST API only. See cURL.
+```
+
+```java
+// REST API only. See cURL.
+```
+
+### Requirements
+
+Endpoint: `GET https://<%= config[:api_endpoint] %>/notifications`
+
+### Query Parameters
+
+Parameter | Type | Required | Description
+--------- | ------- | -------  | -----------
+shop_id | String | true | Your API key
+shop_secret | String | true | Your API secret key
+phone* | String | true | User's phone number
+email* | String | true | User's email
+loyalty_id* | String | true | User's loyalty ID
+external_id* | String | true | User's external ID
+date_from | String | true | Date in YYYY-MM-DD format. Selects all messages from this date to the current day.
+
+<aside class="notice">
+Do not use very old `date_from`: the method is slow and large period can slow down the response.
+</aside>
