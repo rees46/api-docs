@@ -5,10 +5,10 @@ Section describes the notifications center endpoints.
 ## Return all messages sent to a user
 
 ```shell
-curl https://<%= config[:api_endpoint] %>/notifications?shop_id=...&shop_secret=...&email=...&date_from=YYYY-MM-DD&type=trigger
-curl https://<%= config[:api_endpoint] %>/notifications?shop_id=...&shop_secret=...&phone=...&date_from=YYYY-MM-DD&type=trigger,transactional
-curl https://<%= config[:api_endpoint] %>/notifications?shop_id=...&shop_secret=...&loyalty_id=...&date_from=YYYY-MM-DD&type=bulk,trigger,transactional
-curl https://<%= config[:api_endpoint] %>/notifications?shop_id=...&shop_secret=...&external_id=...&date_from=YYYY-MM-DD&type=bulk,trigger,transactional
+curl https://<%= config[:api_endpoint] %>/notifications?shop_id=...&shop_secret=...&email=...&date_from=YYYY-MM-DD&type=trigger&channel=mobile_push
+curl https://<%= config[:api_endpoint] %>/notifications?shop_id=...&shop_secret=...&phone=...&date_from=YYYY-MM-DD&type=trigger,transactional&channel=mobile_push,sms
+curl https://<%= config[:api_endpoint] %>/notifications?shop_id=...&shop_secret=...&loyalty_id=...&date_from=YYYY-MM-DD&type=bulk,trigger,transactional&channel=mobile_push
+curl https://<%= config[:api_endpoint] %>/notifications?shop_id=...&shop_secret=...&external_id=...&date_from=YYYY-MM-DD&type=bulk,trigger,transactional&channel=mobile_push,email,web_push
 
 Response format:
 
