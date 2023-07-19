@@ -95,13 +95,13 @@ This method overrides profile's settings.
 
 ### Query Parameters
 
-Parameter | Type | Required | Description
---------- | ------- | -------  | -----------
-shop_id | String | true | Your API key
-shop_secret | String | true | Your API secret key
-did* | String | true | 	Device ID
-email* | String | true | User's email
-phone* | String | true | User's phone number
+| Parameter   | Type   | Required   | Description         |
+|-------------|--------|------------|---------------------|
+| shop_id     | String | true       | Your API key        |
+| shop_secret | String | true       | Your API secret key |
+| did*        | String | true       | Device ID           |
+| email*      | String | true       | User's email        |
+| phone*      | String | true       | User's phone number |
 
 <aside class="notice">
 At least of identifiers (marked by *) must present in request: did, email or phone. It's used to identify user.
@@ -116,42 +116,42 @@ If `did` is present, `shop_secret` is not needed.
 
 You can update any standard profile property. All standard properties are listed here:
 
-Parameter | Type | Description
---------- | ------- | -----------
-loyalty_id | String | User's loyalty program ID
-id | String | User ID in your platform
-fb_id | String | User's Facebook ID
-vk_id | String | User's VK ID
-telegram_id | String | User's Telegram ID
-loyalty_card_location | String | Location ID where user's loyalty card was issued
-loyalty_status | String | User's loyalty program status
-loyalty_bonuses | Integer | User's bonuses amount
-loyalty_bonuses_to_next_level | Integer | User's bonuses amount left for the next level
-gender | String | User's gender: `m` or `f`
-location | String | User's location code
-first_name | String | User's first name
-last_name | String | User's last name
-age | Integer | User's age in years
-birthday | Date | User's birthday in SQL format: YYYY-MM-DD
-bought_something | Bool | User bought something ever
-kids | Array | List of kids (see below)
-auto | Array | List of auto vehicles (see below)
+| Parameter                     | Type    | Description                                      |
+|-------------------------------|---------|--------------------------------------------------|
+| loyalty_id                    | String  | User's loyalty program ID                        |
+| id                            | String  | User ID in your platform                         |
+| fb_id                         | String  | User's Facebook ID                               |
+| vk_id                         | String  | User's VK ID                                     |
+| telegram_id                   | String  | User's Telegram ID                               |
+| loyalty_card_location         | String  | Location ID where user's loyalty card was issued |
+| loyalty_status                | String  | User's loyalty program status                    |
+| loyalty_bonuses               | Integer | User's bonuses amount                            |
+| loyalty_bonuses_to_next_level | Integer | User's bonuses amount left for the next level    |
+| gender                        | String  | User's gender: `m` or `f`                        |
+| location                      | String  | User's location code                             |
+| first_name                    | String  | User's first name                                |
+| last_name                     | String  | User's last name                                 |
+| age                           | Integer | User's age in years                              |
+| birthday                      | Date    | User's birthday in SQL format: YYYY-MM-DD        |
+| bought_something              | Bool    | User bought something ever                       |
+| kids                          | Array   | List of kids (see below)                         |
+| auto                          | Array   | List of auto vehicles (see below)                |
 
 
 Kid object properties:
 
-Parameter | Type | Description
---------- | ------- | -----------
-gender | String | Kid's gender: `m` or `f`
-birthday | Date | Kid's birthday in SQL format: YYYY-MM-DD
+| Parameter  | Type   | Description                              |
+|------------|--------|------------------------------------------|
+| gender     | String | Kid's gender: `m` or `f`                 |
+| birthday   | Date   | Kid's birthday in SQL format: YYYY-MM-DD |
 
 Auto object properties:
 
-Parameter | Type | Description
---------- | ------- | -----------
-brand | String | Vehicle brand
-model | String | Vehicle model
-vds | String | Vehicle VDS/VIN number
+| Parameter  | Type   | Description            |
+|------------|--------|------------------------|
+| brand      | String | Vehicle brand          |
+| model      | String | Vehicle model          |
+| vds        | String | Vehicle VDS/VIN number |
 
 ### Custom properties
 
@@ -174,7 +174,10 @@ curl https://<%= config[:api_endpoint] %>/profile?phone=...&shop_id=...&shop_sec
     // Here you can use all properties of profile's object
     console.log(profile.gender);
     console.log(profile.fashion.sizes.shoe);
-});
+},
+// Use `true`, to work in single page sites.
+true
+);
 ```
 
 > REST method returns this JSON structure
@@ -268,8 +271,6 @@ You can read profile info from CRM using API or SDK.
 In case of using REST API (when using email or phone number as user ID), you must provide secret key to the method.
 
 
-
-
 ## Force change email
 
 ```shell
@@ -304,13 +305,13 @@ It's S2S method.
 
 ### Query Parameters
 
-Parameter | Type | Required | Description
---------- | ------- | -------  | -----------
-shop_id | String | true | Your API key
-shop_secret | String | true | Your API secret key
-new_email | String | true | User's new email
-old_email | String | true | User's current email
-i_understand_what_i_am_doing | String | true | Must present with any `true` value (`true`, `"true"`, `1`, `yes`, `believe me I know what I am doing`, etc).
+| Parameter                    | Type   | Required   | Description                                                                                                  |
+|------------------------------|--------|------------|--------------------------------------------------------------------------------------------------------------|
+| shop_id                      | String | true       | Your API key                                                                                                 |
+| shop_secret                  | String | true       | Your API secret key                                                                                          |
+| new_email                    | String | true       | User's new email                                                                                             |
+| old_email                    | String | true       | User's current email                                                                                         |
+| i_understand_what_i_am_doing | String | true       | Must present with any `true` value (`true`, `"true"`, `1`, `yes`, `believe me I know what I am doing`, etc). |
 
 
 ## Force change phone
@@ -347,10 +348,10 @@ It's S2S method.
 
 ### Query Parameters
 
-Parameter | Type | Required | Description
---------- | ------- | -------  | -----------
-shop_id | String | true | Your API key
-shop_secret | String | true | Your API secret key
-new_phone | String | true | User's new phone
-old_phone | String | true | User's current phone
-i_understand_what_i_am_doing | String | true | Must present with any `true` value (`true`, `"true"`, `1`, `yes`, `believe me I know what I am doing`, etc).
+| Parameter                    | Type   | Required | Description                                                                                                  |
+|------------------------------|--------|----------|--------------------------------------------------------------------------------------------------------------|
+| shop_id                      | String | true     | Your API key                                                                                                 |
+| shop_secret                  | String | true     | Your API secret key                                                                                          |
+| new_phone                    | String | true     | User's new phone                                                                                             |
+| old_phone                    | String | true     | User's current phone                                                                                         |
+| i_understand_what_i_am_doing | String | true     | Must present with any `true` value (`true`, `"true"`, `1`, `yes`, `believe me I know what I am doing`, etc). |
