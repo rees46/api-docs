@@ -7,7 +7,7 @@ Service provides endpoints for loyalty program management.
 > Request example
 
 ```shell
-curl 'https://api.rees46.ru/loyalty/basic/balance?shop_id=SHOP_ID&shop_secret=SHOP_SECRET&phone=PHONE&order_total=ORDER_TOTAL'
+curl 'https://<%= config[:api_endpoint] %>/loyalty/basic/balance?shop_id=SHOP_ID&shop_secret=SHOP_SECRET&phone=PHONE&order_total=ORDER_TOTAL'
 ```
 
 > The above command returns JSON structured like this:
@@ -60,7 +60,7 @@ At least of identifiers (marked by *) must present in request: email, phone. It'
 > Request example
 
 ```shell
-curl 'https://api.rees46.ru/loyalty/basic/init_bonus_usage?shop_id=SHOP_ID&shop_secret=SHOP_SECRET&phone=PHONE&bonus_points=BONUS_POINTS'
+curl 'https://<%= config[:api_endpoint] %>/loyalty/basic/init_bonus_usage?shop_id=SHOP_ID&shop_secret=SHOP_SECRET&phone=PHONE&bonus_points=BONUS_POINTS'
 ```
 
 > The above command returns JSON structured like this:
@@ -105,7 +105,7 @@ At least of identifiers (marked by *) must present in request: email, phone. It'
 > Request example
 
 ```shell
-curl --location --request POST 'https://api.rees46.ru/loyalty/basic/use_bonus_points?phone=PHONE&shop_id=SHOP_ID&shop_secret=SHOP_SECRET&bonus_points=BONUS_POINTS&confirm_code=true&sms_code=SMS_CODE'
+curl --location --request POST 'https://<%= config[:api_endpoint] %>/loyalty/basic/use_bonus_points?phone=PHONE&shop_id=SHOP_ID&shop_secret=SHOP_SECRET&bonus_points=BONUS_POINTS&confirm_code=true&sms_code=SMS_CODE'
 ```
 
 > The above command returns JSON structured like this:
@@ -152,7 +152,7 @@ At least of identifiers (marked by *) must present in request: email, phone. It'
 > Request example
 
 ```shell
-curl --location --request POST 'https://api.rees46.ru/loyalty/basic/use_bonus_points_confirmed?phone=PHONE&shop_id=SHOP_ID&shop_secret=SHOP_SECRET&bonus_points=BONUS_POINTS&sms_code=SMS_CODE'
+curl --location --request POST 'https://<%= config[:api_endpoint] %>/loyalty/basic/use_bonus_points_confirmed?phone=PHONE&shop_id=SHOP_ID&shop_secret=SHOP_SECRET&bonus_points=BONUS_POINTS&sms_code=SMS_CODE'
 ```
 
 > The above command returns JSON structured like this:
@@ -198,7 +198,7 @@ At least of identifiers (marked by *) must present in request: email, phone. It'
 > Request example
 
 ```shell
-curl --location --request POST 'https://api.rees46.ru/loyalty/basic/use_bonus_points?phone=PHONE&shop_id=SHOP_ID&shop_secret=SHOP_SECRET&bonus_points=BONUS_POINTS'
+curl --location --request POST 'https://<%= config[:api_endpoint] %>/loyalty/basic/use_bonus_points?phone=PHONE&shop_id=SHOP_ID&shop_secret=SHOP_SECRET&bonus_points=BONUS_POINTS'
 ```
 
 > The above command returns JSON structured like this:
