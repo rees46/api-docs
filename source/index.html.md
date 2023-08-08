@@ -38,6 +38,7 @@ includes:
   - chats.md.erb
   - communications.md.erb
   - reputation.md.erb
+  - stories.md.erb
   - utilities.md.erb
   - errors.md.erb 
 
