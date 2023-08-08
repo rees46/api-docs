@@ -4,22 +4,6 @@ Section describes how to use Stories
 
 ## Font setup
 
-After initializing the SDK, you can set the desired style configuration for the fonts and buttons of the Stories block.
-
-<aside class="notice">
-Remember! The use of default parameters in the SDK during initialization takes precedence over the parameters received with the back-end configuration.
-</aside>
-
-Before a font can be used, it must be registered with your app.
-Add the font file to your xCode project. You must specify a file name with .ttf or .otf extension. Сall the following method after SDK initialization for font registration
-
-### Available SDK Configuration options
-
-You can use both the font family in the title and its direct name, for example with the "-Regular" suffix.
-The color must be transmitted in hex format, for example "#FFFFFF”.
-Any parameter in any method is optional, you can use both together and separately in combination with other parameters.
-
-
 ```shell
 ```
 
@@ -51,3 +35,18 @@ sdk.configuration().stories.setProductsCard(fontName: "Museo")
 
 ```jsx
 ```
+
+After initializing the SDK, you can set the desired style configuration for the fonts and buttons of the Stories block.
+
+<aside class="notice">
+Remember! The use of default parameters in the SDK during initialization takes precedence over the parameters received with the back-end configuration.
+</aside>
+
+Before a font can be used, it must be registered with your app.
+Add the font file to your xCode project. You must specify a file name with .ttf or .otf extension. Сall the following method after SDK initialization for font registration
+
+### Available SDK Configuration options
+
+You can use both the font family in the title and its direct name, for example with the "-Regular" suffix.
+The color must be transmitted in hex format, for example "#FFFFFF”.
+Any parameter in any method is optional, you can use both together and separately in combination with other parameters.
