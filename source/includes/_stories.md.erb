@@ -28,6 +28,59 @@ sdk.configuration().stories.setSlideProductsButton(fontName: "Museo", fontSize: 
 
 // Set the font family for the Products Card.
 sdk.configuration().stories.setProductsCard(fontName: "Museo")
+
+// You can customize font family, font size, colour's, icon size or any other view parameters of the Stories block to suit your app design.
+// Each parameter is individual and may not be set - in this case default value's of SDK will be used.
+sdk.configuration().stories.setStoriesBlock(fontName: "Museo",
+  fontSize: 15.0,
+  textColor: "#5ec169",
+  textColorDarkMode: "#ffffff",
+  backgroundColor: "#ffffff",
+  backgroundColorDarkMode: "#000000",
+  iconSize: 76,
+  iconBorderWidth: 2.3,
+  iconMarginX: 18,
+  iconMarginBottom: 8,
+  iconNotViewedBorderColor: "#5ec169",
+  iconNotViewedBorderColorDarkMode: "#5ec169",
+  iconViewedBorderColor: "#5ec169",
+  iconViewedBorderColorDarkMode: "#5ec169",
+  iconViewedTransparency: 0.9,
+  iconPreloaderColor: "#5ba05f",
+  iconPlaceholderColor: "#d6d6d6",
+  iconPlaceholderColorDarkMode: "#d6d6d6",
+  labelWidth: 50,
+  pinColor: "#5ec169",
+  pinColorDarkMode: "#5ec169",
+  closeIconColor: "#ffffff"
+)
+
+// Set font family and font size for Default button on Story slide.
+// Set font color and background color for Default button on Story slide.
+sdk.configuration().stories.setSlideDefaultButton(
+  fontName: "Museo",
+  fontSize: 19.0,
+  textColor: "#ffffff",
+  backgroundColor: "#5ec169",
+  textColorDarkMode: "#000000",
+  backgroundColorDarkMode: "#ffffff",
+	cornerRadius: 5
+)
+
+// Set font family and font size for Products button on Story slide.
+// Set font color and background color for Products button on Story slide.
+sdk.configuration().stories.setSlideProductsButton(
+  fontName: "Museo",
+  fontSize: 19.0,
+  textColor: "#FFFFFF",
+  backgroundColor: "#000000",
+  textColorDarkMode: "#000000",
+  backgroundColorDarkMode: "#ffffff",
+	cornerRadius: 5
+)
+
+// Set the font family for the Products Card detailed view.
+sdk.configuration().stories.setProductsCard(fontName: "Museo")
 ```
 
 ```java
