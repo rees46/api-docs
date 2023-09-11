@@ -71,6 +71,32 @@ sdk.addToSegment(segmentId: "333", email: "my@example.com", phone: "+10000000000
 <%= config[:android_sdk_package_name] %>.addToSegment("333", "my@example.com", "+10000000000");
 ```
 
+```jsx
+// Using all possible identifiers
+sdk.segments('add', {
+  "email": "jane@example.com",
+  "phone": "+10000000000",
+  "segment_id": "SEGMENT_ID"
+});
+
+// With phone only
+sdk.segments('add', {
+  "phone": "+10000000000",
+  "segment_id": "SEGMENT_ID"
+});
+
+// With email only
+sdk.segments('add', {
+  "email": "jane@example.com",
+  "segment_id": "SEGMENT_ID"
+});
+
+// Without any contacts: `did` is used automatically
+sdk.segments('add', {
+  "segment_id": "SEGMENT_ID"
+});
+```
+
 This method adds user to a specific static segment.
 
 `POST https://<%= config[:api_endpoint] %>/segments/add`
@@ -159,6 +185,32 @@ sdk.removeFromSegment(segmentId: "333", email: "my@example.com", phone: "+100000
 <%= config[:android_sdk_package_name] %>.removeFromSegment("333", "my@example.com", "+10000000000");
 ```
 
+```jsx
+// Using all possible identifiers
+sdk.segments('remove', {
+  "email": "jane@example.com",
+  "phone": "+10000000000",
+  "segment_id": "SEGMENT_ID"
+});
+
+// With phone only
+sdk.segments('remove', {
+  "phone": "+10000000000",
+  "segment_id": "SEGMENT_ID"
+});
+
+// With email only
+sdk.segments('remove', {
+  "email": "jane@example.com",
+  "segment_id": "SEGMENT_ID"
+});
+
+// Without any contacts: `did` is used automatically
+sdk.segments('remove', {
+  "segment_id": "SEGMENT_ID"
+});
+```
+
 This method removes user from a specific static segment.
 
 `POST https://<%= config[:api_endpoint] %>/segments/remove`
@@ -212,6 +264,16 @@ sdk->getCurrentSegment()
   public void onSuccess(JSONArray segments) {
     // segments (type: array of objects)
   }
+});
+```
+
+```jsx
+// Using all possible identifiers
+sdk.segments('get').then(res => {
+  // segments (type: array of objects)
+  // each object has the following properties:
+  // "id" as Segment ID
+  // "type" as Segment Type ("dynamic", "static")
 });
 ```
 
