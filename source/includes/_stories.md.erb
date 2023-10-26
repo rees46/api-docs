@@ -12,75 +12,100 @@ Section describes how to use Stories
 
 ```swift
 
-sdk.configuration().stories.registerFont(fileName: "Museo900", fileExtension: “ttf”)
+// Register the font family for Stories block first.
+sdk.configuration().stories.registerFont(fileName: "Museo900", fileExtension: FontExtension.ttf.rawValue)
 
-// Set the font family and font size for the text of the Stories block.
-// Set the font color and background color for the Stories block.
-sdk.configuration().stories.setStoriesBlock(fontName: "Museo", fontSize: 13.0, textColor: "#1A900C", backgroundColor: "#D5F5E3")
-
-// Set the font family and font size for the Standard Slide button of the Story block.
-// Set the font color and background color for the Standard Slide button of the Story block.
-sdk.configuration().stories.setSlideDefaultButton(fontName: "Museo", fontSize: 17.0, textColor: "#A3E4D7", backgroundColor: "#900C3F")
-
-// Set the font family and font size for the Products button of the Slide in the Story block.
-// Set the font color and background color for the Products button on the Slide of the Story block.
-sdk.configuration().stories.setSlideProductsButton(fontName: "Museo", fontSize: 19.0, textColor: "#7D3C98", backgroundColor: "#7CFC00")
-
-// Set the font family for the Products Card.
-sdk.configuration().stories.setProductsCard(fontName: "Museo")
 
 // You can customize font family, font size, colour's, icon size or any other view parameters of the Stories block to suit your app design.
 // Each parameter is individual and may not be set - in this case default value's of SDK will be used.
 sdk.configuration().stories.setStoriesBlock(fontName: "Museo",
-  fontSize: 15.0,
-  textColor: "#5ec169",
-  textColorDarkMode: "#ffffff",
-  backgroundColor: "#ffffff",
-  backgroundColorDarkMode: "#000000",
-  iconSize: 76,
-  iconBorderWidth: 2.3,
-  iconMarginX: 18,
-  iconMarginBottom: 8,
-  iconNotViewedBorderColor: "#5ec169",
-  iconNotViewedBorderColorDarkMode: "#5ec169",
-  iconViewedBorderColor: "#5ec169",
-  iconViewedBorderColorDarkMode: "#5ec169",
-  iconViewedTransparency: 0.9,
-  iconPreloaderColor: "#5ba05f",
-  iconPlaceholderColor: "#d6d6d6",
-  iconPlaceholderColorDarkMode: "#d6d6d6",
-  labelWidth: 50,
-  pinColor: "#5ec169",
-  pinColorDarkMode: "#5ec169",
-  closeIconColor: "#ffffff"
-)
+                                            fontSize: 15.0,
+                                            textColor: "#5ec169",
+                                            textColorDarkMode: "#5ec169",
+                                            backgroundColor: "#ffffff",
+                                            backgroundColorDarkMode: "#000000",
+                                            iconSize: 76,
+                                            iconBorderWidth: 2.3,
+                                            iconMarginX: 18,
+                                            iconMarginBottom: 8,
+                                            iconNotViewedBorderColor: "#fd7c50",
+                                            iconNotViewedBorderColorDarkMode: "#fd7c50",
+                                            iconViewedBorderColor: "#fdc2a1",
+                                            iconViewedBorderColorDarkMode: "#fdc2a1",
+                                            iconViewedTransparency: 1.0,
+                                            iconAnimatedLoaderColor: "#5ec169",
+                                            iconPlaceholderColor: "#d6d6d6",
+                                            iconPlaceholderColorDarkMode: "#d6d6d6",
+                                            iconDisplayFormatSquare: false,
+                                            labelWidth: 76,
+                                            pinColor: "#fd7c50",
+                                            pinColorDarkMode: "#fd7c50",
+                                            closeIconColor: "#5ec169")
+
 
 // Set font family and font size for Default button on Story slide.
 // Set font color and background color for Default button on Story slide.
-sdk.configuration().stories.setSlideDefaultButton(
-  fontName: "Museo",
-  fontSize: 19.0,
-  textColor: "#ffffff",
-  backgroundColor: "#5ec169",
-  textColorDarkMode: "#000000",
-  backgroundColorDarkMode: "#ffffff",
-	cornerRadius: 5
-)
+sdk.configuration().stories.setSlideDefaultButton(fontName: "Museo",
+                                                  fontSize: 17.0,
+                                                  textColor: "#ffffff",
+                                                  backgroundColor: "#5ec169",
+                                                  textColorDarkMode: "#000000",
+                                                  backgroundColorDarkMode: "#ffffff",
+                                                  cornerRadius: 5)
+
 
 // Set font family and font size for Products button on Story slide.
 // Set font color and background color for Products button on Story slide.
-sdk.configuration().stories.setSlideProductsButton(
-  fontName: "Museo",
-  fontSize: 19.0,
-  textColor: "#FFFFFF",
-  backgroundColor: "#000000",
-  textColorDarkMode: "#000000",
-  backgroundColorDarkMode: "#ffffff",
-	cornerRadius: 5
-)
+sdk.configuration().stories.setSlideProductsButton(fontName: "Museo",
+                                                   fontSize: 17.0,
+                                                   textColor: "#ffffff",
+                                                   backgroundColor: "#5ec169",
+                                                   textColorDarkMode: "#000000",
+                                                   backgroundColorDarkMode: "#ffffff",
+                                                   cornerRadius: 5)
+
 
 // Set the font family for the Products Card detailed view.
 sdk.configuration().stories.setProductsCard(fontName: "Museo")
+
+
+// Set the font family, font size, colour's for Banner with Promocode view.
+sdk.configuration().stories.setPromocodeCard(productTitleFontName: "Museo",
+                                             productTitleFontSize: 19.0,
+                                             productTitleTextColor: "#5ec169",
+                                             productTitleTextColorDarkMode: "#5ec169",
+                                             productBannerPriceSectionFontColor: "#d6d6d6",
+                                             productBannerPromocodeSectionFontColor: "#5ec169",
+                                             productBannerPriceSectionBackgroundColor: "#fd7c50",
+                                             productBannerPromocodeSectionBackgroundColor: "#17aadf",
+                                             discountSectionBackgroundColor: "#ea1717",
+                                             productBannerDefaultMessage: "Copied")
+
+
+// Setup Stories block autoreload settings.
+sdk.configuration().stories.storiesSlideReloadManually = false
+sdk.configuration().stories.storiesSlideReloadTimeoutInterval = 10
+sdk.configuration().stories.storiesSlideReloadIndicatorDisabled = false
+sdk.configuration().stories.storiesSlideReloadIndicatorBackgroundColor = "#ffffff"
+sdk.configuration().stories.storiesSlideReloadIndicatorSize = 76.0
+sdk.configuration().stories.storiesSlideReloadIndicatorBorderLineWidth = 3
+sdk.configuration().stories.storiesSlideReloadIndicatorSegmentCount = 9
+sdk.configuration().stories.storiesSlideReloadIndicatorAnimationDuration = 1
+sdk.configuration().stories.storiesSlideReloadIndicatorRotationDuration = 17
+
+
+// Setup Stories Alert popup connection settings.
+sdk.configuration().stories.storiesSlideReloadPopupMessageError = "Failed to retrieve data. Please check your connection and try again."
+sdk.configuration().stories.storiesSlideReloadPopupMessageFontSize = 17.0
+sdk.configuration().stories.storiesSlideReloadPopupMessageFontWeight = .medium
+sdk.configuration().stories.storiesSlideReloadPopupMessageDisplayTime = 4
+sdk.configuration().stories.storiesSlideReloadPopupPositionY = 120 //default constant
+
+
+// Setup Stories Stories block text label characters wrapping settings.
+sdk.configuration().stories.storiesBlockNumberOfLines = 2
+sdk.configuration().stories.storiesBlockCharWrapping = false
+sdk.configuration().stories.storiesBlockCharCountWrap = 15
 ```
 
 ```java
