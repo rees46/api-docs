@@ -195,7 +195,7 @@ Description of `orders` objects:
 ## Get users last order products
 
 ```shell
-curl https://<%= config[:api_endpoint] %>/orders/last_for_user?shop_id=SHOP_ID&did=DID&seance=SEANCE_ID
+curl https://<%= config[:api_endpoint] %>/orders/last_for_user?shop_id=SHOP_ID&did=DID&sid=SEANCE_ID
 ```
 
 If a request fetches user's last purchase and returns list of purchased products. If there was not purchases, empty array is returned.
@@ -206,7 +206,7 @@ If a request fetches user's last purchase and returns list of purchased products
 |-----------|--------|------------|------------------|
 | shop_id   | String | true       | Your API key     |
 | did       | String | true       | Users device ID  |
-| seance    | String | true       | Users session ID |
+| sid       | String | true       | Users session ID |
 
 
 

@@ -15,13 +15,13 @@ To track assisted events, you need to user `recommendedBy` (or `recommended_by`,
 
 All events require at least these parameters:
 
-| Parameter  | Type   | Required   | Description                                                                                                                                                                                                                    |
-|------------|--------|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| shop_id    | String | true       | Your API key                                                                                                                                                                                                                   |
-| did        | String | true       | Device ID                                                                                                                                                                                                                      |
-| seance     | String | true       | User's current session                                                                                                                                                                                                         |
-| event      | String | true       | Type of an event                                                                                                                                                                                                               |
-| stream     | String | false      | Data stream code. Alphanumeric string (letters, numbers only). Max length: 16. Default: null (means "web"). Can be "ios", "android" or any other string. Used to distinguish between mobile apps, web and other events sources |
+| Parameter | Type   | Required   | Description                                                                                                                                                                                                                    |
+|-----------|--------|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| shop_id   | String | true       | Your API key                                                                                                                                                                                                                   |
+| did       | String | true       | Device ID                                                                                                                                                                                                                      |
+| sid       | String | true       | User's current session                                                                                                                                                                                                         |
+| event     | String | true       | Type of an event                                                                                                                                                                                                               |
+| stream    | String | false      | Data stream code. Alphanumeric string (letters, numbers only). Max length: 16. Default: null (means "web"). Can be "ios", "android" or any other string. Used to distinguish between mobile apps, web and other events sources |
 
 
 SDKs already handle these parameters out of the box.
@@ -59,13 +59,13 @@ For mobile apps you have to track all app launches, happened by drip campaigns, 
 curl 'https://<%= config[:api_endpoint] %>/push' \
     -X 'POST' \
     -H 'Content-Type: application/json' \
-    --data-raw '{"event":"view", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "seance":"SEANCE_ID", "segment":"A or B", "items":[{"id":"PRODUCT_ID"}]}'
+    --data-raw '{"event":"view", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "sid":"SEANCE_ID", "segment":"A or B", "items":[{"id":"PRODUCT_ID"}]}'
 
 #Full request with widget recommendation identifiers
 curl 'https://<%= config[:api_endpoint] %>/push' \
     -X 'POST' \
     -H 'Content-Type: application/json' \
-    --data-raw '{"event":"view", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "seance":"SEANCE_ID", "segment":"A or B", "items":[{"id":"PRODUCT_ID"}], "recommended_by":"dynamic", "recommended_code":"UNIQUE_RECOMMENDER_CODE"}'
+    --data-raw '{"event":"view", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "sid":"SEANCE_ID", "segment":"A or B", "items":[{"id":"PRODUCT_ID"}], "recommended_by":"dynamic", "recommended_code":"UNIQUE_RECOMMENDER_CODE"}'
 
 #Short request with minimum required parameters
 curl 'https://<%= config[:api_endpoint] %>/push' \
@@ -194,7 +194,7 @@ Send this event when user opens product's details page.
 curl 'https://<%= config[:api_endpoint] %>/push' \
     -X 'POST' \
     -H 'Content-Type: application/json' \
-    --data-raw '{"event":"category", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "seance":"SEANCE_ID", "segment":"A or B", "category_id":"CATEGORY_ID"}'
+    --data-raw '{"event":"category", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "sid":"SEANCE_ID", "segment":"A or B", "category_id":"CATEGORY_ID"}'
 
 #Short request with minimum required parameters
 curl 'https://<%= config[:api_endpoint] %>/push' \
@@ -240,7 +240,7 @@ Send this event when user opens category page.
 curl 'https://<%= config[:api_endpoint] %>/push' \
     -X 'POST' \
     -H 'Content-Type: application/json' \
-    --data-raw '{"event":"search", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "seance":"SEANCE_ID", "segment":"A or B", "search_query":"SEARCH_QUERY"}'
+    --data-raw '{"event":"search", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "sid":"SEANCE_ID", "segment":"A or B", "search_query":"SEARCH_QUERY"}'
 
 #Short request with minimum required parameters
 curl 'https://<%= config[:api_endpoint] %>/push' \
@@ -281,13 +281,13 @@ sdk.track("search", "This is a search example");
 curl 'https://<%= config[:api_endpoint] %>/push' \
     -X 'POST' \
     -H 'Content-Type: application/json' \
-    --data-raw '{"event":"cart", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "seance":"SEANCE_ID", "segment":"A or B", "items":[{"id":"PRODUCT_ID"}]}'
+    --data-raw '{"event":"cart", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "sid":"SEANCE_ID", "segment":"A or B", "items":[{"id":"PRODUCT_ID"}]}'
 
 #Full request for a single product with widget recommendation identifiers
 curl 'https://<%= config[:api_endpoint] %>/push' \
     -X 'POST' \
     -H 'Content-Type: application/json' \
-    --data-raw '{"event":"cart", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "seance":"SEANCE_ID", "segment":"A or B", "items":[{"id":"PRODUCT_ID"}], "recommended_by":"dynamic", "recommended_code":"UNIQUE_RECOMMENDER_CODE"}'
+    --data-raw '{"event":"cart", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "sid":"SEANCE_ID", "segment":"A or B", "items":[{"id":"PRODUCT_ID"}], "recommended_by":"dynamic", "recommended_code":"UNIQUE_RECOMMENDER_CODE"}'
 
 #Short request for a single product with minimum required parameters
 curl 'https://<%= config[:api_endpoint] %>/push' \
@@ -299,7 +299,7 @@ curl 'https://<%= config[:api_endpoint] %>/push' \
 curl 'https://<%= config[:api_endpoint] %>/push' \
     -X 'POST' \
     -H 'Content-Type: application/json' \
-    --data-raw '{"event":"cart", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "seance":"SEANCE_ID", "segment":"A or B", "items":[{"id":"PRODUCT_ID", "amount":"PRODUCT_QUANTITY"}], "full_cart":true}'
+    --data-raw '{"event":"cart", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "sid":"SEANCE_ID", "segment":"A or B", "items":[{"id":"PRODUCT_ID", "amount":"PRODUCT_QUANTITY"}], "full_cart":true}'
 ```
 
 ```javascript
@@ -438,7 +438,7 @@ sdk.track("cart", [
 curl 'https://<%= config[:api_endpoint] %>/push' \
     -X 'POST' \
     -H 'Content-Type: application/json' \
-    --data-raw '{"event":"remove_from_cart", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "seance":"SEANCE_ID", "segment":"A or B", "items":[{"id":"PRODUCT_ID"}]}'
+    --data-raw '{"event":"remove_from_cart", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "sid":"SEANCE_ID", "segment":"A or B", "items":[{"id":"PRODUCT_ID"}]}'
 
 #Short request for a single product with minimum required parameters
 curl 'https://<%= config[:api_endpoint] %>/push' \
@@ -484,13 +484,13 @@ sdk.track("remove_from_cart", id);
 curl 'https://<%= config[:api_endpoint] %>/push' \
     -X 'POST' \
     -H 'Content-Type: application/json' \
-    --data-raw '{"event":"purchase", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "email":"john.doe@examplemail.com", "phone": "4400114527199", "seance":"SEANCE_ID", "segment":"A or B", "items":[{"id":"PRODUCT_ID", "price": PRODUCT_PRICE, "amount": PRODUCT_QUANTITY}], "order_id":"ORDER_NUMBER", "order_price":TOTAL_ORDER_PRICE}'
+    --data-raw '{"event":"purchase", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "email":"john.doe@examplemail.com", "phone": "4400114527199", "sid":"SEANCE_ID", "segment":"A or B", "items":[{"id":"PRODUCT_ID", "price": PRODUCT_PRICE, "amount": PRODUCT_QUANTITY}], "order_id":"ORDER_NUMBER", "order_price":TOTAL_ORDER_PRICE}'
 
 #Short request with minimum required parameters
 curl 'https://<%= config[:api_endpoint] %>/push' \
     -X 'POST' \
     -H 'Content-Type: application/json' \
-    --data-raw '{"event":"purchase", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "seance":"SEANCE_ID", "items":[{"id":"PRODUCT_ID"}]}'
+    --data-raw '{"event":"purchase", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "sid":"SEANCE_ID", "items":[{"id":"PRODUCT_ID"}]}'
 ```
 
 ```javascript
@@ -579,7 +579,7 @@ Description of parameters in the objects of the "products" array:
 curl 'https://<%= config[:api_endpoint] %>/push' \
     -X 'POST' \
     -H 'Content-Type: application/json' \
-    --data-raw '{"event":"wish", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "seance":"SEANCE_ID", "items":[{"id":"PRODUCT_ID"}]}'
+    --data-raw '{"event":"wish", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "sid":"SEANCE_ID", "items":[{"id":"PRODUCT_ID"}]}'
 ```
 
 ```javascript
@@ -609,7 +609,7 @@ sdk.track("wish", id);
 curl 'https://<%= config[:api_endpoint] %>/push' \
     -X 'POST' \
     -H 'Content-Type: application/json' \
-    --data-raw '{"event":"remove_wish", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "seance":"SEANCE_ID", "items":[{"id":"PRODUCT_ID"}]}'
+    --data-raw '{"event":"remove_wish", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "sid":"SEANCE_ID", "items":[{"id":"PRODUCT_ID"}]}'
 ```
 
 ```javascript
@@ -638,7 +638,7 @@ sdk.track("remove_wish", id);
 curl 'https://<%= config[:api_endpoint] %>/push/custom' \
     -X 'POST' \
     -H 'Content-Type: application/json' \
-    --data-raw '{"event":"my_event", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "seance":"SEANCE_ID"}'
+    --data-raw '{"event":"my_event", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "sid":"SEANCE_ID"}'
 
 # With other identifiers
 curl 'https://<%= config[:api_endpoint] %>/push/custom' \
@@ -656,7 +656,7 @@ curl 'https://<%= config[:api_endpoint] %>/push/custom' \
 curl 'https://<%= config[:api_endpoint] %>/push/custom' \
     -X 'POST' \
     -H 'Content-Type: application/json' \
-    --data-raw '{"event":"my_event", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "seance":"SEANCE_ID", "time": "1652648400"}'
+    --data-raw '{"event":"my_event", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "sid":"SEANCE_ID", "time": "1652648400"}'
 ```
 
 ```javascript

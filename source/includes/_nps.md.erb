@@ -64,9 +64,9 @@ curl https://<%= config[:api_endpoint] %>/nps/categories?shop_id=SHOPID
 
 ### Query Parameters
 
-Parameter | Type | Required | Description
---------- | ------- | -------  | -----------
-shop_id | String | true | Your API key. JS SDK handles it automatically.
+| Parameter  | Type   | Required   | Description                                    |
+|------------|--------|------------|------------------------------------------------|
+| shop_id    | String | true       | Your API key. JS SDK handles it automatically. |
 
 
 ## NPS channels
@@ -123,9 +123,9 @@ curl https://<%= config[:api_endpoint] %>/nps/channels?shop_id=SHOPID
 
 ### Query Parameters
 
-Parameter | Type | Required | Description
---------- | ------- | -------  | -----------
-shop_id | String | true | Your API key. JS SDK handles it automatically.
+| Parameter | Type   | Required  | Description                                    |
+|-----------|--------|-----------|------------------------------------------------|
+| shop_id   | String | true      | Your API key. JS SDK handles it automatically. |
 
 
 
@@ -185,14 +185,14 @@ curl https://<%= config[:api_endpoint] %>/nps/reviews?shop_id=SHOPID&shop_secret
 
 ### Query Parameters
 
-Parameter | Type | Required | Description
---------- | ------- | -------  | -----------
-shop_id | String | true | Your API key.
-shop_secret | String | true | Your API secret key.
-date_from | String | false | Filter by date: start date.
-date_to | String | false | Filter by date: end date.
-channel | String | false | Channel code.
-category | String | false | Category code.
+| Parameter   | Type   | Required  | Description                 |
+|-------------|--------|-----------|-----------------------------|
+| shop_id     | String | true      | Your API key.               |
+| shop_secret | String | true      | Your API secret key.        |
+| date_from   | String | false     | Filter by date: start date. |
+| date_to     | String | false     | Filter by date: end date.   |
+| channel     | String | false     | Channel code.               |
+| category    | String | false     | Category code.              |
 
 
 
@@ -295,18 +295,17 @@ If user rated more than one process category, you have to send separate request 
 
 One of the listed user identifiers is required: `did`, `email`, `phone`, `order_id`.
 
-Parameter | Type | Required | Description
---------- | ------- | ------- | -----------
-shop_id | String | true | Your API key
-shop_secret | String | true | Your secret API key
-did | String | false | Device ID of the user. SDK handles it automatically.
-seance | true | Temporary user session ID. Required when sending NPS with `did` identifier.
-email | String | false | User's email
-phone | String | false | User's phone
-loyalty_id | String | false | User's loyalty ID
-order_id | String | false | Order ID, related to the current survey
-channel | String | true | NPS channel code
-category | String | true | NPS process category code
-rate | Integer | true | Score of the rated process: 1..10
-comment | String | false | Optional answer to the follow-up question
-
+| Parameter   | Type    | Required                                                                    | Description                                          |
+|-------------|---------|-----------------------------------------------------------------------------|------------------------------------------------------|
+| shop_id     | String  | true                                                                        | Your API key                                         |
+| shop_secret | String  | true                                                                        | Your secret API key                                  |
+| did         | String  | false                                                                       | Device ID of the user. SDK handles it automatically. |
+| sid         | true    | Temporary user session ID. Required when sending NPS with `did` identifier. |
+| email       | String  | false                                                                       | User's email                                         |
+| phone       | String  | false                                                                       | User's phone                                         |
+| loyalty_id  | String  | false                                                                       | User's loyalty ID                                    |
+| order_id    | String  | false                                                                       | Order ID, related to the current survey              |
+| channel     | String  | true                                                                        | NPS channel code                                     |
+| category    | String  | true                                                                        | NPS process category code                            |
+| rate        | Integer | true                                                                        | Score of the rated process: 1..10                    |
+| comment     | String  | false                                                                       | Optional answer to the follow-up question            |

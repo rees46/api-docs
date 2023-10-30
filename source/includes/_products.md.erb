@@ -6,25 +6,25 @@ Service is used to manage products and categories.
 
 ```shell
 # Basic
-curl https://<%= config[:api_endpoint] %>/products?shop_id=...&did=...&seance=...
+curl https://<%= config[:api_endpoint] %>/products?shop_id=...&did=...&sid=...
 
 # Filter by brands
-curl https://<%= config[:api_endpoint] %>/products?shop_id=...&did=...&seance=...&brands=BRAND_1,BRAND_2
+curl https://<%= config[:api_endpoint] %>/products?shop_id=...&did=...&sid=...&brands=BRAND_1,BRAND_2
 
 # Filter by categories
-curl https://<%= config[:api_endpoint] %>/products?shop_id=...&did=...&seance=...&categories=CATEGORY_1,CATEGORY_2
+curl https://<%= config[:api_endpoint] %>/products?shop_id=...&did=...&sid=...&categories=CATEGORY_1,CATEGORY_2
 
 # Filter by locations
-curl https://<%= config[:api_endpoint] %>/products?shop_id=...&did=...&seance=...&locations=LOCATION_1,LOCATION_2
+curl https://<%= config[:api_endpoint] %>/products?shop_id=...&did=...&sid=...&locations=LOCATION_1,LOCATION_2
 
 # Filter by merchants
-curl https://<%= config[:api_endpoint] %>/products?shop_id=...&did=...&seance=...&merchants=MERCHANT_1,MERCHANT_2
+curl https://<%= config[:api_endpoint] %>/products?shop_id=...&did=...&sid=...&merchants=MERCHANT_1,MERCHANT_2
 
 # Filter by params
-curl https://<%= config[:api_endpoint] %>/products?shop_id=...&did=...&seance=...&filters={"PARAM_NAME_1": ["PARAM_VALUE_1", "PARAM_VALUE_2"], "PARAM_NAME_2": ["PARAM_VALUE_1", "PARAM_VALUE_2"]}
+curl https://<%= config[:api_endpoint] %>/products?shop_id=...&did=...&sid=...&filters={"PARAM_NAME_1": ["PARAM_VALUE_1", "PARAM_VALUE_2"], "PARAM_NAME_2": ["PARAM_VALUE_1", "PARAM_VALUE_2"]}
 
 # Filter by true|false params. Send boolean params as string
-curl https://<%= config[:api_endpoint] %>/products?shop_id=...&did=...&seance=...&filters={"PARAM_NAME_1": ["true"], "PARAM_NAME_2": ["false"]}
+curl https://<%= config[:api_endpoint] %>/products?shop_id=...&did=...&sid=...&filters={"PARAM_NAME_1": ["true"], "PARAM_NAME_2": ["false"]}
 
 ```
 
@@ -50,7 +50,7 @@ curl https://<%= config[:api_endpoint] %>/products?shop_id=...&did=...&seance=..
 |------------|----------|--------------------------------------------------------------------------------------------------------------------------------------|
 | did        | true     | Device ID. You get it from `init` method in SDK.                                                                                     |
 | shop_id    | true     | Your API key                                                                                                                         |
-| seance     | true     | Temporary user session ID                                                                                                            |
+| sid        | true     | Temporary user session ID                                                                                                            |
 | limit      | false    | Limit of results                                                                                                                     |
 | page       | false    | Page of results                                                                                                                      |
 | locations  | false    | Comma separated list of locations IDs                                                                                                |

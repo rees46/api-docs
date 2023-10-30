@@ -117,7 +117,7 @@ Before using API you have to setup SDK.
 ## Start session
 
 ```shell
-curl https://<%= config[:api_endpoint] %>/init?did=DEVICE_ID&shop_id=SHOP_ID&v=3&seance=SEANCE_ID&referrer=REF_URL
+curl https://<%= config[:api_endpoint] %>/init?did=DEVICE_ID&shop_id=SHOP_ID&v=3&sid=SEANCE_ID&referrer=REF_URL
 ```
 
 ```javascript
@@ -178,13 +178,13 @@ If you don't have device identifier (first launch on new device), you have to re
 
 ### Query Parameters
 
-| Parameter   | Required   | Description                                                                                                                                                                                                                     |
-|-------------|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| shop_id     | true       | Your API key                                                                                                                                                                                                                    |
-| did         | false      | Is mandatory if you have it. Request without `did` will generate new one in our DB. Use it as device ID for future requests.                                                                                                    |
-| v           | true       | Version. Just use `3` as value.                                                                                                                                                                                                 |
-| seance      | true       | User's temporary identifier for the current session. Must be regenerated every time user starts new session. Unique string. This parameter is handled automatically in all SDKs.                                                |
-| referrer    | false      | Referrer page URL for web integration.                                                                                                                                                                                          |
-| tz          | false      | Timezone offset (integer, positive or negative number as difference with GMT).                                                                                                                                                  |
-| stream      | false      | Data stream code. Alphanumeric string (letters, numbers only). Max length: 16. Default: null (means "web"). Can be "ios", "android" or any other string. Used to distinguish between mobile apps, web and other events sources. |
+| Parameter | Required   | Description                                                                                                                                                                                                                     |
+|-----------|------------|---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| shop_id   | true       | Your API key                                                                                                                                                                                                                    |
+| did       | false      | Is mandatory if you have it. Request without `did` will generate new one in our DB. Use it as device ID for future requests.                                                                                                    |
+| v         | true       | Version. Just use `3` as value.                                                                                                                                                                                                 |
+| sid       | true       | User's temporary identifier for the current session. Must be regenerated every time user starts new session. Unique string. This parameter is handled automatically in all SDKs.                                                |
+| referrer  | false      | Referrer page URL for web integration.                                                                                                                                                                                          |
+| tz        | false      | Timezone offset (integer, positive or negative number as difference with GMT).                                                                                                                                                  |
+| stream    | false      | Data stream code. Alphanumeric string (letters, numbers only). Max length: 16. Default: null (means "web"). Can be "ios", "android" or any other string. Used to distinguish between mobile apps, web and other events sources. |
 
