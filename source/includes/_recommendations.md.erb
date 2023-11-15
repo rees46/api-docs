@@ -29,6 +29,44 @@ sdk.recommend(blockId: "block_id", currentProductId: "PRODUCT_ID") { recommendRe
   print("Callback")
 }
 
+// Create Recommendations Widget collection programmatically.
+public var recommendationsCollectionView = RecommendationsWidgetView()
+// Load Recommendations Widget view and setup height and position settings.
+DispatchQueue.main.async {
+  self.recommendationsCollectionView.loadWidget(sdk: globalSDK, blockId: "bc1f41f40bb4f92a705ec9d5ec2ada42")
+  self.view.addSubview(self.recommendationsCollectionView)
+
+  self.recommendationsCollectionView.heightAnchor.constraint(equalToConstant: 460).isActive = true //height
+  self.recommendationsCollectionView.topAnchor.constraint(equalTo: self.view.topAnchor, constant: 20).isActive = true
+  self.recommendationsCollectionView.leadingAnchor.constraint(equalTo: self.view.leadingAnchor).isActive = true //left
+  self.recommendationsCollectionView.trailingAnchor.constraint(equalTo: self.view.trailingAnchor).isActive = true //right
+}
+// Setup Recommendations Widget configuration.
+sdk.configuration().recommendations.setWidgetBlock(widgetFontName: "Museo",
+  widgetBackgroundColor: "#ffffff",
+  widgetBackgroundColorDarkMode: "#000000",
+  widgetCellBackgroundColor: "#ffffff",
+  widgetCellBackgroundColorDarkMode: "#000000",
+  widgetBorderWidth: 1,
+  widgetBorderColor: "#c3c3c3",
+  widgetBorderColorDarkMode: "#c3c3c3",
+  widgetBorderTransparent: 0.4,
+  widgetCornerRadius: 9,
+  widgetStarsColor: "#ff9500",
+  widgetAddToCartButtonText: "Add to cart",
+  widgetRemoveFromCartButtonText: "Remove from cart",
+  widgetAddToCartButtonFontSize: 17,
+  widgetRemoveFromCartButtonFontSize: 14,
+  widgetCartButtonTextColor: "#ffffff",
+  widgetCartButtonTextColorDarkMode: "#ffffff",
+  widgetCartButtonBackgroundColor: "#000000",
+  widgetCartButtonBackgroundColorDarkMode: "#ffffff",
+  widgetCartButtonNeedOpenWebUrl: false,
+  widgetFavoritesIconColor: "#000000",
+  widgetFavoritesIconColorDarkMode: "#ffffff",
+  widgetPreloadIndicatorColor: "#ffffff"
+)
+
 ```
 
 ```java

@@ -11,11 +11,8 @@ Section describes how to use Stories
 ```
 
 ```swift
-
 // Register the font family for Stories block first.
 sdk.configuration().stories.registerFont(fileName: "Museo900", fileExtension: FontExtension.ttf.rawValue)
-
-
 // You can customize font family, font size, colour's, icon size or any other view parameters of the Stories block to suit your app design.
 // Each parameter is individual and may not be set - in this case default value's of SDK will be used.
 sdk.configuration().stories.setStoriesBlock(fontName: "Museo",
@@ -41,8 +38,6 @@ sdk.configuration().stories.setStoriesBlock(fontName: "Museo",
                                             pinColor: "#fd7c50",
                                             pinColorDarkMode: "#fd7c50",
                                             closeIconColor: "#5ec169")
-
-
 // Set font family and font size for Default button on Story slide.
 // Set font color and background color for Default button on Story slide.
 sdk.configuration().stories.setSlideDefaultButton(fontName: "Museo",
@@ -52,8 +47,6 @@ sdk.configuration().stories.setSlideDefaultButton(fontName: "Museo",
                                                   textColorDarkMode: "#000000",
                                                   backgroundColorDarkMode: "#ffffff",
                                                   cornerRadius: 5)
-
-
 // Set font family and font size for Products button on Story slide.
 // Set font color and background color for Products button on Story slide.
 sdk.configuration().stories.setSlideProductsButton(fontName: "Museo",
@@ -63,25 +56,20 @@ sdk.configuration().stories.setSlideProductsButton(fontName: "Museo",
                                                    textColorDarkMode: "#000000",
                                                    backgroundColorDarkMode: "#ffffff",
                                                    cornerRadius: 5)
-
-
 // Set the font family for the Products Card detailed view.
 sdk.configuration().stories.setProductsCard(fontName: "Museo")
-
-
 // Set the font family, font size, colour's for Banner with Promocode view.
-sdk.configuration().stories.setPromocodeCard(productTitleFontName: "Museo",
-                                             productTitleFontSize: 19.0,
+sdk.configuration().stories.setPromocodeCard(productBannerFontName: "Museo",
+                                             productTitleFontSize: 16.0,
                                              productTitleTextColor: "#5ec169",
                                              productTitleTextColorDarkMode: "#5ec169",
-                                             productBannerPriceSectionFontColor: "#d6d6d6",
-                                             productBannerPromocodeSectionFontColor: "#5ec169",
-                                             productBannerPriceSectionBackgroundColor: "#fd7c50",
-                                             productBannerPromocodeSectionBackgroundColor: "#17aadf",
-                                             discountSectionBackgroundColor: "#ea1717",
-                                             productBannerDefaultMessage: "Copied")
-
-
+                                             productBannerOldPriceSectionFontColor: "#5ec169",
+                                             productBannerPriceSectionFontColor: "#5ec169",
+                                             productBannerPriceSectionBackgroundColor: "#ffffff",
+                                             productBannerPromocodeSectionFontColor: "#ff0000",
+                                             productBannerPromocodeSectionBackgroundColor: "#5ec169",
+                                             productBannerDiscountSectionBackgroundColor: "#5ec169",
+                                             productBannerPromocodeCopyToClipboardMessage: "Copied")
 // Setup Stories block autoreload settings.
 sdk.configuration().stories.storiesSlideReloadManually = false
 sdk.configuration().stories.storiesSlideReloadTimeoutInterval = 10
@@ -92,16 +80,12 @@ sdk.configuration().stories.storiesSlideReloadIndicatorBorderLineWidth = 3
 sdk.configuration().stories.storiesSlideReloadIndicatorSegmentCount = 9
 sdk.configuration().stories.storiesSlideReloadIndicatorAnimationDuration = 1
 sdk.configuration().stories.storiesSlideReloadIndicatorRotationDuration = 17
-
-
 // Setup Stories Alert popup connection settings.
 sdk.configuration().stories.storiesSlideReloadPopupMessageError = "Failed to retrieve data. Please check your connection and try again."
 sdk.configuration().stories.storiesSlideReloadPopupMessageFontSize = 17.0
 sdk.configuration().stories.storiesSlideReloadPopupMessageFontWeight = .medium
 sdk.configuration().stories.storiesSlideReloadPopupMessageDisplayTime = 4
 sdk.configuration().stories.storiesSlideReloadPopupPositionY = 120 //default constant
-
-
 // Setup Stories Stories block text label characters wrapping settings.
 sdk.configuration().stories.storiesBlockNumberOfLines = 2
 sdk.configuration().stories.storiesBlockCharWrapping = false
