@@ -326,9 +326,15 @@ Checks email's subscription status.
 | Parameter   | Type   | Required | Description                                            |
 |-------------|--------|----------|--------------------------------------------------------|
 | shop_id     | String | true     | Your API key                                           |
-| shop_secret | String | true     | Secret API key. Can be sent as header `X-Shop-Secret`. |
+| shop_secret | String | true**   | Secret API key. Can be sent as header `X-Shop-Secret`. |
 | email       | String | true*    | User's email                                           |
 | phone       | String | true*    | User's phone.                                          |
+| did         | String | true*    | User's did.                                            |
+
+<aside class="notice">
+* - at least of identifiers (marked by *) must present in request: email, phone, loyalty_id or external_id. It's used to identify user.
+** - if a did is sended in the request, the shop_secret is not required.
+</aside>
 
 Response flags:
 
@@ -416,8 +422,7 @@ curl https://<%= config[:api_endpoint] %>/subscriptions/changes?shop_id=...&shop
     "channel": "crm",
     "datetime": "2020-09-25 14:43:36",
     "ip": "192.168.2.27"
-  },
-  ...
+  }
 ]
 ```
 
