@@ -280,12 +280,20 @@ https://<%= config[:api_endpoint] %>/subscriptions/callback
 
 ## Check subscription status
 
+`GET https://<%= config[:api_endpoint] %>/subscriptions/check`
+
 ```shell
 curl https://<%= config[:api_endpoint] %>/subscriptions/check
 ```
 
 ```javascript
-// No implementation. See CURL
+<%= config[:js_sdk_name] %>('subscription', 'check',
+function (subscriptions) {
+  console.log(subscriptions)
+},
+function(error) {
+  console.log(error)
+});
 ```
 
 ```swift
