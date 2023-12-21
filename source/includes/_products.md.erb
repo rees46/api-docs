@@ -33,7 +33,18 @@ curl https://<%= config[:api_endpoint] %>/products?shop_id=...&did=...&sid=...&f
 ```
 
 ```swift
-// No implementation. See CURL
+sdk.getProductsList(
+  brands: String?,
+  merchants: String?,
+  categories: String?,
+  locations: String?,
+  limit: Int?,
+  page: Int?,
+  filters: [String : Any]?
+) {
+  Result<ProductsListResponse,
+  SDKError> in //productsListResponse in // Result response
+}
 ```
 
 ```java
