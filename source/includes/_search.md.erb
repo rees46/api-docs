@@ -207,6 +207,7 @@ sdk.search({
 | price_min        | false    | Min price                                                                                                                            |
 | price_max        | false    | Max price                                                                                                                            |
 | colors           | false    | Comma separated list of colors                                                                                                       |
+| fashion_sizes    | false    | Comma separated list of sizes                                                                                                        |
 | exclude          | false    | Comma separated list of products IDs to exclude from search results                                                                  |
 | email            | false    | It's only for S2S integration, when service doesn't have user's session. Mobile SDK doesn't use it.                                  |
 | no_clarification | false    | Disable clarified search (true, false, default: false). Don't use it. God mode only.                                                 |
@@ -230,6 +231,9 @@ sdk.search({
 |                    |        | * values – array of values (object). Has the following properties:                                                                                                                                    |
 |                    |        | * value – value label. (string)                                                                                                                                                                       |
 |                    |        | * count – cont of products whith this parameter (number)                                                                                                                                              |
+| industrial_filters | array  | Array with information about industrial filters. For example: colors and fashion_sizes                                                                                                                |
+|                    |        | colors (array of objects) has the following properties: color, count                                                                                                                                  |
+|                    |        | fashion_sizes (array of objects) has the following properties: size, count                                                                                                                            |
 | html               | string | HTML-code of the block with products. The template is customized in the <%= config[:service_name] %> personal account.                                                                                |
 | price_range        | object | Min and max price of products. Has the following properties:                                                                                                                                          |
 |                    |        | * min – min price (number)                                                                                                                                                                            |
