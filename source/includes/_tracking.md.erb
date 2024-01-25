@@ -296,6 +296,7 @@ curl 'https://<%= config[:api_endpoint] %>/push' \
     --data-raw '{"event":"cart", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "items":[{"id":"PRODUCT_ID"}]}'
 
 #Full request to send the full current cart
+# Clear all products on our side
 curl 'https://<%= config[:api_endpoint] %>/push' \
     -X 'POST' \
     -H 'Content-Type: application/json' \
@@ -327,6 +328,10 @@ curl 'https://<%= config[:api_endpoint] %>/push' \
         amount: LAST_PRODUCT_QUANTITY
     }
 ]);
+
+// Full request to send the empty current cart
+// Clear all products on our side
+<%= config[:js_sdk_name] %>('track', 'cart', []);
 ```
 
 ```swift
@@ -580,10 +585,30 @@ curl 'https://<%= config[:api_endpoint] %>/push' \
     -X 'POST' \
     -H 'Content-Type: application/json' \
     --data-raw '{"event":"wish", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "sid":"SEANCE_ID", "items":[{"id":"PRODUCT_ID"}]}'
+
+#Full request to send the full current wish
+curl 'https://<%= config[:api_endpoint] %>/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/json' \
+    --data-raw '{"event":"wish", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "sid":"SEANCE_ID", "segment":"A or B", "items":["FIRST_PRODUCT_ID", "LAST_PRODUCT_ID"], "full_wish":true}'
+
+#Full request to send the empty current wish
+# Clear all products on our side
+curl 'https://<%= config[:api_endpoint] %>/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/json' \
+    --data-raw '{"event":"wish", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "sid":"SEANCE_ID", "segment":"A or B", "full_wish":true}'
 ```
 
 ```javascript
 <%= config[:js_sdk_name] %>('track', 'wish', product_id);
+
+// Full request to send the full current wish
+<%= config[:js_sdk_name] %>('track', 'wish', [FIRST_PRODUCT_ID, ..., LAST_PRODUCT_ID]);
+
+// Full request to send the empty current wish
+// Clear all products on our side
+<%= config[:js_sdk_name] %>('track', 'wish', []);
 ```
 
 ```java
