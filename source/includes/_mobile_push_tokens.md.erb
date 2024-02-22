@@ -13,7 +13,12 @@ sdk.setPushTokenNotification(token: "TOKEN_STRING") { (tokenResponse) in
 ```
 
 ```java
-TBD
+<%= config[:android_sdk_package_name] %>.setPushTokenNotification("token", new Api.OnApiCallbackListener() {
+	@Override
+	public void onSuccess(JSONObject msg) {
+		//
+	}
+});
 ```
 
 ```jsx
@@ -36,10 +41,10 @@ This endpoint creates new token for the user, identified by `did` parameter.
 
 ### Query Parameters
 
-Parameter | Required | Description
---------- | ------- | -----------
-did | true | Device ID. You get it from `init` method in SDK.
-platform | true | Identifies platform: `ios` for APNs or `android` for Firebase
-token | true | Unique mobile push token from iOS or Android.
-shop_id | true | Your API key
+| Parameter   | Required   | Description                                                   |
+|-------------|------------|---------------------------------------------------------------|
+| did         | true       | Device ID. You get it from `init` method in SDK.              |
+| platform    | true       | Identifies platform: `ios` for APNs or `android` for Firebase |
+| token       | true       | Unique mobile push token from iOS or Android.                 |
+| shop_id     | true       | Your API key                                                  |
 
