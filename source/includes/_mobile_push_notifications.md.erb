@@ -1,0 +1,323 @@
+# Sending mobile push notifications
+
+```jsx
+// Simple init
+sdk.initPush();
+
+//onClick listener
+sdk.initPush(onClickCallback);
+
+// onReceivetive listener
+sdk.initPush(false, onReceiveCallback);
+
+// you can use different callback for notification, when app is in background.
+sdk.initPush(false, onReceiveCallback, onBackgroundReceiveCallback);
+
+// If onBackgroundReceiveCallback not specified, used onReceiveCallback listener.
+
+// onClickCallback params
+{
+  "bigPictureUrl": "MESSAGE_IMAGE",
+  "channelId": "personaclick-push",
+  "data": {
+    "id": "MESSAGE_ID",
+    "type": "MESSAGE_TYPE"
+  },
+  "foreground": true,
+  "id": "MESSAGE_ID",
+  "largeIconUrl": "MESSAGE_ICON",
+  "message": "MESSAGE_BODY",
+  "title": "MESSAGE_TITLE",
+  "userInteraction": true
+}
+// onReceiveCallBack, onBackgroundReceiveCallback params
+{
+  "data": {
+    "action_urls": "[]",
+    "actions": "[]",
+    "body": "MESSAGE_BODY",
+    "icon": "MESSAGE_ICON",
+    "id": "MESSAGE_ID",
+    "image": "MESSAGE_IMAGE",
+    "title": "MESSAGE_TITLE",
+    "type": "MESSAGE_TYPE"
+  },
+  "from": "MESSAGE_FROM",
+  "messageId": "FMC_MESSAGE_ID",
+  "sentTime": TIMESTAMP,
+  "ttl": TTL_VALUE
+}
+```
+
+
+## Default payload structure
+
+> For iOS
+
+```json
+{
+  "aps": {
+    "alert": {
+      "title": "...",
+      "subtitle": "...",
+      "body": "...",
+      "badge": 1
+    },
+    "mutable-content": 1
+  },
+  "image_url": "...",
+  "event": {
+    "type": "...",
+    "uri": "..."
+  },
+  "src": {
+    "type": "...",
+    "id": "..."
+  }
+}
+```
+
+> For Android
+
+```json
+{
+  "title": "...",
+  "body": "...",
+  "icon": "...",
+  "type": "...",
+  "id": "...",
+  "actions": "[{\"action\": "\b0\", \"title\": \"...\"}, ...]",
+  "action_urls": "[...]",
+  "image": "...",
+  "event": "{\"type\": \"...\", \"uri\": \"...\"}"
+}
+```
+
+
+Parameter | Required | Description
+--------- | ------- | -----------
+aps.alert.title | true | The title of the notification. Apple Watch displays this string in the short look notification interface. Specify a string that is quickly understood by the user.
+aps.alert.subtitle | true | Additional information that explains the purpose of the notification.
+aps.alert.body | true | The content of the alert message.
+aps.alert.badge | true | The number to display in a badge on your app’s icon. Specify 0 to remove the current badge, if any.
+aps.mutable-content | true | Always `1` for iOS.
+image_url | false | Link to image/icon.
+event | false | Optional object with additional data.
+event.type | true | Type of the notification: `web`, `category`, `product`, `custom`.
+event.uri | true | Resource identificator depending on the type of event. See examples below.
+src | true | Information about a campaign (source of the message).
+src.type | true | Type of a campaign: `bulk`, `chain`, `transactional`.
+src.id | true | Type of a campaign. String.
+
+<aside class="notice">
+If `src` section is present, each tracked event must be populated with this data to track campaign's efficiency.
+</aside>
+
+## Basic message
+
+> For iOS
+
+```json
+{
+  "aps": {
+    "alert": {
+      "title": "Welcome aboard!",
+      "subtitle": "Greeting message.",
+      "body": "Hey, it's nice to know you're with us now. Check new updates in our application.",
+      "badge": 1
+    },
+    "mutable-content": 1
+  },
+  "image_url": "...",
+  "src": {
+    "type": "bulk",
+    "id": "33631"
+  }
+}
+```
+
+> For Android
+
+```json
+{
+  "title": "Welcome aboard!",
+  "body": "Hey, it's nice to know you're with us now. Check new updates in our application.",
+  "icon": "...",
+  "type": "bulk",
+  "id": "33631"
+}
+```
+
+This kind of message can be used to attract attention and open home screen of the application.
+
+## Open web link
+
+> For iOS
+
+```json
+{
+  "aps": {
+    "alert": {
+      "title": "Only today",
+      "subtitle": "Special Offer",
+      "body": "This special offer for Dyson products only for you!",
+      "badge": 1
+    },
+    "mutable-content": 1
+  },
+  "image_url": "...",
+  "event": {
+    "type": "web",
+    "uri": "https://example.com/landing/promo"
+  },
+  "src": {
+    "type": "bulk",
+    "id": "XFMjM4VAF4"
+  }
+}
+```
+
+> For Android
+
+```json
+{
+  "title": "Only today",
+  "body": "This special offer for Dyson products only for you!",
+  "icon": "...",
+  "type": "bulk",
+  "id": "XFMjM4VAF4",
+  "event": "{\"type\": \"web\", \"uri\": \"https://example.com/landing/promo\"}"
+}
+```
+
+
+Usually used for promo campaigns when final action is to open some URL in web view.
+
+## Open category
+
+> For iOS
+
+```json
+{
+  "aps": {
+    "alert": {
+      "title": "Black Friday!",
+      "subtitle": "Discount",
+      "body": "Check our big sale from this category",
+      "badge": 1
+    },
+    "mutable-content": 1
+  },
+  "image_url": "...",
+  "event": {
+    "type": "category",
+    "uri": "BFRIDAY_CATEGORY_ID"
+  },
+  "src": {
+    "type": "chain",
+    "id": "72CONd54uF"
+  }
+}
+```
+
+> For Android
+
+```json
+{
+  "title": "Black Friday!",
+  "body": "Check our big sale from this category",
+  "icon": "...",
+  "type": "chain",
+  "id": "72CONd54uF",
+  "event": "{\"type\": \"category\", \"uri\": \"BFRIDAY_CATEGORY_ID\"}"
+}
+```
+
+Suitable to open specific category by it's ID. For example for bulk messages about discounts.
+
+## Open product
+
+> For iOS
+
+```json
+{
+  "aps": {
+    "alert": {
+      "title": "...",
+      "subtitle": "...",
+      "body": "...",
+      "badge": 1
+    },
+    "mutable-content": 1
+  },
+  "image_url": "...",
+  "event": {
+    "type": "product",
+    "uri": "PRODUCT123"
+  },
+  "src": {
+    "type": "chain",
+    "id": "ugLxQ7KrnL"
+  }
+}
+```
+
+> For Android
+
+```json
+{
+  "title": "...",
+  "body": "...",
+  "icon": "...",
+  "type": "chain",
+  "id": "ugLxQ7KrnL",
+  "event": "{\"type\": \"product\", \"uri\": \"PRODUCT123\"}"
+}
+```
+
+Suitable to open specific product by it's ID. For example for triggered messages.
+
+## Open custom page
+
+> For iOS
+
+```json
+{
+  "aps": {
+    "alert": {
+      "title": "...",
+      "subtitle": "...",
+      "body": "...",
+      "badge": 1
+    },
+    "mutable-content": 1
+  },
+  "image_url": "...",
+  "event": {
+    "type": "custom",
+    "uri": "order/status/36",
+    "payload": {}
+  },
+  "src": {
+    "type": "transactional",
+    "id": "order_delivered"
+  }
+}
+```
+
+> For Android
+
+```json
+{
+  "title": "...",
+  "body": "...",
+  "type": "transactional",
+  "id": "order_delivered",
+  "event": "{\"type\": \"custom\", \"uri\": \"order/status/36\", \"payload\": {}}"
+}
+```
+
+Can be used to open any resource by custom data. For example for transactional messages to show order status.
+
+
+

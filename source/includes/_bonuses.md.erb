@@ -1,0 +1,101 @@
+# Bonuses
+
+Service provides endpoints for bonuses management.
+
+
+## Import bonuses status
+
+> Headers
+
+```
+Method: POST
+Content-type: application/json
+```
+
+> Body example
+
+```json
+{
+  "shop_id":"...",
+  "shop_secret":"...",
+  "bonuses": [
+    {
+      "email": "...",
+      "phone": "...",
+      "loyalty_id": "...",
+      "current_status": "...",
+      "total_balance": ...,
+      "total_used": ...,
+      "total_burned": ...,
+      "total_cancelled": ...,
+      "total_inactive": ...,
+      "total_rewarded": ...,
+      "event": "...",
+      "order_id": "...",
+      "bonus_status": "...",
+      "amount_changed": "...",
+      "activated_at": "...",
+      "expiration": "...",
+      "activity": "...",
+      "balance": ...
+    }, ...
+  ]
+}
+```
+
+> Request example
+
+```shell
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data-binary "@data.json" \
+  https://<%= config[:api_endpoint] %>/import/bonuses
+```
+
+Method uploads current bonuses status.
+
+
+### HTTP Request
+
+`POST https://<%= config[:api_endpoint] %>/import/bonuses`
+
+`Content-Type: application/json`
+
+### Query Parameters
+
+Parameter | Required | Description
+--------- | ------- | -----------
+shop_id | true | Your API key
+shop_secret | true | Your API secret key
+email* | true | Promo codes list ID
+phone* | true | List of promo codes
+loyalty_id* | true | List of promo codes
+
+<aside class="notice">
+At least of identifiers (marked by *) must present in request: email, phone or loyalty_id. It's used to identify user.
+</aside>
+
+
+### Properties
+
+Parameter | Type | Description
+--------- | ------- | -----------
+current_status | String | Current status
+total_balance | Float | Total balance
+total_used | Float | Total used
+total_burned | Float | Total burned out
+total_cancelled | Float | Total cancelled
+total_inactive | Float | Total inactive
+total_rewarded | Float | Total rewarded
+purchase_date | Date | Date in format YYYY-MM-DD HH:MM:SS
+event | String | Status change event
+order_id | String | Order ID
+bonus_status | String | Status of bonuses
+amount_changed | String | Amount of bonus changes
+activated_at | Date | Date in format YYYY-MM-DD HH:MM:SS
+expiration | Date | Date in format YYYY-MM-DD HH:MM:SS
+activity | String | The action that changed the balance
+balance | Float | Current bonuses balance
+
+
+### Errors

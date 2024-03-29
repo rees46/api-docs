@@ -1,0 +1,363 @@
+# User's profile
+
+Endpoints is used to work with user's profile.
+
+## Save profile settings
+
+```shell
+curl -d "shop_id=SHOPID&shop_secret=SHOP_SECRET&email=EMAIL&fieldname=FIELDVALUE" https://<%= config[:api_endpoint] %>/profile/set
+```
+
+```javascript
+<%= config[:js_sdk_name] %>('profile', 'set', {
+    "email": "test@example.com",
+    "id": "123456789",
+    "loyalty_id": "987654321",
+    "phone": "19991005000",
+    "first_name": "Jane",
+    "last_name": "Smith",
+    "location": "sdsdfsdfsdf",
+    "kids": [
+        {"gender": "m", "birthday": "2017-06-04"},
+        {"gender": "f", "birthday": "2014-02-10"},
+        {"gender": "m", "birthday": "2014-03-17"}
+    ]
+});
+```
+
+```javascript
+//An example of using custom fields by type
+<%= config[:js_sdk_name] %>('profile', 'set', {
+    "string": "sdsdfsdfsdf",
+    "int": 123,
+    "float": 123.12,
+    "list_element": ["first", "second"],
+    "json": {"key": "val", "key2": "val2"},
+    "date": "2022-08-26"
+});
+```
+
+```swift
+  sdk.setProfileData(userEmail: 'email@example.com',
+    userPhone: '10000000000',
+    userLoyaltyId: 'L010101',
+    birthday: ...,
+    age: ...,
+    firstName: ...,
+    lastName: ...,
+    location: ...,
+    gender: ...) { (profileDataResp) in
+      print("Profile data callback")
+    }
+```
+
+```java
+  HashMap<String, String> params = new HashMap<>();
+  params.put("email", "email@example.com");
+  <%= config[:android_sdk_package_name]%>.profile(params);
+  //With callback
+  <%= config[:android_sdk_package_name]%>.profile(params, new Api.OnApiCallbackListener() {
+      @Override
+      public void onSuccess(JSONObject response) {
+          Log.i(TAG, "Response: " + response.toString());
+      }
+  });
+```
+
+```jsx
+const params = {
+  id: 100500,
+  email: "john.doe@examplemail.com",
+  phone: "4400114527199",
+  first_name: "John",
+  last_name: "Doe",
+  birthday: "1990-03-11",
+  age: 31,
+  gender: "m",
+  location: "NY",
+  bought_something: true,
+  loyalty_id: "000001234567",
+  loyalty_card_location: "NY",
+  loyalty_status: "5% discount",
+  loyalty_bonuses: 1123,
+  loyalty_bonuses_to_next_level: 1877,
+  fb_id: "000000000354677",
+  vk_id: "vk031845",
+  telegram_id: "0125762968357835",
+  kids: [
+    {gender: "m", birthday: "2001-04-12"},
+    {gender: "f", birthday: "2015-07-28"}
+  ],
+  auto: [
+    {brand: "Nissan", model: "Qashqai", vds: "TM7N243E4G0BJG978"}
+  ]
+};
+
+sdk.setProfile(params);
+```
+
+This method overrides profile's settings.
+
+### Query Parameters
+
+| Parameter   | Type   | Required   | Description         |
+|-------------|--------|------------|---------------------|
+| shop_id     | String | true       | Your API key        |
+| shop_secret | String | true       | Your API secret key |
+| did*        | String | true       | Device ID           |
+| email*      | String | true       | User's email        |
+| phone*      | String | true       | User's phone number |
+
+<aside class="notice">
+At least of identifiers (marked by *) must present in request: did, email or phone. It's used to identify user.
+</aside>
+
+<aside class="notice">
+If `did` is present, `shop_secret` is not needed.
+</aside>
+
+
+### Default properties
+
+You can update any standard profile property. All standard properties are listed here:
+
+| Parameter                     | Type    | Description                                      |
+|-------------------------------|---------|--------------------------------------------------|
+| loyalty_id                    | String  | User's loyalty program ID                        |
+| id                            | String  | User ID in your platform                         |
+| fb_id                         | String  | User's Facebook ID                               |
+| vk_id                         | String  | User's VK ID                                     |
+| telegram_id                   | String  | User's Telegram ID                               |
+| loyalty_card_location         | String  | Location ID where user's loyalty card was issued |
+| loyalty_status                | String  | User's loyalty program status                    |
+| loyalty_bonuses               | Integer | User's bonuses amount                            |
+| loyalty_bonuses_to_next_level | Integer | User's bonuses amount left for the next level    |
+| gender                        | String  | User's gender: `m` or `f`                        |
+| location                      | String  | User's location code                             |
+| first_name                    | String  | User's first name                                |
+| last_name                     | String  | User's last name                                 |
+| age                           | Integer | User's age in years                              |
+| birthday                      | Date    | User's birthday in SQL format: YYYY-MM-DD        |
+| bought_something              | Bool    | User bought something ever                       |
+| kids                          | Array   | List of kids (see below)                         |
+| auto                          | Array   | List of auto vehicles (see below)                |
+
+
+Kid object properties:
+
+| Parameter  | Type   | Description                              |
+|------------|--------|------------------------------------------|
+| gender     | String | Kid's gender: `m` or `f`                 |
+| birthday   | Date   | Kid's birthday in SQL format: YYYY-MM-DD |
+
+Auto object properties:
+
+| Parameter  | Type   | Description            |
+|------------|--------|------------------------|
+| brand      | String | Vehicle brand          |
+| model      | String | Vehicle model          |
+| vds        | String | Vehicle VDS/VIN number |
+
+### Custom properties
+
+Additionally you can update any custom property, you've created in CRM.
+
+
+
+## Read profile info
+
+```shell
+# Using email as user identifier
+curl https://<%= config[:api_endpoint] %>/profile?email=...&shop_id=...&shop_secret=...
+
+# Using phone as user identifier
+curl https://<%= config[:api_endpoint] %>/profile?phone=...&shop_id=...&shop_secret=...
+```
+
+```javascript
+<%= config[:js_sdk_name] %>('profile', 'get', function(profile) {
+    // Here you can use all properties of profile's object
+    console.log(profile.gender);
+    console.log(profile.fashion.sizes.shoe);
+},
+// Use `true`, to work in single page sites.
+// Default - `false`
+false
+);
+```
+
+> REST method returns this JSON structure
+
+```json
+{
+  "first_name": "...",
+  "last_name": "...",
+  "email": "...",
+  "phone": "...",
+  "fb_id": "...",
+  "vk_id": "...",
+  "telegram_id": "...",
+  "loyalty_id": "...",
+  "loyalty_card_location": "...",
+  "loyalty_status": "...",
+  "loyalty_bonuses": "...",
+  "loyalty_bonuses_to_next_level": "...",
+  "gender": "...",
+  "location": "...",
+  "age": "...",
+  "birthday": "...",
+  "bought_something": "...",
+  "tags": [
+    "...",
+    "..."
+  ],
+  "custom_properties": {
+    "prop_key_1": "prop_value",
+    "prop_key_2": "prop_value"
+  },
+  "additional_phones": [],
+  "additional_emails": [],
+  "additional_loyalty_ids": [],
+  "orders": [
+    {
+      "id": "...",
+      "value": "...",
+      "status": "...",
+      "items": [
+        {
+          "id": "...",
+          "price": "...",
+          "name": "...",
+          "quantity": "..."
+        },
+        {
+          "id": "...",
+          "price": "...",
+          "name": "...",
+          "quantity": "..."
+        }
+      ]
+    }
+  ]
+}
+```
+
+> JS SDK method returns simplified anonymous structure to prevent data stealing
+
+```json
+{
+  "fashion_sizes": ["..."],
+
+  "gender": "m or f",
+
+  "cosmetic_hair": ["..."],
+  "allergy": "bool",
+  "cosmetic_skin": ["..."],
+  "cosmetic_perfume": ["..."],
+
+  "compatibility": null,
+  "vds": null,
+
+  "jewelry": null,
+
+  "realty": ["..."],
+
+  "children": ["..."],
+  "child_gender": "m or f",
+
+  "pets": ["..."],
+
+  "income_level": "cheap"
+}
+```
+
+
+You can read profile info from CRM using API or SDK.
+
+In case of using REST API (when using email or phone number as user ID), you must provide secret key to the method.
+
+
+## Force change email
+
+```shell
+curl -d "shop_id=SHOPID&shop_secret=SHOP_SECRET&new_email=NEW_EMAIL&old_email=OLD_EMAIL" https://<%= config[:api_endpoint] %>/profile/force_change_email
+```
+
+```javascript
+// Not supported
+```
+
+```swift
+// Not supported
+```
+
+```java
+// Not supported
+```
+
+```jsx
+// Not supported
+```
+
+Force change email of user with `old_email` to `new_email`. If a user with `new_email` exists, removes email from that user.
+
+If user with `old_email` is not found, returns 404.
+
+<aside class="notice">
+Use it carefully, because wrong usage of this method can lose old profile data. Mass uncontrolled action can break everything.
+</aside>
+
+It's S2S method.
+
+### Query Parameters
+
+| Parameter                    | Type   | Required   | Description                                                                                                  |
+|------------------------------|--------|------------|--------------------------------------------------------------------------------------------------------------|
+| shop_id                      | String | true       | Your API key                                                                                                 |
+| shop_secret                  | String | true       | Your API secret key                                                                                          |
+| new_email                    | String | true       | User's new email                                                                                             |
+| old_email                    | String | true       | User's current email                                                                                         |
+| i_understand_what_i_am_doing | String | true       | Must present with any `true` value (`true`, `"true"`, `1`, `yes`, `believe me I know what I am doing`, etc). |
+
+
+## Force change phone
+
+```shell
+curl -d "shop_id=SHOPID&shop_secret=SHOP_SECRET&new_phone=NEW_PHONE&old_phone=OLD_PHONE" https://<%= config[:api_endpoint] %>/profile/force_change_phone
+```
+
+```javascript
+// Not supported
+```
+
+```swift
+// Not supported
+```
+
+```java
+// Not supported
+```
+
+```jsx
+// Not supported
+```
+
+Force change phone of user with `old_phone` to `new_phone`. If a user with `new_phone` exists, removes phone from that user.
+
+If user with `old_phone` is not found, returns 404.
+
+<aside class="notice">
+Use it carefully, because wrong usage of this method can lose old profile data. Mass uncontrolled action can break everything.
+</aside>
+
+It's S2S method.
+
+### Query Parameters
+
+| Parameter                    | Type   | Required | Description                                                                                                  |
+|------------------------------|--------|----------|--------------------------------------------------------------------------------------------------------------|
+| shop_id                      | String | true     | Your API key                                                                                                 |
+| shop_secret                  | String | true     | Your API secret key                                                                                          |
+| new_phone                    | String | true     | User's new phone                                                                                             |
+| old_phone                    | String | true     | User's current phone                                                                                         |
+| i_understand_what_i_am_doing | String | true     | Must present with any `true` value (`true`, `"true"`, `1`, `yes`, `believe me I know what I am doing`, etc). |

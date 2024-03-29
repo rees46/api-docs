@@ -1,0 +1,86 @@
+# Multi-messaging
+
+Method of multi-channel notifications, when the platform automatically chooses the cheapest and more efficient way to deliver transactional message to a recipient.
+
+Supported channels:
+
+- email
+- web push
+- mobile push
+- sms
+
+## Initial tasks
+
+Before sending campaign you have to setup it:
+
+1. Prepare transactional email template
+2. Prepare transactional web/mobile push template
+3. Prepare transactional SMS template
+4. Create multi-channel campaign and select created templates for every channel you want to use in the campaign.
+5. Done.
+
+In templates you can use variables and operators to customize final content. Template engine - Liquid.
+
+## Sending message
+
+```shell
+curl -i -X POST -H "Content-Type: application/json" --data-binary "@data.json" https://<%= config[:api_endpoint] %>/transact
+
+# data.json
+{
+  "shop_id": "DvLWN2ZTMZ",
+  "shop_secret": "EIxTuot8sj",
+  "email": "...",
+  "phone": "...",
+  "code": "...",
+  "variables": {
+    "first_name": "John",
+    "last_name": "Connor",
+    "promocode": "IDDQD",
+    "variable_1": "value_1",
+    "variable_2": "value_2",
+    ...
+  }
+}
+```
+
+```javascript
+// REST API only. See cURL.
+```
+
+```swift
+// REST API only. See cURL.
+```
+
+```java
+// REST API only. See cURL.
+```
+
+When sending a message, you must to send:
+
+- API credentials
+- One or several user identifiers: email, phone, loyalty_id (more is better)
+- Multi-channel campaign ID
+- Variables object
+
+### Requirements
+
+Endpoint: `GET https://<%= config[:api_endpoint] %>/transact`
+
+Content type: `application/json`
+
+Data format: `JSON body`.
+
+### Query Parameters
+
+Parameter | Type | Required | Description
+--------- | ------- | -------  | -----------
+shop_id | String | true | Your API key
+shop_secret | String | true | Your API secret key
+email* | String | true | User's email
+phone* | String | true | User's phone number
+code | String | true | Multi-channel campaign unique code
+send_everywhere | Boolean | false | Send to all channels, except SMS. Default `false`
+variables | Object | true | Object of key-pair variables for template parser. See example
+
+> * One of identifiers must present in request: email or phone. It's used to identify user.

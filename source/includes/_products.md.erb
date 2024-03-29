@@ -1,0 +1,460 @@
+# Products and catalog
+
+Service is used to manage products and categories.
+
+## Request product list
+
+```shell
+# Basic
+curl https://<%= config[:api_endpoint] %>/products?shop_id=...&did=...&sid=...
+
+# Filter by brands
+curl https://<%= config[:api_endpoint] %>/products?shop_id=...&did=...&sid=...&brands=BRAND_1,BRAND_2
+
+# Filter by categories
+curl https://<%= config[:api_endpoint] %>/products?shop_id=...&did=...&sid=...&categories=CATEGORY_1,CATEGORY_2
+
+# Filter by locations
+curl https://<%= config[:api_endpoint] %>/products?shop_id=...&did=...&sid=...&locations=LOCATION_1,LOCATION_2
+
+# Filter by merchants
+curl https://<%= config[:api_endpoint] %>/products?shop_id=...&did=...&sid=...&merchants=MERCHANT_1,MERCHANT_2
+
+# Filter by params
+curl https://<%= config[:api_endpoint] %>/products?shop_id=...&did=...&sid=...&filters={"PARAM_NAME_1": ["PARAM_VALUE_1", "PARAM_VALUE_2"], "PARAM_NAME_2": ["PARAM_VALUE_1", "PARAM_VALUE_2"]}
+
+# Filter by true|false params. Send boolean params as string
+curl https://<%= config[:api_endpoint] %>/products?shop_id=...&did=...&sid=...&filters={"PARAM_NAME_1": ["true"], "PARAM_NAME_2": ["false"]}
+
+```
+
+```javascript
+// No implementation. See CURL
+```
+
+```swift
+sdk.getProductsList(
+  brands: String?,
+  merchants: String?,
+  categories: String?,
+  locations: String?,
+  limit: Int?,
+  page: Int?,
+  filters: [String : Any]?
+) {
+  Result<ProductsListResponse,
+  SDKError> in //productsListResponse in // Result response
+}
+```
+
+```java
+// No implementation. See CURL
+```
+
+### HTTP Request
+
+`GET https://<%= config[:api_endpoint] %>/products`
+
+### Query Parameters
+
+| Parameter  | Required | Description                                                                                                                          |
+|------------|----------|--------------------------------------------------------------------------------------------------------------------------------------|
+| did        | true     | Device ID. You get it from `init` method in SDK.                                                                                     |
+| shop_id    | true     | Your API key                                                                                                                         |
+| sid        | true     | Temporary user session ID                                                                                                            |
+| limit      | false    | Limit of results                                                                                                                     |
+| page       | false    | Page of results                                                                                                                      |
+| locations  | false    | Comma separated list of locations IDs                                                                                                |
+| brands     | false    | Comma separated list of brands to filter                                                                                             |
+| merchants  | false    | Comma separated list of merchants to filter                                                                                          |
+| categories | false    | Comma separated list of categories to filter                                                                                         |
+| filters    | false    | Optional escaped JSON string with filter parameters. For example: `{"bluetooth":["yes"],"offers":["15% cashback"],"weight":["1.6"]}` |
+
+
+### API response
+| Name               | Type   | Description                                                                                                                                                                                           |
+|:-------------------|:-------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| brands             | array  | Array with information about brands. Each object has the following properties:                                                                                                                        |
+|                    |        | * name – brand name (string)                                                                                                                                                                          |
+|                    |        | * picture – brand picture (string)                                                                                                                                                                    |
+| filters            | array  | Array with information about filters. Each object has the following properties:                                                                                                                       |
+|                    |        | * filter – fitler object. Has the following properties:                                                                                                                                               |
+|                    |        | * count – total count of products whith this parameters (number)                                                                                                                                      |
+|                    |        | * values – array of values (object). Has the following properties:                                                                                                                                    |
+|                    |        | * value – value label. (string)                                                                                                                                                                       |
+|                    |        | * count – cont of products whith this parameter (number)                                                                                                                                              |
+| price_range        | object | Min and max price of products. Has the following properties:                                                                                                                                          |
+|                    |        | * min – min price (number)                                                                                                                                                                            |
+|                    |        | * max – max price (number)                                                                                                                                                                            |
+| products           | array  | Array with information about products. Each object has the following properties:                                                                                                                      |
+|                    |        | * brand – product brand (string)                                                                                                                                                                      |
+|                    |        | * currency – product currency (string, corresponds to the currency of the personal account in <%= config[:service_name] %>, or a custom value specified in the shop settings in the personal account) |
+|                    |        | * id – product ID (string)                                                                                                                                                                            |
+|                    |        | * is_new – product property (boolean, default - null)                                                                                                                                                 |
+|                    |        | * name – product name (string)                                                                                                                                                                        |
+|                    |        | * old_price – product old price (string, default - 0)                                                                                                                                                 |
+|                    |        | * picture – product's picture URL in the <%= config[:service_name] %> storage (string)                                                                                                                |
+|                    |        | * price – product price (number)                                                                                                                                                                      |
+|                    |        | * price_formatted – product price with currency (string)                                                                                                                                              |
+|                    |        | * url – product URL (string)                                                                                                                                                                          |
+|                    |        |                                                                                                                                                                                                       |
+|                    |        | Additional properties. If a parameter "extended" is passed in the request                                                                                                                             |
+|                    |        | * barcode – product barcode (string)                                                                                                                                                                  |
+|                    |        | * categories – product categories (array). Has the following properties:                                                                                                                              |
+|                    |        | * id – category id (string)                                                                                                                                                                           |
+|                    |        | * name – category name (string)                                                                                                                                                                       |
+|                    |        | * parent – parent category id (string)                                                                                                                                                                |
+|                    |        | * params – array with information about params. Each object has the following properties:                                                                                                             |
+|                    |        | * key – param name (string)                                                                                                                                                                           |
+|                    |        | * values – array of values (array)                                                                                                                                                                    |
+| products_total     | number | Total count of products                                                                                                                                                                               |
+
+
+## Get product info
+
+```shell
+curl https://<%= config[:api_endpoint] %>/products/get?shop_id=...&item_id=...
+```
+
+```javascript
+// No implementation. See CURL
+```
+
+```swift
+// No implementation. See CURL
+```
+
+```java
+// No implementation. See CURL
+```
+
+> REST method returns this JSON structure
+
+```json
+{
+  "name": "...",
+  "description": "...",
+  "price": "...",
+  "currency": "...",
+  "url": "...",
+  "picture": "..."
+}
+```
+
+Returns basic product info.
+
+`GET https://<%= config[:api_endpoint] %>/products/get`
+
+### Query Parameters
+
+| Parameter | Type   | Required   | Description  |
+|-----------|--------|------------|--------------|
+| shop_id   | String | true       | Your API key |
+| item      | String | true       | Product ID   |
+
+## Get product stats
+
+```shell
+curl https://<%= config[:api_endpoint] %>/products/counters?shop_id=...&item=...
+```
+
+```javascript
+<%= config[:js_sdk_name] %>('products', 'counters', ITEM, success, error)
+```
+
+```swift
+// No implementation. See CURL
+```
+
+```java
+// No implementation. See CURL
+```
+
+> REST method returns this JSON structure
+
+```json
+{
+  "daily": {
+    "view": 123,
+    "cart": 456,
+    "purchase": 789
+  },
+  "now": {
+    "view": 123,
+    "cart": 456,
+    "purchase": 789
+  }
+}
+```
+
+Returns basic product info.
+
+`GET https://<%= config[:api_endpoint] %>/products/counters`
+
+### Query Parameters
+
+| Parameter | Type   | Required   | Description  |
+|-----------|--------|------------|--------------|
+| shop_id   | String | true       | Your API key |
+| item_id   | String | true       | Product ID   |
+
+## Get subscriptions for products in stock
+
+```shell
+curl https://<%= config[:api_endpoint] %>/products/subscribers/stock?shop_id=...&shop_secret=...
+```
+
+```javascript
+// No implementation. See CURL
+```
+
+```swift
+// No implementation. See CURL
+```
+
+```java
+// No implementation. See CURL
+```
+
+> REST method returns this JSON structure
+
+```json
+[
+  {
+    "id": "ID1",
+    "barcode": "BC101",
+    "quantity": 337,
+    "date": "2020-01-12",
+    "contacts": [
+      "email@email.com",
+      "email@email.com"
+    ]
+  },
+  {
+    "id": "ID2",
+    "barcode": "BC102",
+    "quantity": 13,
+    "date": "2020-08-11",
+    "contacts": [
+      "email@email.com",
+      "email@email.com"
+    ]
+  }
+]
+```
+
+Returns list of products and a number of subscribers for each product in stock.
+
+`GET https://<%= config[:api_endpoint] %>/products/subscribers/stock`
+
+### Query Parameters
+
+| Parameter     | Type      | Required   | Description       |
+|---------------|-----------|------------|-------------------|
+| shop_id       | String    | true       | Your API key      |
+| shop_secret   | String    | true       | Shop secret key   |
+
+### Response details
+
+| Parameter     | Type    | Description                           |
+|---------------|---------|---------------------------------------|
+| id            | String  | Product ID                            |
+| barcode       | String  | Product barcode                       |
+| subscribers   | Integer | Number of subscribers for the product |
+| date          | String  | Date of the last subscription         |
+
+
+
+## Get subscriptions for products price drop
+
+```shell
+curl https://<%= config[:api_endpoint] %>/products/subscribers/price?shop_id=...&shop_secret=...
+```
+
+```javascript
+// No implementation. See CURL
+```
+
+```swift
+// No implementation. See CURL
+```
+
+```java
+// No implementation. See CURL
+```
+
+> REST method returns this JSON structure
+
+```json
+[
+  {
+    "id": "ID1",
+    "barcode": "BC101",
+    "quantity": 337,
+    "date": "2020-01-12",
+    "contacts": [
+      "email@email.com",
+      "email@email.com"
+    ]
+  },
+  {
+    "id": "ID2",
+    "barcode": "BC102",
+    "quantity": 13,
+    "date": "2020-08-11",
+    "contacts": [
+      "email@email.com",
+      "email@email.com"
+    ]
+  }
+]
+```
+
+Returns list of products and a number of subscribers for each product's price drop.
+
+`GET https://<%= config[:api_endpoint] %>/products/subscribers/price`
+
+### Query Parameters
+
+| Parameter   | Type   | Required   | Description     |
+|-------------|--------|------------|-----------------|
+| shop_id     | String | true       | Your API key    |
+| shop_secret | String | true       | Shop secret key |
+
+### Response details
+
+| Parameter    | Type    | Description                           |
+|--------------|---------|---------------------------------------|
+| id           | String  | Product ID                            |
+| barcode      | String  | Product barcode                       |
+| subscribers  | Integer | Number of subscribers for the product |
+| date         | String  | Date of the last subscription         |
+
+
+## Get status of subscription for "Back in Stock" trigger
+
+```shell
+// No implementation. See JavaScript
+```
+
+```javascript
+<%= config[:js_sdk_name] %>("check_trigger", "product_price_decrease", params, success, error);
+```
+
+```swift
+// No implementation. See JavaScript
+```
+
+```java
+// No implementation. See JavaScript
+```
+
+> API method returns this boolean status
+
+
+Returns boolean status of subscription.
+
+
+### Query Parameters
+
+| Parameter | Type     | Required | Description                                                                                |
+|-----------|----------|----------|--------------------------------------------------------------------------------------------|
+| params    | Object   | true     |  Object with request parameters.                                                           |
+| success   | Function | true     | Callback-function, where the API response will be passed to. Response type: object.        |
+|  error    | Function | false    | Callback-function to be called when an error occurs (any HTTP status code other than 200). |
+
+### Request parameters
+
+| Parameter   | Type          | Required | Description                          |
+|-------------|---------------|----------|--------------------------------------|
+| item        | string/number | true     | Product ID                           |
+| email       | string 	      | false    | Email for subscription checking      |
+| phone       | string 	      | false    | Phone for subscription checking      |
+|  loyalty_id | string 	      | false    | Loyalty ID for subscription checking |
+
+<aside class="notice">
+If no *email*, *phone*, or *loyalty_id* is specified, only the user's current device will be checked. It won't take into account subscriptions performed on the user's other devices.
+</aside>
+
+
+## Get status of subscription for product price drop
+
+```shell
+// No implementation. See JavaScript
+```
+
+```javascript
+<%= config[:js_sdk_name] %>("check_trigger", "product_available", params, success, error);
+```
+
+```swift
+// No implementation. See JavaScript
+```
+
+```java
+// No implementation. See JavaScript
+```
+
+> API method returns this boolean status
+
+
+Returns boolean status of subscription.
+
+
+### Query Parameters
+
+| Parameter | Type     | Required | Description                                                                                |
+|-----------|----------|----------|--------------------------------------------------------------------------------------------|
+| params    | Object   | true     | Object with request parameters.                                                            |
+| success   | Function | true     | Callback-function, where the API response will be passed to. Response type: object.        |
+|  error    | Function | false    | Callback-function to be called when an error occurs (any HTTP status code other than 200). |
+
+### Request parameters
+
+| Parameter   | Type          | Required | Description                          |
+|-------------|---------------|----------|--------------------------------------|
+| item        | string/number | true     | Product ID                           |
+| email       | string        | false    | Email for subscription checking      |
+| phone       | string        | false    | Phone for subscription checking      |
+| loyalty_id  | string        | false    | Loyalty ID for subscription checking |
+
+<aside class="notice">
+If no *email*, *phone*, or *loyalty_id* is specified, only the user's current device will be checked. It won't take into account subscriptions performed on the user's other devices.
+</aside>
+
+
+## List not widgetable products
+
+```shell
+curl https://<%= config[:api_endpoint] %>/products/not_widgetable?shop_id=...&shop_secret=...
+```
+
+```javascript
+// No implementation. See shell
+```
+
+```swift
+// No implementation. See shell
+```
+
+```java
+// No implementation. See shell
+```
+
+> API method returns a list like this:
+
+```
+{
+  "status": "success",
+  "data": {
+    "items": [
+      { "uniqid": "YOUR_SKU", "name": "...", "url": "...", "image_url": "", "price": ..., "image_downloading_error": "..."},
+      { "uniqid": "YOUR_SKU", "name": "...", "url": "...", "image_url": "", "price": ..., "image_downloading_error": "..."},
+    ]
+  }
+}
+```
+
+Returns a list of `avaiable` and `not ignored` products which are not `widgetable`: can't be displayed in search, recommendations and messages due to missing one of mandatory parameters (`name`, `price`, `url` or `image_url`) or failed to fetch product's photo during import operation.
+
+

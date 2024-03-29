@@ -1,0 +1,208 @@
+# Communications
+
+Section describes how to save, read or edit external communication's logs.
+
+## Save communication log
+
+```shell
+curl -i -X POST -H "Content-Type: application/json" --data-binary "@data.json" https://<%= config[:api_endpoint] %>/crm/client_calls
+
+# data.json for phone
+{
+  "shop_id": "DvLWN2ZTMZ",
+  "shop_secret": "EIxTuot8sj",
+  "phone": "...",
+  "channel": "...",
+  "event": "...",
+  "location_id": "...",
+  "call_type": "...",
+  "call_theme": "...",
+  "comment": "...",
+  "author_type": "...",
+  "status": "..."
+}
+
+# data.json for email
+{
+  "shop_id": "DvLWN2ZTMZ",
+  "shop_secret": "EIxTuot8sj",
+  "email": "...",
+  "channel": "...",
+  "event": "...",
+  "location_id": "...",
+  "call_type": "...",
+  "call_theme": "...",
+  "comment": "...",
+  "author_type": "...",
+  "status": "..."
+}
+
+# data.json for did
+{
+  "shop_id": "DvLWN2ZTMZ",
+  "shop_secret": "EIxTuot8sj",
+  "did": "...",
+  "channel": "...",
+  "event": "...",
+  "location_id": "...",
+  "call_type": "...",
+  "call_theme": "...",
+  "comment": "...",
+  "author_type": "...",
+  "status": "..."
+}
+```
+
+```javascript
+// REST API only. See cURL.
+```
+
+```swift
+// REST API only. See cURL.
+```
+
+```java
+// REST API only. See cURL.
+```
+
+```jsx
+// REST API only. See cURL.
+```
+
+### Requirements
+
+Endpoint: `POST https://<%= config[:api_endpoint] %>/crm/client_calls`
+
+Content type: `application/json`
+
+### Query Parameters
+
+| Parameter       | Type    | Required | Description                                |
+|-----------------|---------|----------|--------------------------------------------|
+| shop_id         | String  | true     | Your API key                               |
+| shop_secret     | String  | true     | Your API secret key                        |
+| phone*          | String  | true     | User's phone number                        |
+| email*          | String  | true     | User's email                               |
+| did*            | String  | true     | User's did                                 |
+| channel         | String  | true     | Сommunication's channel                    |
+| event           | String  | true     | Сommunication's event                      |
+| location_id     | String  | true     | Client's location id                       |
+| call_type       | String  | true     | Сommunication's type                       |
+| call_theme      | String  | true     | Сommunication's theme                      |
+| subject_appeal  | String  | true     | Сommunication's subtheme                   |
+| comment         | String  | true     | Сommunication's comment                    |
+| author_type     | String  | true     | Сommunication's author                     |
+| status          | String  | true     | Сommunication's status in external system  |
+
+<aside class="notice">
+At least of identifiers (marked by *) must present in request: did, email or phone. It's used to identify user.
+</aside>
+
+
+## Read communication log
+
+The query returns the last 20 communications as an array with items sorted by time
+
+```shell
+# Using phone as user identifier
+curl https://<%= config[:api_endpoint] %>/crm/client_calls?&shop_id=...&shop_secret=...phone=...
+
+# Using email as user identifier
+curl https://<%= config[:api_endpoint] %>/crm/client_calls?&shop_id=...&shop_secret=...email=...
+
+# Using did as user identifier
+curl https://<%= config[:api_endpoint] %>/crm/client_calls?&shop_id=...&shop_secret=...did=...
+```
+
+```javascript
+// REST API only. See cURL.
+```
+
+```swift
+// REST API only. See cURL.
+```
+
+```java
+// REST API only. See cURL.
+```
+
+```jsx
+// REST API only. See cURL.
+```
+
+### Requirements
+
+Endpoint: `GET https://<%= config[:api_endpoint] %>/crm/client_calls`
+
+### Query Parameters
+
+| Parameter   | Type    | Required | Description                                |
+|-------------|---------|----------|--------------------------------------------|
+| shop_id     | String  | true     | Your API key                               |
+| shop_secret | String  | true     | Your API secret key                        |
+| phone*      | String  | true     | User's phone number                        |
+| email*      | String  | true     | User's email                               |
+| did*        | String  | true     | User's did                                 |
+
+<aside class="notice">
+At least of identifiers (marked by *) must present in request: did, email or phone. It's used to identify user.
+</aside>
+
+## Edit communication log
+
+The query returns the last 20 communications as an array with items sorted by time
+
+```shell
+# Using phone as user identifier
+curl https://<%= config[:api_endpoint] %>/crm/client_calls/ID?&shop_id=...&shop_secret=...phone=...
+
+# Using email as user identifier
+curl https://<%= config[:api_endpoint] %>/crm/client_calls/ID?&shop_id=...&shop_secret=...email=...
+
+# Using did as user identifier
+curl https://<%= config[:api_endpoint] %>/crm/client_calls/ID?&shop_id=...&shop_secret=...did=...
+```
+
+```javascript
+// REST API only. See cURL.
+```
+
+```swift
+// REST API only. See cURL.
+```
+
+```java
+// REST API only. See cURL.
+```
+
+```jsx
+// REST API only. See cURL.
+```
+
+### Requirements
+
+Endpoint: `PATCH https://<%= config[:api_endpoint] %>/crm/client_calls`
+
+### Query Parameters
+
+| Parameter       | Type    | Required | Description                                |
+|-----------------|---------|----------|--------------------------------------------|
+| shop_id         | String  | true     | Your API key                               |
+| shop_secret     | String  | true     | Your API secret key                        |
+| phone*          | String  | true     | User's phone number                        |
+| email*          | String  | true     | User's email                               |
+| did*            | String  | true     | User's did                                 |
+| ID              | String  | true     | Communication's id                         |
+| channel         | String  | true     | Сommunication's channel                    |
+| event           | String  | true     | Сommunication's event                      |
+| location_id     | String  | true     | Client's location id                       |
+| call_type       | String  | true     | Сommunication's type                       |
+| call_theme      | String  | true     | Сommunication's theme                      |
+| subject_appeal  | String  | true     | Сommunication's subtheme                   |
+| comment         | String  | true     | Сommunication's comment                    |
+| author_type     | String  | true     | Сommunication's author                     |
+| status          | String  | true     | Сommunication's status in external system  |
+
+<aside class="notice">
+At least of identifiers (marked by *) must present in request: did, email or phone. It's used to identify user.
+</aside>

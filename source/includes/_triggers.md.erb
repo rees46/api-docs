@@ -1,0 +1,248 @@
+# Triggers
+
+Trigger subscription methods that require explicit user action.
+
+## Price drop
+
+```shell
+# Subscribing
+curl --location --request POST 'https://<%= config[:api_endpoint] %>/subscriptions/subscribe_for_product_price' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "shop_id":"SHOP_ID",
+    "email":"EMAIL",
+    "phone":"PHONE",
+    "did":"DeviceID",
+    "item_id":"11111",
+    "price": "1000"
+}'
+
+# Unsubscribing from specific products
+curl --location --request POST 'https://<%= config[:api_endpoint] %>/subscriptions/unsubscribe_from_product_price' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "shop_id":"SHOP_ID",
+    "email":"EMAIL",
+    "phone":"PHONE",
+    "did":"DeviceID",
+    "item_ids":"11111, 22222, 333333"
+}'
+
+# Unsubscribing from all products
+curl --location --request POST 'https://<%= config[:api_endpoint] %>/subscriptions/unsubscribe_from_product_price' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "shop_id":"SHOP_ID",
+    "email":"EMAIL",
+    "phone":"PHONE",
+    "did":"DeviceID",
+    "item_ids":""
+}'
+```
+
+```javascript
+// Subscribing
+<%= config[:js_sdk_name] %>('subscribe_trigger', 'product_price_decrease', {email: 'John.Doe@store.com', item: '3323', price: 160});
+
+// Unsubscribing from specific products
+<%= config[:js_sdk_name] %>('unsubscribe_trigger', 'product_price_decrease', {email: 'John.Doe@store.com', item_ids: [3323, 100500, 'ABCDEF']});
+
+// Unsubscribing from all products
+<%= config[:js_sdk_name] %>('unsubscribe_trigger', 'product_price_decrease', {email: 'John.Doe@store.com', item_ids: []});
+```
+
+```swift
+// Subscribe
+sdk.subscribeForPriceDrop(id: "PRODUCT_ID", currentPrice: 333.49);
+
+// Subscribe for specific email
+sdk.subscribeForPriceDrop(id: "PRODUCT_ID", currentPrice: 333.49, email: "mail@example.com");
+
+// Subscribe for specific phone
+sdk.subscribeForPriceDrop(id: "PRODUCT_ID", currentPrice: 333.49, phone: "+19999999999");
+```
+
+```java
+// Subscribe
+<%= config[:android_sdk_package_name]%>.subscribeForPriceDrop("PRODUCT_ID", 333.49);
+
+// Subscribe for specific email
+<%= config[:android_sdk_package_name]%>.subscribeForPriceDrop("PRODUCT_ID", 333.49, "mail@example.com");
+
+// Subscribe for specific phone
+<%= config[:android_sdk_package_name]%>.subscribeForPriceDrop("PRODUCT_ID", 333.49, null, "+19999999999");
+
+// Unsubscribing from specific products
+<%= config[:android_sdk_package_name]%>.unsubscribeForPriceDrop(new String[] {"11111", "22222", "33333"});
+
+// Unsubscribing from all products
+<%= config[:android_sdk_package_name]%>.unsubscribeForPriceDrop(new String[] {});
+```
+
+This feature gives the customers an option to choose if they want to receive a notification when the price of the item they want has dropped.
+
+### JS SDK syntax
+| Syntax                                                                              |
+|-------------------------------------------------------------------------------------|
+| <%= config[:js_sdk_name] %>('subscribe_trigger', 'product_price_decrease', params); |
+
+### JS SDK Parameters
+| Parameter | Type          | Requirement | Description                                                |
+|-----------|---------------|-------------|------------------------------------------------------------|
+| email*    | string        | required    | Subscriber Email                                           |
+| phone*    | string        | required    | Subscriber Phone                                           |
+| did*      | string        | required    | Subscriber Did                                             |
+| item      | number/string | required    | The ID of the product to which the user will be subscribed |
+| price     | number/string | required    | The current product price                                  |
+
+<aside class="notice">
+At least of identifiers (marked by *) must present in request: did, email or phone. It's used to identify user.
+</aside>
+
+### JS SDK syntax
+| Syntax                                                                                |
+|---------------------------------------------------------------------------------------|
+| <%= config[:js_sdk_name] %>('unsubscribe_trigger', 'product_price_decrease', params); |
+
+### JS SDK Parameters
+| Parameter   | Type           | Requirement    | Description                                                                                             |
+|-------------|----------------|----------------|---------------------------------------------------------------------------------------------------------|
+| email*      | string         | required       | Subscriber Email                                                                                        |
+| phone*      | string         | required       | Subscriber Phone                                                                                        |
+| did*        | string         | required       | Subscriber Did                                                                                          |
+| item_ids    | array          | required       | The IDs of the products from which the user will unsubscribe, or an empty array for full unsubscription |
+
+<aside class="notice">
+At least of identifiers (marked by *) must present in request: did, email or phone. It's used to identify user.
+</aside>
+
+## Back in Stock
+
+```shell
+# Subscribing
+curl --location --request POST 'https://<%= config[:api_endpoint] %>/subscriptions/subscribe_for_product_available' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "shop_id":"SHOP_ID",
+    "email":"EMAIL",
+    "item_id":"11111",
+    "phone":"PHONE",
+    "did":"DeviceID",
+    "properties": {"fashion_size":"XL", "barcode": "222222"}
+}'
+
+# Unsubscribing from specific products
+curl --location --request POST 'https://<%= config[:api_endpoint] %>/subscriptions/unsubscribe_from_product_available' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "shop_id":"SHOP_ID",
+    "email":"EMAIL",
+    "phone":"PHONE",
+    "did":"DeviceID",
+    "item_ids":"11111, 22222, 333333"
+}'
+
+# Unsubscribing from all products
+curl --location --request POST 'https://<%= config[:api_endpoint] %>/subscriptions/unsubscribe_from_product_available' \
+--header 'Content-Type: application/json' \
+--data-raw '{
+    "shop_id":"SHOP_ID",
+    "email":"EMAIL",
+    "phone":"PHONE",
+    "did":"DeviceID",
+    "item_ids":""
+}'
+```
+
+```javascript
+// Subscribing
+<%= config[:js_sdk_name] %>('subscribe_trigger', 'product_available', {email: 'John.Doe@store.com', item: '3323', properties: {fashion_size: "XL", barcode: "222222"}});
+
+// Unsubscribing from specific products
+<%= config[:js_sdk_name] %>('unsubscribe_trigger', 'product_available', {email: 'John.Doe@store.com', item_ids: [3323, 100500, 'ABCDEF']});
+
+// Unsubscribing from all products
+<%= config[:js_sdk_name] %>('unsubscribe_trigger', 'product_available', {email: 'John.Doe@store.com', item_ids: []});
+```
+
+```swift
+// Subscribe
+sdk.subscribeForBackInStock(id: "PRODUCT_ID");
+
+// Subscribe for specific email
+sdk.subscribeForBackInStock(id: "PRODUCT_ID", email: "mail@example.com");
+
+// Subscribe for specific phone
+sdk.subscribeForBackInStock(id: "PRODUCT_ID", phone: "+19999999999");
+```
+
+```java
+// Subscribe
+<%= config[:android_sdk_package_name]%>.subscribeForBackInStock("PRODUCT_ID");
+
+// Subscribe for specific email
+<%= config[:android_sdk_package_name]%>.subscribeForBackInStock("PRODUCT_ID", "mail@example.com");
+
+// Subscribe for specific phone
+<%= config[:android_sdk_package_name]%>.subscribeForBackInStock("PRODUCT_ID", "+19999999999");
+
+// Subscribe with product size
+JSONObject properties = new JSONObject();
+properties.put("fashion_size", "XL");
+<%= config[:android_sdk_package_name]%>.subscribeForBackInStock("PRODUCT_ID", properties, "mail@example.com", null, null);
+
+// Unsubscribing from specific products
+<%= config[:android_sdk_package_name]%>.unsubscribeForBackInStock(new String[] {"11111", "22222", "33333"});
+
+// Unsubscribing from all products
+<%= config[:android_sdk_package_name]%>.unsubscribeForBackInStock(new String[] {});
+```
+
+```jsx
+// Subscribing
+<%= config[:rn_sdk_package_name]%>.triggers('subscribe_for_product_available', {email: 'John.Doe@store.com', item: '3323', properties: {fashion_size: "XL"}});
+
+// Unsubscribing from specific products
+<%= config[:rn_sdk_package_name]%>.triggers('unsubscribe_from_product_available', {email: 'John.Doe@store.com', item_ids: [3323, 100500, 'ABCDEF']});
+
+// Unsubscribing from all products
+<%= config[:rn_sdk_package_name]%>.triggers('unsubscribe_from_product_available', {email: 'John.Doe@store.com', item_ids: []});
+```
+
+This feature helps you recover sales lost due to out-of-stock items by giving your customers an option to choose if they want to receive a notification when the item they want is back in stock.
+
+### JS SDK syntax
+| Syntax                                                                         |
+|--------------------------------------------------------------------------------|
+| <%= config[:js_sdk_name] %>('subscribe_trigger', 'product_available', params); |
+
+### JS SDK Parameters
+| Parameter | Type          | Requirement | Description                                                |
+|-----------|---------------|-------------|------------------------------------------------------------|
+| email*    | string        | required    | Subscriber Email                                           |
+| phone*    | string        | required    | Subscriber Phone                                           |
+| did*      | string        | required    | Subscriber Did                                             |
+| item      | number/string | required    | The ID of the product to which the user will be subscribed |
+| params    | object        | optional    | Product properties: barcode, fashion_color, fashion_size   |
+
+<aside class="notice">
+At least of identifiers (marked by *) must present in request: did, email or phone. It's used to identify user.
+</aside>
+
+### JS SDK syntax
+| Syntax                                                                           |
+|----------------------------------------------------------------------------------|
+| <%= config[:js_sdk_name] %>('unsubscribe_trigger', 'product_available', params); |
+
+### JS SDK Parameters
+| Parameter      | Type           | Requirement    | Description                                                                                               |
+|----------------|----------------|----------------|-----------------------------------------------------------------------------------------------------------|
+| email*         | string         | required       | Subscriber Email                                                                                          |
+| phone*         | string         | required       | Subscriber Phone                                                                                          |
+| did*           | string         | required       | Subscriber Did                                                                                            |
+| item_ids       | array          | required       | The IDs of the products from which the user will unsubscribe, or an empty array for full unsubscription   |
+
+<aside class="notice">
+At least of identifiers (marked by *) must present in request: did, email or phone. It's used to identify user.
+</aside>
+

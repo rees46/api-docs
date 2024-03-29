@@ -1,0 +1,205 @@
+# Audience
+
+This section allows to manage users, their subscriptions and segments.
+
+## Import users
+
+```shell
+curl -i -X POST -H "Content-Type: application/json" --data-binary "@data.json" https://<%= config[:api_endpoint] %>/import/audience
+
+# data.json
+{
+  "shop_id": "1234567890",
+  "shop_secret": "0987654321",
+  "segment_id": "123",
+  "audience": [
+    {
+      "email": "test@example.com",
+      "loyalty_id": "123454321",
+      "phone": "19991005000",
+      "id": "998877",
+      "fb_id": "",
+      "vk_id": "",
+      "telegram_id": "",
+      "loyalty_card_location": "",
+      "loyalty_status": "VIP",
+      "loyalty_bonuses": 3000,
+      "loyalty_bonuses_to_next_level": 70000,
+      "gender": "",
+      "location": "",
+      "first_name": "Jane",
+      "last_name": "Smith",
+      "age": "",
+      "birthday": "",
+      "bought_something": true,
+      "email_bulk": true,
+      "email_chain": true,
+      "email_transactional": true,
+      "sms_bulk": true,
+      "sms_chain": true,
+      "sms_transactional": true,
+      "mobile_token": "TOKEN",
+      "mobile_token_platform": "PLATFORM",
+      "auto": [
+        {
+          "brand": "Mini",
+          "model": "Countryman",
+          "vds": "1234567"
+        },
+        {
+          "brand": "Toyota",
+          "model": "Corolla",
+          "vds": "987655431"
+        }
+      ],
+      "kids": [
+        {
+          "birthday": "2014-06-03",
+          "gender": "f"
+          },
+        {
+          "birthday": "2017-04-01",
+          "gender": "m"
+        }
+      ],
+
+    },
+    {...},
+    {...},
+  ]
+}
+```
+
+```javascript
+// No implementation is needed in JS SDK
+```
+
+```swift
+// No implementation is needed in iOS SDK
+```
+
+```java
+// No implementation is needed in Android SDK
+```
+
+Upload audience to database. You can upload users to the default segment or put it in the specific segment. At the same time you can subscribe or unsubscribe users from any kind of email campaigns.
+
+
+
+### Query Parameters
+
+Parameter | Type | Required | Description
+--------- | ------- | -------  | -----------
+shop_id | String | true | Your API key
+shop_secret | String | true | Your API secret key
+segment_id | Integer | false | Segment ID
+audience | Array | true | Array of user data objects (see below)
+
+### Audience element properties
+
+You can update any standard profile property. All standard properties are listed here:
+
+Parameter | Type | Description
+--------- | ------- | -----------
+email* | String | User's email
+phone* | String | User's phone number
+loyalty_id | String | User's loyalty program ID
+id | String | User ID in your platform
+fb_id | String | User's Facebook ID
+vk_id | String | User's VK ID
+telegram_id | String | User's Telegram ID
+loyalty_card_location | String | Location ID where user's loyalty card was issued
+loyalty_status | String | User's loyalty program status
+loyalty_bonuses | Integer | User's bonuses amount
+loyalty_bonuses_to_next_level | Integer | User's bonuses amount left for the next level
+gender | String | User's gender: `m` or `f`
+location | String | User's location code
+first_name | String | User's first name
+last_name | String | User's last name
+age | Integer | User's age in years
+birthday | Date | User's birthday in SQL format: YYYY-MM-DD
+bought_something | Bool | User bought something ever
+kids | Array | List of kids (see below)
+auto | Array | List of auto vehicles (see below)
+email_bulk | Boolean | Subscribe user to email bulk campaigns
+email_chain | Boolean | Subscribe user to email drip/trigger campaigns
+email_transactional | Boolean | Subscribe user to email transactional campaigns
+sms_bulk | Boolean | Subscribe user to SMS bulk campaigns
+sms_chain | Boolean | Subscribe user to SMS drip/trigger campaigns
+sms_transactional | Boolean | Subscribe user to SMS transactional campaigns
+mobile_token | String | Unique mobile push token from iOS or Android
+mobile_token_platform | String | Identifies platform: `ios` for APNs or `android` for Firebase
+
+
+<aside class="notice">
+At least of identifiers (marked by *) must present in request: email or phone. It's used to identify user.
+</aside>
+
+Kid object properties:
+
+Parameter | Type | Description
+--------- | ------- | -----------
+gender | String | Kid's gender: `m` or `f`
+birthday | Date | Kid's birthday in SQL format: YYYY-MM-DD
+
+Auto object properties:
+
+Parameter | Type | Description
+--------- | ------- | -----------
+brand | String | Vehicle brand
+model | String | Vehicle model
+vds | String | Vehicle VDS/VIN number
+
+### Custom properties
+
+Additionally you can update any custom property, you've created in CRM.
+
+
+
+
+## Import suppressed emails
+
+```shell
+curl -i -X POST -H "Content-Type: application/json" --data-binary "@data.json" https://<%= config[:api_endpoint] %>/import/suppressed
+
+# data.json
+{
+  "shop_id": "1234567890",
+  "shop_secret": "0987654321",
+  "audience": [
+    { "email": "test@example.com" },
+    { "email": "test2@example.com" },
+  ]
+}
+```
+
+```javascript
+// No implementation is needed in JS SDK
+```
+
+```swift
+// No implementation is needed in iOS SDK
+```
+
+```java
+// No implementation is needed in Android SDK
+```
+
+Upload suppressed emails to database. All emails from this list will be unsubscribed from emails and marked as suppressed.
+
+
+
+### Query Parameters
+
+Parameter | Type | Required | Description
+--------- | ------- | -------  | -----------
+shop_id | String | true | Your API key
+shop_secret | String | true | Your API secret key
+audience | Array | true | Array of user data objects (see below)
+
+### Audience element properties
+
+Parameter | Type | Description
+--------- | ------- | -----------
+email | String | User's email
+

@@ -1,0 +1,50 @@
+# Mobile push tokens
+
+## Create new token
+
+```shell
+curl -d "did=DEVICE_ID&shop_id=SHOPID&token=TOKEN&platform=PLATFORM" https://<%= config[:api_endpoint] %>/mobile_push_tokens
+```
+
+```swift
+sdk.setPushTokenNotification(token: "TOKEN_STRING") { (tokenResponse) in
+  print("Token set response")
+}
+```
+
+```java
+<%= config[:android_sdk_package_name] %>.setPushTokenNotification("token", new Api.OnApiCallbackListener() {
+	@Override
+	public void onSuccess(JSONObject msg) {
+		//
+	}
+});
+```
+
+```jsx
+// When you request permissions to send notifications and receive push token,
+// send it to API using this method:
+sdk.setPushTokenNotification('NEW_TOKEN');
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{}
+```
+
+This endpoint creates new token for the user, identified by `did` parameter.
+
+### HTTP Request
+
+`POST https://<%= config[:api_endpoint] %>/mobile_push_tokens`
+
+### Query Parameters
+
+| Parameter   | Required   | Description                                                   |
+|-------------|------------|---------------------------------------------------------------|
+| did         | true       | Device ID. You get it from `init` method in SDK.              |
+| platform    | true       | Identifies platform: `ios` for APNs or `android` for Firebase |
+| token       | true       | Unique mobile push token from iOS or Android.                 |
+| shop_id     | true       | Your API key                                                  |
+

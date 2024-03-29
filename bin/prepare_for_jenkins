@@ -1,0 +1,11 @@
+#!/bin/bash
+
+set -e
+
+[[ -s "$HOME/.rvm/scripts/rvm" ]] && source "$HOME/.rvm/scripts/rvm"
+
+ruby -v
+bundle -v
+
+bundle install
+

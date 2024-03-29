@@ -1,0 +1,912 @@
+# Events tracking
+
+You have to track all user's behavior to get real time statistics and user's segmentation.
+
+The platform provides different kinds of events:
+
+- pre-defined events for main reports and segmentation
+- user defined events
+
+Events can be tracked in default mode (user did something) and assisted mode (user did something with help of some platform's instruments: search, push, email, recommendations, etc).
+
+To track assisted events, you need to user `recommendedBy` (or `recommended_by`, depending on SDK) params.
+
+## Required params
+
+All events require at least these parameters:
+
+| Parameter | Type   | Required   | Description                                                                                                                                                                                                                    |
+|-----------|--------|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| shop_id   | String | true       | Your API key                                                                                                                                                                                                                   |
+| did       | String | true       | Device ID                                                                                                                                                                                                                      |
+| sid       | String | true       | User's current session                                                                                                                                                                                                         |
+| event     | String | true       | Type of an event                                                                                                                                                                                                               |
+| stream    | String | false      | Data stream code. Alphanumeric string (letters, numbers only). Max length: 16. Default: null (means "web"). Can be "ios", "android" or any other string. Used to distinguish between mobile apps, web and other events sources |
+
+
+SDKs already handle these parameters out of the box.
+
+## Source tracking
+
+```shell
+# No code implementation
+```
+
+```javascript
+// It's done automatically. You don't have to do anything.
+```
+
+```swift
+// Track launch from drip campaign (chain).
+// Message ID and source will be provided in mobile push payload
+sdk.trackSource(source: .chain, code: "MESSAGE_ID")
+```
+
+```java
+<%= config[:android_sdk_package_name]%>.track(Params.TrackEvent.VIEW, "37");
+```
+
+```jsx
+// See click on push notification
+```
+
+For mobile apps you have to track all app launches, happened by drip campaigns, mailings and push notifications. It will allow to track campaigns efficiency properly.
+
+## User viewed a product
+
+```shell
+#Full request without widget recommendation identifiers
+curl 'https://<%= config[:api_endpoint] %>/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/json' \
+    --data-raw '{"event":"view", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "sid":"SEANCE_ID", "segment":"A or B", "items":[{"id":"PRODUCT_ID"}]}'
+
+#Full request with widget recommendation identifiers
+curl 'https://<%= config[:api_endpoint] %>/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/json' \
+    --data-raw '{"event":"view", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "sid":"SEANCE_ID", "segment":"A or B", "items":[{"id":"PRODUCT_ID"}], "recommended_by":"dynamic", "recommended_code":"UNIQUE_RECOMMENDER_CODE"}'
+
+#Short request with minimum required parameters
+curl 'https://<%= config[:api_endpoint] %>/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/json' \
+    --data-raw '{"event":"view", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "items":[{"id":"PRODUCT_ID"}]}'
+```
+
+```javascript
+
+// Simple track
+<%= config[:js_sdk_name] %>("track", "view", "37");
+
+// Also notify the product is in stock (if it was not in stock)
+<%= config[:js_sdk_name] %>("track", "view", {
+    id: "37",
+    stock: true
+});
+
+// Or not in stock anymore (to prevent recommending it on the next requests)
+<%= config[:js_sdk_name] %>("track", "view", {
+    id: "37",
+    stock: false
+});
+
+// Track if product was viewed after click on product recommendations
+<%= config[:js_sdk_name] %>("track", "view", {
+    id: "37",
+    recommended_by: "dynamic",
+    recommended_code: "jkIWdXSRfwVyK"
+});
+
+// Track if product was viewed after click on suggest results
+<%= config[:js_sdk_name] %>("track", "view", {
+    id: "37",
+    recommended_by: "instant_search"
+});
+
+// ... or on full results
+<%= config[:js_sdk_name] %>("track", "view", {
+    id: "37",
+    recommended_by: "full_search"
+});
+
+```
+
+```swift
+// Plain tracking
+sdk.track(event: .productView(id: "PRODUCT_ID")) { trackResponse in
+    print("Product viewed callback")
+    switch trackResponse {
+    case let .success(response):
+        print("Successful")
+    case let .failure(error):
+        switch error {
+        case .custom(let customError):
+            print("Error: ", customError)
+        default:
+            print("Error: ", error.localizedDescription)
+        }
+        fatalError("Task failed successfully")
+    }
+}
+
+
+// Tracking after product recommendation click
+let recData = RecomendedBy(type: .dynamic, code: "beb620922934b6ba2d6a3fb82b8b3271")
+sdk.track(event: .productView(id: "PRODUCT_ID"), recommendedBy: recData) { trackResponse in
+    // ...
+}
+```
+
+```jsx
+
+// View product (simple)
+sdk.track("view", "37");
+
+// View product (extended, try to avoid)
+sdk.track("view", {
+    id: "37",
+    stock: true
+});
+
+// View product after click on recommender block
+sdk.track("view", {
+  id: PRODUCT_ID,
+  recommended_by: 'dynamic',
+  recommended_code: 'UNIQUE_RECOMMENDER_CODE'
+});
+
+// View product after search results (instant search)
+sdk.track("view", {
+  id: PRODUCT_ID,
+  recommended_by: 'full_search',
+  recommended_code: QUERY_STRING
+});
+
+// View product after search results (full search)
+sdk.track("view", {
+  id: PRODUCT_ID,
+  recommended_by: 'instant_search',
+  recommended_code: QUERY_STRING
+});
+
+```
+
+Send this event when user opens product's details page.
+
+### JS SDK syntax
+| Syntax                                                  |
+|---------------------------------------------------------|
+| <%= config[:js_sdk_name] %>("track", "view", {params}); |
+
+### JS SDK Parameters
+| Parameter        | Type     | Requirement            | Description                                                                                                                                                                                                                                                                      |
+|------------------|----------|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id               | string   | required               | The ID of the product being viewed                                                                                                                                                                                                                                               |
+| stock            | boolean  | optional               | Product availability. If defined, it overwrites the value received from the product feed (XML) and HTTP-import of the product catalog.                                                                                                                                           |
+| recommended_by   | string   | required in some cases | If a product from a recommendation widget was opened in a popup or a website uses a "single page" architecture, this parameter must contain the value "dynamic".                                                                                                                 |
+| recommended_code | string   | required in some cases | If a product from the recommendations widget was opened in the pop-up or the site uses a "single page" architecture, this parameter must contain a unique code of the recommendations widget, available in the account in the "data-recommender-code" attribute for each widget. |
+
+## User viewed a category
+
+```shell
+#Full request
+curl 'https://<%= config[:api_endpoint] %>/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/json' \
+    --data-raw '{"event":"category", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "sid":"SEANCE_ID", "segment":"A or B", "category_id":"CATEGORY_ID"}'
+
+#Short request with minimum required parameters
+curl 'https://<%= config[:api_endpoint] %>/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/json' \
+    --data-raw '{"event":"category", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "category_id":"CATEGORY_ID"}'
+```
+
+```javascript
+<%= config[:js_sdk_name] %>("track", "category", "100500");
+```
+
+```swift
+sdk.track(event: .categoryView(id: "CATEGORY_ID")) { trackResponse in
+    // ... see product viewed event for details about a callback
+}
+```
+
+```java
+<%= config[:android_sdk_package_name]%>.track(Params.TrackEvent.CATEGORY, (new Params()).put(Params.Parameter.CATEGORY_ID, "100"));
+```
+
+```jsx
+sdk.track("category", "100500");
+```
+
+Send this event when user opens category page.
+
+### JS SDK syntax
+| Syntax                                                         |
+|----------------------------------------------------------------|
+| <%= config[:js_sdk_name] %>("track", "category", category_id); |
+
+### JS SDK Parameters
+| Parameter   | Type     | Requirement  | Description                         |
+|-------------|----------|--------------|-------------------------------------|
+| category_id | string   | required     | The ID of the category being viewed |
+
+## User searched something
+
+```shell
+#Full request
+curl 'https://<%= config[:api_endpoint] %>/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/json' \
+    --data-raw '{"event":"search", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "sid":"SEANCE_ID", "segment":"A or B", "search_query":"SEARCH_QUERY"}'
+
+#Short request with minimum required parameters
+curl 'https://<%= config[:api_endpoint] %>/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/json' \
+    --data-raw '{"event":"search", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "search_query":"SEARCH_QUERY"}'
+```
+
+```swift
+// Added in iOS SDK 2.1.0
+sdk.track(event: .search(query: "red shoes")) { trackResponse in
+    // ...
+}
+```
+
+```javascript
+<%= config[:js_sdk_name] %>('track', 'search', search_query);
+```
+
+```jsx
+sdk.track("search", "This is a search example");
+```
+
+### JS SDK syntax
+| Syntax                                                        |
+|---------------------------------------------------------------|
+| <%= config[:js_sdk_name] %>("track", "search", search_query); |
+
+### JS SDK Parameters
+| Parameter    | Type   | Requirement  | Description           |
+|--------------|--------|--------------|-----------------------|
+| search_query | string | required     | The search query text |
+
+## User added product to cart
+
+```shell
+#Full request for a single product without widget recommendation identifiers
+curl 'https://<%= config[:api_endpoint] %>/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/json' \
+    --data-raw '{"event":"cart", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "sid":"SEANCE_ID", "segment":"A or B", "items":[{"id":"PRODUCT_ID"}]}'
+
+#Full request for a single product with widget recommendation identifiers
+curl 'https://<%= config[:api_endpoint] %>/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/json' \
+    --data-raw '{"event":"cart", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "sid":"SEANCE_ID", "segment":"A or B", "items":[{"id":"PRODUCT_ID"}], "recommended_by":"dynamic", "recommended_code":"UNIQUE_RECOMMENDER_CODE"}'
+
+#Short request for a single product with minimum required parameters
+curl 'https://<%= config[:api_endpoint] %>/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/json' \
+    --data-raw '{"event":"cart", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "items":[{"id":"PRODUCT_ID"}]}'
+
+#Full request to send the full current cart
+# Clear all products on our side
+curl 'https://<%= config[:api_endpoint] %>/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/json' \
+    --data-raw '{"event":"cart", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "sid":"SEANCE_ID", "segment":"A or B", "items":[{"id":"PRODUCT_ID", "amount":"PRODUCT_QUANTITY"}], "full_cart":true}'
+```
+
+```javascript
+//Short request for a single product
+<%= config[:js_sdk_name] %>('track', 'cart', 'id');
+
+//Full request for a single product with widget recommendation identifiers
+<%= config[:js_sdk_name] %>('track', 'cart', {
+    id: PRODUCT_ID,
+    amount: PRODUCT_QUANTITY,
+    stock: true,
+    recommended_by: 'dynamic',
+    recommended_code: 'UNIQUE_RECOMMENDER_CODE'
+});
+
+//Full request to send the full current cart
+<%= config[:js_sdk_name] %>('track', 'cart', [
+    {
+        id: FIRST_PRODUCT_ID,
+        amount: FIRST_PRODUCT_QUANTITY
+    },
+    ...
+    {
+        id: LAST_PRODUCT_ID,
+        amount: LAST_PRODUCT_QUANTITY
+    }
+]);
+
+// Full request to send the empty current cart
+// Clear all products on our side
+<%= config[:js_sdk_name] %>('track', 'cart', []);
+```
+
+```swift
+// Track product added to cart
+sdk.track(event: .productAddedToCart(id: "PRODUCT_ID", amount: 3)) { trackResponse in
+    // ... see product viewed event for details about a callback
+}
+
+// Sync full cart with products quantity (automatically adds and removes products)
+sdk.track(event: .synchronizeCart(items: [CartItem(productId: "784"), CartItem(productId: "785", quantity: 3)]  )) { _ in
+  print("Cart is synced callback")
+}
+```
+
+```java
+//Add to cart (simple)
+<%= config[:android_sdk_package_name]%>.track(Params.TrackEvent.CART, "37");
+
+//Add to cart (extended)
+Params cart = new Params();
+cart
+	.put(new Params.Item("37")
+		.set(Params.Item.COLUMN.FASHION_SIZE, "M")
+		.set(Params.Item.COLUMN.AMOUNT, 2)
+	)
+	.put(new Params.RecommendedBy(Params.RecommendedBy.TYPE.RECOMMENDATION, "e9ddb9cdc66285fac40c7a897760582a"));
+<%= config[:android_sdk_package_name]%>.track(Params.TrackEvent.CART, cart);
+
+//Tracking full cart
+Params full_cart = new Params();
+full_cart
+    .put(Params.Parameter.FULL_CART, true)
+    .put(new Params.Item("37")
+        .set(Params.Item.COLUMN.AMOUNT, 2)
+        .set(Params.Item.COLUMN.FASHION_SIZE, "M")
+    )
+    .put(new Params.Item("40")
+        .set(Params.Item.COLUMN.AMOUNT, 1)
+        .set(Params.Item.COLUMN.FASHION_SIZE, "M")
+    );
+<%= config[:android_sdk_package_name]%>.track(Params.TrackEvent.CART, full_cart);
+```
+
+```jsx
+// Add to cart (simple)
+sdk.track("cart", "id");
+
+// Add to cart (from recommender block)
+sdk.track("cart", {
+  id: PRODUCT_ID,
+  amount: PRODUCT_QUANTITY,
+  recommended_by: 'dynamic',
+  recommended_code: 'UNIQUE_RECOMMENDER_CODE'
+});
+
+//Full request to send the full current cart
+sdk.track("cart", [
+  {
+    id: FIRST_PRODUCT_ID,
+    amount: FIRST_PRODUCT_QUANTITY
+  },
+  ...
+  {
+    id: LAST_PRODUCT_ID,
+    amount: LAST_PRODUCT_QUANTITY
+  }
+]);
+```
+
+### JS SDK syntax (short request for a single product)
+| Syntax                                            |
+|---------------------------------------------------|
+| <%= config[:js_sdk_name] %>("track", "cart", "id"); |
+
+### JS SDK Parameters
+| Parameter  | Type          | Requirement  | Description                             |
+|------------|---------------|--------------|-----------------------------------------|
+| id         | number/string | required     | The ID of the product added to the cart |
+
+### JS SDK syntax (full request for a single product)
+| Syntax                                                  |
+|---------------------------------------------------------|
+| <%= config[:js_sdk_name] %>("track", "cart", {params}); |
+
+### JS SDK Parameters
+| Parameter          | Type            | Requirement            | Description                                                                                                                                                                                                                                                                      |
+|--------------------|-----------------|------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| id                 | string          | required               | The ID of the product added to the cart                                                                                                                                                                                                                                          |
+| amount             | number          | optional               | Product quantity                                                                                                                                                                                                                                                                 |
+| stock              | boolean         | optional               | Product availability. If defined, it overwrites the value received from the product feed (XML) and HTTP-import of the product catalog.                                                                                                                                           |
+| recommended_by     | string          | required in some cases | If a product from a recommendation widget was opened in a popup or a website uses a "single page" architecture, this parameter must contain the value "dynamic".                                                                                                                 |
+| recommended_code   | string          | required in some cases | If a product from the recommendations widget was opened in the pop-up or the site uses a "single page" architecture, this parameter must contain a unique code of the recommendations widget, available in the account in the "data-recommender-code" attribute for each widget. |
+
+### JS SDK syntax (request to send the full current cart)
+| Syntax                                                                   |
+|--------------------------------------------------------------------------|
+| <%= config[:js_sdk_name] %>("track", "cart", [{params}, ..., {params}]); |
+
+### JS SDK Parameters
+| Parameter  | Type     | Requirement  | Description                             |
+|------------|----------|--------------|-----------------------------------------|
+| id         | string   | required     | The ID of the product added to the cart |
+| amount     | number   | optional     | Product quantity                        |
+
+## User removed product from cart
+
+```shell
+#Full request
+curl 'https://<%= config[:api_endpoint] %>/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/json' \
+    --data-raw '{"event":"remove_from_cart", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "sid":"SEANCE_ID", "segment":"A or B", "items":[{"id":"PRODUCT_ID"}]}'
+
+#Short request for a single product with minimum required parameters
+curl 'https://<%= config[:api_endpoint] %>/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/json' \
+    --data-raw '{"event":"remove_from_cart", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "items":[{"id":"PRODUCT_ID"}]}'
+```
+
+```javascript
+//Full request for a single product
+<%= config[:js_sdk_name] %>('track', 'remove_from_cart', 'id');
+```
+
+```swift
+sdk.track(event: .productRemovedFromCart(id: "PRODUCT_ID")) { trackResponse in
+    // ... see product viewed event for details about a callback
+}
+```
+
+```java
+// Not described yet
+```
+
+```jsx
+sdk.track("remove_from_cart", id);
+```
+
+### JS SDK syntax (full request for a single product)
+| Syntax                                                            |
+|-------------------------------------------------------------------|
+| <%= config[:js_sdk_name] %>("track", "remove_from_cart", "id");   |
+
+### JS SDK Parameters
+| Parameter | Type   | Requirement | Description                                 |
+|-----------|--------|-------------|---------------------------------------------|
+| id        | string | required    | The ID of the product removed from the cart |
+
+
+## User purchased products
+
+```shell
+#Full request
+curl 'https://<%= config[:api_endpoint] %>/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/json' \
+    --data-raw '{"event":"purchase", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "email":"john.doe@examplemail.com", "phone": "4400114527199", "sid":"SEANCE_ID", "segment":"A or B", "items":[{"id":"PRODUCT_ID", "price": PRODUCT_PRICE, "amount": PRODUCT_QUANTITY}], "order_id":"ORDER_NUMBER", "order_price":TOTAL_ORDER_PRICE}'
+
+#Short request with minimum required parameters
+curl 'https://<%= config[:api_endpoint] %>/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/json' \
+    --data-raw '{"event":"purchase", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "sid":"SEANCE_ID", "items":[{"id":"PRODUCT_ID"}]}'
+```
+
+```javascript
+//Full request
+<%= config[:js_sdk_name] %>('track', 'purchase', {
+	  email: "john.doe@examplemail.com",
+	  phone: "4400114527199",
+    products: [
+        {id: 37, price: 318, amount: 3},
+        {id: 187, price: 5000, amount: 1}
+    ],
+    order: 'N318',
+    order_price: 29999
+});
+```
+
+```swift
+// Track product added to cart
+sdk.track(event: .orderCreated(orderId: "123", totalValue: 33.3, products: [(id: "PRODUCT_ID_1", amount: 3, price: 300), (id: "PRODUCT_ID_2", amount: 1, price: 100)])) { trackResponse in
+    // ... see product viewed event for details about a callback
+}
+```
+
+```java
+Params purchase = new Params();
+purchase
+	.put(new Params.Item("37").set(Params.Item.COLUMN.AMOUNT, 2).set(Params.Item.COLUMN.PRICE, 100))
+	.put(Params.Parameter.ORDER_ID, "100234")
+	.put(Params.Parameter.ORDER_PRICE, 100500)
+  .put(Params.Parameter.DELIVERY_ADDRESS, "1860 street")
+	.put(new Params.RecommendedBy(Params.RecommendedBy.TYPE.RECOMMENDATION, "e9ddb9cdc66285fac40c7a897760582a"));
+<%= config[:android_sdk_package_name]%>.track(Params.TrackEvent.PURCHASE, purchase);
+```
+
+```jsx
+sdk.track("purchase", {
+  products: [
+      {id: "37", price: 318, amount: 3},
+      {id: "187", price: 5000, amount: 1}
+  ],
+  order: 'N318',
+  order_price: 29999
+});
+
+```
+
+<aside class="notice">
+If you want to debug purchase tracking, keep in mind: if you send event for existing order (by `order_id`), platform doesn't create new events with the same `order_id`. For test purposes, you can use random `order_id` or just omit it (platform will generate fake `order_id`).
+</aside>
+
+### JS SDK syntax
+| Syntax                                                      |
+|-------------------------------------------------------------|
+| <%= config[:js_sdk_name] %>("track", "purchase", {params}); |
+
+### JS SDK Parameters
+| Parameter      | Type     | Requirement  | Description                                                                                                                                                                                                                 |
+|----------------|----------|--------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| products       | array    | required     | An array of objects with product information in the order. Description of parameters in the table below.                                                                                                                    |
+| order          | string   | optional     | Order number in the store. If not defined, the internal order numbering system will be used. In this case synchronization of order status is impossible.                                                                    |
+| email          | string   | optional     | Client email.                                                                                                                                                                                                               |
+| phone          | string   | optional     | Client phone.                                                                                                                                                                                                               |
+| promocode      | string   | optional     | Promo code used in transaction.                                                                                                                                                                                             |
+| order_price    | number   | optional     | The final cost of the order including all discounts, bonuses, and additional services. If not defined, the cost of the order is calculated from the data in the product database without discounts and additional services. |
+| order_cash     | number   | optional     | How much a customer paid with real money.                                                                                                                                                                                   |
+| order_bonuses  | number   | optional     | How much a customer paid with bonuses.                                                                                                                                                                                      |
+| order_delivery | number   | optional     | Delivery fee.                                                                                                                                                                                                               |
+| order_discount | number   | optional     | Order discount.                                                                                                                                                                                                             |
+| delivery_type  | string   | optional     | Method of delivery.                                                                                                                                                                                                         |
+| payment_type   | string   | optional     | Payment type. Can by any string value. Ex: cash, card, wire.                                                                                                                                                                |
+| tax_free       | boolean  | optional     | Tax free                                                                                                                                                                                                                    |
+
+Description of parameters in the objects of the "products" array:
+
+| Parameter | Type    | Requirement | Description                                                             |
+|-----------|---------|-------------|-------------------------------------------------------------------------|
+| id        | string  | required    | The ID of the product in the order                                      |
+| amount    | number  | required    | Product quantity                                                        |
+| price     | number  | optional    | Product cost per unit                                                   |
+| line_id   | string  | optional    | Unique identifier of the item position in the order on the store's side |
+
+## User added product to favorites
+
+```shell
+# Full request
+curl 'https://<%= config[:api_endpoint] %>/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/json' \
+    --data-raw '{"event":"wish", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "sid":"SEANCE_ID", "items":[{"id":"PRODUCT_ID"}]}'
+
+#Full request to send the full current wish
+curl 'https://<%= config[:api_endpoint] %>/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/json' \
+    --data-raw '{"event":"wish", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "sid":"SEANCE_ID", "segment":"A or B", "items":["FIRST_PRODUCT_ID", "LAST_PRODUCT_ID"], "full_wish":true}'
+
+#Full request to send the empty current wish
+# Clear all products on our side
+curl 'https://<%= config[:api_endpoint] %>/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/json' \
+    --data-raw '{"event":"wish", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "sid":"SEANCE_ID", "segment":"A or B", "full_wish":true}'
+```
+
+```javascript
+<%= config[:js_sdk_name] %>('track', 'wish', product_id);
+
+// Full request to send the full current wish
+<%= config[:js_sdk_name] %>('track', 'wish', [FIRST_PRODUCT_ID, ..., LAST_PRODUCT_ID]);
+
+// Full request to send the empty current wish
+// Clear all products on our side
+<%= config[:js_sdk_name] %>('track', 'wish', []);
+```
+
+```java
+<%= config[:android_sdk_package_name]%>.track(Params.TrackEvent.WISH, "37");
+```
+
+```swift
+sdk.track(event: .productAddToFavorities(id: "PRODUCT_ID")) { trackResponse in
+    // ... see product viewed event for details about a callback
+}
+```
+
+```jsx
+sdk.track("wish", id);
+```
+
+
+## User removed product from favorites
+
+
+```shell
+#Full request
+curl 'https://<%= config[:api_endpoint] %>/push' \
+    -X 'POST' \
+    -H 'Content-Type: application/json' \
+    --data-raw '{"event":"remove_wish", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "sid":"SEANCE_ID", "items":[{"id":"PRODUCT_ID"}]}'
+```
+
+```javascript
+<%= config[:js_sdk_name] %>('track', 'remove_wish', product_id);
+```
+
+```swift
+sdk.track(event: .productRemovedToFavorities(id: "PRODUCT_ID")) { trackResponse in
+    // ... see product viewed event for details about a callback
+}
+```
+
+```java
+<%= config[:android_sdk_package_name]%>.track(Params.TrackEvent.REMOVE_FROM_WISH, "37");
+```
+
+```jsx
+sdk.track("remove_wish", id);
+```
+
+
+## Track custom event
+
+```shell
+# Basic tracking
+curl 'https://<%= config[:api_endpoint] %>/push/custom' \
+    -X 'POST' \
+    -H 'Content-Type: application/json' \
+    --data-raw '{"event":"my_event", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "sid":"SEANCE_ID"}'
+
+# With other identifiers
+curl 'https://<%= config[:api_endpoint] %>/push/custom' \
+    -X 'POST' \
+    -H 'Content-Type: application/json' \
+    --data-raw '{"event":"my_event", "shop_id":"SHOP_ID", "email":"EMAIL", "phone":"PHONE", "loyalty_id":"LOYALTY_ID", "external_id":"EXTERNAL_ID"}'
+
+# With custom parameters
+curl 'https://<%= config[:api_endpoint] %>/push/custom' \
+    -X 'POST' \
+    -H 'Content-Type: application/json' \
+    --data-raw '{"event":"my_event", "shop_id":"SHOP_ID", "email":"EMAIL", "phone":"PHONE", "loyalty_id":"LOYALTY_ID", "external_id":"EXTERNAL_ID", "category":"event category", "label":"event label", "value":100}'
+
+# With custom time
+curl 'https://<%= config[:api_endpoint] %>/push/custom' \
+    -X 'POST' \
+    -H 'Content-Type: application/json' \
+    --data-raw '{"event":"my_event", "shop_id":"SHOP_ID", "did":"DEVICE_ID", "sid":"SEANCE_ID", "time": "1652648400"}'
+```
+
+```javascript
+
+// Simple tracking
+<%= config[:js_sdk_name] %>("track", "my_event");
+
+// Tracking with custom parameters
+<%= config[:js_sdk_name] %>("track", "my_event", {
+    category: "event category",
+    label: "event label",
+    value: 100
+});
+```
+
+```swift
+// Simple custom event tracking
+sdk.trackEvent(event: "something_happened")
+
+// With parameters
+sdk.trackEvent(event: "something_happened", category: "important", label: "banner_click", value: 42)
+```
+
+```java
+// Simple tracking of custom event
+<%= config[:android_sdk_package_name] %>.track("my_event");
+
+// Tracking with additional parameters
+<%= config[:android_sdk_package_name] %>.track("my_event", "event category", "event label", 100);
+```
+
+```jsx
+// Simple tracking
+sdk.trackEvent('my_event');
+
+// Tracking with custom parameters
+sdk.trackEvent('my_event', {
+  category: "event category",
+  label: "event label",
+  value: 100
+});
+```
+
+
+<aside class="notice">
+Before tracking custom events, register it in "Settings > Custom events".
+</aside>
+
+### Query Parameters
+
+| Parameter      | Type      | Required   | Description               |
+|----------------|-----------|------------|---------------------------|
+| shop_id        | String    | true       | Your API key              |
+| email*         | String    | true       | User's email              |
+| phone*         | String    | true       | User's phone number       |
+| loyalty_id*    | String    | true       | User's loyalty card id    |
+| external_id*   | String    | true       | User's shop internal id   |
+
+<aside class="notice">
+ At least of identifiers (marked by *) must present in request: email, phone, loyalty_id or external_id. It's used to identify user.
+</aside>
+
+
+### Optional parameters
+
+Custom event can be tracked in simple mode (just event name) and advanced mode (with 3 optional parameters).
+
+
+| Parameter | Type        | Requirement      | Description      |
+|-----------|-------------|------------------|------------------|
+| category  | String      | optional         | Event category   |
+| label     | String      | optional         | Event label      |
+| value     | Integer     | optional         | Event value      |
+| time*     | Timestamp   | optional         | Event time       |
+
+<aside class="notice">
+ * - works only in Curl method
+</aside>
+
+## User received on mobile push
+
+```shell
+curl 'https://<%= config[:api_endpoint] %>/track/received' \
+    -X 'POST' \
+    -H 'Content-Type: application/json' \
+    --data-raw '{"shop_id":"SHOP_ID", "code":"CODE", "type":"TYPE"}'
+```
+
+```javascript
+// No implementation
+```
+
+```swift
+sdk.notificationReceived(code: "i7ykuagkjgfs", type: "mobile_push_transactional")
+```
+
+```java
+// Automatically called from SDK when receiving data from firebase
+```
+
+```jsx
+// Code and type are received in push notification structure
+const params = {
+  code: 'CODE',
+  type: 'TYPE'
+};
+
+// Track when the notification is received and displayed
+sdk.notificationReceived(params);
+```
+
+When user clicks on mobile push notification in mobile app, you have to send event to API with `code` and `type` parameters.
+
+This method uses separate endpoint:
+
+Endpoint: `POST https://<%= config[:api_endpoint] %>/track/received`
+
+### Required params
+
+All events require at least these parameters:
+
+| Parameter | Type   | Required   | Description                                                                                                                          |
+|-----------|--------|------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| shop_id   | String | true       | Your API key                                                                                                                         |
+| code      | String | true       | Message identifier. Value can be taken from push's JSON payload. For Android it's located in `id` property. In iOS SDK it's `src.id` |
+| type      | String | true       | Message type. Value can be taken from push's JSON payload. For Android it's located in `type` property. In iOS SDK it's `src.type`   |
+
+
+## User clicked on mobile push
+
+```shell
+curl 'https://<%= config[:api_endpoint] %>/track/clicked' \
+    -X 'POST' \
+    -H 'Content-Type: application/json' \
+    --data-raw '{"shop_id":"SHOP_ID", "code":"CODE", "type":"TYPE"}'
+```
+
+```javascript
+// No implementation
+```
+
+```swift
+sdk.notificationClicked(code: "i7ykuagkjgfs", type: "mobile_push_transactional")
+```
+
+```java
+// Add notification identification data to the intent
+intent.putExtra(<%= config[:android_sdk_package_name] %>.NOTIFICATION_TYPE, data.get("type"));
+intent.putExtra(<%= config[:android_sdk_package_name] %>.NOTIFICATION_ID, data.get("id"));
+
+// Add click tracking in the method of activity creation
+@Override
+	protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    //For tracking notification clicked
+    if( getIntent().getExtras() != null ) {
+     <%= config[:android_sdk_package_name] %>.notificationClicked(getIntent().getExtras());
+    }
+  }
+```
+
+```jsx
+// Code and type are received in push notification structure
+const params = {
+  code: 'CODE',
+  type: 'TYPE'
+};
+
+// Track when user clicked the notification
+sdk.notificationClicked(params);
+```
+
+When user clicks on mobile push notification in mobile app, you have to send event to API with `code` and `type` parameters.
+
+This method uses separate endpoint:
+
+Endpoint: `POST https://<%= config[:api_endpoint] %>/track/clicked`
+
+### Required params
+
+All events require at least these parameters:
+
+| Parameter | Type   | Required   | Description                                                                                                                          |
+|-----------|--------|------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| shop_id   | String | true       | Your API key                                                                                                                         |
+| code      | String | true       | Message identifier. Value can be taken from push's JSON payload. For Android it's located in `id` property. In iOS SDK it's `src.id` |
+|  type     | String | true       | Message type. Value can be taken from push's JSON payload. For Android it's located in `type` property. In iOS SDK it's `src.type`   |
+
+## User closed on mobile push
+
+```shell
+curl 'https://<%= config[:api_endpoint] %>/track/closed' \
+    -X 'POST' \
+    -H 'Content-Type: application/json' \
+    --data-raw '{"shop_id":"SHOP_ID", "code":"CODE", "type":"TYPE"}'
+```
+
+```javascript
+// No implementation
+```
+
+```swift
+sdk.notificationClosed(code: "i7ykuagkjgfs", type: "mobile_push_transactional")
+```
+
+```java
+// Not supported
+```
+
+```jsx
+// Not supported
+```
+
+When user clicks on mobile push notification in mobile app, you have to send event to API with `code` and `type` parameters.
+
+This method uses separate endpoint:
+
+Endpoint: `POST https://<%= config[:api_endpoint] %>/track/closed`
+
+### Required params
+
+All events require at least these parameters:
+
+| Parameter | Type   | Required   | Description                                                                                                                          |
+|-----------|--------|------------|--------------------------------------------------------------------------------------------------------------------------------------|
+| shop_id   | String | true       | Your API key                                                                                                                         |
+| code      | String | true       | Message identifier. Value can be taken from push's JSON payload. For Android it's located in `id` property. In iOS SDK it's `src.id` |
+| type      | String | true       | Message type. Value can be taken from push's JSON payload. For Android it's located in `type` property. In iOS SDK it's `src.type`   |

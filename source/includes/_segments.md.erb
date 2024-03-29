@@ -1,0 +1,366 @@
+# Segments
+
+The endpoint is used to put or remove user to/from static segment.
+
+## Add user to a segment
+
+```shell
+# Using all possible identifiers
+curl -d "shop_id=SHOPID&shop_secret=SHOP_SECRET&email=EMAIL&phone=PHONE&segment_id=SEGMENT_ID" https://<%= config[:api_endpoint] %>/segments/add
+
+# With phone only
+curl -d "shop_id=SHOPID&shop_secret=SHOP_SECRET&phone=PHONE&segment_id=SEGMENT_ID" https://<%= config[:api_endpoint] %>/segments/add
+
+# With email only
+curl -d "shop_id=SHOPID&shop_secret=SHOP_SECRET&email=EMAIL&segment_id=SEGMENT_ID" https://<%= config[:api_endpoint] %>/segments/add
+```
+
+```javascript
+
+// Using all possible identifiers
+<%= config[:js_sdk_name] %>('segment', 'add', {
+    "email": "jane@example.com",
+    "phone": "+10000000000",
+    "segment_id": "SEGMENT_ID"
+});
+
+// With phone only
+<%= config[:js_sdk_name] %>('segment', 'add', {
+    "phone": "+10000000000",
+    "segment_id": "SEGMENT_ID"
+});
+
+// With email only
+<%= config[:js_sdk_name] %>('segment', 'add', {
+    "email": "jane@example.com",
+    "segment_id": "SEGMENT_ID"
+});
+
+// Without any contacts: `did` is used automatically
+<%= config[:js_sdk_name] %>('segment', 'add', {
+    "segment_id": "SEGMENT_ID"
+});
+```
+
+```swift
+// By `did` only
+sdk.addToSegment(segmentId: "333")
+
+// With a email (`did` will be switched to the owner of the email)
+sdk.addToSegment(segmentId: "333", email: "my@example.com")
+
+// With a phone number (`did` will be switched to the owner of the phone number)
+sdk.addToSegment(segmentId: "333", phone: "+10000000000")
+
+// With both (`did` will be switched to the owner of primary contact)
+sdk.addToSegment(segmentId: "333", email: "my@example.com", phone: "+10000000000")
+
+```
+
+```java
+// By `did` only
+<%= config[:android_sdk_package_name] %>.addToSegment("333", null, null);
+
+// With a email (`did` will be switched to the owner of the email)
+<%= config[:android_sdk_package_name] %>.addToSegment("333", "my@example.com", null);
+
+// With a phone number (`did` will be switched to the owner of the phone number)
+<%= config[:android_sdk_package_name] %>.addToSegment("333", null, "+10000000000");
+
+// With both (`did` will be switched to the owner of primary contact)
+<%= config[:android_sdk_package_name] %>.addToSegment("333", "my@example.com", "+10000000000");
+```
+
+```jsx
+// Using all possible identifiers
+sdk.segments('add', {
+  "email": "jane@example.com",
+  "phone": "+10000000000",
+  "segment_id": "SEGMENT_ID"
+});
+
+// With phone only
+sdk.segments('add', {
+  "phone": "+10000000000",
+  "segment_id": "SEGMENT_ID"
+});
+
+// With email only
+sdk.segments('add', {
+  "email": "jane@example.com",
+  "segment_id": "SEGMENT_ID"
+});
+
+// Without any contacts: `did` is used automatically
+sdk.segments('add', {
+  "segment_id": "SEGMENT_ID"
+});
+```
+
+This method adds user to a specific static segment.
+
+`POST https://<%= config[:api_endpoint] %>/segments/add`
+
+### Query Parameters
+
+| Parameter   | Type   | Required                                      | Description         |
+|-------------|--------|-----------------------------------------------|---------------------|
+| shop_id     | String | true                                          | Your API key        |
+| shop_secret | String | true                                          | Your API secret key |
+| did*        | String | User's device ID. Only for JS/iOS/Android SDK |                     |
+| email*      | String | User's email                                  |                     |
+| phone*      | String | User's phone number                           |                     |
+| segment_id  | String | Segment ID                                    |                     |
+
+<aside class="notice">
+One of identifiers (marked by *) must present in request: email or phone. It's used to identify user. In case of API request, you can't use `did` parameter. In case of JS SDK you can omit `email` and `phone` fields and `did` will be used to find right user.
+</aside>
+
+
+## Remove user from a segment
+
+```shell
+# Using all possible identifiers
+curl -d "shop_id=SHOPID&shop_secret=SHOP_SECRET&email=EMAIL&phone=PHONE&segment_id=SEGMENT_ID" https://<%= config[:api_endpoint] %>/segments/remove
+
+# With phone only
+curl -d "shop_id=SHOPID&shop_secret=SHOP_SECRET&phone=PHONE&segment_id=SEGMENT_ID" https://<%= config[:api_endpoint] %>/segments/remove
+
+# With email only
+curl -d "shop_id=SHOPID&shop_secret=SHOP_SECRET&email=EMAIL&segment_id=SEGMENT_ID" https://<%= config[:api_endpoint] %>/segments/remove
+```
+
+```javascript
+
+// Using all possible identifiers
+<%= config[:js_sdk_name] %>('segment', 'remove', {
+    "email": "jane@example.com",
+    "phone": "+10000000000",
+    "segment_id": "SEGMENT_ID"
+});
+
+// With phone only
+<%= config[:js_sdk_name] %>('segment', 'remove', {
+    "phone": "+10000000000",
+    "segment_id": "SEGMENT_ID"
+});
+
+// With email only
+<%= config[:js_sdk_name] %>('segment', 'remove', {
+    "email": "jane@example.com",
+    "segment_id": "SEGMENT_ID"
+});
+
+// Without any contacts: `did` is used automatically
+<%= config[:js_sdk_name] %>('segment', 'remove', {
+    "segment_id": "SEGMENT_ID"
+});
+```
+
+```swift
+// By `did` only
+sdk.removeFromSegment(segmentId: "333")
+
+// With a email (`did` will be switched to the owner of the email)
+sdk.removeFromSegment(segmentId: "333", email: "my@example.com")
+
+// With a phone number (`did` will be switched to the owner of the phone number)
+sdk.removeFromSegment(segmentId: "333", phone: "+10000000000")
+
+// With both (`did` will be switched to the owner of primary contact)
+sdk.removeFromSegment(segmentId: "333", email: "my@example.com", phone: "+10000000000")
+```
+
+```java
+// By `did` only
+<%= config[:android_sdk_package_name] %>.removeFromSegment("333", null, null);
+
+// With a email (`did` will be switched to the owner of the email)
+<%= config[:android_sdk_package_name] %>.removeFromSegment("333", "my@example.com", null);
+
+// With a phone number (`did` will be switched to the owner of the phone number)
+<%= config[:android_sdk_package_name] %>.removeFromSegment("333", null, "+10000000000");
+
+// With both (`did` will be switched to the owner of primary contact)
+<%= config[:android_sdk_package_name] %>.removeFromSegment("333", "my@example.com", "+10000000000");
+```
+
+```jsx
+// Using all possible identifiers
+sdk.segments('remove', {
+  "email": "jane@example.com",
+  "phone": "+10000000000",
+  "segment_id": "SEGMENT_ID"
+});
+
+// With phone only
+sdk.segments('remove', {
+  "phone": "+10000000000",
+  "segment_id": "SEGMENT_ID"
+});
+
+// With email only
+sdk.segments('remove', {
+  "email": "jane@example.com",
+  "segment_id": "SEGMENT_ID"
+});
+
+// Without any contacts: `did` is used automatically
+sdk.segments('remove', {
+  "segment_id": "SEGMENT_ID"
+});
+```
+
+This method removes user from a specific static segment.
+
+`POST https://<%= config[:api_endpoint] %>/segments/remove`
+
+### Query Parameters
+
+| Parameter   | Type   | Required                                      | Description         |
+|-------------|--------|-----------------------------------------------|---------------------|
+| shop_id     | String | true                                          | Your API key        |
+| shop_secret | String | true                                          | Your API secret key |
+| did*        | String | User's device ID. Only for JS/iOS/Android SDK |                     |
+| email*      | String | User's email                                  |                     |
+| phone*      | String | User's phone number                           |                     |
+| segment_id  | String | Segment ID                                    |                     |
+
+<aside class="notice">
+At least one of identifiers (marked by *) must present in request: email or phone. It's used to identify user. In case of API request, you can't use `did` parameter. In case of JS SDK you can omit `email` and `phone` fields and `did` will be used to find right user.
+</aside>
+
+## Get user segments
+
+```shell
+# Using all possible identifiers
+curl "shop_id=SHOPID&shop_secret=SHOP_SECRET&email=EMAIL&phone=PHONE" https://<%= config[:api_endpoint] %>/segments/get
+
+# With phone only
+curl "shop_id=SHOPID&shop_secret=SHOP_SECRET&phone=PHONE" https://<%= config[:api_endpoint] %>/segments/get
+
+# With email only
+curl "shop_id=SHOPID&shop_secret=SHOP_SECRET&email=EMAIL" https://<%= config[:api_endpoint] %>/segments/get
+```
+
+```javascript
+
+// Using all possible identifiers
+<%= config[:js_sdk_name] %>('segment', 'get', function(segments) {
+    // segments (type: array of objects)
+    // each object has the following properties:
+    // "id" as Segment ID
+    // "type" as Segment Type ("dynamic", "static")
+});
+```
+
+```swift
+sdk->getCurrentSegment()
+```
+
+```java
+<%= config[:android_sdk_package_name]%>.getCurrentSegment(new Api.OnApiCallbackListener() {
+  @Override
+  public void onSuccess(JSONArray segments) {
+    // segments (type: array of objects)
+  }
+});
+```
+
+```jsx
+// Using all possible identifiers
+sdk.segments('get').then(res => {
+  // segments (type: array of objects)
+  // each object has the following properties:
+  // "id" as Segment ID
+  // "type" as Segment Type ("dynamic", "static")
+});
+```
+
+> Response structure
+
+```json
+[
+  {
+    "id": 313,
+    "type": "static"
+  },
+  {
+    "id": 314,
+    "type": "dynamic"
+  }
+]
+```
+
+
+The method returns an array of segments of the current user.
+
+`GET https://<%= config[:api_endpoint] %>/segments/get`
+
+### Query Parameters
+
+| Parameter   | Type   | Required                                      | Description         |
+|-------------|--------|-----------------------------------------------|---------------------|
+| shop_id     | String | true                                          | Your API key        |
+| shop_secret | String | true                                          | Your API secret key |
+| did*        | String | User's device ID. Only for JS/iOS/Android SDK |                     |
+| email*      | String | User's email                                  |                     |
+| phone*      | String | User's phone number                           |                     |
+
+<aside class="notice">
+One of identifiers (marked by *) must present in request: email or phone. It's used to identify user. In case of API request, you can't use `did` parameter. In case of JS SDK you can omit `email` and `phone` fields and `did` will be used to find right user.
+</aside>
+
+
+
+
+## Check if a user is in a segment
+
+```shell
+# Using all possible identifiers
+curl "shop_id=SHOPID&shop_secret=SHOP_SECRET&email=EMAIL&phone=PHONE" https://<%= config[:api_endpoint] %>/segments/includes
+
+# With phone only
+curl "shop_id=SHOPID&shop_secret=SHOP_SECRET&phone=PHONE" https://<%= config[:api_endpoint] %>/segments/includes
+
+# With email only
+curl "shop_id=SHOPID&shop_secret=SHOP_SECRET&email=EMAIL" https://<%= config[:api_endpoint] %>/segments/includes
+```
+
+```javascript
+// Not implemented
+```
+
+```swift
+// Not implemented
+```
+
+```java
+// Not implemented
+```
+
+> Response structure
+
+```json
+true
+```
+
+
+The method returns TRUE|FALSE if a user identified by any identifier is included in a segment.
+
+`GET https://<%= config[:api_endpoint] %>/segments/includes`
+
+### Query Parameters
+
+| Parameter   | Type    | Required | Description          |
+|-------------|---------|----------|----------------------|
+| shop_id     | String  | true     | Your API key         |
+| shop_secret | String  | true     | Your API secret key  |
+| email       | String  | true*    | User's email         |
+| phone       | String  | true*    | User's phone number  |
+| segment_id  | Integer | true     | Segment ID           |
+
+<aside class="notice">
+One of identifiers (marked by *) must be present in request: email or phone. It's used to identify user.
+</aside>
+

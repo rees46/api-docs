@@ -1,0 +1,35 @@
+# Reputation
+
+Endpoints is used to work with shop's reputation.
+
+## Get reviews
+
+```shell
+curl -d "shop_id=SHOPID&count=COUNT&offset=OFFSET" https://<%= config[:api_endpoint] %>/reputation/shop
+```
+
+```javascript
+// No implementation is needed in JS SDK
+```
+
+```swift
+// No implementation is needed in iOS SDK
+```
+
+```java
+// No implementation is needed in Android SDK
+```
+
+```jsx
+// No implementation is needed in React Native SDK
+```
+
+This method overrides profile's settings.
+
+### Query Parameters
+
+| Parameter | Type   | Required | Description       |
+|-----------|--------|----------|-------------------|
+| shop_id   | String | true     | Your API key      |
+| count     | String | false    | Number of reviews |
+| offset    | String | false    | Offset of reviews |

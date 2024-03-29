@@ -1,0 +1,248 @@
+# Orders
+
+This section describes how to import orders, change its' statuses, structure and other.
+
+## Import orders
+
+```shell
+curl -i -X POST -H "Content-Type: application/json" --data-binary "@data.json" https://<%= config[:api_endpoint] %>/sync/orders
+
+# data.json
+{
+  "shop_id": "DvLWN2ZTMZ",
+  "shop_secret": "EIxTuot8sj",
+  "orders": [
+    {
+      "id": "yKsvZbWpCL",
+      "status": "Delivered",
+      "channel": "website",
+      "date": 1602338740,
+      "offline": false,
+      "email": "user@example.com",
+      "phone": "+15554443322",
+      "loyalty_id": "000-33-444-111",
+      "location_id": "7701123",
+      "promocode": "vxawxSi9Uy",
+      "delivery_type": "courier",
+      "delivery_address": "Rouse st, 13",
+      "delivery_date": "2021-12-21",
+      "delivery_time": "15:00",
+      "tax_free": true,
+      "bank_issuer": "Sberbank",
+      "bank_pos_processor": "apex",
+      "bank_loyalty_program": "miles&smiles",
+      "bank_total_installment": 4,
+      "payment_card_provider": "mastercard"
+      "gift_package":true,
+      "value": {
+        "total": 200.13,
+      },
+      "payment_structure": {
+        "cash": 190,
+        "bonuses": 15,
+        "delivery": 20,
+        "discount": 24.87
+      },
+      "items": [
+        {
+          "id": "ITEM-ID-1",
+          "price": 205,
+          "quantity": 1,
+          "status": "cancelled",
+          "original_price": 230,
+          "discount_product": 30,
+          "discount_coupon": 10,
+          "discount_bonuses": 20,
+          "delivery_company": "ups",
+          "barcode_id": "195204003541",
+          "line_id": "195204003541-22323443-123434",
+          "cancel_reason": "over size",
+        },
+}
+        ...
+      ]
+    },
+    ...
+  ]
+}
+```
+
+If a request contains orders with IDs which are already saved in our database, statuses and structure of this orders will be updated.
+
+<aside class="notice">
+Don't use the API method simultaneously with the JS SDK "purchase" event on the frontend.
+</aside>
+
+### Query Parameters
+
+| Parameter   | Type   | Required   | Description                            |
+|-------------|--------|------------|----------------------------------------|
+| shop_id     | String | true       | Your API key                           |
+| shop_secret | String | true       | Your API secret key                    |
+| orders      | Array  | true       | List of orders. See description below. |
+
+Description of `orders` objects:
+
+| Parameter              | Type    | Required | Description                                                  |
+|------------------------|---------|----------|--------------------------------------------------------------|
+| id                     | String  | true     | Order ID                                                     |
+| status                 | String  | true     | Order's status                                               |
+| channel                | String  | true     | Channel where order was updated                              |
+| date                   | Integer | true     | Date and time when order status changed                      |
+| offline                | Boolean | false    | Flags orders as offline. Default `false`.                    |
+| email                  | String  | false    | User's email                                                 |
+| phone                  | String  | false    | User's phone                                                 |
+| loyalty_id             | String  | false    | User's loyalty ID                                            |
+| location_id            | String  | false    | User's location (city) ID                                    |
+| promocode              | String  | false    | Promo code used in the order                                 |
+| delivery_type          | String  | false    | Delivery type                                                |
+| delivery_address       | String  | false    | Destination address for CRM                                  |
+| delivery_date          | Date    | false    | Planned delivery date. Format: "YYYY-MM-DD"                  |
+| delivery_time          | Time    | false    | Planned delivery time. Format: "HH:MM"                       |
+| payment_type           | String  | false    | Payment type. Can by any string value. Ex: cash, card, wire. |
+| tax_free               | Boolean | false    | Tax free                                                     |
+| bank_issuer            | String  | false    | Bank issuer                                                  |
+| bank_pos_processor     | String  | false    | Bank POS processor                                           |
+| bank_loyalty_program   | String  | false    | Bank loyalty program                                         |
+| bank_total_installment | Integer | false    | Bank total installment                                       |
+| payment_card_provider  | String  | false    | Payment card provider                                        |
+| gift_package           | Boolean | false    | Gift packaged                                                |
+| value                  | Object  | true     | Describes order's value parts. See below.                    |
+| payment_structure      | Object  | false    | Describes order's payment_structure parts. See below.        |
+| items*                 | Array   | true     | Describes order's products. See below.                       |
+
+Description of `value` object:
+
+| Parameter | Type    | Required   | Description                                                 |
+|-----------|---------|------------|-------------------------------------------------------------|
+| total     | Numeric | true       | Order's total value                                         |
+
+Description of `payment_structure` object:
+
+| Parameter | Type    | Required   | Description                                                 |
+|-----------|---------|------------|-------------------------------------------------------------|
+| cash      | Numeric | false      | Describes how much of order's value was paid by real money. |
+| bonuses   | Numeric | false      | Describes how much of order's value was paid by bonuses.    |
+| delivery  | Numeric | false      | Describes price of order's delivery                         |
+| discount  | Numeric | false      | Describes discount value of the order.                      |
+
+<aside class="notice">
+How to check if everything is correct: `value.total == payment_structure.cash + payment_structure.bonuses + payment_structure.delivery - payment_structure.discount`
+</aside>
+
+Description of `items` objects:
+
+| Parameter        | Type    | Required   | Description                                                                          |
+|------------------|---------|------------|--------------------------------------------------------------------------------------|
+| id               | String  | true       | ID of purchased product                                                              |
+| price            | Numeric | true       | Price of 1 unit of purchased product                                                 |
+| quantity         | Integer | true       | Quantity of mentioned products in the order                                          |
+| status           | String  | false      | Item status, Can by only: created, invoiced, shipped, delivered, cancelled, refunded |
+| original_price   | Numeric | false      | Original item price                                                                  |
+| discount_product | Numeric | false      | Discount item                                                                        |
+| discount_coupon  | Numeric | false      | Discount item coupon                                                                 |
+| discount_bonuses | Numeric | false      | Discount item bonuses                                                                |
+| delivery_company | String  | false      | Delivery item company                                                                |
+| barcode          | String  | false      | Item barcode                                                                         |
+| line_id          | String  | false      | Unique identifier of the item position in the order on the store's side              |
+| cancel_reason    | String  | false      | Cancel reason                                                                        |
+
+<aside class="notice">
+  Object `items` is required when you create order. You can send it as empty array when updating order's status.
+</aside>
+
+
+## Send cancelled orders
+
+You can change order's status to "Cancelled".
+Order status must linked with our system status.
+Just send new request with the same order ID and order will be updated.
+
+
+```shell
+curl -i -X POST -H "Content-Type: application/json" --data-binary "@data.json" https://<%= config[:api_endpoint] %>/sync/orders
+
+# data.json
+{
+  "shop_id": "DvLWN2ZTMZ",
+  "shop_secret": "EIxTuot8sj",
+  "orders": [
+    {
+      "id": "yKsvZbWpCL",
+      "status": "Cancelled"
+    },
+    ...
+  ]
+}
+```
+
+### Query Parameters
+
+| Parameter   | Type   | Required   | Description                            |
+|-------------|--------|------------|----------------------------------------|
+| shop_id     | String | true       | Your API key                           |
+| shop_secret | String | true       | Your API secret key                    |
+| orders      | Array  | true       | List of orders. See description below. |
+
+Description of `orders` objects:
+
+| Parameter | Type   | Required  | Description    |
+|-----------|--------|-----------|----------------|
+| id        | String | true      | Order ID       |
+| status    | String | true      | Order's status |
+
+
+## Get users last order products
+
+```shell
+curl https://<%= config[:api_endpoint] %>/orders/last_for_user?shop_id=SHOP_ID&did=DID&sid=SEANCE_ID
+```
+
+If a request fetches user's last purchase and returns list of purchased products. If there was not purchases, empty array is returned.
+
+### Query Parameters
+
+| Parameter | Type   | Required   | Description      |
+|-----------|--------|------------|------------------|
+| shop_id   | String | true       | Your API key     |
+| did       | String | true       | Users device ID  |
+| sid       | String | true       | Users session ID |
+
+
+
+## Get user's orders
+
+```shell
+curl https://<%= config[:api_endpoint] %>/orders/by_user?shop_id=SHOP_ID&shop_secret=SHOP_SECRET&did=DID&date_from=YYYY-MM-DD
+```
+
+```javascript
+// Not supported
+```
+
+```swift
+// Not supported
+```
+
+```java
+// Not supported
+```
+
+```jsx
+// Not supported
+```
+
+Returns a list of user's orders (ascending by date and internal ID). User is identified by `did`, `email`, `phone`, `loyalty_id` or `external_id`.
+
+### Query Parameters
+
+| Parameter   | Type   | Required | Description               |
+|-------------|--------|----------|---------------------------|
+| shop_id     | String | true     | Your API key              |
+| shop_secret | String | true     | Your API secret key       |
+| did         | String | false    | User's device ID          |
+| email       | String | false     | User's email              |
+| phone       | String | false     | User's phone              |
+| loyalty_id  | String | false     | User's loyalty ID         |
+| external_id | String | false     | User's external ID        |
+| date_from   | Date   | false     | Date in YYYY-MM-DD format |

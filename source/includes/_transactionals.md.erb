@@ -1,0 +1,64 @@
+# Transactionals
+
+The method allows you to send transactional messages.
+
+## Request transactionals
+
+```shell
+# Request with JSON
+curl --location --request POST 'https://<%= config[:api_endpoint] %>/transact' \
+--header 'Content-Type: application/json' \
+--data-raw '"shop_id":"SHOP_ID", "shop_secret":"SHOP_SECRET", "code":"TRANSACTIONAL_MESSAGE_CODE", "email":"EMAIL", "variables":{"KEY":"VALUE", "KEY_2":"VALUE_2"}}'
+
+# Request with FormData
+curl --location --request POST 'https://<%= config[:api_endpoint] %>/transact' \
+--form 'file_name=@"local_file_path/local_file_name"' \
+--form 'file_name_2=@"local_file_path/local_file_name_2"' \
+--form 'shop_id="SHOP_ID"' \
+--form 'shop_secret="SHOP_SECRET"' \
+--form 'code="TRANSACTIONAL_MESSAGE_CODE"' \
+--form 'email="EMAIL"' \
+--form 'variables[KEY]="VALUE"'
+--form 'variables[KEY_2]="VALUE_2"'
+```
+
+```javascript
+// REST API only. See cURL.
+```
+
+```swift
+// REST API only. See cURL.
+```
+
+```java
+// REST API only. See cURL.
+```
+
+```jsx
+// REST API only. See cURL.
+```
+
+### HTTP Request
+
+`GET https://<%= config[:api_endpoint] %>/transact`
+
+### Query Parameters
+
+| Parameter   | Required | Description                         |
+|-------------|----------|-------------------------------------|
+| shop_id     | true     | Your shop id                        |
+| shop_secret | true     | Your shop secret                    |
+| code        | true     | Your transactional message code     |
+| email       | true     | Client's email                      |
+| variables   | false    | Object with custom data for message |
+
+<aside class="notice">
+Limits: max count - 10 files, max common weight - 10 mb.
+</aside>
+
+### HTTP Response
+
+| HTTP status code   | Response body                                            | Explanation                                                                                 |
+|--------------------|----------------------------------------------------------|---------------------------------------------------------------------------------------------|
+| 204                | none                                                     | The request was successful.                                                                 |
+| 4xx (400-499)      | {"status": "error", "message": "Error description text"} | The request was unsuccessful. See the reason in the `message` property of the response body.|
