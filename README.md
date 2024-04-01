@@ -8,7 +8,7 @@ REES46 API
 * Send emails
 * Send web/mobile push
 * etc.
-
+ 
 Read the https://reference.api.rees46.com for usage details.
 
 ## Setup for updates
