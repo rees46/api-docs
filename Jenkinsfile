@@ -16,7 +16,7 @@ pipeline {
               script {
                 env.GIT_COMMIT_MSG = sh (script: 'git log -1 --pretty=%B ${GIT_COMMIT}', returnStdout: true).trim()
                 env.GIT_COMMIT_AUTHOR = sh (script: 'git log -1 --pretty=%an ${GIT_COMMIT}', returnStdout: true).trim()
-                env.COMMIT_URL = "https://github.com/rees46/api-reference/commit/${GIT_COMMIT}"
+                env.COMMIT_URL = "https://github.com/rees46/api-docs/commit/${GIT_COMMIT}"
               }
             }
         }
