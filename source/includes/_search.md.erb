@@ -128,7 +128,7 @@ sdk.search({
 ## Full search
 
 ```javascript
-<%= config[:js_sdk_name] %>("search", {search_query: "To be or not to be", page: 2, limit: 15, brands: ["Alas", "poor", "Yorick"], categories: [1, 146, 100500], filters: {'key':['value'], 'key':['value']}, sort_by: "price", order: "asc"}, function(response) {
+<%= config[:js_sdk_name] %>("search", {search_query: "To be or not to be", page: 2, limit: 15, brands: ["Alas", "poor", "Yorick"], categories: [1, 146, 100500], filters: {'key':['value'], 'key':['value']}, merchants: ['merchant1', 'merchant2'], sort_by: "price", order: "asc"}, function(response) {
   // the functionality of rendering a block of full search
 }, function(error) {
   // when something went wrong
@@ -211,6 +211,7 @@ sdk.search({
 | exclude          | false    | Comma separated list of products IDs to exclude from search results                                                                  |
 | email            | false    | It's only for S2S integration, when service doesn't have user's session. Mobile SDK doesn't use it.                                  |
 | no_clarification | false    | Disable clarified search (true, false, default: false). Don't use it. God mode only.                                                 |
+| merchants        | false    | Comma separated list of merchants                                                 |
 
 
 ### API response
