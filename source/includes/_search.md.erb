@@ -58,14 +58,15 @@ sdk.search({
 
 ### Query Parameters
 
-| Parameter    | Required | Description                                      |
-|--------------|----------|--------------------------------------------------|
-| did          | true     | Device ID. You get it from `init` method in SDK. |
-| shop_id      | true     | Your API key                                     |
-| sid          | true     | Temporary user session ID                        |
-| type         | true     | In this case: "instant_search"                   |
-| search_query | true     | Search query                                     |
-| locations    | false    | Comma separated list of locations IDs            |
+| Parameter            | Required | Description                                                       |
+|----------------------|----------|-------------------------------------------------------------------|
+| did                  | true     | Device ID. You get it from `init` method in SDK.                  |
+| shop_id              | true     | Your API key                                                      |
+| sid                  | true     | Temporary user session ID                                         |
+| type                 | true     | In this case: "instant_search"                                    |
+| search_query         | true     | Search query                                                      |
+| locations            | false    | Comma separated list of locations IDs                             |
+| filters_search_by    | false    | Available options for filter: name, quantity, popularity          |
 
 ### API response
 | Name                   | Type   | Description                                                                                                                                                                                           |
