@@ -459,3 +459,46 @@ curl https://<%= config[:api_endpoint] %>/products/not_widgetable?shop_id=...&sh
 Returns a list of `avaiable` and `not ignored` products which are not `widgetable`: can't be displayed in search, recommendations and messages due to missing one of mandatory parameters (`name`, `price`, `url` or `image_url`) or failed to fetch product's photo during import operation.
 
 
+
+## Clear client's shopping cart
+
+```shell
+
+# By phone number
+curl --location --request DELETE 'https://<%= config[:api_endpoint] %>/products/cart/clear?phone=PHONE&shop_id=SHOP_ID&shop_secret=SHOP_SECRET'
+
+# By phone email
+curl --location --request DELETE 'https://<%= config[:api_endpoint] %>/products/cart/clear?email=EMAIL&shop_id=SHOP_ID&shop_secret=SHOP_SECRET'
+
+
+```
+
+```javascript
+// No implementation. See CURL}
+```
+
+```java
+// No implementation. See CURL
+```
+
+### HTTP Request
+
+`DELETE https://<%= config[:api_endpoint] %>/products/cart/clear`
+
+### Query Parameters
+
+| Parameter  | Required | Description                                                                                                                          |
+|------------|----------|--------------------------------------------------------------------------------------------------------------------------------------|
+| shop_id      | true     | Your API key                            |
+| shop_secret  | true     | Your API secret key                     |
+| email*       | true     | User's email                            |
+| phone*       | true     | User's phone number                     |
+
+<aside class="notice">
+At least of identifiers (marked by *) must present in request: email, phone. It's used to identify user.
+</aside>
+
+
+### API response
+
+Returns `{"status": "success"}` JSON object.
