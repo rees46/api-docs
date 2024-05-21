@@ -470,15 +470,23 @@ curl 'https://<%= config[:api_endpoint] %>/products/cart?did=DEVICE_ID&shop_id=S
 ```
 
 ```javascript
-// No implementation. See CURL}
+<%= config[:js_sdk_name] %>("cart", "get", function(response) {
+  // callback for success
+}, function(error) {
+  // callback for error
+});
 ```
 
 ```java
-// No implementation. See CURL
+// Not implemented yet.
 ```
 
 ```swift
-// No implementation. See CURL
+// Not implemented yet.
+```
+
+```jsx
+// Not implemented yet.
 ```
 
 ### HTTP Request
