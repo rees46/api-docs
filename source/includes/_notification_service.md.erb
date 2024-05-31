@@ -41,12 +41,6 @@
      extension AppDelegate: UNUserNotificationCenterDelegate {
          func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data){
              let tokenParts = deviceToken.map { data -> String in String(format: "%02.2hhx",data) }
-
-             let token = tokenParts.joined()
-             pushGlobalToken = token
-             print("Push Token", pushGlobalToken)
-             userDefaults.standard.set(token,forkey: "pushGlobalToken")
-             Messaging.messaging().apnsToken = deviceToken
              # Additional custom code
               notificationService?didRegisterForRemoteNotificationsWithDeviceToken(deviceToken: deviceToken)
     }
