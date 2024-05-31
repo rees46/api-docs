@@ -27,8 +27,9 @@
 
      # During initialization `NotificationService ` will ask permission from the user to send notifications
      # - UIApplication.shared.registerForRemoteNotifications()
-     # The client will have to sign protocols - UNUserNotificationCenterDelegate and implement the `application` method
-     # and call the `application` method inside of the NotificationService object application
+     # The client will have to sign protocols - UNUserNotificationCenterDelegate and implement
+     # the application(didRegisterForRemoteNotificationsWithDeviceToken) method
+     # and call notificationService.didRegisterForRemoteNotificationsWithDeviceToken(deviceToken: Data)
 
      extension AppDelegate: UNUserNotificationCenterDelegate {
          func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
