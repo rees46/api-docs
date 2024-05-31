@@ -93,9 +93,58 @@ Method uploads list of unique promo codes to the selected list. All non-unique p
 | id           | true      | Promo codes list ID |
 | codes        | true      | List of promo codes |
 
+
+
+
+
+## Delete not sent promo codes
+
+> Headers
+
+```
+Content-type: application/json
+```
+
+> Body example
+
+```json
+{
+    "shop_id": "...",
+    "shop_secret": "...",
+    "id": "...",
+}
+```
+
+> Request example
+
+```shell
+curl --header "Content-Type: application/json" \
+  --request DELETE \
+  --data-binary "@data.json" \
+  https://<%= config[:api_endpoint] %>/promo_codes/purge
+```
+
+Method deletes promo codes from the list which were not sent to any user. It's useful to clean up time sensitive codes.
+
+
+### HTTP Request
+
+`DELETE https://<%= config[:api_endpoint] %>/promo_codes/purge`
+
+`Content-Type: application/json`
+
+### Query Parameters
+
+| Parameter    | Required  | Description         |
+|--------------|-----------|---------------------|
+| shop_id      | true      | Your API key        |
+| shop_secret  | true      | Your API secret key |
+| id           | true      | Promo codes list ID |
+
 ### Errors
 
-When promo codes list is empty, method returns 404 error.
+When promo codes list is not found, method returns 404 error.
+
 
 
 
