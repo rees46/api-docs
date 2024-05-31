@@ -9,29 +9,21 @@
 
      @UIApplicationMain
 
-     class AppDelegate:UIResponder,UIApplicationDelegate {
-       var window:UIWindow?
+     class AppDelegate: UIResponder, UIApplicationDelegate {
+         var window: UIWindow?
 
-       let gcmMessageIDKey = "gcm.message_id"
-       var sdk:PersonalizationSDK!
-       var sdkAdditionalInit:PersonalizationSDK!
-       var NotificationService:NotificationServiceProtocol?
+         var sdk: PersonalizationSDK!
+         var notificationService: NotificationServiceProtocol?
 
-       func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+         func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+             sdk = createPersonalizationSDK(shopId: "SHOP_ID", enableLogs: true, { error in
+             # Custom completionHandler
+             })
 
-           print("A. init firebase SDK")
-           FirebaseApp.configure()
-           Messaging.messaging().delegate = self
-           print("======")
-
-           print("0 init SDK")
-           sdk = createPersonalizationSDK(shopId:String, enableLogs: Boolean, { error in
-                 # Custom completionHandler
-           })
-           # Create instance of NotificationService with pre-created sdk
-           notificationService = NotificationService(sdk: sdk)
-           }
-     }
+             # Create instance of NotificationService with pre-created sdk
+             notificationService = NotificationService(sdk: sdk)
+                 }
+             }
 
      # During initialization `NotificationService ` will ask permission from the user to send notifications
      # - UIApplication.shared.registerForRemoteNotifications()
@@ -39,8 +31,7 @@
      # and call the `application` method inside of the NotificationService object application
 
      extension AppDelegate: UNUserNotificationCenterDelegate {
-         func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data){
-             let tokenParts = deviceToken.map { data -> String in String(format: "%02.2hhx",data) }
-             # Additional custom code
-              notificationService?didRegisterForRemoteNotificationsWithDeviceToken(deviceToken: deviceToken)
-    }
+         func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+         # Additional custom code
+     notificationService?.didRegisterForRemoteNotificationsWithDeviceToken(deviceToken: deviceToken)
+     }
