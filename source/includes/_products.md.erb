@@ -459,6 +459,54 @@ curl https://<%= config[:api_endpoint] %>/products/not_widgetable?shop_id=...&sh
 Returns a list of `avaiable` and `not ignored` products which are not `widgetable`: can't be displayed in search, recommendations and messages due to missing one of mandatory parameters (`name`, `price`, `url` or `image_url`) or failed to fetch product's photo during import operation.
 
 
+## Get client's shopping cart
+
+Shopping cart can be fetched with `did` (device ID) parameter only.
+
+```shell
+
+# By did
+curl 'https://<%= config[:api_endpoint] %>/products/cart?did=DEVICE_ID&shop_id=SHOP_ID'
+```
+
+```javascript
+<%= config[:js_sdk_name] %>("cart", "get", function(response) {
+  // callback for success
+}, function(error) {
+  // callback for error
+});
+```
+
+```java
+// Not implemented yet.
+```
+
+```swift
+// Not implemented yet.
+```
+
+```jsx
+// Not implemented yet.
+```
+
+### HTTP Request
+
+`GET https://<%= config[:api_endpoint] %>/products/cart`
+
+### Query Parameters
+
+| Parameter | Required | Description         |
+|-----------|----------|---------------------|
+| shop_id   | true     | Your API key        |
+| did       | true     | Device ID           |
+
+
+### API response
+
+Returns `{"status": "success", "data": { "items": [ {"uniqid": "SKU_1", "quantity": 1}, {"uniqid": "SKU_2", "quantity": 3} ] }}` JSON object.
+
+
+
 
 ## Clear client's shopping cart
 
@@ -470,11 +518,10 @@ curl --location --request DELETE 'https://<%= config[:api_endpoint] %>/products/
 # By phone email
 curl --location --request DELETE 'https://<%= config[:api_endpoint] %>/products/cart/clear?email=EMAIL&shop_id=SHOP_ID&shop_secret=SHOP_SECRET'
 
-
 ```
 
 ```javascript
-// No implementation. See CURL}
+// No implementation. See CURL
 ```
 
 ```java
