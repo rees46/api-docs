@@ -1,0 +1,51 @@
+     #  The first step is setting `autoSendPushToken = true` during SDK initialization
+     # `NotificationService`  object is initializing in `SimplePersonalizationSDK`
+     # `NotificationService` will check `autoSendPushToken ` value. If true - the last sending date check.
+     #  Check results: nil - token will be sent to the server and the date will be saved. More than a week - the token will be sent and the token sending date will be renewed.
+     #  Less than a week - token won`t be sent.
+     #  If `autoSendPushToken` value is false NotificationService won`t send the token to the server
+
+     @UIApplicationMain
+
+     class AppDelegate:UIResponder,UIApplicationDelegate {
+       var window:UIWindow?
+
+       let gcmMessageIDKey = "gcm.message_id"
+       var sdk:PersonalizationSDK!
+       var sdkAdditionalInit:PersonalizationSDK!
+       var NotificationService:NotificationServiceProtocol?
+
+       func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+
+           print("A. init firebase SDK")
+           FirebaseApp.configure()
+           Messaging.messaging().delegate = self
+           print("======")
+
+           print("0 init SDK")
+           sdk = createPersonalizationSDK(shopId:String, enableLogs: Boolean, { error in
+                 didToken = self.sdk.getDeviceId()
+                 globalSDK = self.sdk
+                 NotificationCenter.default.post(name: globalSDKNotificationNameMainInit, object: nil)
+           })
+           notificationService = NotificationService(sdk: sdk)
+           notificationService?.pushActionDelegate = self
+
+       }
+     }
+
+     # During initialization `NotificationService ` will ask permission from the user to send notifications - UIApplication.shared.registerForRemoteNotifications()
+     # The client will have to sign protocols - UNUserNotificationCenterDelegate and implement the `application` method and call the `application` method inside of the NotificationService object application
+
+     extension AppDelegate: UNUserNotificationCenterDelegate {
+         func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data){
+             let tokenParts = deviceToken.map { data -> String in String(format: "%02.2hhx",data) }
+
+             let token = tokenParts.joined()
+             pushGlobalToken = token
+             print("Push Token", pushGlobalToken)
+             userDefaults.standard.set(token,forkey: "pushGlobalToken")
+             Messaging.messaging().apnsToken = deviceToken
+
+        notificationService?didRegisterForRemoteNotificationsWithDeviceToken(deviceToken: deviceToken)
+    }
