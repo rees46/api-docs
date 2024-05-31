@@ -1,5 +1,6 @@
-     #  The first step is setting `autoSendPushToken = true` during SDK initialization
-     # `NotificationService`  object is initializing in `SimplePersonalizationSDK`
+     #  The first step is to make sure that `autoSendPushToken = true` during SDK initialization
+     #  it's a default value.
+     # `NotificationService`  object is initializing with `SimplePersonalizationSDK`
      # `NotificationService` will check `autoSendPushToken ` value. If true - the last sending date check.
      #  Check results: nil - token will be sent to the server and the date will be saved.
      #  More than a week - the token will be sent and the token sending date will be renewed.
@@ -25,14 +26,11 @@
 
            print("0 init SDK")
            sdk = createPersonalizationSDK(shopId:String, enableLogs: Boolean, { error in
-                 didToken = self.sdk.getDeviceId()
-                 globalSDK = self.sdk
-                 NotificationCenter.default.post(name: globalSDKNotificationNameMainInit, object: nil)
+                 # Custom completionHandler
            })
+           # Create instance of NotificationService with pre-created sdk
            notificationService = NotificationService(sdk: sdk)
-           notificationService?.pushActionDelegate = self
-
-       }
+           }
      }
 
      # During initialization `NotificationService ` will ask permission from the user to send notifications
@@ -49,6 +47,6 @@
              print("Push Token", pushGlobalToken)
              userDefaults.standard.set(token,forkey: "pushGlobalToken")
              Messaging.messaging().apnsToken = deviceToken
-
-        notificationService?didRegisterForRemoteNotificationsWithDeviceToken(deviceToken: deviceToken)
+             # Additional custom code
+              notificationService?didRegisterForRemoteNotificationsWithDeviceToken(deviceToken: deviceToken)
     }
