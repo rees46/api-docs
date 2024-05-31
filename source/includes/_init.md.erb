@@ -127,7 +127,7 @@ curl https://<%= config[:api_endpoint] %>/init?did=DEVICE_ID&shop_id=SHOP_ID&v=3
 
 ```swift
 import <%= config[:ios_sdk_package_name] %>
-var sdk = createPersonalizationSDK(shopId: "SHOP_ID", stream: "ios")
+var sdk = createPersonalizationSDK(shopId: "SHOP_ID", stream: "ios",  userEmail: "exmample@mail.ru", userPhone: "String", userLoyaltyId: "String", apiDomain: "String", enableLogs: Bool, autoSendPushToken: Bool)
 ```
 
 ```java

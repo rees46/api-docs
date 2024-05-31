@@ -1,0 +1,38 @@
+     #  The first step is to make sure that `autoSendPushToken = true` during SDK initialization
+     #  it's a default value.
+     # `NotificationService`  object is initializing with `SimplePersonalizationSDK`
+     # `NotificationService` will check `autoSendPushToken ` value. If true - the last sending date check.
+     #  Check results: nil - token will be sent to the server and the date will be saved.
+     #  More than a week - the token will be sent and the token sending date will be renewed.
+     #  Less than a week - token won`t be sent.
+     #  If `autoSendPushToken` value is false NotificationService won`t send the token to the server
+
+     @UIApplicationMain
+
+     class AppDelegate: UIResponder, UIApplicationDelegate {
+         var window: UIWindow?
+
+         var sdk: PersonalizationSDK!
+         var notificationService: NotificationServiceProtocol?
+
+         func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+             sdk = createPersonalizationSDK(shopId: "SHOP_ID", enableLogs: true, { error in
+             # Custom completionHandler
+             })
+
+             # Create instance of NotificationService with pre-created sdk
+             notificationService = NotificationService(sdk: sdk)
+                 }
+             }
+
+     # During initialization `NotificationService ` will ask permission from the user to send notifications
+     # - UIApplication.shared.registerForRemoteNotifications()
+     # The client will have to sign protocols - UNUserNotificationCenterDelegate and implement
+     # the application(didRegisterForRemoteNotificationsWithDeviceToken) method
+     # and call notificationService.didRegisterForRemoteNotificationsWithDeviceToken(deviceToken: Data)
+
+     extension AppDelegate: UNUserNotificationCenterDelegate {
+         func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+         # Additional custom code
+     notificationService?.didRegisterForRemoteNotificationsWithDeviceToken(deviceToken: deviceToken)
+     }
