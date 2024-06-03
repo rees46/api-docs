@@ -117,6 +117,25 @@ HashMap<String, Boolean> subscriptions = new HashMap<>();
 subscriptions.put("email_bulk", true);
 <%= config[:android_sdk_package_name]%>.manageSubscription("my@example.com", "+10000000000", subscriptions);
 
+// With email and phone and listener
+HashMap<String, Boolean> subscriptions = new HashMap<>();
+subscriptions.put("email_bulk", true);
+<%= config[:android_sdk_package_name]%>.manageSubscription("my@example.com", "+10000000000", subscriptions, listener);
+
+// With email, phone, externalId, loyaltyId, telegramId
+HashMap<String, Boolean> subscriptions = new HashMap<>();
+subscriptions.put("external_id", true);
+subscriptions.put("loyalty_id", true);
+subscriptions.put("telegram_id", true);
+<%= config[:android_sdk_package_name]%>.manageSubscription("my@example.com", "+10000000000", "externalID", "loyaltyId", "telegramId", subscriptions);
+
+// With email, phone, externalId, loyaltyId, telegramId and listener
+HashMap<String, Boolean> subscriptions = new HashMap<>();
+subscriptions.put("external_id", true);
+subscriptions.put("loyalty_id", true);
+subscriptions.put("telegram_id", true);
+<%= config[:android_sdk_package_name]%>.manageSubscription("my@example.com", "+10000000000", "externalID", "loyaltyId", "telegramId", subscriptions, listener);
+
 // Unsubscribe from bulk SMS and email
 HashMap<String, Boolean> subscriptions = new HashMap<>();
 subscriptions.put("email_bulk", false);
@@ -133,6 +152,7 @@ The method changes user's subscription to different channels (`email`, `sms`) an
 | email                      | String  | true*    | User's email                                                                       |
 | phone                      | String  | true*    | User's email                                                                       |
 | external_id                | String  | true*    | User's ID from external source                                                     |
+| telegram_id                | String  | true*    | User's telegram ID                                                      |
 | loyalty_id                 | String  | true*    | User's loyalty card ID                                                             |
 | did                        | String  | true*    | Users device ID. It's handled automatically on JS SDK and don't needed in REST API |
 | email_bulk                 | Boolean | false    | Subscribe user to email bulk campaigns                                             |
