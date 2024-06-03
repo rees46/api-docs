@@ -90,6 +90,85 @@ sdk.configuration().stories.storiesSlideReloadPopupPositionY = 120 //default con
 sdk.configuration().stories.storiesBlockNumberOfLines = 2
 sdk.configuration().stories.storiesBlockCharWrapping = false
 sdk.configuration().stories.storiesBlockCharCountWrap = 15
+
+// TextBlock is initializing form StoriesElement object and clipsToBounds parameter, it's default value is true
+// configurable parameters: textColor,cornerRadius,clipsToBounds,backgroundColor,yOffset
+
+init(from textBlockObject: StoriesElement)
+
+// Define font family names
+public struct FontConstants {
+    public static let monospaced = "Menlo"
+    public static let serif = "Georgia"
+    public static let sansSerif = "Arial"
+}
+
+// Define layout constants for TextBlockView
+public static let leftAnchorOffsetConstant: CGFloat = 5
+public static let rightAnchorOffsetConstant: CGFloat = -5
+public static let topAnchorOffsetConstant: CGFloat = 2
+public static let bottomAnchorOffsetConstant: CGFloat = -2
+
+// Define protocol for text configuration
+protocol TBTextConfigurable {
+    var text: NSAttributedString { get }
+    var textAlignment: NSTextAlignment { get }
+}
+
+// Implement TBTextConfigurable protocol
+public struct TBTextConfiguration: TBTextConfigurable
+
+// Initialize TBTextConfiguration using StoriesElement
+init(from textBlockObject: StoriesElement)
+
+// Initialize TBFontConfiguration using StoriesElement
+init(from textBlockObject: StoriesElement)
+
+// Get UIFont based on type, size, bold, and italic properties
+private static func getFont(for fontType: FontType, isBold: Bool = false, isItalic: Bool = false, fontSize: CGFloat) -> UIFont
+
+// Define protocol for appearance configuration
+protocol TBAppearanceConfigurable {
+    var textColor: UIColor { get }
+    var cornerRadius: CGFloat { get }
+    var clipsToBounds: Bool { get }
+    var backgroundColor: UIColor { get }
+    var yOffset: CGFloat { get }
+}
+
+// Implement TBAppearanceConfigurable protocol
+public struct TBAppearanceConfiguration: TBAppearanceConfigurable
+
+// Initialize TBAppearanceConfiguration using StoriesElement
+init(from textBlockObject: StoriesElement, clipsToBounds: Bool = true)
+
+// Initialize StoriesElement with JSON dictionary
+public init(json: [String: Any])
+
+// Define properties of StoriesElement
+public var link: String?
+public var deeplinkIos: String?
+let uID: String?
+let fontType: FontType?
+let fontSize: Double?
+let textItalic: Bool?
+let textBackgroundColorOpacity: String?
+let textBackgroundColor: String?
+let textColor: String?
+let textInput: String?
+let textAlignment: TextAlignment?
+let textLineSpacing: Double?
+let yOffset: Double?
+let type: ElementType
+let color: String?
+let title, linkIos: String?
+let textBold: Bool?
+let background: String?
+let cornerRadius: Int
+let labels: Labels?
+let products: [StoriesProduct]?
+let product: StoriesPromoCodeElement?
+
 ```
 
 ```java
