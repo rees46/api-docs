@@ -177,6 +177,45 @@ stories.settings.label_font_size = 16;
 stories.settings.label_font_family = Typeface.SERIF;
 stories.settings.button_font_family = Typeface.MONOSPACE;
 stories.settings.products_button_font_family = Typeface.DEFAULT_BOLD;
+
+// TextBlock
+
+| Parameter                    | Type     | default value                          | Description                       |
+|------------------------------|----------|----------------------------------------|-----------------------------------|
+| bold                         | boolean  | false                                  | font bold                         |
+| italic                       | boolean  | false                                  | font italic                       |
+| textInput                    | String   |                                        | text content                      |
+| yOffset                      | int      | 0                                      | vertical offset of the text block |
+| fontType                     | String   |                                        | font type                         |
+| fontSize                     | int      | DEFAULT_FONT_SIZE                      | font size                         |
+| textAlign                    | String   |                                        | text alignment                    |
+| textColor                    | String   |                                        | text color                        |
+| textLineSpacing              | double   | 0.0                                    | line spacing od the text          |
+| textBackgroundColor          | String   | DEFAULT_TEXT_BACKGROUND_COLOR          | background color                  |
+| textBackgroundColorOpacity   | String   | DEFAULT_TEXT_BACKGROUND_COLOR_OPACITY  |background color opacity           |
+
+// default variables
+| Variable                              | Type     | Value   |
+|---------------------------------------|----------|---------|
+| DEFAULT_FONT_SIZE                     | int      | 14      |
+| DEFAULT_TEXT_BACKGROUND_COLOR         | String   | #FFFFFF |
+| DEFAULT_TEXT_BACKGROUND_COLOR_OPACITY | String   | 0%      |
+
+// TextBlock is initializing based on JSON object it received
+
+public TextBlockElement(@NonNull JSONObject json) {
+    bold = json.optBoolean("bold", false);
+    italic = json.optBoolean("italic", false);
+    textInput = json.optString("text_input", "");
+    yOffset = json.optInt("y_offset", 0);
+    fontType = json.optString("font_type", "");
+    fontSize = json.optInt("font_size", DEFAULT_FONT_SIZE);
+    textAlign = json.optString("text_align", "");
+    textColor = json.optString("text_color", "");
+    textLineSpacing = json.optDouble("text_line_spacing", 0.0);
+    textBackgroundColor = json.optString("text_background_color", DEFAULT_TEXT_BACKGROUND_COLOR);
+    textBackgroundColorOpacity = json.optString("text_background_color_opacity", DEFAULT_TEXT_BACKGROUND_COLOR_OPACITY);
+}
 ```
 
 ```jsx
