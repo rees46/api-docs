@@ -124,16 +124,15 @@ subscriptions.put("email_bulk", true);
 
 // With email, phone, externalId, loyaltyId, telegramId
 HashMap<String, Boolean> subscriptions = new HashMap<>();
-subscriptions.put("external_id", true);
-subscriptions.put("loyalty_id", true);
-subscriptions.put("telegram_id", true);
+subscriptions.put("email_bulk", true);
+subscriptions.put("sms_chain", false);
 <%= config[:android_sdk_package_name]%>.manageSubscription("my@example.com", "+10000000000", "externalID", "loyaltyId", "telegramId", subscriptions);
 
 // With email, phone, externalId, loyaltyId, telegramId and listener
 HashMap<String, Boolean> subscriptions = new HashMap<>();
-subscriptions.put("external_id", true);
-subscriptions.put("loyalty_id", true);
-subscriptions.put("telegram_id", true);
+subscriptions.put("email_bulk", true);
+subscriptions.put("email_transactional", false);
+subscriptions.put("sms_chain", true);
 <%= config[:android_sdk_package_name]%>.manageSubscription("my@example.com", "+10000000000", "externalID", "loyaltyId", "telegramId", subscriptions, listener);
 
 // Unsubscribe from bulk SMS and email
