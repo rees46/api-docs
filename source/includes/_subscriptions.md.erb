@@ -106,40 +106,40 @@ sdk.manageSubscription(email: "my@example.com", phone: "+10000000000", userExter
 )
 ```
 
-```java
+```kotlin
 // With `did` only
-HashMap<String, Boolean> subscriptions = new HashMap<>();
-subscriptions.put("email_bulk", true);
-<%= config[:android_sdk_package_name]%>.manageSubscription(null, null, subscriptions);
+val subscriptions = hashMapOf<String, Boolean>()
+subscriptions["email_bulk"] = true
+sdk.manageSubscription(null, null, subscriptions)
 
 // With email and phone
-HashMap<String, Boolean> subscriptions = new HashMap<>();
-subscriptions.put("email_bulk", true);
-<%= config[:android_sdk_package_name]%>.manageSubscription("my@example.com", "+10000000000", subscriptions);
+val subscriptions = hashMapOf<String, Boolean>()
+subscriptions["email_bulk"] = true
+sdk.manageSubscription("my@example.com", "+10000000000", subscriptions)
 
 // With email and phone and listener
-HashMap<String, Boolean> subscriptions = new HashMap<>();
-subscriptions.put("email_bulk", true);
-<%= config[:android_sdk_package_name]%>.manageSubscription("my@example.com", "+10000000000", subscriptions, listener);
+val subscriptions = hashMapOf<String, Boolean>()
+subscriptions["email_bulk"] = true
+sdk.manageSubscription("my@example.com", "+10000000000", subscriptions, listener)
 
 // With email, phone, externalId, loyaltyId, telegramId
-HashMap<String, Boolean> subscriptions = new HashMap<>();
-subscriptions.put("email_bulk", true);
-subscriptions.put("sms_chain", false);
-<%= config[:android_sdk_package_name]%>.manageSubscription("my@example.com", "+10000000000", "externalID", "loyaltyId", "telegramId", subscriptions);
+val subscriptions = hashMapOf<String, Boolean>()
+subscriptions["email_bulk"] = true
+subscriptions["sms_chain"] = false
+sdk.manageSubscription("my@example.com", "+10000000000", "externalID", "loyaltyId", "telegramId", subscriptions)
 
 // With email, phone, externalId, loyaltyId, telegramId and listener
-HashMap<String, Boolean> subscriptions = new HashMap<>();
-subscriptions.put("email_bulk", true);
-subscriptions.put("email_transactional", false);
-subscriptions.put("sms_chain", true);
-<%= config[:android_sdk_package_name]%>.manageSubscription("my@example.com", "+10000000000", "externalID", "loyaltyId", "telegramId", subscriptions, listener);
+val subscriptions = hashMapOf<String, Boolean>()
+subscriptions["email_bulk"] = true
+subscriptions["email_transactional"] = false
+subscriptions["sms_chain"] = true
+sdk.manageSubscription("my@example.com", "+10000000000", "externalID", "loyaltyId", "telegramId", subscriptions, listener)
 
 // Unsubscribe from bulk SMS and email
-HashMap<String, Boolean> subscriptions = new HashMap<>();
-subscriptions.put("email_bulk", false);
-subscriptions.put("sms_bulk", false);
-<%= config[:android_sdk_package_name]%>.manageSubscription(null, null, subscriptions);
+val subscriptions = hashMapOf<String, Boolean>()
+subscriptions["email_bulk"] = false
+subscriptions["sms_bulk"] = false
+sdk.manageSubscription(null, null, subscriptions)
 ```
 
 The method changes user's subscription to different channels (`email`, `sms`) and campaigns types (`bulk`, `chain`, `transactional`).
@@ -193,7 +193,7 @@ https://<%= config[:api_endpoint] %>/subscriptions/callback
 // No implementation. See CURL
 ```
 
-```java
+```kotlin
 // No implementation. See CURL
 ```
 
@@ -224,7 +224,7 @@ https://<%= config[:api_endpoint] %>/subscriptions/callback
 // No implementation. See CURL
 ```
 
-```java
+```kotlin
 // No implementation. See CURL
 ```
 
@@ -255,7 +255,7 @@ https://<%= config[:api_endpoint] %>/subscriptions/callback
 // No implementation. See CURL
 ```
 
-```java
+```kotlin
 // No implementation. See CURL
 ```
 
@@ -286,7 +286,7 @@ https://<%= config[:api_endpoint] %>/subscriptions/callback
 // No implementation. See CURL
 ```
 
-```java
+```kotlin
 // No implementation. See CURL
 ```
 
@@ -319,7 +319,7 @@ function(error) {
 // No implementation. See CURL
 ```
 
-```java
+```kotlin
 // No implementation. See CURL
 ```
 
@@ -406,7 +406,7 @@ curl https://<%= config[:api_endpoint] %>/subscriptions/changes?shop_id=...&shop
 // No implementation. See CURL
 ```
 
-```java
+```kotlin
 // No implementation. See CURL
 ```
 

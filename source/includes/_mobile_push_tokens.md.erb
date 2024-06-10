@@ -12,13 +12,12 @@ sdk.setPushTokenNotification(token: "TOKEN_STRING") { (tokenResponse) in
 }
 ```
 
-```java
-<%= config[:android_sdk_package_name] %>.setPushTokenNotification("token", new Api.OnApiCallbackListener() {
-	@Override
-	public void onSuccess(JSONObject msg) {
-		//
-	}
-});
+```kotlin
+sdk.setPushTokenNotification("token", object : OnApiCallbackListener() {
+            override fun onSuccess(msg: JSONObject?) {
+                //
+            }
+        })
 ```
 
 ```jsx

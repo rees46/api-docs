@@ -205,12 +205,16 @@ let product: StoriesPromoCodeElement?
 
 ```
 
-```java
-StoriesView stories = findViewById(R.id.story_view);
-stories.settings.label_font_size = 16;
-stories.settings.label_font_family = Typeface.SERIF;
-stories.settings.button_font_family = Typeface.MONOSPACE;
-stories.settings.products_button_font_family = Typeface.DEFAULT_BOLD;
+```kotlin
+val stories = findViewById<StoriesView>(R.id.story_view)
+stories.settings.apply {
+    label_font_size = 16
+    label_font_family = Typeface.SERIF
+    button_font_family = Typeface.MONOSPACE
+    products_button_font_family = Typeface.DEFAULT_BOLD
+}
+```
+```
 
 // TextBlock
 
@@ -236,21 +240,19 @@ stories.settings.products_button_font_family = Typeface.DEFAULT_BOLD;
 | DEFAULT_TEXT_BACKGROUND_COLOR_OPACITY | String   | 0%      |
 
 // TextBlock is initializing based on JSON object it received
-
-public TextBlockElement(@NonNull JSONObject json) {
-    bold = json.optBoolean("bold", false);
-    italic = json.optBoolean("italic", false);
-    textInput = json.optString("text_input", "");
-    yOffset = json.optInt("y_offset", 0);
-    fontType = json.optString("font_type", "");
-    fontSize = json.optInt("font_size", DEFAULT_FONT_SIZE);
-    textAlign = json.optString("text_align", "");
-    textColor = json.optString("text_color", "");
-    textLineSpacing = json.optDouble("text_line_spacing", 0.0);
-    textBackgroundColor = json.optString("text_background_color", DEFAULT_TEXT_BACKGROUND_COLOR);
-    textBackgroundColorOpacity = json.optString("text_background_color_opacity", DEFAULT_TEXT_BACKGROUND_COLOR_OPACITY);
+constructor(json: JSONObject) {
+    bold = json.optBoolean("bold", false)
+    italic = json.optBoolean("italic", false)
+    textInput = json.optString("text_input", "")
+    yOffset = json.optInt("y_offset", 0)
+    fontType = json.optString("font_type", "")
+    fontSize = json.optInt("font_size", DEFAULT_FONT_SIZE)
+    textAlign = json.optString("text_align", "")
+    textColor = json.optString("text_color", "")
+    textLineSpacing = json.optDouble("text_line_spacing", 0.0)
+    textBackgroundColor = json.optString("text_background_color", DEFAULT_TEXT_BACKGROUND_COLOR)
+    textBackgroundColorOpacity = json.optString("text_background_color_opacity", DEFAULT_TEXT_BACKGROUND_COLOR_OPACITY)
 }
-```
 
 ```jsx
 ```

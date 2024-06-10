@@ -69,17 +69,18 @@ sdk.configuration().recommendations.setWidgetBlock(widgetFontName: "Museo",
 
 ```
 
-```java
-Params params = new Params();
-params.put(Params.Parameter.EXTENDED, true);
-params.put(Params.Parameter.ITEM, "37");
-params.put(Params.Parameter.CATEGORY, "111"); //filter by category
-<%= config[:android_sdk_package_name]%>.recommend("RECOMMENDER_CODE", params, new Api.OnApiCallbackListener() {
-    @Override
-    public void onSuccess(JSONObject response) {
-        Log.i(TAG, "Recommender response: " + response.toString());
-    }
-});
+```kotlin
+   val params = Params().apply {
+            put(Params.Parameter.EXTENDED, true)
+            put(Params.Parameter.ITEM, "37")
+            put(Params.Parameter.CATEGORY, "111") // category filtration
+        }
+
+        sdk.recommend("RECOMMENDER_CODE", params, object : OnApiCallbackListener() {
+            override fun onSuccess(response: JSONObject?) {
+                Log.i(TAG, "Ответ рекомендации: " + response.toString())
+            }
+        })
 ```
 
 ```jsx
