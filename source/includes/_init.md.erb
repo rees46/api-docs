@@ -55,8 +55,11 @@ buildscript {
 	}
 }
 
-// 3. Append to your app module build.gradle after line apply plugin: 'com.android.application'
-apply plugin: 'com.google.gms.google-services'
+// 3. Append to your app module `build.gradle` after line `id 'com.android.application'`
+plugins {
+	id 'com.google.gms.google-services'
+	id 'org.jetbrains.kotlin.android'
+}
 
 // 4. Create your app in the Firebase console
 //    and copy file google-services.json to your app root path.
@@ -130,31 +133,30 @@ import <%= config[:ios_sdk_package_name] %>
 var sdk = createPersonalizationSDK(shopId: "SHOP_ID", stream: "ios",  userEmail: "exmample@mail.ru", userPhone: "String", userLoyaltyId: "String", apiDomain: "String", enableLogs: Bool, autoSendPushToken: Bool)
 ```
 
-```java
-// 1. Add code to your application
-public class SampleApplication extends Application {
-	public void onCreate() {
-		super.onCreate();
+```kotlin
+class SampleApplication: Application() {
+    override fun onCreate() {
+        super.onCreate()
 
-		//Initialize
-		<%= config[:android_sdk_package_name] %>.initialize(getApplicationContext(), SHOP_ID);
+        //Initialize
+        val sdk = REES46.initialize(applicationContext, SHOP_ID)
 
-		//Notification callback
-		<%= config[:android_sdk_package_name] %>.setOnMessageListener(new MessagingService.OnMessageListener() {
-			@Override
-			public void onMessage(Map<String, String> data) {
+        //Notification callback
+        sdk.setOnMessageListener(object : OnMessageListener {
+            override fun onMessage(data: Map<String, String>) {
 
-				//----->
-				//Show your custom notification
-				//----->
+                //----->
+                //Show your custom notification
+                //----->
 
-			}
-		});
-	}
+            }
+        })
+    }
 }
 
+
 // 2. For On-Premise integration need use initialize with custom api domain:
-<%= config[:android_sdk_package_name] %>.initialize(getApplicationContext(), SHOP_ID, API_DOMAIN);
+val sdk = REES46.initialize(getApplicationContext(), SHOP_ID, API_DOMAIN)
 
 // 3. Check AndroidManifest.xml and add android:name=".SampleApplication" to application item.
 <application
