@@ -139,7 +139,8 @@ class SampleApplication: Application() {
         super.onCreate()
 
         //Initialize
-        val sdk = <%= config[:android_sdk_package_name] %>.initialize(applicationContext, SHOP_ID)
+       val sdk = <%= config[:android_sdk_package_name] %>.getInstance()
+               <%= config[:android_sdk_package_name] %>.initialize(applicationContext, SHOP_ID)
 
         //Notification callback
         sdk.setOnMessageListener(object : OnMessageListener {
@@ -156,7 +157,7 @@ class SampleApplication: Application() {
 
 
 // 2. For On-Premise integration need use initialize with custom api domain:
-val sdk = <%= config[:android_sdk_package_name] %>.initialize(applicationContext, SHOP_ID, API_DOMAIN)
+<%= config[:android_sdk_package_name] %>.initialize(applicationContext, SHOP_ID, API_DOMAIN)
 
 // 3. Check AndroidManifest.xml and add android:name=".SampleApplication" to application item.
 <application
