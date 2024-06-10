@@ -540,7 +540,7 @@ val purchase = Params().apply {
     put(Params.Parameter.DELIVERY_ADDRESS, "1860 street")
     put(Params.RecommendedBy(Params.RecommendedBy.TYPE.RECOMMENDATION, "e9ddb9cdc66285fac40c7a897760582a"))
 }
-<%= config["android_sdk_package_name"]%>.track(Params.TrackEvent.PURCHASE, purchase)
+sdk.track(Params.TrackEvent.PURCHASE, purchase)
 
 ```
 
@@ -851,7 +851,7 @@ sdk.notificationClicked(code: "i7ykuagkjgfs", type: "mobile_push_transactional")
       super.onCreate(savedInstanceState)
       // Для отслеживания кликов по уведомлению
       if (intent.extras != null) {
-          config.androidSdkPackageName.notificationClicked(intent.extras)
+          sdk.notificationClicked(intent.extras)
       }
   }
 ```
