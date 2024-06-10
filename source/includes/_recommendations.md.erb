@@ -70,19 +70,17 @@ sdk.configuration().recommendations.setWidgetBlock(widgetFontName: "Museo",
 ```
 
 ```kotlin
-// Create object with Params
-val params = Params().apply {
-    put(Parameter.EXTENDED, true)
-    put(Parameter.ITEM, "37")
-    put(Parameter.CATEGORY, "111") // Фильтрация по категории
-}
+   val params = Params().apply {
+            put(Params.Parameter.EXTENDED, true)
+            put(Params.Parameter.ITEM, "37")
+            put(Params.Parameter.CATEGORY, "111") // category filtration
+        }
 
-// Recommendations method call
-<%= config[:android_sdk_package_name] %>.recommend("RECOMMENDER_CODE", params, object : Api.OnApiCallbackListener {
-    override fun onSuccess(response: JSONObject) {
-        Log.i(TAG, "Ответ рекомендации: " + response.toString())
-    }
-})
+        sdk.recommend("RECOMMENDER_CODE", params, object : OnApiCallbackListener() {
+            override fun onSuccess(response: JSONObject?) {
+                Log.i(TAG, "Ответ рекомендации: " + response.toString())
+            }
+        })
 ```
 
 ```jsx

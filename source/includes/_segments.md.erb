@@ -259,11 +259,7 @@ sdk->getCurrentSegment()
 ```
 
 ```kotlin
-<%= config["android_sdk_package_name"] %>.getCurrentSegment(object : Api.OnApiCallbackListener() {
-    override fun onSuccess(segments: JSONArray) {
-        // segments (type: array of objects)
-    }
-})
+sdk.getCurrentSegment(object : OnApiCallbackListener() {...})
 ```
 
 ```jsx

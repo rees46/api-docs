@@ -64,19 +64,19 @@ sdk.subscribeForPriceDrop(id: "PRODUCT_ID", currentPrice: 333.49, phone: "+19999
 
 ```kotlin
 // Subscribe
-config.androidSdkPackageName.subscribeForPriceDrop("PRODUCT_ID", 333.49)
+sdk.subscribeForPriceDrop("PRODUCT_ID", 333.49)
 
 // Subscribe for a specific email
-config.androidSdkPackageName.subscribeForPriceDrop("PRODUCT_ID", 333.49, "mail@example.com")
+sdk.subscribeForPriceDrop("PRODUCT_ID", 333.49, "mail@example.com")
 
 // Subscribe for a specific phone number
-config.androidSdkPackageName.subscribeForPriceDrop("PRODUCT_ID", 333.49, null, "+19999999999")
+sdk.subscribeForPriceDrop("PRODUCT_ID", 333.49, null, "+19999999999")
 
 // Unsubscribe from specific products
-config.androidSdkPackageName.unsubscribeForPriceDrop(arrayOf("11111", "22222", "33333"))
+sdk.unsubscribeForPriceDrop(arrayOf("11111", "22222", "33333"))
 
 // Unsubscribe from all products
-config.androidSdkPackageName.unsubscribeForPriceDrop(arrayOf())
+sdk.unsubscribeForPriceDrop(arrayOf())
 
 ```
 
@@ -177,26 +177,26 @@ sdk.subscribeForBackInStock(id: "PRODUCT_ID", email: "mail@example.com");
 sdk.subscribeForBackInStock(id: "PRODUCT_ID", phone: "+19999999999");
 ```
 
-```java
+```kotlin
 // Subscribe
-config.androidSdkPackageName.subscribeForBackInStock("PRODUCT_ID")
+sdk.subscribeForBackInStock("PRODUCT_ID")
 
 // Subscribe for a specific email
-config.androidSdkPackageName.subscribeForBackInStock("PRODUCT_ID", "mail@example.com")
+sdk.subscribeForBackInStock("PRODUCT_ID", "mail@example.com")
 
 // Subscribe for a specific phone number
-config.androidSdkPackageName.subscribeForBackInStock("PRODUCT_ID", "+19999999999")
+sdk.subscribeForBackInStock("PRODUCT_ID", "+19999999999")
 
 // Subscribe with product size
 val properties = JSONObject()
 properties.put("fashion_size", "XL")
-config.androidSdkPackageName.subscribeForBackInStock("PRODUCT_ID", properties, "mail@example.com", null, null)
+sdk.subscribeForBackInStock("PRODUCT_ID", properties, "mail@example.com", null, null)
 
 // Unsubscribe from specific products
-config.androidSdkPackageName.unsubscribeForBackInStock(arrayOf("11111", "22222", "33333"))
+sdk.unsubscribeForBackInStock(arrayOf("11111", "22222", "33333"))
 
 // Unsubscribe from all products
-config.androidSdkPackageName.unsubscribeForBackInStock(arrayOf())
+sdk.unsubscribeForBackInStock(arrayOf())
 ```
 
 ```jsx

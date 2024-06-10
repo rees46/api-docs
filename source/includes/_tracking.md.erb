@@ -43,7 +43,7 @@ sdk.trackSource(source: .chain, code: "MESSAGE_ID")
 ```
 
 ```kotlin
-<%= config["android_sdk_package_name"]%>.track(Params.TrackEvent.VIEW, "37")
+sdk.track(Params.TrackEvent.VIEW, "37")
 ```
 
 ```jsx
@@ -214,7 +214,7 @@ sdk.track(event: .categoryView(id: "CATEGORY_ID")) { trackResponse in
 ```
 
 ```kotlin
-<%= config["android_sdk_package_name"]%>.track(Params.TrackEvent.CATEGORY, Params().apply {
+sdk.track(Params.TrackEvent.CATEGORY, Params().apply {
     put(Params.Parameter.CATEGORY_ID, "100")
 })
 ```
@@ -350,7 +350,7 @@ sdk.track(event: .synchronizeCart(items: [CartItem(productId: "784"), CartItem(p
 
 ```kotlin
 // Add to cart (simple)
-<%= config["android_sdk_package_name"]%>.track(Params.TrackEvent.CART, "37")
+sdk.track(Params.TrackEvent.CART, "37")
 
 // Add to cart (extended)
 val cart = Params().apply {
@@ -362,7 +362,7 @@ val cart = Params().apply {
     )
     put(Params.RecommendedBy(Params.RecommendedBy.TYPE.RECOMMENDATION, "e9ddb9cdc66285fac40c7a897760582a"))
 }
-<%= config["android_sdk_package_name"]%>.track(Params.TrackEvent.CART, cart)
+sdk.track(Params.TrackEvent.CART, cart)
 
 // Tracking full cart
 val fullCart = Params().apply {
@@ -380,7 +380,7 @@ val fullCart = Params().apply {
         }
     )
 }
-<%= config["android_sdk_package_name"]%>.track(Params.TrackEvent.CART, fullCart)
+sdk.track(Params.TrackEvent.CART, fullCart)
 ```
 
 ```jsx
@@ -626,7 +626,7 @@ curl 'https://<%= config[:api_endpoint] %>/push' \
 ```
 
 ```kotlin
-config["android_sdk_package_name"].track(Params.TrackEvent.WISH, "37")
+sdk.track(Params.TrackEvent.WISH, "37")
 ```
 
 ```swift
@@ -662,7 +662,7 @@ sdk.track(event: .productRemovedToFavorities(id: "PRODUCT_ID")) { trackResponse 
 ```
 
 ```kotlin
-config["android_sdk_package_name"].track(Params.TrackEvent.REMOVE_FROM_WISH, "37")
+sdk.track(Params.TrackEvent.REMOVE_FROM_WISH, "37")
 ```
 
 ```jsx
@@ -721,10 +721,10 @@ sdk.trackEvent(event: "something_happened", category: "important", label: "banne
 
 ```kotlin
 // Simple tracking of custom event
-config["android_sdk_package_name"].track("my_event")
+sdk.track("my_event")
 
 // Tracking with additional parameters
-config["android_sdk_package_name"].track("my_event", "event category", "event label", 100)
+sdk.track("my_event", "event category", "event label", 100)
 ```
 
 ```jsx
@@ -843,8 +843,8 @@ sdk.notificationClicked(code: "i7ykuagkjgfs", type: "mobile_push_transactional")
 
 ```kotlin
   // Add notification identification data to the intent
-  intent.putExtra(config.androidSdkPackageName + NOTIFICATION_TYPE, data["type"])
-  intent.putExtra(config.androidSdkPackageName + NOTIFICATION_ID, data["id"])
+  intent.putExtra( <%= config[:android_sdk_package_name] %>.NOTIFICATION_TYPE, data["type"])
+  intent.putExtra( <%= config[:android_sdk_package_name] %>.NOTIFICATION_ID, data["id"])
 
   // Add click tracking in the method of activity creation
   override fun onCreate(savedInstanceState: Bundle?) {

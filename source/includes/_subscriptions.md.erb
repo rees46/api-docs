@@ -110,36 +110,36 @@ sdk.manageSubscription(email: "my@example.com", phone: "+10000000000", userExter
 // With `did` only
 val subscriptions = hashMapOf<String, Boolean>()
 subscriptions["email_bulk"] = true
-<%= config[:android_sdk_package_name]%>.manageSubscription(null, null, subscriptions)
+sdk.manageSubscription(null, null, subscriptions)
 
 // With email and phone
 val subscriptions = hashMapOf<String, Boolean>()
 subscriptions["email_bulk"] = true
-<%= config[:android_sdk_package_name]%>.manageSubscription("my@example.com", "+10000000000", subscriptions)
+sdk.manageSubscription("my@example.com", "+10000000000", subscriptions)
 
 // With email and phone and listener
 val subscriptions = hashMapOf<String, Boolean>()
 subscriptions["email_bulk"] = true
-<%= config[:android_sdk_package_name]%>.manageSubscription("my@example.com", "+10000000000", subscriptions, listener)
+sdk.manageSubscription("my@example.com", "+10000000000", subscriptions, listener)
 
 // With email, phone, externalId, loyaltyId, telegramId
 val subscriptions = hashMapOf<String, Boolean>()
 subscriptions["email_bulk"] = true
 subscriptions["sms_chain"] = false
-<%= config[:android_sdk_package_name]%>.manageSubscription("my@example.com", "+10000000000", "externalID", "loyaltyId", "telegramId", subscriptions)
+sdk.manageSubscription("my@example.com", "+10000000000", "externalID", "loyaltyId", "telegramId", subscriptions)
 
 // With email, phone, externalId, loyaltyId, telegramId and listener
 val subscriptions = hashMapOf<String, Boolean>()
 subscriptions["email_bulk"] = true
 subscriptions["email_transactional"] = false
 subscriptions["sms_chain"] = true
-<%= config[:android_sdk_package_name]%>.manageSubscription("my@example.com", "+10000000000", "externalID", "loyaltyId", "telegramId", subscriptions, listener)
+sdk.manageSubscription("my@example.com", "+10000000000", "externalID", "loyaltyId", "telegramId", subscriptions, listener)
 
 // Unsubscribe from bulk SMS and email
 val subscriptions = hashMapOf<String, Boolean>()
 subscriptions["email_bulk"] = false
 subscriptions["sms_bulk"] = false
-<%= config[:android_sdk_package_name]%>.manageSubscription(null, null, subscriptions)
+sdk.manageSubscription(null, null, subscriptions)
 ```
 
 The method changes user's subscription to different channels (`email`, `sms`) and campaigns types (`bulk`, `chain`, `transactional`).

@@ -147,26 +147,11 @@ sdk.search(query: "laptop", limit: nil, offset: nil, categoryLimit: nil, categor
 }
 ```
 ```kotlin
-// Full search
-val params = SearchParams().apply {
-    put(SearchParams.Parameter.LOCATIONS, "location")
-}
-
-// additional filters
-val filters = SearchParams.SearchFilters().apply {
-    put("voltage", arrayOf("11.1", "14.8"))
-}
-params.put(SearchParams.Parameter.FILTERS, filters)
-
-// Disable refinement search
-params.put(SearchParams.Parameter.NO_CLARIFICATION, true)
-
-// Call search method
-<%= config[:android_sdk_package_name] %>.search("SEARCH_QUERY", SearchParams.TYPE.FULL, params, object : Api.OnApiCallbackListener {
-    override fun onSuccess(response: JSONObject) {
-        Log.i(TAG, "Search response: " + response.toString())
-    }
-})
+sdk.search("SEARCH_QUERY", SearchParams.TYPE.FULL, params, object : OnApiCallbackListener() {
+            override fun onSuccess(response: JSONObject?) {
+                Log.i(TAG, "Search response: " + response.toString())
+            }
+        })
 ```
 ```jsx
 const type = 'full_search';
