@@ -57,7 +57,7 @@ sdk.addToSegment(segmentId: "333", email: "my@example.com", phone: "+10000000000
 
 ```
 
-```java
+```kotlin
 // By `did` only
 <%= config[:android_sdk_package_name] %>.addToSegment("333", null, null);
 
@@ -171,7 +171,7 @@ sdk.removeFromSegment(segmentId: "333", phone: "+10000000000")
 sdk.removeFromSegment(segmentId: "333", email: "my@example.com", phone: "+10000000000")
 ```
 
-```java
+```kotlin
 // By `did` only
 <%= config[:android_sdk_package_name] %>.removeFromSegment("333", null, null);
 
@@ -258,13 +258,12 @@ curl "shop_id=SHOPID&shop_secret=SHOP_SECRET&email=EMAIL" https://<%= config[:ap
 sdk->getCurrentSegment()
 ```
 
-```java
-<%= config[:android_sdk_package_name]%>.getCurrentSegment(new Api.OnApiCallbackListener() {
-  @Override
-  public void onSuccess(JSONArray segments) {
-    // segments (type: array of objects)
-  }
-});
+```kotlin
+<%= config["android_sdk_package_name"] %>.getCurrentSegment(object : Api.OnApiCallbackListener() {
+    override fun onSuccess(segments: JSONArray) {
+        // segments (type: array of objects)
+    }
+})
 ```
 
 ```jsx
@@ -335,7 +334,7 @@ curl "shop_id=SHOPID&shop_secret=SHOP_SECRET&email=EMAIL" https://<%= config[:ap
 // Not implemented
 ```
 
-```java
+```kotlin
 // Not implemented
 ```
 
