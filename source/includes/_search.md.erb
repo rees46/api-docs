@@ -147,11 +147,23 @@ sdk.search(query: "laptop", limit: nil, offset: nil, categoryLimit: nil, categor
 }
 ```
 ```kotlin
-sdk.search("SEARCH_QUERY", SearchParams.TYPE.FULL, params, object : OnApiCallbackListener() {
-            override fun onSuccess(response: JSONObject?) {
-                Log.i(TAG, "Search response: " + response.toString())
-            }
-        })
+   //Full search
+        val params = SearchParams()
+        params.put(SearchParams.Parameter.LOCATIONS, "location")
+
+        //Additional filters
+        val filters = SearchFilters()
+        filters.put("voltage", arrayOf("11.1", "14.8"))
+        params.put(SearchParams.Parameter.FILTERS, filters)
+
+        //Disable clarification search
+        params.put(SearchParams.Parameter.NO_CLARIFICATION, true)
+
+        sdk.search("SEARCH_QUERY", SearchParams.TYPE.FULL, params, object : OnApiCallbackListener() {
+                    override fun onSuccess(response: JSONObject?) {
+                        Log.i(TAG, "Search response: " + response.toString())
+                    }
+                })
 ```
 ```jsx
 const type = 'full_search';

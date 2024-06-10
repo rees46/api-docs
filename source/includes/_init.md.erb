@@ -156,7 +156,7 @@ class SampleApplication: Application() {
 
 
 // 2. For On-Premise integration need use initialize with custom api domain:
-val sdk = <%= config[:android_sdk_package_name] %>.initialize(getApplicationContext(), SHOP_ID, API_DOMAIN)
+val sdk = <%= config[:android_sdk_package_name] %>.initialize(applicationContext, SHOP_ID, API_DOMAIN)
 
 // 3. Check AndroidManifest.xml and add android:name=".SampleApplication" to application item.
 <application
