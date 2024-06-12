@@ -61,11 +61,11 @@ val params = hashMapOf(
 sdk.profile(params)
 
 // With callback
-sdk.profile(params, object : Api.OnApiCallbackListener {
-    override fun onSuccess(response: JSONObject) {
-        Log.i(TAG, "Response: ${response.toString()}")
-    }
-})
+sdk.profile(params, object : OnApiCallbackListener() {
+                override fun onSuccess(response: JSONObject?) {
+                    Log.i(TAG, "Response: ${response.toString()}")
+                }
+            })
 
 ```
 
