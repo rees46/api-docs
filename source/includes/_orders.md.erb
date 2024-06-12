@@ -264,18 +264,31 @@ Returns a list of user's orders (ascending by date and internal ID). User is ide
 //TODO
 ```
 
-```java
-// value in parameters can be String, int, double, boolean
-public CustomOrderParameters set(@NonNull String name, @NonNull String value) {
-// for String
-    .set("tour_class", "lux")
-// for int
-    .set("rooms", 5)
-// for double
-    .set("change", 5.5)
-// for boolean
-    .set("booked", true)
+```kotlin
+// Example of setting custom order parameters
+class CustomOrderParameters {
+    // Method to set parameters
+    fun set(name: String, value: Any): CustomOrderParameters {
+        // implementation here
+        return this
+    }
 }
+
+// Creating an instance of CustomOrderParameters and setting various types of parameters
+val orderParams = CustomOrderParameters()
+
+// for String
+orderParams.set("tour_class", "lux")
+
+// for int
+orderParams.set("rooms", 5)
+
+// for double
+orderParams.set("change", 5.5)
+
+// for boolean
+orderParams.set("booked", true)
+
 ```
 
 ```jsx

@@ -5,7 +5,7 @@ language_tabs:
   - shell: cURL
   - javascript: JavaScript
   - swift: iOS
-  - java: Android
+  - kotlin: Android
   - jsx: React Native
 
 includes:
