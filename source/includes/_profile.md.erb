@@ -62,10 +62,10 @@ sdk.profile(params)
 
 // With callback
 sdk.profile(params, object : OnApiCallbackListener() {
-                override fun onSuccess(response: JSONObject?) {
-                    Log.i(TAG, "Response: ${response.toString()}")
-                }
-            })
+  override fun onSuccess(response: JSONObject?) {
+    Log.i(TAG, "Response: ${response.toString()}")
+      }
+})
 
 ```
 
