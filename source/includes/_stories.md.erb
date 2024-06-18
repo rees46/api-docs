@@ -206,6 +206,22 @@ let product: StoriesPromoCodeElement?
 ```
 
 ```kotlin
+
+// Initialization by adding code into layout
+<com.personalizatio.stories.views.StoriesView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:code="STORY BLOCK CODE" />
+
+val storiesView = findViewById<StoriesView>(R.id.stories_view)
+sdk.initializeStoriesView(storiesView)
+
+// Programmatic initialization
+val storiesView = StoriesView(this, "STORY BLOCK CODE")
+findViewById<ViewGroup>(R.id.stories).addView(storiesView)
+sdk.initializeStoriesView(storiesView)
+
+//Font setup
 val stories = findViewById<StoriesView>(R.id.story_view)
 stories.settings.apply {
     label_font_size = 16
@@ -213,8 +229,25 @@ stories.settings.apply {
     button_font_family = Typeface.MONOSPACE
     products_button_font_family = Typeface.DEFAULT_BOLD
 }
-```
-```
+
+// Set item click listener:
+val storiesView = findViewById<StoriesView>(R.id.stories_view)
+storiesView.itemClickListener = object : OnLinkClickListener {
+    override fun onClick(url: String): Boolean {
+        // return true if need to opening using the SDK
+        return false
+    }
+
+    override fun onClick(product: Product): Boolean {
+        // return true if need to opening using the SDK
+        return false
+    }
+}
+
+// Show story by id:
+
+sdk.showStory(STORY_ID)
+
 
 // TextBlock
 
