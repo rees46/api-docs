@@ -207,14 +207,32 @@ let product: StoriesPromoCodeElement?
 
 ```kotlin
 val stories = findViewById<StoriesView>(R.id.story_view)
+sdk.initializeStoriesView(storiesView)
 stories.settings.apply {
     label_font_size = 16
     label_font_family = Typeface.SERIF
     button_font_family = Typeface.MONOSPACE
     products_button_font_family = Typeface.DEFAULT_BOLD
 }
-```
-```
+
+// Set item click listener:
+val storiesView = findViewById<StoriesView>(R.id.stories_view)
+storiesView.itemClickListener = object : OnLinkClickListener {
+    override fun onClick(url: String): Boolean {
+        // return true if need to opening using the SDK
+        return false
+    }
+
+    override fun onClick(product: Product): Boolean {
+        // return true if need to opening using the SDK
+        return false
+    }
+}
+
+// Show story by id:
+
+sdk.showStory(STORY_ID)
+
 
 // TextBlock
 
