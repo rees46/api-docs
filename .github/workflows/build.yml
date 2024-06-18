@@ -3,10 +3,10 @@ name: Build
 on:
   push:
     branches: [ '*' ]
-    paths-ignore: [ 'README.md', '**.html.md', '**.md.erb' ]
+    paths-ignore: [ '**.md' ]
   pull_request:
     branches: [ '*' ]
-    paths-ignore: [ 'README.md', '**.html.md', '**.md.erb' ]
+    paths-ignore: [ '**.md' ]
 
 jobs:
   test:
