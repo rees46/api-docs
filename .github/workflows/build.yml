@@ -36,6 +36,7 @@ jobs:
     - run: gem install bundler -v 2.4.22
 
     - run: bundle config set deployment 'true'
+    - run: bundle config build.nokogiri --use-system-libraries
     - run: bundle install
 
     - run: bundle exec middleman build
