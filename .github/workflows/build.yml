@@ -10,7 +10,7 @@ on:
 
 jobs:
   test:
-    runs-on: ubuntu-latest
+    runs-on: debian-bookworm-slim
 
     strategy:
       matrix:
