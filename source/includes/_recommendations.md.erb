@@ -11,7 +11,7 @@ Service provides access to product recommendations endpoint.
 ```
 
 ```javascript
-<%= config[:js_sdk_name] %>("recommend", "1fd1b3495137bc3c9299816026acf36f", {item: 100500, exclude: [3, 14, 159, 26535], category: 146, search_query: "To be or not to be", limit: 15, brands: ["Alas", "poor", "Yorick"], categories: [1, 146, 100500]}, function(response) {
+<%= config[:js_sdk_name] %>("recommend", "1fd1b3495137bc3c9299816026acf36f", {item: 100500, exclude: [3, 14, 159, 26535], category: 146, search_query: "To be or not to be", limit: 15, brands: ["Alas", "poor", "Yorick"], categories: [1, 146, 100500], extended: true, with_locations:true }, function(response) {
   // the functionality of rendering a block of product recommendations
 }, function(error) {
   // when something went wrong
@@ -117,11 +117,9 @@ sdk.recommend(recommender_code, params)
 | sid              | true       | Temporary user session ID                                                                                                                                                                                                                                                                  |
 | recommender_code | true       | ID of product recommendations block. You get it from blocks management UI.                                                                                                                                                                                                                 |
 | resize_image     | false      | Image size (px) to resize. Supported: 120, 140, 160, 180, 200, 220.                                                                                                                                                                                                                        |
-| extended         | false      |  If true, it will return all information about recommended products. If parameter with_locations is present in request and is true, location_ids column with a list of locations where product is available will be returned. If omit, it returns only products IDs.                       |
-| with_locations   | false      |  If true and if parameter extended is in request, it will return  location_ids column with a list of locations where product is available. If request doesn't have `extended` parameter, `with_locations` parameter is ignored.                                                            |                                                                                  |
-
-### JS SDK syntax
-| Syntax                                                                  |
+| extended         | false      |  If true, it will return all information about recommended products. If parameter with_locations is present in request and is true, location_ids column with a list of locations where product is available will be returned. If omit, it returns only products IDs. Default is false.     |
+| with_locations   | false      |  If true and if parameter extended is in request, it will return  location_ids column with a list of locations where product is available. If request doesn't have `extended` parameter, `with_locations` parameter is ignored. Default value is false.                                    |                                                                                  |
+Syntax                                                                  |
 |-------------------------------------------------------------------------|
 | <%= config[:js_sdk_name] %>("recommend", code, params, success, error); |
 
@@ -148,6 +146,7 @@ sdk.recommend(recommender_code, params)
 | extended        | number        | optionally             | Supports: `1` or empty. If `1`, it will return all information about recommended products. If omit, it returns only products IDs.                                                                         |
 | prevent_shuffle | boolean       | optionally             | If true, it disables shuffling of products in the response.                                                                                                                                               |
 | page            | number        | optionally             | The parameter for creating pagination, by default 1. Returns the number of products based on the limit per page.                                                                                          |
+| with_locations  | boolean       | optionally             | List of locations where product is available. Returns only if parameter extended is true.                                                                                          |
 
 ### API response
 | Name     | Type   | Description                                                                                                                      |
