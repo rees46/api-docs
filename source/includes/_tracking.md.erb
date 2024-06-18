@@ -627,6 +627,16 @@ curl 'https://<%= config[:api_endpoint] %>/push' \
 
 ```kotlin
 sdk.track(Params.TrackEvent.WISH, "37")
+
+// Full wish tracking
+
+Params full_wish = new Params();
+	full_wish
+		.put(Params.Parameter.FULL_WISH, true)
+		.put(new Params.Item("37"))
+		.put(new Params.Item("40"));
+	T.track(Params.TrackEvent.WISH, full_wish);
+
 ```
 
 ```swift
