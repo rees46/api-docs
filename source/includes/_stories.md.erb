@@ -206,8 +206,23 @@ let product: StoriesPromoCodeElement?
 ```
 
 ```kotlin
-val stories = findViewById<StoriesView>(R.id.story_view)
+
+// Initialization by adding code into layout
+<com.personalizatio.stories.views.StoriesView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:code="STORY BLOCK CODE" />
+
+val storiesView = findViewById<StoriesView>(R.id.stories_view)
 sdk.initializeStoriesView(storiesView)
+
+// Programmatic initialization
+val storiesView = StoriesView(this, "STORY BLOCK CODE")
+findViewById<ViewGroup>(R.id.stories).addView(storiesView)
+sdk.initializeStoriesView(storiesView)
+
+//Font setup
+val stories = findViewById<StoriesView>(R.id.story_view)
 stories.settings.apply {
     label_font_size = 16
     label_font_family = Typeface.SERIF
