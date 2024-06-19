@@ -482,7 +482,14 @@ curl 'https://<%= config[:api_endpoint] %>/products/cart?did=DEVICE_ID&shop_id=S
 ```
 
 ```swift
-// Not implemented yet.
+sdk.getProductsFromCart { result in
+            switch result {
+            case .success(let items):
+                print("cart items: \n \(items)")
+            case .failure(let error):
+                print("error: \(error)")
+            }
+        }
 ```
 
 ```jsx
@@ -505,7 +512,7 @@ curl 'https://<%= config[:api_endpoint] %>/products/cart?did=DEVICE_ID&shop_id=S
 
 Returns `{"status": "success", "data": { "items": [ {"uniqid": "SKU_1", "quantity": 1}, {"uniqid": "SKU_2", "quantity": 3} ] }}` JSON object.
 
-
+##
 
 
 ## Clear client's shopping cart
