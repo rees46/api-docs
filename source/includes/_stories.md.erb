@@ -4,7 +4,30 @@ Section describes how to use Stories
 
 ## Request campaign
 
-//
+// Request path /story/STORY_ID
+// First step of the process is a path check
+
+case '/story':
+  if( !$code ) {
+    throw new RequestError('Incorrect id or missing');
+    }
+return StorySingle::run($code, $params, $request, $cancellation);
+
+| Request parameters | required     | description     |
+|____________________|______________|_________________|
+| story_id           | true         | story id        |
+| shop_id            | true         | shop id         |
+| did                | true         | device id       |
+
+```shell
+curl -X GET "https://api.example.com/story" \
+-H "Content-Type: application/json" \
+-d '{
+  "id": "STORY_ID",
+  "shop_id": "SHOP_ID",
+  "did": "DEVICE_ID"
+}
+```
 
 ```kotlin
 // Show story by id:
