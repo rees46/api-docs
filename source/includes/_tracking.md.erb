@@ -643,6 +643,12 @@ Params full_wish = new Params();
 sdk.track(event: .productAddToFavorities(id: "PRODUCT_ID")) { trackResponse in
     // ... see product viewed event for details about a callback
 }
+
+// Full wish tracking
+sdk.track(event: .synchronizeFavorites( id: "PRODUCT_ID")){
+  // items and full_wish flag added to request parameters
+  // event type set to wish
+}
 ```
 
 ```jsx
