@@ -2,6 +2,37 @@
 
 Section describes how to use Stories
 
+## Request campaign
+
+// Request path /story/STORY_ID
+// First step of the process is a path check
+
+case '/story':
+  if( !$code ) {
+    throw new RequestError('Incorrect id or missing');
+    }
+return StorySingle::run($code, $params, $request, $cancellation);
+
+| Request parameters | required     | description     |
+|____________________|______________|_________________|
+| story_id           | true         | story id        |
+| shop_id            | true         | shop id         |
+| did                | true         | device id       |
+
+```shell
+curl -X GET "https://api.example.com/story" \
+-H "Content-Type: application/json" \
+-d '{
+  "id": "STORY_ID",
+  "shop_id": "SHOP_ID",
+  "did": "DEVICE_ID"
+}
+```
+
+```kotlin
+// Show story by id:
+sdk.showStory(STORY_ID)
+```
 ## Font setup
 
 ```shell
@@ -125,6 +156,101 @@ sdk.configuration().stories.storiesBlockNumberOfLines = 2
 sdk.configuration().stories.storiesBlockCharWrapping = false
 sdk.configuration().stories.storiesBlockCharCountWrap = 15
 
+```
+
+```kotlin
+
+// Initialization by adding code into layout
+<com.personalizatio.stories.views.StoriesView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:code="STORY BLOCK CODE" />
+
+val storiesView = findViewById<StoriesView>(R.id.stories_view)
+sdk.initializeStoriesView(storiesView)
+
+// Programmatic initialization
+val storiesView = StoriesView(this, "STORY BLOCK CODE")
+findViewById<ViewGroup>(R.id.stories).addView(storiesView)
+sdk.initializeStoriesView(storiesView)
+
+//Font setup
+val stories = findViewById<StoriesView>(R.id.story_view)
+stories.settings.apply {
+    label_font_size = 16
+    label_font_family = Typeface.SERIF
+    button_font_family = Typeface.MONOSPACE
+    products_button_font_family = Typeface.DEFAULT_BOLD
+}
+
+// Set item click listener:
+val storiesView = findViewById<StoriesView>(R.id.stories_view)
+storiesView.itemClickListener = object : OnLinkClickListener {
+    override fun onClick(url: String): Boolean {
+        // return true if need to opening using the SDK
+        return false
+    }
+
+    override fun onClick(product: Product): Boolean {
+        // return true if need to opening using the SDK
+        return false
+    }
+}
+
+
+
+```jsx
+```
+After initializing the SDK, you can set the desired style configuration for the fonts and buttons of the Stories block.
+
+<aside class="notice">
+Remember! The use of default parameters in the SDK during initialization takes precedence over the parameters received with the back-end configuration.
+</aside>
+
+Before a font can be used, it must be registered with your app.
+Add the font file to your xCode project. You must specify a file name with .ttf or .otf extension. Сall the following method after SDK initialization for font registration
+
+## Stories Text Block
+
+// TextBlock
+
+| Parameter                    | Type     | default value                          | Description                       |
+|------------------------------|----------|----------------------------------------|-----------------------------------|
+| bold                         | boolean  | false                                  | font bold                         |
+| italic                       | boolean  | false                                  | font italic                       |
+| textInput                    | String   |                                        | text content                      |
+| yOffset                      | int      | 0                                      | vertical offset of the text block |
+| fontType                     | String   |                                        | font type                         |
+| fontSize                     | int      | DEFAULT_FONT_SIZE                      | font size                         |
+| textAlign                    | String   |                                        | text alignment                    |
+| textColor                    | String   |                                        | text color                        |
+| textLineSpacing              | double   | 0.0                                    | line spacing od the text          |
+| textBackgroundColor          | String   | DEFAULT_TEXT_BACKGROUND_COLOR          | background color                  |
+| textBackgroundColorOpacity   | String   | DEFAULT_TEXT_BACKGROUND_COLOR_OPACITY  |background color opacity           |
+
+// default variables
+| Variable                              | Type     | Value   |
+|---------------------------------------|----------|---------|
+| DEFAULT_FONT_SIZE                     | int      | 14      |
+| DEFAULT_TEXT_BACKGROUND_COLOR         | String   | #FFFFFF |
+| DEFAULT_TEXT_BACKGROUND_COLOR_OPACITY | String   | 0%      |
+
+// TextBlock is initializing based on JSON object it received
+constructor(json: JSONObject) {
+bold = json.optBoolean("bold", false)
+italic = json.optBoolean("italic", false)
+textInput = json.optString("text_input", "")
+yOffset = json.optInt("y_offset", 0)
+fontType = json.optString("font_type", "")
+fontSize = json.optInt("font_size", DEFAULT_FONT_SIZE)
+textAlign = json.optString("text_align", "")
+textColor = json.optString("text_color", "")
+textLineSpacing = json.optDouble("text_line_spacing", 0.0)
+textBackgroundColor = json.optString("text_background_color", DEFAULT_TEXT_BACKGROUND_COLOR)
+textBackgroundColorOpacity = json.optString("text_background_color_opacity", DEFAULT_TEXT_BACKGROUND_COLOR_OPACITY)
+}
+
+```swift
 // TextBlock is initializing form StoriesElement object and clipsToBounds parameter, it's default value is true
 // configurable parameters: textColor,cornerRadius,clipsToBounds,backgroundColor,yOffset
 
@@ -204,100 +330,6 @@ let products: [StoriesProduct]?
 let product: StoriesPromoCodeElement?
 
 ```
-
-```kotlin
-
-// Initialization by adding code into layout
-<com.personalizatio.stories.views.StoriesView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:code="STORY BLOCK CODE" />
-
-val storiesView = findViewById<StoriesView>(R.id.stories_view)
-sdk.initializeStoriesView(storiesView)
-
-// Programmatic initialization
-val storiesView = StoriesView(this, "STORY BLOCK CODE")
-findViewById<ViewGroup>(R.id.stories).addView(storiesView)
-sdk.initializeStoriesView(storiesView)
-
-//Font setup
-val stories = findViewById<StoriesView>(R.id.story_view)
-stories.settings.apply {
-    label_font_size = 16
-    label_font_family = Typeface.SERIF
-    button_font_family = Typeface.MONOSPACE
-    products_button_font_family = Typeface.DEFAULT_BOLD
-}
-
-// Set item click listener:
-val storiesView = findViewById<StoriesView>(R.id.stories_view)
-storiesView.itemClickListener = object : OnLinkClickListener {
-    override fun onClick(url: String): Boolean {
-        // return true if need to opening using the SDK
-        return false
-    }
-
-    override fun onClick(product: Product): Boolean {
-        // return true if need to opening using the SDK
-        return false
-    }
-}
-
-// Show story by id:
-
-sdk.showStory(STORY_ID)
-
-
-// TextBlock
-
-| Parameter                    | Type     | default value                          | Description                       |
-|------------------------------|----------|----------------------------------------|-----------------------------------|
-| bold                         | boolean  | false                                  | font bold                         |
-| italic                       | boolean  | false                                  | font italic                       |
-| textInput                    | String   |                                        | text content                      |
-| yOffset                      | int      | 0                                      | vertical offset of the text block |
-| fontType                     | String   |                                        | font type                         |
-| fontSize                     | int      | DEFAULT_FONT_SIZE                      | font size                         |
-| textAlign                    | String   |                                        | text alignment                    |
-| textColor                    | String   |                                        | text color                        |
-| textLineSpacing              | double   | 0.0                                    | line spacing od the text          |
-| textBackgroundColor          | String   | DEFAULT_TEXT_BACKGROUND_COLOR          | background color                  |
-| textBackgroundColorOpacity   | String   | DEFAULT_TEXT_BACKGROUND_COLOR_OPACITY  |background color opacity           |
-
-// default variables
-| Variable                              | Type     | Value   |
-|---------------------------------------|----------|---------|
-| DEFAULT_FONT_SIZE                     | int      | 14      |
-| DEFAULT_TEXT_BACKGROUND_COLOR         | String   | #FFFFFF |
-| DEFAULT_TEXT_BACKGROUND_COLOR_OPACITY | String   | 0%      |
-
-// TextBlock is initializing based on JSON object it received
-constructor(json: JSONObject) {
-    bold = json.optBoolean("bold", false)
-    italic = json.optBoolean("italic", false)
-    textInput = json.optString("text_input", "")
-    yOffset = json.optInt("y_offset", 0)
-    fontType = json.optString("font_type", "")
-    fontSize = json.optInt("font_size", DEFAULT_FONT_SIZE)
-    textAlign = json.optString("text_align", "")
-    textColor = json.optString("text_color", "")
-    textLineSpacing = json.optDouble("text_line_spacing", 0.0)
-    textBackgroundColor = json.optString("text_background_color", DEFAULT_TEXT_BACKGROUND_COLOR)
-    textBackgroundColorOpacity = json.optString("text_background_color_opacity", DEFAULT_TEXT_BACKGROUND_COLOR_OPACITY)
-}
-
-```jsx
-```
-
-After initializing the SDK, you can set the desired style configuration for the fonts and buttons of the Stories block.
-
-<aside class="notice">
-Remember! The use of default parameters in the SDK during initialization takes precedence over the parameters received with the back-end configuration.
-</aside>
-
-Before a font can be used, it must be registered with your app.
-Add the font file to your xCode project. You must specify a file name with .ttf or .otf extension. Сall the following method after SDK initialization for font registration
 
 ### Available SDK Configuration options
 
