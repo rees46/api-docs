@@ -156,6 +156,10 @@ sdk.search(query: "laptop", limit: nil, offset: nil, categoryLimit: nil, categor
         filters.put("voltage", arrayOf("11.1", "14.8"))
         params.put(SearchParams.Parameter.FILTERS, filters)
 
+        // Support for FASHION_SIZES filter
+        filters.put("fashion_sizes", arrayOf("S", "M", "L"))
+        params.put(SearchParams.Parameter.FILTERS, filters)
+
         //Disable clarification search
         params.put(SearchParams.Parameter.NO_CLARIFICATION, true)
 
