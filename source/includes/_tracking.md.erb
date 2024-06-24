@@ -653,6 +653,11 @@ sdk.track(event: .synchronizeFavorites( id: "PRODUCT_ID")){
 
 ```jsx
 sdk.track("wish", id);
+
+// Full wish tracking - if the parameter is an array, full_wish is true.
+sdk.track('wish', [17515, 17520]);
+// If the parameter is a primitive, full_wish won't be forwarded
+sdk.track('wish', 17515);
 ```
 
 
