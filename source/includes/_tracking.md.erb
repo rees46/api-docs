@@ -518,6 +518,31 @@ curl 'https://<%= config[:api_endpoint] %>/push' \
     order: 'N318',
     order_price: 29999
 });
+
+// Custom order tracking
+r46('track', 'purchase', {
+    'email': "john.doe@examplemail.com",
+    'phone': "4400114527199",
+    'products': [
+        {'id': 37, 'price': 318, 'amount': 1},
+    ],
+    'custom': {
+        'date_start': '2024-03-01',
+        'date_finish': '2024-03-11',
+        'duration': 11,
+        'route': 'Moscow - Берлин',
+        'route_start': 'Moscow',
+        'route_finish': 'Berlin',
+        'tour_class': 'Lux',
+        'adults_count': 2,
+        'children_count': 1,
+        'infants_count': 1,
+        'deck': 'lower',
+        'rooms': '334,335'
+    },
+    'order': 'N318',
+    'order_price': 29999
+});
 ```
 
 ```swift
@@ -581,6 +606,7 @@ If you want to debug purchase tracking, keep in mind: if you send event for exis
 | delivery_type  | string   | optional     | Method of delivery.                                                                                                                                                                                                         |
 | payment_type   | string   | optional     | Payment type. Can by any string value. Ex: cash, card, wire.                                                                                                                                                                |
 | tax_free       | boolean  | optional     | Tax free                                                                                                                                                                                                                    |
+| custom         | object   | optional     | Not empty object. Not array, not null.                                                                                                                                                                                      |
 
 Description of parameters in the objects of the "products" array:
 
