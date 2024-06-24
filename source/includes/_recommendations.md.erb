@@ -127,7 +127,7 @@ Syntax                                                                    |
 | Name    | Type     | Requirement            | Description                                                                                                                      |
 |---------|----------|------------------------|----------------------------------------------------------------------------------------------------------------------------------|
 | code    | string   | required               | Unique code of the recommendation block. See this value in the "data-recommender-code" attribute of the block created in account |
-| params  | object   | required               | Object with request parameters                                                                                                   |
+| params  | object   | required               | Object with request parameters. Parameter `searcheable` can be added. If it`s value is false parameter will be ignored in search |
 | success | function | required in some cases | A callback function, to which the API response will be passed. Response type: **object**.                                        |
 | error   | function | optionally             | A callback function that will be called when an error occurs (any HTTP status code other than 200)                               |
 
