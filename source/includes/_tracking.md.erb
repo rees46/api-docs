@@ -579,6 +579,20 @@ sdk.track("purchase", {
   order_price: 29999
 });
 
+// Custom order tracking
+sdk.track('purchase', {
+  'email': "john.doe@examplemail.com",
+  'phone': "4400114527199",
+  'products': [
+    {'id': 37, 'price': 318, 'quantity': 1},
+  ],
+  'custom': {
+      'date_start': '2024-03-01',
+  },
+  'order': 'N318',
+  'order_price': 29999
+});
+
 ```
 
 <aside class="notice">
