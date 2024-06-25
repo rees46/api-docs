@@ -67,6 +67,13 @@ curl https://<%= config[:api_endpoint] %>/products/categories
    }
 ]
 ```
+### Categories cashing
+
+The following request parameters are cached: `shop_id`, `categories`, `locations`, `brands`, `merchants`, `filters_search_by`, `category_limit`, `available`, `price_min`, `price_max`, `sort_by`, `sort_dir`, `limit`, `page`, `offset`.
+
+Cache duration is 60 seconds.
+
+If JSON filters are included in the request, it will not be cached.
 
 ## Dynamic filter guide for category
 
