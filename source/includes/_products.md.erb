@@ -371,7 +371,7 @@ Returns boolean status of subscription.
 | item        | string/number | true     | Product ID                           |
 | email       | string 	      | false    | Email for subscription checking      |
 | phone       | string 	      | false    | Phone for subscription checking      |
-|  loyalty_id | string 	      | false    | Loyalty ID for subscription checking |
+| loyalty_id  | string 	      | false    | Loyalty ID for subscription checking |
 
 <aside class="notice">
 If no *email*, *phone*, or *loyalty_id* is specified, only the user's current device will be checked. It won't take into account subscriptions performed on the user's other devices.
@@ -542,6 +542,15 @@ curl --location --request DELETE 'https://<%= config[:api_endpoint] %>/products/
 # By phone email
 curl --location --request DELETE 'https://<%= config[:api_endpoint] %>/products/cart/clear?email=EMAIL&shop_id=SHOP_ID&shop_secret=SHOP_SECRET'
 
+# By loyalty_id
+curl --location --request DELETE 'https://<%= config[:api_endpoint] %>/products/cart/clear?loyalty_id=LOYALTY_ID&shop_id=SHOP_ID&shop_secret=SHOP_SECRET'
+
+# By external_id
+curl --location --request DELETE 'https://<%= config[:api_endpoint] %>/products/cart/clear?external_id=EXTERNAL_ID&shop_id=SHOP_ID&shop_secret=SHOP_SECRET'
+
+# By telegram_id
+curl --location --request DELETE 'https://<%= config[:api_endpoint] %>/products/cart/clear?telegram_id=TELEGRAM_ID&shop_id=SHOP_ID&shop_secret=SHOP_SECRET'
+
 ```
 
 ```javascript
@@ -558,15 +567,18 @@ curl --location --request DELETE 'https://<%= config[:api_endpoint] %>/products/
 
 ### Query Parameters
 
-| Parameter  | Required | Description                                                                                                                          |
-|------------|----------|--------------------------------------------------------------------------------------------------------------------------------------|
+| Parameter    | Required | Description                                                                                                                          |
+|--------------|----------|--------------------------------------------------------------------------------------------------------------------------------------|
 | shop_id      | true     | Your API key                            |
 | shop_secret  | true     | Your API secret key                     |
 | email*       | true     | User's email                            |
 | phone*       | true     | User's phone number                     |
+| loyalty_id*  | true     | User's loyalty_id                       |
+| external_id* | true     | User's external_id                      |
+| telegram_id* | true     | User's telegram_id                      |
 
 <aside class="notice">
-At least of identifiers (marked by *) must present in request: email, phone. It's used to identify user.
+At least of identifiers (marked by *) must present in request: email, phone, etc. It's used to identify user.
 </aside>
 
 
