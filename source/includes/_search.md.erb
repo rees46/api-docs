@@ -183,6 +183,20 @@ sdk.search({
   .catch((error) => {
     console.log(error);
   });
+
+//Full search with additional parameters filters_search_by is fully supported
+
+sdk.search({type: 'full_search', search_query: 'string', filters_search_by: 'popularity'});
+
+ LOG  Request: <%= config[:api] %>
+{
+  "headers": {"Content-Type": "application/x-www-form-urlencoded", "User-Agent": "ReactNative Android SDK v1.6.34"},
+  "method": "GET",
+  "params": {"did": "e0747b709b5b6467", "filters_search_by": "popularity", "seance": "MC44NjAwMD",
+  "search_query": "string", "shop_id": "357382bf66ac0ce2f1722677c59511", "sid": "MC44NjAwMD", "stream": "android",
+  "type": "full_search"}
+}
+
 ```
 
 
