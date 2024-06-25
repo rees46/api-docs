@@ -492,6 +492,9 @@ sdk.track("remove_from_cart", id);
 
 ## User purchased products
 
+// Custom order properties are supported.Property value depends on key type.
+// Supported key types are: string, integer,date.
+
 ```shell
 #Full request
 curl 'https://<%= config[:api_endpoint] %>/push' \
