@@ -982,8 +982,8 @@ Endpoint: `POST https://<%= config[:api_endpoint] %>/track/closed`
 
 All events require at least these parameters:
 
-| Parameter | Type   | Required   | Description                                                                                                                          |
-|-----------|--------|------------|--------------------------------------------------------------------------------------------------------------------------------------|
-| shop_id   | String | true       | Your API key                                                                                                                         |
-| code      | String | true       | Message identifier. Value can be taken from push's JSON payload. For Android it's located in `id` property. In iOS SDK it's `src.id` |
-| type      | String | true       | Message type. Value can be taken from push's JSON payload. For Android it's located in `type` property. In iOS SDK it's `src.type`   |
+| Parameter | Type   | Required   | Description                                                                                                                                                                                |
+|-----------|--------|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| shop_id   | String | true       | Your API key                                                                                                                                                                               |
+| code      | String | true       | Message identifier. Value can be taken from push's JSON payload. For Android it's located in `id` property. In iOS SDK it's `src.id`                                                       |
+| type      | String | true       | Message type. Value can be taken from push's JSON payload. For Android it's located in `type` property. In iOS SDK it's `src.type`. Supported types are: `bulk`, `chain`, `transactional`  |
