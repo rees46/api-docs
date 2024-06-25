@@ -371,7 +371,7 @@ Returns boolean status of subscription.
 | item        | string/number | true     | Product ID                           |
 | email       | string 	      | false    | Email for subscription checking      |
 | phone       | string 	      | false    | Phone for subscription checking      |
-|  loyalty_id | string 	      | false    | Loyalty ID for subscription checking |
+| loyalty_id  | string 	      | false    | Loyalty ID for subscription checking |
 
 <aside class="notice">
 If no *email*, *phone*, or *loyalty_id* is specified, only the user's current device will be checked. It won't take into account subscriptions performed on the user's other devices.
@@ -578,7 +578,7 @@ curl --location --request DELETE 'https://<%= config[:api_endpoint] %>/products/
 | telegram_id* | true     | User's telegram_id                      |
 
 <aside class="notice">
-At least of identifiers (marked by *) must present in request: email, phone, ect. It's used to identify user.
+At least of identifiers (marked by *) must present in request: email, phone, etc. It's used to identify user.
 </aside>
 
 
