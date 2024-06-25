@@ -82,7 +82,7 @@ Endpoint: `GET https://<%= config[:api_endpoint] %>/notifications`
 | external_id*    | String    | true       | User's external ID                                                                                                                                                                    |
 | date_from       | String    | true       | Date in YYYY-MM-DD format. Selects all messages from this date to the current day. Choose date not older than 2 weeks ago, otherwise it will slowdown everything drammatically.       |
 | type            | String    | true       | Comma-separated list of message types: bulk, trigger, transactional. Choose wisely: every type slows down performance of the method. Use only required types of messages.             |
-| channel         | String    | true       | Comma-separated list of message channels: email, sms, web_push, mobile_push, telegram. Choose wisely: every channel slows down performance of the method. Use only required channels. |
+| channel         | String    | true       | Comma-separated list of message channels: email, sms, web_push, mobile_push, telegram, WhatsApp. Choose wisely: every channel slows down performance of the method. Use only required channels. |
 | page            | Integer   | false      | Page for pagination. Default: 1. Min: 1.                                                                                                                                              |
 | limit           | Integer   | false      | Limit of recordings per page. Default: 20. Min: 1. Max: 50.                                                                                                                           |
 
