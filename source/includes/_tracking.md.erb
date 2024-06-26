@@ -781,6 +781,16 @@ sdk.trackEvent(event: "something_happened")
 
 // With parameters
 sdk.trackEvent(event: "something_happened", category: "important", label: "banner_click", value: 42)
+
+// with custom properties
+sdk.trackEvent(event: "something_happened", category: "important", label: "user_event", value: 5, completion: @escaping (Result<Void, SDKError>) -> Void) {
+  sessionQueue.addOperation {
+    let path = "push/custom"
+      var params: [String: Any] = [
+        // `shop_id`,`did`,`seance`,`sid`,`segment`,`event`
+         ]
+}
+
 ```
 
 ```kotlin
