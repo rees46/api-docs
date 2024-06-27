@@ -470,11 +470,17 @@ curl 'https://<%= config[:api_endpoint] %>/products/cart?did=DEVICE_ID&shop_id=S
 ```
 
 ```javascript
-<%= config[:js_sdk_name] %>("cart", "get", function(response) {
-  // callback for success
-}, function(error) {
-  // callback for error
+
+function success ({ data })  {
+  console.log(data.items.length);
 });
+
+function failure (error) {
+  console.error(error);
+})
+
+window.r46('cart', 'get', success, failure);
+
 ```
 
 ```kotlin
