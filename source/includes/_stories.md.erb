@@ -5,23 +5,26 @@ Section describes how to use Stories
 ## Request campaign
 
 // Request path /story/STORY_ID
+
 // First step of the process is a path check
 
+```
 case '/story':
   if( !$code ) {
     throw new RequestError('Incorrect id or missing');
     }
 return StorySingle::run($code, $params, $request, $cancellation);
+```
 
 | Request parameters | required     | description     |
-|____________________|______________|_________________|
+|--------------------|--------------|-----------------|
 | story_id           | true         | story id        |
 | shop_id            | true         | shop id         |
 | did                | true         | device id       |
 
 ```shell
-curl -X GET "https://api.example.com/story" \
--H "Content-Type: application/json" \
+curl -X GET "https:/<%= config[:api_endpoint] %>/story"
+-H "Content-Type: application/json"
 -d '{
   "id": "STORY_ID",
   "shop_id": "SHOP_ID",
@@ -229,6 +232,7 @@ Add the font file to your xCode project. You must specify a file name with .ttf 
 | textBackgroundColorOpacity   | String   | DEFAULT_TEXT_BACKGROUND_COLOR_OPACITY  |background color opacity           |
 
 // default variables
+
 | Variable                              | Type     | Value   |
 |---------------------------------------|----------|---------|
 | DEFAULT_FONT_SIZE                     | int      | 14      |
@@ -236,6 +240,8 @@ Add the font file to your xCode project. You must specify a file name with .ttf 
 | DEFAULT_TEXT_BACKGROUND_COLOR_OPACITY | String   | 0%      |
 
 // TextBlock is initializing based on JSON object it received
+
+```
 constructor(json: JSONObject) {
 bold = json.optBoolean("bold", false)
 italic = json.optBoolean("italic", false)
@@ -249,7 +255,7 @@ textLineSpacing = json.optDouble("text_line_spacing", 0.0)
 textBackgroundColor = json.optString("text_background_color", DEFAULT_TEXT_BACKGROUND_COLOR)
 textBackgroundColorOpacity = json.optString("text_background_color_opacity", DEFAULT_TEXT_BACKGROUND_COLOR_OPACITY)
 }
-
+```
 ```swift
 // TextBlock is initializing form StoriesElement object and clipsToBounds parameter, it's default value is true
 // configurable parameters: textColor,cornerRadius,clipsToBounds,backgroundColor,yOffset
