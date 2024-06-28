@@ -4,17 +4,9 @@ Section describes how to use Stories
 
 ## Request campaign
 
-// Request path /story/STORY_ID
+ Request path /story/STORY_ID
+ First step of the process is a path check
 
-// First step of the process is a path check
-
-```
-case '/story':
-  if( !$code ) {
-    throw new RequestError('Incorrect id or missing');
-    }
-return StorySingle::run($code, $params, $request, $cancellation);
-```
 
 | Request parameters | required     | description     |
 |--------------------|--------------|-----------------|
@@ -35,6 +27,11 @@ curl -X GET "https:/<%= config[:api_endpoint] %>/story"
 ```kotlin
 // Show story by id:
 sdk.showStory(STORY_ID)
+
+// Programmatic initialization
+val storiesView = StoriesView(this, "STORY BLOCK CODE")
+findViewById<ViewGroup>(R.id.stories).addView(storiesView)
+sdk.initializeStoriesView(storiesView)
 ```
 ## Font setup
 
@@ -172,10 +169,6 @@ sdk.configuration().stories.storiesBlockCharCountWrap = 15
 val storiesView = findViewById<StoriesView>(R.id.stories_view)
 sdk.initializeStoriesView(storiesView)
 
-// Programmatic initialization
-val storiesView = StoriesView(this, "STORY BLOCK CODE")
-findViewById<ViewGroup>(R.id.stories).addView(storiesView)
-sdk.initializeStoriesView(storiesView)
 
 //Font setup
 val stories = findViewById<StoriesView>(R.id.story_view)
@@ -215,7 +208,7 @@ Add the font file to your xCode project. You must specify a file name with .ttf 
 
 ## Stories Text Block
 
-// TextBlock
+TextBlock initial parameters
 
 | Parameter                    | Type     | default value                          | Description                       |
 |------------------------------|----------|----------------------------------------|-----------------------------------|
@@ -231,7 +224,7 @@ Add the font file to your xCode project. You must specify a file name with .ttf 
 | textBackgroundColor          | String   | DEFAULT_TEXT_BACKGROUND_COLOR          | background color                  |
 | textBackgroundColorOpacity   | String   | DEFAULT_TEXT_BACKGROUND_COLOR_OPACITY  |background color opacity           |
 
-// default variables
+Default variables values
 
 | Variable                              | Type     | Value   |
 |---------------------------------------|----------|---------|
@@ -239,9 +232,8 @@ Add the font file to your xCode project. You must specify a file name with .ttf 
 | DEFAULT_TEXT_BACKGROUND_COLOR         | String   | #FFFFFF |
 | DEFAULT_TEXT_BACKGROUND_COLOR_OPACITY | String   | 0%      |
 
-// TextBlock is initializing based on JSON object it received
+ TextBlock is initializing based on JSON object it received:
 
-```
 constructor(json: JSONObject) {
 bold = json.optBoolean("bold", false)
 italic = json.optBoolean("italic", false)
@@ -255,7 +247,7 @@ textLineSpacing = json.optDouble("text_line_spacing", 0.0)
 textBackgroundColor = json.optString("text_background_color", DEFAULT_TEXT_BACKGROUND_COLOR)
 textBackgroundColorOpacity = json.optString("text_background_color_opacity", DEFAULT_TEXT_BACKGROUND_COLOR_OPACITY)
 }
-```
+
 ```swift
 // TextBlock is initializing form StoriesElement object and clipsToBounds parameter, it's default value is true
 // configurable parameters: textColor,cornerRadius,clipsToBounds,backgroundColor,yOffset
