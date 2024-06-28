@@ -8,6 +8,7 @@ Events tracking depends on rules that were configured during stories creation.
 Backend method 'checkRule' checks if the event-based rule is true, tracking clicks, views, etc.
 It is based on  'Clickhouse::get()->exists' method, which checks DB for events.
 
+`
 track(event, story_id, slide_id) {
 return this.core.ajax.sendPost(this.core.api.getAPIUrl('/track/stories'), {
 shop_id: this.core.shop.token,
@@ -18,11 +19,13 @@ code: this.code,
 story_id: story_id,
 slide_id: slide_id,
 })
-}
+}`
 
 ## Request campaign
 
- Request path /story/STORY_ID
+ Request path `/story/STORY_ID`
+
+
  First step of the process is a path check
 
 
@@ -239,7 +242,7 @@ Default variables values
 | DEFAULT_TEXT_BACKGROUND_COLOR_OPACITY | String   | 0%      |
 
  TextBlock is initializing based on JSON object it received:
-
+`
 constructor(json: JSONObject) {
 bold = json.optBoolean("bold", false)
 italic = json.optBoolean("italic", false)
@@ -253,7 +256,7 @@ textLineSpacing = json.optDouble("text_line_spacing", 0.0)
 textBackgroundColor = json.optString("text_background_color", DEFAULT_TEXT_BACKGROUND_COLOR)
 textBackgroundColorOpacity = json.optString("text_background_color_opacity", DEFAULT_TEXT_BACKGROUND_COLOR_OPACITY)
 }
-
+`
 ```swift
 // TextBlock is initializing form StoriesElement object and clipsToBounds parameter, it's default value is true
 // configurable parameters: textColor,cornerRadius,clipsToBounds,backgroundColor,yOffset
