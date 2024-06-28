@@ -8,6 +8,9 @@
 
 ```javascript
 // Put this code in the <head> section of web page.
+// During initialization, the cookieless parameter is set to false by default.
+// If cookies are disabled or the personalization opt-out is set, the cookieless parameter is set to true.
+// When cookieless is true, local storage is used instead of cookies.
 (function(r){
     window.<%= config[:js_sdk_name] %>=window.<%= config[:js_sdk_name] %>||function(){(window.<%= config[:js_sdk_name] %>.q=window.<%= config[:js_sdk_name] %>.q||[]).push(arguments)};
     var c="https://<%= config[:cdn_endpoint] %>",v="/v3.js",s={link:[{href:c,rel:"dns-prefetch"},{href:c,rel:"preconnect"},{href:c+v,rel:"preload",as:"script"}],script:[{src:c+v,async:""}]};
