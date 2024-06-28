@@ -8,18 +8,28 @@ Events tracking depends on rules that were configured during stories creation.
 Backend method 'checkRule' checks if the event-based rule is true, tracking clicks, views, etc.
 It is based on  'Clickhouse::get()->exists' method, which checks DB for events.
 
-`
-track(event, story_id, slide_id) {
-return this.core.ajax.sendPost(this.core.api.getAPIUrl('/track/stories'), {
-shop_id: this.core.shop.token,
-did: this.core.user.did,
-sid: this.core.user.seance,
-event: event,
-code: this.code,
-story_id: story_id,
-slide_id: slide_id,
-})
-}`
+
+`track(event, story_id, slide_id) {`
+
+`return this.core.ajax.sendPost(this.core.api.getAPIUrl('/track/stories'), {`
+
+`shop_id: this.core.shop.token,`
+
+`did: this.core.user.did,`
+
+`sid: this.core.user.seance,`
+
+`event: event,`
+
+`code: this.code,`
+
+`story_id: story_id,`
+
+`slide_id: slide_id,`
+
+`})`
+
+`}`
 
 ## Request campaign
 
@@ -55,29 +65,24 @@ sdk.showStory(STORY_ID)
 val storiesView = StoriesView(this, "STORY BLOCK CODE")
 findViewById<ViewGroup>(R.id.stories).addView(storiesView)
 sdk.initializeStoriesView(storiesView)
+
+// Set item click listener:
+val storiesView = findViewById<StoriesView>(R.id.stories_view)
+storiesView.itemClickListener = object : OnLinkClickListener {
+    override fun onClick(url: String): Boolean {
+        // return true if need to opening using the SDK
+        return false
+    }
+
+    override fun onClick(product: Product): Boolean {
+        // return true if need to opening using the SDK
+        return false
+    }
+}
 ```
 ## Font setup
 
 ```shell
-//Events tracking depends on rules that were configured during stories creation.
-// Backend method 'checkRule' checks if the event-based rule is true, tracking clicks, views, etc.
-// It is based on  'Clickhouse::get()->exists' method, which checks DB for events.
-  track() {
-      local event=$1
-      local story_id=$2
-      local slide_id=$3
-      local apiUrl="https://<%= config[:api_endpoint] %>/track/stories"
-
-      curl -X POST "$apiUrl" \
-          -d "shop_id=$SHOP_ID" \
-          -d "did=$USER_DID" \
-          -d "sid=$USER_SEANCE" \
-          -d "event=$event" \
-          -d "code=$CODE" \
-          -d "story_id=$story_id" \
-          -d "slide_id=$slide_id"
-  }
-
 ```
 
 ```javascript
@@ -188,19 +193,7 @@ stories.settings.apply {
     products_button_font_family = Typeface.DEFAULT_BOLD
 }
 
-// Set item click listener:
-val storiesView = findViewById<StoriesView>(R.id.stories_view)
-storiesView.itemClickListener = object : OnLinkClickListener {
-    override fun onClick(url: String): Boolean {
-        // return true if need to opening using the SDK
-        return false
-    }
 
-    override fun onClick(product: Product): Boolean {
-        // return true if need to opening using the SDK
-        return false
-    }
-}
 
 
 
@@ -242,22 +235,42 @@ Default variables values
 | DEFAULT_TEXT_BACKGROUND_COLOR_OPACITY | String   | 0%      |
 
  TextBlock is initializing based on JSON object it received:
-`
-constructor(json: JSONObject) {
-bold = json.optBoolean("bold", false)
-italic = json.optBoolean("italic", false)
-textInput = json.optString("text_input", "")
-yOffset = json.optInt("y_offset", 0)
-fontType = json.optString("font_type", "")
-fontSize = json.optInt("font_size", DEFAULT_FONT_SIZE)
-textAlign = json.optString("text_align", "")
-textColor = json.optString("text_color", "")
-textLineSpacing = json.optDouble("text_line_spacing", 0.0)
-textBackgroundColor = json.optString("text_background_color", DEFAULT_TEXT_BACKGROUND_COLOR)
-textBackgroundColorOpacity = json.optString("text_background_color_opacity", DEFAULT_TEXT_BACKGROUND_COLOR_OPACITY)
-}
-`
+
+`constructor(json: JSONObject) {`
+
+`bold = json.optBoolean("bold", false)`
+
+`italic = json.optBoolean("italic", false)`
+
+`textInput = json.optString("text_input", "")`
+
+`yOffset = json.optInt("y_offset", 0)`
+
+`fontType = json.optString("font_type", "")`
+
+`fontSize = json.optInt("font_size", DEFAULT_FONT_SIZE)`
+
+`textAlign = json.optString("text_align", "")`
+
+`textColor = json.optString("text_color", "")`
+
+`textLineSpacing = json.optDouble("text_line_spacing", 0.0)`
+
+`textBackgroundColor = json.optString("text_background_color", DEFAULT_TEXT_BACKGROUND_COLOR)`
+
+`textBackgroundColorOpacity = json.optString("text_background_color_opacity", DEFAULT_TEXT_BACKGROUND_COLOR_OPACITY)`
+
+`}`
+
+```shell
+```
+
+```javascript
+
+```
+
 ```swift
+
 // TextBlock is initializing form StoriesElement object and clipsToBounds parameter, it's default value is true
 // configurable parameters: textColor,cornerRadius,clipsToBounds,backgroundColor,yOffset
 
@@ -335,8 +348,10 @@ let cornerRadius: Int
 let labels: Labels?
 let products: [StoriesProduct]?
 let product: StoriesPromoCodeElement?
-
 ```
+```kotlin
+```
+
 
 ### Available SDK Configuration options
 
