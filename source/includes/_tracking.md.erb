@@ -998,6 +998,16 @@ All events require at least these parameters:
 | code      | String | true       | Message identifier. Value can be taken from push's JSON payload. For Android it's located in `id` property. In iOS SDK it's `src.id`                                                       |
 | type      | String | true       | Message type. Value can be taken from push's JSON payload. For Android it's located in `type` property. In iOS SDK it's `src.type`.                                                        |
 
+## WhatsApp message delivery tracking
+
+// message opened event
+
+Endpoint: `POST https://<%= config[:api_endpoint] %>/track/opened`
+
+// message delivered event
+
+Endpoint: `POST https://<%= config[:api_endpoint] %>/track/delivered`
+
 ## Stories tracking
 
 Events tracking depends on rules that were configured during stories creation.
@@ -1066,3 +1076,4 @@ track(event, story_id, slide_id) {
 		})
 	}
 ```
+
