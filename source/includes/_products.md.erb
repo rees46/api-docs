@@ -479,7 +479,7 @@ function failure (error) {
   console.error(error);
 })
 
-window.<%= config[:api_endpoint] %>('cart', 'get', success, failure);
+window.<%= config[:js_sdk_name] %>('cart', 'get', success, failure);
 
 ```
 
