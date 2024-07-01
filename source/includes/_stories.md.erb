@@ -2,35 +2,6 @@
 
 Section describes how to use Stories
 
-## Stories events tracking
-
-Events tracking depends on rules that were configured during stories creation.
-Backend method 'checkRule' checks if the event-based rule is true, tracking clicks, views, etc.
-It is based on  'Clickhouse::get()->exists' method, which checks DB for events.
-
-
-`track(event, story_id, slide_id) {`
-
-`return this.core.ajax.sendPost(this.core.api.getAPIUrl('/track/stories'), {`
-
-`shop_id: this.core.shop.token,`
-
-`did: this.core.user.did,`
-
-`sid: this.core.user.seance,`
-
-`event: event,`
-
-`code: this.code,`
-
-`story_id: story_id,`
-
-`slide_id: slide_id,`
-
-`})`
-
-`}`
-
 ## Request campaign
 
  Request path `/story/STORY_ID`
