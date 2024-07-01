@@ -25,8 +25,8 @@ curl -X GET "https:/<%= config[:api_endpoint] %>/story"
 
 ```
 ```kotlin
-// Show story by id:
-sdk.showStory(STORY_ID)
+// Show story by code:
+sdk.showStories(CODE)
 
 // Programmatic initialization
 val storiesView = StoriesView(this, "STORY BLOCK CODE")
