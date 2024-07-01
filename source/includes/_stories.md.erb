@@ -35,10 +35,6 @@ It is based on  'Clickhouse::get()->exists' method, which checks DB for events.
 
  Request path `/story/STORY_ID`
 
-
- First step of the process is a path check
-
-
 | Request parameters | required     | description     |
 |--------------------|--------------|-----------------|
 | story_id           | true         | story id        |
@@ -80,14 +76,8 @@ storiesView.itemClickListener = object : OnLinkClickListener {
     }
 }
 ```
+
 ## Font setup
-
-```shell
-```
-
-```javascript
-
-```
 
 ```swift
 // Register the font family for Stories block first.
@@ -210,39 +200,7 @@ Add the font file to your xCode project. You must specify a file name with .ttf 
 
 ## Stories Text Block
 
-TextBlock initial parameters
-
-| Parameter                    | Type     | default value                          | Description                       |
-|------------------------------|----------|----------------------------------------|-----------------------------------|
-| bold                         | boolean  | false                                  | font bold                         |
-| italic                       | boolean  | false                                  | font italic                       |
-| textInput                    | String   |                                        | text content                      |
-| yOffset                      | int      | 0                                      | vertical offset of the text block |
-| fontType                     | String   |                                        | font type                         |
-| fontSize                     | int      | DEFAULT_FONT_SIZE                      | font size                         |
-| textAlign                    | String   |                                        | text alignment                    |
-| textColor                    | String   |                                        | text color                        |
-| textLineSpacing              | double   | 0.0                                    | line spacing od the text          |
-| textBackgroundColor          | String   | DEFAULT_TEXT_BACKGROUND_COLOR          | background color                  |
-| textBackgroundColorOpacity   | String   | DEFAULT_TEXT_BACKGROUND_COLOR_OPACITY  |background color opacity           |
-
-Default variables values
-
-| Variable                              | Type     | Value   |
-|---------------------------------------|----------|---------|
-| DEFAULT_FONT_SIZE                     | int      | 14      |
-| DEFAULT_TEXT_BACKGROUND_COLOR         | String   | #FFFFFF |
-| DEFAULT_TEXT_BACKGROUND_COLOR_OPACITY | String   | 0%      |
-
- TextBlock is initializing based on JSON object it received:
-
-`constructor(json: JSONObject) {`
-
-`bold = json.optBoolean("bold", false)`
-
-`italic = json.optBoolean("italic", false)`
-
-`textInput = json.optString("text_input", "")`
+// TextBlock is initializing based on JSON object it received
 
 `yOffset = json.optInt("y_offset", 0)`
 
