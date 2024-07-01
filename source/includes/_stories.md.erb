@@ -23,6 +23,20 @@ curl -X GET "https:/<%= config[:api_endpoint] %>/story"
 ```
 ```javascript
 
+sdk.startStory() {
+		if(this.startCampaign){
+			this.showStory(0);
+		}
+	}
+// Story block creation
+
+  function createStoryBlock(label, code) {
+  const storyBlock = document.createElement('div')
+  storyBlock.classList.add(`${label}-stories`)
+  storyBlock.setAttribute('data-code', code)
+
+  return storyBlock
+}
 ```
 ```kotlin
 // Show story by id:
