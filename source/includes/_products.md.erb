@@ -479,7 +479,7 @@ function failure (error) {
   console.error(error);
 })
 
-window.r46('cart', 'get', success, failure);
+window.<%= config[:api_endpoint] %>('cart', 'get', success, failure);
 
 ```
 
