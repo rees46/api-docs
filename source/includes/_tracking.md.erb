@@ -852,7 +852,7 @@ Custom event can be tracked in simple mode (just event name) and advanced mode (
 ## User received on mobile push
 
 ```shell
-curl 'https://<%= config[:api_endpoint] %>/track/received' \
+curl 'https://<%= config[:api_endpoint] %>/track/opened' \
     -X 'POST' \
     -H 'Content-Type: application/json' \
     --data-raw '{"shop_id":"SHOP_ID", "code":"CODE", "type":"TYPE"}'
@@ -885,7 +885,7 @@ When user clicks on mobile push notification in mobile app, you have to send eve
 
 This method uses separate endpoint:
 
-Endpoint: `POST https://<%= config[:api_endpoint] %>/track/received`
+Endpoint: `POST https://<%= config[:api_endpoint] %>/track/opened`
 
 ### Required params
 
@@ -897,6 +897,25 @@ All events require at least these parameters:
 | code      | String | true       | Message identifier. Value can be taken from push's JSON payload. For Android it's located in `id` property. In iOS SDK it's `src.id`                                                      |
 | type      | String | true       | Message type. Value can be taken from push's JSON payload. For Android it's located in `type` property. In iOS SDK it's `src.type`.Supported types are: `bulk`, `chain`, `transactional`  |
 
+## Message delivered
+
+```shell
+curl 'https://<%= config[:api_endpoint] %>/track/delivered' \
+-X 'POST' \
+-H 'Content-Type: application/json' \
+--data-raw '{"shop_id":"SHOP_ID", "code":"CODE", "type":"TYPE"}'
+```
+Endpoint: `POST https://<%= config[:api_endpoint] %>/track/delivered`
+
+### Required params
+
+All events require at least these parameters:
+
+| Parameter | Type   | Required   | Description                                                                                                                                                                               |
+|-----------|--------|------------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| shop_id   | String | true       | Your API key                                                                                                                                                                              |
+| code      | String | true       | Message identifier. Value can be taken from push's JSON payload. For Android it's located in `id` property. In iOS SDK it's `src.id`                                                      |
+| type      | String | true       | Message type. Value can be taken from push's JSON payload. For Android it's located in `type` property. In iOS SDK it's `src.type`.Supported types are: `bulk`, `chain`, `transactional`  |
 
 ## User clicked on mobile push
 
@@ -997,16 +1016,6 @@ All events require at least these parameters:
 | shop_id   | String | true       | Your API key                                                                                                                                                                               |
 | code      | String | true       | Message identifier. Value can be taken from push's JSON payload. For Android it's located in `id` property. In iOS SDK it's `src.id`                                                       |
 | type      | String | true       | Message type. Value can be taken from push's JSON payload. For Android it's located in `type` property. In iOS SDK it's `src.type`.                                                        |
-
-## WhatsApp message delivery tracking
-
-// message opened event
-
-Endpoint: `POST https://<%= config[:api_endpoint] %>/track/opened`
-
-// message delivered event
-
-Endpoint: `POST https://<%= config[:api_endpoint] %>/track/delivered`
 
 ## Stories tracking
 
