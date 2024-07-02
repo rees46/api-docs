@@ -2,15 +2,7 @@
 
 Section describes how to use Stories
 
-## Request campaign
-
- Request path `/story/STORY_ID`
-
-| Request parameters | required     | description     |
-|--------------------|--------------|-----------------|
-| story_id           | true         | story id        |
-| shop_id            | true         | shop id         |
-| did                | true         | device id       |
+## Show stories block on request
 
 ```shell
 curl -X GET "https:/<%= config[:api_endpoint] %>/story"
@@ -23,9 +15,9 @@ curl -X GET "https:/<%= config[:api_endpoint] %>/story"
 ```
 ```javascript
 // The 'start_stories' command is used to start story campaign programmatically (e.g. on button click)
-// The second argument is the ID of the story campaign.
+// The second argument is the ID of the stories block.
 
-<%= config[:js_sdk_name] %>('start_stories', 'command type string')
+<%= config[:js_sdk_name] %>('start_stories', 'ID of the stories block')
 ```
 ```kotlin
 // Show story by id:
@@ -50,6 +42,16 @@ storiesView.itemClickListener = object : OnLinkClickListener {
     }
 }
 ```
+
+ Request path `/story/STORY_ID`
+
+| Request parameters | required     | description     |
+|--------------------|--------------|-----------------|
+| story_id           | true         | story id        |
+| shop_id            | true         | shop id         |
+| did                | true         | device id       |
+
+
 
 ## Font setup
 
