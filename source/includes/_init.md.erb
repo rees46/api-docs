@@ -132,9 +132,9 @@ curl https://<%= config[:api_endpoint] %>/init?did=DEVICE_ID&shop_id=SHOP_ID&v=3
 
 // Cookie-less mode
 
-const disableCookie = true;
+const cookieLess = true;
 
-<%= config[:js_sdk_name] %>('init', 'SHOP_ID', 'STREAM', success, failure, disableCookie)
+<%= config[:js_sdk_name] %>('init', 'SHOP_ID', 'STREAM', success, failure, cookieLess)
 ```
 
 ```swift
