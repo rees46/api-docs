@@ -22,12 +22,8 @@ curl -X GET "https:/<%= config[:api_endpoint] %>/story"
 }
 ```
 ```javascript
-// The 'start_stories' command is used to create a block of stories and start a campaign.
-// The second argument, 'command', must be a string.
-// A stories block is created using the createStoryBlock function.
-// An instance of the Stories class is created.
-// The startCampaign flag is set to initiate the campaign.
-
+// The 'start_stories' command is used to start story campaign programmatically (e.g. on button click)
+// The second argument is the ID of the story campaign.
 
 <%= config[:js_sdk_name] %>('start_stories', 'command type string')
 ```
