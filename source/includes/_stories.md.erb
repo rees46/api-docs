@@ -22,11 +22,14 @@ curl -X GET "https:/<%= config[:api_endpoint] %>/story"
 }
 ```
 ```javascript
-<%= config[:js_sdk_name] %>.startStory() {
-		if(this.startCampaign){
-			this.showStory(0);
-		}
-	}
+// The 'start_stories' command is used to create a block of stories and start a campaign.
+// The second argument, 'command', must be a string.
+// A stories block is created using the createStoryBlock function.
+// An instance of the Stories class is created.
+// The startCampaign flag is set to initiate the campaign.
+
+
+<%= config[:js_sdk_name] %>('start_stories', 'command type string')
 ```
 ```kotlin
 // Show story by id:
