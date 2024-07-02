@@ -2,6 +2,29 @@
 
 Section describes how to use Stories
 
+## Stories initialization
+
+```kotlin
+// Programmatic initialization
+val storiesView = StoriesView(this, "STORY BLOCK CODE")
+findViewById<ViewGroup>(R.id.stories).addView(storiesView)
+sdk.initializeStoriesView(storiesView)
+
+// Set item click listener:
+val storiesView = findViewById<StoriesView>(R.id.stories_view)
+storiesView.itemClickListener = object : OnLinkClickListener {
+override fun onClick(url: String): Boolean {
+// return true if need to opening using the SDK
+return false
+}
+
+    override fun onClick(product: Product): Boolean {
+        // return true if need to opening using the SDK
+        return false
+    }
+}
+```
+
 ## Request campaign
 
  Request path `/story/STORY_ID`
@@ -28,24 +51,6 @@ curl -X GET "https:/<%= config[:api_endpoint] %>/story"
 // Show story by code:
 sdk.showStories(CODE)
 
-// Programmatic initialization
-val storiesView = StoriesView(this, "STORY BLOCK CODE")
-findViewById<ViewGroup>(R.id.stories).addView(storiesView)
-sdk.initializeStoriesView(storiesView)
-
-// Set item click listener:
-val storiesView = findViewById<StoriesView>(R.id.stories_view)
-storiesView.itemClickListener = object : OnLinkClickListener {
-    override fun onClick(url: String): Boolean {
-        // return true if need to opening using the SDK
-        return false
-    }
-
-    override fun onClick(product: Product): Boolean {
-        // return true if need to opening using the SDK
-        return false
-    }
-}
 ```
 
 ## Font setup
