@@ -46,6 +46,10 @@ sdk.trackSource(source: .chain, code: "MESSAGE_ID")
 sdk.track(Params.TrackEvent.VIEW, "37")
 ```
 
+```java
+<%= config[:android_sdk_package_name]%>.track(Params.TrackEvent.VIEW, "37");
+```
+
 ```jsx
 // See click on push notification
 ```
@@ -219,6 +223,10 @@ sdk.track(Params.TrackEvent.CATEGORY, Params().apply {
 })
 ```
 
+```java
+<%= config[:android_sdk_package_name]%>.track(Params.TrackEvent.CATEGORY, (new Params()).put(Params.Parameter.CATEGORY_ID, "100"));
+```
+
 ```jsx
 sdk.track("category", "100500");
 ```
@@ -383,6 +391,36 @@ val fullCart = Params().apply {
 sdk.track(Params.TrackEvent.CART, fullCart)
 ```
 
+
+```java
+//Add to cart (simple)
+<%= config[:android_sdk_package_name]%>.track(Params.TrackEvent.CART, "37");
+
+//Add to cart (extended)
+Params cart = new Params();
+cart
+	.put(new Params.Item("37")
+		.set(Params.Item.COLUMN.FASHION_SIZE, "M")
+		.set(Params.Item.COLUMN.AMOUNT, 2)
+	)
+	.put(new Params.RecommendedBy(Params.RecommendedBy.TYPE.RECOMMENDATION, "e9ddb9cdc66285fac40c7a897760582a"));
+<%= config[:android_sdk_package_name]%>.track(Params.TrackEvent.CART, cart);
+
+//Tracking full cart
+Params full_cart = new Params();
+full_cart
+    .put(Params.Parameter.FULL_CART, true)
+    .put(new Params.Item("37")
+        .set(Params.Item.COLUMN.AMOUNT, 2)
+        .set(Params.Item.COLUMN.FASHION_SIZE, "M")
+    )
+    .put(new Params.Item("40")
+        .set(Params.Item.COLUMN.AMOUNT, 1)
+        .set(Params.Item.COLUMN.FASHION_SIZE, "M")
+    );
+<%= config[:android_sdk_package_name]%>.track(Params.TrackEvent.CART, full_cart);
+```
+
 ```jsx
 // Add to cart (simple)
 sdk.track("cart", "id");
@@ -472,6 +510,10 @@ sdk.track(event: .productRemovedFromCart(id: "PRODUCT_ID")) { trackResponse in
 ```
 
 ```kotlin
+// Not described yet
+```
+
+```java
 // Not described yet
 ```
 
@@ -570,6 +612,18 @@ val purchase = Params().apply {
 }
 sdk.track(Params.TrackEvent.PURCHASE, purchase)
 
+```
+
+
+```java
+Params purchase = new Params();
+purchase
+	.put(new Params.Item("37").set(Params.Item.COLUMN.AMOUNT, 2).set(Params.Item.COLUMN.PRICE, 100))
+	.put(Params.Parameter.ORDER_ID, "100234")
+	.put(Params.Parameter.ORDER_PRICE, 100500)
+  .put(Params.Parameter.DELIVERY_ADDRESS, "1860 street")
+	.put(new Params.RecommendedBy(Params.RecommendedBy.TYPE.RECOMMENDATION, "e9ddb9cdc66285fac40c7a897760582a"));
+<%= config[:android_sdk_package_name]%>.track(Params.TrackEvent.PURCHASE, purchase);
 ```
 
 ```jsx
@@ -682,6 +736,10 @@ Params full_wish = new Params();
 
 ```
 
+```java
+<%= config[:android_sdk_package_name]%>.track(Params.TrackEvent.WISH, "37");
+```
+
 ```swift
 sdk.track(event: .productAddToFavorities(id: "PRODUCT_ID")) { trackResponse in
     // ... see product viewed event for details about a callback
@@ -727,6 +785,10 @@ sdk.track(event: .productRemovedToFavorities(id: "PRODUCT_ID")) { trackResponse 
 
 ```kotlin
 sdk.track(Params.TrackEvent.REMOVE_FROM_WISH, "37")
+```
+
+```java
+<%= config[:android_sdk_package_name]%>.track(Params.TrackEvent.REMOVE_FROM_WISH, "37");
 ```
 
 ```jsx
@@ -801,6 +863,14 @@ sdk.track("my_event")
 sdk.track("my_event", "event category", "event label", 100)
 ```
 
+```java
+// Simple tracking of custom event
+<%= config[:android_sdk_package_name] %>.track("my_event");
+
+// Tracking with additional parameters
+<%= config[:android_sdk_package_name] %>.track("my_event", "event category", "event label", 100);
+```
+
 ```jsx
 // Simple tracking
 sdk.trackEvent('my_event');
@@ -870,6 +940,10 @@ sdk.notificationReceived(code: "i7ykuagkjgfs", type: "mobile_push_transactional"
 // Automatically called from SDK when receiving data from firebase
 ```
 
+```java
+// Automatically called from SDK when receiving data from firebase
+```
+
 ```jsx
 // Code and type are received in push notification structure
 const params = {
@@ -930,6 +1004,23 @@ sdk.notificationClicked(code: "i7ykuagkjgfs", type: "mobile_push_transactional")
   }
 ```
 
+
+```java
+// Add notification identification data to the intent
+intent.putExtra(<%= config[:android_sdk_package_name] %>.NOTIFICATION_TYPE, data.get("type"));
+intent.putExtra(<%= config[:android_sdk_package_name] %>.NOTIFICATION_ID, data.get("id"));
+
+// Add click tracking in the method of activity creation
+@Override
+	protected void onCreate(Bundle savedInstanceState) {
+    super.onCreate(savedInstanceState);
+    //For tracking notification clicked
+    if( getIntent().getExtras() != null ) {
+     <%= config[:android_sdk_package_name] %>.notificationClicked(getIntent().getExtras());
+    }
+  }
+```
+
 ```jsx
 // Code and type are received in push notification structure
 const params = {
@@ -975,6 +1066,10 @@ sdk.notificationClosed(code: "i7ykuagkjgfs", type: "mobile_push_transactional")
 ```
 
 ```kotlin
+// Not supported
+```
+
+```java
 // Not supported
 ```
 

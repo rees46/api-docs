@@ -1,6 +1,6 @@
 # User's profile
 
-Endpoints is used to work with user's profile.
+Endpoints are used to work with user's profile.
 
 ## Save profile settings
 
@@ -67,6 +67,20 @@ sdk.profile(params, object : OnApiCallbackListener() {
       }
 })
 
+```
+
+
+```java
+  HashMap<String, String> params = new HashMap<>();
+  params.put("email", "email@example.com");
+  <%= config[:android_sdk_package_name]%>.profile(params);
+  //With callback
+  <%= config[:android_sdk_package_name]%>.profile(params, new Api.OnApiCallbackListener() {
+      @Override
+      public void onSuccess(JSONObject response) {
+          Log.i(TAG, "Response: " + response.toString());
+      }
+  });
 ```
 
 ```jsx
@@ -300,6 +314,10 @@ curl -d "shop_id=SHOPID&shop_secret=SHOP_SECRET&new_email=NEW_EMAIL&old_email=OL
 // Not supported
 ```
 
+```java
+// Not supported
+```
+
 ```jsx
 // Not supported
 ```
@@ -340,6 +358,10 @@ curl -d "shop_id=SHOPID&shop_secret=SHOP_SECRET&new_phone=NEW_PHONE&old_phone=OL
 ```
 
 ```kotlin
+// Not supported
+```
+
+```java
 // Not supported
 ```
 

@@ -20,6 +20,15 @@ sdk.setPushTokenNotification("token", object : OnApiCallbackListener() {
         })
 ```
 
+```java
+<%= config[:android_sdk_package_name] %>.setPushTokenNotification("token", new Api.OnApiCallbackListener() {
+	@Override
+	public void onSuccess(JSONObject msg) {
+		//
+	}
+});
+```
+
 ```jsx
 // When you request permissions to send notifications and receive push token,
 // send it to API using this method:

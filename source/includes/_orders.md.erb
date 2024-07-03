@@ -230,6 +230,10 @@ curl https://<%= config[:api_endpoint] %>/orders/by_user?shop_id=SHOP_ID&shop_se
 // Not supported
 ```
 
+```java
+// Not supported
+```
+
 ```jsx
 // Not supported
 ```
@@ -289,6 +293,20 @@ orderParams.set("change", 5.5)
 // for boolean
 orderParams.set("booked", true)
 
+```
+
+```java
+// value in parameters can be String, int, double, boolean
+public CustomOrderParameters set(@NonNull String name, @NonNull String value) {
+// for String
+    .set("tour_class", "lux")
+// for int
+    .set("rooms", 5)
+// for double
+    .set("change", 5.5)
+// for boolean
+    .set("booked", true)
+}
 ```
 
 ```jsx

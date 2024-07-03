@@ -169,6 +169,27 @@ sdk.search(query: "laptop", limit: nil, offset: nil, categoryLimit: nil, categor
                     }
                 })
 ```
+
+```java
+//Full search
+SearchParams params = new SearchParams();
+params.put(SearchParams.Parameter.LOCATIONS, "location");
+
+//Additional filters
+SearchParams.SearchFilters filters = new SearchParams.SearchFilters();
+filters.put("voltage", new String[] {"11.1", "14.8"});
+params.put(SearchParams.Parameter.FILTERS, filters);
+
+//Disable clarification search
+params.put(SearchParams.Parameter.NO_CLARIFICATION, true);
+<%= config[:android_sdk_package_name]%>.search("SEARCH_QUERY", SearchParams.TYPE.FULL, params, new Api.OnApiCallbackListener() {
+    @Override
+    public void onSuccess(JSONObject response) {
+        Log.i(TAG, "Search response: " + response.toString());
+    }
+});
+```
+
 ```jsx
 const type = 'full_search';
 let search_query = 'your_search_text';
@@ -314,6 +335,10 @@ curl https://<%= config[:api_endpoint] %>/search/no_result_queries?shop_id=...&s
 ```
 
 ```kotlin
+// No implementation. See CURL
+```
+
+```java
 // No implementation. See CURL
 ```
 

@@ -24,6 +24,21 @@ return false
     }
 }
 ```
+```java
+<com.personalizatio.stories.views.StoriesView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:code="STORY BLOCK CODE" />
+
+StoriesView storiesView = findViewById(R.id.story_view);
+<%= config[:android_sdk_package_name] %>.initializeStoriesView(storiesView);
+
+// Programmatic initialization
+StoriesView storiesView = new StoriesView(this, "STORY BLOCK CODE");
+((ViewGroup) findViewById(R.id.stories)).addView(storiesView);
+<%= config[:android_sdk_package_name] %>.initializeStoriesView(storiesView);
+
+```
 
 ## Request campaign
 
@@ -50,6 +65,11 @@ curl -X GET "https:/<%= config[:api_endpoint] %>/story"
 ```kotlin
 // Show story by code:
 sdk.showStories(CODE)
+
+```
+
+```java
+<%= config[:android_sdk_package_name] %>.showStories(CODE);
 
 ```
 
@@ -158,8 +178,15 @@ stories.settings.apply {
     button_font_family = Typeface.MONOSPACE
     products_button_font_family = Typeface.DEFAULT_BOLD
 }
+```
 
-
+```java
+StoriesView stories = findViewById(R.id.story_view);
+stories.settings.label_font_size = 16;
+stories.settings.label_font_family = Typeface.SERIF;
+stories.settings.button_font_family = Typeface.MONOSPACE;
+stories.settings.products_button_font_family = Typeface.DEFAULT_BOLD;
+```
 
 
 
@@ -178,23 +205,6 @@ Add the font file to your xCode project. You must specify a file name with .ttf 
 
 // TextBlock is initializing based on JSON object it received
 
-`yOffset = json.optInt("y_offset", 0)`
-
-`fontType = json.optString("font_type", "")`
-
-`fontSize = json.optInt("font_size", DEFAULT_FONT_SIZE)`
-
-`textAlign = json.optString("text_align", "")`
-
-`textColor = json.optString("text_color", "")`
-
-`textLineSpacing = json.optDouble("text_line_spacing", 0.0)`
-
-`textBackgroundColor = json.optString("text_background_color", DEFAULT_TEXT_BACKGROUND_COLOR)`
-
-`textBackgroundColorOpacity = json.optString("text_background_color_opacity", DEFAULT_TEXT_BACKGROUND_COLOR_OPACITY)`
-
-`}`
 
 ```shell
 ```

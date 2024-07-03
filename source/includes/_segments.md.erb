@@ -71,6 +71,20 @@ sdk.addToSegment(segmentId: "333", email: "my@example.com", phone: "+10000000000
 <%= config[:android_sdk_package_name] %>.addToSegment("333", "my@example.com", "+10000000000");
 ```
 
+```java
+// By `did` only
+<%= config[:android_sdk_package_name] %>.addToSegment("333", null, null);
+
+// With a email (`did` will be switched to the owner of the email)
+<%= config[:android_sdk_package_name] %>.addToSegment("333", "my@example.com", null);
+
+// With a phone number (`did` will be switched to the owner of the phone number)
+<%= config[:android_sdk_package_name] %>.addToSegment("333", null, "+10000000000");
+
+// With both (`did` will be switched to the owner of primary contact)
+<%= config[:android_sdk_package_name] %>.addToSegment("333", "my@example.com", "+10000000000");
+```
+
 ```jsx
 // Using all possible identifiers
 sdk.segments('add', {
@@ -185,6 +199,20 @@ sdk.removeFromSegment(segmentId: "333", email: "my@example.com", phone: "+100000
 <%= config[:android_sdk_package_name] %>.removeFromSegment("333", "my@example.com", "+10000000000");
 ```
 
+```java
+// By `did` only
+<%= config[:android_sdk_package_name] %>.removeFromSegment("333", null, null);
+
+// With a email (`did` will be switched to the owner of the email)
+<%= config[:android_sdk_package_name] %>.removeFromSegment("333", "my@example.com", null);
+
+// With a phone number (`did` will be switched to the owner of the phone number)
+<%= config[:android_sdk_package_name] %>.removeFromSegment("333", null, "+10000000000");
+
+// With both (`did` will be switched to the owner of primary contact)
+<%= config[:android_sdk_package_name] %>.removeFromSegment("333", "my@example.com", "+10000000000");
+```
+
 ```jsx
 // Using all possible identifiers
 sdk.segments('remove', {
@@ -266,6 +294,17 @@ sdk.getCurrentSegment(object: OnApiCallbackListener() {
         })
 ```
 
+
+
+```java
+<%= config[:android_sdk_package_name]%>.getCurrentSegment(new Api.OnApiCallbackListener() {
+  @Override
+  public void onSuccess(JSONArray segments) {
+    // segments (type: array of objects)
+  }
+});
+```
+
 ```jsx
 // Using all possible identifiers
 sdk.segments('get').then(res => {
@@ -335,6 +374,10 @@ curl "shop_id=SHOPID&shop_secret=SHOP_SECRET&email=EMAIL" https://<%= config[:ap
 ```
 
 ```kotlin
+// Not implemented
+```
+
+```java
 // Not implemented
 ```
 
