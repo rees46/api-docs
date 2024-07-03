@@ -42,6 +42,14 @@ storiesView.itemClickListener = object : OnLinkClickListener {
     }
 }
 ```
+```swift
+// collectionView(_:didSelectItemAt:) is called when an element has been chosen (e.g., a button is clicked)
+public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    showStoriesByUserClick(at: indexPath.row)
+    // indexPath.row is the index of the chosen element
+    // showStoriesByUserClick tries to get a story from the stories array, and then renders it
+}
+```
 
  Request path `/story/STORY_ID`
 
