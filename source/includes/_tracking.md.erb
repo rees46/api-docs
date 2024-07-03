@@ -688,7 +688,7 @@ sdk.track(event: .productAddToFavorities(id: "PRODUCT_ID")) { trackResponse in
 }
 
 // Full wish tracking
-sdk.track(event: .synchronizeFavorites( id: "PRODUCT_ID")){
+sdk.track(event: .synchronizeFavorites( ids: ["PRODUCT_ID"])){
   // items and full_wish flag added to request parameters
   // event type set to wish
 }
