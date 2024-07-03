@@ -69,6 +69,29 @@ plugins {
 //    Sync gradle now.
 ```
 
+```java
+// 1. Add to dependencies:
+implementation 'com.<%= config[:android_sdk_package_code] %>:<%= config[:android_sdk_package_code] %>-sdk:+'
+implementation 'com.google.firebase:firebase-bom:29.0.3'
+implementation 'com.google.firebase:firebase-messaging:23.0.0'
+
+
+// 2. Append to your project build.gradle
+buildscript {
+	dependencies {
+		...
+		classpath 'com.google.gms:google-services:4.3.10'
+	}
+}
+
+// 3. Append to your app module build.gradle after line apply plugin: 'com.android.application'
+apply plugin: 'com.google.gms.google-services'
+
+// 4. Create your app in the Firebase console
+//    and copy file google-services.json to your app root path.
+//    Sync gradle now.
+```
+
 ```jsx
 // Add required packages:
 yarn add <%= config[:rn_sdk_package_code] %>/react-native-sdk
@@ -167,6 +190,38 @@ class SampleApplication: Application() {
 
 // 2. For On-Premise integration need use initialize with custom api domain:
 <%= config[:android_sdk_package_name] %>.initialize(applicationContext, SHOP_ID, API_DOMAIN)
+
+// 3. Check AndroidManifest.xml and add android:name=".SampleApplication" to application item.
+<application
+		...
+		android:name=".SampleApplication"
+```
+
+```java
+public class SampleApplication extends Application {
+	public void onCreate() {
+		super.onCreate();
+
+		//Initialize
+		<%= config[:android_sdk_package_name] %>.initialize(getApplicationContext(), SHOP_ID);
+
+		//Notification callback
+		<%= config[:android_sdk_package_name] %>.setOnMessageListener(new MessagingService.OnMessageListener() {
+			@Override
+			public void onMessage(Map<String, String> data) {
+
+				//----->
+				//Show your custom notification
+				//----->
+
+			}
+		});
+	}
+}
+
+
+// 2. For On-Premise integration need use initialize with custom api domain:
+<%= config[:android_sdk_package_name] %>.initialize(getApplicationContext(), SHOP_ID, API_DOMAIN);
 
 // 3. Check AndroidManifest.xml and add android:name=".SampleApplication" to application item.
 <application

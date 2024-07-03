@@ -2,13 +2,51 @@
 
 Section describes how to use Stories
 
+## Stories initialization
+
+```kotlin
+// Programmatic initialization
+val storiesView = StoriesView(this, "STORY BLOCK CODE")
+findViewById<ViewGroup>(R.id.stories).addView(storiesView)
+sdk.initializeStoriesView(storiesView)
+
+// Set item click listener:
+val storiesView = findViewById<StoriesView>(R.id.stories_view)
+storiesView.itemClickListener = object : OnLinkClickListener {
+override fun onClick(url: String): Boolean {
+// return true if need to opening using the SDK
+return false
+}
+
+    override fun onClick(product: Product): Boolean {
+        // return true if need to opening using the SDK
+        return false
+    }
+}
+```
+```java
+<com.personalizatio.stories.views.StoriesView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:code="STORY BLOCK CODE" />
+
+StoriesView storiesView = findViewById(R.id.story_view);
+<%= config[:android_sdk_package_name] %>.initializeStoriesView(storiesView);
+
+// Programmatic initialization
+StoriesView storiesView = new StoriesView(this, "STORY BLOCK CODE");
+((ViewGroup) findViewById(R.id.stories)).addView(storiesView);
+<%= config[:android_sdk_package_name] %>.initializeStoriesView(storiesView);
+
+```
+
 ## Show stories block on request
 
 ```shell
 curl -X GET "https:/<%= config[:api_endpoint] %>/story"
 -H "Content-Type: application/json"
 -d '{
-  "id": "STORY_ID",
+  "id": "STORY_CODE",
   "shop_id": "SHOP_ID",
   "did": "DEVICE_ID"
 }
@@ -20,27 +58,14 @@ curl -X GET "https:/<%= config[:api_endpoint] %>/story"
 <%= config[:js_sdk_name] %>('start_stories', 'ID of the stories block')
 ```
 ```kotlin
-// Show story by id:
-sdk.showStory(STORY_ID)
+// Show story by code:
+sdk.showStories(CODE)
 
-// Programmatic initialization
-val storiesView = StoriesView(this, "STORY BLOCK CODE")
-findViewById<ViewGroup>(R.id.stories).addView(storiesView)
-sdk.initializeStoriesView(storiesView)
+```
 
-// Set item click listener:
-val storiesView = findViewById<StoriesView>(R.id.stories_view)
-storiesView.itemClickListener = object : OnLinkClickListener {
-    override fun onClick(url: String): Boolean {
-        // return true if need to opening using the SDK
-        return false
-    }
+```java
+<%= config[:android_sdk_package_name] %>.showStories(CODE);
 
-    override fun onClick(product: Product): Boolean {
-        // return true if need to opening using the SDK
-        return false
-    }
-}
 ```
 ```swift
 // collectionView(_:didSelectItemAt:) is called when an element has been chosen (e.g., a button is clicked)
@@ -51,13 +76,11 @@ public func collectionView(_ collectionView: UICollectionView, didSelectItemAt i
 }
 ```
 
- Request path `/story/STORY_ID`
-
 | Request parameters | required     | description     |
 |--------------------|--------------|-----------------|
-| story_id           | true         | story id        |
+| story_code           | true       | story code      |
 | shop_id            | true         | shop id         |
-| did                | true         | device id       |
+| did                | true         | device id       
 
 
 
@@ -166,8 +189,15 @@ stories.settings.apply {
     button_font_family = Typeface.MONOSPACE
     products_button_font_family = Typeface.DEFAULT_BOLD
 }
+```
 
-
+```java
+StoriesView stories = findViewById(R.id.story_view);
+stories.settings.label_font_size = 16;
+stories.settings.label_font_family = Typeface.SERIF;
+stories.settings.button_font_family = Typeface.MONOSPACE;
+stories.settings.products_button_font_family = Typeface.DEFAULT_BOLD;
+```
 
 
 
@@ -274,7 +304,7 @@ let product: StoriesPromoCodeElement?
 ```
 ```kotlin
 ```
-
+// TextBlock is initializing based on JSON object it received
 
 ### Available SDK Configuration options
 

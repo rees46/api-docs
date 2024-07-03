@@ -142,6 +142,43 @@ subscriptions["sms_bulk"] = false
 sdk.manageSubscription(null, null, subscriptions)
 ```
 
+```java
+// With `did` only
+HashMap<String, Boolean> subscriptions = new HashMap<>();
+subscriptions.put("email_bulk", true);
+<%= config[:android_sdk_package_name]%>.manageSubscription(null, null, subscriptions);
+
+// With email and phone
+HashMap<String, Boolean> subscriptions = new HashMap<>();
+subscriptions.put("email_bulk", true);
+<%= config[:android_sdk_package_name]%>.manageSubscription("my@example.com", "+10000000000", subscriptions);
+
+// With email and phone and listener
+HashMap<String, Boolean> subscriptions = new HashMap<>();
+subscriptions.put("email_bulk", true);
+<%= config[:android_sdk_package_name]%>.manageSubscription("my@example.com", "+10000000000", subscriptions, listener);
+
+// With email, phone, externalId, loyaltyId, telegramId
+HashMap<String, Boolean> subscriptions = new HashMap<>();
+subscriptions.put("email_bulk", true);
+subscriptions.put("sms_chain", false);
+<%= config[:android_sdk_package_name]%>.manageSubscription("my@example.com", "+10000000000", "externalID", "loyaltyId", "telegramId", subscriptions);
+
+// With email, phone, externalId, loyaltyId, telegramId and listener
+HashMap<String, Boolean> subscriptions = new HashMap<>();
+subscriptions.put("email_bulk", true);
+subscriptions.put("email_transactional", false);
+subscriptions.put("sms_chain", true);
+<%= config[:android_sdk_package_name]%>.manageSubscription("my@example.com", "+10000000000", "externalID", "loyaltyId", "telegramId", subscriptions, listener);
+
+// Unsubscribe from bulk SMS and email
+HashMap<String, Boolean> subscriptions = new HashMap<>();
+subscriptions.put("email_bulk", false);
+subscriptions.put("sms_bulk", false);
+<%= config[:android_sdk_package_name]%>.manageSubscription(null, null, subscriptions);
+
+```
+
 The method changes user's subscription to different channels (`email`, `sms`) and campaigns types (`bulk`, `chain`, `transactional`).
 
 | Parameter                  | Type    | Required | Description                                                                        |
@@ -197,6 +234,10 @@ https://<%= config[:api_endpoint] %>/subscriptions/callback
 // No implementation. See CURL
 ```
 
+```java
+// No implementation. See CURL
+```
+
 | Parameter   | Type   | Required | Description                                         |
 |-------------|--------|----------|-----------------------------------------------------|
 | shop_id     | String | true     | Your API key                                        |
@@ -225,6 +266,10 @@ https://<%= config[:api_endpoint] %>/subscriptions/callback
 ```
 
 ```kotlin
+// No implementation. See CURL
+```
+
+```java
 // No implementation. See CURL
 ```
 
@@ -259,6 +304,10 @@ https://<%= config[:api_endpoint] %>/subscriptions/callback
 // No implementation. See CURL
 ```
 
+```java
+// No implementation. See CURL
+```
+
 | Parameter   | Type   | Required | Description                                         |
 |-------------|--------|----------|-----------------------------------------------------|
 | shop_id     | String | true     | Your API key                                        |
@@ -287,6 +336,10 @@ https://<%= config[:api_endpoint] %>/subscriptions/callback
 ```
 
 ```kotlin
+// No implementation. See CURL
+```
+
+```java
 // No implementation. See CURL
 ```
 
@@ -320,6 +373,10 @@ function(error) {
 ```
 
 ```kotlin
+// No implementation. See CURL
+```
+
+```java
 // No implementation. See CURL
 ```
 
@@ -407,6 +464,10 @@ curl https://<%= config[:api_endpoint] %>/subscriptions/changes?shop_id=...&shop
 ```
 
 ```kotlin
+// No implementation. See CURL
+```
+
+```java
 // No implementation. See CURL
 ```
 
