@@ -42,11 +42,9 @@ StoriesView storiesView = new StoriesView(this, "STORY BLOCK CODE");
 
 ## Request campaign
 
- Request path `/story/STORY_ID`
-
 | Request parameters | required     | description     |
 |--------------------|--------------|-----------------|
-| story_id           | true         | story id        |
+| story_code           | true       | story code      |
 | shop_id            | true         | shop id         |
 | did                | true         | device id       |
 
@@ -54,7 +52,7 @@ StoriesView storiesView = new StoriesView(this, "STORY BLOCK CODE");
 curl -X GET "https:/<%= config[:api_endpoint] %>/story"
 -H "Content-Type: application/json"
 -d '{
-  "id": "STORY_ID",
+  "id": "STORY_CODE",
   "shop_id": "SHOP_ID",
   "did": "DEVICE_ID"
 }
