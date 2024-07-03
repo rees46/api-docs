@@ -40,13 +40,7 @@ StoriesView storiesView = new StoriesView(this, "STORY BLOCK CODE");
 
 ```
 
-## Request campaign
-
-| Request parameters | required     | description     |
-|--------------------|--------------|-----------------|
-| story_code           | true       | story code      |
-| shop_id            | true         | shop id         |
-| did                | true         | device id       |
+## Show stories block on request
 
 ```shell
 curl -X GET "https:/<%= config[:api_endpoint] %>/story"
@@ -58,7 +52,10 @@ curl -X GET "https:/<%= config[:api_endpoint] %>/story"
 }
 ```
 ```javascript
+// The 'start_stories' command is used to start story campaign programmatically (e.g. on button click)
+// The second argument is the ID of the stories block.
 
+<%= config[:js_sdk_name] %>('start_stories', 'ID of the stories block')
 ```
 ```kotlin
 // Show story by code:
@@ -70,6 +67,22 @@ sdk.showStories(CODE)
 <%= config[:android_sdk_package_name] %>.showStories(CODE);
 
 ```
+```swift
+// collectionView(_:didSelectItemAt:) is called when an element has been chosen (e.g., a button is clicked)
+public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    showStoriesByUserClick(at: indexPath.row)
+    // indexPath.row is the index of the chosen element
+    // showStoriesByUserClick tries to get a story from the stories array, and then renders it
+}
+```
+
+| Request parameters | required     | description     |
+|--------------------|--------------|-----------------|
+| story_code           | true       | story code      |
+| shop_id            | true         | shop id         |
+| did                | true         | device id       
+
+
 
 ## Font setup
 
@@ -201,10 +214,8 @@ Add the font file to your xCode project. You must specify a file name with .ttf 
 
 ## Stories Text Block
 
-// TextBlock is initializing based on JSON object it received
-
-
 ```shell
+not supported
 ```
 
 ```javascript
@@ -293,7 +304,7 @@ let product: StoriesPromoCodeElement?
 ```
 ```kotlin
 ```
-
+// TextBlock is initializing based on JSON object it received
 
 ### Available SDK Configuration options
 

@@ -192,6 +192,26 @@ sdk.subscribeForBackInStock(id: "PRODUCT_ID", email: "mail@example.com");
 
 // Subscribe for specific phone
 sdk.subscribeForBackInStock(id: "PRODUCT_ID", phone: "+19999999999");
+
+// Subscribe for Back In Stock
+sdk.subscribeForBackInStock(id: "PRODUCT_ID", email: "USER_EMAIL", phone: "USER_PHONE", fashionSize: ["SIZE1", "SIZE2"]) { result in
+    switch result {
+    case .success:
+        // Handle success
+    case .failure(let error):
+        // Handle failure
+    }
+}
+
+// Unsubscribe for Back In Stock
+sdk.unsubscribeForBackInStock(itemIds: ["ITEM_ID1", "ITEM_ID2"], email: "USER_EMAIL", phone: "USER_PHONE") { result in
+    switch result {
+    case .success:
+        // Handle success
+    case .failure(let error):
+        // Handle failure
+    }
+}
 ```
 
 ```kotlin
@@ -247,6 +267,8 @@ properties.put("fashion_size", "XL");
 
 // Unsubscribing from all products
 <%= config[:rn_sdk_package_name]%>.triggers('unsubscribe_from_product_available', {email: 'John.Doe@store.com', item_ids: []});
+
+//
 ```
 
 This feature helps you recover sales lost due to out-of-stock items by giving your customers an option to choose if they want to receive a notification when the item they want is back in stock.
