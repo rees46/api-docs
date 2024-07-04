@@ -29,6 +29,16 @@ sdk.recommend(blockId: "block_id", currentProductId: "PRODUCT_ID") { recommendRe
   print("Callback")
 }
 
+// Request with locations
+// It has extended and withLocations parameters.
+// To get locations in the response, the extended parameter must be included in the request and set to true
+sdk.recommend(blockId: "block_id", extended: true, with_locations: true) {
+  // An array with JSON objects containing information about locations will be part of the response.
+  // locations: [ { "id": "loc1", "name": "Location 1" }, { "id": "loc2", "name": "Location 2" } ]
+}
+
+
+
 // Create Recommendations Widget collection programmatically.
 public var recommendationsCollectionView = RecommendationsWidgetView()
 // Load Recommendations Widget view and setup height and position settings.
