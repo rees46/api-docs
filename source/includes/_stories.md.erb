@@ -87,6 +87,17 @@ sdk.showStories(CODE)
 
 ```
 ```swift
+// Stories block is initialized
+@IBOutlet private weak var storiesCollectionView: StoriesView!
+  private func loadStoriesViewBlock() {
+     if let globalSDK = globalSDK {
+        // sdk receives an instance of globalSDK with personalization data and methods
+        // mainVC receives an instance of type UIViewController; it is used for the configure method
+        // code - string ID to choose a specific block of stories
+        storiesCollectionView.configure(sdk: globalSDK, mainVC: self, code: "STORIES_CODE")
+    }
+
+
 // collectionView(_:didSelectItemAt:) is called when an element has been chosen (e.g., a button is clicked)
 public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     showStoriesByUserClick(at: indexPath.row)
@@ -96,6 +107,7 @@ public func collectionView(_ collectionView: UICollectionView, didSelectItemAt i
 ```
 
 After initializing the SDK, you can request a block of stories. To start initialization, follow the [instructions](#stories-initialization) in the Stories initialization section.
+
 
 ## Font setup
 
