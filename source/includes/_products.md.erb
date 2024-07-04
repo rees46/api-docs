@@ -159,7 +159,18 @@ Returns basic product info.
 | Parameter | Type   | Required   | Description  |
 |-----------|--------|------------|--------------|
 | shop_id   | String | true       | Your API key |
-| item      | String | true       | Product ID   |
+| item_id   | String | true       | Product ID   |
+
+### Response details
+
+| Parameter     | Type    | Description                              |
+|---------------|---------|------------------------------------------|
+| name          | String  | Product name                             |
+| description   | String  | Product description                      |
+| price         | String  | Product price                            |
+| currency      | String  | Currency                                 |
+| url           | String  | URL                                      |
+| picture       | String  | Picture                                  |
 
 ## Get product stats
 
@@ -209,7 +220,15 @@ Returns basic product info.
 | Parameter | Type   | Required   | Description  |
 |-----------|--------|------------|--------------|
 | shop_id   | String | true       | Your API key |
-| item_id   | String | true       | Product ID   |
+| item      | String | true       | Product ID   |
+
+### Response details
+
+| Parameter     | Type    | Description                                       |
+|---------------|---------|---------------------------------------------------|
+| daily         | Object  | Returns "view", "cart", "purchase" for 24 hours   |
+| now           | Object  | Returns "view", "cart", "purchase" for 15 minutes |
+
 
 ## Get subscriptions for products in stock
 
@@ -273,12 +292,13 @@ Returns list of products and a number of subscribers for each product in stock.
 
 ### Response details
 
-| Parameter     | Type    | Description                           |
-|---------------|---------|---------------------------------------|
-| id            | String  | Product ID                            |
-| barcode       | String  | Product barcode                       |
-| subscribers   | Integer | Number of subscribers for the product |
-| date          | String  | Date of the last subscription         |
+| Parameter     | Type    | Description                              |
+|---------------|---------|------------------------------------------|
+| id            | String  | Product ID                               |
+| barcode       | String  | Product barcode                          |
+| quantity      | Integer | Number of products that have subscribers |
+| date          | String  | Date of the last subscription            |
+| contacts      | String  | Array with contact details               |
 
 
 
@@ -344,13 +364,13 @@ Returns list of products and a number of subscribers for each product's price dr
 
 ### Response details
 
-| Parameter    | Type    | Description                           |
-|--------------|---------|---------------------------------------|
-| id           | String  | Product ID                            |
-| barcode      | String  | Product barcode                       |
-| subscribers  | Integer | Number of subscribers for the product |
-| date         | String  | Date of the last subscription         |
-
+| Parameter    | Type    | Description                              |
+|--------------|---------|------------------------------------------|
+| id           | String  | Product ID                               |
+| barcode      | String  | Product barcode                          |
+| quantity     | Integer | Number of products that have subscribers |
+| date         | String  | Date of the last subscription            |
+| contacts     | String  | Array with contact details               |
 
 ## Get status of subscription for "Back in Stock" trigger
 
