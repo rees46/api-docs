@@ -5,6 +5,15 @@ Section describes how to use Stories
 ## Stories initialization
 
 ```kotlin
+// Manual initialization by insetring this code into layout
+<com.personalizatio.stories.views.StoriesView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:code="STORY BLOCK CODE" />
+
+val storiesView = findViewById<StoriesView>(R.id.story_view)
+sdk.initializeStoriesView(storiesView)
+
 // Programmatic initialization
 val storiesView = StoriesView(this, "STORY BLOCK CODE")
 findViewById<ViewGroup>(R.id.stories).addView(storiesView)
@@ -17,14 +26,15 @@ override fun onClick(url: String): Boolean {
 // return true if need to opening using the SDK
 return false
 }
-
-    override fun onClick(product: Product): Boolean {
-        // return true if need to opening using the SDK
-        return false
+  override fun onClick(product: Product): Boolean {
+    // return true if need to opening using the SDK
+    return false
     }
 }
 ```
 ```java
+// Manual initialization by insetring this code into layout
+
 <com.personalizatio.stories.views.StoriesView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
@@ -43,14 +53,9 @@ StoriesView storiesView = new StoriesView(this, "STORY BLOCK CODE");
 ## Show stories block on request
 
 ```shell
-curl -X GET "https:/<%= config[:api_endpoint] %>/story"
--H "Content-Type: application/json"
--d '{
-  "id": "STORY_CODE",
-  "shop_id": "SHOP_ID",
-  "did": "DEVICE_ID"
-}
+No implementation. See SDK.
 ```
+
 ```javascript
 // The 'start_stories' command is used to start story campaign programmatically (e.g. on button click)
 // The second argument is the ID of the stories block.
@@ -58,12 +63,26 @@ curl -X GET "https:/<%= config[:api_endpoint] %>/story"
 <%= config[:js_sdk_name] %>('start_stories', 'ID of the stories block')
 ```
 ```kotlin
-// Show story by code:
-sdk.showStories(CODE)
+// To display stories using code, you must have a stories view with any code added and initialized.
+// Therefore, to display stories, you need to complete two steps.
+// Step 1: Adding and initializing a stories view with a code.
+// Follow the instructions in the Stories initialization section.
+// If you already have an initialized stories view, skip Step 1.
 
+// 2 step: Show stories by code:
+
+sdk.showStories(CODE)
 ```
 
 ```java
+// To display stories using code, you must have a stories view with any code added and initialized.
+// Therefore, to display stories, you need to complete two steps.
+// Step 1: Adding and initializing a stories view with a code.
+// Follow the instructions in the Stories initialization section.
+// If you already have an initialized stories view, skip Step 1.
+
+// 2 step: Show stories by code:
+
 <%= config[:android_sdk_package_name] %>.showStories(CODE);
 
 ```
@@ -86,6 +105,9 @@ public func collectionView(_ collectionView: UICollectionView, didSelectItemAt i
     // showStoriesByUserClick tries to get a story from the stories array, and then renders it
 }
 ```
+
+After initializing the SDK, you can request a block of stories. To start initialization, follow the [instructions](#stories-initialization) in the Stories initialization section.
+
 
 ## Font setup
 
