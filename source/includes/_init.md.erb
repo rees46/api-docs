@@ -191,14 +191,13 @@ class SampleApplication: Application() {
 // 2. For On-Premise integration need use initialize with custom api domain:
 <%= config[:android_sdk_package_name] %>.initialize(applicationContext, SHOP_ID, API_DOMAIN)
 
+// Initialization with token automatic sending flag
+<%= config[:android_sdk_package_name] %>.initialize(applicationContext, SHOP_ID, autoSendPushToken)
+
 // 3. Check AndroidManifest.xml and add android:name=".SampleApplication" to application item.
 <application
 		...
 		android:name=".SampleApplication"
-```
-```kotlin
-// Initialization with token automatic sending flag
-<%= config[:android_sdk_package_name] %>.initialize(applicationContext, SHOP_ID, autoSendPushToken)
 ```
 
 ```java
