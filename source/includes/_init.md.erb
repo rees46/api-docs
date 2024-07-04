@@ -192,7 +192,7 @@ class SampleApplication: Application() {
 <%= config[:android_sdk_package_name] %>.initialize(applicationContext, SHOP_ID, API_DOMAIN)
 
 // Initialization with token automatic sending flag
-<%= config[:android_sdk_package_name] %>.initialize(applicationContext, SHOP_ID, autoSendPushToken)
+<%= config[:android_sdk_package_name] %>.initialize(applicationContext, SHOP_ID, API_DOMAIN, autoSendPushToken)
 
 // 3. Check AndroidManifest.xml and add android:name=".SampleApplication" to application item.
 <application
