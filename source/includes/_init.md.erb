@@ -196,6 +196,10 @@ class SampleApplication: Application() {
 		...
 		android:name=".SampleApplication"
 ```
+```kotlin
+// Initialization with token automatic sending flag
+<%= config[:android_sdk_package_name] %>.initialize(applicationContext, SHOP_ID, autoSendPushToken)
+```
 
 ```java
 public class SampleApplication extends Application {
