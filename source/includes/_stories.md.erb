@@ -68,6 +68,16 @@ sdk.showStories(CODE)
 
 ```
 ```swift
+// Stories block is initialized
+private func loadStoriesViewBlock() {
+    if let globalSDK = globalSDK {
+    // sdk receives an instance of globalSDK with personalization data and methods
+    // mainVC receives an instance of type UIViewController; it is used for the configure method
+    // code - string ID to choose a specific block of stories
+       storiesCollectionView.configure(sdk: globalSDK, mainVC: self, code: "STORIES_CODE")
+    }
+
+
 // collectionView(_:didSelectItemAt:) is called when an element has been chosen (e.g., a button is clicked)
 public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
     showStoriesByUserClick(at: indexPath.row)
@@ -75,14 +85,6 @@ public func collectionView(_ collectionView: UICollectionView, didSelectItemAt i
     // showStoriesByUserClick tries to get a story from the stories array, and then renders it
 }
 ```
-
-| Request parameters | required     | description     |
-|--------------------|--------------|-----------------|
-| story_code           | true       | story code      |
-| shop_id            | true         | shop id         |
-| did                | true         | device id       
-
-
 
 ## Font setup
 
