@@ -9,20 +9,6 @@ Section describes how to use Stories
 val storiesView = StoriesView(this, "STORY BLOCK CODE")
 findViewById<ViewGroup>(R.id.stories).addView(storiesView)
 sdk.initializeStoriesView(storiesView)
-
-// Set item click listener:
-val storiesView = findViewById<StoriesView>(R.id.stories_view)
-storiesView.itemClickListener = object : OnLinkClickListener {
-override fun onClick(url: String): Boolean {
-// return true if need to opening using the SDK
-return false
-}
-
-    override fun onClick(product: Product): Boolean {
-        // return true if need to opening using the SDK
-        return false
-    }
-}
 ```
 ```java
 <com.personalizatio.stories.views.StoriesView
@@ -58,12 +44,38 @@ curl -X GET "https:/<%= config[:api_endpoint] %>/story"
 <%= config[:js_sdk_name] %>('start_stories', 'ID of the stories block')
 ```
 ```kotlin
-// Show story by code:
+// The first step is initialization, which can be done programmatically
+val storiesView = StoriesView(this, "STORY BLOCK CODE")
+findViewById<ViewGroup>(R.id.stories).addView(storiesView)
+sdk.initializeStoriesView(storiesView)
+
+// Or initialization can be done manually by inserting this code into the page layout
+<com.personalizatio.stories.views.StoriesView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:code="STORY BLOCK CODE" />
+
+Show stories by code:
 sdk.showStories(CODE)
 
 ```
 
 ```java
+// The first step is initialization, which can be done programmatically
+StoriesView storiesView = new StoriesView(this, "STORY BLOCK CODE");
+((ViewGroup) findViewById(R.id.stories)).addView(storiesView);
+<%= config[:android_sdk_package_name] %>.initializeStoriesView(storiesView);
+
+// Or initialization can be done manually by inserting this code into the page layout
+<com.personalizatio.stories.views.StoriesView
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    app:code="STORY BLOCK CODE" />
+
+StoriesView storiesView = findViewById(R.id.story_view);
+<%= config[:android_sdk_package_name] %>.initializeStoriesView(storiesView);
+
+// Show stories by code:
 <%= config[:android_sdk_package_name] %>.showStories(CODE);
 
 ```
@@ -75,14 +87,7 @@ public func collectionView(_ collectionView: UICollectionView, didSelectItemAt i
     // showStoriesByUserClick tries to get a story from the stories array, and then renders it
 }
 ```
-
-| Request parameters | required     | description     |
-|--------------------|--------------|-----------------|
-| story_code           | true       | story code      |
-| shop_id            | true         | shop id         |
-| did                | true         | device id       
-
-
+After initializing the SDK,
 
 ## Font setup
 
