@@ -69,12 +69,13 @@ sdk.showStories(CODE)
 ```
 ```swift
 // Stories block is initialized
-private func loadStoriesViewBlock() {
-    if let globalSDK = globalSDK {
-    // sdk receives an instance of globalSDK with personalization data and methods
-    // mainVC receives an instance of type UIViewController; it is used for the configure method
-    // code - string ID to choose a specific block of stories
-       storiesCollectionView.configure(sdk: globalSDK, mainVC: self, code: "STORIES_CODE")
+@IBOutlet private weak var storiesCollectionView: StoriesView!
+  private func loadStoriesViewBlock() {
+     if let globalSDK = globalSDK {
+        // sdk receives an instance of globalSDK with personalization data and methods
+        // mainVC receives an instance of type UIViewController; it is used for the configure method
+        // code - string ID to choose a specific block of stories
+        storiesCollectionView.configure(sdk: globalSDK, mainVC: self, code: "STORIES_CODE")
     }
 
 
