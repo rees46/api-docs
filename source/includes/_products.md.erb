@@ -399,6 +399,7 @@ Returns list of products and a number of subscribers for each product's price dr
 
 Returns boolean status of subscription.
 
+`GET https://<%= config[:api_endpoint] %>/products/check_product_available_subscription`
 
 ### Query Parameters
 
@@ -410,17 +411,25 @@ Returns boolean status of subscription.
 
 ### Request parameters
 
-| Parameter   | Type          | Required | Description                          |
-|-------------|---------------|----------|--------------------------------------|
-| item        | string/number | true     | Product ID                           |
-| email       | string 	      | false    | Email for subscription checking      |
-| phone       | string 	      | false    | Phone for subscription checking      |
-| loyalty_id  | string 	      | false    | Loyalty ID for subscription checking |
+| Parameter    | Type          | Required | Description                           |
+|--------------|---------------|----------|---------------------------------------|
+| item_id      | string/number | true     | Product ID                            |
+| shop_secret  | string        | true     | Shop secret                           |
+| shop_id      | string        | true     | Shop ID                               |
+| did*         | string        | false    | Device ID                             |
+| external_id* | string        | false    | External ID                           |
+| email*       | string 	     | false    | Email for subscription checking       |
+| phone*       | string 	     | false    | Phone for subscription checking       |
+| loyalty_id*  | string 	     | false    | Loyalty ID for subscription checking  |
+| telegram_id* | string 	     | false    | Telegram ID for subscription checking |
 
 <aside class="notice">
 If no *email*, *phone*, or *loyalty_id* is specified, only the user's current device will be checked. It won't take into account subscriptions performed on the user's other devices.
 </aside>
 
+<aside class="warning">
+ Parameters marked by * are optional. But at least one of them must be present in your request.
+</aside>
 
 ## Get status of subscription for product price drop
 
@@ -449,6 +458,7 @@ If no *email*, *phone*, or *loyalty_id* is specified, only the user's current de
 
 Returns boolean status of subscription.
 
+`GET https://<%= config[:api_endpoint] %>/products/check_price_drop_subscription`
 
 ### Query Parameters
 
@@ -460,15 +470,25 @@ Returns boolean status of subscription.
 
 ### Request parameters
 
-| Parameter   | Type          | Required | Description                          |
-|-------------|---------------|----------|--------------------------------------|
-| item        | string/number | true     | Product ID                           |
-| email       | string        | false    | Email for subscription checking      |
-| phone       | string        | false    | Phone for subscription checking      |
-| loyalty_id  | string        | false    | Loyalty ID for subscription checking |
+| Parameter    | Type          | Required | Description                           |
+|--------------|---------------|----------|---------------------------------------|
+| item_id      | string/number | true     | Product ID                            |
+| shop_secret  | string        | true     | Shop secret                           |
+| shop_id      | string        | true     | Shop ID                               |
+| did*         | string        | false    | Device ID                             |
+| external_id* | string        | false    | External ID                           |
+| email*       | string 	     | false    | Email for subscription checking       |
+| phone*       | string 	     | false    | Phone for subscription checking       |
+| loyalty_id*  | string 	     | false    | Loyalty ID for subscription checking  |
+| telegram_id* | string 	     | false    | Telegram ID for subscription checking |
+
 
 <aside class="notice">
 If no *email*, *phone*, or *loyalty_id* is specified, only the user's current device will be checked. It won't take into account subscriptions performed on the user's other devices.
+</aside>
+
+<aside class="warning">
+ Parameters marked by * are optional. But at least one of them must be present in your request. It's used to identify user.
 </aside>
 
 
@@ -498,18 +518,33 @@ curl https://<%= config[:api_endpoint] %>/products/not_widgetable?shop_id=...&sh
 
 ```
 {
-  "status": "success",
-  "data": {
-    "items": [
-      { "uniqid": "YOUR_SKU", "name": "...", "url": "...", "image_url": "", "price": ..., "image_downloading_error": "..."},
-      { "uniqid": "YOUR_SKU", "name": "...", "url": "...", "image_url": "", "price": ..., "image_downloading_error": "..."},
+  status: 'success',
+  data: {
+    total: number of widgetable products,
+    items: [
+      {
+        uniqid: String,
+        price: Float | Null,
+        name: String,
+        url: String,
+        image_url: String,
+        image_downloading_error: String (image loading error description),
+      },
     ]
-  }
+   }
 }
+
 ```
+### Query Parameters
+
+| Parameter   | Type   | Required   | Description     |
+|-------------|--------|------------|-----------------|
+| shop_id     | String | true       | Your API key    |
+| shop_secret | String | true       | Shop secret key |
 
 Returns a list of `avaiable` and `not ignored` products which are not `widgetable`: can't be displayed in search, recommendations and messages due to missing one of mandatory parameters (`name`, `price`, `url` or `image_url`) or failed to fetch product's photo during import operation.
 
+`GET https://<%= config[:api_endpoint] %>/products/not_widgetable`
 
 ## Get client's shopping cart
 
@@ -591,8 +626,6 @@ sdk.getProductsFromCart { result in
 
 Returns `{"status": "success", "data": { "items": [ {"uniqid": "SKU_1", "quantity": 1}, {"uniqid": "SKU_2", "quantity": 3} ] }}` JSON object.
 
-##
-
 
 ## Clear client's shopping cart
 
@@ -644,7 +677,7 @@ curl --location --request DELETE 'https://<%= config[:api_endpoint] %>/products/
 | telegram_id* | true     | User's telegram_id                      |
 
 <aside class="notice">
-At least of identifiers (marked by *) must present in request: email, phone, etc. It's used to identify user.
+At least one of identifiers (marked by *) must present in request: email, phone, etc. It's used to identify user.
 </aside>
 
 
