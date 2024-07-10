@@ -405,9 +405,6 @@ Returns boolean status of subscription.
 
 | Parameter    | Type          | Required | Description                                                                                |
 |--------------|---------------|----------|--------------------------------------------------------------------------------------------|
-| params       | Object        | true     |  Object with request parameters.                                                           |
-| success      | Function      | true     | Callback-function, where the API response will be passed to. Response type: object.        |
-|  error       | Function      | false    | Callback-function to be called when an error occurs (any HTTP status code other than 200). |
 | item_id      | string/number | true     | Product ID                                                                                 |
 | shop_secret  | string        | true     | Shop secret                                                                                |
 | shop_id      | string        | true     | Shop ID                                                                                    |
@@ -419,7 +416,7 @@ Returns boolean status of subscription.
 | telegram_id* | string 	     | false    | Telegram ID for subscription checking                                                      |
 
 <aside class="notice">
-If no *email*, *phone*, or *loyalty_id* is specified, only the user's current device will be checked. It won't take into account subscriptions performed on the user's other devices.
+At least one of identifiers (marked by *) must present in request: email, phone, etc. It's used to identify user.
 </aside>
 
 <aside class="warning">
@@ -459,9 +456,6 @@ Returns boolean status of subscription.
 
 | Parameter    | Type          | Required | Description                                                                                |
 |--------------|---------------|----------|--------------------------------------------------------------------------------------------|
-| params       | Object        | true     | Object with request parameters.                                                            |
-| success      | Function      | true     | Callback-function, where the API response will be passed to. Response type: object.        |
-|  error       | Function      | false    | Callback-function to be called when an error occurs (any HTTP status code other than 200). |
 | item_id      | string/number | true     | Product ID                                                                                 |
 | shop_secret  | string        | true     | Shop secret                                                                                |
 | shop_id      | string        | true     | Shop ID                                                                                    |
@@ -474,7 +468,7 @@ Returns boolean status of subscription.
 
 
 <aside class="notice">
-If no *email*, *phone*, or *loyalty_id* is specified, only the user's current device will be checked. It won't take into account subscriptions performed on the user's other devices.
+At least one of identifiers (marked by *) must present in request: email, phone, etc. It's used to identify user.
 </aside>
 
 <aside class="warning">
