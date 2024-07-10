@@ -172,11 +172,11 @@ Syntax                                                                    |
 | with_locations  | boolean       | optionally             | Locations where product is available. Returned only if parameter extended is in request and is true.                                                                                                      |
 
 ### API response
-| Name     | Type   | Description                                                                                                                      |
-|:---------|:-------|:---------------------------------------------------------------------------------------------------------------------------------|
-| html     | string | HTML-code of the block with products. The template is customized in the <%= config[:service_name] %> personal account.           |
-| title    | string | The block title. Corresponds to the value of the "Action" element in the block rules.                                            |
-| products | array  | Array with product IDs.                                                                                                          |
-| id       | number | Unique block identifier. Corresponds to the block ID in the list of blocks in the <%= config[:service_name] %> personal account. |
+| Name       | Type   | Description                                                                                                                      |
+|:-----------|:-------|:---------------------------------------------------------------------------------------------------------------------------------|
+| html       | string | HTML-code of the block with products. The template is customized in the <%= config[:service_name] %> personal account.           |
+| title      | string | The block title. Corresponds to the value of the "Action" element in the block rules.                                            |
+| recommends | array  | Array with product IDs.                                                                                                          |
+| id         | number | Unique block identifier. Corresponds to the block ID in the list of blocks in the <%= config[:service_name] %> personal account. |
 
 
