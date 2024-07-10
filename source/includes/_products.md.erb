@@ -403,25 +403,20 @@ Returns boolean status of subscription.
 
 ### Query Parameters
 
-| Parameter | Type     | Required | Description                                                                                |
-|-----------|----------|----------|--------------------------------------------------------------------------------------------|
-| params    | Object   | true     |  Object with request parameters.                                                           |
-| success   | Function | true     | Callback-function, where the API response will be passed to. Response type: object.        |
-|  error    | Function | false    | Callback-function to be called when an error occurs (any HTTP status code other than 200). |
-
-### Request parameters
-
-| Parameter    | Type          | Required | Description                           |
-|--------------|---------------|----------|---------------------------------------|
-| item_id      | string/number | true     | Product ID                            |
-| shop_secret  | string        | true     | Shop secret                           |
-| shop_id      | string        | true     | Shop ID                               |
-| did*         | string        | false    | Device ID                             |
-| external_id* | string        | false    | External ID                           |
-| email*       | string 	     | false    | Email for subscription checking       |
-| phone*       | string 	     | false    | Phone for subscription checking       |
-| loyalty_id*  | string 	     | false    | Loyalty ID for subscription checking  |
-| telegram_id* | string 	     | false    | Telegram ID for subscription checking |
+| Parameter    | Type          | Required | Description                                                                                |
+|--------------|---------------|----------|--------------------------------------------------------------------------------------------|
+| params       | Object        | true     |  Object with request parameters.                                                           |
+| success      | Function      | true     | Callback-function, where the API response will be passed to. Response type: object.        |
+|  error       | Function      | false    | Callback-function to be called when an error occurs (any HTTP status code other than 200). |
+| item_id      | string/number | true     | Product ID                                                                                 |
+| shop_secret  | string        | true     | Shop secret                                                                                |
+| shop_id      | string        | true     | Shop ID                                                                                    |
+| did*         | string        | false    | Device ID                                                                                  |
+| external_id* | string        | false    | External ID                                                                                |
+| email*       | string 	     | false    | Email for subscription checking                                                            |
+| phone*       | string 	     | false    | Phone for subscription checking                                                            |
+| loyalty_id*  | string 	     | false    | Loyalty ID for subscription checking                                                       |
+| telegram_id* | string 	     | false    | Telegram ID for subscription checking                                                      |
 
 <aside class="notice">
 If no *email*, *phone*, or *loyalty_id* is specified, only the user's current device will be checked. It won't take into account subscriptions performed on the user's other devices.
@@ -462,25 +457,20 @@ Returns boolean status of subscription.
 
 ### Query Parameters
 
-| Parameter | Type     | Required | Description                                                                                |
-|-----------|----------|----------|--------------------------------------------------------------------------------------------|
-| params    | Object   | true     | Object with request parameters.                                                            |
-| success   | Function | true     | Callback-function, where the API response will be passed to. Response type: object.        |
-|  error    | Function | false    | Callback-function to be called when an error occurs (any HTTP status code other than 200). |
-
-### Request parameters
-
-| Parameter    | Type          | Required | Description                           |
-|--------------|---------------|----------|---------------------------------------|
-| item_id      | string/number | true     | Product ID                            |
-| shop_secret  | string        | true     | Shop secret                           |
-| shop_id      | string        | true     | Shop ID                               |
-| did*         | string        | false    | Device ID                             |
-| external_id* | string        | false    | External ID                           |
-| email*       | string 	     | false    | Email for subscription checking       |
-| phone*       | string 	     | false    | Phone for subscription checking       |
-| loyalty_id*  | string 	     | false    | Loyalty ID for subscription checking  |
-| telegram_id* | string 	     | false    | Telegram ID for subscription checking |
+| Parameter    | Type          | Required | Description                                                                                |
+|--------------|---------------|----------|--------------------------------------------------------------------------------------------|
+| params       | Object        | true     | Object with request parameters.                                                            |
+| success      | Function      | true     | Callback-function, where the API response will be passed to. Response type: object.        |
+|  error       | Function      | false    | Callback-function to be called when an error occurs (any HTTP status code other than 200). |
+| item_id      | string/number | true     | Product ID                                                                                 |
+| shop_secret  | string        | true     | Shop secret                                                                                |
+| shop_id      | string        | true     | Shop ID                                                                                    |
+| did*         | string        | false    | Device ID                                                                                  |
+| external_id* | string        | false    | External ID                                                                                |
+| email*       | string 	     | false    | Email for subscription checking                                                            |
+| phone*       | string 	     | false    | Phone for subscription checking                                                            |
+| loyalty_id*  | string 	     | false    | Loyalty ID for subscription checking                                                       |
+| telegram_id* | string 	     | false    | Telegram ID for subscription checking                                                      |
 
 
 <aside class="notice">
@@ -666,20 +656,23 @@ curl --location --request DELETE 'https://<%= config[:api_endpoint] %>/products/
 
 ### Query Parameters
 
-| Parameter    | Required | Description                                                                                                                          |
-|--------------|----------|--------------------------------------------------------------------------------------------------------------------------------------|
-| shop_id      | true     | Your API key                            |
-| shop_secret  | true     | Your API secret key                     |
-| email*       | true     | User's email                            |
-| phone*       | true     | User's phone number                     |
-| loyalty_id*  | true     | User's loyalty_id                       |
-| external_id* | true     | User's external_id                      |
-| telegram_id* | true     | User's telegram_id                      |
+| Parameter    | Required  | Description                                                                                                                          |
+|--------------|-----------|--------------------------------------------------------------------------------------------------------------------------------------|
+| shop_id      | true      | Your API key                            |
+| shop_secret  | true      | Your API secret key                     |
+| email*       | false     | User's email                            |
+| phone*       | false     | User's phone number                     |
+| loyalty_id*  | false     | User's loyalty_id                       |
+| external_id* | false     | User's external_id                      |
+| telegram_id* | false     | User's telegram_id                      |
 
 <aside class="notice">
 At least one of identifiers (marked by *) must present in request: email, phone, etc. It's used to identify user.
 </aside>
 
+<aside class="warning">
+ Parameters marked by * are optional. But at least one of them must be present in your request. It's used to identify user.
+</aside>
 
 ### API response
 
