@@ -19,12 +19,31 @@ sdk.suggest(query: "ipho") { searchResult in
 ```
 ```java
 //Instant search
+SearchParams params = new SearchParams();
+params.put(SearchParams.Parameter.LOCATIONS, "location");
+<%= config[:android_sdk_package_name]%>.search("SEARCH_QUERY", SearchParams.TYPE.INSTANT, params, new Api.OnApiCallbackListener() {
+    @Override
+    public void onSuccess(JSONObject response) {
+        Log.i(TAG, "Search response: " + response.toString());
+    }
+});
+//Search blank request
+<%= config[:android_sdk_package_name]%>.search_blank(new Api.OnApiCallbackListener() {
+    @Override
+    public void onSuccess(JSONObject response) {
+        Log.i(T.TAG, "Search response: " + response.toString());
+    }
+});
+```
+```kotlin
+//Instant search
 sdk.searchManager.searchInstant("SEARCH_QUERY", "locations", { searchInstantResponse ->
     Log.i(TAG, "Search instant response: $searchInstantResponse")
-
+})
 //Search blank request
 sdk.searchManager.searchBlank({ searchBlankResponse ->
     Log.i(TAG, "Search blank response: $searchBlankResponse")
+})
 ```
 ```jsx
 const type = 'instant_search';
@@ -137,23 +156,20 @@ sdk.search(query: "laptop", limit: nil, offset: nil, categoryLimit: nil, categor
 }
 ```
 ```kotlin
-   //Full search
-   val params = SearchParams()
-       params.put(SearchParams.Parameter.LOCATIONS, "location")
-       //Additional filters
-       val filters = SearchParams.SearchFilters()
-       filters.put("voltage", arrayOf("11.1", "14.8"))
-       params.put(SearchParams.Parameter.FILTERS, filters)
-       params.put(SearchParams.Parameter.NO_CLARIFICATION, true)
+//Full search
+val params = SearchParams()
+params.put(SearchParams.Parameter.LOCATIONS, "location")
 
-        // Support for FASHION_SIZES filter
-        filters.put("fashion_sizes", arrayOf("S", "M", "L"))
-        params.put(SearchParams.Parameter.FASHION_SIZES, filters)
+//Additional filters
+val filters = SearchParams.SearchFilters()
+filters.put("voltage", arrayOf("11.1", "14.8"))
+params.put(SearchParams.Parameter.FILTERS, filters)
+//Disable clarification search
+params.put(SearchParams.Parameter.NO_CLARIFICATION, true)
 
-        //Disable clarification search
-        sdk.searchManager.searchFull("SEARCH_QUERY", params, { searchInstantResponse ->
-              Log.i(TAG, "Search full response: $searchInstantResponse")
-         })
+// Support for FASHION_SIZES filter
+filters.put("fashion_sizes", arrayOf("S", "M", "L"))
+params.put(SearchParams.Parameter.FASHION_SIZES, filters)
 ```
 
 ```java
