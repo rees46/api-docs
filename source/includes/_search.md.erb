@@ -27,7 +27,6 @@ params.put(SearchParams.Parameter.LOCATIONS, "location");
         Log.i(TAG, "Search response: " + response.toString());
     }
 });
-
 //Search blank request
 <%= config[:android_sdk_package_name]%>.search_blank(new Api.OnApiCallbackListener() {
     @Override
@@ -35,6 +34,16 @@ params.put(SearchParams.Parameter.LOCATIONS, "location");
         Log.i(T.TAG, "Search response: " + response.toString());
     }
 });
+```
+```kotlin
+//Instant search
+sdk.searchManager.searchInstant("SEARCH_QUERY", "locations", { searchInstantResponse ->
+    Log.i(TAG, "Search instant response: $searchInstantResponse")
+})
+//Search blank request
+sdk.searchManager.searchBlank({ searchBlankResponse ->
+    Log.i(TAG, "Search blank response: $searchBlankResponse")
+})
 ```
 ```jsx
 const type = 'instant_search';
@@ -147,27 +156,25 @@ sdk.search(query: "laptop", limit: nil, offset: nil, categoryLimit: nil, categor
 }
 ```
 ```kotlin
-   //Full search
-        val params = SearchParams()
-        params.put(SearchParams.Parameter.LOCATIONS, "location")
+// Search with locations
+val params = SearchParams()
+params.put(SearchParams.Parameter.LOCATIONS, "location")
 
-        //Additional filters
-        val filters = SearchFilters()
-        filters.put("voltage", arrayOf("11.1", "14.8"))
-        params.put(SearchParams.Parameter.FILTERS, filters)
+//Additional filters
+val filters = SearchParams.SearchFilters()
+filters.put("voltage", arrayOf("11.1", "14.8"))
+params.put(SearchParams.Parameter.FILTERS, filters)
+//Disable clarification search
+params.put(SearchParams.Parameter.NO_CLARIFICATION, true)
 
-        // Support for FASHION_SIZES filter
-        filters.put("fashion_sizes", arrayOf("S", "M", "L"))
-        params.put(SearchParams.Parameter.FASHION_SIZES, filters)
+// Support for FASHION_SIZES filter
+filters.put("fashion_sizes", arrayOf("S", "M", "L"))
+params.put(SearchParams.Parameter.FASHION_SIZES, filters)
 
-        //Disable clarification search
-        params.put(SearchParams.Parameter.NO_CLARIFICATION, true)
-
-        sdk.search("SEARCH_QUERY", SearchParams.TYPE.FULL, params, object : OnApiCallbackListener() {
-                    override fun onSuccess(response: JSONObject?) {
-                        Log.i(TAG, "Search response: " + response.toString())
-                    }
-                })
+//Full search
+sdk.searchManager.searchFull("SEARCH_QUERY", params, { searchFullResponse ->
+    Log.i(TAG, "Search full response: $searchFullResponse")
+})
 ```
 
 ```java

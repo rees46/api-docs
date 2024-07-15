@@ -80,17 +80,19 @@ sdk.configuration().recommendations.setWidgetBlock(widgetFontName: "Museo",
 ```
 
 ```kotlin
-   val params = Params().apply {
-            put(Params.Parameter.EXTENDED, true)
-            put(Params.Parameter.ITEM, "37")
-            put(Params.Parameter.CATEGORY, "111") // category filtration
-        }
-
-        sdk.recommend("RECOMMENDER_CODE", params, object : OnApiCallbackListener() {
-            override fun onSuccess(response: JSONObject?) {
-                Log.i(TAG, "Ответ рекомендации: " + response.toString())
-            }
-        })
+val params = Params().apply {
+    put(Params.Parameter.ITEM, "37")
+    // category filtration
+    put(Params.Parameter.CATEGORY, "111")
+}
+// get recommendation with product ids
+sdk.recommendationManager.getRecommendation("RECOMMENDER_CODE", params, { getRecommendationResponse ->
+	  Log.i(TAG, "Get recommandation response: $getRecommendationResponse")
+})
+// get recommendation with products info
+sdk.recommendationManager.getExtendedRecommendation("RECOMMENDER_CODE", params, { getExtendedRecommendationResponse ->
+    Log.i(TAG, "Get extended recommandation response: $getExtendedRecommendationResponse")
+ })
 ```
 ```java
 Params params = new Params();
