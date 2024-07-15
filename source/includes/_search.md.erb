@@ -156,9 +156,7 @@ sdk.search(query: "laptop", limit: nil, offset: nil, categoryLimit: nil, categor
 }
 ```
 ```kotlin
-//Full search
-sdk.searchManager.searchFull("SEARCH_QUERY", params, { searchFullResponse -> Log.i(TAG, "Search full response: $searchFullResponse") })
-
+// Search with locations
 val params = SearchParams()
 params.put(SearchParams.Parameter.LOCATIONS, "location")
 
@@ -172,6 +170,11 @@ params.put(SearchParams.Parameter.NO_CLARIFICATION, true)
 // Support for FASHION_SIZES filter
 filters.put("fashion_sizes", arrayOf("S", "M", "L"))
 params.put(SearchParams.Parameter.FASHION_SIZES, filters)
+
+//Full search
+sdk.searchManager.searchFull("SEARCH_QUERY", params, { searchFullResponse ->
+    Log.i(TAG, "Search full response: $searchFullResponse")
+})
 ```
 
 ```java
