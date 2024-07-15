@@ -84,7 +84,7 @@ val params = Params().apply {
     put(Params.Parameter.ITEM, "37")
     // category filtration
     put(Params.Parameter.CATEGORY, "111")
-    }
+}
 // get recommendation with product ids
 sdk.recommendationManager.getRecommendation("RECOMMENDER_CODE", params, { getRecommendationResponse ->
 	  Log.i(TAG, "Get recommandation response: $getRecommendationResponse")
