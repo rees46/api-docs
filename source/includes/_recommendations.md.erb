@@ -128,8 +128,9 @@ sdk.recommend(recommender_code, params)
     console.log(error);
   });
 
-// Example of request containing with_locations parameter
-// Locations will be shown in the "location_ids" field, it will contain an array with locations
+// Example of a request containing the with_locations parameter.
+// The parameter extended with the value true must be present in the request. Otherwise, only the location ID will be returned.
+// Locations will be shown in the "location_ids" field, which will contain an array with location IDs.
 sdk.recommend(`recommend/${recommender_code}`, {
             params: {
               shop_id: this.shop_id,
