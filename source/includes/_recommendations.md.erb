@@ -129,7 +129,7 @@ sdk.recommend(recommender_code, params)
   });
 
 // Example of a request containing the with_locations parameter.
-// The parameter extended with the value true must be present in the request. Otherwise, only the location ID will be returned.
+// The parameter extended with the value true must be present in the request. Otherwise, only product IDs will be returned and with_locations parameter will be ignored.
 // Locations will be shown in the "location_ids" field, which will contain an array with location IDs.
 sdk.recommend(`recommend/${recommender_code}`, {
             params: {
