@@ -94,6 +94,7 @@ sdk.recommendationManager.getExtendedRecommendation("RECOMMENDER_CODE", params, 
     Log.i(TAG, "Get extended recommandation response: $getExtendedRecommendationResponse")
  })
 ```
+
 ```java
 Params params = new Params();
 params.put(Params.Parameter.EXTENDED, true);
@@ -132,16 +133,15 @@ sdk.recommend(recommender_code, params)
 // The parameter extended with the value true must be present in the request. Otherwise, only product IDs will be returned and with_locations parameter will be ignored.
 // Locations will be shown in the "location_ids" field, which will contain an array with location IDs.
 sdk.recommend(`recommend/${recommender_code}`, {
-            params: {
-              shop_id: this.shop_id,
-              stream: this.stream,
-              recommender_code,
-              extended:true,
-              with_locations:true,
-            },
+  params: {
+   shop_id: this.shop_id,
+   stream: this.stream,
+   recommender_code,
+   extended:true,
+   with_locations:true,
+   },
 })
 ```
-
 
 ### HTTP Request
 
@@ -167,10 +167,12 @@ Syntax                                                                    |
 |---------|----------|------------------------|----------------------------------------------------------------------------------------------------------------------------------|
 | code    | string   | required               | Unique code of the recommendation block. See this value in the "data-recommender-code" attribute of the block created in account |
 | params  | object   | required               | Object with request parameters                                                                                                   |
-| success | function | required in some cases | A callback function, to which the API response will be passed. Response type: **object**.                                        |
+| success | function | required in some cases | A callback function, to which the API response will be passed. Response type: **
+object**.                                        |
 | error   | function | optionally             | A callback function that will be called when an error occurs (any HTTP status code other than 200)                               |
 
 ### Request parameters
+
 | Name            | Type          | Requirement            | Description                                                                                                                                                                                               |
 |-----------------|---------------|------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | item            | number/string | required in some cases | Product ID. This parameter is mandatory for the requests of blocks that use the algorithms "Similar" and "Also bought".                                                                                   |
@@ -189,6 +191,7 @@ Syntax                                                                    |
 | with_locations  | boolean       | optionally             | Locations where product is available. Returned only if parameter extended is in request and is true.                                                                                                      |
 
 ### API response
+
 | Name       | Type   | Description                                                                                                                      |
 |:-----------|:-------|:---------------------------------------------------------------------------------------------------------------------------------|
 | html       | string | HTML-code of the block with products. The template is customized in the <%= config[:service_name] %> personal account.           |
