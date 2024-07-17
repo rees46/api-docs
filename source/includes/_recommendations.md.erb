@@ -115,6 +115,8 @@ const params = {
   item: 100500,
   exclude: [3, 14, 159, 26535],
   search_query: "To be or not to be"
+  extended:true
+  with_locations:true
  // other params
 };
 
@@ -125,6 +127,18 @@ sdk.recommend(recommender_code, params)
   .catch((error) => {
     console.log(error);
   });
+
+// Example of request containing with_locations parameter
+// Locations will be shown in the "location_ids" field, it will contain an array with locations
+sdk.recommend(`recommend/${recommender_code}`, {
+            params: {
+              shop_id: this.shop_id,
+              stream: this.stream,
+              recommender_code,
+              extended:true,
+              with_locations:true,
+            },
+})
 ```
 
 
