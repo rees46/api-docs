@@ -106,7 +106,10 @@ yarn add @react-native-firebase/messaging
 // On application launch initialize the SDK:
 import <%= config[:rn_sdk_package_name] %> from '<%= config[:rn_sdk_package_code] %>/react-native-sdk';
 ...
-const sdk = new <%= config[:rn_sdk_package_name] %>("YOUR_SHOP_ID", "Stream");
+// The parameter autoSendPushToken is responsible for automatically sending the push notification token upon initialization.
+// Its default value is true, meaning the token will be sent automatically.
+// Set it to false if you want to manage token sending manually.
+const sdk = new <%= config[:rn_sdk_package_name] %>("YOUR_SHOP_ID", "stream", "debug", autoSendPushToken);
 
 // Initialization is async, so you have a method to test, if SDK is initialized or not:
 sdk.isInit(); // returns true/false
