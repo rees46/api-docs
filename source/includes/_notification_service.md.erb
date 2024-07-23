@@ -1,44 +1,67 @@
  ## Handling Mobile Push Notifications
 
  ```swift
-     #  The first step is to make sure that `autoSendPushToken = true` during SDK initialization
-     #  it's a default value.
-     # `NotificationService`  object is initializing with `SimplePersonalizationSDK`
-     # `NotificationService` will check `autoSendPushToken ` value. If true - the last sending date check.
-     #  Check results: nil - token will be sent to the server and the date will be saved.
-     #  More than a week - the token will be sent and the token sending date will be renewed.
-     #  Less than a week - token won`t be sent.
-     #  If `autoSendPushToken` value is false NotificationService won`t send the token to the server
+#  The first step is to make sure that `autoSendPushToken = true` during SDK initialization
+#  it's a default value.
+# `NotificationService`  object is initializing with `SimplePersonalizationSDK`
+#  This is done in the didFinishLaunchingWithOptions method of the AppDelegate class
+# `NotificationService checks the value of autoSendPushToken.
+# `If autoSendPushToken = true, it checks the date of the last token sent.
+#  If the last sent date is missing (nil), the token will be sent to the server and the date will be saved.
+#  If more than a week has passed since the last send, the token will be sent and the date will be updated.
+#  If less than a week has passed, the token will not be sent.
+#  If `autoSendPushToken` value is false NotificationService won`t send the token to the server
 
-     @UIApplicationMain
+@UIApplicationMain
 
-     class AppDelegate: UIResponder, UIApplicationDelegate {
-         var window: UIWindow?
+class AppDelegate: UIResponder, UIApplicationDelegate {
+  var window: UIWindow?
+  var sdk: PersonalizationSDK!
+  var notificationService: NotificationServiceProtocol?
 
-         var sdk: PersonalizationSDK!
-         var notificationService: NotificationServiceProtocol?
+  func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+    sdk = createPersonalizationSDK(
+      shopId: "SHOP_ID",
+      stream: "ios",
+      enableLogs: true
+      ) { error in
+         // Custom completionHandler
+        }
 
-         func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-             sdk = createPersonalizationSDK(shopId: "SHOP_ID", enableLogs: true, { error in
-             # Custom completionHandler
-             })
+      notificationService = NotificationService(sdk: sdk)
+      return true
+      }
+  }
 
-             # Create instance of NotificationService with pre-created sdk
-             notificationService = NotificationService(sdk: sdk)
-                 }
-             }
+# During initialization `NotificationService ` will ask permission from the user to send notifications
+# The initializeNotificationRegistrar method requests permissions and registers the device for remote notifications.
 
-     # During initialization `NotificationService ` will ask permission from the user to send notifications
-     # - UIApplication.shared.registerForRemoteNotifications()
-     # The client will have to sign protocols - UNUserNotificationCenterDelegate and implement
-     # the application(didRegisterForRemoteNotificationsWithDeviceToken) method
-     # and call notificationService.didRegisterForRemoteNotificationsWithDeviceToken(deviceToken: Data)
+private func initializeNotificationRegistrar() {
+  if autoSendPushToken {
+    UNUserNotificationCenter.current().requestAuthorization(options: [.alert, .sound, .badge]) { [weak self] granted, error in
+      guard let self = self else { return }
 
-     extension AppDelegate: UNUserNotificationCenterDelegate {
-         func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-         # Additional custom code
-     notificationService?.didRegisterForRemoteNotificationsWithDeviceToken(deviceToken: deviceToken)
-     }
+    if granted {
+       DispatchQueue.main.async {
+        UIApplication.shared.registerForRemoteNotifications()
+        }
+
+    if let deviceToken = UserDefaults.standard.data(forKey: Constants.deviceToken) {
+      let notificationRegistrar = NotificationRegistrar(sdk: self)
+        notificationRegistrar.registerWithDeviceToken(deviceToken: deviceToken)
+          }
+
+    } else if let error = error {
+}
+
+# The handleAutoSendPushToken method checks for the presence of a token and initiates its sending.
+
+private func handleAutoSendPushToken() {
+  if let deviceToken = UserDefaults.standard.data(forKey: Constants.deviceToken) {
+    let notificationRegistrar = NotificationRegistrar(sdk: self)
+    notificationRegistrar.registerWithDeviceToken(deviceToken: deviceToken)
+  }
+}
 ```
 
 
