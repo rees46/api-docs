@@ -1,16 +1,16 @@
  ## Handling Mobile Push Notifications
 
  ```swift
-#  The first step is to make sure that `autoSendPushToken = true` during SDK initialization
+#  The first step is to make sure that autoSendPushToken = true during SDK initialization
 #  it's a default value.
-# `NotificationService`  object is initializing with `SimplePersonalizationSDK`
+#  NotificationService  object is initializing with SimplePersonalizationSDK
 #  This is done in the didFinishLaunchingWithOptions method of the AppDelegate class
-# `NotificationService checks the value of autoSendPushToken.
-# `If autoSendPushToken = true, it checks the date of the last token sent.
+#  NotificationService checks the value of autoSendPushToken.
+#  If autoSendPushToken = true, it checks the date of the last token sent.
 #  If the last sent date is missing (nil), the token will be sent to the server and the date will be saved.
 #  If more than a week has passed since the last send, the token will be sent and the date will be updated.
 #  If less than a week has passed, the token will not be sent.
-#  If `autoSendPushToken` value is false NotificationService won`t send the token to the server
+#  If autoSendPushToken value is false NotificationService won`t send the token to the server
 
 @UIApplicationMain
 
@@ -33,7 +33,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
       }
   }
 
-# During initialization `NotificationService ` will ask permission from the user to send notifications
+# During initialization NotificationService  will ask permission from the user to send notifications
 # The initializeNotificationRegistrar method requests permissions and registers the device for remote notifications.
 
 private func initializeNotificationRegistrar() {
