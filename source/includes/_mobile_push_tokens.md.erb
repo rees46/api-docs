@@ -13,11 +13,14 @@ sdk.setPushTokenNotification(token: "TOKEN_STRING") { (tokenResponse) in
 ```
 
 ```kotlin
-sdk.setPushTokenNotification("token", object : OnApiCallbackListener() {
-            override fun onSuccess(msg: JSONObject?) {
-                //
-            }
-        })
+sdk.registerManager.setPushTokenNotification(
+    token = "token",
+    listener = object : OnApiCallbackListener() {
+        override fun onSuccess(msg: JSONObject?) {
+            //
+        }
+    }
+)
 ```
 
 ```java
@@ -49,10 +52,10 @@ This endpoint creates new token for the user, identified by `did` parameter.
 
 ### Query Parameters
 
-| Parameter   | Required   | Description                                                   |
-|-------------|------------|---------------------------------------------------------------|
-| did         | true       | Device ID. You get it from `init` method in SDK.              |
-| platform    | true       | Identifies platform: `ios` for APNs or `android` for Firebase |
-| token       | true       | Unique mobile push token from iOS or Android.                 |
-| shop_id     | true       | Your API key                                                  |
+| Parameter | Required | Description                                                   |
+|-----------|----------|---------------------------------------------------------------|
+| did       | true     | Device ID. You get it from `init` method in SDK.              |
+| platform  | true     | Identifies platform: `ios` for APNs or `android` for Firebase |
+| token     | true     | Unique mobile push token from iOS or Android.                 |
+| shop_id   | true     | Your API key                                                  |
 
