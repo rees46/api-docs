@@ -983,6 +983,26 @@ curl 'https://<%= config[:api_endpoint] %>/track/delivered' \
 -H 'Content-Type: application/json' \
 --data-raw '{"shop_id":"SHOP_ID", "code":"CODE", "type":"TYPE"}'
 ```
+Message delivered to user's device event tracking
+
+```jsx
+sdk.notificationDelivered(options) {
+  return this.notificationTrack('delivered', options);
+}
+```
+
+```swift
+  no implementation yet
+```
+
+```kotlin
+  no implementation yet
+```
+
+```java
+  no implementation yet
+```
+
 Endpoint: `POST https://<%= config[:api_endpoint] %>/track/delivered`
 
 ### Required params
@@ -1184,4 +1204,5 @@ track(event, story_id, slide_id) {
 		})
 	}
 ```
+
 
