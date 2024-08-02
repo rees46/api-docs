@@ -955,11 +955,13 @@ const params = {
   type: 'TYPE'
 };
 
-// Track when the notification is received and displayed
-sdk.notificationReceived(params);
+// Track when the notification is received
+sdk.notificationOpened(params) {
+  // return this.notificationTrack(event,params)
+};
 ```
 
-When user clicks on mobile push notification in mobile app, you have to send event to API with `code` and `type` parameters.
+When the push had been delivered and shown to the user, the parameters that have to be sent to the API are code and type
 
 This method uses separate endpoint:
 
@@ -983,11 +985,12 @@ curl 'https://<%= config[:api_endpoint] %>/track/delivered' \
 -H 'Content-Type: application/json' \
 --data-raw '{"shop_id":"SHOP_ID", "code":"CODE", "type":"TYPE"}'
 ```
-Message delivered to user's device event tracking
+Message delivered to user's device event tracking. Event - push had been delivered, but had not been shown to the user yet
 
 ```jsx
-sdk.notificationDelivered(options) {
-  return this.notificationTrack('delivered', options);
+// Event - push had been delivered, but had not been shown to the user yet.
+sdk.notificationDelivered(params) {
+  // return this.notificationTrack(event,params)
 }
 ```
 
