@@ -2,6 +2,97 @@
 
 Service provides endpoints for loyalty program management.
 
+## Join loyalty program
+
+> Headers
+
+```
+Content-type: application/json
+```
+
+> Body example
+
+```json
+{
+    "shop_id": "...",
+    "shop_secret": "...",
+    "phone": "...",
+    "email": "...",
+    "first_name": "...",
+    "last_name": "...",
+    "gender": "...",
+    "birthday": "..."
+}
+```
+
+> Request example
+
+```shell
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data-binary "@data.json" \
+  https://<%= config[:api_endpoint] %>/loyalty/members/join
+```
+
+```javascript
+// S2S only
+```
+
+```swift
+// S2S only
+```
+
+```java
+// S2S only
+```
+
+```kotlin
+// S2S only
+```
+
+```jsx
+// S2S only
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "success": true,
+  "data": {
+    "message": "Member is registered successfully",
+    "identifier": "..."
+  }
+}
+```
+
+### HTTP Request
+
+`POST https://<%= config[:api_endpoint] %>/loyalty/members/join`
+
+Method to register a user as a member of loyalty program. Server-to-server integration method only.
+
+### Query Parameters
+
+| Parameter   | Required | Description                              |
+|-------------|----------|------------------------------------------|
+| shop_id     | true     | Your API key                             |
+| shop_secret | true     | Your API secret key                      |
+| email*      | true     | User's email                             |
+| phone*      | true     | User's phone number                      |
+| first_name  | optional | Customer's first name                    |
+| last_name   | optional | Customer's last name                     |
+| gender      | optional | Customer's gender: `m` or `f`            |
+| birthday    | optional | Customer's birthday (format: `YYYY-MM-DD` |
+
+<aside class="notice">
+At least one of identifiers (marked by *) must present in request: email, phone.
+You must use only identifier type selected as identifier in loyalty program settings.
+</aside>
+
+
+
+
 
 ## Get balance
 > Request example
@@ -41,7 +132,7 @@ Method return current bonuses balance.
 | order_total | optional | Order total                          |
 
 <aside class="notice">
-At least of identifiers (marked by *) must present in request: email, phone. It's used to identify user.
+At least one of identifiers (marked by *) must present in request: email, phone. It's used to identify user.
 </aside>
 
 
@@ -89,7 +180,7 @@ Method return SMS code.
 | bonus_points  | true     | Bonuses, which client wants to validate  |
 
 <aside class="notice">
-At least of identifiers (marked by *) must present in request: email, phone. It's used to identify user.
+At least one of identifiers (marked by *) must present in request: email, phone. It's used to identify user.
 </aside>
 
 
@@ -136,7 +227,7 @@ Method validate SMS code.
 | sms_code     | true     | SMS code                                |
 
 <aside class="notice">
-At least of identifiers (marked by *) must present in request: email, phone. It's used to identify user.
+At least one of identifiers (marked by *) must present in request: email, phone. It's used to identify user.
 </aside>
 
 
@@ -182,7 +273,7 @@ Method decrease bonuses.
 | sms_code     | true     | SMS code                                |
 
 <aside class="notice">
-At least of identifiers (marked by *) must present in request: email, phone. It's used to identify user.
+At least one of identifiers (marked by *) must present in request: email, phone. It's used to identify user.
 </aside>
 
 
@@ -227,7 +318,7 @@ Method decrease bonuses without SMS code.
 | bonus_points | true     | Bonuses, which client wants to validate |
 
 <aside class="notice">
-At least of identifiers (marked by *) must present in request: email, phone. It's used to identify user.
+At least one of identifiers (marked by *) must present in request: email, phone. It's used to identify user.
 </aside>
 
 
@@ -273,7 +364,7 @@ Method increase bonuses. This method is used to increase user bonuses that aren'
 | amount       | true     | Bonuses amount                                                                                              |
 
 <aside class="notice">
-At least of identifiers (marked by *) must present in request: email, phone. It's used to identify user.
+At least one of identifiers (marked by *) must present in request: email, phone. It's used to identify user.
 </aside>
 
 ### API response
