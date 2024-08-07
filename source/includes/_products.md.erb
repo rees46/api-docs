@@ -102,6 +102,14 @@ sdk.getProductsList(
 |                    |        | * price – product price (number)                                                                                                                                                                      |
 |                    |        | * price_formatted – product price with currency (string)                                                                                                                                              |
 |                    |        | * url – product URL (string)                                                                                                                                                                          |
+|                    |        | * description – product description (string)                                                                                                                                                          |
+|                    |        | * category_ids – id of categories that product belongs to(string)                                                                                                                                     |
+|                    |        | * sales_rate – sales rate (integer)                                                                                                                                                                   |
+|                    |        | * relative_sales_rate –  (integer)                                                                                                                                                                    |
+|                    |        | * price_full_formatted – product price (string)                                                                                                                                                       |
+|                    |        | * image_url_handle –  (string)                                                                                                                                                                        |
+|                    |        | * image_url_resized – object with keys represent the size pf image, values are paths to image                                                                                                         |
+|                    |        | * _id – internal id (string)                                                                                                                                                                          |
 |                    |        |                                                                                                                                                                                                       |
 |                    |        | Additional properties. If a parameter "extended" is passed in the request                                                                                                                             |
 |                    |        | * barcode – product barcode (string)                                                                                                                                                                  |
@@ -113,6 +121,9 @@ sdk.getProductsList(
 |                    |        | * key – param name (string)                                                                                                                                                                           |
 |                    |        | * values – array of values (array)                                                                                                                                                                    |
 | products_total     | number | Total count of products                                                                                                                                                                               |
+| price_range        | object | keys are representing minimum and maximum values                                                                                                                                                      |
+| price_ranges       | object | keys are representing 'to' and 'count'                                                                                                                                                                |
+| price_median       | number | median price                                                                                                                                                               |
 
 
 ## Get product info
