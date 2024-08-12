@@ -376,3 +376,88 @@ curl https://<%= config[:api_endpoint] %>/search/no_result_queries?shop_id=...&s
 |-----------|---------|---------------------------------------|
 | query     | String  | Search query value                    |
 |  quantity | Integer | Number of query usages during 2 weeks |
+
+## Search localization settings
+
+```JSON
+// API response example
+{
+"did": "did",
+"seance": "seance",
+"currency": "₽",
+"email_collector": true,
+"has_email": false,
+"recommendations": true,
+"lazy_load": true,
+"auto_css_recommender": false,
+"cms": "owndev",
+"snippets": [],
+"search": {
+"enabled": true,
+"landing": "https:/<%= config[:api_endpoint] %>/search",
+"type": "full",
+"settings": {
+"redirects": {
+"test": "https://<%= config[:api_endpoint] %>/test",
+"мужская обувь": "https://<%= config[:api_endpoint] %>categories/mens-shoes",
+"asus zenfone 3": "https:///<%= config[:api_endpoint] %>.com/products/17517?recommended_by=dynamic&recommended_code=2dbebc39bee259b118bcc0ac3fa74a42",
+"shoes": "https:///<%= config[:api_endpoint] %>",
+"пустой запрос": "https://d/<%= config[:api_endpoint] %>"
+},
+"suggestions_title": "Suggestions",
+"categories_title": "Categories",
+"brands_title": "Brands",
+"filters_title": "Filters",
+"items_title": "Interesting offers for you",
+"show_all_title": "Show all possible matches (%count%): %query%",
+"last_queries_title": "Recent search",
+"last_products_title": "Recently viewed products",
+"empty_title": "Nothing found",
+"book_author_title": "Authors",
+"enable_full_search": true,
+"append_to_body": true,
+"enable_last_queries": false,
+"enable_old_price": false,
+"popular_links_title": "Popular search queries",
+"popular_categories_title": "Popular categories",
+"popular_brands_title": "Popular brands",
+"price_filter_name": "Фильтр по цене",
+"price_filter_from": "Минимум",
+"price_filter_to": "Максимум",
+"sort_by_name": "Сортировка",
+"sort_dir_desc": "Вниз",
+"sort_dir_asc": "Вверх",
+"sort_by_popular": "Самые популярные",
+"sort_by_price": "Самые дорогие",
+"sort_by_discount": "По размеру скидки",
+"sort_by_sales_rate": "Самые продаваемые",
+"sort_by_new": "Самые новые"
+}
+},
+"web_push_settings": {
+"public_key": "public key",
+"safari_enabled": false,
+"safari_id": "",
+"service_worker": "/push_sw.js"
+},
+"recone": true
+}
+```
+
+Localization settings are affecting the following fields of the API response:
+
+- price_filter_name
+- price_filter_from
+- price_filter_to
+- sort_by_name
+- sort_dir_desc
+- sort_dir_asc
+- sort_by_popular
+- sort_by_price
+- sort_by_discount
+- sort_by_sales_rate
+- sort_by_new
+
+
+
+
