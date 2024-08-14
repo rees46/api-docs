@@ -105,6 +105,9 @@ apply plugin: 'com.google.gms.google-services'
 ```
 
 ```jsx
+// If you are using version 1.8 or above, you don't need to use permissions like SCHEDULE_EXACT_ALARM or USE_EXACT_ALARM.
+// The notifee dependency introduced in version 1.7.1 also isn't required starting from version 1.8 of the SDK.
+
 // Add required packages:
 yarn add <%= config[:rn_sdk_package_code] %>/react-native-sdk
 yarn add @react-native-async-storage/async-storage
