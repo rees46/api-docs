@@ -38,17 +38,59 @@ curl -d "shop_id=SHOPID&shop_secret=SHOP_SECRET&email=EMAIL&fieldname=FIELDVALUE
 ```
 
 ```swift
-  sdk.setProfileData(userEmail: 'email@example.com',
-    userPhone: '10000000000',
-    userLoyaltyId: 'L010101',
-    birthday: ...,
-    age: ...,
-    firstName: ...,
-    lastName: ...,
-    location: ...,
-    gender: ...) { (profileDataResp) in
-      print("Profile data callback")
-    }
+// The iOS SDK profile can work with any type of array, as well as with objects.
+sdk.setProfileData(
+  userEmail: "YOUR_EMAIL",
+  userPhone: "YOUR_PHONE",
+  userLoyaltyId: "YOUR_LOYALTY_ID",
+  birthday: Date(),
+  age: 30,
+  firstName: "YOUR_NAME",
+  lastName: "YOUR_LAST_NAME",
+  location: "YOUR_LOCATION",
+  gender: .male,
+  fbID: "YOUR_FB_ID",
+  vkID: "YOUR_VK_ID",
+  telegramId: "YOUR_TG_ID",
+  loyaltyCardLocation: "LOYALTY_CARD_LOCATION",
+  loyaltyStatus: "LOYALTY_SATUS",
+  loyaltyBonuses: 100,
+  loyaltyBonusesToNextLevel: 200,
+  boughtSomething: true,
+  userId: "YOUR_USER_ID",
+  customProperties: customProperties
+)
+
+// Examples of arrays
+let stringArray = ["item1", "item2", "item3"]
+let intArray = [1, 2, 3, 4, 5]
+let floatArray: [Float] = [1.1, 2.2, 3.3]
+let boolArray = [true, false, true]
+let dateArray = [Date(),Date(),Date()]
+
+// Object example
+let object: [String: Any] = [
+  "stringKey": "stringValue",
+  "intKey": 123,
+  "floatKey": 45.67,
+  "boolKey": true,
+  "dateKey": Date(),
+  "arrayKey": [1, 2, 3],
+  "nestedObjectKey": [
+  "nestedStringKey": "nestedValue",
+  "nestedIntKey": 456
+  ]
+]
+
+// Custom properties example
+let customProperties: [String: Any] = [
+  "stringArray": stringArray,
+  "intArray": intArray,
+  "floatArray": floatArray,
+  "boolArray": boolArray,
+  "dateArray": dateArray,
+  "customObject": object
+]
 ```
 
 ```kotlin
