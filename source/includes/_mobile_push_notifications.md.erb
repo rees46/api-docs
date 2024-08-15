@@ -93,21 +93,37 @@ sdk.initPush(false, onReceiveCallback, onBackgroundReceiveCallback);
 }
 ```
 
+> Android request example with analytics_label parameter
 
-Parameter | Required | Description
---------- | ------- | -----------
-aps.alert.title | true | The title of the notification. Apple Watch displays this string in the short look notification interface. Specify a string that is quickly understood by the user.
-aps.alert.subtitle | true | Additional information that explains the purpose of the notification.
-aps.alert.body | true | The content of the alert message.
-aps.alert.badge | true | The number to display in a badge on your app’s icon. Specify 0 to remove the current badge, if any.
-aps.mutable-content | true | Always `1` for iOS.
-image_url | false | Link to image/icon.
-event | false | Optional object with additional data.
-event.type | true | Type of the notification: `web`, `category`, `product`, `custom`.
-event.uri | true | Resource identificator depending on the type of event. See examples below.
-src | true | Information about a campaign (source of the message).
-src.type | true | Type of a campaign: `bulk`, `chain`, `transactional`.
-src.id | true | Type of a campaign. String.
+```json
+{
+  "to": "string",
+  "notification": {
+    "title": "Analitics message",
+    "body": "message contains analitytics label",
+    "sound": "default"
+  },
+  "data": {
+    "analytics_label": "example analytics label"
+  }
+}
+```
+
+| Parameter           | Required | Description                                                                                                                                                        |
+|---------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| aps.alert.title     | true     | The title of the notification. Apple Watch displays this string in the short look notification interface. Specify a string that is quickly understood by the user. |
+| aps.alert.subtitle  | true     | Additional information that explains the purpose of the notification.                                                                                              |
+| aps.alert.body      | true     | The content of the alert message.                                                                                                                                  |
+| aps.alert.badge     | true     | The number to display in a badge on your app’s icon. Specify 0 to remove the current badge, if any.                                                                |
+| aps.mutable-content | true     | Always `1` for iOS.                                                                                                                                                |
+| image_url           | false    | Link to image/icon.                                                                                                                                                |
+| event               | false    | Optional object with additional data.                                                                                                                              |
+| event.type          | true     | Type of the notification: `web`, `category`, `product`, `custom`.                                                                                                  |
+| event.uri           | true     | Resource identificator depending on the type of event. See examples below.                                                                                         |
+| src                 | true     | Information about a campaign (source of the message).                                                                                                              |
+| src.type            | true     | Type of a campaign: `bulk`, `chain`, `transactional`.                                                                                                              |
+| src.id              | true     | Type of a campaign. String.                                                                                                                                        |
+| analytics_label     | true     | It's value is equals message                                                                                                                                       |
 
 <aside class="notice">
 If `src` section is present, each tracked event must be populated with this data to track campaign's efficiency.
