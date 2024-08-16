@@ -59,6 +59,8 @@ sdk.getProductsList(
 
 `GET https://<%= config[:api_endpoint] %>/products`
 
+If the request lacks a category, request has no parameters, or contains empty parameters, the response won't include any filters
+
 ### Query Parameters
 
 | Parameter             | Required | Description                                                                                                                          |
