@@ -33,9 +33,6 @@ post_install do |installer|
   end
 end
 
-
-
-
 // Swift package manager (XCode >= 11)
 // 1. Click File menu
 // 2. Swift Packages
@@ -57,7 +54,6 @@ dependencies {
 plugins {
     id 'kotlin-kapt'
 }
-
 
 // 2. Append to your project build.gradle
 buildscript {
@@ -89,7 +85,6 @@ plugins {
 implementation 'com.<%= config[:android_sdk_package_code] %>:<%= config[:android_sdk_package_code] %>-sdk:+'
 implementation 'com.google.firebase:firebase-bom:29.0.3'
 implementation 'com.google.firebase:firebase-messaging:23.0.0'
-
 
 // 2. Append to your project build.gradle
 buildscript {
