@@ -335,5 +335,52 @@ Suitable to open specific product by it's ID. For example for triggered messages
 
 Can be used to open any resource by custom data. For example for transactional messages to show order status.
 
+## Custom push notifications
 
+```shell
+No implementation needed
+```
 
+```javascript
+No implementation needed
+```
+
+```swift
+No implementation needed
+```
+
+```kotlin
+No implementaion needed
+```
+
+```java
+No implementaion needed
+```
+
+```jsx
+No implementaion needed
+```
+
+The `notification` parameter configures push settings for Android-based devices.
+
+We have added the `click_action` field to the `notification`. It is responsible for the event that occurs when the user clicks the push notification.
+
+`'notification' => [
+'click_action' => FIREBASE_CONFIG['FCMV2']['notification_callback_name'] ?? 'PUSH_NOTIFICATION_CLICK'
+]`
+
+The application developer must add intent filter. Example:
+
+`<intent-filter>
+<action android:name="PUSH_NOTIFICATION_CLICK"/>
+<category android:name="android.intent.category.DEFAULT"/>
+</intent-filter>`
+
+Click tracking must be implemented inside the this intent.
+
+Scenario:
+
+1. A push notification is sent, and the `click_action` field is activated. Its value is either `notification_callback_name` from `FIREBASE_CONFIG['FCMV2']` or `PUSH_NOTIFICATION_CLICK`
+2. If the value of the `click_action` field is `PUSH_NOTIFICATION_CLICK`, the system will try to find a component (Activity, Service, or BroadcastReceiver) that can handle the intent
+3. Android will search for an `intent-filter` in the application manifest that matches the action name.
+4. Click tracking should be implemented within the intent handler. Android will send the intent to the component declared in the manifest.
