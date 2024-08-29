@@ -361,26 +361,25 @@ No implementaion needed
 No implementaion needed
 ```
 
-The `notification` parameter configures push settings for Android-based devices.
+A custom notification will work if both of the following criteria are met.
 
-We have added the `click_action` field to the `notification`. It is responsible for the event that occurs when the user clicks the push notification.
+First, the platform checks if `attach_notification` is enabled.
 
-`'notification' => [
-'click_action' => FIREBASE_CONFIG['FCMV2']['notification_callback_name'] ?? 'PUSH_NOTIFICATION_CLICK'
-]`
+The second condition is a custom action on click, which must be set up beforehand.
 
-The application developer must add intent filter. Example:
+Once these two conditions are satisfied, the `notification` array will be sent to FCM.
 
-`<intent-filter>
-<action android:name="PUSH_NOTIFICATION_CLICK"/>
-<category android:name="android.intent.category.DEFAULT"/>
-</intent-filter>`
+The `notification` array includes a special parameter for Android called `click_action`.
 
-Click tracking must be implemented inside the intent.
+An application developer needs to configure `click_action` inside the AndroidManifest.
 
-Scenario:
+To link `click_action` with a specific activity, the developer must use an `intent-filter`. Example:
 
-1. A push notification is sent, and the `click_action` field is activated. Its value is either `notification_callback_name` from `FIREBASE_CONFIG['FCMV2']` or `PUSH_NOTIFICATION_CLICK`
-2. If the value of the `click_action` field is `PUSH_NOTIFICATION_CLICK`, the system will try to find a component (Activity, Service, or BroadcastReceiver) that can handle the intent
-3. Android will search for an `intent-filter` in the application manifest that matches the action name.
-4. Click tracking should be implemented within the intent handler. Android will send the intent to the component declared in the manifest.
+`<activity android:name=".DetailActivity">
+    <intent-filter>
+        <action android:name="com.example.app.ACTION_OPEN_DETAIL" />
+        <category android:name="android.intent.category.DEFAULT" />
+    </intent-filter>
+</activity>
+`
+
