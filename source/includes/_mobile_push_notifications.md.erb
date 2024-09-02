@@ -335,5 +335,51 @@ Suitable to open specific product by it's ID. For example for triggered messages
 
 Can be used to open any resource by custom data. For example for transactional messages to show order status.
 
+## Custom push notifications
 
+```shell
+No implementation needed
+```
+
+```javascript
+No implementation needed
+```
+
+```swift
+No implementation needed
+```
+
+```kotlin
+No implementaion needed
+```
+
+```java
+No implementaion needed
+```
+
+```jsx
+No implementaion needed
+```
+
+A custom notification will work if both of the following criteria are met.
+
+First, the platform checks if `attach_notification` is enabled.
+
+The second condition is a custom action on click, which must be set up beforehand.
+
+Once these two conditions are satisfied, the `notification` array will be sent to FCM.
+
+The `notification` array includes a special parameter for Android called `click_action`.
+
+An application developer needs to configure `click_action` inside the AndroidManifest.
+
+To link `click_action` with a specific activity, the developer must use an `intent-filter`. Example:
+
+`<activity android:name=".DetailActivity">
+    <intent-filter>
+        <action android:name="com.example.app.ACTION_OPEN_DETAIL" />
+        <category android:name="android.intent.category.DEFAULT" />
+    </intent-filter>
+</activity>
+`
 
