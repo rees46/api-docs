@@ -1,0 +1,49 @@
+# Import
+
+Information about import.
+
+## Update category
+
+```shell
+
+curl https://<%= config[:api_endpoint] %>/import/categories
+
+```
+
+```javascript
+No implementation needed
+```
+
+```swift
+No implementation needed
+```
+
+```kotlin
+No implementaion needed
+```
+
+```java
+No implementaion needed
+```
+
+```jsx
+No implementaion needed
+```
+### HTTP Request
+
+`PUT https://<%= config[:api_endpoint] %>/import/categories`
+
+### Query Parameters
+
+| Parameter   | Required | Description                                                                                        |
+|-------------|----------|----------------------------------------------------------------------------------------------------|
+| shop_id     | true     | Your API key                                                                                       |
+| shop_secret | true     | Your secret key                                                                                    |
+| categories  | true     | An array with categories you want to update                                                        |
+| webhook     | false    | URL-address for HTTP request. If not empty, sends a notification with the categories update status |
+
+This method allows to  update categories that were put in the request.
+
+It updates existing categories or creates a new one.
+
+It does not modify categories that were not included in the request.

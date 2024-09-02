@@ -13,6 +13,7 @@ includes:
   - intro.md.erb
   - auth.md.erb
   - init.md.erb
+  - import.md.erb
   - tracking.md.erb
   - recommendations.md.erb
   - search.md.erb
