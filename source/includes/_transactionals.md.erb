@@ -62,7 +62,7 @@ Limits: max count - 10 files, max common weight - 10 mb.
 
 ### HTTP Response
 
-| HTTP status code   | Response body                                            | Explanation                                                                                 |
-|--------------------|----------------------------------------------------------|---------------------------------------------------------------------------------------------|
-| 204                | none                                                     | The request was successful.                                                                 |
-| 4xx (400-499)      | {"status": "error", "message": "Error description text"} | The request was unsuccessful. See the reason in the `message` property of the response body.|
+| HTTP status code | Response body                                            | Explanation                                                                                  |
+|------------------|----------------------------------------------------------|----------------------------------------------------------------------------------------------|
+| 200              | {"code": "12345"}                                        | The request was successful.                                                                  |
+| 4xx (400-499)    | {"status": "error", "message": "Error description text"} | The request was unsuccessful. See the reason in the `message` property of the response body. |

@@ -159,7 +159,7 @@ sdk.recommend(`recommend/${recommender_code}`, {
 | extended         | false      |  If true, it will return all information about recommended products. If false - only product IDs will be returned. Default is false.                                                                                                                                                       |
 | with_locations   | false      |  If true and if parameter `extended` is in request and is true, the answer will return  location_ids where product is available. If request doesn't have `extended` parameter or it`s false, `with_locations` parameter is ignored. Default value is false.                                |
 
-Syntax                                                                    |
+| Syntax                                                                  |
 |-------------------------------------------------------------------------|
 | <%= config[:js_sdk_name] %>("recommend", code, params, success, error); |
 
@@ -179,7 +179,7 @@ Syntax                                                                    |
 | category        | number/string | required in some cases | Category ID. This parameter is mandatory for all blocks set on category pages.                                                                                                                            |
 | search_query    | string        | required in some cases | The text of the search query. This parameter is mandatory for the requests of blocks that use the "Search" algorithm.                                                                                     |
 | limit           | number        | optionally             | A maximum number of products in the API response.                                                                                                                                                         |
-| locations       | array         | optionally             | Array with location IDs. If used, the API response will return products available in the listed locations. Locations must be specified in the XML product feed.                                           |
+| locations       | string        | optionally             | A string with location IDs. IDs are separated by comma. If used, the API response will return products available in the listed locations. Locations must be specified in the XML product feed.            |
 | brands          | array         | optionally             | Array with brand names. If used, only the products of the listed brands will be returned in the API response. Brands must be specified in the XML product feed.                                           |
 | exclude_brands  | array         | optionally             | Array with brand names. If used, the API response will exclude the products of the listed brands. Brands must be specified in the XML product feed.                                                       |
 | categories      | array         | optionally             | Array with category IDs. If used, the API response will only return products that are included in the listed categories.                                                                                  |
