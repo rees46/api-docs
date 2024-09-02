@@ -35,11 +35,12 @@ No implementaion needed
 
 ### Query Parameters
 
-| Parameter   | Required | Description                   |
-|-------------|----------|-------------------------------|
-| shop_id     | true     | Your API key                  |
-| external_id | true     | External ID                   |
-| categories  | true     | A category you want to update |
+| Parameter   | Required | Description                                                                                        |
+|-------------|----------|----------------------------------------------------------------------------------------------------|
+| shop_id     | true     | Your API key                                                                                       |
+| shop_secret | true     | Your secret key                                                                                    |
+| categories  | true     | An array with categories you want to update                                                        |
+| webhook     | false    | URL-address for HTTP request. If not empty, sends a notification with the categories update status |
 
 This method allows to  update categories that were put in the request.
 
