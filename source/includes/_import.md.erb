@@ -47,3 +47,77 @@ This method allows to  update categories that were put in the request.
 It updates existing categories or creates a new one.
 
 It does not modify categories that were not included in the request.
+
+## Product Feed - Mirroring the Database
+
+```shell
+No implementaion needed
+```
+
+```javascript
+No implementation needed
+```
+
+```swift
+No implementation needed
+```
+
+```kotlin
+No implementaion needed
+```
+
+```java
+No implementaion needed
+```
+
+```jsx
+No implementaion needed
+```
+
+1. A new data synchronization mode needs to be added – an intermediate database.
+2. When switching to the new mode, a new database with a new user is created.
+3. Access credentials –  shop_id:shop_secret. The path to the database is displayed on the shop settings page.
+4. List of tables – categories, locations, products.
+5. Structure:
+
+- categories
+  - category_id - varchar(255)
+  - parent_id - varchar(255)
+  - active - boolean
+  - name - varchar(255)
+  - url - varchar(255)
+  - updated_at - timestamp(6) = now()
+  - processed_at - timestamp(6)
+
+- locations
+  - location_id - varchar(255)
+  - active - boolean
+  - name - varchar(255)
+  - updated_at - timestamp(6) = now()
+  - processed_at - timestamp(6)
+
+- products
+  - product_id - varchar(255)
+  - active - boolean
+  - data - jsonb(65,535)
+  - updated_at - timestamp(6) = now()
+  - processed_at - timestamp(6)
+
+6.  The active column is needed to allow data to be updated for availability rather than deleted.
+7.  On each update, the current time (UTC=0) must be set in the updated_at column.
+8.  During each processing cycle, the system retrieves data with updated updated_at, active set to true, sends it to the API in "batches" of 2000 items, and updates the time in the processed_at column.
+
+
+
+### Rules for Working with Tables
+
+- The sequence of data entry is not important.
+- When updating a row, the `updated_at` column must be set to the current timestamp, and the `processed_at` column should NOT be updated.
+- If the data in a row has not been updated, the value of the `updated_at` column MUST NOT be changed.
+- Rows in the table can be deleted or the value of the `active` column can be set to `false`. Such rows will be ignored.
+
+
+
+
+
+
