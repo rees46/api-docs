@@ -43,7 +43,7 @@ sdk.trackSource(source: .chain, code: "MESSAGE_ID")
 ```
 
 ```kotlin
-sdk.track(Params.TrackEvent.VIEW, "37")
+sdk.trackEventManager.track(Params.TrackEvent.VIEW, "37")
 ```
 
 ```java
@@ -218,9 +218,7 @@ sdk.track(event: .categoryView(id: "CATEGORY_ID")) { trackResponse in
 ```
 
 ```kotlin
-sdk.track(Params.TrackEvent.CATEGORY, Params().apply {
-    put(Params.Parameter.CATEGORY_ID, "100")
-})
+sdk.trackEventManager.track(Params.TrackEvent.CATEGORY, Params().put(Params.Parameter.CATEGORY_ID, "100"))
 ```
 
 ```java
@@ -358,7 +356,7 @@ sdk.track(event: .synchronizeCart(items: [CartItem(productId: "784"), CartItem(p
 
 ```kotlin
 // Add to cart (simple)
-sdk.track(Params.TrackEvent.CART, "37")
+sdk.trackEventManager.track(Params.TrackEvent.CART, "37")
 
 // Add to cart (extended)
 val cart = Params().apply {
@@ -369,8 +367,9 @@ val cart = Params().apply {
         }
     )
     put(Params.RecommendedBy(Params.RecommendedBy.TYPE.RECOMMENDATION, "e9ddb9cdc66285fac40c7a897760582a"))
+
 }
-sdk.track(Params.TrackEvent.CART, cart)
+sdk.trackEventManager.track(Params.TrackEvent.CART, cart)
 
 // Tracking full cart
 val fullCart = Params().apply {
@@ -388,7 +387,7 @@ val fullCart = Params().apply {
         }
     )
 }
-sdk.track(Params.TrackEvent.CART, fullCart)
+sdk.trackEventManager.track(Params.TrackEvent.CART, fullCart)
 ```
 
 
@@ -610,7 +609,7 @@ val purchase = Params().apply {
     put(Params.Parameter.DELIVERY_ADDRESS, "1860 street")
     put(Params.RecommendedBy(Params.RecommendedBy.TYPE.RECOMMENDATION, "e9ddb9cdc66285fac40c7a897760582a"))
 }
-sdk.track(Params.TrackEvent.PURCHASE, purchase)
+sdk.trackEventManager.track(Params.TrackEvent.PURCHASE, purchase
 
 ```
 
@@ -723,7 +722,7 @@ curl 'https://<%= config[:api_endpoint] %>/push' \
 ```
 
 ```kotlin
-sdk.track(Params.TrackEvent.WISH, "37")
+sdk.trackEventManager.track(Params.TrackEvent.WISH, "37")
 
 // Full wish tracking
 
@@ -784,7 +783,7 @@ sdk.track(event: .productRemovedToFavorities(id: "PRODUCT_ID")) { trackResponse 
 ```
 
 ```kotlin
-sdk.track(Params.TrackEvent.REMOVE_FROM_WISH, "37")
+sdk.trackEventManager.track(Params.TrackEvent.REMOVE_FROM_WISH, "37")
 ```
 
 ```java
@@ -857,10 +856,15 @@ sdk.trackEvent(event: "something_happened", category: "important", label: "user_
 
 ```kotlin
 // Simple tracking of custom event
-sdk.track("my_event")
+sdk.trackEventManager.customTrack("my_event")
 
 // Tracking with additional parameters
-sdk.track("my_event", "event category", "event label", 100)
+sdk.trackEventManager.customTrack(
+    event = "my_event",
+    category = "event category",
+    label = "event label",
+    value = 100
+)
 ```
 
 ```java
@@ -952,10 +956,12 @@ const params = {
 };
 
 // Track when the notification is received and displayed
-sdk.notificationReceived(params);
+sdk.notificationOpened(params) {
+  // return this.notificationTrack(event,params)
+};
 ```
 
-When user clicks on mobile push notification in mobile app, you have to send event to API with `code` and `type` parameters.
+When the push had been delivered and shown to the user, the parameters that have to be sent to the API are code and type
 
 This method uses separate endpoint:
 
@@ -979,6 +985,31 @@ curl 'https://<%= config[:api_endpoint] %>/track/delivered' \
 -H 'Content-Type: application/json' \
 --data-raw '{"shop_id":"SHOP_ID", "code":"CODE", "type":"TYPE"}'
 ```
+Message delivered to user's device event tracking. Event - push had been delivered, but had not been shown to the user yet
+
+```jsx
+// Event - push had been delivered, but had not been shown to the user yet.
+sdk.notificationDelivered(params) {
+  // return this.notificationTrack(event,params)
+}
+```
+
+```swift
+//Required parameters are code:"string" and type:"string"
+sdk.notificationDelivered(parameters)
+
+// example
+sdk.notificationDelivered(code: "i7ykuagkjgfs", type: "mobile_push_transactional")
+```
+
+```kotlin
+  no implementation yet
+```
+
+```java
+  no implementation yet
+```
+
 Endpoint: `POST https://<%= config[:api_endpoint] %>/track/delivered`
 
 ### Required params
@@ -1180,4 +1211,5 @@ track(event, story_id, slide_id) {
 		})
 	}
 ```
+
 

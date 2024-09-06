@@ -6,7 +6,7 @@ Section describes how to use Stories
 
 ```kotlin
 // Manual initialization by inserting this code into the layout
-<com.personalizatio.stories.views.StoriesView
+<com.personalization.stories.views.StoriesView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:code="STORY BLOCK CODE" />
@@ -196,7 +196,7 @@ sdk.configuration().stories.storiesBlockCharCountWrap = 15
 ```kotlin
 
 // Initialization by adding code into layout
-<com.personalizatio.stories.views.StoriesView
+<com.personalization.stories.views.StoriesView
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     app:code="STORY BLOCK CODE" />
@@ -335,3 +335,52 @@ let product: StoriesPromoCodeElement?
 You can use both the font family in the title and its direct name, for example with the "-Regular" suffix.
 The color must be transmitted in hex format, for example "#FFFFFF”.
 Any parameter in any method is optional, you can use both together and separately in combination with other parameters.
+
+## Displayed price
+
+```shell
+No implementation needed
+```
+
+```javascript
+No implementation needed
+```
+
+```swift
+No implementation needed
+```
+
+```kotlin
+No implementaion needed
+```
+
+```java
+No implementaion needed
+```
+
+```jsx
+No implementaion needed
+```
+
+The following parameters can be present or absent in the database:
+
+| Parameter            | Presence in the DB | Description                        |
+|----------------------|--------------------|------------------------------------|
+| price                | always             | Product's price                    |
+| old_price            | not always         | Product's  old price               |
+| price_with_promocode | not always         | Product's price  with a promo code |
+
+Depending on which parameters are present in the DB, when the slide is requested, the following scenarios are possible:
+
+1. If the `old_price` parameter is present in the DB, the crossed-out price displayed on the slide is the `old_price`
+2. If the `old_price` parameter is not in the DB, the crossed-out price displayed on the slide is the `price`
+3. If the `price_with_promocode` parameter is present in the DB, the price value displayed on the slide is `price_with_promocode`
+4. If the` price_with_promocode` parameter is not in the DB, the price value displayed on the slide is the `price`
+
+Note: Two prices are displayed on the slide: the actual price and the old price, which is visually crossed out.
+
+<aside class="info">
+A crossed-out price is displayed on a slide only if its value is less than the actual price.
+</aside>
+
+

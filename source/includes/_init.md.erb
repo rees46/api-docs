@@ -33,9 +33,6 @@ post_install do |installer|
   end
 end
 
-
-
-
 // Swift package manager (XCode >= 11)
 // 1. Click File menu
 // 2. Swift Packages
@@ -45,10 +42,17 @@ end
 
 ```kotlin
 // 1. Add to dependencies:
-implementation 'com.<%= config[:android_sdk_package_code] %>:<%= config[:android_sdk_package_code] %>-sdk:+'
-implementation 'com.google.firebase:firebase-bom:29.0.3'
-implementation 'com.google.firebase:firebase-messaging:23.0.0'
-
+dependencies {
+    implementation 'com.rees46:rees46-sdk:+'
+    implementation 'com.google.firebase:firebase-bom:32.7.0'
+    implementation 'com.google.firebase:firebase-messaging:23.4.1'
+    implementation 'com.google.dagger:dagger:2.51.1'
+    kapt 'com.google.dagger:dagger-compiler:2.48'
+}
+// Add to plugins:
+plugins {
+    id 'kotlin-kapt'
+}
 
 // 2. Append to your project build.gradle
 buildscript {
@@ -67,6 +71,12 @@ plugins {
 // 4. Create your app in the Firebase console
 //    and copy file google-services.json to your app root path.
 //    Sync gradle now.
+
+// 5. Library versions used in the SDK:
+// Java 22
+// Kotlin 2.0.0
+// Gradle 8.8
+// Android Gradle Plugin 8.5.1
 ```
 
 ```java
@@ -74,7 +84,6 @@ plugins {
 implementation 'com.<%= config[:android_sdk_package_code] %>:<%= config[:android_sdk_package_code] %>-sdk:+'
 implementation 'com.google.firebase:firebase-bom:29.0.3'
 implementation 'com.google.firebase:firebase-messaging:23.0.0'
-
 
 // 2. Append to your project build.gradle
 buildscript {
@@ -90,9 +99,18 @@ apply plugin: 'com.google.gms.google-services'
 // 4. Create your app in the Firebase console
 //    and copy file google-services.json to your app root path.
 //    Sync gradle now.
+
+// 5. Library versions used in the SDK:
+// Java 22
+// Kotlin 2.0.0
+// Gradle 8.8
+// Android Gradle Plugin 8.5.1
 ```
 
 ```jsx
+// If you are using version 1.8 or above, you don't need to use permissions like SCHEDULE_EXACT_ALARM or USE_EXACT_ALARM.
+// The notifee dependency introduced in version 1.7.1 also isn't required starting from version 1.8 of the SDK.
+
 // Add required packages:
 yarn add <%= config[:rn_sdk_package_code] %>/react-native-sdk
 yarn add @react-native-async-storage/async-storage
@@ -106,7 +124,10 @@ yarn add @react-native-firebase/messaging
 // On application launch initialize the SDK:
 import <%= config[:rn_sdk_package_name] %> from '<%= config[:rn_sdk_package_code] %>/react-native-sdk';
 ...
-const sdk = new <%= config[:rn_sdk_package_name] %>("YOUR_SHOP_ID", "Stream");
+// The parameter autoSendPushToken is responsible for automatically sending the push notification token upon initialization.
+// Its default value is true, meaning the token will be sent automatically.
+// Set it to false if you want to manage token sending manually.
+const sdk = new <%= config[:rn_sdk_package_name] %>("YOUR_SHOP_ID", "stream", "debug", autoSendPushToken);
 
 // Initialization is async, so you have a method to test, if SDK is initialized or not:
 sdk.isInit(); // returns true/false
@@ -258,3 +279,57 @@ If you don't have device identifier (first launch on new device), you have to re
 | tz        | false      | Timezone offset (integer, positive or negative number as difference with GMT).                                                                                                                                                  |
 | stream    | false      | Data stream code. Alphanumeric string (letters, numbers only). Max length: 16. Default: null (means "web"). Can be "ios", "android" or any other string. Used to distinguish between mobile apps, web and other events sources. |
 
+### API response
+
+| Name                 | Type    | Description                                                                                                      |
+|:---------------------|:--------|:-----------------------------------------------------------------------------------------------------------------|
+| did                  | string  | Device id                                                                                                        |
+| seance               | string  | Seance                                                                                                           |
+| currency             | string  | Currency                                                                                                         |
+| email_collector      | boolean | Enable or disable email_collector service                                                                        |
+| has_email            | boolean | User has an email address                                                                                        |
+| recommendations      | boolean | Recommendations are enabled or disabled                                                                          |
+| lazy_load            | boolean | Lazy load option is enabled or disabled                                                                          |
+| auto_css_recommender | boolean | auto_css_recommender is enabled or disabled                                                                      |
+| cms                  | string  | CMS                                                                                                              |
+| snippets             | array   | List of snippets                                                                                                 |
+| search               | object  | Objects with search configuration                                                                                |
+|                      |         | * enabled - boolean value                                                                                        |
+|                      |         | * landing - string with a page address                                                                           |
+|                      |         | * type - string with a type of search: full, instant, blank                                                      |
+|                      |         | * settings - object with settings that can be configured in dashboard                                            |
+|                      |         | - redirects - object inside settings with redirects. Format "string":"string". Redirect request and page address |
+|                      |         | - suggestions_title - a string with suggestion title                                                             |
+|                      |         | - categories_title - a string with category title                                                                |
+|                      |         | - brands_title - a string with brand title                                                                       |
+|                      |         | - filters_title - a string with filter title                                                                     |
+|                      |         | - items_title - a string with items title                                                                        |
+|                      |         | - show_all_title - a string with all titles that match query                                                     |
+|                      |         | - last_queries_title - a string with recent search                                                               |
+|                      |         | - last_products_title - a string with a recently viewed products                                                 |
+|                      |         | - empty_title - a string with message that nothing was found                                                     |
+|                      |         | - book_author_title - a string with book author                                                                  |
+|                      |         | - enable_full_search - boolean value                                                                             |
+|                      |         | - append_to_body - boolean value                                                                                 |
+|                      |         | - enable_last_queries - boolean value                                                                            |
+|                      |         | - enable_old_price - boolean value                                                                               |
+|                      |         | - popular_links_title - string. Popular search queries                                                           |
+|                      |         | - popular_categories_title - string. Popular category title                                                      |
+|                      |         | - popular_brands_title - string. Popular brands                                                                  |
+|                      |         | - price_filter_name - string. Price filter. Affected by localization settings                                    |
+|                      |         | - price_filter_from - string. Minimum price filer. Affected by localization settings                             |
+|                      |         | - price_filter_to - string. Maximum price filter. Affected by localization settings                              |
+|                      |         | - sort_by_name - string. Sorting by name. Affected by localization settings                                      |
+|                      |         | - sort_dir_desc - string. Sorting direction. Descending. Affected by localization settings                       |
+|                      |         | - sort_dir_asc - string. Sorting direction. Ascending. Affected by localization settings                         |
+|                      |         | - sort_by_popular - string. Sorting by popularity. Affected by localization settings                             |
+|                      |         | - sort_by_price - string. Sorting by price. Affected by localization settings                                    |
+|                      |         | - sort_by_discount - string. Sorting by discount. Affected by localization settings                              |
+|                      |         | - sort_by_sales_rate - string. Sorting by sales. Affected by localization settings                               |
+|                      |         | - sort_by_new - string. Affected by localization settings                                                        |
+| web_push_settings    | object  | Object with web-push settings.                                                                                   |
+|                      |         | * public_key - a string with the shop's public key                                                               |
+|                      |         | * safari_enabled - a boolean value                                                                               |
+|                      |         | * safari_id - a string. If safari_enable is false. The string is empty                                           |
+|                      |         | * service_worker - a string with a path to the service worker                                                    |
+| recone               | boolean | A boolean value                                                                                                  |

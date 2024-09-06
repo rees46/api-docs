@@ -27,7 +27,6 @@ params.put(SearchParams.Parameter.LOCATIONS, "location");
         Log.i(TAG, "Search response: " + response.toString());
     }
 });
-
 //Search blank request
 <%= config[:android_sdk_package_name]%>.search_blank(new Api.OnApiCallbackListener() {
     @Override
@@ -35,6 +34,16 @@ params.put(SearchParams.Parameter.LOCATIONS, "location");
         Log.i(T.TAG, "Search response: " + response.toString());
     }
 });
+```
+```kotlin
+//Instant search
+sdk.searchManager.searchInstant("SEARCH_QUERY", "locations", { searchInstantResponse ->
+    Log.i(TAG, "Search instant response: $searchInstantResponse")
+})
+//Search blank request
+sdk.searchManager.searchBlank({ searchBlankResponse ->
+    Log.i(TAG, "Search blank response: $searchBlankResponse")
+})
 ```
 ```jsx
 const type = 'instant_search';
@@ -77,12 +86,21 @@ sdk.search({
 |                        |        | * name – category name (string)                                                                                                                                                                       |
 |                        |        | * url – category url (string)                                                                                                                                                                         | queries          | array  | Array with information about queries. Each object has the following properties:                                                                                                                       |
 |                        |        | * count – count of products in category (number)                                                                                                                                                      |
+| queries                |        | Objects with the found items:                                                                                                                                                                         |
+|                        |        | * The key is the index number of the item found through the search, and the value is an object containing the following properties:                                                                   |
+|                        |        | - key: name, value: the name of the search item (string)                                                                                                                                              |
+|                        |        | - key: url_handle, value: URL handle (string)                                                                                                                                                         |
+|                        |        | - key: url, value: full URL (string)                                                                                                                                                                  |
+|                        |        | - key: score, value: a score that used for ranking the search suggestions (float)                                                                                                                     |
 | filters                | array  | Array with information about filters. Each object has the following properties:                                                                                                                       |
-|                        |        | * filter – fitler object. Has the following properties:                                                                                                                                               |
-|                        |        | * count – total count of products whith this parameters (number)                                                                                                                                      |
+|                        |        | * filter – filter object. Has the following properties:                                                                                                                                               |
+|                        |        | * count – total count of products with this parameters (number)                                                                                                                                       |
 |                        |        | * values – array of values (object). Has the following properties:                                                                                                                                    |
 |                        |        | * value – value label. (string)                                                                                                                                                                       |
-|                        |        | * count – cont of products whith this parameter (number)                                                                                                                                              |
+|                        |        | * count – cont of products with this parameter (number)                                                                                                                                               |
+|                        |        | * ranges - an object with the following properties:                                                                                                                                                   |
+|                        |        | - key: min, value: the minimum value of product (string)                                                                                                                                              |
+|                        |        | - key: max, value: the maximum value of product (string)                                                                                                                                              |
 | html                   | string | HTML-code of the block with products. The template is customized in the <%= config[:service_name] %> personal account.                                                                                |
 | price_range            | object | Min and max price of products. Has the following properties:                                                                                                                                          |
 |                        |        | * min – min price (number)                                                                                                                                                                            |
@@ -147,27 +165,25 @@ sdk.search(query: "laptop", limit: nil, offset: nil, categoryLimit: nil, categor
 }
 ```
 ```kotlin
-   //Full search
-        val params = SearchParams()
-        params.put(SearchParams.Parameter.LOCATIONS, "location")
+// Search with locations
+val params = SearchParams()
+params.put(SearchParams.Parameter.LOCATIONS, "location")
 
-        //Additional filters
-        val filters = SearchFilters()
-        filters.put("voltage", arrayOf("11.1", "14.8"))
-        params.put(SearchParams.Parameter.FILTERS, filters)
+//Additional filters
+val filters = SearchParams.SearchFilters()
+filters.put("voltage", arrayOf("11.1", "14.8"))
+params.put(SearchParams.Parameter.FILTERS, filters)
+//Disable clarification search
+params.put(SearchParams.Parameter.NO_CLARIFICATION, true)
 
-        // Support for FASHION_SIZES filter
-        filters.put("fashion_sizes", arrayOf("S", "M", "L"))
-        params.put(SearchParams.Parameter.FASHION_SIZES, filters)
+// Support for FASHION_SIZES filter
+filters.put("fashion_sizes", arrayOf("S", "M", "L"))
+params.put(SearchParams.Parameter.FASHION_SIZES, filters)
 
-        //Disable clarification search
-        params.put(SearchParams.Parameter.NO_CLARIFICATION, true)
-
-        sdk.search("SEARCH_QUERY", SearchParams.TYPE.FULL, params, object : OnApiCallbackListener() {
-                    override fun onSuccess(response: JSONObject?) {
-                        Log.i(TAG, "Search response: " + response.toString())
-                    }
-                })
+//Full search
+sdk.searchManager.searchFull("SEARCH_QUERY", params, { searchFullResponse ->
+    Log.i(TAG, "Search full response: $searchFullResponse")
+})
 ```
 
 ```java
@@ -303,7 +319,6 @@ sdk.search({type: 'full_search', search_query: 'string', filters_search_by: 'pop
 | products_total     | number | Total count of products                                                                                                                                                                               |
 | search_query       | string | Search query                                                                                                                                                                                          |
 | book_authors       | array  | Reserved                                                                                                                                                                                              |
-| collections        | array  | Reserved                                                                                                                                                                                              |
 | keywords           | array  | Reserved                                                                                                                                                                                              |
 | queries            | array  | Reserved                                                                                                                                                                                              |
 | virtual_categories | array  | Reserved                                                                                                                                                                                              |
@@ -370,3 +385,8 @@ curl https://<%= config[:api_endpoint] %>/search/no_result_queries?shop_id=...&s
 |-----------|---------|---------------------------------------|
 | query     | String  | Search query value                    |
 |  quantity | Integer | Number of query usages during 2 weeks |
+
+
+
+
+
