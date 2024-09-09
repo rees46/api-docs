@@ -60,6 +60,14 @@ sdk.subscribeForPriceDrop(id: "PRODUCT_ID", currentPrice: 333.49, email: "mail@e
 
 // Subscribe for specific phone
 sdk.subscribeForPriceDrop(id: "PRODUCT_ID", currentPrice: 333.49, phone: "+19999999999");
+
+// Unsubscribe from price drop event
+sdk.unsubscribeForPriceDrop(
+   itemIds: ["PRODUCT_ID"],
+   currentPrice: 333.49,
+   email: "USER_EMAIL",
+   phone: "USER_PHONE"
+)
 ```
 
 ```kotlin

@@ -80,18 +80,21 @@ sdk.configuration().recommendations.setWidgetBlock(widgetFontName: "Museo",
 ```
 
 ```kotlin
-   val params = Params().apply {
-            put(Params.Parameter.EXTENDED, true)
-            put(Params.Parameter.ITEM, "37")
-            put(Params.Parameter.CATEGORY, "111") // category filtration
-        }
-
-        sdk.recommend("RECOMMENDER_CODE", params, object : OnApiCallbackListener() {
-            override fun onSuccess(response: JSONObject?) {
-                Log.i(TAG, "Ответ рекомендации: " + response.toString())
-            }
-        })
+val params = Params().apply {
+    put(Params.Parameter.ITEM, "37")
+    // category filtration
+    put(Params.Parameter.CATEGORY, "111")
+}
+// get recommendation with product ids
+sdk.recommendationManager.getRecommendation("RECOMMENDER_CODE", params, { getRecommendationResponse ->
+	  Log.i(TAG, "Get recommandation response: $getRecommendationResponse")
+})
+// get recommendation with products info
+sdk.recommendationManager.getExtendedRecommendation("RECOMMENDER_CODE", params, { getExtendedRecommendationResponse ->
+    Log.i(TAG, "Get extended recommandation response: $getExtendedRecommendationResponse")
+ })
 ```
+
 ```java
 Params params = new Params();
 params.put(Params.Parameter.EXTENDED, true);
@@ -113,6 +116,8 @@ const params = {
   item: 100500,
   exclude: [3, 14, 159, 26535],
   search_query: "To be or not to be"
+  extended:true
+  with_locations:true
  // other params
 };
 
@@ -123,8 +128,20 @@ sdk.recommend(recommender_code, params)
   .catch((error) => {
     console.log(error);
   });
-```
 
+// Example of a request containing the with_locations parameter.
+// The parameter extended with the value true must be present in the request. Otherwise, only product IDs will be returned and with_locations parameter will be ignored.
+// Locations will be shown in the "location_ids" field, which will contain an array with location IDs.
+sdk.recommend(`recommend/${recommender_code}`, {
+  params: {
+   shop_id: this.shop_id,
+   stream: this.stream,
+   recommender_code,
+   extended:true,
+   with_locations:true,
+   },
+})
+```
 
 ### HTTP Request
 
@@ -142,7 +159,7 @@ sdk.recommend(recommender_code, params)
 | extended         | false      |  If true, it will return all information about recommended products. If false - only product IDs will be returned. Default is false.                                                                                                                                                       |
 | with_locations   | false      |  If true and if parameter `extended` is in request and is true, the answer will return  location_ids where product is available. If request doesn't have `extended` parameter or it`s false, `with_locations` parameter is ignored. Default value is false.                                |
 
-Syntax                                                                    |
+| Syntax                                                                  |
 |-------------------------------------------------------------------------|
 | <%= config[:js_sdk_name] %>("recommend", code, params, success, error); |
 
@@ -154,6 +171,7 @@ Syntax                                                                    |
 | error   | function | optionally             | A callback function that will be called when an error occurs (any HTTP status code other than 200)                               |
 
 ### Request parameters
+
 | Name            | Type          | Requirement            | Description                                                                                                                                                                                               |
 |-----------------|---------------|------------------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | item            | number/string | required in some cases | Product ID. This parameter is mandatory for the requests of blocks that use the algorithms "Similar" and "Also bought".                                                                                   |
@@ -161,7 +179,7 @@ Syntax                                                                    |
 | category        | number/string | required in some cases | Category ID. This parameter is mandatory for all blocks set on category pages.                                                                                                                            |
 | search_query    | string        | required in some cases | The text of the search query. This parameter is mandatory for the requests of blocks that use the "Search" algorithm.                                                                                     |
 | limit           | number        | optionally             | A maximum number of products in the API response.                                                                                                                                                         |
-| locations       | array         | optionally             | Array with location IDs. If used, the API response will return products available in the listed locations. Locations must be specified in the XML product feed.                                           |
+| locations       | string        | optionally             | A string with location IDs. IDs are separated by comma. If used, the API response will return products available in the listed locations. Locations must be specified in the XML product feed.            |
 | brands          | array         | optionally             | Array with brand names. If used, only the products of the listed brands will be returned in the API response. Brands must be specified in the XML product feed.                                           |
 | exclude_brands  | array         | optionally             | Array with brand names. If used, the API response will exclude the products of the listed brands. Brands must be specified in the XML product feed.                                                       |
 | categories      | array         | optionally             | Array with category IDs. If used, the API response will only return products that are included in the listed categories.                                                                                  |
@@ -172,11 +190,12 @@ Syntax                                                                    |
 | with_locations  | boolean       | optionally             | Locations where product is available. Returned only if parameter extended is in request and is true.                                                                                                      |
 
 ### API response
-| Name     | Type   | Description                                                                                                                      |
-|:---------|:-------|:---------------------------------------------------------------------------------------------------------------------------------|
-| html     | string | HTML-code of the block with products. The template is customized in the <%= config[:service_name] %> personal account.           |
-| title    | string | The block title. Corresponds to the value of the "Action" element in the block rules.                                            |
-| products | array  | Array with product IDs.                                                                                                          |
-| id       | number | Unique block identifier. Corresponds to the block ID in the list of blocks in the <%= config[:service_name] %> personal account. |
+
+| Name       | Type   | Description                                                                                                                      |
+|:-----------|:-------|:---------------------------------------------------------------------------------------------------------------------------------|
+| html       | string | HTML-code of the block with products. The template is customized in the <%= config[:service_name] %> personal account.           |
+| title      | string | The block title. Corresponds to the value of the "Action" element in the block rules.                                            |
+| recommends | array  | Array with product IDs.                                                                                                          |
+| id         | number | Unique block identifier. Corresponds to the block ID in the list of blocks in the <%= config[:service_name] %> personal account. |
 
 

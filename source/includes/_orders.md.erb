@@ -92,10 +92,10 @@ Description of `orders` objects:
 | channel                | String  | true     | Channel where order was updated                              |
 | date                   | Integer | true     | Date and time when order status changed                      |
 | offline                | Boolean | false    | Flags orders as offline. Default `false`.                    |
-| email                  | String  | false    | User's email                                                 |
-| phone                  | String  | false    | User's phone                                                 |
-| loyalty_id             | String  | false    | User's loyalty ID                                            |
-| location_id            | String  | false    | User's location (city) ID                                    |
+| email                  | String  | true*    | User's email                                                 |
+| phone                  | String  | true*    | User's phone                                                 |
+| loyalty_id             | String  | true*    | User's loyalty ID                                            |
+| location_id            | String  | true*    | User's location (city) ID                                    |
 | promocode              | String  | false    | Promo code used in the order                                 |
 | delivery_type          | String  | false    | Delivery type                                                |
 | delivery_address       | String  | false    | Destination address for CRM                                  |
@@ -112,6 +112,10 @@ Description of `orders` objects:
 | value                  | Object  | true     | Describes order's value parts. See below.                    |
 | payment_structure      | Object  | false    | Describes order's payment_structure parts. See below.        |
 | items*                 | Array   | true     | Describes order's products. See below.                       |
+
+<aside class="notice">
+At least one of identifiers (marked by *) must present in request: email, phone, etc. It's used to identify user.
+</aside>
 
 Description of `value` object:
 
