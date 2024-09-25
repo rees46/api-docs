@@ -447,8 +447,8 @@ sdk.track("cart", [
 ```
 
 ### JS SDK syntax (short request for a single product)
-| Syntax                                            |
-|---------------------------------------------------|
+| Syntax                                              |
+|-----------------------------------------------------|
 | <%= config[:js_sdk_name] %>("track", "cart", "id"); |
 
 ### JS SDK Parameters
@@ -1146,70 +1146,54 @@ All events require at least these parameters:
 ## Stories tracking
 
 Events tracking depends on rules that were configured during stories creation.
-Backend method 'checkRule' checks if the event-based rule is true, tracking clicks, views, etc.
-It is based on  'Clickhouse::get()->exists' method, which checks DB for events.
-
-
-`track(event, story_id, slide_id) {`
-
-`return this.core.ajax.sendPost(this.core.api.getAPIUrl('/track/stories'), {`
-
-`shop_id: this.core.shop.token,`
-
-`did: this.core.user.did,`
-
-`sid: this.core.user.seance,`
-
-`event: event,`
-
-`code: this.code,`
-
-`story_id: story_id,`
-
-`slide_id: slide_id,`
-
-`})`
-
-`}`
+Backend method checks if the event-based rule is true, tracking clicks, views, etc.
 
 ```shell
-//Events tracking depends on rules that were configured during stories creation.
-// Backend method 'checkRule' checks if the event-based rule is true, tracking clicks, views, etc.
-// It is based on  'Clickhouse::get()->exists' method, which checks DB for events.
-  track() {
-      local event=$1
-      local story_id=$2
-      local slide_id=$3
-      local apiUrl="https://<%= config[:api_endpoint] %>/track/stories"
+// Events tracking depends on rules that were configured during stories creation.
 
-      curl -X POST "$apiUrl" \
-          -d "shop_id=$SHOP_ID" \
-          -d "did=$USER_DID" \
-          -d "sid=$USER_SEANCE" \
-          -d "event=$event" \
-          -d "code=$CODE" \
-          -d "story_id=$story_id" \
-          -d "slide_id=$slide_id"
-  }
+local event=$1
+local story_id=$2
+local slide_id=$3
+local apiUrl="https://<%= config[:api_endpoint] %>/track/stories"
 
+curl -X POST "$apiUrl" \
+     -d "shop_id=$SHOP_ID" \
+     -d "did=$USER_DID" \
+     -d "sid=$USER_SEANCE" \
+     -d "event=$event" \
+     -d "code=$CODE" \
+     -d "story_id=$story_id" \
+     -d "slide_id=$slide_id"
 ```
 
 ```javascript
-//Events tracking depends on rules that were configured during stories creation.
-// Backend method 'checkRule' checks if the event-based rule is true, tracking clicks, views, etc.
-// It is based on  'Clickhouse::get()->exists' method, which checks DB for events.
+// Events tracking depends on rules that were configured during stories creation.
 
 track(event, story_id, slide_id) {
-		return this.core.ajax.sendPost(this.core.api.getAPIUrl('/track/stories'), {
-			shop_id: this.core.shop.token,
-			did: this.core.user.did,
-			sid: this.core.user.seance,
-			event: event,
-			code: this.code,
-			story_id: story_id,
-			slide_id: slide_id,
-		})
-	}
+  return this.core.ajax.sendPost(this.core.api.getAPIUrl('/track/stories'), {
+    shop_id: this.core.shop.token,
+    did: this.core.user.did,
+    sid: this.core.user.seance,
+    event: event,
+    code: this.code,
+    story_id: story_id,
+    slide_id: slide_id,
+  });
+}
 ```
 
+```swift
+// No implementation
+```
 
+```kotlin
+// No implementation
+```
+
+```java
+// No implementation
+```
+
+```jsx
+// No implementation
+```
