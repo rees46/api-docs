@@ -23,19 +23,18 @@ sdk.initializeStoriesView(storiesView)
 val storiesView = findViewById<StoriesView>(R.id.stories_view)
 storiesView.itemClickListener = object : OnLinkClickListener {
   override fun onClick(url: String): Boolean {
-  // This function is responsible for defining what happens after the user clicks on the link.
-  // If this function returns false, the developer must implement their own logic for handling the click.
-  // If this function returns true, the SDK will handle the processing after the user clicks on the link.
-  return false
+    // This function is responsible for defining what happens after the user clicks on the link.
+    // If this function returns false, the developer must implement their own logic for handling the click.
+    // If this function returns true, the SDK will handle the processing after the user clicks on the link.
+    return false
   }
   override fun onClick(product: Product): Boolean {
-  // This function is responsible for defining what happens after the user clicks on the product.
-  // If this function returns false, the developer must implement their own logic for handling the click.
-  // If this function returns true, the SDK will handle the processing after the user clicks on the product.
-  return false
+    // This function is responsible for defining what happens after the user clicks on the product.
+    // If this function returns false, the developer must implement their own logic for handling the click.
+    // If this function returns true, the SDK will handle the processing after the user clicks on the product.
+    return false
   }
 }
-
 ```
 ```java
 // Manual initialization by inserting this code into the layout
