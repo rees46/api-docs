@@ -175,13 +175,22 @@ curl https://<%= config[:api_endpoint] %>/init?did=DEVICE_ID&shop_id=SHOP_ID&v=3
 
 ```javascript
 // Put this line right after setup code
-<%= config[:js_sdk_name] %>('init', 'SHOP_ID', 'STREAM', success, failure);
+<%= config[:js_sdk_name] %>('init', 'SHOP_ID', 'STREAM', success, failure, cookieLess, isSpa);
 
 // Cookie-less mode
 
 const cookieLess = true;
 
-<%= config[:js_sdk_name] %>('init', 'SHOP_ID', 'STREAM', success, failure, cookieLess)
+<%= config[:js_sdk_name] %>('init', 'SHOP_ID', 'STREAM', success, failure, cookieLess);
+
+// SPA support mode
+// The default value of the isSpa parameter is false.
+// When the isSpa parameter is true, the client's session ID is checked during the tracking process.
+// If the session ID has expired, a new one will be requested from the server.
+
+const isSpa = true;
+
+<%= config[:js_sdk_name] %>('init', 'SHOP_ID', 'STREAM', success, failure, cookieLess, isSpa);
 ```
 
 ```swift
