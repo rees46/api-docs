@@ -350,31 +350,46 @@ No implementation needed
 ```
 
 ```kotlin
-No implementaion needed
+// notification object example
+{
+  "title": "notice",
+  "body": "notice text",
+  "click_action": "ACTION_VIEW",
+  "sound": "default"
+}
+
 ```
 
 ```java
-No implementaion needed
+// notification object example
+{
+  "title": "notice",
+  "body": "notice text",
+  "click_action": "ACTION_VIEW",
+  "sound": "default"
+}
+
 ```
 
 ```jsx
 No implementaion needed
 ```
 
-A custom notification will work if both of the following criteria are met.
+A custom notification will work if both of the following criteria are met:
 
-First, the platform checks if `attach_notification` is enabled.
+The platform checks if attach_notification is enabled.
 
-The second condition is a custom action on click, which must be set up beforehand.
+The second condition is the existence of the android_notification_payload object.
 
-Once these two conditions are satisfied, the `notification` array will be sent to FCM.
+Once these two conditions are satisfied, the notification object will be sent to FCM for delivery to Android devices.
 
-The `notification` array includes a special parameter for Android called `click_action`.
+The notification object may include a special parameter for Android called click_action.
 
-An application developer needs to configure `click_action` inside the AndroidManifest.
+An application developer needs to configure click_action inside the AndroidManifest.
 
-To link `click_action` with a specific activity, the developer must use an `intent-filter`.
+To link click_action with a specific activity, the developer must use an intent-filter.
 
+<aside class="warning"> The notification object can be used only for sending notices to Android devices. </aside>
 
 
 
