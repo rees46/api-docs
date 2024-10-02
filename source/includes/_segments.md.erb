@@ -394,15 +394,19 @@ The method returns TRUE|FALSE if a user identified by any identifier is included
 
 ### Query Parameters
 
-| Parameter   | Type    | Required | Description          |
-|-------------|---------|----------|----------------------|
-| shop_id     | String  | true     | Your API key         |
-| shop_secret | String  | true     | Your API secret key  |
-| email       | String  | true*    | User's email         |
-| phone       | String  | true*    | User's phone number  |
-| segment_id  | Integer | true     | Segment ID           |
+| Parameter   | Type    | Required               | Description         |
+|-------------|---------|------------------------|---------------------|
+| shop_id     | String  | true                   | Your API key        |
+| shop_secret | String  | true                   | Your API secret key |
+| email       | String  | true*                  | User's email        |
+| phone       | String  | true*                  | User's phone number |
+| segment_id  | Integer | true                   | Segment ID          |
+| external_id | String  | true*                  | Segment ID          |
+| loyalty_id  | String  | true*                  | Loyalty ID          |
+| telegram_id | String  | true*                  | Telegram ID         |
+
 
 <aside class="notice">
-One of identifiers (marked by *) must be present in request: email or phone. It's used to identify user.
+One of identifiers (marked by *) must be present in request: email, phone, external_id, loyalty_id, telegram_id. It's used to identify user.
 </aside>
 
