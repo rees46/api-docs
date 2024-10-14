@@ -164,22 +164,41 @@ curl https://<%= config[:api_endpoint] %>/init?did=DEVICE_ID&shop_id=SHOP_ID&v=3
 
 ```javascript
 // Put this line right after setup code
-<%= config[:js_sdk_name] %>('init', 'SHOP_ID', 'STREAM', success, failure, cookieLess, isSpa);
+r46('init', 'SHOP_ID', 'STREAM', success, failure, options, isSpa);
 
-// Cookie-less mode
+// Cookie-less Mode
+const options = {
+  cookieless: true
+};
+
+r46('init', 'SHOP_ID', 'STREAM', success, failure, options);
+
+// Control of device ID
+// If you use any external device management system
+// your own device ID can be assigned the to client.
+
+const options = {
+  did: 'example'
+};
+
+r46('init', 'SHOP_ID', 'STREAM', success, failure, options);
+
+// DEPRECATED
+// This will be removed in future SDK updates.
+// Previously you could enable `cookieless` mode as follows.
 
 const cookieLess = true;
 
-<%= config[:js_sdk_name] %>('init', 'SHOP_ID', 'STREAM', success, failure, cookieLess);
+r46('init', 'SHOP_ID', 'STREAM', success, failure, cookieLess);
 
 // SPA support mode
 // The default value of the isSpa parameter is false.
-// When the isSpa parameter is true, the client's session ID is checked during the tracking process.
+// The client's session ID is checked during the tracking process.
+// The check starts only if isSpa parameter is true.
 // If the session ID has expired, a new one will be requested from the server.
-
 const isSpa = true;
 
-<%= config[:js_sdk_name] %>('init', 'SHOP_ID', 'STREAM', success, failure, cookieLess, isSpa);
+r46('init', 'SHOP_ID', 'STREAM', success, failure, options, isSpa);
 ```
 
 ```swift
