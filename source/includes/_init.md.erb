@@ -183,14 +183,6 @@ const options = {
 
 r46('init', 'SHOP_ID', 'STREAM', success, failure, options);
 
-// DEPRECATED
-// This will be removed in future SDK updates.
-// Previously you could enable `cookieless` mode as follows.
-
-const cookieLess = true;
-
-r46('init', 'SHOP_ID', 'STREAM', success, failure, cookieLess);
-
 // SPA support mode
 // The default value of the isSpa parameter is false.
 // The client's session ID is checked during the tracking process.
@@ -199,6 +191,15 @@ r46('init', 'SHOP_ID', 'STREAM', success, failure, cookieLess);
 const isSpa = true;
 
 r46('init', 'SHOP_ID', 'STREAM', success, failure, options, isSpa);
+
+// DEPRECATED
+// This will be removed in future SDK updates.
+// Previously you could enable `cookieless` mode as follows.
+
+const cookieLess = true;
+
+r46('init', 'SHOP_ID', 'STREAM', success, failure, cookieLess);
+
 ```
 
 ```swift
