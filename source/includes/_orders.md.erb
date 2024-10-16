@@ -12,6 +12,8 @@ curl -i -X POST -H "Content-Type: application/json" --data-binary "@data.json" h
 # data.json
 {
   "shop_id": "DvLWN2ZTMZ",
+  "external_id": "777_777"
+  "telegram_id": "123456"
   "shop_secret": "EIxTuot8sj",
   "orders": [
     {
@@ -77,11 +79,13 @@ Don't use the API method simultaneously with the JS SDK "purchase" event on the 
 
 ### Query Parameters
 
-| Parameter   | Type   | Required   | Description                            |
-|-------------|--------|------------|----------------------------------------|
-| shop_id     | String | true       | Your API key                           |
-| shop_secret | String | true       | Your API secret key                    |
-| orders      | Array  | true       | List of orders. See description below. |
+| Parameter   | Type   | Required | Description                            |
+|-------------|--------|----------|----------------------------------------|
+| shop_id     | String | true     | Your API key                           |
+| external_id | String | true     | External ID                            |
+| telegram_id | String | true     | Telegram ID                            |
+| shop_secret | String | true     | Your API secret key                    |
+| orders      | Array  | true     | List of orders. See description below. |
 
 Description of `orders` objects:
 
