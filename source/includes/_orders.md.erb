@@ -12,8 +12,6 @@ curl -i -X POST -H "Content-Type: application/json" --data-binary "@data.json" h
 # data.json
 {
   "shop_id": "DvLWN2ZTMZ",
-  "external_id": "777_777"
-  "telegram_id": "123456"
   "shop_secret": "EIxTuot8sj",
   "orders": [
     {
@@ -24,6 +22,8 @@ curl -i -X POST -H "Content-Type: application/json" --data-binary "@data.json" h
       "offline": false,
       "email": "user@example.com",
       "phone": "+15554443322",
+      "external_id": "777_777",
+      "telegram_id": "123456",
       "loyalty_id": "000-33-444-111",
       "location_id": "7701123",
       "promocode": "vxawxSi9Uy",
@@ -82,8 +82,6 @@ Don't use the API method simultaneously with the JS SDK "purchase" event on the 
 | Parameter   | Type   | Required | Description                            |
 |-------------|--------|----------|----------------------------------------|
 | shop_id     | String | true     | Your API key                           |
-| external_id | String | true     | External ID                            |
-| telegram_id | String | true     | Telegram ID                            |
 | shop_secret | String | true     | Your API secret key                    |
 | orders      | Array  | true     | List of orders. See description below. |
 
@@ -98,6 +96,8 @@ Description of `orders` objects:
 | offline                | Boolean | false    | Flags orders as offline. Default `false`.                    |
 | email                  | String  | true*    | User's email                                                 |
 | phone                  | String  | true*    | User's phone                                                 |
+| external_id            | String  | true*    | External ID                                                  |
+| telegram_id            | String  | true*    | Telegram ID                                                  |
 | loyalty_id             | String  | true*    | User's loyalty ID                                            |
 | location_id            | String  | true*    | User's location (city) ID                                    |
 | promocode              | String  | false    | Promo code used in the order                                 |
