@@ -218,35 +218,13 @@ override fun onCreate(savedInstanceState: Bundle?) {
 ```
 
 ```java
-public class SampleApplication extends Application {
-	public void onCreate() {
-		super.onCreate();
+private REES46 rees46;
 
-		//Initialize
-		<%= config[:android_sdk_package_name] %>.initialize(getApplicationContext(), SHOP_ID);
-
-		//Notification callback
-		<%= config[:android_sdk_package_name] %>.setOnMessageListener(new MessagingService.OnMessageListener() {
-			@Override
-			public void onMessage(Map<String, String> data) {
-
-				//----->
-				//Show your custom notification
-				//----->
-
-			}
-		});
-	}
+@Override
+public void onCreate() {
+  super.onCreate();
+	rees46 = REES46.initialize(getApplicationContext(), getShopId(), API_DOMAIN);
 }
-
-
-// 2. For On-Premise integration need use initialize with custom api domain:
-<%= config[:android_sdk_package_name] %>.initialize(getApplicationContext(), SHOP_ID, API_DOMAIN);
-
-// 3. Check AndroidManifest.xml and add android:name=".SampleApplication" to application item.
-<application
-		...
-		android:name=".SampleApplication"
 ```
 
 `GET https://<%= config[:api_endpoint] %>/init`
