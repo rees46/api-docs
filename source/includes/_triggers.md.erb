@@ -71,17 +71,17 @@ sdk.unsubscribeForPriceDrop(
 ```
 
 ```kotlin
-// Subscribe
-sdk.subscribeForPriceDrop("PRODUCT_ID", 333.49)
+// Subscribe for a specific email
+sdk.subscribeForPriceDrop(YOUR_PRODUCT_ID, YOUR_PRICE)
 
 // Subscribe for a specific email
-sdk.subscribeForPriceDrop("PRODUCT_ID", 333.49, "mail@example.com")
+sdk.subscribeForPriceDrop(YOUR_PRODUCT_ID, YOUR_PRICE, YOUR_EMAIL)
 
 // Subscribe for a specific phone number
-sdk.subscribeForPriceDrop("PRODUCT_ID", 333.49, null, "+19999999999")
+sdk.subscribeForPriceDrop(YOUR_PRODUCT_ID, YOUR_PRICE, null, YOUR_PHONE_NUMBER)
 
-// Unsubscribe from specific products
-sdk.unsubscribeForPriceDrop(arrayOf("11111", "22222", "33333"))
+ // Unsubscribe from specific products
+ sdk.unsubscribeForPriceDrop(arrayOf(YOUR_PRODUCT_ID_1, YOUR_PRODUCT_ID_2, YOUR_PRODUCT_ID_3))
 
 // Unsubscribe from all products
 sdk.unsubscribeForPriceDrop(arrayOf())
@@ -90,19 +90,19 @@ sdk.unsubscribeForPriceDrop(arrayOf())
 
 ```java
 // Subscribe
-<%= config[:android_sdk_package_name]%>.subscribeForPriceDrop("PRODUCT_ID", 333.49);
+ REES46.subscribeForPriceDrop(YOUR_PRODUCT_ID, YOUR_PRICE);
 
 // Subscribe for specific email
-<%= config[:android_sdk_package_name]%>.subscribeForPriceDrop("PRODUCT_ID", 333.49, "mail@example.com");
+ REES46.subscribeForPriceDrop(YOUR_PRODUCT_ID, YOUR_PRICE, YOUR_EMAIL);
 
-// Subscribe for specific phone
-<%= config[:android_sdk_package_name]%>.subscribeForPriceDrop("PRODUCT_ID", 333.49, null, "+19999999999");
+ // Subscribe for specific phone
+ REES46.subscribeForPriceDrop(YOUR_PRODUCT_ID, YOUR_PRICE, null, YOUR_PHONE_NUMBER);
 
 // Unsubscribing from specific products
-<%= config[:android_sdk_package_name]%>.unsubscribeForPriceDrop(new String[] {"11111", "22222", "33333"});
+ REES46.unsubscribeForPriceDrop(arrayOf<String>(YOUR_PRODUCT_ID_1, YOUR_PRODUCT_ID_2, YOUR_PRODUCT_ID_3));
 
-// Unsubscribing from all products
-<%= config[:android_sdk_package_name]%>.unsubscribeForPriceDrop(new String[] {});
+ // Unsubscribing from all products
+ REES46.unsubscribeForPriceDrop(arrayOf<String>());
 ```
 
 This feature gives the customers an option to choose if they want to receive a notification when the price of the item they want has dropped.
@@ -224,24 +224,24 @@ sdk.unsubscribeForBackInStock(itemIds: ["ITEM_ID1", "ITEM_ID2"], email: "USER_EM
 
 ```kotlin
 // Subscribe
-sdk.subscribeForBackInStock("PRODUCT_ID")
+sdk.subscribeForBackInStock(YOUR_PRODUCT_ID)
 
 // Subscribe for a specific email
-sdk.subscribeForBackInStock("PRODUCT_ID", "mail@example.com")
+sdk.subscribeForBackInStock(YOUR_PRODUCT_ID, YOUR_EMAIL)
 
 // Subscribe for a specific phone number
-sdk.subscribeForBackInStock("PRODUCT_ID", "+19999999999")
+sdk.subscribeForBackInStock(YOUR_PRODUCT_ID, YOUR_PHONE_NUMBER)
 
 // Subscribe with product size
 val properties = JSONObject()
-properties.put("fashion_size", "XL")
-sdk.subscribeForBackInStock("PRODUCT_ID", "mail@example.com", null, properties, null)
+  properties.put("fashion_size", YOUR_FASHION_SIZE)
+  sdk.subscribeForBackInStock(YOUR_PRODUCT_ID, YOUR_EMAIL, null, properties, null)
 
 // Unsubscribe from specific products
-sdk.unsubscribeForBackInStock(arrayOf("11111", "22222", "33333"))
+sdk.unsubscribeForBackInStock(arrayOf(YOUR_PRODUCT_ID_1, YOUR_PRODUCT_ID_2, YOUR_PRODUCT_ID_3))
 
-// Unsubscribe from all products
-sdk.unsubscribeForBackInStock(arrayOf())
+ // Unsubscribe from all products
+ sdk.unsubscribeForBackInStock(arrayOf())
 ```
 
 ```java

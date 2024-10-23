@@ -597,32 +597,58 @@ sdk.track(event: .orderCreated(orderId: "123", totalValue: 33.3, products: [(id:
 ```
 
 ```kotlin
-val purchase = Params().apply {
-    put(
-        Params.Item("37").apply {
-            set(Params.Item.COLUMN.AMOUNT, 2)
-            set(Params.Item.COLUMN.PRICE, 100)
+  val params = Params().apply {
+        put(
+            Params.Item(YOUR_ITEM_ID).apply {
+                set(Params.Item.COLUMN.AMOUNT, YOUR_AMOUNT)
+                set(Params.Item.COLUMN.PRICE, YOUR_PRICE)
+            }
+        )
+        put(Params.Parameter.ORDER_ID, YOUR_ORDER_ID)
+        put(Params.Parameter.ORDER_PRICE, YOUR_ORDER_PRICE)
+        put(Params.Parameter.DELIVERY_ADDRESS, YOUR_DELIVERY_ADDRESS)
+        put(Params.RecommendedBy(Params.RecommendedBy.TYPE.RECOMMENDATION, YOUR_RECCOMENDATION_CODE))
+    }
+    sdk.trackEventManager.track(
+        event = TrackEvent.PURCHASE,
+        params = params,
+        listener = object : OnApiCallbackListener() {
+
+            // Handle a successful response with a JSON array
+            override fun onSuccess(response: JSONArray) {
+                super.onSuccess(response)
+                // You can process the JSON array here, for example, a list of items
+            }
+
+            // Handle a successful response with a JSON object
+            override fun onSuccess(response: JSONObject?) {
+                super.onSuccess(response)
+                // You can process the JSON object here, for example, order details
+            }
+
+            // Handle an error response
+            override fun onError(code: Int, msg: String?) {
+                super.onError(code, msg)
+                // Handle the error based on the code and message
+            }
         }
     )
-    put(Params.Parameter.ORDER_ID, "100234")
-    put(Params.Parameter.ORDER_PRICE, 100500)
-    put(Params.Parameter.DELIVERY_ADDRESS, "1860 street")
-    put(Params.RecommendedBy(Params.RecommendedBy.TYPE.RECOMMENDATION, "e9ddb9cdc66285fac40c7a897760582a"))
-}
-sdk.trackEventManager.track(Params.TrackEvent.PURCHASE, purchase
-
 ```
 
 
 ```java
-Params purchase = new Params();
-purchase
-	.put(new Params.Item("37").set(Params.Item.COLUMN.AMOUNT, 2).set(Params.Item.COLUMN.PRICE, 100))
-	.put(Params.Parameter.ORDER_ID, "100234")
-	.put(Params.Parameter.ORDER_PRICE, 100500)
-  .put(Params.Parameter.DELIVERY_ADDRESS, "1860 street")
-	.put(new Params.RecommendedBy(Params.RecommendedBy.TYPE.RECOMMENDATION, "e9ddb9cdc66285fac40c7a897760582a"));
-<%= config[:android_sdk_package_name]%>.track(Params.TrackEvent.PURCHASE, purchase);
+	Params purchase = new Params();
+
+	purchase
+			.put(new Params.Item(YOUR_ITEM_ID)
+					.set(Params.Item.COLUMN.AMOUNT, YOUR_ITEM_AMOUNT)
+					.set(Params.Item.COLUMN.PRICE, YOUR_ITEM_PRICE))
+			.put(Params.Parameter.ORDER_ID, YOUR_ORDER_ID)
+			.put(Params.Parameter.ORDER_PRICE, YOUR_ORDER_PRICE)
+			.put(Params.Parameter.DELIVERY_ADDRESS, YOUR_DELIVERY_ADDRESS)
+			.put(new Params.RecommendedBy(Params.RecommendedBy.TYPE.RECOMMENDATION, YOUR_RECOMMENDATION_CODE));
+
+	REES46.track(Params.TrackEvent.PURCHASE, purchase);
 ```
 
 ```jsx
@@ -722,17 +748,17 @@ curl 'https://<%= config[:api_endpoint] %>/push' \
 ```
 
 ```kotlin
-sdk.trackEventManager.track(Params.TrackEvent.WISH, "37")
+sdk.trackEventManager.track(Params.TrackEvent.WISH, YOUR_ITEM_ID)
 
 // Full wish tracking
 
-Params full_wish = new Params();
-	full_wish
-		.put(Params.Parameter.FULL_WISH, true)
-		.put(new Params.Item("37"))
-		.put(new Params.Item("40"));
-	T.track(Params.TrackEvent.WISH, full_wish);
+val fullWish = Params().apply {
+  put(Params.Item(YOUR_FIRST_ITEM_ID))
+  put(Params.Parameter.FULL_WISH, true)
+  put(Params.Item(YOUR_SECOND_ITEM_ID))
+}
 
+sdk.trackEventManager.track(Params.TrackEvent.WISH, fullWish)
 ```
 
 ```java
@@ -783,7 +809,7 @@ sdk.track(event: .productRemovedToFavorities(id: "PRODUCT_ID")) { trackResponse 
 ```
 
 ```kotlin
-sdk.trackEventManager.track(Params.TrackEvent.REMOVE_FROM_WISH, "37")
+sdk.trackEventManager.track(Params.TrackEvent.REMOVE_FROM_WISH, YOUR_ITEM_ID)
 ```
 
 ```java
@@ -856,14 +882,14 @@ sdk.trackEvent(event: "something_happened", category: "important", label: "user_
 
 ```kotlin
 // Simple tracking of custom event
-sdk.trackEventManager.customTrack("my_event")
+sdk.trackEventManager.customTrack(YOUR_EVENT_NAME)
 
 // Tracking with additional parameters
 sdk.trackEventManager.customTrack(
-    event = "my_event",
-    category = "event category",
-    label = "event label",
-    value = 100
+  event = YOUR_EVENT_NAME,
+  category = YOUR_EVENT_CATEGORY,
+  label = YOUR_EVENT_LABEL,
+   value = YOUR_EVENT_VALUE
 )
 ```
 
