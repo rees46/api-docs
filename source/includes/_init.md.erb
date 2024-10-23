@@ -199,38 +199,22 @@ var sdk = createPersonalizationSDK(shopId: "SHOP_ID", stream: "ios",  userEmail:
 ```
 
 ```kotlin
-class SampleApplication: Application() {
-    override fun onCreate() {
-        super.onCreate()
+private lateinit var sdk: SDK
 
-        //Initialize
-       val sdk = <%= config[:android_sdk_package_name] %>.getInstance()
-               <%= config[:android_sdk_package_name] %>.initialize(applicationContext, SHOP_ID)
+override fun onCreate(savedInstanceState: Bundle?) {
+  super.onCreate(savedInstanceState)
+  sdk = SDK()
 
-        //Notification callback
-        sdk.setOnMessageListener(object : OnMessageListener {
-            override fun onMessage(data: Map<String, String>) {
-
-                //----->
-                //Show your custom notification
-                //----->
-
-            }
-        })
-    }
+  sdk.initialize(
+    context = applicationContext,
+    shopId = SHOP_ID,
+    apiUrl = API_URL,
+    tag = TAG,
+    notificationType = NOTIFICATION_TYPE,
+    notificationId = NOTIFICATION_ID,
+    autoSendPushToken = ... Optional parameter for initialization with token automatic sending flag
+  )
 }
-
-
-// 2. For On-Premise integration need use initialize with custom api domain:
-<%= config[:android_sdk_package_name] %>.initialize(applicationContext, SHOP_ID, API_DOMAIN)
-
-// Initialization with token automatic sending flag
-<%= config[:android_sdk_package_name] %>.initialize(applicationContext, SHOP_ID, API_DOMAIN, autoSendPushToken)
-
-// 3. Check AndroidManifest.xml and add android:name=".SampleApplication" to application item.
-<application
-		...
-		android:name=".SampleApplication"
 ```
 
 ```java
