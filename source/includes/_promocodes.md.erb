@@ -187,3 +187,46 @@ Note: unique promo codes are limited. Store fetched promo code during user's ses
 ### Errors
 
 When promo codes list is empty, method returns 404 error.
+
+## Delete promocodes
+
+```shell
+curl "promo_code_list_id=PROMO_CODE_LIST_ID&codes[]=CODE1&codes[]=CODE2" https://<%= config[:api_endpoint] %>/promo_codes/delete
+
+```
+
+```javascript
+// Not implemented
+```
+
+```swift
+// Not implemented
+```
+
+```kotlin
+// Not implemented
+```
+
+```java
+// Not implemented
+```
+
+```jsx
+// Not implemented
+```
+
+`GET https://<%= config[:api_endpoint] %>/promo_codes/delete`
+
+### Query Parameters
+
+| Parameter          | Type   | Required | Description                     |
+|--------------------|--------|----------|---------------------------------|
+| promo_code_list_Id | String | true     | Id of the list with promo codes |
+| codes              | Array  | true     | An array with promo codes       |
+
+### Response parameters
+
+| Parameter       | Type   | Description                               |
+|-----------------|--------|-------------------------------------------|
+| delete_count    | String | Number of deleted promo codes             |
+| not_found_count | String | Number of promo codes that were not found |
