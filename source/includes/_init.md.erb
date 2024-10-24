@@ -223,7 +223,7 @@ private <%= config[:android_sdk_package_code] %> <%= config[:android_sdk_package
 @Override
 public void onCreate() {
   super.onCreate();
-	rees46 = <%= config[:android_sdk_package_code] %>.initialize(getApplicationContext(), getShopId(), API_DOMAIN);
+	rees46 = <%= config[:android_sdk_package_code] %>.initialize(getApplicationContext(), SHOP_ID, API_DOMAIN);
 }
 ```
 
