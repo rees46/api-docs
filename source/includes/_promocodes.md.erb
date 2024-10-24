@@ -191,7 +191,16 @@ When promo codes list is empty, method returns 404 error.
 ## Delete promocodes
 
 ```shell
-curl "promo_code_list_id=PROMO_CODE_LIST_ID&codes[]=CODE1&codes[]=CODE2" https://<%= config[:api_endpoint] %>/promo_codes/delete
+curl --header "Content-Type: application/json"
+  --request DELETE
+  --data '{
+    "shop_id": "SHOP_ID",
+    "shop_secret": "SHOP_SECRET",
+    "promo_code_list_id": "1",
+    "codes": ["code1", "code2"]
+  }'
+  https://<%= config[:api_endpoint] %>/promo_codes/delete
+
 
 ```
 
@@ -215,7 +224,7 @@ curl "promo_code_list_id=PROMO_CODE_LIST_ID&codes[]=CODE1&codes[]=CODE2" https:/
 // Not implemented
 ```
 
-`GET https://<%= config[:api_endpoint] %>/promo_codes/delete`
+`DELETE https://<%= config[:api_endpoint] %>/promo_codes/delete`
 
 ### Query Parameters
 
@@ -226,7 +235,7 @@ curl "promo_code_list_id=PROMO_CODE_LIST_ID&codes[]=CODE1&codes[]=CODE2" https:/
 
 ### Response parameters
 
-| Parameter       | Type   | Description                               |
-|-----------------|--------|-------------------------------------------|
-| delete_count    | String | Number of deleted promo codes             |
-| not_found_count | String | Number of promo codes that were not found |
+| Parameter       | Type    | Description                               |
+|-----------------|---------|-------------------------------------------|
+| delete_count    | Integer | Number of deleted promo codes             |
+| not_found_count | Integer | Number of promo codes that were not found |
