@@ -597,58 +597,58 @@ sdk.track(event: .orderCreated(orderId: "123", totalValue: 33.3, products: [(id:
 ```
 
 ```kotlin
-  val params = Params().apply {
-        put(
-            Params.Item(YOUR_ITEM_ID).apply {
-                set(Params.Item.COLUMN.AMOUNT, YOUR_AMOUNT)
-                set(Params.Item.COLUMN.PRICE, YOUR_PRICE)
-            }
-        )
-        put(Params.Parameter.ORDER_ID, YOUR_ORDER_ID)
-        put(Params.Parameter.ORDER_PRICE, YOUR_ORDER_PRICE)
-        put(Params.Parameter.DELIVERY_ADDRESS, YOUR_DELIVERY_ADDRESS)
-        put(Params.RecommendedBy(Params.RecommendedBy.TYPE.RECOMMENDATION, YOUR_RECCOMENDATION_CODE))
+val params = Params().apply {
+  put(
+    Params.Item(YOUR_ITEM_ID).apply {
+    set(Params.Item.COLUMN.AMOUNT, YOUR_AMOUNT)
+    set(Params.Item.COLUMN.PRICE, YOUR_PRICE)
     }
-    sdk.trackEventManager.track(
-        event = TrackEvent.PURCHASE,
-        params = params,
-        listener = object : OnApiCallbackListener() {
+  )
+  put(Params.Parameter.ORDER_ID, YOUR_ORDER_ID)
+  put(Params.Parameter.ORDER_PRICE, YOUR_ORDER_PRICE)
+  put(Params.Parameter.DELIVERY_ADDRESS, YOUR_DELIVERY_ADDRESS)
+  put(Params.RecommendedBy(Params.RecommendedBy.TYPE.RECOMMENDATION, YOUR_RECCOMENDATION_CODE))
+ }
+sdk.trackEventManager.track(
+  event = TrackEvent.PURCHASE,
+  params = params,
+  listener = object : OnApiCallbackListener() {
 
-            // Handle a successful response with a JSON array
-            override fun onSuccess(response: JSONArray) {
-                super.onSuccess(response)
-                // You can process the JSON array here, for example, a list of items
-            }
+    // Handle a successful response with a JSON array
+    override fun onSuccess(response: JSONArray) {
+      super.onSuccess(response)
+      // You can process the JSON array here, for example, a list of items
+    }
 
-            // Handle a successful response with a JSON object
-            override fun onSuccess(response: JSONObject?) {
-                super.onSuccess(response)
-                // You can process the JSON object here, for example, order details
-            }
+    // Handle a successful response with a JSON object
+    override fun onSuccess(response: JSONObject?) {
+      super.onSuccess(response)
+      // You can process the JSON object here, for example, order details
+    }
 
-            // Handle an error response
-            override fun onError(code: Int, msg: String?) {
-                super.onError(code, msg)
-                // Handle the error based on the code and message
-            }
-        }
-    )
+    // Handle an error response
+    override fun onError(code: Int, msg: String?) {
+      super.onError(code, msg)
+      // Handle the error based on the code and message
+    }
+  }
+)
 ```
 
 
 ```java
-	Params purchase = new Params();
+Params purchase = new Params();
 
-	purchase
-			.put(new Params.Item(YOUR_ITEM_ID)
-					.set(Params.Item.COLUMN.AMOUNT, YOUR_ITEM_AMOUNT)
-					.set(Params.Item.COLUMN.PRICE, YOUR_ITEM_PRICE))
-			.put(Params.Parameter.ORDER_ID, YOUR_ORDER_ID)
-			.put(Params.Parameter.ORDER_PRICE, YOUR_ORDER_PRICE)
-			.put(Params.Parameter.DELIVERY_ADDRESS, YOUR_DELIVERY_ADDRESS)
-			.put(new Params.RecommendedBy(Params.RecommendedBy.TYPE.RECOMMENDATION, YOUR_RECOMMENDATION_CODE));
+purchase
+	.put(new Params.Item(YOUR_ITEM_ID)
+	  .set(Params.Item.COLUMN.AMOUNT, YOUR_ITEM_AMOUNT)
+		.set(Params.Item.COLUMN.PRICE, YOUR_ITEM_PRICE))
+	.put(Params.Parameter.ORDER_ID, YOUR_ORDER_ID)
+	.put(Params.Parameter.ORDER_PRICE, YOUR_ORDER_PRICE)
+	.put(Params.Parameter.DELIVERY_ADDRESS, YOUR_DELIVERY_ADDRESS)
+	.put(new Params.RecommendedBy(Params.RecommendedBy.TYPE.RECOMMENDATION, YOUR_RECOMMENDATION_CODE));
 
-	REES46.track(Params.TrackEvent.PURCHASE, purchase);
+<%= config[:android_sdk_package_code] %>.track(Params.TrackEvent.PURCHASE, purchase);
 ```
 
 ```jsx
@@ -889,7 +889,7 @@ sdk.trackEventManager.customTrack(
   event = YOUR_EVENT_NAME,
   category = YOUR_EVENT_CATEGORY,
   label = YOUR_EVENT_LABEL,
-   value = YOUR_EVENT_VALUE
+  value = YOUR_EVENT_VALUE
 )
 ```
 

@@ -82,8 +82,8 @@ sdk.configuration().recommendations.setWidgetBlock(widgetFontName: "Museo",
 ```kotlin
 val params = Params().apply {
   put(Params.Parameter.ITEM, YOUR_ITEM_ID)
-   // category filtration
-   put(Params.Parameter.CATEGORY, YOUR_CATEGORY_ID)
+  // category filtration
+  put(Params.Parameter.CATEGORY, YOUR_CATEGORY_ID)
 }
 
  // get recommendation with product ids
@@ -104,13 +104,13 @@ val params = Params().apply {
   put(Params.Parameter.CATEGORY, YOUR_CATEGORY_ID)
 }
 
-REES46.recommend(
-YOUR_RECOMMENDER_CODE,
-params, object : Api.OnApiCallbackListener() {
-override fun onSuccess(response: JSONObject) {
-Log.i(TAG, "Recommender response: $response")
-}
-   }
+<%= config[:android_sdk_package_code] %>.recommend(
+  YOUR_RECOMMENDER_CODE,
+  params, object : Api.OnApiCallbackListener() {
+    override fun onSuccess(response: JSONObject) {
+      Log.i(TAG, "Recommender response: $response")
+    }
+  }
 )
 ```
 

@@ -80,8 +80,8 @@ sdk.subscribeForPriceDrop(YOUR_PRODUCT_ID, YOUR_PRICE, YOUR_EMAIL)
 // Subscribe for a specific phone number
 sdk.subscribeForPriceDrop(YOUR_PRODUCT_ID, YOUR_PRICE, null, YOUR_PHONE_NUMBER)
 
- // Unsubscribe from specific products
- sdk.unsubscribeForPriceDrop(arrayOf(YOUR_PRODUCT_ID_1, YOUR_PRODUCT_ID_2, YOUR_PRODUCT_ID_3))
+// Unsubscribe from specific products
+sdk.unsubscribeForPriceDrop(arrayOf(YOUR_PRODUCT_ID_1, YOUR_PRODUCT_ID_2, YOUR_PRODUCT_ID_3))
 
 // Unsubscribe from all products
 sdk.unsubscribeForPriceDrop(arrayOf())
@@ -90,19 +90,19 @@ sdk.unsubscribeForPriceDrop(arrayOf())
 
 ```java
 // Subscribe
- REES46.subscribeForPriceDrop(YOUR_PRODUCT_ID, YOUR_PRICE);
+<%= config[:android_sdk_package_code] %>.subscribeForPriceDrop(YOUR_PRODUCT_ID, YOUR_PRICE);
 
 // Subscribe for specific email
- REES46.subscribeForPriceDrop(YOUR_PRODUCT_ID, YOUR_PRICE, YOUR_EMAIL);
+<%= config[:android_sdk_package_code] %>.subscribeForPriceDrop(YOUR_PRODUCT_ID, YOUR_PRICE, YOUR_EMAIL);
 
- // Subscribe for specific phone
- REES46.subscribeForPriceDrop(YOUR_PRODUCT_ID, YOUR_PRICE, null, YOUR_PHONE_NUMBER);
+// Subscribe for specific phone
+<%= config[:android_sdk_package_code] %>.subscribeForPriceDrop(YOUR_PRODUCT_ID, YOUR_PRICE, null, YOUR_PHONE_NUMBER);
 
 // Unsubscribing from specific products
- REES46.unsubscribeForPriceDrop(arrayOf<String>(YOUR_PRODUCT_ID_1, YOUR_PRODUCT_ID_2, YOUR_PRODUCT_ID_3));
+<%= config[:android_sdk_package_code] %>.unsubscribeForPriceDrop(arrayOf<String>(YOUR_PRODUCT_ID_1, YOUR_PRODUCT_ID_2, YOUR_PRODUCT_ID_3));
 
- // Unsubscribing from all products
- REES46.unsubscribeForPriceDrop(arrayOf<String>());
+// Unsubscribing from all products
+<%= config[:android_sdk_package_code] %>.unsubscribeForPriceDrop(arrayOf<String>());
 ```
 
 This feature gives the customers an option to choose if they want to receive a notification when the price of the item they want has dropped.
@@ -240,8 +240,8 @@ val properties = JSONObject()
 // Unsubscribe from specific products
 sdk.unsubscribeForBackInStock(arrayOf(YOUR_PRODUCT_ID_1, YOUR_PRODUCT_ID_2, YOUR_PRODUCT_ID_3))
 
- // Unsubscribe from all products
- sdk.unsubscribeForBackInStock(arrayOf())
+// Unsubscribe from all products
+sdk.unsubscribeForBackInStock(arrayOf())
 ```
 
 ```java

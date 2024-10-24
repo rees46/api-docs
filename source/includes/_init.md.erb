@@ -218,12 +218,12 @@ override fun onCreate(savedInstanceState: Bundle?) {
 ```
 
 ```java
-private REES46 rees46;
+private <%= config[:android_sdk_package_code] %> <%= config[:android_sdk_package_code] %>;
 
 @Override
 public void onCreate() {
   super.onCreate();
-	rees46 = REES46.initialize(getApplicationContext(), getShopId(), API_DOMAIN);
+	rees46 = <%= config[:android_sdk_package_code] %>.initialize(getApplicationContext(), getShopId(), API_DOMAIN);
 }
 ```
 
