@@ -81,31 +81,37 @@ sdk.configuration().recommendations.setWidgetBlock(widgetFontName: "Museo",
 
 ```kotlin
 val params = Params().apply {
-    put(Params.Parameter.ITEM, "37")
-    // category filtration
-    put(Params.Parameter.CATEGORY, "111")
+  put(Params.Parameter.ITEM, YOUR_ITEM_ID)
+  // category filtration
+  put(Params.Parameter.CATEGORY, YOUR_CATEGORY_ID)
 }
-// get recommendation with product ids
-sdk.recommendationManager.getRecommendation("RECOMMENDER_CODE", params, { getRecommendationResponse ->
-	  Log.i(TAG, "Get recommandation response: $getRecommendationResponse")
-})
+
+ // get recommendation with product ids
+sdk.recommendationManager.getRecommendation(RECOMMEDATION_CODE, params) { response ->
+  Log.i(TAG, "Get recommendation response: $response")
+}
+
 // get recommendation with products info
-sdk.recommendationManager.getExtendedRecommendation("RECOMMENDER_CODE", params, { getExtendedRecommendationResponse ->
-    Log.i(TAG, "Get extended recommandation response: $getExtendedRecommendationResponse")
- })
+sdk.recommendationManager.getExtendedRecommendation(RECOMMEDATION_CODE, params) { response ->
+  Log.i(TAG, "Get extended recommendation response: $response")
+}
 ```
 
 ```java
-Params params = new Params();
-params.put(Params.Parameter.EXTENDED, true);
-params.put(Params.Parameter.ITEM, "37");
-params.put(Params.Parameter.CATEGORY, "111"); //filter by category
-<%= config[:android_sdk_package_name]%>.recommend("RECOMMENDER_CODE", params, new Api.OnApiCallbackListener() {
-    @Override
-    public void onSuccess(JSONObject response) {
-        Log.i(TAG, "Recommender response: " + response.toString());
+val params = Params().apply {
+  put(Params.Parameter.EXTENDED, true)
+  put(Params.Parameter.ITEM, YOUR_ITEM_ID)
+  put(Params.Parameter.CATEGORY, YOUR_CATEGORY_ID)
+}
+
+<%= config[:android_sdk_package_code] %>.recommend(
+  YOUR_RECOMMENDER_CODE,
+  params, object : Api.OnApiCallbackListener() {
+    override fun onSuccess(response: JSONObject) {
+      Log.i(TAG, "Recommender response: $response")
     }
-});
+  }
+)
 ```
 
 ```jsx

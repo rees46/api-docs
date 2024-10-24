@@ -59,16 +59,16 @@ sdk.addToSegment(segmentId: "333", email: "my@example.com", phone: "+10000000000
 
 ```kotlin
 // By `did` only
-<%= config[:android_sdk_package_name] %>.addToSegment("333", null, null);
+sdk.addToSegment(YOUR_DID, null, null)
 
-// With a email (`did` will be switched to the owner of the email)
-<%= config[:android_sdk_package_name] %>.addToSegment("333", "my@example.com", null);
+// With an email (`did` will be switched to the owner of the email)
+sdk.addToSegment(YOUR_DID, YOUR_EMAIL, null)
 
 // With a phone number (`did` will be switched to the owner of the phone number)
-<%= config[:android_sdk_package_name] %>.addToSegment("333", null, "+10000000000");
+sdk.addToSegment(YOUR_DID, null, YOUR_PHONE_NUMBER)
 
 // With both (`did` will be switched to the owner of primary contact)
-<%= config[:android_sdk_package_name] %>.addToSegment("333", "my@example.com", "+10000000000");
+sdk.addToSegment(YOUR_DID, YOUR_EMAIL, YOUR_PHONE_NUMBER)
 ```
 
 ```java
@@ -187,16 +187,16 @@ sdk.removeFromSegment(segmentId: "333", email: "my@example.com", phone: "+100000
 
 ```kotlin
 // By `did` only
-<%= config[:android_sdk_package_name] %>.removeFromSegment("333", null, null);
+sdk.removeFromSegment(YOUR_DID, null, null)
 
-// With a email (`did` will be switched to the owner of the email)
-<%= config[:android_sdk_package_name] %>.removeFromSegment("333", "my@example.com", null);
+// With an email (`did` will be switched to the owner of the email)
+sdk.removeFromSegment(YOUR_DID, YOUR_EMAIL, null)
 
 // With a phone number (`did` will be switched to the owner of the phone number)
-<%= config[:android_sdk_package_name] %>.removeFromSegment("333", null, "+10000000000");
+sdk.removeFromSegment(YOUR_DID, null, YOUR_PHONE_NUMBER)
 
 // With both (`did` will be switched to the owner of primary contact)
-<%= config[:android_sdk_package_name] %>.removeFromSegment("333", "my@example.com", "+10000000000");
+sdk.removeFromSegment(YOUR_DID, YOUR_EMAIL, YOUR_PHONE_NUMBER)
 ```
 
 ```java
