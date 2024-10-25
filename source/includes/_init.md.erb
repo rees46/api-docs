@@ -69,6 +69,20 @@ plugins {
 // Kotlin 2.0.0
 // Gradle 8.8
 // Android Gradle Plugin 8.5.1
+
+// If your application uses Dagger for dependency injection, don't delete Dagger dependencies.
+// If you use Dagger, its dependencies and the kapt plugin must remain in your gradle files.
+// The structure for such a project should look similar to the example below:
+
+plugins {
+    id 'kotlin-kapt'
+}
+
+dependencies {
+    implementation 'com.rees46:rees46-sdk:+'
+    implementation 'com.google.dagger:dagger:DAGGER_VERSION'
+    kapt 'com.google.dagger:dagger-compiler:DAGGER_COMPILER_VERSION'
+}
 ```
 
 ```java
@@ -155,6 +169,15 @@ apply plugin: 'com.google.gms.google-services'
 
 
 Before using API you have to setup SDK.
+
+<aside class="warning">
+
+<p>If your mobile application uses Dagger for dependency injection, make sure to keep the Dagger dependencies and the kapt plugin in your gradle files.</p>
+
+<p>An example is provided in this documentation.</p>
+
+<p>If you are having trouble switching to version 2.0 of the Android SDK or newer, refer to the troubleshooting section in our guides.</p>
+</aside>
 
 ## Start session
 
