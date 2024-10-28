@@ -63,8 +63,9 @@ sdk.search({
 // Blank request search
 
 sdk.search({
-  options: options,  // An object of parameters for the search or undefined.
-                    // For example, a search query can be part of this object.
+  options: options, // An object of parameters for the search.
+                    // It can contain various parameters, such as a search query.
+                    // It can be an empty object or this method can be called without option parameter.
 
 // Depending on the presence and content of the options object, the search method will select the appropriate API endpoint.
 // If the options object is empty or not provided, the 'search/blank' endpoint will be used to perform a blank search.
