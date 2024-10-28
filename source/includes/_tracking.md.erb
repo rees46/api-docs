@@ -640,17 +640,16 @@ sdk.trackEventManager.track(
 Params purchase = new Params();
 
 purchase
-  .put(new Params.Item(YOUR_ITEM_ID)
-	  .set(Params.Item.COLUMN.AMOUNT, YOUR_ITEM_AMOUNT)
-		.set(Params.Item.COLUMN.PRICE, YOUR_ITEM_PRICE))
-	.put(Params.Parameter.ORDER_ID, YOUR_ORDER_ID)
-	.put(Params.Parameter.ORDER_PRICE, YOUR_ORDER_PRICE)
-	.put(Params.Parameter.DELIVERY_ADDRESS, YOUR_DELIVERY_ADDRESS)
-	.put(new Params.RecommendedBy(Params.RecommendedBy.TYPE.RECOMMENDATION, YOUR_RECOMMENDATION_CODE));
+		.put(new Params.Item(YOUR_ITEM_ID)
+				.set(Params.Item.COLUMN.AMOUNT, YOUR_ITEM_AMOUNT)
+				.set(Params.Item.COLUMN.PRICE, YOUR_ITEM_PRICE))
+		.put(Params.Parameter.ORDER_ID, YOUR_ORDER_ID)
+		.put(Params.Parameter.ORDER_PRICE, YOUR_ORDER_PRICE)
+		.put(Params.Parameter.DELIVERY_ADDRESS, YOUR_DELIVERY_ADDRESS)
+		.put(new Params.RecommendedBy(Params.RecommendedBy.TYPE.RECOMMENDATION, YOUR_RECOMMENDATION_CODE));
 
-<%= config[:android_sdk_package_code] %>.track(Params.TrackEvent.PURCHASE, purchase);
+REES46.track(Params.TrackEvent.PURCHASE, purchase);
 ```
-
 ```jsx
 sdk.track("purchase", {
   products: [
