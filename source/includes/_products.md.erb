@@ -26,6 +26,16 @@ curl https://<%= config[:api_endpoint] %>/products?shop_id=...&did=...&sid=...&f
 # Filter by true|false params. Send boolean params as string
 curl https://<%= config[:api_endpoint] %>/products?shop_id=...&did=...&sid=...&filters={"PARAM_NAME_1": ["true"], "PARAM_NAME_2": ["false"]}
 
+# Filter by price_margin
+curl -X POST https://<%= config[:api_endpoint] %>/products \
+  -H "Content-Type: application/json" \
+  -d '{
+    "shop_id": "...",
+    "did": "...",
+    "sid": "...",
+    "sort_by": "price_margin",
+    "sort_dir": "desc"
+  }'
 ```
 
 ```javascript
