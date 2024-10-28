@@ -39,7 +39,9 @@ curl -X POST https://<%= config[:api_endpoint] %>/products \
 ```
 
 ```javascript
-// No implementation. See CURL
+// The method requires the command as the first argument, followed by the request parameters.
+// Next, provide callback functions: first, the function to be called upon success, and then the one for handling failures.
+<%= config[:js_sdk_name] %>('products', { limit: 5, categories: '313' }, success, error);
 ```
 
 ```swift
