@@ -61,8 +61,7 @@ sdk.search({
   });
 
 // Blank request search
-sdk.blankSearchRequest(shop_id, stream)
-// The shop_id and stream parameters are used in the request.
+sdk.searchBlank()
 // The request is sent to the endpoint 'search/blank'.
 .then((res) => {
   console.log(res);
