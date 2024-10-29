@@ -61,21 +61,15 @@ sdk.search({
   });
 
 // Blank request search
-sdk.search(options // An object containing parameters for the search.
-                   // For example, a search query or shop_id. These parameters will be part of the request to the API.
-                   // This can be an empty object, or the method can be called without the options parameter.
-
-// Depending on the presence and content of the options object, the search method will select the appropriate API endpoint.
-// If the options object is empty or not provided, the 'search/blank' endpoint will be used to perform a blank search.
-// If the options object is provided and not empty, the 'search' endpoint will be used
-)
-  .then((res) => {
-    console.log(res);
-  })
-  .catch((error) => {
-    console.log(error);
-  });
-
+sdk.blankSearchRequest(shop_id, stream)
+// The shop_id and stream parameters are used in the request.
+// The request is sent to the endpoint 'search/blank'.
+.then((res) => {
+  console.log(res);
+})
+.catch((error) => {
+  console.log(error);
+});
 ```
 
 ### HTTP Request
