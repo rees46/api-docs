@@ -640,13 +640,13 @@ sdk.trackEventManager.track(
 Params purchase = new Params();
 
 purchase
-		.put(new Params.Item(YOUR_ITEM_ID)
-				.set(Params.Item.COLUMN.AMOUNT, YOUR_ITEM_AMOUNT)
-				.set(Params.Item.COLUMN.PRICE, YOUR_ITEM_PRICE))
-		.put(Params.Parameter.ORDER_ID, YOUR_ORDER_ID)
-		.put(Params.Parameter.ORDER_PRICE, YOUR_ORDER_PRICE)
-		.put(Params.Parameter.DELIVERY_ADDRESS, YOUR_DELIVERY_ADDRESS)
-		.put(new Params.RecommendedBy(Params.RecommendedBy.TYPE.RECOMMENDATION, YOUR_RECOMMENDATION_CODE));
+  .put(new Params.Item(YOUR_ITEM_ID)
+	.set(Params.Item.COLUMN.AMOUNT, YOUR_ITEM_AMOUNT)
+	.set(Params.Item.COLUMN.PRICE, YOUR_ITEM_PRICE))
+	.put(Params.Parameter.ORDER_ID, YOUR_ORDER_ID)
+	.put(Params.Parameter.ORDER_PRICE, YOUR_ORDER_PRICE)
+	.put(Params.Parameter.DELIVERY_ADDRESS, YOUR_DELIVERY_ADDRESS)
+	.put(new Params.RecommendedBy(Params.RecommendedBy.TYPE.RECOMMENDATION, YOUR_RECOMMENDATION_CODE));
 
 REES46.track(Params.TrackEvent.PURCHASE, purchase);
 ```
@@ -1065,18 +1065,18 @@ sdk.notificationClicked(code: "i7ykuagkjgfs", type: "mobile_push_transactional")
 ```
 
 ```kotlin
-  // Add notification identification data to the intent
-  intent.putExtra( <%= config[:android_sdk_package_name] %>.NOTIFICATION_TYPE, data["type"])
-  intent.putExtra( <%= config[:android_sdk_package_name] %>.NOTIFICATION_ID, data["id"])
+// Add notification identification data to the intent
+intent.putExtra( <%= config[:android_sdk_package_name] %>.NOTIFICATION_TYPE, data["type"])
+intent.putExtra( <%= config[:android_sdk_package_name] %>.NOTIFICATION_ID, data["id"])
 
-  // Add click tracking in the method of activity creation
-  override fun onCreate(savedInstanceState: Bundle?) {
-      super.onCreate(savedInstanceState)
-      // Для отслеживания кликов по уведомлению
-      if (intent.extras != null) {
-          sdk.notificationClicked(intent.extras)
-      }
-  }
+// Add click tracking in the method of activity creation
+override fun onCreate(savedInstanceState: Bundle?) {
+  super.onCreate(savedInstanceState)
+    // Для отслеживания кликов по уведомлению
+    if (intent.extras != null) {
+      sdk.notificationClicked(intent.extras)
+    }
+}
 ```
 
 
