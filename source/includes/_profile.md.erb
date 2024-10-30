@@ -96,18 +96,21 @@ let customProperties: [String: Any] = [
 ```kotlin
 // Create a map of parameters
 val params = hashMapOf(
-    "email" to "email@example.com"
+  "email" to YOUR_EMAIL
 )
 
 // Use the SDK to update the profile
 sdk.profile(params)
 
 // With callback
-sdk.profile(params, object : OnApiCallbackListener() {
-  override fun onSuccess(response: JSONObject?) {
-    Log.i(TAG, "Response: ${response.toString()}")
+sdk.profile(
+  params,
+  object : OnApiCallbackListener() {
+    override fun onSuccess(response: JSONObject?) {
+      Log.i(TAG, "Response: $response")
       }
-})
+   }
+)
 
 ```
 
