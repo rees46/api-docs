@@ -60,7 +60,30 @@ sdk.getProductsList(
 ```
 
 ```kotlin
-// No implementation. See CURL
+// sdk.productsManager requests a product list from the API with the following parameters:
+// brands, merchants, categories, locations, limit, page, filters
+// Example:
+
+sdk.productsManager.getProductsList(
+  brands = PRODUCTS_BRANDS,
+  merchants = PRODUCTS_MERCHANTS,
+  categories = PRODUCTS_CATEGORIES,
+  locations = PRODUCTS_LOCATIONS,
+  limit = PRODUCTS_LIMIT,
+  page = PRODUCTS_PAGE,
+  filters = PRODUCTS_FILTERS,
+  listener = object : OnApiCallbackListener() {
+    override fun onSuccess(response: JSONObject?) {
+      super.onSuccess(response)
+      // Handle your response
+    }
+
+    override fun onError(code: Int, msg: String?) {
+      super.onError(code, msg)
+      // Handle errors
+    }
+  }
+)
 ```
 
 ```java
