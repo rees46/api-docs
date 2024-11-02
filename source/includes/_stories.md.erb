@@ -19,20 +19,55 @@ val storiesView = StoriesView(this, "STORY BLOCK CODE")
 findViewById<ViewGroup>(R.id.stories).addView(storiesView)
 sdk.initializeStoriesView(storiesView)
 
-// Set item click listener:
-val storiesView = findViewById<StoriesView>(R.id.stories_view)
-storiesView.itemClickListener = object : OnLinkClickListener {
+storiesView.itemClickListener = object : OnClickListener {
+
+  /**
+  * Called when clicking on a regular link or deep link.
+  * This function is responsible for defining what happens after the user clicks on the link.
+  *
+  * If this function returns `false`, the developer must implement their own logic for handling the click.
+  * If this function returns `true`, the SDK will handle the processing after the user clicks on the link.
+  *
+  * @param url URL of the clicked link.
+  * @return Boolean indicating whether to let the SDK handle the navigation (true) or handle it manually (false).
+  */
+
   override fun onClick(url: String): Boolean {
-    // This function is responsible for defining what happens after the user clicks on the link.
-    // If this function returns false, the developer must implement their own logic for handling the click.
-    // If this function returns true, the SDK will handle the processing after the user clicks on the link.
     return false
   }
+
+  /**
+   * Called when clicking on a product.
+   * This function is responsible for defining what happens after the user clicks on a product.
+   *
+   * If this function returns `false`, the developer must implement their own logic for handling the click.
+   * If this function returns `true`, the SDK will handle the processing after the user clicks on the product.
+   *
+   * @param product The clicked product.
+   * @return Boolean indicating whether to let the SDK handle the navigation (true) or handle it manually (false).
+   */
+
   override fun onClick(product: Product): Boolean {
-    // This function is responsible for defining what happens after the user clicks on the product.
-    // If this function returns false, the developer must implement their own logic for handling the click.
-    // If this function returns true, the SDK will handle the processing after the user clicks on the product.
     return false
+  }
+
+  /**
+   * Called when clicking on a product in a dialog, providing an option to prevent navigation to the browser.
+   *
+   * This function allows custom handling when the user clicks on a product with an associated URL in a dialog.
+   * If this function returns `false`, navigation to the browser will be prevented, and the developer can implement custom behavior.
+   * If this function returns `true`, the SDK will proceed to open the URL in the browser.
+   *
+   * @param product The clicked product, or `null` if not available.
+   * @param url The URL associated with the product, or `null` if not available.
+   * @return Boolean indicating whether to allow navigation to the browser (true) or handle it manually (false).
+   */
+
+  override fun onCloseDialogClick(
+    product: Product?,
+    url: String?
+  ): Boolean {
+      return false
   }
 }
 ```
