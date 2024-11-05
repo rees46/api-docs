@@ -161,6 +161,40 @@ Description of `items` objects:
   Object `items` is required when you create order. You can send it as empty array when updating order's status.
 </aside>
 
+### Repeated import
+
+<aside class="notice">
+
+If fields in the order are empty during a repeated import, their previous values will remain unchanged.
+
+</aside>
+
+The following fields can be updated by the repeated import:
+
+| Parameter              | Type           | Example | Update condition | Description |
+|------------------------|----------------|---------|------------------|-------------|
+| value_raw              | Hash           |         |                  |
+| value                  | Hash/Float     |         |                  |
+| common_value           | Float          |         |                  |
+| cash_value             | Float          |         |                  |
+| bonuses_value          | Float          |         |                  |
+| delivery_value         | Float          |         |                  |
+| discount_value         | Float          |         |                  |
+| channel                | String         |         |                  |
+| promocode              | String         |         |                  |
+| location_id            | String/Integer |         |                  |
+| payment_type           | String         |         |                  |
+| tax_free               | Boolean        |         |                  |
+| bank_issuer            | String         |         |                  |
+| bank_pos_processor     | String         |         |                  |             |
+| bank_loyalty_program   | String         |         |                  |             |
+| bank_total_installment | String/Integer |         |                  |             |
+| payment_card_provider  | String         |         |                  |             |
+| gift_package           | Boolean        |         |                  |
+| payment_structure      | Hash           |         |                  |
+
+
+
 
 ## Send cancelled orders
 
