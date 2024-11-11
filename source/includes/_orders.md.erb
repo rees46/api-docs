@@ -161,6 +161,37 @@ Description of `items` objects:
   Object `items` is required when you create order. You can send it as empty array when updating order's status.
 </aside>
 
+### Repeated import
+
+<aside class="warning">
+
+If fields in the order are empty during a repeated import, their previous values will remain unchanged.
+
+</aside>
+
+The following fields can be updated by the repeated import:
+
+| Parameter              | Type           | Field update condition                                                            |
+|------------------------|----------------|-----------------------------------------------------------------------------------|
+| value_raw              | Hash           | Updates if `value` is a non-empty hash.                                           |
+| value                  | Float          | Updates if `value` is a non-empty hash (uses `total` value) or a float.           |
+| common_value           | Float          | Updates if `recommended` is `false` and `value` is present.                       |
+| cash_value             | Float          | Updates if `cash` or `products` in `value` is present and non-empty.              |
+| bonuses_value          | Float          | Updates if `bonuses` is present and non-empty in `value` or `payment_structure`.  |
+| delivery_value         | Float          | Updates if `delivery` is present and non-empty in `value` or `payment_structure`. |
+| discount_value         | Float          | Updates if `discount` is present and non-empty in `value` or `payment_structure`. |
+| channel                | String         | Updates if `channel` is present and non-empty.                                    |
+| promocode              | String         | Updates if `promocode` is present and non-empty.                                  |
+| location_id            | String/Integer | Updates if `location_id` is present and non-empty.                                |
+| payment_type           | String         | Updates if `payment_type` is present and non-empty.                               |
+| tax_free               | Boolean        | Updates if `tax_free` is present.                                                 |
+| bank_issuer            | String         | Updates if `bank_issuer` is present and non-empty.                                |
+| bank_pos_processor     | String         | Updates if `bank_pos_processor` is present and non-empty.                         |
+| bank_loyalty_program   | String         | Updates if `bank_loyalty_program` is present and non-empty.                       |
+| bank_total_installment | String/Integer | Updates if `bank_total_installment` is present and non-empty.                     |
+| payment_card_provider  | String         | Updates if `payment_card_provider` is present and non-empty.                      |
+| gift_package           | Boolean        | Updates if `gift_package` is present.                                             |
+| payment_structure      | Hash           | Updates if `payment_structure` is present and non-empty.                          |
 
 ## Send cancelled orders
 
