@@ -163,7 +163,7 @@ Description of `items` objects:
 
 ### Repeated import
 
-<aside class="notice">
+<aside class="warning">
 
 If fields in the order are empty during a repeated import, their previous values will remain unchanged.
 
@@ -171,30 +171,27 @@ If fields in the order are empty during a repeated import, their previous values
 
 The following fields can be updated by the repeated import:
 
-| Parameter              | Type           | Example | Update condition | Description |
-|------------------------|----------------|---------|------------------|-------------|
-| value_raw              | Hash           |         |                  |
-| value                  | Hash/Float     |         |                  |
-| common_value           | Float          |         |                  |
-| cash_value             | Float          |         |                  |
-| bonuses_value          | Float          |         |                  |
-| delivery_value         | Float          |         |                  |
-| discount_value         | Float          |         |                  |
-| channel                | String         |         |                  |
-| promocode              | String         |         |                  |
-| location_id            | String/Integer |         |                  |
-| payment_type           | String         |         |                  |
-| tax_free               | Boolean        |         |                  |
-| bank_issuer            | String         |         |                  |
-| bank_pos_processor     | String         |         |                  |             |
-| bank_loyalty_program   | String         |         |                  |             |
-| bank_total_installment | String/Integer |         |                  |             |
-| payment_card_provider  | String         |         |                  |             |
-| gift_package           | Boolean        |         |                  |
-| payment_structure      | Hash           |         |                  |
-
-
-
+| Parameter              | Type           | Field update condition                                                            |
+|------------------------|----------------|-----------------------------------------------------------------------------------|
+| value_raw              | Hash           | Updates if `value` is a non-empty hash.                                           |
+| value                  | Float          | Updates if `value` is a non-empty hash (uses `total` value) or a float.           |
+| common_value           | Float          | Updates if `recommended` is `false` and `value` is present.                       |
+| cash_value             | Float          | Updates if `cash` or `products` in `value` is present and non-empty.              |
+| bonuses_value          | Float          | Updates if `bonuses` is present and non-empty in `value` or `payment_structure`.  |
+| delivery_value         | Float          | Updates if `delivery` is present and non-empty in `value` or `payment_structure`. |
+| discount_value         | Float          | Updates if `discount` is present and non-empty in `value` or `payment_structure`. |
+| channel                | String         | Updates if `channel` is present and non-empty.                                    |
+| promocode              | String         | Updates if `promocode` is present and non-empty.                                  |
+| location_id            | String/Integer | Updates if `location_id` is present and non-empty.                                |
+| payment_type           | String         | Updates if `payment_type` is present and non-empty.                               |
+| tax_free               | Boolean        | Updates if `tax_free` is present.                                                 |
+| bank_issuer            | String         | Updates if `bank_issuer` is present and non-empty.                                |
+| bank_pos_processor     | String         | Updates if `bank_pos_processor` is present and non-empty.                         |
+| bank_loyalty_program   | String         | Updates if `bank_loyalty_program` is present and non-empty.                       |
+| bank_total_installment | String/Integer | Updates if `bank_total_installment` is present and non-empty.                     |
+| payment_card_provider  | String         | Updates if `payment_card_provider` is present and non-empty.                      |
+| gift_package           | Boolean        | Updates if `gift_package` is present.                                             |
+| payment_structure      | Hash           | Updates if `payment_structure` is present and non-empty.                          |
 
 ## Send cancelled orders
 
