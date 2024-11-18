@@ -195,7 +195,26 @@ curl https://<%= config[:api_endpoint] %>/products/get?shop_id=...&item_id=...
 ```
 
 ```kotlin
-// No implementation. See CURL
+sdk.productsManager.getProductInfo(
+  shopId = YOUR_SHOP_ID,
+  itemId = YOUR_ITEM_ID,
+  listener = object : OnApiCallbackListener() {
+    override fun onSuccess(response: JSONArray) {
+      super.onSuccess(response)
+      // Handle your response
+    }
+
+    override fun onSuccess(response: JSONObject?) {
+      super.onSuccess(response)
+      // Handle your response
+    }
+
+    override fun onError(code: Int, msg: String?) {
+      super.onError(code, msg)
+      // Handle your error
+    }
+  }
+)
 ```
 
 ```java
