@@ -75,37 +75,6 @@ sdk.searchBlank()
 
 // No implementation is needed in HTTP
 
-### Query Parameters
-
-| Parameter    | Required | Description                                                                                                                                                                                                                                                                                     |
-|--------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| did          | true     | Device ID. You get it from `init` method in SDK.                                                                                                                                                                                                                                                |
-| shop_id      | true     | Your API key.                                                                                                                                                                                                                                                                                   |
-| sid          | true     | Temporary user session ID.                                                                                                                                                                                                                                                                      |
-| type         | true     | In this case: "instant_search".                                                                                                                                                                                                                                                                 |
-| search_query | true     | Search query.                                                                                                                                                                                                                                                                                   |
-| locations    | false    | Comma separated list of locations IDs.                                                                                                                                                                                                                                                          |
-| search_scope | false    | The whitelist of parameters separated by commas. There are two types: common parameters and subparameters for books. If empty, all common parameters are considered included by default. If there are no book subparameters in the request, the search of book parameters won't be initialized. |
-
-### Search_scope common parameters and the books subparameters
-
-| Common Parameter | Description      |
-|------------------|------------------|
-| params           | Parameters names |
-| brand            | Brand text       |
-| type             | Type prefix      |
-| model            | Model            |
-| categories       | Category names   |
-| name             | Name             |
-
-
-| Books Parameter | Description           |
-|-----------------|-----------------------|
-| author          | Book author downcased |
-| publisher       | Publisher             |
-| illustrator     | Illustration text     |
-| editor          | Editor                |
-| series          | Series                |
 
 
 
