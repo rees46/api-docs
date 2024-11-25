@@ -276,13 +276,16 @@ If you don't have device identifier (first launch on new device), you have to re
 | tz        | false      | Timezone offset (integer, positive or negative number as difference with GMT).                                                                                                                                                  |
 | stream    | false      | Data stream code. Alphanumeric string (letters, numbers only). Max length: 16. Default: null (means "web"). Can be "ios", "android" or any other string. Used to distinguish between mobile apps, web and other events sources. |
 
-#### Popup initialization
+### Popup initialization
 
-Popup initialization without stream parameter in the request will lead to change of the stream value. The stream field value will automatically become `web`.
+**Default to web:**
 
-The same will happen if there will be the `NULL` value in the stream parameter in the request.
+  - If the stream parameter is missing from the request or its value is NULL, the stream field will automatically be set to "web".
 
-If there is a specific value of the stream parameter, for example `android`, popups with other stream values won't be initialized.
+**Stream-Specific Initialization:**
+
+  - If a specific value is provided for the stream parameter (e.g., "android"), only popups with a matching stream value will be initialized.
+  Popups with other stream values (e.g., "web", "ios") will not be initialized..
 
 ### API response
 
