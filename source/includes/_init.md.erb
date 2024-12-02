@@ -218,7 +218,16 @@ r46('init', 'SHOP_ID', 'STREAM', success, failure, options, isSpa);
 
 ```swift
 import <%= config[:ios_sdk_package_name] %>
-var sdk = createPersonalizationSDK(shopId: "SHOP_ID", stream: "ios",  userEmail: "exmample@mail.ru", userPhone: "String", userLoyaltyId: "String", apiDomain: "String", enableLogs: Bool, autoSendPushToken: Bool)
+
+var sdk = createPersonalizationSDK(
+  shopId: SHOP_ID,
+  userEmail: YOUR_EMAIL,
+  userPhone: YOUR_PHONE
+  apiDomain: YOUR_DOMAIN,
+  enableLogs: true,
+  autoSendPushToken: true,
+  parentViewController: (window?.rootViewController)! <- Pass a view controller to display in-app notifications
+)
 ```
 
 ```kotlin
