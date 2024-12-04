@@ -307,7 +307,8 @@ sdk.search({type: 'full_search', search_query: 'string', filters_search_by: 'pop
 
 <aside class="warning">
 
-<p>*</p>
+<p></p>
+<p>* <code>exclude_merchants</code></p>
 <p>The <code>exclude_merchants</code> parameter works only in conjunction with the <code>merchants</code> parameter within the <code>locations</code> field.</p>
 <p>Note that if a product is associated with multiple merchants, the list of merchants in the <code>exclude_merchants</code> parameter must precisely match the list of merchants for that product. Otherwise, the parameter will not work.</p>
 <p>The connection between the <code>merchants</code> and <code>exclude_merchants</code> parameters exists because a whitelist of merchants is created based on the <code>merchants</code> parameter within the <code>locations</code> field.</p>
