@@ -276,33 +276,45 @@ sdk.search({type: 'full_search', search_query: 'string', filters_search_by: 'pop
 
 ### Query Parameters
 
-| Parameter         | Required | Description                                                                                                                          |
-|-------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------|
-| did               | true     | Device ID. You get it from `init` method in SDK.                                                                                     |
-| shop_id           | true     | Your API key                                                                                                                         |
-| sid               | true     | Temporary user session ID                                                                                                            |
-| type              | true     | In this case: "full_search"                                                                                                          |
-| search_query      | true     | Search query                                                                                                                         |
-| limit             | false    | Limit of results                                                                                                                     |
-| offset            | false    | Offset of results                                                                                                                    |
-| category_limit    | false    | How many categories for sidebar filter to return                                                                                     |
-| categories        | false    | Comma separated list of categories to filter                                                                                         |
-| extended          | false    | It's better to use `true` for full search results                                                                                    |
-| sort_by           | false    | Sort by parameter: `popular`, `price`, `discount`, `sales_rate`, `date`, `price_margin`                                              |
-| order             | false    | Sort direction: `asc` or `desc` (default)                                                                                            |
-| locations         | false    | Comma separated list of locations IDs                                                                                                |
-| brands            | false    | Comma separated list of brands to filter                                                                                             |
-| filters           | false    | Optional escaped JSON string with filter parameters. For example: `{"bluetooth":["yes"],"offers":["15% cashback"],"weight":["1.6"]}` |
-| price_min         | false    | Min price                                                                                                                            |
-| price_max         | false    | Max price                                                                                                                            |
-| colors            | false    | Comma separated list of colors                                                                                                       |
-| fashion_sizes     | false    | Comma separated list of sizes                                                                                                        |
-| exclude           | false    | Comma separated list of products IDs to exclude from search results                                                                  |
-| email             | false    | It's only for S2S integration, when service doesn't have user's session. Mobile SDK doesn't use it.                                  |
-| no_clarification  | false    | Disable clarified search (true, false, default: false). Don't use it. God mode only.                                                 |
-| merchants         | false    | Comma separated list of merchants                                                                                                    |
-| filters_search_by | false    | Available options for filter: name, quantity, popularity.If this parameter in query global settings from dashboard are ignored       |
-| brand_limit       | false    | This parameter allows limiting the number of brands aggregated in the response. The default limit is 1000                            |
+| Parameter          | Required | Description                                                                                                                          |
+|--------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------|
+| did                | true     | Device ID. You get it from `init` method in SDK                                                                                      |
+| shop_id            | true     | Your API key                                                                                                                         |
+| sid                | true     | Temporary user session ID                                                                                                            |
+| type               | true     | In this case: "full_search"                                                                                                          |
+| search_query       | true     | Search query                                                                                                                         |
+| limit              | false    | Limit of results                                                                                                                     |
+| offset             | false    | Offset of results                                                                                                                    |
+| category_limit     | false    | How many categories for sidebar filter to return                                                                                     |
+| categories         | false    | Comma separated list of categories to filter                                                                                         |
+| extended           | false    | It's better to use `true` for full search results                                                                                    |
+| sort_by            | false    | Sort by parameter: `popular`, `price`, `discount`, `sales_rate`, `date`, `price_margin`                                              |
+| order              | false    | Sort direction: `asc` or `desc` (default)                                                                                            |
+| locations          | false    | Comma separated list of locations IDs                                                                                                |
+| brands             | false    | Comma separated list of brands to filter                                                                                             |
+| filters            | false    | Optional escaped JSON string with filter parameters. For example: `{"bluetooth":["yes"],"offers":["15% cashback"],"weight":["1.6"]}` |
+| price_min          | false    | Min price                                                                                                                            |
+| price_max          | false    | Max price                                                                                                                            |
+| colors             | false    | Comma separated list of colors                                                                                                       |
+| fashion_sizes      | false    | Comma separated list of sizes                                                                                                        |
+| exclude            | false    | Comma separated list of products IDs to exclude from search results                                                                  |
+| email              | false    | It's only for S2S integration, when service doesn't have user's session. Mobile SDK doesn't use it                                   |
+| no_clarification   | false    | Disable clarified search (true, false, default: false). Don't use it. God mode only                                                  |
+| merchants          | false    | Comma separated list of merchants                                                                                                    |
+| exclude_merchants* | false    | A comma-separated list of merchants. Products from these merchants will be excluded from the search results                          |
+| filters_search_by  | false    | Available options for filter: name, quantity, popularity.If this parameter in query global settings from dashboard are ignored       |
+| brand_limit        | false    | This parameter allows limiting the number of brands aggregated in the response. The default limit is 1000                            |
+
+<aside class="warning">
+
+<p>*</p>
+<p>The <code>exclude_merchants</code> parameter works only in conjunction with the <code>merchants</code> parameter within the <code>locations</code> field.</p>
+<p>Note that if a product is associated with multiple merchants, the list of merchants in the <code>exclude_merchants</code> parameter must precisely match the list of merchants for that product. Otherwise, the parameter will not work.</p>
+<p>The connection between the <code>merchants</code> and <code>exclude_merchants</code> parameters exists because a whitelist of merchants is created based on the <code>merchants</code> parameter within the <code>locations</code> field.</p>
+<p>The whitelist of merchants is populated by the content of the <code>merchants</code> parameter. If this parameter is not provided, all merchants for the product will be included in the whitelist by default.</p>
+<p>The <code>exclude_merchants</code> parameter then excludes merchants from this whitelist.</p>
+
+</aside>
 
 ### API response
 | Name               | Type   | Description                                                                                                                                                                                           |
