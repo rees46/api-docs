@@ -89,7 +89,7 @@ val params = Params().apply {
 // Retrieve extended information about the product
 
 sdk.recommendationManager.getExtendedRecommendation(RECOMMEDATION_CODE,
-  params,
+  params = params,
   onGetExtendedRecommendation = { response ->
     Log.i(YOUR_TAG, response)
   },
