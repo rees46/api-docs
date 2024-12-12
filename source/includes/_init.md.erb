@@ -241,9 +241,9 @@ override fun onCreate(savedInstanceState: Bundle?) {
     context = applicationContext,
     shopId = SHOP_ID,
     apiUrl = API_URL,
+    // The tag parameter is useful for configuring logs to make it easier to identify messages from the SDK.
+    // It helps filter them among other logs in the application. Default value - SDK, but you can change the tag name.
     tag = TAG,
-    notificationType = NOTIFICATION_TYPE,
-    notificationId = NOTIFICATION_ID,
     autoSendPushToken = ... Optional parameter for initialization that enables automatic token sending
     needReInitialization = ... Optional parameter that allows you to reinitialize the SDK and to clear storage
   )
