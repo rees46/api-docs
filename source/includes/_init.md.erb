@@ -219,15 +219,21 @@ r46('init', 'SHOP_ID', 'STREAM', success, failure, options, isSpa);
 ```swift
 import <%= config[:ios_sdk_package_name] %>
 
-var sdk = createPersonalizationSDK(
-  shopId: SHOP_ID,
-  userEmail: YOUR_EMAIL,
-  userPhone: YOUR_PHONE
-  apiDomain: YOUR_DOMAIN,
-  enableLogs: true,
-  autoSendPushToken: true,
-  parentViewController: (window?.rootViewController)! <- Pass a view controller to display in-app notifications
+sdk = createPersonalizationSDK(
+  shopId: AppEnvironments.shopId, // The shop identifier (required parameter for SDK configuration).
+  apiDomain: AppEnvironments.apiDomain, // The API domain for server communication.
+  enableLogs: true, // Enable logs for debugging purposes during development.
+  parentViewController: (window?.rootViewController)!, // Pass the view controller to display in-app notifications.
+  needReInitialization: true, // Optional: Allows reinitialization of the SDK and clears the local storage.
+  { error in
+      // Assign the SDK instance to a global variable for reuse across the application.
+      globalSDK = self.sdk
+
+      // Notify other parts of the application about the successful initialization of the SDK.
+      NotificationCenter.default.post(name: globalSDKNotificationNameMainInit, object: nil)
+  }
 )
+
 ```
 
 ```kotlin
