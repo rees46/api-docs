@@ -243,17 +243,34 @@ override fun onCreate(savedInstanceState: Bundle?) {
   super.onCreate(savedInstanceState)
   sdk = SDK()
 
+  // Choose ONE of the following SDK initialization methods based on your requirements.
+
+  // ===== Basic SDK initialization =====
+  // This is a simpler initialization with only the required parameters.
   sdk.initialize(
+    context = context, // Required parameter: The application context, used for SDK initialization.
+    shopId = shopId    // Required parameter: The shop identifier, necessary for the SDK to function.
+  )
+
+  // ===== Extended SDK initialization =====
+  // Use this method if you need more configuration options.
+  sdk.initialize(
+    // Required parameter: The application context, used for SDK initialization.
     context = applicationContext,
+    // Required parameter: The shop identifier, necessary for the SDK to function.
     shopId = SHOP_ID,
+    // Optional parameter: The API domain that the SDK will interact with.
     apiUrl = API_URL,
-    // The tag parameter is useful for configuring logs to make it easier to identify messages from the SDK.
-    // It helps filter them among other logs in the application. Default value - SDK, but you can change the tag name.
+    // Optional parameter: The tag is useful for configuring logs to make it easier to identify messages from the SDK.
+    // It helps filter them among other logs in the application. Default value is "SDK," but you can change the tag name.
     tag = TAG,
-    autoSendPushToken = ... Optional parameter for initialization that enables automatic token sending
-    needReInitialization = ... Optional parameter that allows you to reinitialize the SDK and to clear storage
+    // Optional parameter: Enables automatic token sending during initialization.
+    autoSendPushToken = true,
+    // Optional parameter: Allows you to reinitialize the SDK and clear the storage.
+    needReInitialization = false
   )
 }
+
 ```
 
 ```java
