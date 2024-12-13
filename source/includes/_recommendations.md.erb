@@ -82,19 +82,21 @@ sdk.configuration().recommendations.setWidgetBlock(widgetFontName: "Museo",
 ```kotlin
 val params = Params().apply {
   put(Params.Parameter.ITEM, YOUR_ITEM_ID)
-  // category filtration
-  put(Params.Parameter.CATEGORY, YOUR_CATEGORY_ID)
+  put(Params.Parameter.CATEGORY, YOUR_CATEGORY_ID) // category filtration
+  put(Params.Parameter.WITH_LOCATIONS, true) // Enable locations to receive data about locations where the product is available (default is false).
 }
 
- // get recommendation with product ids
-sdk.recommendationManager.getRecommendation(RECOMMEDATION_CODE, params) { response ->
-  Log.i(TAG, "Get recommendation response: $response")
-}
+// Retrieve extended information about the product
 
-// get recommendation with products info
-sdk.recommendationManager.getExtendedRecommendation(RECOMMEDATION_CODE, params) { response ->
-  Log.i(TAG, "Get extended recommendation response: $response")
-}
+sdk.recommendationManager.getExtendedRecommendation(RECOMMEDATION_CODE,
+  params = params,
+  onGetExtendedRecommendation = { response ->
+    Log.i(YOUR_TAG, response)
+  },
+  onError = { code, msg ->
+    Log.e(YOUR_TAG, "Error caught: $code, $msg")
+  }
+)
 ```
 
 ```java
