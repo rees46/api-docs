@@ -645,17 +645,13 @@ window.<%= config[:js_sdk_name] %>('cart', 'get', success, failure);
 ```
 
 ```kotlin
-sdk.cartManager.getClientShoppingCart(
-  listener = object : OnApiCallbackListener() {
-
-    override fun onSuccess(response: JSONObject?) {
-      // Handle your response
-    }
-
-    override fun onError(code: Int, msg: String?) {
+sdk.cartManager.getClientShoppingCartContent(
+  onGetCartContent = { cartContent: CartContent ->
     // Handle your response
-    }
- }
+  },
+  onError = { code: Int, msg: String? ->
+    // Handle your response
+  }
 )
 ```
 
