@@ -94,23 +94,109 @@ let customProperties: [String: Any] = [
 ```
 
 ```kotlin
-// Create a map of parameters
+
+/**
+ * Updates the user's profile using the SDK.
+ *
+ * @param params Map of parameters to update the user's profile.
+ * @param params.email User's email address.
+ */
+
 val params = hashMapOf(
   "email" to YOUR_EMAIL
 )
 
-// Use the SDK to update the profile
 sdk.profile(params)
 
-// With callback
+/**
+ * Updates the user's profile using the SDK with a callback.
+ *
+ * @param params Map of parameters to update the user's profile.
+ * @param params.email User's email address.
+ * @param callback Callback to handle the response.
+ */
+
+val params = hashMapOf(
+  "email" to YOUR_EMAIL
+)
 sdk.profile(
   params,
   object : OnApiCallbackListener() {
     override fun onSuccess(response: JSONObject?) {
       Log.i(TAG, "Response: $response")
-      }
-   }
+    }
+  }
+ )
+
+/**
+ * Custom properties for the user.
+ *
+ * @property prop_key_1 Custom property key 1.
+ * @property prop_key_2 Custom property key 2.
+*/
+
+val customProperties = JSONObject(
+  """
+  {
+    "prop_key_1": "prop_value",
+    "prop_key_2": "prop_value"
+  }
+ """
 )
+
+/**
+ * Updates the user's profile with detailed properties.
+ *
+ * @param params Map of parameters to update the user's profile.
+ * @param params.userEmail User's email address.
+ * @param params.userPhone User's phone number.
+ * @param params.userLoyaltyId User's loyalty ID.
+ * @param params.birthday User's birthday.
+ * @param params.age User's age.
+ * @param params.firstName User's first name.
+ * @param params.lastName User's last name.
+ * @param params.location User's location.
+ * @param params.gender User's gender.
+ * @param params.fbID User's Facebook ID.
+ * @param params.vkID User's VK ID.
+ * @param params.telegramId User's Telegram ID.
+ * @param params.loyaltyCardLocation Loyalty card location.
+ * @param params.loyaltyStatus Loyalty status.
+ * @param params.loyaltyBonuses User's loyalty bonuses.
+ * @param params.loyaltyBonusesToNextLevel Bonuses to next loyalty level.
+ * @param params.boughtSomething Whether the user has purchased something.
+ * @param params.userId User's ID.
+ * @param params.customProperties Custom properties for the user.
+ * @param callback Callback to handle the response.
+ */
+
+val params: HashMap<String, Any> = hashMapOf(
+  "userEmail" to "YOUR_EMAIL",
+  "userPhone" to "YOUR_PHONE",
+  "userLoyaltyId" to "YOUR_LOYALTY_ID",
+  "birthday" to Date(),
+  "age" to 30,
+  "firstName" to "YOUR_NAME",
+  "lastName" to "YOUR_LAST_NAME",
+  "location" to "YOUR_LOCATION",
+  "gender" to "male",
+  "fbID" to "YOUR_FB_ID",
+  "vkID" to "YOUR_VK_ID",
+  "telegramId" to "YOUR_TG_ID",
+  "loyaltyCardLocation" to "LOYALTY_CARD_LOCATION",
+  "loyaltyStatus" to "LOYALTY_STATUS",
+  "loyaltyBonuses" to 100,
+  "loyaltyBonusesToNextLevel" to 200,
+  "boughtSomething" to true,
+  "userId" to "YOUR_USER_ID",
+  "customProperties" to customProperties
+ )
+
+sdk.profile(params, object : OnApiCallbackListener() {
+  override fun onSuccess(response: JSONObject?) {
+    Log.i(TAG, "Response: $response")
+  }
+})
 
 ```
 
@@ -224,7 +310,7 @@ Auto object properties:
 
 ### Custom properties
 
-Additionally you can update any custom property, you've created in CRM.
+Additionally, you can update any custom property, you've created in CRM.
 
 
 
