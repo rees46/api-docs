@@ -48,48 +48,139 @@ sdk.initPush(false, onReceiveCallback, onBackgroundReceiveCallback);
   "ttl": TTL_VALUE
 }
 ```
+## Adding Push Notification Permissions
 
+```kotlin
+
+/**
+To enable push notifications on Android, add the following permissions to your AndroidManifest.xml file
+*/
+
+<uses-permission android:name="android.permission.INTERNET" />
+<uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
+<uses-permission android:name="com.google.android.c2dm.permission.RECEIVE" />
+
+/**
+Additionally, ensure that the Firebase messaging service is declared in the manifest
+*/
+
+<service android:name="com.google.firebase.messaging.FirebaseMessagingService" android:exported="true">
+  <intent-filter>
+    <action android:name="com.google.firebase.MESSAGING_EVENT" />
+  </intent-filter>
+</service>
+
+```
+
+```swift
+
+/**
+To configure push notifications for iOS:
+
+1. Enable the Push Notifications capability in your Xcode project under the Signing & Capabilities tab.
+2. Register for push notifications in your AppDelegate.swift file. Example below.
+
+*/
+
+import UserNotifications
+import Firebase
+
+@UIApplicationMain
+class AppDelegate: UIResponder, UIApplicationDelegate {
+  func application(
+    _ application: UIApplication,
+    didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?
+  ) -> Bool {
+    UNUserNotificationCenter.current().delegate = self
+    application.registerForRemoteNotifications()
+    FirebaseApp.configure()
+    return true
+  }
+}
+
+```
 
 ## Default payload structure
 
-> For iOS
+> Example for iOS
 
 ```json
 {
-  "aps": {
-    "alert": {
-      "title": "...",
-      "subtitle": "...",
-      "body": "...",
-      "badge": 1
+  "id": "sample_id",
+  "title": "Sample Title",
+  "body": "Sample body content for the notification.",
+  "icon": "YOUR_IMAGE",
+  "type": "sample_type",
+  "actions": [
+    {
+      "action": "open_app",
+      "title": "Open Application"
     },
-    "mutable-content": 1
-  },
-  "image_url": "...",
+    {
+      "action": "view_details",
+      "title": "View Details"
+    }
+  ],
+  "actionUrls": [
+    "ACTION_URL/action1",
+    "ACTION_URL/action2"
+  ],
+  "image": "YOUR_IMAGE",
   "event": {
-    "type": "...",
-    "uri": "..."
+    "type": "web",
+    "uri": "URI/event",
+    "payload": {
+      "campaignId": "campaign_sample",
+      "userSegment": "segment_sample"
+    }
   },
-  "src": {
-    "type": "...",
-    "id": "..."
-  }
+  "recipient": {
+    "userId": "user_sample_id",
+    "deviceToken": "sample_device_token"
+  },
+  "priority": "high",
+  "timestamp": "CURRENT_TIMESTAMP"
 }
 ```
 
-> For Android
+> Example for Android
 
 ```json
 {
-  "title": "...",
-  "body": "...",
-  "icon": "...",
-  "type": "...",
-  "id": "...",
-  "actions": "[{\"action\": "\b0\", \"title\": \"...\"}, ...]",
-  "action_urls": "[...]",
-  "image": "...",
-  "event": "{\"type\": \"...\", \"uri\": \"...\"}"
+  "id": "sample_id",
+  "title": "Sample Title",
+  "body": "Sample body content for the notification.",
+  "icon": "YOUR_IMAGE",
+  "type": "sample_type",
+  "actions": [
+    {
+      "action": "open_app",
+      "title": "Open Application"
+    },
+    {
+      "action": "view_details",
+      "title": "View Details"
+    }
+  ],
+  "actionUrls": [
+    "ACTION_URL/action1",
+    "ACTION_URL/action2"
+  ],
+  "image": "YOUR_IMAGE",
+  "event": {
+    "type": "web",
+    "uri": "URI/event",
+    "payload": {
+      "campaignId": "campaign_sample",
+      "userSegment": "segment_sample"
+    }
+  },
+  "recipient": {
+    "userId": "user_sample_id",
+    "deviceToken": "sample_device_token"
+  },
+  "priority": "high",
+  "timestamp": "CURRENT_TIMESTAMP"
 }
 ```
 
@@ -334,6 +425,117 @@ Suitable to open specific product by it's ID. For example for triggered messages
 ```
 
 Can be used to open any resource by custom data. For example for transactional messages to show order status.
+
+## Handling Push Notifications
+
+```kotlin
+
+/**
+You can use the following code to listten for incoming notifications and their payload extraction
+*/
+
+sdk.setOnMessageListener(
+  listener = { data ->
+    Log.i(TAG, data.toString())
+  }
+)
+
+/**
+The OnMessageListener interface
+*/
+
+fun interface OnMessageListener {
+  fun onMessage(data: NotificationData)
+}
+
+/**
+NotificationData class
+*/
+
+data class NotificationData(
+  val id: String?,
+  val title: String?,
+  val body: String?,
+  val icon: String?,
+  val type: String?,
+  val actions: List<NotificationAction>?,
+  val actionUrls: List<String>?,
+  val image: String?,
+  val event: NotificationEvent?
+)
+
+data class NotificationAction(
+  val action: String,
+  val title: String
+)
+
+data class NotificationEvent(
+  val type: String?,
+  val uri: String?,
+  val payload: Map<String, Any>? = null
+)
+
+
+```
+
+```swift
+
+/**
+In the AppDelegate file, you can handle push notifications using the following delegate methods
+*/
+
+extension AppDelegate: UNUserNotificationCenterDelegate {
+  func application(
+    _ application: UIApplication,
+    didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data
+  ) {
+      let tokenParts = deviceToken.map { data in
+        String(format: "%02.2hhx", data)
+      }
+      let token = tokenParts.joined()
+      print("Push Token: \(token)")
+      }
+
+  func userNotificationCenter(
+    _ center: UNUserNotificationCenter,
+    willPresent notification: UNNotification,
+    withCompletionHandler completionHandler: @escaping (UNNotificationPresentationOptions) -> Void
+  ) {
+      completionHandler([.alert, .badge, .sound])
+    }
+
+  func application(
+    _ application: UIApplication,
+    didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+    fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void
+  ) {
+      print("Received Notification: \(userInfo)")
+      completionHandler(.newData)
+    }
+}
+
+/**
+You can customize actions for notifications by implementing the NotificationActionsProtocol
+*/
+
+extension AppDelegate: NotificationActionsProtocol {
+  func openCustom(url: String) {
+    print("Open custom URL: \(url)")
+  }
+
+  func openCategory(categoryId: String) {
+    print("Open category: \(categoryId)")
+  }
+
+  func openProduct(productId: String) {
+    print("Open product: \(productId)")
+  }
+
+  func openWeb(url: String) {
+    print("Open web URL: \(url)")
+  }
+}
+```
 
 ## Custom push notifications
 
