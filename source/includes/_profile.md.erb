@@ -94,107 +94,91 @@ let customProperties: [String: Any] = [
 ```
 
 ```kotlin
-
 /**
- * Updates the user's profile using the SDK.
- *
- * @param params Map of parameters to update the user's profile.
- * @param params.email User's email address.
+ * Initializes arrays of basic data types.
+ * These arrays demonstrate that profile properties can support arrays of strings, integers, floats, booleans, and dates.
  */
 
-val params = hashMapOf(
-  "email" to YOUR_EMAIL
-)
-
-sdk.profile(params)
+val stringArray = arrayOf("item1", "item2", "item3")
+val intArray = arrayOf(1, 2, 3, 4, 5)
+val floatArray = arrayOf(1.1f, 2.2f, 3.3f)
+val boolArray = arrayOf(true, false, true)
+val dateArray = arrayOf(Date(), Date(), Date())
 
 /**
- * Updates the user's profile using the SDK with a callback.
- *
- * @param params Map of parameters to update the user's profile.
- * @param params.email User's email address.
- * @param callback Callback to handle the response.
+ * Creates a nested JSON object.
+ * This object demonstrates how to structure complex data with key-value pairs, including strings and integers.
  */
 
-val params = hashMapOf(
-  "email" to YOUR_EMAIL
-)
-sdk.profile(
-  params,
-  object : OnApiCallbackListener() {
-    override fun onSuccess(response: JSONObject?) {
-      Log.i(TAG, "Response: $response")
-    }
-  }
- )
+val nestedObject = JSONObject().apply {
+  put("nestedStringKey", "nestedValue")
+  put("nestedIntKey", 456)
+}
 
 /**
- * Custom properties for the user.
- *
- * @property prop_key_1 Custom property key 1.
- * @property prop_key_2 Custom property key 2.
-*/
-
-val customProperties = JSONObject(
-  """
-  {
-    "prop_key_1": "prop_value",
-    "prop_key_2": "prop_value"
-  }
- """
-)
-
-/**
- * Updates the user's profile with detailed properties.
- *
- * @param params Map of parameters to update the user's profile.
- * @param params.userEmail User's email address.
- * @param params.userPhone User's phone number.
- * @param params.userLoyaltyId User's loyalty ID.
- * @param params.birthday User's birthday.
- * @param params.age User's age.
- * @param params.firstName User's first name.
- * @param params.lastName User's last name.
- * @param params.location User's location.
- * @param params.gender User's gender.
- * @param params.fbID User's Facebook ID.
- * @param params.vkID User's VK ID.
- * @param params.telegramId User's Telegram ID.
- * @param params.loyaltyCardLocation Loyalty card location.
- * @param params.loyaltyStatus Loyalty status.
- * @param params.loyaltyBonuses User's loyalty bonuses.
- * @param params.loyaltyBonusesToNextLevel Bonuses to next loyalty level.
- * @param params.boughtSomething Whether the user has purchased something.
- * @param params.userId User's ID.
- * @param params.customProperties Custom properties for the user.
- * @param callback Callback to handle the response.
+ * Creates a custom JSON object.
+ * The object includes various data types such as strings, integers, floats, booleans, dates, arrays,
+ * and even another nested JSON object.
  */
 
-val params: HashMap<String, Any> = hashMapOf(
-  "userEmail" to "YOUR_EMAIL",
-  "userPhone" to "YOUR_PHONE",
-  "userLoyaltyId" to "YOUR_LOYALTY_ID",
-  "birthday" to Date(),
-  "age" to 30,
-  "firstName" to "YOUR_NAME",
-  "lastName" to "YOUR_LAST_NAME",
-  "location" to "YOUR_LOCATION",
-  "gender" to "male",
-  "fbID" to "YOUR_FB_ID",
-  "vkID" to "YOUR_VK_ID",
-  "telegramId" to "YOUR_TG_ID",
-  "loyaltyCardLocation" to "LOYALTY_CARD_LOCATION",
-  "loyaltyStatus" to "LOYALTY_STATUS",
-  "loyaltyBonuses" to 100,
-  "loyaltyBonusesToNextLevel" to 200,
-  "boughtSomething" to true,
-  "userId" to "YOUR_USER_ID",
-  "customProperties" to customProperties
- )
+val customObject = JSONObject().apply {
+  put("stringKey", "stringValue")
+  put("intKey", 123)
+  put("floatKey", 45.67f)
+  put("boolKey", true)
+  put("dateKey", Date())
+  put("arrayKey", JSONArray(arrayOf(1, 2, 3)))
+  put("nestedObjectKey", nestedObject)
+}
+
+/**
+ * Creates an array of custom JSON objects.
+ * This demonstrates how to pass an array of complex objects as a single profile property.
+ */
+
+val customObjectArray = arrayOf(customObject, customObject)
+
+/**
+ * Builds the ProfileParams object using the Builder pattern.
+ * This example demonstrates how to add a wide range of user properties,
+ * including basic data types, arrays, and custom objects, to be passed to the SDK.
+ */
+
+val params = ProfileParams.Builder()
+  .put("userEmail", "YOUR_EMAIL")
+  .put("userPhone", "YOUR_PHONE")
+  .put("userLoyaltyId", "YOUR_LOYALTY_ID")
+  .put("birthday", Date())
+  .put("age", 30)
+  .put("firstName", "YOUR_NAME")
+  .put("lastName", "YOUR_LAST_NAME")
+  .put("location", "YOUR_LOCATION")
+  .put("gender", "male")
+  .put("fbID", "YOUR_FB_ID")
+  .put("vkID", "YOUR_VK_ID")
+  .put("telegramId", "YOUR_TG_ID")
+  .put("loyaltyCardLocation", "LOYALTY_CARD_LOCATION")
+  .put("loyaltyStatus", "LOYALTY_STATUS")
+  .put("loyaltyBonuses", 100)
+  .put("loyaltyBonusesToNextLevel", 200)
+  .put("boughtSomething", true)
+  .put("userId", "YOUR_USER_ID")
+  .put("stringArray", stringArray)
+  .put("intArray", intArray)
+  .put("floatArray", floatArray)
+  .put("boolArray", boolArray)
+  .put("dateArray", dateArray)
+  .put("customObject", customObject)
+  .put("customObjectArray", customObjectArray)
+
+/**
+ * Calls the SDK's profile method to save user profile data.
+ * A callback is included to handle success or failure of the API call.
+ */
 
 sdk.profile(params, object : OnApiCallbackListener() {
   override fun onSuccess(response: JSONObject?) {
-    Log.i(TAG, "Response: $response")
+    Log.i(TAG, "Response: $response") // Logs the API response
   }
 })
 
