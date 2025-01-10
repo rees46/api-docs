@@ -22,6 +22,7 @@ includes:
   - transactionals.md.erb
   - mobile_push_tokens.md.erb
   - mobile_push_notifications.md.erb
+  - mobile_in_app_push_notifications.md.erb
   - profile.md.erb
   - audience.md.erb
   - crm.md.erb
