@@ -16,7 +16,6 @@ Alert management is responsible only for alert display. Any further configuratio
 For iOS you'll need to add `parentViewController` as an optional parameter during SDK initialization.
 
 ```swift
-
 /*
 SDK initialization example with parentViewController
 */
@@ -61,9 +60,9 @@ sdk.initialize(
 /*
 The separate fragmentManager initialization that enables three types of alert display:
 
-- Centered on the screen
-- Positioned at the bottom
-- Full-screen
+1. Centered on the screen
+2. Positioned at the bottom
+3. Full-screen
 */
 
 sdk.initializeFragmentManager(fragmentManager = fragmentManager)
