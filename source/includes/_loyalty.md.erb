@@ -117,7 +117,7 @@ Content-type: application/json
 curl --header "Content-Type: application/json" \
   --request POST \
   --data-binary "@data.json" \
-  https://<%= config[:api_endpoint] %>/loyalty/estimate
+  https://<%= config[:api_endpoint] %>/loyalty/checkout/estimate
 ```
 
 ```javascript
@@ -171,7 +171,7 @@ curl --header "Content-Type: application/json" \
 
 ### HTTP Request
 
-`POST https://<%= config[:api_endpoint] %>/loyalty/estimate`
+`POST https://<%= config[:api_endpoint] %>/loyalty/checkout/estimate`
 
 Method estimates discounts and bonuses usage for the shopping cart.
 
@@ -215,7 +215,7 @@ Content-type: application/json
 curl --header "Content-Type: application/json" \
   --request POST \
   --data-binary "@data.json" \
-  https://<%= config[:api_endpoint] %>/loyalty/estimate
+  https://<%= config[:api_endpoint] %>/loyalty/checkout/apply
 ```
 
 ```javascript
@@ -269,7 +269,7 @@ curl --header "Content-Type: application/json" \
 
 ### HTTP Request
 
-`POST https://<%= config[:api_endpoint] %>/loyalty/apply`
+`POST https://<%= config[:api_endpoint] %>/loyalty/checkout/apply`
 
 When clients proceed to the payment step, execute the this method to charge for bonuses and get the final payment value.
 
@@ -280,6 +280,82 @@ This method requires `order_id` parameter to apply bonuses and save results in o
 This method actually charges a client for bonuses so it's not safe to execute it several times for the same `order_id` or `identifier`.
 
 If client decided to not pay for the order, use "order status sync" operation to cancel the order and refund bonuses charged in this operation.
+
+
+
+
+
+
+
+## Cancel order
+
+> Headers
+
+```
+Content-type: application/json
+```
+
+> Body example
+
+```json
+{
+    "shop_id":         "...",
+    "shop_secret":     "...",
+    "order_id":        "...",
+    "identifier":      "...",
+    "charge_bonuses":  true,
+    "cart_items": [
+      {"product_id": "...", "price": 1000, "quantity": 4},
+      {"product_id": "...", "price": 2000, "quantity": 1}
+    ]
+}
+```
+
+> Request example
+
+```shell
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data-binary "@data.json" \
+  https://<%= config[:api_endpoint] %>/loyalty/checkout/cancel
+```
+
+```javascript
+// S2S only
+```
+```swift
+// S2S only
+```
+```java
+// S2S only
+```
+```kotlin
+// S2S only
+```
+```jsx
+// S2S only
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "success": true,
+  "payload": {
+    "order_id": "...",
+    "identifier": "..."
+  }
+}
+```
+
+### HTTP Request
+
+`POST https://<%= config[:api_endpoint] %>/loyalty/checkout/cancel`
+
+If client failed to pay for order and don't plan to proceed, you have to cancel the transaction to refund bonuses used on `loyalty/checkout/apply` operation.
+
+Just send the same payload to `loyalty/checkout/cancel` to refund bonuses.
+
 
 
 
