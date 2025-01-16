@@ -42,6 +42,7 @@ includes:
   - communications.md.erb
   - reputation.md.erb
   - stories.md.erb
+  - sliders.md.erb
   - utilities.md.erb
   - errors.md.erb 
 
