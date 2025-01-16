@@ -9,7 +9,7 @@ Slider is a banner block. It has a collection of banners.
 ## Get slider's banners
 
 ```shell
-curl https://<%= config[:api_endpoint] %>/slider?shop_id=...&shop_secret=...&code=...&did=...&email=...&phone=...&external_id=...&tag=...
+curl https://<%= config[:api_endpoint] %>/slider?shop_id=...&shop_secret=...&code=...&did=...&email=...&phone=...&external_id=...&tags=...
 ```
 
 ```javascript
@@ -62,16 +62,16 @@ curl https://<%= config[:api_endpoint] %>/slider?shop_id=...&shop_secret=...&cod
 
 ### Query Parameters
 
-| Parameter   | Required | Description                                        |
-|-------------|----------|----------------------------------------------------|
-| did         | true     | Device ID. You get it from `init` method in SDK.   |
-| email       | true     | User's email                                       |
-| phone       | true     | User's phone                                       |
-| external_id | true     | User's ID from your database                       |
-| shop_id     | true     | Your API key                                       |
-| shop_secret | true     | Your API secret key                                |
-| code        | true     | Slider unique code                                 |
-| tag         | false    | Banner tag to filter banners by tag value (string) |
+| Parameter   | Required | Description                                                  |
+|-------------|----------|--------------------------------------------------------------|
+| did         | false    | Device ID. You get it from `init` method in SDK.             |
+| email       | false    | User's email                                                 |
+| phone       | false    | User's phone                                                 |
+| external_id | false    | User's ID from your database                                 |
+| shop_id     | true     | Your API key                                                 |
+| shop_secret | true     | Your API secret key                                          |
+| code        | true     | Slider unique code                                           |
+| tags        | false    | Banner tags to filter banners (comma-separated list of tags) |
 
 
 ### API response
