@@ -158,6 +158,7 @@ curl --header "Content-Type: application/json" \
         "total": 4000,
         "discountable": true,
         "bonusable": true,
+        "rewardable": true,
         "paid_with_offers": 0,
         "paid_with_discounts": 500,
         "paid_with_bonuses": 500,
@@ -203,7 +204,6 @@ Content-type: application/json
     "shop_secret":     "...",
     "order_id":        "...",
     "identifier":      "...",
-    "payment_type":    "...",
     "payment_type":    "...",
     "charge_bonuses":  true,
     "cart_items": [
@@ -259,12 +259,13 @@ curl --header "Content-Type: application/json" \
         "total": 4000,
         "discountable": true,
         "bonusable": true,
+        "rewardable": true,
         "paid_with_offers": 0,
         "paid_with_discounts": 500,
         "paid_with_bonuses": 500,
         "bonuses_used": 500,
         "bonuses_used_per_product": 125,
-        "total_after_discounts": 3500,
+        "total_after_discounts": 3500
       },
       ...
     ]
@@ -364,6 +365,106 @@ Just send the same payload to `loyalty/checkout/cancel` to refund bonuses.
 
 
 
+
+
+## Change order
+
+> Headers
+
+```
+Content-type: application/json
+```
+
+> Body example
+
+```json
+{
+    "shop_id":         "...",
+    "shop_secret":     "...",
+    "order_id":        "...",
+    "identifier":      "...",
+    "payment_type":    "...",
+    "charge_bonuses":  true,
+    "cart_items": [
+      {"product_id": "...", "price": 1000, "quantity": 4},
+      {"product_id": "...", "price": 2000, "quantity": 1}
+    ]
+}
+```
+
+> Request example
+
+```shell
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data-binary "@data.json" \
+  https://<%= config[:api_endpoint] %>/loyalty/checkout/change
+```
+
+```javascript
+// S2S only
+```
+```swift
+// S2S only
+```
+```java
+// S2S only
+```
+```kotlin
+// S2S only
+```
+```jsx
+// S2S only
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "success": true,
+  "payload": {
+    "refund": 1000, // How much money to refund
+    "order_id": "...",
+    "identifier": "...",
+    "payment_type": "...",
+    "order_total": 6000,
+    "order_discount": 1000,
+    "order_to_pay": 5000,
+    "order_bonuses_to_charge": 500,
+    "items": [
+      {
+        "product_id": "...",
+        "quantity": 4,
+        "price": 1000,
+        "total": 4000,
+        "discountable": true,
+        "bonusable": true,
+        "rewardable": true,
+        "paid_with_offers": 0,
+        "paid_with_discounts": 500,
+        "paid_with_bonuses": 500,
+        "bonuses_used": 500,
+        "bonuses_used_per_product": 125,
+        "total_after_discounts": 3500
+      },
+      ...
+    ]
+  }
+}
+```
+
+### HTTP Request
+
+`POST https://<%= config[:api_endpoint] %>/loyalty/checkout/change`
+
+When client partially returns some products from an order, it's needed to recalculate money and bonuses used in the order and make money/bonuses refund.
+
+Send an updated list of client's cart to refund bonuses and calculate how much money to refund.
+
+
+
+
+
 ## Order details
 
 > Headers
@@ -428,6 +529,7 @@ curl --header "Content-Type: application/json" \
         "total": ...,                 // (decimal) Total value of a position (price * quantity)
         "discountable": ...,          //(bool) Allowed for discounts
         "bonusable": ...,             // (bool) Allowed for bonuses
+        "rewardable": ...,            // (bool) Allowed to be rewarded with bonuses
         "paid_with_offers": ...,      // (decimal) Paid with offers
         "paid_with_discounts": ...,   // (decimal) Paid with discounts
         "paid_with_bonuses": ...,     // (decimal) Paid with bonuses
