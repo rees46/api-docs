@@ -31,6 +31,15 @@ includes:
   - promocodes.md.erb
   - bonuses.md.erb
   - loyalty.md.erb
+  - loyalty.join.md.erb
+  - loyalty.estimate.md.erb
+  - loyalty.apply.md.erb
+  - loyalty.cancel.md.erb
+  - loyalty.confirm.md.erb
+  - loyalty.change.md.erb
+  - loyalty.details.md.erb
+  - loyalty.balance.md.erb
+  - loyalty.event_bonus.md.erb
   - nps.md.erb
   - sms.md.erb
   - multi_messaging.md.erb
