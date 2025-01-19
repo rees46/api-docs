@@ -1,0 +1,84 @@
+## Join loyalty program
+
+> Headers
+
+```
+Content-type: application/json
+```
+
+> Body example
+
+```json
+{
+    "shop_id": "...",
+    "shop_secret": "...",
+    "phone": "...",
+    "email": "...",
+    "first_name": "...",
+    "last_name": "...",
+    "gender": "...",
+    "birthday": "..."
+}
+```
+
+> Request example
+
+```shell
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data-binary "@data.json" \
+  https://<%= config[:api_endpoint] %>/loyalty/members/join
+```
+
+```javascript
+// S2S only
+```
+
+```swift
+// S2S only
+```
+
+```java
+// S2S only
+```
+
+```kotlin
+// S2S only
+```
+
+```jsx
+// S2S only
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "success": true,
+  "payload": {
+    "message": "Member is registered successfully",
+    "identifier": "..."
+  }
+}
+```
+
+### HTTP Request
+
+`POST https://<%= config[:api_endpoint] %>/loyalty/members/join`
+
+Method to register a user as a member of loyalty program. Server-to-server integration method only.
+
+### Query Parameters
+
+| Parameter   | Required | Description                               |
+|-------------|----------|-------------------------------------------|
+| shop_id     | true     | Your API key                              |
+| shop_secret | true     | Your API secret key                       |
+| email       | true     | User's email                              |
+| phone*      | true     | User's phone number. Required.            |
+| first_name  | optional | Customer's first name                     |
+| last_name   | optional | Customer's last name                      |
+| gender      | optional | Customer's gender: `m` or `f`             |
+| birthday    | optional | Customer's birthday (format: `YYYY-MM-DD` |
+
+

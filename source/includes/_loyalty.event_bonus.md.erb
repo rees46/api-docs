@@ -1,0 +1,39 @@
+## Reward bonuses for an activity
+
+> Request example
+
+```shell
+curl --location --request POST 'https://<%= config[:api_endpoint] %>/loyalty/basic/event_bonus?phone=PHONE&shop_id=SHOP_ID&shop_secret=SHOP_SECRET&event=EVENT&amount=AMOUNT'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "status": "success"
+}
+```
+
+Method increase bonuses. This method is used to increase user bonuses that aren't related to an order. It can be any action, for example, registration in the mobile applications. Bonuses added by this method have activated status and can be used immediately.
+
+### HTTP Request
+
+`POST https://<%= config[:api_endpoint] %>/loyalty/basic/event_bonus`
+
+### Query Parameters
+
+| Parameter   | Required | Description                                                                                                  |
+|-------------|----------|--------------------------------------------------------------------------------------------------------------|
+| shop_id     | true     | Your API key                                                                                                 |
+| shop_secret | true     | Your API secret key                                                                                          |
+| email       | true     | User's email                                                                                                 |
+| phone*      | true     | User's phone number (loyalty program identifier)                                                             |
+| event       | true     | A unique event code that's used once for a user to award bonuses for an action. For example, "registration". |
+| amount      | true     | Bonuses amount                                                                                               |
+
+
+### API response
+
+| Name      | Type   | Description       |
+|-----------|--------|-------------------|
+| status    | String | Response status   |
