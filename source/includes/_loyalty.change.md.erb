@@ -52,17 +52,20 @@ curl --header "Content-Type: application/json" \
 {
   "success": true,
   "payload": {
-    "refund": 1000, // How much money to refund
     "order_id": "...",
     "identifier": "...",
     "payment_type": "...",
+    "products_total": 5,
     "order_total": 6000,
-    "order_discount": 1000,
+    "saved_total": 1000,
+    "saved_by_discounts": 400,
+    "saved_by_bonuses": 600,
     "order_to_pay": 5000,
     "order_bonuses_to_charge": 500,
     "order_total_change": -300,   // How order value changed: negative for refund, positive for extra charge
+    "bonuses_reward": 500,
     "items": [
-      {
+       {
         "product_id": "...",
         "quantity": 4,
         "price": 1000,
@@ -71,8 +74,11 @@ curl --header "Content-Type: application/json" \
         "bonusable": true,
         "rewardable": true,
         "paid_with_offers": 0,
+        "paid_with_offers_per_product": 0,
         "paid_with_discounts": 500,
+        "paid_with_discounts_per_product": 100,
         "paid_with_bonuses": 500,
+        "paid_with_bonuses_per_product": 100,
         "bonuses_used": 500,
         "bonuses_used_per_product": 125,
         "total_after_discounts": 3500
