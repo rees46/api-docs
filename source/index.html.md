@@ -39,6 +39,7 @@ includes:
   - loyalty.change.md.erb
   - loyalty.details.md.erb
   - loyalty.balance.md.erb
+  - loyalty.history.md.erb
   - loyalty.event_bonus.md.erb
   - nps.md.erb
   - sms.md.erb

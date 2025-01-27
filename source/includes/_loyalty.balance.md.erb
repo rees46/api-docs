@@ -1,4 +1,54 @@
-## Get balance
+## Bonuses balance
+> Request example
+
+```shell
+curl 'https://<%= config[:api_endpoint] %>/loyalty/bonuses/balance?shop_id=SHOP_ID&shop_secret=SHOP_SECRET&identifier=PHONE&expire_in=YYYY-MM-DD'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "active": 123,
+    "pending": 456,
+    "expiring": 789,
+    "expire_in": "2030-12-12"
+}
+```
+
+Method return current bonuses balance.
+
+### HTTP Request
+
+`GET https://<%= config[:api_endpoint] %>/loyalty/bonuses/balance`
+
+### Query Parameters
+
+| Parameter   | Required | Description                          |
+|-------------|----------|--------------------------------------|
+| shop_id     | true     | Your API key                         |
+| shop_secret | true     | Your API secret key                  |
+| identifier  | true     | User's phone (identifier)            |
+| expire_in   | optional | Bonuses expiration date (DD-MM-YYYY) |
+
+### API response
+
+| Name               | Type | Description                            |
+|--------------------|------|----------------------------------------|
+| active             | Int  | Available bonuses                      |
+| pending            | Int  | Pending bonuses                        |
+| expiring           | Int  | Bonuses that will be expired           |
+| expire_in          | Date | Expiring period                        |
+
+
+
+## Get balance (deprecated)
+
+<aside class="notice">
+It's a previous version. Will be deleted on 2025-05-01.
+</aside>
+
+
 > Request example
 
 ```shell
@@ -35,9 +85,6 @@ Method return current bonuses balance.
 | expire_in   | optional | Bonuses expiration date (DD-MM-YYYY) |
 | order_total | optional | Order total                          |
 
-<aside class="notice">
-At least one of identifiers (marked by *) must present in request: email, phone. It's used to identify user.
-</aside>
 
 
 ### API response
