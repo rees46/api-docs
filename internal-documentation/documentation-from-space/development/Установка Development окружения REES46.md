@@ -86,4 +86,96 @@ ALTER USER rees46 WITH SUPERUSER;
 ```
 ### Clickhouse 22.2
 
+Mac OS:
+
+```
+brew tap clickhouse/clickhouse && brew install clickhouse@22.2 && brew services restart clickhouse
+```
+
+#### Обновляем сертификаты
+
+Ubuntu:
+
+```
+sudo apt install ca-certificates
+```
+
+Mac OS:
+
+```
+brew install ca-certificates
+```
+
+### Ruby 
+
+Установка ruby через RVM:
+
+```
+curl -sSL https://get.rvm.io | bash -s stable && source ~/.profile
+```
+Если получаем ошибку `curl: (60) SSL certificate problem: certificate has expired`:
+
+```
+curl https://raw.githubusercontent.com/rvm/rvm/master/binscripts/rvm-installer | bash -s stable
+```
+Рестартуем терминал и выполняем установку Ruby 2.7.5
+
+```
+rvm install 2.7.5
+```
+#### Ubuntu
+
+На версии 22.04 не работает подключение к PG. Падает с ошибкой Segmentation fault . Видимо из-за использования OpenSSL 3. Работает корректно только на 18.04 версии.
+
+Устанавливаем bundle:
+
+```
+gem install bundler -v 1.17.3
+```
+
+#### Mac OS:
+
+Если видимо ошибку при установке` Error running 'requirements_osx_brew_update_system ruby-2.7.5'`
+
+Требуется поставить CommandLineTools:
+
+```
+sudo rm -rf /Library/Developer/CommandLineTools
+xcode-select --install
+```
+### ImageMagick 6
+
+Ubuntu:
+
+```
+sudo apt-get install -y imagemagick-6.q16 libmagickwand-dev
+```
+
+Mac OS:
+
+```
+brew install shared-mime-info imagemagick@6
+```
+
+### Node 16, NPM
+
+Ubuntu:
+
+```
+curl -sL https://deb.nodesource.com/setup_16.x | sudo bash -
+sudo apt -y install nodejs
+node -v
+```
+
+Mac OS:
+
+```
+brew install node@16
+node -v
+```
+## Настройка API проекта
+
+Создаем рабочую директорию с проектами (не обязательно, у вас оно может лежать в любом другом месте):
+
+
 
