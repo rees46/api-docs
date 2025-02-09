@@ -1,0 +1,65 @@
+## Send one-time password
+
+> Headers
+
+```
+Content-type: application/json
+```
+
+> Body example
+
+```json
+{
+    "shop_id":        "...",
+    "shop_secret":    "...",
+    "phone":          "...",
+    "event":          "..."
+}
+```
+
+> Request example
+
+```shell
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data-binary "@data.json" \
+  https://<%= config[:api_endpoint] %>/otp/send
+```
+
+```javascript
+// S2S only
+```
+```swift
+// S2S only
+```
+```java
+// S2S only
+```
+```kotlin
+// S2S only
+```
+```jsx
+// S2S only
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "success": true
+}
+```
+
+### HTTP Request
+
+`POST https://<%= config[:api_endpoint] %>/otp/send`
+
+Method sends one-time password to authorize bonuses usage on POS. This method sends a code even if recipient is not a member of loyalty program.
+
+| Parameter   | Type   | Required | Description         |
+|-------------|--------|----------|---------------------|
+| shop_id     | String | true     | Your API key        |
+| shop_secret | String | true     | Your API secret key |
+| phone       | String | true     | Phone number        |
+| event       | String | true     | Event to authorize  |
+
