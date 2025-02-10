@@ -218,26 +218,89 @@ r46('init', 'SHOP_ID', 'STREAM', success, failure, options, isSpa);
 
 ```swift
 import <%= config[:ios_sdk_package_name] %>
-var sdk = createPersonalizationSDK(shopId: "SHOP_ID", stream: "ios",  userEmail: "exmample@mail.ru", userPhone: "String", userLoyaltyId: "String", apiDomain: "String", enableLogs: Bool, autoSendPushToken: Bool)
+
+sdk = createPersonalizationSDK(
+  shopId: AppEnvironments.shopId, // The shop identifier (required parameter for SDK configuration).
+  apiDomain: AppEnvironments.apiDomain, // The API domain for server communication.
+  enableLogs: true, // Enable logs for debugging purposes during development.
+  parentViewController: (window?.rootViewController)!, // Pass the view controller to display in-app notifications.
+  needReInitialization: true, // Optional: Allows reinitialization of the SDK and clears the local storage.
+  { error in
+      // Assign the SDK instance to a global variable for reuse across the application.
+      globalSDK = self.sdk
+
+      // Notify other parts of the application about the successful initialization of the SDK.
+      NotificationCenter.default.post(name: globalSDKNotificationNameMainInit, object: nil)
+  }
+)
+
 ```
 
 ```kotlin
 private lateinit var sdk: SDK
 
+/**
+ * Entry point for the application's activity where the SDK is initialized.
+ * The SDK supports two types of initialization:
+ * - **Basic Initialization:** Only the required parameters are provided for minimal configuration.
+ * - **Extended Initialization:** Includes optional parameters for more advanced customization.
+ *
+ * You can choose the initialization method that best suits your application's needs.
+ */
 override fun onCreate(savedInstanceState: Bundle?) {
   super.onCreate(savedInstanceState)
   sdk = SDK()
 
+  /**
+  * Initializes the SDK with a simple configuration.
+  * This method is suitable if you only need the basic functionality of the SDK.
+  *
+  * @param context Context - Required. The application context used for SDK initialization.
+  * @param shopId String - Required. The shop identifier, necessary for the SDK to function.
+  *
+  * @example
+  * sdk.initialize(
+  *  context = applicationContext,
+  *  shopId = "YOUR_SHOP_ID"
+  * )
+  */
+  sdk.initialize(
+    context = context,
+    shopId = shopId
+  )
+
+  /**
+  * Initializes the SDK with an extended configuration.
+  * This method provides additional options for advanced use cases.
+  *
+  * @param context Context - Required. The application context used for SDK initialization.
+  * @param shopId String - Required. The shop identifier, necessary for the SDK to function.
+  * @param apiDomain String? - Optional. The API domain that the SDK will interact with. Default is null.
+  * @param tag String? - Optional. A tag used for configuring logs, making it easier to identify SDK messages.
+  *                      Default value is "SDK," but you can specify your own tag name.
+  * @param autoSendPushToken Boolean - Optional. Enables automatic token sending during initialization. Default is true.
+  * @param needReInitialization Boolean - Optional. Allows you to reinitialize the SDK and clear the storage. Default is false.
+  *
+  * @example
+  * sdk.initialize(
+  *   context = applicationContext,
+  *   shopId = "YOUR_SHOP_ID",
+  *   apiDomain = "YOUR_API_DOMAIN",
+  *   tag = "CustomTag",
+  *   autoSendPushToken = true,
+  *   needReInitialization = false
+  * )
+  */
   sdk.initialize(
     context = applicationContext,
     shopId = SHOP_ID,
-    apiUrl = API_URL,
+    apiDomain = API_DOMAIN,
     tag = TAG,
-    notificationType = NOTIFICATION_TYPE,
-    notificationId = NOTIFICATION_ID,
-    autoSendPushToken = ... Optional parameter for initialization with token automatic sending flag
+    autoSendPushToken = true,
+    needReInitialization = false
   )
 }
+
 ```
 
 ```java

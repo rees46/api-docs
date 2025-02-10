@@ -1,0 +1,51 @@
+## Bonuses history
+> Request example
+
+```shell
+curl 'https://<%= config[:api_endpoint] %>/loyalty/bonuses/history?shop_id=SHOP_ID&shop_secret=SHOP_SECRET&identifier=PHONE&offset=0&limit=50'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+    "date": "2025-01-01",
+    "status": "confirmed",
+    "event_source": "order",
+    "event": null,
+    "order_id": "pc19843",
+    "amount": -300,
+  },
+  {
+    "date": "2025-01-01",
+    "status": "confirmed",
+    "event_source": "custom",
+    "event": "registration",
+    "order_id": null,
+    "amount": 1000
+  },
+  ...
+]
+```
+
+Method return current bonuses balance.
+
+### HTTP Request
+
+`GET https://<%= config[:api_endpoint] %>/loyalty/bonuses/history`
+
+### Query Parameters
+
+| Parameter   | Required | Description                |
+|-------------|----------|----------------------------|
+| shop_id     | true     | Your API key               |
+| shop_secret | true     | Your API secret key        |
+| identifier  | true     | User's phone (identifier)  |
+| offset      | optional | Offset (default 0)         |
+| limit       | optional | Limit (default 50, max 50) |
+
+
+
+
+

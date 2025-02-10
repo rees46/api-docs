@@ -1,0 +1,91 @@
+## Order details
+
+> Headers
+
+```
+Content-type: application/json
+```
+
+> Body example
+
+```json
+{
+    "shop_id":         "...",
+    "shop_secret":     "...",
+    "order_id":        "..."
+}
+```
+
+> Request example
+
+```shell
+curl --header "Content-Type: application/json" \
+  --request GET \
+  --data-binary "@data.json" \
+  https://<%= config[:api_endpoint] %>/loyalty/checkout/details
+```
+
+```javascript
+// S2S only
+```
+```swift
+// S2S only
+```
+```java
+// S2S only
+```
+```kotlin
+// S2S only
+```
+```jsx
+// S2S only
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "success": true,
+  "payload": {
+    "order_id": "...",              // (string) Order ID
+    "identifier": "...",            // (string) Loyalty member identifier
+    "payment_type": "...",          // (string) Payment type
+    "products_total": ...,          // (integer) Total products in the cart
+    "order_total": ...,             // (decimal) Order total value (initial)
+    "saved_total": ...,             // (decimal) Money saved total (discounts and bonuses)
+    "saved_by_discounts": ...,      // (decimal) Money saved by discounts and offers
+    "saved_by_bonuses": ...,        // (decimal) Money saved by bonuses
+    "order_to_pay": ...,            // (decimal) Order total to pay after discounts
+    "order_bonuses_to_charge": ..., // (integer) Total bonuses used in this order
+    "bonuses_reward": ...,          // (integer) Bonuses amount to be rewarded after the purchase
+    "items": [
+      {
+        "uniqid": "...",                          // (string) Item ID
+        "quantity": ...,                          // (integer) Quantity
+        "price": ...,                             // (decimal) Initial product price
+        "total": ...,                             // (decimal) Total value of a position (price * quantity)
+        "discountable": ...,                      //(bool) Allowed for discounts
+        "bonusable": ...,                         // (bool) Allowed for bonuses
+        "rewardable": ...,                        // (bool) Allowed to be rewarded with bonuses
+        "paid_with_offers": ...,                  // (decimal) Paid with offers
+        "paid_with_offers_per_product": ...,      // (decimal) Paid with offers per 1 item
+        "paid_with_discounts": ...,               // (decimal) Paid with discounts
+        "paid_with_discounts_per_product": ...,   // (decimal) Paid with discounts
+        "paid_with_bonuses": ...,                 // (decimal) Paid with bonuses
+        "paid_with_bonuses_per_product": ...,     // (decimal) Paid with bonuses
+        "bonuses_used": ...,                      // (integer) Bonuses used for this position
+        "bonuses_used_per_product": ...,          // (integer) Bonuses used per 1 pcs of this product
+        "total_after_discounts": ...              // (decimal) To paid with money after all discounts
+      },
+      ...
+    ],
+  }
+}
+```
+
+### HTTP Request
+
+`GET https://<%= config[:api_endpoint] %>/loyalty/checkout/details`
+
+Returns details of discounts and bonuses usage calculation of a previously created order.
+

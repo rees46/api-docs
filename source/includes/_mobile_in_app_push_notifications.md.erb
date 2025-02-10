@@ -1,0 +1,81 @@
+# In App Notifications
+
+This document provides detailed guidelines for integrating and configuring in-app notifications for Android and iOS platforms.
+
+To configure in-app notifications, follow a two-step process:
+
+1. SDK Initialization
+2. Alert Management Setup
+
+<aside class="notice">
+Alert management is responsible only for alert display. Any further configuration should be done using the shop’s administrative panel.
+</aside>
+
+## SDK initialization and alert management for iOS
+
+For iOS you'll need to add `parentViewController` as an optional parameter during SDK initialization.
+
+```swift
+/*
+SDK initialization example with parentViewController
+*/
+
+sdk = createPersonalizationSDK(
+  shopId: YOUR_SHOP_ID,
+  apiDomain: YOUR_DOMAIN,
+  parentViewController: (window?.rootViewController)!,
+    { error in
+      // You can handle initialization errors here
+    }
+)
+```
+
+### initialization parameters for iOS
+
+| Parameter            | Category    | Description                                                                                                     |
+|----------------------|-------------|-----------------------------------------------------------------------------------------------------------------|
+| shopId               | required    | Your shop ID                                                                                                    |
+| apiDomain            | required    | API endpoint for URL request creation                                                                           |
+| parentViewController | optional    | This parameter must be provided if you want to enable alerts                                                    |
+| stream               | conditional | Platform specific value "ios" must be passed if alerts are enabled (parentViewController parameter is provided) |
+
+## SDK initialization and alert management for Android
+
+To enable alerts in your Android App you'll have to initialize `fragmentManager` separately. It allows three types of alert display:
+
+1. Centered on the screen
+2. Positioned at the bottom
+3. Full-screen
+
+```kotlin
+/*
+Basic SDK initialization example without additional parameters
+*/
+
+sdk.initialize(
+  context = YOUR_CONTEXT,
+  shopId = YOUR_SHOP_ID
+)
+
+/*
+The separate fragmentManager initialization that enables three types of alert display:
+
+1. Centered on the screen
+2. Positioned at the bottom
+3. Full-screen
+*/
+
+sdk.initializeFragmentManager(fragmentManager = fragmentManager)
+
+```
+
+### initialization parameters for Android
+
+| Parameter | Category    | Description                                                                             |
+|-----------|-------------|-----------------------------------------------------------------------------------------|
+| shopId    | required    | Your shop ID                                                                            |
+| context   | required    | The part that provides access to the core resources of your App                         |
+| stream    | conditional | Platform specific value "android" must be passed if the fragmentManager was initialized |
+
+The `fragmentManager` must be initialized separately if you want to enable alerts.
+

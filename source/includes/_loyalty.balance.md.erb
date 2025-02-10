@@ -1,0 +1,98 @@
+## Bonuses balance
+> Request example
+
+```shell
+curl 'https://<%= config[:api_endpoint] %>/loyalty/bonuses/balance?shop_id=SHOP_ID&shop_secret=SHOP_SECRET&identifier=PHONE&expire_in=YYYY-MM-DD'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "active": 123,
+    "pending": 456,
+    "expiring": 789,
+    "expire_in": "2030-12-12"
+}
+```
+
+Method return current bonuses balance.
+
+### HTTP Request
+
+`GET https://<%= config[:api_endpoint] %>/loyalty/bonuses/balance`
+
+### Query Parameters
+
+| Parameter   | Required | Description                          |
+|-------------|----------|--------------------------------------|
+| shop_id     | true     | Your API key                         |
+| shop_secret | true     | Your API secret key                  |
+| identifier  | true     | User's phone (identifier)            |
+| expire_in   | optional | Bonuses expiration date (DD-MM-YYYY) |
+
+### API response
+
+| Name               | Type | Description                            |
+|--------------------|------|----------------------------------------|
+| active             | Int  | Available bonuses                      |
+| pending            | Int  | Pending bonuses                        |
+| expiring           | Int  | Bonuses that will be expired           |
+| expire_in          | Date | Expiring period                        |
+
+
+
+## Get balance (deprecated)
+
+<aside class="notice">
+It's a previous version. Will be deleted on 2025-05-01.
+</aside>
+
+
+> Request example
+
+```shell
+curl 'https://<%= config[:api_endpoint] %>/loyalty/basic/balance?shop_id=SHOP_ID&shop_secret=SHOP_SECRET&phone=PHONE&order_total=ORDER_TOTAL'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "confirmed": 123,
+    "pending": 456,
+    "expiring": 789,
+    "expire_in": "2022-12-12 23:59:59 UTC",
+    "available_in_order": 100, // How many bonuses can be spent in this purchase
+    "payable_amount": 50 // How much it will in currency if exchange rate is not 1:1
+}
+```
+
+Method return current bonuses balance.
+
+### HTTP Request
+
+`GET https://<%= config[:api_endpoint] %>/loyalty/basic/balance`
+
+### Query Parameters
+
+| Parameter   | Required | Description                          |
+|-------------|----------|--------------------------------------|
+| shop_id     | true     | Your API key                         |
+| shop_secret | true     | Your API secret key                  |
+| email*      | true     | User's email                         |
+| phone*      | true     | User's phone number                  |
+| expire_in   | optional | Bonuses expiration date (DD-MM-YYYY) |
+| order_total | optional | Order total                          |
+
+
+
+### API response
+
+| Name                | Type     | Description                            |
+|---------------------|----------|----------------------------------------|
+| confirmed           | Int      | Available bonuses                      |
+| pending             | Int      | Pending bonuses                        |
+| expiring            | Int      | Bonuses that will be expired           |
+| expire_in           | Datetime | Expiring period                        |
+| available_in_order  | Int      | Available bonuses for use in the order |

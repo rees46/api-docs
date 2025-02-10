@@ -96,6 +96,10 @@ sdk.productsManager.getProductsList(
 
 If the request lacks a category, request has no parameters, or contains empty parameters, the response won't include any filters
 
+<aside class="warning">
+There is a response limit: a response can contain no more than ten thousand items, even if the request found more products
+</aside>
+
 ### Query Parameters
 
 | Parameter             | Required | Description                                                                                                                          |
@@ -493,17 +497,17 @@ Returns boolean status of subscription.
 
 ### Query Parameters
 
-| Parameter    | Type          | Required | Description                                                                                |
-|--------------|---------------|----------|--------------------------------------------------------------------------------------------|
-| item_id      | string/number | true     | Product ID                                                                                 |
-| shop_secret  | string        | true     | Shop secret                                                                                |
-| shop_id      | string        | true     | Shop ID                                                                                    |
-| did*         | string        | false    | Device ID                                                                                  |
-| external_id* | string        | false    | External ID                                                                                |
-| email*       | string 	     | false    | Email for subscription checking                                                            |
-| phone*       | string 	     | false    | Phone for subscription checking                                                            |
-| loyalty_id*  | string 	     | false    | Loyalty ID for subscription checking                                                       |
-| telegram_id* | string 	     | false    | Telegram ID for subscription checking                                                      |
+| Parameter    | Type          | Required | Description                           |
+|--------------|---------------|----------|---------------------------------------|
+| item_id      | string/number | true     | Product ID                            |
+| shop_secret  | string        | true     | Shop secret                           |
+| shop_id      | string        | true     | Shop ID                               |
+| did*         | string        | false    | Device ID                             |
+| external_id* | string        | false    | External ID                           |
+| email*       | string 	     | false    | Email for subscription checking       |
+| phone*       | string 	     | false    | Phone for subscription checking       |
+| loyalty_id*  | string 	     | false    | Loyalty ID for subscription checking  |
+| telegram_id* | string 	     | false    | Telegram ID for subscription checking |
 
 <aside class="notice">
 At least one of identifiers (marked by *) must present in request: email, phone, etc. It's used to identify user.
@@ -645,7 +649,14 @@ window.<%= config[:js_sdk_name] %>('cart', 'get', success, failure);
 ```
 
 ```kotlin
-// Not implemented yet.
+sdk.cartManager.getClientShoppingCartContent(
+  onGetCartContent = { cartContent: CartContent ->
+    // Handle your response
+  },
+  onError = { code: Int, msg: String? ->
+    // Handle your response
+  }
+)
 ```
 
 ```java
@@ -699,7 +710,6 @@ sdk.getProductsFromCart { result in
 ### API response
 
 Returns `{"status": "success", "data": { "items": [ {"uniqid": "SKU_1", "quantity": 1}, {"uniqid": "SKU_2", "quantity": 3} ] }}` JSON object.
-
 
 ## Clear client's shopping cart
 

@@ -94,23 +94,93 @@ let customProperties: [String: Any] = [
 ```
 
 ```kotlin
-// Create a map of parameters
-val params = hashMapOf(
-  "email" to YOUR_EMAIL
-)
+/**
+ * Initializes arrays of basic data types.
+ * These arrays demonstrate that profile properties can support arrays of strings, integers, floats, booleans, and dates.
+ */
 
-// Use the SDK to update the profile
-sdk.profile(params)
+val stringArray = arrayOf("item1", "item2", "item3")
+val intArray = arrayOf(1, 2, 3, 4, 5)
+val floatArray = arrayOf(1.1f, 2.2f, 3.3f)
+val boolArray = arrayOf(true, false, true)
+val dateArray = arrayOf(Date(), Date(), Date())
 
-// With callback
-sdk.profile(
-  params,
-  object : OnApiCallbackListener() {
-    override fun onSuccess(response: JSONObject?) {
-      Log.i(TAG, "Response: $response")
-      }
-   }
-)
+/**
+ * Creates a nested JSON object.
+ * This object demonstrates how to structure complex data with key-value pairs, including strings and integers.
+ */
+
+val nestedObject = JSONObject().apply {
+  put("nestedStringKey", "nestedValue")
+  put("nestedIntKey", 456)
+}
+
+/**
+ * Creates a custom JSON object.
+ * The object includes various data types such as strings, integers, floats, booleans, dates, arrays,
+ * and even another nested JSON object.
+ */
+
+val customObject = JSONObject().apply {
+  put("stringKey", "stringValue")
+  put("intKey", 123)
+  put("floatKey", 45.67f)
+  put("boolKey", true)
+  put("dateKey", Date())
+  put("arrayKey", JSONArray(arrayOf(1, 2, 3)))
+  put("nestedObjectKey", nestedObject)
+}
+
+/**
+ * Creates an array of custom JSON objects.
+ * This demonstrates how to pass an array of complex objects as a single profile property.
+ */
+
+val customObjectArray = arrayOf(customObject, customObject)
+
+/**
+ * Builds the ProfileParams object using the Builder pattern.
+ * This example demonstrates how to add a wide range of user properties,
+ * including basic data types, arrays, and custom objects, to be passed to the SDK.
+ */
+
+val params = ProfileParams.Builder()
+  .put("userEmail", "YOUR_EMAIL")
+  .put("userPhone", "YOUR_PHONE")
+  .put("userLoyaltyId", "YOUR_LOYALTY_ID")
+  .put("birthday", Date())
+  .put("age", 30)
+  .put("firstName", "YOUR_NAME")
+  .put("lastName", "YOUR_LAST_NAME")
+  .put("location", "YOUR_LOCATION")
+  .put("gender", "male")
+  .put("fbID", "YOUR_FB_ID")
+  .put("vkID", "YOUR_VK_ID")
+  .put("telegramId", "YOUR_TG_ID")
+  .put("loyaltyCardLocation", "LOYALTY_CARD_LOCATION")
+  .put("loyaltyStatus", "LOYALTY_STATUS")
+  .put("loyaltyBonuses", 100)
+  .put("loyaltyBonusesToNextLevel", 200)
+  .put("boughtSomething", true)
+  .put("userId", "YOUR_USER_ID")
+  .put("stringArray", stringArray)
+  .put("intArray", intArray)
+  .put("floatArray", floatArray)
+  .put("boolArray", boolArray)
+  .put("dateArray", dateArray)
+  .put("customObject", customObject)
+  .put("customObjectArray", customObjectArray)
+
+/**
+ * Calls the SDK's profile method to save user profile data.
+ * A callback is included to handle success or failure of the API call.
+ */
+
+sdk.profile(params, object : OnApiCallbackListener() {
+  override fun onSuccess(response: JSONObject?) {
+    Log.i(TAG, "Response: $response") // Logs the API response
+  }
+})
 
 ```
 
@@ -224,7 +294,7 @@ Auto object properties:
 
 ### Custom properties
 
-Additionally you can update any custom property, you've created in CRM.
+Additionally, you can update any custom property, you've created in CRM.
 
 
 
