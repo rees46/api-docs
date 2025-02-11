@@ -398,6 +398,15 @@ If you don't have device identifier (first launch on new device), you have to re
 |                      |         | - sort_by_discount - string. Sorting by discount. Affected by localization settings                              |
 |                      |         | - sort_by_sales_rate - string. Sorting by sales. Affected by localization settings                               |
 |                      |         | - sort_by_new - string. Affected by localization settings                                                        |
+| popup                | object  | Object with popup properties                                                                                     |
+|                      |         | - id - integer. Popup id                                                                                         |
+|                      |         | - channels - array. Communication channels                                                                       |
+|                      |         | - position - string. Popup position on a screen                                                                  |
+|                      |         | - delay - integer. Delay before popup will appear                                                                |
+|                      |         | - html - string(HTML). Popup HTML markup                                                                         |
+|                      |         | - components - string(JSON). Template for render in the mobile platforms (Android SDK, iOS SDK)                  |
+|                      |         | - web_push_system - Boolean.                                                                                     |
+|                      |         | - popup_actions - String (JSON). Popup actions, for example  - links for user to follow                          |
 | web_push_settings    | object  | Object with web-push settings.                                                                                   |
 |                      |         | * public_key - a string with the shop's public key                                                               |
 |                      |         | * safari_enabled - a boolean value                                                                               |
