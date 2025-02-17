@@ -9,7 +9,7 @@ Slider is a banner block. It has a collection of banners.
 ## Get slider's banners
 
 ```shell
-curl https://<%= config[:api_endpoint] %>/slider?shop_id=...&shop_secret=...&code=...&did=...&email=...&phone=...&external_id=...&tags=...
+curl https://<%= config[:api_endpoint] %>/slider?shop_id=...&code=...&did=...&email=...&phone=...&external_id=...&tags=...
 ```
 
 ```javascript
@@ -69,7 +69,6 @@ curl https://<%= config[:api_endpoint] %>/slider?shop_id=...&shop_secret=...&cod
 | phone       | false    | User's phone                                                 |
 | external_id | false    | User's ID from your database                                 |
 | shop_id     | true     | Your API key                                                 |
-| shop_secret | true     | Your API secret key                                          |
 | code        | true     | Slider unique code                                           |
 | tags        | false    | Banner tags to filter banners (comma-separated list of tags) |
 
