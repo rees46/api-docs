@@ -92,16 +92,23 @@ sdk.searchBlank()
 | search_scope        | false    | The whitelist of parameters separated by commas. There are two types: common parameters and subparameters for books. If empty, all common parameters are considered included by default. If there are no book subparameters in the request, the search of book parameters won't be initialized. |
 | excluded_merchants* | false    | A comma-separated list of merchants. Products from these merchants will be excluded from the search results                                                                                                                                                                                     |
 | collapse            | false    | When set to `false`, products with the same `group_id` will not be collapsed into a single entry and will appear as separate items in the search results.                                                                                                                                       |                    |          |                                                                                                                                                                                                                                                                                                 |
+| excluded_brands     | false    | A list of brands in lowercase, separated by commas                                                                                                                                                                                                                                              |
 
 <aside class="warning">
 
 <p></p>
-<p>* <code>excluded_merchants</code></p>
+<p>*<code>excluded_merchants</code></p>
 <p>The <code>excluded_merchants</code> parameter works only in conjunction with the <code>merchants</code> parameter within the <code>locations</code> field.</p>
 <p>Note that if a product is associated with multiple merchants, the list of merchants in the <code>excluded_merchants</code> parameter must precisely match the list of merchants for that product. Otherwise, the parameter will not work.</p>
 <p>The connection between the <code>merchants</code> and <code>excluded_merchants</code> parameters exists because a whitelist of merchants is created based on the <code>merchants</code> parameter within the <code>locations</code> field.</p>
 <p>The whitelist of merchants is populated by the content of the <code>merchants</code> parameter. If this parameter is not provided, all merchants for the product will be included in the whitelist by default.</p>
 <p>The <code>excluded_merchants</code> parameter then excludes merchants from this whitelist.</p>
+
+<p></p>
+<p>*<code>excluded_brands</code></p>
+<p>When you upload your product, the <code>brand</code> field must not be empty.</p>
+<p>Do not use the brand name from the <code>brand</code> field of your JSON file, as it is automatically converted to lowercase by the backend.</p>
+<p>Use brand names in lowercase only.</p>
 
 </aside>
 
@@ -323,6 +330,7 @@ sdk.search({type: 'full_search', search_query: 'string', filters_search_by: 'pop
 | filters_search_by   | false    | Available options for filter: name, quantity, popularity.If this parameter in query global settings from dashboard are ignored                            |
 | brand_limit         | false    | This parameter allows limiting the number of brands aggregated in the response. The default limit is 1000                                                 |
 | collapse            | false    | When set to `false`, products with the same `group_id` will not be collapsed into a single entry and will appear as separate items in the search results. |
+| excluded_brands*    | false    | A list of brands in lowercase, separated by commas                                                                                                        |
 
 <aside class="warning">
 
@@ -333,6 +341,13 @@ sdk.search({type: 'full_search', search_query: 'string', filters_search_by: 'pop
 <p>The connection between the <code>merchants</code> and <code>excluded_merchants</code> parameters exists because a whitelist of merchants is created based on the <code>merchants</code> parameter within the <code>locations</code> field.</p>
 <p>The whitelist of merchants is populated by the content of the <code>merchants</code> parameter. If this parameter is not provided, all merchants for the product will be included in the whitelist by default.</p>
 <p>The <code>excluded_merchants</code> parameter then excludes merchants from this whitelist.</p>
+
+<p></p>
+<p>*<code>excluded_brands</code></p>
+<p>When you upload your product, the <code>brand</code> field must not be empty.</p>
+<p>Do not use the brand name from the <code>brand</code> field of your JSON file, as it is automatically converted to lowercase by the backend.</p>
+<p>Use brand names in lowercase only.</p>
+
 
 </aside>
 
