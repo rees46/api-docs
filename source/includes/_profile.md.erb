@@ -320,7 +320,7 @@ false
 );
 ```
 
-> REST method returns this JSON structure
+> The REST method returns this JSON structure for requests where a secret key was provided
 
 ```json
 {
@@ -376,6 +376,22 @@ false
 }
 ```
 
+> The REST method returns this JSON structure with publicly available profile data if a secret key was not provided in the request
+
+```json
+{
+  "has_email": true,
+  "computed_gender": "male",
+  "gender": "male",
+  "bought_something": true,
+  "id": "YOUR ID",
+  "custom_properties": {
+    "favorite_color": "blue",
+    "subscription_level": "premium"
+  }
+}
+```
+
 > JS SDK method returns simplified anonymous structure to prevent data stealing
 
 ```json
@@ -406,9 +422,11 @@ false
 ```
 
 
-You can read profile info from CRM using API or SDK.
+You can read profile info from the CRM using an API or SDK.
 
-In case of using REST API (when using email or phone number as user ID), you must provide secret key to the method.
+In the case of using the REST API (when using an email or phone number as the user ID), you must provide a secret key to the method to get a full response.
+
+However, there is publicly available data you can retrieve without providing a secret key in your request.
 
 
 ## Force change email
