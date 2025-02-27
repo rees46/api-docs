@@ -106,9 +106,10 @@ sdk.searchBlank()
 
 <p></p>
 <p>*<code>excluded_brands</code></p>
-<p>When you upload your product, the <code>brand</code> field must not be empty.</p>
-<p>Do not use the brand name from the <code>brand</code> field of your JSON file, as it is automatically converted to lowercase by the backend.</p>
-<p>Use brand names in lowercase only.</p>
+<p>When uploading a product, the JSON must include the <code>brand</code> field.</p>
+<p>On the backend, the value from the <code>brand</code> field is automatically converted to lowercase using <code>brand_downcase</code>.</p>
+<p>Therefore, brands in <code>excluded_brands</code> must be written in lowercase.</p>
+<p>Be aware that brand exclusion will not work if the <code>brand</code> field was not provided in the JSON when uploading the product.</p>
 
 </aside>
 
@@ -343,11 +344,10 @@ sdk.search({type: 'full_search', search_query: 'string', filters_search_by: 'pop
 <p>The <code>excluded_merchants</code> parameter then excludes merchants from this whitelist.</p>
 
 <p></p>
-<p>*<code>excluded_brands</code></p>
-<p>When you upload your product, the <code>brand</code> field must not be empty.</p>
-<p>Do not use the brand name from the <code>brand</code> field of your JSON file, as it is automatically converted to lowercase by the backend.</p>
-<p>Use brand names in lowercase only.</p>
-
+<p>When uploading a product, the JSON must include the <code>brand</code> field.</p>
+<p>On the backend, the value from the <code>brand</code> field is automatically converted to lowercase using <code>brand_downcase</code>.</p>
+<p>Therefore, brands in <code>excluded_brands</code> must be written in lowercase.</p>
+<p>Be aware that brand exclusion will not work if the <code>brand</code> field was not provided in the JSON when uploading the product.</p>
 
 </aside>
 
