@@ -48,6 +48,24 @@ sdk.searchManager.searchInstant("SEARCH_QUERY", "locations", { searchInstantResp
 sdk.searchManager.searchBlank({ searchBlankResponse ->
     Log.i(TAG, "Search blank response: $searchBlankResponse")
 })
+
+/**
+
+Brand exclusion
+
+query - search query value
+excludedBrands - list of brands to be excluded
+onSearchInstant - callback that is triggered when the search is completed
+
+**/
+
+sdk.searchManager.searchInstant(
+  query = "powder bronzer",
+  excludedBrands = listOf("dior", "estee lauder"),
+  nSearchInstant = {
+    Log.d("INSTANT SEARCH EXCLUDE BRANDS", it.productsTotal.toString())
+  }
+)
 ```
 ```jsx
 const type = 'instant_search';
@@ -243,6 +261,27 @@ params.put(SearchParams.Parameter.FASHION_SIZES, filters)
 sdk.searchManager.searchFull("SEARCH_QUERY", params, { searchFullResponse ->
     Log.i(TAG, "Search full response: $searchFullResponse")
 })
+
+/**
+
+ Full search with brand exclusion
+
+query - search query value
+searchParams - additional search parameters
+EXCLUDED_BRANDS - a comma-separated list of brands to be excluded
+onSearchFull - callback that is triggered when the full search is completed
+
+ **/
+
+sdk.searchManager.searchFull(
+  "powder bronzer",
+  searchParams = SearchParams()
+    .put(SearchParams.Parameter.EXCLUDED_BRANDS, listOf("dior", "estee lauder").joinToString(",")),
+  onSearchFull = {
+    Log.d("FULL SEARCH EXCLUDE BRANDS", it.productsTotal.toString())
+  }
+)
+
 ```
 
 ```java
