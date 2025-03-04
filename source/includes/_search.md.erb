@@ -20,6 +20,41 @@ There is a response limit: a response can contain no more than ten thousand item
 sdk.suggest(query: "ipho") { searchResult in
   print("Suggest callback")
 }
+
+/**
+
+Brand exclusion
+
+To exclude brands from the search results, use `excludedBrands`.
+
+excludedBrands – an array of brand names that should be excluded from search results.
+
+**/
+
+sdk?.search(
+    query: "powder bronzer",
+    excludedBrands: ["dior", "estee lauder"]
+) { result in
+    switch result {
+    case .success(let response):
+        print(response.productsTotal)
+    case .failure(let error):
+        print(error.description)
+    }
+}
+
+sdk?.suggest(
+    query: "powder bronzer",
+    excludedBrands: ["dior", "estee lauder"]
+) { result in
+    switch result {
+    case .success(let response):
+        print(response.productsTotal)
+    case .failure(let error):
+        print(error.description)
+    }
+}
+
 ```
 ```java
 //Instant search
@@ -239,6 +274,40 @@ sdk.search(query: "iphone") { searchResult in
 // Full search with additional parameters
 sdk.search(query: "laptop", limit: nil, offset: nil, categoryLimit: nil, categories: nil, extended: nil, sortBy: nil, sortDir: nil, locations: nil, brands: nil, filters: nil, priceMin: nil, priceMax: nil, colors: nil, exclude: nil, fashion_sizes: nil) { searchResult in
   print("Full search callback")
+}
+
+/**
+
+Brand exclusion
+
+To exclude brands from the search results, use `excludedBrands`.
+
+excludedBrands – an array of brand names that should be excluded from search results.
+
+**/
+
+sdk?.search(
+    query: "powder bronzer",
+    excludedBrands: ["dior", "estee lauder"]
+) { result in
+    switch result {
+    case .success(let response):
+        print(response.productsTotal)
+    case .failure(let error):
+        print(error.description)
+    }
+}
+
+sdk?.suggest(
+    query: "powder bronzer",
+    excludedBrands: ["dior", "estee lauder"]
+) { result in
+    switch result {
+    case .success(let response):
+        print(response.productsTotal)
+    case .failure(let error):
+        print(error.description)
+    }
 }
 ```
 ```kotlin
