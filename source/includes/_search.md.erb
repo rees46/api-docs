@@ -22,6 +22,7 @@ sdk.suggest(query: "ipho") { searchResult in
 }
 
 /**
+
 Search for merchants in locations.
 
 To exclude merchants from the search results, use `excludedMerchants`.
@@ -30,7 +31,6 @@ excludedMerchants - an array of merchants to be excluded from the search results
 
 locations - locations where the search for merchants occurs.
 **/
-
 
 sdk?.search(
   query: "search-query",
@@ -57,6 +57,41 @@ sdk?.suggest(
       print(error.description)
   }
 }
+                                 
+/**
+
+Brand exclusion
+
+To exclude brands from the search results, use `excludedBrands`.
+
+excludedBrands – an array of brand names that should be excluded from search results.
+
+**/
+
+sdk?.search(
+    query: "powder bronzer",
+    excludedBrands: ["dior", "estee lauder"]
+) { result in
+    switch result {
+    case .success(let response):
+        print(response.productsTotal)
+    case .failure(let error):
+        print(error.description)
+    }
+}
+
+sdk?.suggest(
+    query: "powder bronzer",
+    excludedBrands: ["dior", "estee lauder"]
+) { result in
+    switch result {
+    case .success(let response):
+        print(response.productsTotal)
+    case .failure(let error):
+        print(error.description)
+    }
+}
+
 ```
 ```java
 //Instant search
@@ -288,7 +323,6 @@ excludedMerchants - an array of merchants to be excluded from the search results
 locations - locations where the search for merchants occurs.
 **/
 
-
 sdk?.search(
   query: "search-query",
   locations: "location",
@@ -313,6 +347,39 @@ sdk?.suggest(
     case .failure(let error):
       print(error.description)
   }
+
+
+/**
+Brand exclusion
+
+To exclude brands from the search results, use `excludedBrands`.
+
+excludedBrands – an array of brand names that should be excluded from search results.
+
+**/
+
+sdk?.search(
+    query: "powder bronzer",
+    excludedBrands: ["dior", "estee lauder"]
+) { result in
+    switch result {
+    case .success(let response):
+        print(response.productsTotal)
+    case .failure(let error):
+        print(error.description)
+    }
+}
+
+sdk?.suggest(
+    query: "powder bronzer",
+    excludedBrands: ["dior", "estee lauder"]
+) { result in
+    switch result {
+    case .success(let response):
+        print(response.productsTotal)
+    case .failure(let error):
+        print(error.description)
+    }
 }
 ```
 ```kotlin
