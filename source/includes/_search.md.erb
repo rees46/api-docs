@@ -22,14 +22,20 @@ sdk.suggest(query: "ipho") { searchResult in
 }
 
 /**
-To exclude merchants from the search results, use excludedMerchants.
+Search for merchants in locations.
+
+To exclude merchants from the search results, use `excludedMerchants`.
 
 excludedMerchants - an array of merchants to be excluded from the search results.
+
+locations - locations where the search for merchants occurs.
 **/
 
+
 sdk?.search(
-  query: "powder bronzer",
-  excludedMerchants: ["Essa cosmetics"]
+  query: "search-query",
+  locations: "location",
+  excludedMerchants: ["excluded-merchant"]
 ) { result in
     switch result {
     case .success(let response):
@@ -40,8 +46,9 @@ sdk?.search(
 }
 
 sdk?.suggest(
-  query: "powder bronzer",
-  excludedMerchants: ["Essa cosmetics"]
+  query: "search-query",
+  locations: "location",
+  excludedMerchants: ["excluded-merchant"]
 ) { result in
     switch result {
     case .success(let response):
@@ -272,14 +279,20 @@ sdk.search(query: "laptop", limit: nil, offset: nil, categoryLimit: nil, categor
 }
 
 /**
-To exclude merchants from the search results, use excludedMerchants.
+Search for merchants in locations.
+
+To exclude merchants from the search results, use `excludedMerchants`.
 
 excludedMerchants - an array of merchants to be excluded from the search results.
+
+locations - locations where the search for merchants occurs.
 **/
 
+
 sdk?.search(
-  query: "powder bronzer",
-  excludedMerchants: ["Essa cosmetics"]
+  query: "search-query",
+  locations: "location",
+  excludedMerchants: ["excluded-merchant"]
 ) { result in
     switch result {
     case .success(let response):
@@ -288,9 +301,11 @@ sdk?.search(
       print(error.description)
   }
 }
+
 sdk?.suggest(
-  query: "powder bronzer",
-  excludedMerchants: ["Essa cosmetics"]
+  query: "search-query",
+  locations: "location",
+  excludedMerchants: ["excluded-merchant"]
 ) { result in
     switch result {
     case .success(let response):
