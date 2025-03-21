@@ -4,6 +4,65 @@ Section describes how to use Stories
 
 ## Stories initialization
 
+### API Response
+
+
+| Parameter | Type    | Description                                                                                |
+|-----------|---------|--------------------------------------------------------------------------------------------|
+| stories   | array   | List of stories. Each story contains:                                                      |
+|           |         | - `id` (integer) - Story ID                                                                |
+|           |         | - `name` (string) - Story name                                                             |
+|           |         | - `avatar` (string, URL) - Story avatar URL                                                |
+|           |         | - `viewed` (boolean) - Whether the story has been viewed                                   |
+|           |         | - `start_position` (integer) - Starting position in the story                              |
+|           |         | - `pinned` (boolean) - Whether the story is pinned                                         |
+|           |         | - `slides` (array) - List of slides in the story. Each slide contains:                     |
+|           |         | * `id` (integer) - Slide ID                                                                |
+|           |         | * `duration` (integer) - Duration of the slide (seconds)                                   |
+|           |         | * `background` (string, URL) - Slide background image URL                                  |
+|           |         | * `preview` (string) - Slide preview (if available)                                        |
+|           |         | * `type` (string) - Slide type (e.g., image)                                               |
+|           |         | * `elements` (array) - List of elements within the slide. Each element contains:           |
+|           |         | ** `bold` (boolean) - Whether the text is bold                                             |
+|           |         | ** `type` (string) - Type of element (e.g., text_block)                                    |
+|           |         | ** `italic` (boolean) - Whether the text is italic                                         |
+|           |         | ** `uniqid` (string) - Unique identifier for the element                                   |
+|           |         | ** `y_offset` (string) - Vertical position offset                                          |
+|           |         | ** `font_size` (string) - Font size of the text                                            |
+|           |         | ** `font_type` (string) - Font type (e.g., sans-serif)                                     |
+|           |         | ** `text_align` (string) - Text alignment (e.g., left)                                     |
+|           |         | ** `text_color` (string, hex) - Text color                                                 |
+|           |         | ** `text_input` (string) - Text content                                                    |
+|           |         | ** `text_line_spacing` (string) - Line spacing for text                                    |
+|           |         | ** `text_background_color` (string, hex) - Background color of the text block              |
+|           |         | ** `text_background_color_opacity` (string) - Opacity of the text background color         |
+|           |         | ** `promocode` (string) - Promocode text                                                   |
+| id        | integer | Unique identifier for the root object.                                                     |
+| settings  | object  | Display settings for stories. Contains:                                                    |
+|           |         | - `color` (string, hex) - Primary color                                                    |
+|           |         | - `font_size` (integer) - Font size                                                        |
+|           |         | - `background` (string, hex) - Background color                                            |
+|           |         | - `icon_shape` (string) - Shape of the icon (e.g., circle)                                 |
+|           |         | - `avatar_size` (integer) - Size of the avatar                                             |
+|           |         | - `close_color` (string, hex) - Close button color                                         |
+|           |         | - `border_viewed` (string, hex) - Border color for viewed stories                          |
+|           |         | - `background_pin` (string, hex) - Background color for pinned stories                     |
+|           |         | - `viewed_opacity` (integer) - Opacity of viewed stories                                   |
+|           |         | - `border_not_viewed` (string, hex) - Border color for not viewed stories                  |
+|           |         | - `background_opacity` (integer) - Opacity of the background                               |
+|           |         | - `background_progress` (string, hex) - Progress bar background color                      |
+|           |         | - `product_price_color` (string, hex) - Color of the product price                         |
+|           |         | - `product_title_color` (string, hex) - Color of the product title                         |
+|           |         | - `product_status_color` (string, hex) - Color of the product status                       |
+|           |         | - `product_old_price_color` (string, hex) - Color of the old price of the product          |
+|           |         | - `product_price_background` (string, hex) - Background color of the product price         |
+|           |         | - `product_slide_background` (string, hex) - Background color of the product slide         |
+|           |         | - `product_status_background` (string, hex) - Background color of the product status       |
+|           |         | - `product_discount_background` (string, hex) - Background color of the discount label     |
+|           |         | - `product_promocode_background` (string, hex) - Background color of the promocode section |
+|           |         | - `pin_symbol` (string) - Symbol for pinned stories                                        |
+
+
 ```kotlin
 // Manual initialization by inserting this code into the layout
 <com.personalization.stories.views.StoriesView
