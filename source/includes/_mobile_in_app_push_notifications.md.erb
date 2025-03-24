@@ -18,16 +18,44 @@ For iOS you'll need to add `parentViewController` as an optional parameter durin
 ```swift
 /*
 SDK initialization example with parentViewController
+
+titleText and messageText - are required parameters, the rest are optional
+
 */
 
-sdk = createPersonalizationSDK(
-  shopId: YOUR_SHOP_ID,
-  apiDomain: YOUR_DOMAIN,
-  parentViewController: (window?.rootViewController)!,
-    { error in
-      // You can handle initialization errors here
-    }
+notificationWidget?.showTopDialog(
+  titleText: "title",
+  messageText: "message",
+  imageUrl: "image url",
+  confirmButtonText: "custom confirm button text",
+  dismissButtonText: "custom dismiss button text",
+  onConfirmButtonClick: {
+    print("confirm clicked")
+  }
 )
+
+notificationWidget?.showAlert(
+  titleText: "title",
+  messageText: "message",
+  imageUrl: "image url",
+  confirmButtonText: "custom confirm button text",
+  dismissButtonText: "custom dismiss button text",
+  onConfirmButtonClick: {
+    print("confirm clicked")
+  }
+)
+
+notificationWidget?.showBottomDialog(
+  titleText: "title",
+  messageText: "message",
+  imageUrl: "image url",
+  confirmButtonText: "custom confirm button text",
+  dismissButtonText: "custom dismiss button text",
+  onConfirmButtonClick: {
+    print("confirm clicked")
+  }
+)
+
 ```
 
 ### initialization parameters for iOS
