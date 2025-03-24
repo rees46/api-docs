@@ -41,6 +41,7 @@ includes:
   - loyalty.balance.md.erb
   - loyalty.history.md.erb
   - loyalty.event_bonus.md.erb
+  - loyalty.referral.md.erb
   - loyalty.otp-send.md.erb
   - loyalty.otp-check.md.erb
   - nps.md.erb
