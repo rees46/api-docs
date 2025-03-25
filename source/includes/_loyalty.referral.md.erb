@@ -1,0 +1,37 @@
+## Get referral code
+> Request example
+
+```shell
+curl 'https://<%= config[:api_endpoint] %>/loyalty/referral/code?shop_id=SHOP_ID&shop_secret=SHOP_SECRET&identifier=PHONE'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "status": "success",
+  "payload": {
+    "message": "Success",
+    "code": "XXX-YYY-ZZZ"
+  }
+}
+```
+
+Method returns member's referrer code.
+
+### HTTP Request
+
+`GET https://<%= config[:api_endpoint] %>/loyalty/referral/code`
+
+### Query Parameters
+
+| Parameter   | Required | Description                |
+|-------------|----------|----------------------------|
+| shop_id     | true     | Your API key               |
+| shop_secret | true     | Your API secret key        |
+| identifier  | true     | User's phone (identifier)  |
+
+
+
+
+
