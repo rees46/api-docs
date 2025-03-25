@@ -64,11 +64,16 @@ Section describes how to use Stories
 
 
 ```kotlin
-// Manual initialization by inserting this code into the layout
+/**
+* Manual initialization by inserting this code into the layout
+* product_banner_tap_default_message – an optional parameter that allows changing the default text of the notification displayed when the user copies a promo code.
+**/
+
 <com.personalization.stories.views.StoriesView
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    app:code="STORY BLOCK CODE" />
+  android:layout_width="match_parent"
+  android:layout_height="wrap_content"
+  app:product_banner_tap_default_message="tap message"
+  app:code="STORY BLOCK CODE" />
 
 val storiesView = findViewById<StoriesView>(R.id.story_view)
 sdk.initializeStoriesView(storiesView)
