@@ -530,11 +530,24 @@ It's S2S method.
 
 ```shell
 # By phone number
-curl --location --request DELETE "shop_id=SHOPID&shop_secret=SHOP_SECRET&phone=PHONE" https://<%= config[:api_endpoint] %>/profile/purge
+curl --location --request DELETE 'https://<%= config[:api_endpoint] %>/profile/purge' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: did=7Hvlb6ftsK; r46_debug=true' \
+--data '{
+    "shop_id": "...",
+    "shop_secret": "...",
+    "phone": "..."
+}'
 
-# By email
-curl --location --request DELETE "shop_id=SHOPID&shop_secret=SHOP_SECRET&email=EMAIL" https://<%= config[:api_endpoint] %>/profile/purge
-
+# By phone
+curl --location --request DELETE 'https://<%= config[:api_endpoint] %>/profile/purge' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: did=7Hvlb6ftsK; r46_debug=true' \
+--data '{
+    "shop_id": "...",
+    "shop_secret": "...",
+    "email": "..."
+}'
 ```
 
 ```javascript
