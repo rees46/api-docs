@@ -56,6 +56,32 @@ sdk.trackEventManager.track(Params.TrackEvent.VIEW, "37")
 
 For mobile apps you have to track all app launches, happened by drip campaigns, mailings and push notifications. It will allow to track campaigns efficiency properly.
 
+### API response
+
+| Parameter | Type   | Description                                                                                              |
+|-----------|--------|----------------------------------------------------------------------------------------------------------|
+| status    | string | Status of the request (e.g., `"success"` for successful processing)                                      |
+| payload   | object | Object containing details about the tracked event. Includes:                                             |
+|           |        | * `event` - The type of event being tracked                                                              |
+|           |        | * `transaction_id` - Transaction ID for purchase-related events (empty for non-purchase events).         |
+|           |        | * `value` - Total value of the tracked items                                                             |
+|           |        | * `currency` - Currency in which the value is expressed                                                  |
+|           |        | * `items` - An array of viewed items, each containing:                                                   |
+|           |        | ** `id` - Item identifier                                                                                |
+|           |        | ** `name` - Item name                                                                                    |
+|           |        | ** `price` - Item price                                                                                  |
+|           |        | ** `brand` - Item's brand                                                                                |
+|           |        | ** `quantity` - Quantity of the item viewed                                                              |
+| popup     | object | Object containing details about the popup displayed. Includes:                                           |
+|           |        | * `id` - Popup identifier.                                                                               |
+|           |        | * `channels` - Array of channels associated with the popup.                                              |
+|           |        | * `position` - Position of the popup on the screen                                                       |
+|           |        | * `delay` - Delay in seconds before the popup appears                                                    |
+|           |        | * `html` - HTML markup of the popup                                                                      |
+|           |        | * `web_push_system` - Indicates whether the popup is used for web push notifications (`true` or `false`) |
+|           |        | * `popup_actions` - JSON object containing additional actions linked to the popup                        |
+
+
 ## User viewed a product
 
 ```shell
@@ -258,6 +284,32 @@ sdk.track("category", "100500");
 
 Send this event when user opens category page.
 
+### API response
+
+| Parameter | Type   | Description                                                                                              |
+|-----------|--------|----------------------------------------------------------------------------------------------------------|
+| status    | string | Status of the request (e.g., `"success"` for successful processing)                                      |
+| payload   | object | Object containing details about the tracked event. Includes:                                             |
+|           |        | * `event` - The type of event being tracked                                                              |
+|           |        | * `transaction_id` - Transaction ID for purchase-related events (empty for non-purchase events).         |
+|           |        | * `value` - Total value of the tracked items                                                             |
+|           |        | * `currency` - Currency in which the value is expressed                                                  |
+|           |        | * `items` - An array of viewed items, each containing:                                                   |
+|           |        | ** `id` - Item identifier                                                                                |
+|           |        | ** `name` - Item name                                                                                    |
+|           |        | ** `price` - Item price                                                                                  |
+|           |        | ** `brand` - Item's brand                                                                                |
+|           |        | ** `quantity` - Quantity of the item viewed                                                              |
+| popup     | object | Object containing details about the popup displayed. Includes:                                           |
+|           |        | * `id` - Popup identifier.                                                                               |
+|           |        | * `channels` - Array of channels associated with the popup.                                              |
+|           |        | * `position` - Position of the popup on the screen                                                       |
+|           |        | * `delay` - Delay in seconds before the popup appears                                                    |
+|           |        | * `html` - HTML markup of the popup                                                                      |
+|           |        | * `web_push_system` - Indicates whether the popup is used for web push notifications (`true` or `false`) |
+|           |        | * `popup_actions` - JSON object containing additional actions linked to the popup                        |
+
+
 ### JS SDK syntax
 | Syntax                                                         |
 |----------------------------------------------------------------|
@@ -298,6 +350,30 @@ sdk.track(event: .search(query: "red shoes")) { trackResponse in
 ```jsx
 sdk.track("search", "This is a search example");
 ```
+### API response
+
+| Parameter | Type   | Description                                                                                              |
+|-----------|--------|----------------------------------------------------------------------------------------------------------|
+| status    | string | Status of the request (e.g., `"success"` for successful processing)                                      |
+| payload   | object | Object containing details about the tracked event. Includes:                                             |
+|           |        | * `event` - The type of event being tracked                                                              |
+|           |        | * `transaction_id` - Transaction ID for purchase-related events (empty for non-purchase events).         |
+|           |        | * `value` - Total value of the tracked items                                                             |
+|           |        | * `currency` - Currency in which the value is expressed                                                  |
+|           |        | * `items` - An array of viewed items, each containing:                                                   |
+|           |        | ** `id` - Item identifier                                                                                |
+|           |        | ** `name` - Item name                                                                                    |
+|           |        | ** `price` - Item price                                                                                  |
+|           |        | ** `brand` - Item's brand                                                                                |
+|           |        | ** `quantity` - Quantity of the item viewed                                                              |
+| popup     | object | Object containing details about the popup displayed. Includes:                                           |
+|           |        | * `id` - Popup identifier.                                                                               |
+|           |        | * `channels` - Array of channels associated with the popup.                                              |
+|           |        | * `position` - Position of the popup on the screen                                                       |
+|           |        | * `delay` - Delay in seconds before the popup appears                                                    |
+|           |        | * `html` - HTML markup of the popup                                                                      |
+|           |        | * `web_push_system` - Indicates whether the popup is used for web push notifications (`true` or `false`) |
+|           |        | * `popup_actions` - JSON object containing additional actions linked to the popup                        |
 
 ### JS SDK syntax
 | Syntax                                                        |
@@ -472,6 +548,30 @@ sdk.track("cart", [
   }
 ]);
 ```
+### API response
+
+| Parameter | Type   | Description                                                                                              |
+|-----------|--------|----------------------------------------------------------------------------------------------------------|
+| status    | string | Status of the request (e.g., `"success"` for successful processing)                                      |
+| payload   | object | Object containing details about the tracked event. Includes:                                             |
+|           |        | * `event` - The type of event being tracked                                                              |
+|           |        | * `transaction_id` - Transaction ID for purchase-related events (empty for non-purchase events).         |
+|           |        | * `value` - Total value of the tracked items                                                             |
+|           |        | * `currency` - Currency in which the value is expressed                                                  |
+|           |        | * `items` - An array of viewed items, each containing:                                                   |
+|           |        | ** `id` - Item identifier                                                                                |
+|           |        | ** `name` - Item name                                                                                    |
+|           |        | ** `price` - Item price                                                                                  |
+|           |        | ** `brand` - Item's brand                                                                                |
+|           |        | ** `quantity` - Quantity of the item viewed                                                              |
+| popup     | object | Object containing details about the popup displayed. Includes:                                           |
+|           |        | * `id` - Popup identifier.                                                                               |
+|           |        | * `channels` - Array of channels associated with the popup.                                              |
+|           |        | * `position` - Position of the popup on the screen                                                       |
+|           |        | * `delay` - Delay in seconds before the popup appears                                                    |
+|           |        | * `html` - HTML markup of the popup                                                                      |
+|           |        | * `web_push_system` - Indicates whether the popup is used for web push notifications (`true` or `false`) |
+|           |        | * `popup_actions` - JSON object containing additional actions linked to the popup                        |
 
 ### JS SDK syntax (short request for a single product)
 | Syntax                                              |
@@ -546,6 +646,32 @@ sdk.track(event: .productRemovedFromCart(id: "PRODUCT_ID")) { trackResponse in
 ```jsx
 sdk.track("remove_from_cart", id);
 ```
+
+### API response
+
+| Parameter | Type   | Description                                                                                              |
+|-----------|--------|----------------------------------------------------------------------------------------------------------|
+| status    | string | Status of the request (e.g., `"success"` for successful processing)                                      |
+| payload   | object | Object containing details about the tracked event. Includes:                                             |
+|           |        | * `event` - The type of event being tracked                                                              |
+|           |        | * `transaction_id` - Transaction ID for purchase-related events (empty for non-purchase events).         |
+|           |        | * `value` - Total value of the tracked items                                                             |
+|           |        | * `currency` - Currency in which the value is expressed                                                  |
+|           |        | * `items` - An array of viewed items, each containing:                                                   |
+|           |        | ** `id` - Item identifier                                                                                |
+|           |        | ** `name` - Item name                                                                                    |
+|           |        | ** `price` - Item price                                                                                  |
+|           |        | ** `brand` - Item's brand                                                                                |
+|           |        | ** `quantity` - Quantity of the item viewed                                                              |
+| popup     | object | Object containing details about the popup displayed. Includes:                                           |
+|           |        | * `id` - Popup identifier.                                                                               |
+|           |        | * `channels` - Array of channels associated with the popup.                                              |
+|           |        | * `position` - Position of the popup on the screen                                                       |
+|           |        | * `delay` - Delay in seconds before the popup appears                                                    |
+|           |        | * `html` - HTML markup of the popup                                                                      |
+|           |        | * `web_push_system` - Indicates whether the popup is used for web push notifications (`true` or `false`) |
+|           |        | * `popup_actions` - JSON object containing additional actions linked to the popup                        |
+
 
 ### JS SDK syntax (full request for a single product)
 | Syntax                                                            |
@@ -707,6 +833,32 @@ sdk.track('purchase', {
 If you want to debug purchase tracking, keep in mind: if you send event for existing order (by `order_id`), platform doesn't create new events with the same `order_id`. For test purposes, you can use random `order_id` or just omit it (platform will generate fake `order_id`).
 </aside>
 
+### API response
+
+| Parameter | Type   | Description                                                                                              |
+|-----------|--------|----------------------------------------------------------------------------------------------------------|
+| status    | string | Status of the request (e.g., `"success"` for successful processing)                                      |
+| payload   | object | Object containing details about the tracked event. Includes:                                             |
+|           |        | * `event` - The type of event being tracked                                                              |
+|           |        | * `transaction_id` - Transaction ID for purchase-related events (empty for non-purchase events).         |
+|           |        | * `value` - Total value of the tracked items                                                             |
+|           |        | * `currency` - Currency in which the value is expressed                                                  |
+|           |        | * `items` - An array of viewed items, each containing:                                                   |
+|           |        | ** `id` - Item identifier                                                                                |
+|           |        | ** `name` - Item name                                                                                    |
+|           |        | ** `price` - Item price                                                                                  |
+|           |        | ** `brand` - Item's brand                                                                                |
+|           |        | ** `quantity` - Quantity of the item viewed                                                              |
+| popup     | object | Object containing details about the popup displayed. Includes:                                           |
+|           |        | * `id` - Popup identifier.                                                                               |
+|           |        | * `channels` - Array of channels associated with the popup.                                              |
+|           |        | * `position` - Position of the popup on the screen                                                       |
+|           |        | * `delay` - Delay in seconds before the popup appears                                                    |
+|           |        | * `html` - HTML markup of the popup                                                                      |
+|           |        | * `web_push_system` - Indicates whether the popup is used for web push notifications (`true` or `false`) |
+|           |        | * `popup_actions` - JSON object containing additional actions linked to the popup                        |
+
+
 ### JS SDK syntax
 | Syntax                                                      |
 |-------------------------------------------------------------|
@@ -811,6 +963,30 @@ sdk.track('wish', [17515, 17520]);
 // If the parameter is a primitive, full_wish won't be forwarded
 sdk.track('wish', 17515);
 ```
+### API response
+
+| Parameter | Type   | Description                                                                                              |
+|-----------|--------|----------------------------------------------------------------------------------------------------------|
+| status    | string | Status of the request (e.g., `"success"` for successful processing)                                      |
+| payload   | object | Object containing details about the tracked event. Includes:                                             |
+|           |        | * `event` - The type of event being tracked                                                              |
+|           |        | * `transaction_id` - Transaction ID for purchase-related events (empty for non-purchase events).         |
+|           |        | * `value` - Total value of the tracked items                                                             |
+|           |        | * `currency` - Currency in which the value is expressed                                                  |
+|           |        | * `items` - An array of viewed items, each containing:                                                   |
+|           |        | ** `id` - Item identifier                                                                                |
+|           |        | ** `name` - Item name                                                                                    |
+|           |        | ** `price` - Item price                                                                                  |
+|           |        | ** `brand` - Item's brand                                                                                |
+|           |        | ** `quantity` - Quantity of the item viewed                                                              |
+| popup     | object | Object containing details about the popup displayed. Includes:                                           |
+|           |        | * `id` - Popup identifier.                                                                               |
+|           |        | * `channels` - Array of channels associated with the popup.                                              |
+|           |        | * `position` - Position of the popup on the screen                                                       |
+|           |        | * `delay` - Delay in seconds before the popup appears                                                    |
+|           |        | * `html` - HTML markup of the popup                                                                      |
+|           |        | * `web_push_system` - Indicates whether the popup is used for web push notifications (`true` or `false`) |
+|           |        | * `popup_actions` - JSON object containing additional actions linked to the popup                        |
 
 
 ## User removed product from favorites
@@ -845,6 +1021,30 @@ sdk.trackEventManager.track(Params.TrackEvent.REMOVE_FROM_WISH, YOUR_ITEM_ID)
 ```jsx
 sdk.track("remove_wish", id);
 ```
+### API response
+
+| Parameter | Type   | Description                                                                                              |
+|-----------|--------|----------------------------------------------------------------------------------------------------------|
+| status    | string | Status of the request (e.g., `"success"` for successful processing)                                      |
+| payload   | object | Object containing details about the tracked event. Includes:                                             |
+|           |        | * `event` - The type of event being tracked                                                              |
+|           |        | * `transaction_id` - Transaction ID for purchase-related events (empty for non-purchase events).         |
+|           |        | * `value` - Total value of the tracked items                                                             |
+|           |        | * `currency` - Currency in which the value is expressed                                                  |
+|           |        | * `items` - An array of viewed items, each containing:                                                   |
+|           |        | ** `id` - Item identifier                                                                                |
+|           |        | ** `name` - Item name                                                                                    |
+|           |        | ** `price` - Item price                                                                                  |
+|           |        | ** `brand` - Item's brand                                                                                |
+|           |        | ** `quantity` - Quantity of the item viewed                                                              |
+| popup     | object | Object containing details about the popup displayed. Includes:                                           |
+|           |        | * `id` - Popup identifier.                                                                               |
+|           |        | * `channels` - Array of channels associated with the popup.                                              |
+|           |        | * `position` - Position of the popup on the screen                                                       |
+|           |        | * `delay` - Delay in seconds before the popup appears                                                    |
+|           |        | * `html` - HTML markup of the popup                                                                      |
+|           |        | * `web_push_system` - Indicates whether the popup is used for web push notifications (`true` or `false`) |
+|           |        | * `popup_actions` - JSON object containing additional actions linked to the popup                        |
 
 
 ## Track custom event
@@ -944,6 +1144,32 @@ sdk.trackEvent('my_event', {
 Before tracking custom events, register it in "Settings > Custom events".
 </aside>
 
+### API response
+
+| Parameter | Type   | Description                                                                                              |
+|-----------|--------|----------------------------------------------------------------------------------------------------------|
+| status    | string | Status of the request (e.g., `"success"` for successful processing)                                      |
+| payload   | object | Object containing details about the tracked event. Includes:                                             |
+|           |        | * `event` - The type of event being tracked                                                              |
+|           |        | * `transaction_id` - Transaction ID for purchase-related events (empty for non-purchase events).         |
+|           |        | * `value` - Total value of the tracked items                                                             |
+|           |        | * `currency` - Currency in which the value is expressed                                                  |
+|           |        | * `items` - An array of viewed items, each containing:                                                   |
+|           |        | ** `id` - Item identifier                                                                                |
+|           |        | ** `name` - Item name                                                                                    |
+|           |        | ** `price` - Item price                                                                                  |
+|           |        | ** `brand` - Item's brand                                                                                |
+|           |        | ** `quantity` - Quantity of the item viewed                                                              |
+| popup     | object | Object containing details about the popup displayed. Includes:                                           |
+|           |        | * `id` - Popup identifier.                                                                               |
+|           |        | * `channels` - Array of channels associated with the popup.                                              |
+|           |        | * `position` - Position of the popup on the screen                                                       |
+|           |        | * `delay` - Delay in seconds before the popup appears                                                    |
+|           |        | * `html` - HTML markup of the popup                                                                      |
+|           |        | * `web_push_system` - Indicates whether the popup is used for web push notifications (`true` or `false`) |
+|           |        | * `popup_actions` - JSON object containing additional actions linked to the popup                        |
+
+
 ### Query Parameters
 
 | Parameter      | Type      | Required   | Description               |
@@ -1029,6 +1255,31 @@ All events require at least these parameters:
 | code      | String | true       | Message identifier. Value can be taken from push's JSON payload. For Android it's located in `id` property. In iOS SDK it's `src.id`                                                      |
 | type      | String | true       | Message type. Value can be taken from push's JSON payload. For Android it's located in `type` property. In iOS SDK it's `src.type`.Supported types are: `bulk`, `chain`, `transactional`  |
 
+### API response
+
+| Parameter | Type   | Description                                                                                              |
+|-----------|--------|----------------------------------------------------------------------------------------------------------|
+| status    | string | Status of the request (e.g., `"success"` for successful processing)                                      |
+| payload   | object | Object containing details about the tracked event. Includes:                                             |
+|           |        | * `event` - The type of event being tracked                                                              |
+|           |        | * `transaction_id` - Transaction ID for purchase-related events (empty for non-purchase events).         |
+|           |        | * `value` - Total value of the tracked items                                                             |
+|           |        | * `currency` - Currency in which the value is expressed                                                  |
+|           |        | * `items` - An array of viewed items, each containing:                                                   |
+|           |        | ** `id` - Item identifier                                                                                |
+|           |        | ** `name` - Item name                                                                                    |
+|           |        | ** `price` - Item price                                                                                  |
+|           |        | ** `brand` - Item's brand                                                                                |
+|           |        | ** `quantity` - Quantity of the item viewed                                                              |
+| popup     | object | Object containing details about the popup displayed. Includes:                                           |
+|           |        | * `id` - Popup identifier.                                                                               |
+|           |        | * `channels` - Array of channels associated with the popup.                                              |
+|           |        | * `position` - Position of the popup on the screen                                                       |
+|           |        | * `delay` - Delay in seconds before the popup appears                                                    |
+|           |        | * `html` - HTML markup of the popup                                                                      |
+|           |        | * `web_push_system` - Indicates whether the popup is used for web push notifications (`true` or `false`) |
+|           |        | * `popup_actions` - JSON object containing additional actions linked to the popup                        |
+
 ## Message delivered
 
 ```shell
@@ -1073,6 +1324,31 @@ All events require at least these parameters:
 | shop_id   | String | true       | Your API key                                                                                                                                                                              |
 | code      | String | true       | Message identifier. Value can be taken from push's JSON payload. For Android it's located in `id` property. In iOS SDK it's `src.id`                                                      |
 | type      | String | true       | Message type. Value can be taken from push's JSON payload. For Android it's located in `type` property. In iOS SDK it's `src.type`.Supported types are: `bulk`, `chain`, `transactional`  |
+
+### API response
+
+| Parameter | Type   | Description                                                                                              |
+|-----------|--------|----------------------------------------------------------------------------------------------------------|
+| status    | string | Status of the request (e.g., `"success"` for successful processing)                                      |
+| payload   | object | Object containing details about the tracked event. Includes:                                             |
+|           |        | * `event` - The type of event being tracked                                                              |
+|           |        | * `transaction_id` - Transaction ID for purchase-related events (empty for non-purchase events).         |
+|           |        | * `value` - Total value of the tracked items                                                             |
+|           |        | * `currency` - Currency in which the value is expressed                                                  |
+|           |        | * `items` - An array of viewed items, each containing:                                                   |
+|           |        | ** `id` - Item identifier                                                                                |
+|           |        | ** `name` - Item name                                                                                    |
+|           |        | ** `price` - Item price                                                                                  |
+|           |        | ** `brand` - Item's brand                                                                                |
+|           |        | ** `quantity` - Quantity of the item viewed                                                              |
+| popup     | object | Object containing details about the popup displayed. Includes:                                           |
+|           |        | * `id` - Popup identifier.                                                                               |
+|           |        | * `channels` - Array of channels associated with the popup.                                              |
+|           |        | * `position` - Position of the popup on the screen                                                       |
+|           |        | * `delay` - Delay in seconds before the popup appears                                                    |
+|           |        | * `html` - HTML markup of the popup                                                                      |
+|           |        | * `web_push_system` - Indicates whether the popup is used for web push notifications (`true` or `false`) |
+|           |        | * `popup_actions` - JSON object containing additional actions linked to the popup                        |
 
 ## User clicked on mobile push
 
@@ -1150,6 +1426,31 @@ All events require at least these parameters:
 | code      | String | true       | Message identifier. Value can be taken from push's JSON payload. For Android it's located in `id` property. In iOS SDK it's `src.id` |
 |  type     | String | true       | Message type. Value can be taken from push's JSON payload. For Android it's located in `type` property. In iOS SDK it's `src.type`   |
 
+### API response
+
+| Parameter | Type   | Description                                                                                              |
+|-----------|--------|----------------------------------------------------------------------------------------------------------|
+| status    | string | Status of the request (e.g., `"success"` for successful processing)                                      |
+| payload   | object | Object containing details about the tracked event. Includes:                                             |
+|           |        | * `event` - The type of event being tracked                                                              |
+|           |        | * `transaction_id` - Transaction ID for purchase-related events (empty for non-purchase events).         |
+|           |        | * `value` - Total value of the tracked items                                                             |
+|           |        | * `currency` - Currency in which the value is expressed                                                  |
+|           |        | * `items` - An array of viewed items, each containing:                                                   |
+|           |        | ** `id` - Item identifier                                                                                |
+|           |        | ** `name` - Item name                                                                                    |
+|           |        | ** `price` - Item price                                                                                  |
+|           |        | ** `brand` - Item's brand                                                                                |
+|           |        | ** `quantity` - Quantity of the item viewed                                                              |
+| popup     | object | Object containing details about the popup displayed. Includes:                                           |
+|           |        | * `id` - Popup identifier.                                                                               |
+|           |        | * `channels` - Array of channels associated with the popup.                                              |
+|           |        | * `position` - Position of the popup on the screen                                                       |
+|           |        | * `delay` - Delay in seconds before the popup appears                                                    |
+|           |        | * `html` - HTML markup of the popup                                                                      |
+|           |        | * `web_push_system` - Indicates whether the popup is used for web push notifications (`true` or `false`) |
+|           |        | * `popup_actions` - JSON object containing additional actions linked to the popup                        |
+
 ## User closed on mobile push
 
 ```shell
@@ -1194,6 +1495,31 @@ All events require at least these parameters:
 | shop_id   | String | true       | Your API key                                                                                                                                                                               |
 | code      | String | true       | Message identifier. Value can be taken from push's JSON payload. For Android it's located in `id` property. In iOS SDK it's `src.id`                                                       |
 | type      | String | true       | Message type. Value can be taken from push's JSON payload. For Android it's located in `type` property. In iOS SDK it's `src.type`.                                                        |
+
+### API response
+
+| Parameter | Type   | Description                                                                                              |
+|-----------|--------|----------------------------------------------------------------------------------------------------------|
+| status    | string | Status of the request (e.g., `"success"` for successful processing)                                      |
+| payload   | object | Object containing details about the tracked event. Includes:                                             |
+|           |        | * `event` - The type of event being tracked                                                              |
+|           |        | * `transaction_id` - Transaction ID for purchase-related events (empty for non-purchase events).         |
+|           |        | * `value` - Total value of the tracked items                                                             |
+|           |        | * `currency` - Currency in which the value is expressed                                                  |
+|           |        | * `items` - An array of viewed items, each containing:                                                   |
+|           |        | ** `id` - Item identifier                                                                                |
+|           |        | ** `name` - Item name                                                                                    |
+|           |        | ** `price` - Item price                                                                                  |
+|           |        | ** `brand` - Item's brand                                                                                |
+|           |        | ** `quantity` - Quantity of the item viewed                                                              |
+| popup     | object | Object containing details about the popup displayed. Includes:                                           |
+|           |        | * `id` - Popup identifier.                                                                               |
+|           |        | * `channels` - Array of channels associated with the popup.                                              |
+|           |        | * `position` - Position of the popup on the screen                                                       |
+|           |        | * `delay` - Delay in seconds before the popup appears                                                    |
+|           |        | * `html` - HTML markup of the popup                                                                      |
+|           |        | * `web_push_system` - Indicates whether the popup is used for web push notifications (`true` or `false`) |
+|           |        | * `popup_actions` - JSON object containing additional actions linked to the popup                        |
 
 ## Stories tracking
 
@@ -1249,3 +1575,27 @@ track(event, story_id, slide_id) {
 ```jsx
 // No implementation
 ```
+### API response
+
+| Parameter | Type   | Description                                                                                              |
+|-----------|--------|----------------------------------------------------------------------------------------------------------|
+| status    | string | Status of the request (e.g., `"success"` for successful processing)                                      |
+| payload   | object | Object containing details about the tracked event. Includes:                                             |
+|           |        | * `event` - The type of event being tracked                                                              |
+|           |        | * `transaction_id` - Transaction ID for purchase-related events (empty for non-purchase events).         |
+|           |        | * `value` - Total value of the tracked items                                                             |
+|           |        | * `currency` - Currency in which the value is expressed                                                  |
+|           |        | * `items` - An array of viewed items, each containing:                                                   |
+|           |        | ** `id` - Item identifier                                                                                |
+|           |        | ** `name` - Item name                                                                                    |
+|           |        | ** `price` - Item price                                                                                  |
+|           |        | ** `brand` - Item's brand                                                                                |
+|           |        | ** `quantity` - Quantity of the item viewed                                                              |
+| popup     | object | Object containing details about the popup displayed. Includes:                                           |
+|           |        | * `id` - Popup identifier.                                                                               |
+|           |        | * `channels` - Array of channels associated with the popup.                                              |
+|           |        | * `position` - Position of the popup on the screen                                                       |
+|           |        | * `delay` - Delay in seconds before the popup appears                                                    |
+|           |        | * `html` - HTML markup of the popup                                                                      |
+|           |        | * `web_push_system` - Indicates whether the popup is used for web push notifications (`true` or `false`) |
+|           |        | * `popup_actions` - JSON object containing additional actions linked to the popup                        |
