@@ -7,7 +7,6 @@ To configure in-app notifications, follow a two-step process:
 1. SDK Initialization
 2. Alert Management (programmatic or via admin panel)
 
-
 ## iOS
 
 For iOS you'll need to add `parentViewController` as an optional parameter during SDK initialization.
@@ -16,26 +15,28 @@ For iOS you'll need to add `parentViewController` as an optional parameter durin
 
 ```swift
 /*
+
 SDK initialization example with parentViewController
 
 parentViewController - parameter required for alerts
 
 stream - parameter is required if you are going to use alrts
 
+1. Step one - initialize SDK
+2. Step two - initialize notificationWidget
+
 */
 
-// 1. Initialize SDK
 let sdk = createPersonalizationSDK(
   shopId: "YOUR_SHOP_ID",
-  apiDomain: "https://api.your-domain.com",
-  parentViewController: rootViewController, // Required for alerts
-  stream: "ios", // Mandatory if using alerts
+  apiDomain: "YOUR_API_DOMEN"
+  parentViewController: rootViewController,
+  stream: "ios",
   onError: { error in
     print("Initialization error: \(error.localizedDescription)")
   }
 )
 
-// 2. Access Notification Widget
 guard let notificationWidget = sdk.getNotificationWidget() else {
   print("Notification widget not available")
   return
@@ -53,7 +54,6 @@ dismissButtonText - optional
 
 */
 
-// Top
 notificationWidget?.showTopDialog(
   titleText: "title",
   messageText: "message",
@@ -65,7 +65,6 @@ notificationWidget?.showTopDialog(
   }
 )
 
-// Center
 notificationWidget?.showAlert(
   titleText: "title",
   messageText: "message",
@@ -76,7 +75,7 @@ notificationWidget?.showAlert(
   print("confirm clicked")
   }
 )
-// Bottom
+
 notificationWidget?.showBottomDialog(
   titleText: "title",
   messageText: "message",
@@ -101,13 +100,14 @@ notificationWidget?.showBottomDialog(
 
 ### Alert management
 
-| Parameter         | Category | Description              |
-|-------------------|----------|--------------------------|
-| titleText         | required | Alert title              |
-| messageText       | required | Message body             |
-| imageUrl          | optional | Image link               |
-| confirmButtonText | optional | Confirmation button text |
-| dismissButtonText | optional | Dismissal button text    |
+| Parameter            | Category | Description              |
+|----------------------|----------|--------------------------|
+| titleText            | required | Alert title              |
+| messageText          | required | Message body             |
+| imageUrl             | optional | Image link               |
+| confirmButtonText    | optional | Confirmation button text |
+| dismissButtonText    | optional | Dismissal button text    |
+| onConfirmButtonClick | optional | Closes push by default   |
 
 
 ## Android
@@ -120,22 +120,26 @@ To enable alerts in your Android App you'll have to initialize `fragmentManager`
 
 Supported Alert Types:
 
-1. Centered dialog
-2. Bottom sheet
-3. Full-screen modal
+1. Alert dialog
+2. Bottom dialog
+3. Top dialog
 
 ```kotlin
+*/
 
-// 1. Basic SDK Initialization
+1. Step one - initialize SDK
+2. Step two - initialize FragmentManager
+
+*/
+
 sdk.initialize(
-  context = applicationContext,
+  context = "YOUR_CONTEXT",
   shopId = "YOUR_SHOP_ID"
 )
 
-// 2. FragmentManager Initialization (required for alerts)
 sdk.initializeFragmentManager(
   fragmentManager = supportFragmentManager,
-  stream = "android" // Mandatory for alerts
+  stream = "android"
 )
 
 ```
