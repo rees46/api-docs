@@ -168,7 +168,7 @@ apply plugin: 'com.google.gms.google-services'
 
 
 
-Before using API you have to setup SDK.
+Before using API you have to set up SDK.
 
 <aside class="warning">
 
@@ -217,14 +217,24 @@ r46('init', 'SHOP_ID', 'STREAM', success, failure, options, isSpa);
 ```
 
 ```swift
+/*
+
+shopId – Required parameter. The shop identifier.
+apiDomain – API domain for server communication.
+enableLogs – Optional parameter. Enables logs for debugging purposes during development.
+parentViewController – Optional parameter. Without it, in-app notifications will not be displayed.
+needReInitialization – Optional parameter. Allows reinitialization of the SDK and clears local storage.
+
+*/
+
 import <%= config[:ios_sdk_package_name] %>
 
 sdk = createPersonalizationSDK(
-  shopId: AppEnvironments.shopId, // The shop identifier (required parameter for SDK configuration).
-  apiDomain: AppEnvironments.apiDomain, // The API domain for server communication.
-  enableLogs: true, // Enable logs for debugging purposes during development.
-  parentViewController: (window?.rootViewController)!, // Pass the view controller to display in-app notifications.
-  needReInitialization: true, // Optional: Allows reinitialization of the SDK and clears the local storage.
+  shopId: AppEnvironments.shopId,
+  apiDomain: AppEnvironments.apiDomain,
+  enableLogs: true,
+  parentViewController: (window?.rootViewController)!,
+  needReInitialization: true,
   { error in
       // Assign the SDK instance to a global variable for reuse across the application.
       globalSDK = self.sdk
@@ -326,6 +336,11 @@ Depending on platform there are different requirements when to run init:
 
 If you don't have device identifier (first launch on new device), you have to request API's `init` method to generate new one. Store this identifier (it's named `did`) in local storage of mobile application or in database: you'll need it for the future requests to API.
 
+<aside class="warning">
+
+If you initialize the iOS SDK without the optional parameter parentViewController, in-app notifications will not be displayed.
+
+</aside>
 
 ### Query Parameters
 
