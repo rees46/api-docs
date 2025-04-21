@@ -20,7 +20,9 @@ SDK initialization example with parentViewController. Initialize the SDK first, 
 
 parentViewController - parameter required for alerts
 
-stream - parameter is required if you are going to use alrts
+needReInitialization - pop-ups are delivered only during the initialization phase, when this parameter's value is true it triggers reinitialization
+
+stream - parameter is required if you are going to use alerts
 
 */
 
@@ -28,6 +30,7 @@ let sdk = createPersonalizationSDK(
   shopId: "YOUR_SHOP_ID",
   apiDomain: "YOUR_API_DOMEN"
   parentViewController: rootViewController,
+  needReInitialization = true,
   stream: "ios",
   onError: { error in
     print("Initialization error: \(error.localizedDescription)")
@@ -88,12 +91,13 @@ notificationWidget?.showBottomDialog(
 
 ### initialization parameters for iOS
 
-| Parameter            | Category    | Description                                                                                                     |
-|----------------------|-------------|-----------------------------------------------------------------------------------------------------------------|
-| shopId               | required    | Your shop ID                                                                                                    |
-| apiDomain            | required    | API endpoint for URL request creation                                                                           |
-| parentViewController | optional    | This parameter must be provided if you want to enable alerts                                                    |
-| stream               | conditional | Platform specific value "ios" must be passed if alerts are enabled (parentViewController parameter is provided) |
+| Parameter            | Category    | Description                                                                                                                        |
+|----------------------|-------------|------------------------------------------------------------------------------------------------------------------------------------|
+| shopId               | required    | Your shop ID                                                                                                                       |
+| apiDomain            | required    | API endpoint for URL request creation                                                                                              |
+| parentViewController | optional    | This parameter must be provided if you want to enable alerts                                                                       |
+| needReInitialization | required    | Pop-ups are delivered only during the initialization phase, and this flag triggers the necessary reinitialization to receive them. |
+| stream               | conditional | Platform specific value "ios" must be passed if alerts are enabled (parentViewController parameter is provided)                    |
 
 ### Alert management
 
@@ -126,11 +130,20 @@ Supported Alert Types:
 
 Initialize the SDK first, then set up the fragmentManagers.
 
+shopId - your shop ID
+
+context - the part that provides access to the core resources of your App
+
+needReInitialization - pop-ups are delivered only during the initialization phase, when this parameter's value is true it triggers reinitialization
+
+stream - parameter is required if you are going to use alerts
+
 */
 
 sdk.initialize(
   context = "YOUR_CONTEXT",
-  shopId = "YOUR_SHOP_ID"
+  shopId = "YOUR_SHOP_ID",
+  needReInitialization = true
 )
 
 sdk.initializeFragmentManager(
@@ -142,11 +155,12 @@ sdk.initializeFragmentManager(
 
 ### initialization parameters for Android
 
-| Parameter | Category    | Description                                                                             |
-|-----------|-------------|-----------------------------------------------------------------------------------------|
-| shopId    | required    | Your shop ID                                                                            |
-| context   | required    | The part that provides access to the core resources of your App                         |
-| stream    | conditional | Platform specific value "android" must be passed if the fragmentManager was initialized |
+| Parameter            | Category    | Description                                                                                                                        |
+|----------------------|-------------|------------------------------------------------------------------------------------------------------------------------------------|
+| shopId               | required    | Your shop ID                                                                                                                       |
+| context              | required    | The part that provides access to the core resources of your App                                                                    |
+| needReInitialization | required    | Pop-ups are delivered only during the initialization phase, and this flag triggers the necessary reinitialization to receive them. |
+| stream               | conditional | Platform specific value "android" must be passed if the fragmentManager was initialized                                            |
 
 The `fragmentManager` must be initialized separately if you want to enable alerts.
 
