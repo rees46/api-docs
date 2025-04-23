@@ -3,7 +3,10 @@
 > Request example
 
 ```shell
-curl --location --request POST 'https://<%= config[:api_endpoint] %>/loyalty/basic/event_bonus?phone=PHONE&shop_id=SHOP_ID&shop_secret=SHOP_SECRET&event=EVENT&amount=AMOUNT'
+curl 'https://<%= config[:api_endpoint] %>/loyalty/basic/event_bonus' \
+    -X 'POST' \
+    -H 'Content-Type: application/json' \
+    --data-raw '{"phone":"PHONE", "shop_id":"SHOP_ID", "shop_secret":"SHOP_SECRET", "event":"EVENT", amount: 500}'
 ```
 
 > The above command returns JSON structured like this:

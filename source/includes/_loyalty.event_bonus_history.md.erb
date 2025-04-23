@@ -1,0 +1,57 @@
+## Event bonuses history
+> Request example
+
+```shell
+curl 'https://<%= config[:api_endpoint] %>/loyalty/bonuses/event_bonus_history?shop_id=SHOP_ID&shop_secret=SHOP_SECRET&identifier=PHONE&offset=0&limit=50'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+    "id": 3334566,
+    "status": "confirmed",
+    "event": "...",
+    "amount": 300,
+    "remaining_amount": 300,
+    "date": "2025-01-01",
+    "activation_date": "2025-01-14",
+    "expiration_date": "2026-01-01",
+    "cancellable": true
+  },
+  {
+    "id": 33345456,
+    "status": "confirmed",
+    "event": "...",
+    "amount": 300,
+    "remaining_amount": 200,
+    "date": "2025-01-01",
+    "activation_date": "2025-01-14",
+    "expiration_date": "2026-01-01",
+    "cancellable": false
+  },
+  ...
+]
+```
+
+Method return member's bonuses history which were created with `loyalty/basic/event_bonus` method only. This allows to cancel some bonuses by ID using `loyalty/bonuses/cancel` method.
+
+### HTTP Request
+
+`GET https://<%= config[:api_endpoint] %>/loyalty/bonuses/event_bonus_history`
+
+### Query Parameters
+
+| Parameter   | Required | Description                |
+|-------------|----------|----------------------------|
+| shop_id     | true     | Your API key               |
+| shop_secret | true     | Your API secret key        |
+| identifier  | true     | User's phone (identifier)  |
+| offset      | optional | Offset (default 0)         |
+| limit       | optional | Limit (default 50, max 50) |
+
+
+
+
+
