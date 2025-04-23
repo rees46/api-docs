@@ -57,7 +57,7 @@ sdk?.suggest(
       print(error.description)
   }
 }
-                                 
+
 /**
 
 Brand exclusion
@@ -494,7 +494,7 @@ sdk.search({type: 'full_search', search_query: 'string', filters_search_by: 'pop
 | category_limit      | false    | How many categories for sidebar filter to return                                                                                                          |
 | categories          | false    | Comma separated list of categories to filter                                                                                                              |
 | extended            | false    | It's better to use `true` for full search results                                                                                                         |
-| sort_by             | false    | Sort by parameter: `popular`, `price`, `discount`, `sales_rate`, `date`, `price_margin`, `rating`                                                         |
+| sort_by             | false    | Sort by parameter: `popular`, `price`, `discount`, `sales_rate`, `date`, `price_margin`, `rating`, `relevance`                                            |
 | order               | false    | Sort direction: `asc` or `desc` (default)                                                                                                                 |
 | locations           | false    | Comma separated list of locations IDs                                                                                                                     |
 | brands              | false    | Comma separated list of brands to filter                                                                                                                  |
@@ -530,6 +530,21 @@ sdk.search({type: 'full_search', search_query: 'string', filters_search_by: 'pop
 <p>Be aware that brand exclusion will not work if the <code>brand</code> field was not provided in the JSON when uploading the product.</p>
 
 </aside>
+
+#### Sorting parameters in full search
+
+The `sort_by` parameter defines how the search results are ordered. Below are the supported values and their descriptions:
+
+| Value          | Description                                                                                                                                                                                         |
+|----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `popular`      | Sorts products based on their overall popularity. This ranking is influenced by internal metrics such as click-through rates, conversion rates, and user behavior. It is the default sorting method |
+| `price`        | Sorts products by price                                                                                                                                                                             |
+| `discount`     | Sorts products by the size of their discount                                                                                                                                                        |
+| `sales_rate`   | Sorts by the rate at which products are sold. Higher sales velocity items are prioritized                                                                                                           |
+| `date`         | Sorts products by their addition date                                                                                                                                                               |
+| `price_margin` | Sorts by the product's profit margin                                                                                                                                                                |
+| `rating`       | Sorts by user rating, with higher-rated products appearing first                                                                                                                                    |
+| `relevance`    | Sorts by how closely a product matches the search query. It prioritizes content relevance and textual matching, and **does not** consider sales metrics or price                                    |
 
 ### API response
 | Name               | Type   | Description                                                                                                                                                                                           |
