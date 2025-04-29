@@ -126,7 +126,7 @@ Supported Alert Types:
 3. Top dialog
 
 ```kotlin
-*/
+/*
 
 Initialize the SDK first, then set up the fragmentManagers.
 
@@ -150,6 +150,78 @@ sdk.initializeFragmentManager(
   fragmentManager = supportFragmentManager,
   stream = "android"
 )
+
+/*
+
+Popup invocation examples. These examples illustrate how to invoke different types of dialogs:
+top dialog, bottom dialog, full-screen dialog, and alert dialog.
+
+Parameters:
+
+title – notification title (required)
+
+message – notification message (required)
+
+imageUrl – image link (optional)
+
+buttonConfirmText – confirmation button text (optional)
+
+buttonDeclineText – decline button text (optional)
+
+buttonConfirmColor – confirmation button color (optional)
+
+buttonDeclineColor – decline button color (optional)
+
+*/
+
+
+sdk.inAppNotificationManager.showTopDialog(
+  title = TITLE,
+  message = MESSAGE,
+  imageUrl = IMAGE_URL,
+  buttonConfirmText = BUTTON_CONFIRM_TEXT,
+  buttonDeclineText = BUTTON_DECLINE_TEXT,
+  buttonConfirmColor = CONFIRM_BUTTON_COLOR,
+  buttonDeclineColor = DECLINE_BUTTON_COLOR,
+) {
+  // handle positive button click action
+}
+
+sdk.inAppNotificationManager.showBottomDialog(
+  title = TITLE,
+  message = MESSAGE,
+  imageUrl = IMAGE_URL,
+  buttonConfirmText = BUTTON_CONFIRM_TEXT,
+  buttonDeclineText = BUTTON_DECLINE_TEXT,
+  buttonConfirmColor = CONFIRM_BUTTON_COLOR,
+  buttonDeclineColor = DECLINE_BUTTON_COLOR,
+) {
+  // handle positive button click action
+}
+
+sdk.inAppNotificationManager.showFullScreenDialog(
+  title = TITLE,
+  message = MESSAGE,
+  imageUrl = IMAGE_URL,
+  buttonConfirmText = BUTTON_CONFIRM_TEXT,
+  buttonDeclineText = BUTTON_DECLINE_TEXT,
+  buttonConfirmColor = CONFIRM_BUTTON_COLOR,
+  buttonDeclineColor = DECLINE_BUTTON_COLOR,
+) {
+  // handle positive button click action
+}
+
+sdk.inAppNotificationManager.showAlertDialog(
+  title = TITLE,
+  message = MESSAGE,
+  imageUrl = IMAGE_URL,
+  buttonConfirmText = BUTTON_CONFIRM_TEXT,
+  buttonDeclineText = BUTTON_DECLINE_TEXT,
+  buttonConfirmColor = CONFIRM_BUTTON_COLOR,
+  buttonDeclineColor = DECLINE_BUTTON_COLOR,
+) {
+  // handle positive button click action
+}
 
 ```
 
