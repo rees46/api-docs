@@ -16,6 +16,7 @@ includes:
   - import.md.erb
   - tracking.md.erb
   - recommendations.md.erb
+  - product_collections.md.erb
   - search.md.erb
   - subscriptions.md.erb
   - triggers.md.erb
