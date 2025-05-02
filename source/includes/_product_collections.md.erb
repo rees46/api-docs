@@ -1,0 +1,67 @@
+# Product collections
+
+Service provides access to product collections endpoint.
+
+## Request product collection
+
+```shell
+curl 'https://<%= config[:api_endpoint] %>/product_collection/COLLECTION_ID&shop_id=...&did=...&sid=...'
+```
+
+```javascript
+TODO
+```
+
+```swift
+TODO
+```
+
+```kotlin
+TODO
+```
+
+```java
+TODO
+```
+
+```jsx
+TODO
+```
+
+> Response body example
+
+```json
+{
+  "status": "success",
+  "payload": {
+    "products": [...],
+    "groups": [
+      {
+        "name": "group_id",
+        "product_ids": [...]
+      },
+      {
+        "name": "group_id",
+        "products_ids": [...]
+      }
+      // ...
+    ]
+  }
+}
+```
+
+
+### HTTP Request
+
+`GET https://<%= config[:api_endpoint] %>/collection/COLLECTION_ID`
+
+### Query Parameters
+
+| Parameter        | Required   | Description                                                                                                                                                                                                                                                                                |
+|------------------|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| shop_id          | true       | Your API key                                                                                                                                                                                                                                                                               |
+| did              | true       | Device ID. You get it from `init` method in SDK.                                                                                                                                                                                                                                           |
+| sid              | true       | Temporary user session ID                                                                                                                                                                                                                                                                  |
+
+
+
