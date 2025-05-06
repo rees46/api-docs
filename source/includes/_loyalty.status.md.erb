@@ -1,0 +1,92 @@
+## Membership status
+
+> Request example
+
+```shell
+curl https://<%= config[:api_endpoint] %>/loyalty/members/status?shop_id=...&shop_secret=...&identifier=...
+```
+
+```javascript
+// S2S only
+```
+
+```swift
+// S2S only
+```
+
+```java
+// S2S only
+```
+
+```kotlin
+// S2S only
+```
+
+```jsx
+// S2S only
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "success": true,
+  "payload": {
+    "member": true,
+    "level": {
+      "name": "Gold",
+      "code": "level_gold",
+      "expiration_date": "2028-01-01"
+    }
+  }
+}
+```
+
+> If the user is not a member of loyalty program, response will be:
+
+```json
+{
+  "success": true,
+  "payload": {
+    "member": false,
+    "level": {
+      "name": null,
+      "code": null,
+      "expiration_date": null
+    }
+  }
+}
+```
+
+> If the user is on the initial level of loyalty program, response will be:
+
+```json
+{
+  "success": true,
+  "payload": {
+    "member": true,
+    "level": {
+      "name": null,
+      "code": null,
+      "expiration_date": null
+    }
+  }
+}
+```
+
+
+### HTTP Request
+
+`GET https://<%= config[:api_endpoint] %>/loyalty/members/status`
+
+Returns the member's status in the loyalty program: member or not, current level and level expiration date.
+
+### Query Parameters
+
+| Parameter   | Required | Description                               |
+|-------------|----------|-------------------------------------------|
+| shop_id     | true     | Your API key                              |
+| shop_secret | true     | Your API secret key                       |
+| identifier  | true     | User's phone number                       |
+
+
