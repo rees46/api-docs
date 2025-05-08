@@ -573,23 +573,28 @@ curl --location --request DELETE 'https://<%= config[:api_endpoint] %>/profile/p
 // Not supported
 ```
 
-Remove all personal data by `phone` or `email`:
+Remove all personal data by `phone`, `email`, `loyalty_id` or `external_id`:
 
 - phone;
 - email;
 - first_name;
 - last_name;
-- middle_name.
+- middle_name;
+- loyalty_id;
+- external_id;
+- custom client properties
 
 It's S2S method.
 
 ### Query Parameters
 
-| Parameter                    | Type   | Required | Description                                                                                                  |
-|------------------------------|--------|----------|--------------------------------------------------------------------------------------------------------------|
-| shop_id                      | String | true     | Your API key                                                                                                 |
-| shop_secret                  | String | true     | Your API secret key                                                                                          |
-| phone                        | String | true     | User's phone                                                                                                 |
-| email                        | String | true     | User's email                                                                                                 |
+| Parameter   | Type   | Required | Description         |
+|-------------|--------|----------|---------------------|
+| shop_id     | String | true     | Your API key        |
+| shop_secret | String | true     | Your API secret key |
+| phone       | String | true     | User's phone        |
+| email       | String | true     | User's email        |
+| loyalty_id  | String | true     | User's loyalty_id   |
+| external_id | String | true     | User's external_id  |
 
 
