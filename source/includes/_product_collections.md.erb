@@ -5,7 +5,7 @@ Service provides access to product collections endpoint.
 ## Request product collection
 
 ```shell
-curl 'https://<%= config[:api_endpoint] %>/product_collection/COLLECTION_ID&shop_id=...&did=...&sid=...'
+curl 'https://<%= config[:api_endpoint] %>/product_collection/ID&shop_id=...&did=...&sid=...'
 ```
 
 ```javascript
@@ -28,40 +28,59 @@ TODO
 TODO
 ```
 
-> Response body example
-
-```json
-{
-  "status": "success",
-  "payload": {
-    "products": [...],
-    "groups": [
-      {
-        "name": "group_id",
-        "product_ids": [...]
-      },
-      {
-        "name": "group_id",
-        "products_ids": [...]
-      }
-      // ...
-    ]
-  }
-}
-```
-
-
 ### HTTP Request
 
-`GET https://<%= config[:api_endpoint] %>/collection/COLLECTION_ID`
+`GET https://<%= config[:api_endpoint] %>/collection/ID`
+
+<aside class="notice">
+You can find the product collection ID in the Product Collections section of the dashboard. Your configured collections are listed there along with their ID numbers.
+</aside>
+
 
 ### Query Parameters
 
-| Parameter        | Required   | Description                                                                                                                                                                                                                                                                                |
-|------------------|------------|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| shop_id          | true       | Your API key                                                                                                                                                                                                                                                                               |
-| did              | true       | Device ID. You get it from `init` method in SDK.                                                                                                                                                                                                                                           |
-| sid              | true       | Temporary user session ID                                                                                                                                                                                                                                                                  |
+| Parameter   | Required | Description                                      |
+|-------------|----------|--------------------------------------------------|
+| shop_id     | true     | Your API key                                     |
+| did         | false    | Device ID. You get it from `init` method in SDK. |
+| location    | false    | Your location                                    |
+| email       | false    | Your email address                               |
+| phone       | false    | Your phone number                                |
+| external_id | false    | Your external_id                                 |
+| loyalty_id  | false    | Your loyalty_id                                  |
+
+
+### API response
+
+**Products**
+
+API returns an array of objects. Each object in the `products` array contains the following:
+
+| Parameter            | Type             | Description                                                      |
+|----------------------|------------------|------------------------------------------------------------------|
+| name                 | String           | Name of the product                                              |
+| url                  | String           | URL to the product page                                          |
+| description          | String           | Description of the product                                       |
+| category_ids         | Array of Strings | Array of category IDs the product belongs to                     |
+| brand                | String           | Brand of the product (e.g., "-" if not specified)                |
+| fashion_feature      | String           | Fashion feature (e.g., "adult").                                 |
+| fashion_gender       | String           | Gender for which the product is intended (e.g., "f" for female)  |
+| sales_rate           | Integer          | Sales rate (number of sales)                                     |
+| relative_sales_rate  | Float            | Relative sales rate compared to other products                   |
+| picture              | String (URL)     | URL of the product image                                         |
+| categories           | Array of Objects | Array of category objects the product belongs to (system object) |
+| price_formatted      | String           | Formatted price (e.g., "108 ₽")                                  |
+| price_full_formatted | String           | Formatted full price (e.g., "108.33 ₽")                          |
+| price                | Float            | Price of the product                                             |
+| price_full           | Float            | Full price of the product (including possible discounts)         |
+| image_url            | String (URL)     | URL to the resized product image (usually 970px width)           |
+| image_url_handle     | String (URL)     | Processed image URL                                              |
+| image_url_resized    | String (URL)     | Resized image URL                                                |
+| url_handle           | String           | URL handle to access the product within the collection           |
+| currency             | String           | Currency used for the price                                      |
+| _id                  | String           | Unique product identifier                                        |
+| id                   | String           | Product ID                                                       |
+| group_id             | String           | Group identifier for the product                                 |
 
 
 
