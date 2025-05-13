@@ -293,6 +293,12 @@ sdk.searchBlank()
 | book_isbn              | array  | Reserved                                                                                                                                                                                              |
 | book_isbn_vars         | array  | Reserved                                                                                                                                                                                              |
 
+<aside class="notice">
+Fields price_range, price_ranges, and price_median ignore products with a price of zero during aggregation.
+
+For example, if the product prices are: 0, 10, and 100, the API response will return a minimum price of 10 instead of 0.
+</aside>
+
 ## Full search
 
 ```javascript
@@ -599,9 +605,11 @@ The `sort_by` parameter defines how the search results are ordered. Below are th
 | queries            | array  | Reserved                                                                                                                                                                                              |
 | virtual_categories | array  | Reserved                                                                                                                                                                                              |
 
+<aside class="notice">
+Fields price_range, price_ranges, and price_median ignore products with a price of zero during aggregation.
 
-
-
+For example, if the product prices are: 0, 10, and 100, the API response will return a minimum price of 10 instead of 0.
+</aside>
 
 ## Search queries with zero results
 
