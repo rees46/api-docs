@@ -27,7 +27,61 @@ TODO
 ```jsx
 TODO
 ```
+> API response example:
 
+```json
+
+{
+  "products": [
+    {
+      "name": "PRODUCT_NAME",
+      "url": "PRODUCT_URL",
+      "description": "PRODUCT_DESCRIPTION",
+      "category_ids": "CATEGORY_IDS",
+      "brand": "PRODUCT_BRAND",
+      "sales_rate": "SALES_RATE",
+      "relative_sales_rate": "RELATIVE_SALES_RATE",
+      "picture": "PRODUCT_PICTURE_URL",
+      "categories": "CATEGORIES",
+      "price_formatted": "FORMATTED_PRICE",
+      "price_full_formatted": "FORMATTED_FULL_PRICE",
+      "price": "PRICE",
+      "price_full": "FULL_PRICE",
+      "image_url": "IMAGE_URL",
+      "image_url_handle": "IMAGE_URL_HANDLE",
+      "image_url_resized": "RESIZED_IMAGE_URL",
+      "url_handle": "PRODUCT_URL_HANDLE",
+      "currency": "CURRENCY",
+      "_id": "PRODUCT_ID",
+      "id": "NUMERIC_PRODUCT_ID",
+      "group_id": "GROUP_ID"
+    },
+    {
+      "name": "PRODUCT_NAME",
+      "url": "PRODUCT_URL",
+      "description": "PRODUCT_DESCRIPTION",
+      "category_ids": "CATEGORY_IDS",
+      "brand": "PRODUCT_BRAND",
+      "sales_rate": "SALES_RATE",
+      "relative_sales_rate": "RELATIVE_SALES_RATE",
+      "picture": "PRODUCT_PICTURE_URL",
+      "categories": "CATEGORIES",
+      "price_formatted": "FORMATTED_PRICE",
+      "price_full_formatted": "FORMATTED_FULL_PRICE",
+      "price": "PRICE",
+      "price_full": "FULL_PRICE",
+      "image_url": "IMAGE_URL",
+      "image_url_handle": "IMAGE_URL_HANDLE",
+      "image_url_resized": "RESIZED_IMAGE_URL",
+      "url_handle": "PRODUCT_URL_HANDLE",
+      "currency": "CURRENCY",
+      "_id": "PRODUCT_ID",
+      "id": "NUMERIC_PRODUCT_ID",
+      "group_id": "GROUP_ID"
+    }
+  ]
+}
+```
 ### HTTP Request
 
 `GET https://<%= config[:api_endpoint] %>/collection/ID`
