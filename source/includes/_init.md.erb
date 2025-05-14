@@ -214,6 +214,14 @@ const isSpa = true;
 
 r46('init', 'SHOP_ID', 'STREAM', success, failure, options, isSpa);
 
+// In the options parameter, custom domains can be configured through which API requests will be routed
+
+r46('init', 'SHOP_ID', 'STREAM', null, null, {
+  host: 'api.custom.ru', // custom value for API requests
+  master_host: '', // will use the default value,
+  pictures_host: undefined, // will use the default value
+});
+
 ```
 
 ```swift
