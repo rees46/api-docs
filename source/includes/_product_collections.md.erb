@@ -1,0 +1,140 @@
+# Product collections
+
+Service provides access to product collections endpoint.
+
+## Request product collection
+
+```shell
+curl 'https://<%= config[:api_endpoint] %>/collection/ID?shop_id=...'
+```
+
+```javascript
+TODO
+```
+
+```swift
+TODO
+```
+
+```kotlin
+TODO
+```
+
+```java
+TODO
+```
+
+```jsx
+TODO
+```
+> API response example:
+
+```json
+
+{
+  "products": [
+    {
+      "name": "PRODUCT_NAME",
+      "url": "PRODUCT_URL",
+      "description": "PRODUCT_DESCRIPTION",
+      "category_ids": "CATEGORY_IDS",
+      "brand": "PRODUCT_BRAND",
+      "sales_rate": "SALES_RATE",
+      "relative_sales_rate": "RELATIVE_SALES_RATE",
+      "picture": "PRODUCT_PICTURE_URL",
+      "categories": "CATEGORIES",
+      "price_formatted": "FORMATTED_PRICE",
+      "price_full_formatted": "FORMATTED_FULL_PRICE",
+      "price": "PRICE",
+      "price_full": "FULL_PRICE",
+      "image_url": "IMAGE_URL",
+      "image_url_handle": "IMAGE_URL_HANDLE",
+      "image_url_resized": "RESIZED_IMAGE_URL",
+      "url_handle": "PRODUCT_URL_HANDLE",
+      "currency": "CURRENCY",
+      "_id": "PRODUCT_ID",
+      "id": "NUMERIC_PRODUCT_ID",
+      "group_id": "GROUP_ID"
+    },
+    {
+      "name": "PRODUCT_NAME",
+      "url": "PRODUCT_URL",
+      "description": "PRODUCT_DESCRIPTION",
+      "category_ids": "CATEGORY_IDS",
+      "brand": "PRODUCT_BRAND",
+      "sales_rate": "SALES_RATE",
+      "relative_sales_rate": "RELATIVE_SALES_RATE",
+      "picture": "PRODUCT_PICTURE_URL",
+      "categories": "CATEGORIES",
+      "price_formatted": "FORMATTED_PRICE",
+      "price_full_formatted": "FORMATTED_FULL_PRICE",
+      "price": "PRICE",
+      "price_full": "FULL_PRICE",
+      "image_url": "IMAGE_URL",
+      "image_url_handle": "IMAGE_URL_HANDLE",
+      "image_url_resized": "RESIZED_IMAGE_URL",
+      "url_handle": "PRODUCT_URL_HANDLE",
+      "currency": "CURRENCY",
+      "_id": "PRODUCT_ID",
+      "id": "NUMERIC_PRODUCT_ID",
+      "group_id": "GROUP_ID"
+    }
+  ]
+}
+```
+### HTTP Request
+
+`GET https://<%= config[:api_endpoint] %>/collection/ID`
+
+<aside class="notice">
+You can find the product collection ID in the Product Collections section of the dashboard. Your configured collections are listed there along with their ID numbers.
+</aside>
+
+
+### Query Parameters
+
+| Parameter   | Required | Description                                      |
+|-------------|----------|--------------------------------------------------|
+| shop_id     | true     | Your API key                                     |
+| did         | false    | Device ID. You get it from `init` method in SDK. |
+| location    | false    | User's location                                  |
+| email       | false    | User's  email address                            |
+| phone       | false    | User's  phone number                             |
+| external_id | false    | User's  external_id                              |
+| loyalty_id  | false    | User's  loyalty_id                               |
+
+
+### API response
+
+**Products**
+
+API returns an array of objects. Each object in the `products` array contains the following:
+
+| Parameter            | Type             | Description                                                      |
+|----------------------|------------------|------------------------------------------------------------------|
+| name                 | String           | Name of the product                                              |
+| url                  | String           | URL to the product page                                          |
+| description          | String           | Description of the product                                       |
+| category_ids         | Array of Strings | Array of category IDs the product belongs to                     |
+| brand                | String           | Brand of the product                                             |
+| fashion_feature      | String           | Fashion feature (e.g., "adult").                                 |
+| fashion_gender       | String           | Gender for which the product is intended                         |
+| sales_rate           | Integer          | Sales rate                                                       |
+| relative_sales_rate  | Float            | Relative sales rate compared to other products                   |
+| picture              | String (URL)     | URL of the product image                                         |
+| categories           | Array of Objects | Array of category objects the product belongs to (system object) |
+| price_formatted      | String           | Formatted price                                                  |
+| price_full_formatted | String           | Formatted full price                                             |
+| price                | Float            | Price of the product                                             |
+| price_full           | Float            | Full price of the product                                        |
+| image_url            | String (URL)     | URL to the resized product image                                 |
+| image_url_handle     | String (URL)     | Processed image URL                                              |
+| image_url_resized    | String (URL)     | Resized image URL                                                |
+| url_handle           | String           | URL handle to access the product within the collection           |
+| currency             | String           | Currency used for the price                                      |
+| _id                  | String           | Unique product identifier                                        |
+| id                   | String           | Product ID                                                       |
+| group_id             | String           | Group identifier for the product                                 |
+
+
+

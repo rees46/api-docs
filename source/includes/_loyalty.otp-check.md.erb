@@ -1,0 +1,42 @@
+## Verify one-time password
+
+> Request example
+
+```shell
+curl https://<%= config[:api_endpoint] %>/otp/check?shop_id=SHOP_ID&shop_secret=SHOP_SECRET&event=EVENT&phone=PHONE&code=CODE
+```
+
+```javascript
+// S2S only
+```
+```swift
+// S2S only
+```
+```java
+// S2S only
+```
+```kotlin
+// S2S only
+```
+```jsx
+// S2S only
+```
+
+
+### HTTP Request
+
+`GET https://<%= config[:api_endpoint] %>/otp/check`
+
+Method verifies one-time password to authorize bonuses usage on POS.
+
+| Parameter   | Type   | Required | Description         |
+|-------------|--------|----------|---------------------|
+| shop_id     | String | true     | Your API key        |
+| shop_secret | String | true     | Your API secret key |
+| phone       | String | true     | Phone number        |
+| event       | String | true     | Event to authorize  |
+| code        | String | true     | Code to verify      |
+
+On successful verification method responses with HTTP code 200.
+
+On unsuccessful verification (wrong code or invalid parameters) method responses with HTTP code 400.

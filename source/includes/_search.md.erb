@@ -2,6 +2,10 @@
 
 Service provides 2 types of search: instant (typeahead) and full search.
 
+<aside class="warning">
+There is a response limit: a response can contain no more than ten thousand items, even if the request found more products
+</aside>
+
 ## Instant search
 
 ```javascript
@@ -16,6 +20,78 @@ Service provides 2 types of search: instant (typeahead) and full search.
 sdk.suggest(query: "ipho") { searchResult in
   print("Suggest callback")
 }
+
+/**
+
+Search for merchants in locations.
+
+To exclude merchants from the search results, use `excludedMerchants`.
+
+excludedMerchants - an array of merchants to be excluded from the search results.
+
+locations - locations where the search for merchants occurs.
+**/
+
+sdk?.search(
+  query: "search-query",
+  locations: "location",
+  excludedMerchants: ["excluded-merchant"]
+) { result in
+    switch result {
+    case .success(let response):
+      print(response.productsTotal)
+    case .failure(let error):
+      print(error.description)
+  }
+}
+
+sdk?.suggest(
+  query: "search-query",
+  locations: "location",
+  excludedMerchants: ["excluded-merchant"]
+) { result in
+    switch result {
+    case .success(let response):
+      print(response.productsTotal)
+    case .failure(let error):
+      print(error.description)
+  }
+}
+
+/**
+
+Brand exclusion
+
+To exclude brands from the search results, use `excludedBrands`.
+
+excludedBrands – an array of brand names that should be excluded from search results.
+
+**/
+
+sdk?.search(
+    query: "powder bronzer",
+    excludedBrands: ["dior", "estee lauder"]
+) { result in
+    switch result {
+    case .success(let response):
+        print(response.productsTotal)
+    case .failure(let error):
+        print(error.description)
+    }
+}
+
+sdk?.suggest(
+    query: "powder bronzer",
+    excludedBrands: ["dior", "estee lauder"]
+) { result in
+    switch result {
+    case .success(let response):
+        print(response.productsTotal)
+    case .failure(let error):
+        print(error.description)
+    }
+}
+
 ```
 ```java
 //Instant search
@@ -44,6 +120,24 @@ sdk.searchManager.searchInstant("SEARCH_QUERY", "locations", { searchInstantResp
 sdk.searchManager.searchBlank({ searchBlankResponse ->
     Log.i(TAG, "Search blank response: $searchBlankResponse")
 })
+
+/**
+
+Brand exclusion
+
+query - search query value
+excludedBrands - list of brands to be excluded
+onSearchInstant - callback that is triggered when the search is completed
+
+**/
+
+sdk.searchManager.searchInstant(
+  query = "powder bronzer",
+  excludedBrands = listOf("dior", "estee lauder"),
+  nSearchInstant = {
+    Log.d("INSTANT SEARCH EXCLUDE BRANDS", it.productsTotal.toString())
+  }
+)
 ```
 ```jsx
 const type = 'instant_search';
@@ -77,26 +171,35 @@ sdk.searchBlank()
 
 ### Query Parameters
 
-| Parameter          | Required | Description                                                                                                                                                                                                                                                                                     |
-|--------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
-| did                | true     | Device ID. You get it from `init` method in SDK.                                                                                                                                                                                                                                                |
-| shop_id            | true     | Your API key.                                                                                                                                                                                                                                                                                   |
-| sid                | true     | Temporary user session ID.                                                                                                                                                                                                                                                                      |
-| type               | true     | In this case: "instant_search".                                                                                                                                                                                                                                                                 |
-| search_query       | true     | Search query.                                                                                                                                                                                                                                                                                   |
-| locations          | false    | Comma separated list of locations IDs.                                                                                                                                                                                                                                                          |
-| search_scope       | false    | The whitelist of parameters separated by commas. There are two types: common parameters and subparameters for books. If empty, all common parameters are considered included by default. If there are no book subparameters in the request, the search of book parameters won't be initialized. |
-| exclude_merchants* | false    | A comma-separated list of merchants. Products from these merchants will be excluded from the search results                                                                                                                                                                                     |
+| Parameter           | Required | Description                                                                                                                                                                                                                                                                                     |
+|---------------------|----------|-------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| did                 | true     | Device ID. You get it from `init` method in SDK.                                                                                                                                                                                                                                                |
+| shop_id             | true     | Your API key.                                                                                                                                                                                                                                                                                   |
+| sid                 | true     | Temporary user session ID.                                                                                                                                                                                                                                                                      |
+| type                | true     | In this case: "instant_search".                                                                                                                                                                                                                                                                 |
+| search_query        | true     | Search query.                                                                                                                                                                                                                                                                                   |
+| locations           | false    | Comma separated list of locations IDs.                                                                                                                                                                                                                                                          |
+| search_scope        | false    | The whitelist of parameters separated by commas. There are two types: common parameters and subparameters for books. If empty, all common parameters are considered included by default. If there are no book subparameters in the request, the search of book parameters won't be initialized. |
+| excluded_merchants* | false    | A comma-separated list of merchants. Products from these merchants will be excluded from the search results                                                                                                                                                                                     |
+| collapse            | false    | When set to `false`, products with the same `group_id` will not be collapsed into a single entry and will appear as separate items in the search results.                                                                                                                                       |                    |          |                                                                                                                                                                                                                                                                                                 |
+| excluded_brands     | false    | A list of brands in lowercase, separated by commas                                                                                                                                                                                                                                              |
 
 <aside class="warning">
 
 <p></p>
-<p>* <code>exclude_merchants</code></p>
-<p>The <code>exclude_merchants</code> parameter works only in conjunction with the <code>merchants</code> parameter within the <code>locations</code> field.</p>
-<p>Note that if a product is associated with multiple merchants, the list of merchants in the <code>exclude_merchants</code> parameter must precisely match the list of merchants for that product. Otherwise, the parameter will not work.</p>
-<p>The connection between the <code>merchants</code> and <code>exclude_merchants</code> parameters exists because a whitelist of merchants is created based on the <code>merchants</code> parameter within the <code>locations</code> field.</p>
+<p>*<code>excluded_merchants</code></p>
+<p>The <code>excluded_merchants</code> parameter works only in conjunction with the <code>merchants</code> parameter within the <code>locations</code> field.</p>
+<p>Note that if a product is associated with multiple merchants, the list of merchants in the <code>excluded_merchants</code> parameter must precisely match the list of merchants for that product. Otherwise, the parameter will not work.</p>
+<p>The connection between the <code>merchants</code> and <code>excluded_merchants</code> parameters exists because a whitelist of merchants is created based on the <code>merchants</code> parameter within the <code>locations</code> field.</p>
 <p>The whitelist of merchants is populated by the content of the <code>merchants</code> parameter. If this parameter is not provided, all merchants for the product will be included in the whitelist by default.</p>
-<p>The <code>exclude_merchants</code> parameter then excludes merchants from this whitelist.</p>
+<p>The <code>excluded_merchants</code> parameter then excludes merchants from this whitelist.</p>
+
+<p></p>
+<p>*<code>excluded_brands</code></p>
+<p>When uploading a product, the JSON must include the <code>brand</code> field.</p>
+<p>On the backend, the value from the <code>brand</code> field is automatically converted to lowercase using <code>brand_downcase</code>.</p>
+<p>Therefore, brands in <code>excluded_brands</code> must be written in lowercase.</p>
+<p>Be aware that brand exclusion will not work if the <code>brand</code> field was not provided in the JSON when uploading the product.</p>
 
 </aside>
 
@@ -190,6 +293,12 @@ sdk.searchBlank()
 | book_isbn              | array  | Reserved                                                                                                                                                                                              |
 | book_isbn_vars         | array  | Reserved                                                                                                                                                                                              |
 
+<aside class="notice">
+Fields price_range, price_ranges, and price_median ignore products with a price of zero during aggregation.
+
+For example, if the product prices are: 0, 10, and 100, the API response will return a minimum price of 10 instead of 0.
+</aside>
+
 ## Full search
 
 ```javascript
@@ -208,6 +317,75 @@ sdk.search(query: "iphone") { searchResult in
 // Full search with additional parameters
 sdk.search(query: "laptop", limit: nil, offset: nil, categoryLimit: nil, categories: nil, extended: nil, sortBy: nil, sortDir: nil, locations: nil, brands: nil, filters: nil, priceMin: nil, priceMax: nil, colors: nil, exclude: nil, fashion_sizes: nil) { searchResult in
   print("Full search callback")
+}
+
+/**
+Search for merchants in locations.
+
+To exclude merchants from the search results, use `excludedMerchants`.
+
+excludedMerchants - an array of merchants to be excluded from the search results.
+
+locations - locations where the search for merchants occurs.
+**/
+
+sdk?.search(
+  query: "search-query",
+  locations: "location",
+  excludedMerchants: ["excluded-merchant"]
+) { result in
+    switch result {
+    case .success(let response):
+      print(response.productsTotal)
+    case .failure(let error):
+      print(error.description)
+  }
+}
+
+sdk?.suggest(
+  query: "search-query",
+  locations: "location",
+  excludedMerchants: ["excluded-merchant"]
+) { result in
+    switch result {
+    case .success(let response):
+      print(response.productsTotal)
+    case .failure(let error):
+      print(error.description)
+  }
+
+
+/**
+Brand exclusion
+
+To exclude brands from the search results, use `excludedBrands`.
+
+excludedBrands – an array of brand names that should be excluded from search results.
+
+**/
+
+sdk?.search(
+    query: "powder bronzer",
+    excludedBrands: ["dior", "estee lauder"]
+) { result in
+    switch result {
+    case .success(let response):
+        print(response.productsTotal)
+    case .failure(let error):
+        print(error.description)
+    }
+}
+
+sdk?.suggest(
+    query: "powder bronzer",
+    excludedBrands: ["dior", "estee lauder"]
+) { result in
+    switch result {
+    case .success(let response):
+        print(response.productsTotal)
+    case .failure(let error):
+        print(error.description)
+    }
 }
 ```
 ```kotlin
@@ -230,6 +408,27 @@ params.put(SearchParams.Parameter.FASHION_SIZES, filters)
 sdk.searchManager.searchFull("SEARCH_QUERY", params, { searchFullResponse ->
     Log.i(TAG, "Search full response: $searchFullResponse")
 })
+
+/**
+
+ Full search with brand exclusion
+
+query - search query value
+searchParams - additional search parameters
+EXCLUDED_BRANDS - a comma-separated list of brands to be excluded
+onSearchFull - callback that is triggered when the full search is completed
+
+ **/
+
+sdk.searchManager.searchFull(
+  "powder bronzer",
+  searchParams = SearchParams()
+    .put(SearchParams.Parameter.EXCLUDED_BRANDS, listOf("dior", "estee lauder").joinToString(",")),
+  onSearchFull = {
+    Log.d("FULL SEARCH EXCLUDE BRANDS", it.productsTotal.toString())
+  }
+)
+
 ```
 
 ```java
@@ -289,46 +488,69 @@ sdk.search({type: 'full_search', search_query: 'string', filters_search_by: 'pop
 
 ### Query Parameters
 
-| Parameter          | Required | Description                                                                                                                          |
-|--------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------|
-| did                | true     | Device ID. You get it from `init` method in SDK                                                                                      |
-| shop_id            | true     | Your API key                                                                                                                         |
-| sid                | true     | Temporary user session ID                                                                                                            |
-| type               | true     | In this case: "full_search"                                                                                                          |
-| search_query       | true     | Search query                                                                                                                         |
-| limit              | false    | Limit of results                                                                                                                     |
-| offset             | false    | Offset of results                                                                                                                    |
-| category_limit     | false    | How many categories for sidebar filter to return                                                                                     |
-| categories         | false    | Comma separated list of categories to filter                                                                                         |
-| extended           | false    | It's better to use `true` for full search results                                                                                    |
-| sort_by            | false    | Sort by parameter: `popular`, `price`, `discount`, `sales_rate`, `date`, `price_margin`                                              |
-| order              | false    | Sort direction: `asc` or `desc` (default)                                                                                            |
-| locations          | false    | Comma separated list of locations IDs                                                                                                |
-| brands             | false    | Comma separated list of brands to filter                                                                                             |
-| filters            | false    | Optional escaped JSON string with filter parameters. For example: `{"bluetooth":["yes"],"offers":["15% cashback"],"weight":["1.6"]}` |
-| price_min          | false    | Min price                                                                                                                            |
-| price_max          | false    | Max price                                                                                                                            |
-| colors             | false    | Comma separated list of colors                                                                                                       |
-| fashion_sizes      | false    | Comma separated list of sizes                                                                                                        |
-| exclude            | false    | Comma separated list of products IDs to exclude from search results                                                                  |
-| email              | false    | It's only for S2S integration, when service doesn't have user's session. Mobile SDK doesn't use it                                   |
-| no_clarification   | false    | Disable clarified search (true, false, default: false). Don't use it. God mode only                                                  |
-| merchants          | false    | Comma separated list of merchants                                                                                                    |
-| exclude_merchants* | false    | A comma-separated list of merchants. Products from these merchants will be excluded from the search results                          |
-| filters_search_by  | false    | Available options for filter: name, quantity, popularity.If this parameter in query global settings from dashboard are ignored       |
-| brand_limit        | false    | This parameter allows limiting the number of brands aggregated in the response. The default limit is 1000                            |
+| Parameter           | Required | Description                                                                                                                                               |
+|---------------------|----------|-----------------------------------------------------------------------------------------------------------------------------------------------------------|
+| did                 | true     | Device ID. You get it from `init` method in SDK                                                                                                           |
+| shop_id             | true     | Your API key                                                                                                                                              |
+| sid                 | true     | Temporary user session ID                                                                                                                                 |
+| type                | true     | In this case: "full_search"                                                                                                                               |
+| search_query        | true     | Search query                                                                                                                                              |
+| limit               | false    | Limit of results                                                                                                                                          |
+| offset              | false    | Offset of results                                                                                                                                         |
+| category_limit      | false    | How many categories for sidebar filter to return                                                                                                          |
+| categories          | false    | Comma separated list of categories to filter                                                                                                              |
+| extended            | false    | It's better to use `true` for full search results                                                                                                         |
+| sort_by             | false    | Sort by parameter: `popular`, `price`, `discount`, `sales_rate`, `date`, `price_margin`, `rating`, `relevance`                                            |
+| order               | false    | Sort direction: `asc` or `desc` (default)                                                                                                                 |
+| locations           | false    | Comma separated list of locations IDs                                                                                                                     |
+| brands              | false    | Comma separated list of brands to filter                                                                                                                  |
+| filters             | false    | Optional escaped JSON string with filter parameters. For example: `{"bluetooth":["yes"],"offers":["15% cashback"],"weight":["1.6"]}`                      |
+| price_min           | false    | Min price                                                                                                                                                 |
+| price_max           | false    | Max price                                                                                                                                                 |
+| colors              | false    | Comma separated list of colors                                                                                                                            |
+| fashion_sizes       | false    | Comma separated list of sizes                                                                                                                             |
+| exclude             | false    | Comma separated list of products IDs to exclude from search results                                                                                       |
+| email               | false    | It's only for S2S integration, when service doesn't have user's session. Mobile SDK doesn't use it                                                        |
+| no_clarification    | false    | Disable clarified search (true, false, default: false). Don't use it. God mode only                                                                       |
+| merchants           | false    | Comma separated list of merchants                                                                                                                         |
+| excluded_merchants* | false    | A comma-separated list of merchants. Products from these merchants will be excluded from the search results                                               |
+| filters_search_by   | false    | Available options for filter: name, quantity, popularity.If this parameter in query global settings from dashboard are ignored                            |
+| brand_limit         | false    | This parameter allows limiting the number of brands aggregated in the response. The default limit is 1000                                                 |
+| collapse            | false    | When set to `false`, products with the same `group_id` will not be collapsed into a single entry and will appear as separate items in the search results. |
+| excluded_brands*    | false    | A list of brands in lowercase, separated by commas                                                                                                        |
 
 <aside class="warning">
 
 <p></p>
-<p>* <code>exclude_merchants</code></p>
-<p>The <code>exclude_merchants</code> parameter works only in conjunction with the <code>merchants</code> parameter within the <code>locations</code> field.</p>
-<p>Note that if a product is associated with multiple merchants, the list of merchants in the <code>exclude_merchants</code> parameter must precisely match the list of merchants for that product. Otherwise, the parameter will not work.</p>
-<p>The connection between the <code>merchants</code> and <code>exclude_merchants</code> parameters exists because a whitelist of merchants is created based on the <code>merchants</code> parameter within the <code>locations</code> field.</p>
+<p>* <code>excluded_merchants</code></p>
+<p>The <code>excluded_merchants</code> parameter works only in conjunction with the <code>merchants</code> parameter within the <code>locations</code> field.</p>
+<p>Note that if a product is associated with multiple merchants, the list of merchants in the <code>excluded_merchants</code> parameter must precisely match the list of merchants for that product. Otherwise, the parameter will not work.</p>
+<p>The connection between the <code>merchants</code> and <code>excluded_merchants</code> parameters exists because a whitelist of merchants is created based on the <code>merchants</code> parameter within the <code>locations</code> field.</p>
 <p>The whitelist of merchants is populated by the content of the <code>merchants</code> parameter. If this parameter is not provided, all merchants for the product will be included in the whitelist by default.</p>
-<p>The <code>exclude_merchants</code> parameter then excludes merchants from this whitelist.</p>
+<p>The <code>excluded_merchants</code> parameter then excludes merchants from this whitelist.</p>
+
+<p></p>
+<p>When uploading a product, the JSON must include the <code>brand</code> field.</p>
+<p>On the backend, the value from the <code>brand</code> field is automatically converted to lowercase using <code>brand_downcase</code>.</p>
+<p>Therefore, brands in <code>excluded_brands</code> must be written in lowercase.</p>
+<p>Be aware that brand exclusion will not work if the <code>brand</code> field was not provided in the JSON when uploading the product.</p>
 
 </aside>
+
+#### Sorting parameters in full search
+
+The `sort_by` parameter defines how the search results are ordered. Below are the supported values and their descriptions:
+
+| Value          | Description                                                                                                                                                                                         |
+|----------------|-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| `popular`      | Sorts products based on their overall popularity. This ranking is influenced by internal metrics such as click-through rates, conversion rates, and user behavior. It is the default sorting method |
+| `price`        | Sorts products by price                                                                                                                                                                             |
+| `discount`     | Sorts products by the size of their discount                                                                                                                                                        |
+| `sales_rate`   | Sorts by the rate at which products are sold. Higher sales velocity items are prioritized                                                                                                           |
+| `date`         | Sorts products by their addition date                                                                                                                                                               |
+| `price_margin` | Sorts by the product's profit margin                                                                                                                                                                |
+| `rating`       | Sorts by user rating, with higher-rated products appearing first                                                                                                                                    |
+| `relevance`    | Sorts by how closely a product matches the search query. It prioritizes content relevance and textual matching, and **does not** consider sales metrics or price                                    |
 
 ### API response
 
@@ -376,9 +598,11 @@ sdk.search({type: 'full_search', search_query: 'string', filters_search_by: 'pop
 | html               | string           | HTML markup for displaying products on the page.                                             | Returned if HTML content is required for rendering on the client side.                                            |
 
 
+<aside class="notice">
+Fields price_range, price_ranges, and price_median ignore products with a price of zero during aggregation.
 
-
-
+For example, if the product prices are: 0, 10, and 100, the API response will return a minimum price of 10 instead of 0.
+</aside>
 
 ## Search queries with zero results
 

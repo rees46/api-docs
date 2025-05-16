@@ -1,0 +1,105 @@
+# Sliders and banners
+
+Service provides access to sliders.
+
+Slider is a banner block. It has a collection of banners.
+
+
+
+## Get slider's banners
+
+```shell
+curl https://<%= config[:api_endpoint] %>/slider?shop_id=...&code=...&did=...&email=...&phone=...&external_id=...&tags=...
+```
+
+```javascript
+// S2S only.
+```
+
+```swift
+// S2S only.
+```
+
+```kotlin
+// S2S only.
+```
+
+```jsx
+// S2S only.
+```
+
+> Response example:
+
+```json
+{
+  "status": "success",
+  "payload": {
+    "properties": {
+      "code": "homepage_mobile",
+      "width": 1000,
+      "height": 160
+    },
+    "banners": [
+      {
+        "image_url": "...",
+        "url": "...",
+        "deeplink_ios": "...",
+        "deeplink_android": "...",
+        "content_type": "...",
+        "content": "...",
+        "html": "..."
+      },
+      ...
+    ]
+  }
+}
+
+```
+
+### HTTP Request
+
+`GET https://<%= config[:api_endpoint] %>/slider`
+
+### Query Parameters
+
+| Parameter   | Required | Description                                                  |
+|-------------|----------|--------------------------------------------------------------|
+| did         | false    | Device ID. You get it from `init` method in SDK.             |
+| email       | false    | User's email                                                 |
+| phone       | false    | User's phone                                                 |
+| external_id | false    | User's ID from your database                                 |
+| shop_id     | true     | Your API key                                                 |
+| code        | true     | Slider unique code                                           |
+| tags        | false    | Banner tags to filter banners (comma-separated list of tags) |
+
+
+### API response
+
+Main object structure:
+
+| Name       | Type     | Description              |
+|:-----------|:---------|:-------------------------|
+| properties | object   | Slider properties object |
+| slides     | banner[] | List of banners          |
+
+
+Structure of `properties` object:
+
+| Name   | Type    | Description             |
+|:-------|:--------|:------------------------|
+| code   | string  | Slider's unique code    |
+| width  | integer | Banner width in pixels  |
+| height | integer | Banner height in pixels |
+
+Structure of `banner` element:
+
+| Name             | Type   | Description                        |
+|:-----------------|:-------|:-----------------------------------|
+| image_url        | string | Image URL                          |
+| url              | string | Destination URL                    |
+| deeplink_ios     | string | Deeplink for iOS                   |
+| deeplink_android | string | Deeplink for Android               |
+| content_type     | string | Content type (reserved property)   |
+| content          | text   | Banner content (reserved property) |
+| html             | html   | Banner content (HTML)              |
+

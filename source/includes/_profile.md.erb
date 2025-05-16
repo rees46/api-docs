@@ -94,23 +94,93 @@ let customProperties: [String: Any] = [
 ```
 
 ```kotlin
-// Create a map of parameters
-val params = hashMapOf(
-  "email" to YOUR_EMAIL
-)
+/**
+ * Initializes arrays of basic data types.
+ * These arrays demonstrate that profile properties can support arrays of strings, integers, floats, booleans, and dates.
+ */
 
-// Use the SDK to update the profile
-sdk.profile(params)
+val stringArray = arrayOf("item1", "item2", "item3")
+val intArray = arrayOf(1, 2, 3, 4, 5)
+val floatArray = arrayOf(1.1f, 2.2f, 3.3f)
+val boolArray = arrayOf(true, false, true)
+val dateArray = arrayOf(Date(), Date(), Date())
 
-// With callback
-sdk.profile(
-  params,
-  object : OnApiCallbackListener() {
-    override fun onSuccess(response: JSONObject?) {
-      Log.i(TAG, "Response: $response")
-      }
-   }
-)
+/**
+ * Creates a nested JSON object.
+ * This object demonstrates how to structure complex data with key-value pairs, including strings and integers.
+ */
+
+val nestedObject = JSONObject().apply {
+  put("nestedStringKey", "nestedValue")
+  put("nestedIntKey", 456)
+}
+
+/**
+ * Creates a custom JSON object.
+ * The object includes various data types such as strings, integers, floats, booleans, dates, arrays,
+ * and even another nested JSON object.
+ */
+
+val customObject = JSONObject().apply {
+  put("stringKey", "stringValue")
+  put("intKey", 123)
+  put("floatKey", 45.67f)
+  put("boolKey", true)
+  put("dateKey", Date())
+  put("arrayKey", JSONArray(arrayOf(1, 2, 3)))
+  put("nestedObjectKey", nestedObject)
+}
+
+/**
+ * Creates an array of custom JSON objects.
+ * This demonstrates how to pass an array of complex objects as a single profile property.
+ */
+
+val customObjectArray = arrayOf(customObject, customObject)
+
+/**
+ * Builds the ProfileParams object using the Builder pattern.
+ * This example demonstrates how to add a wide range of user properties,
+ * including basic data types, arrays, and custom objects, to be passed to the SDK.
+ */
+
+val params = ProfileParams.Builder()
+  .put("userEmail", "YOUR_EMAIL")
+  .put("userPhone", "YOUR_PHONE")
+  .put("userLoyaltyId", "YOUR_LOYALTY_ID")
+  .put("birthday", Date())
+  .put("age", 30)
+  .put("firstName", "YOUR_NAME")
+  .put("lastName", "YOUR_LAST_NAME")
+  .put("location", "YOUR_LOCATION")
+  .put("gender", "male")
+  .put("fbID", "YOUR_FB_ID")
+  .put("vkID", "YOUR_VK_ID")
+  .put("telegramId", "YOUR_TG_ID")
+  .put("loyaltyCardLocation", "LOYALTY_CARD_LOCATION")
+  .put("loyaltyStatus", "LOYALTY_STATUS")
+  .put("loyaltyBonuses", 100)
+  .put("loyaltyBonusesToNextLevel", 200)
+  .put("boughtSomething", true)
+  .put("userId", "YOUR_USER_ID")
+  .put("stringArray", stringArray)
+  .put("intArray", intArray)
+  .put("floatArray", floatArray)
+  .put("boolArray", boolArray)
+  .put("dateArray", dateArray)
+  .put("customObject", customObject)
+  .put("customObjectArray", customObjectArray)
+
+/**
+ * Calls the SDK's profile method to save user profile data.
+ * A callback is included to handle success or failure of the API call.
+ */
+
+sdk.profile(params, object : OnApiCallbackListener() {
+  override fun onSuccess(response: JSONObject?) {
+    Log.i(TAG, "Response: $response") // Logs the API response
+  }
+})
 
 ```
 
@@ -205,6 +275,9 @@ You can update any standard profile property. All standard properties are listed
 | bought_something              | Bool    | User bought something ever                       |
 | kids                          | Array   | List of kids (see below)                         |
 | auto                          | Array   | List of auto vehicles (see below)                |
+| google_advertising_id         | String  | Google advertising ID                            |
+| apple_advertising_id          | String  | Apple advertising ID                             |
+| yandex_id                     | String  | Yandex advertising ID                            |
 
 
 Kid object properties:
@@ -224,7 +297,7 @@ Auto object properties:
 
 ### Custom properties
 
-Additionally you can update any custom property, you've created in CRM.
+Additionally, you can update any custom property, you've created in CRM.
 
 
 
@@ -250,7 +323,7 @@ false
 );
 ```
 
-> REST method returns this JSON structure
+> The REST method returns this JSON structure for requests where a secret key was provided
 
 ```json
 {
@@ -306,6 +379,22 @@ false
 }
 ```
 
+> The REST method returns this JSON structure with publicly available profile data if a secret key was not provided in the request
+
+```json
+{
+  "has_email": true,
+  "computed_gender": "male",
+  "gender": "male",
+  "bought_something": true,
+  "id": "YOUR ID",
+  "custom_properties": {
+    "favorite_color": "blue",
+    "subscription_level": "premium"
+  }
+}
+```
+
 > JS SDK method returns simplified anonymous structure to prevent data stealing
 
 ```json
@@ -336,9 +425,11 @@ false
 ```
 
 
-You can read profile info from CRM using API or SDK.
+You can read profile info from the CRM using an API or SDK.
 
-In case of using REST API (when using email or phone number as user ID), you must provide secret key to the method.
+In the case of using the REST API (when using an email or phone number as the user ID), you must provide a secret key to the method to get a full response.
+
+However, there is publicly available data you can retrieve without providing a secret key in your request.
 
 
 ## Force change email
@@ -433,3 +524,77 @@ It's S2S method.
 | new_phone                    | String | true     | User's new phone                                                                                             |
 | old_phone                    | String | true     | User's current phone                                                                                         |
 | i_understand_what_i_am_doing | String | true     | Must present with any `true` value (`true`, `"true"`, `1`, `yes`, `believe me I know what I am doing`, etc). |
+
+
+
+
+
+## Purge profile
+
+```shell
+# By phone number
+curl --location --request DELETE 'https://<%= config[:api_endpoint] %>/profile/purge' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: did=7Hvlb6ftsK; r46_debug=true' \
+--data '{
+    "shop_id": "...",
+    "shop_secret": "...",
+    "phone": "..."
+}'
+
+# By phone
+curl --location --request DELETE 'https://<%= config[:api_endpoint] %>/profile/purge' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: did=7Hvlb6ftsK; r46_debug=true' \
+--data '{
+    "shop_id": "...",
+    "shop_secret": "...",
+    "email": "..."
+}'
+```
+
+```javascript
+// Not supported
+```
+
+```swift
+// Not supported
+```
+
+```kotlin
+// Not supported
+```
+
+```java
+// Not supported
+```
+
+```jsx
+// Not supported
+```
+
+Remove all personal data by `phone`, `email`, `loyalty_id` or `external_id`:
+
+- phone;
+- email;
+- first_name;
+- last_name;
+- middle_name;
+- loyalty_id;
+- external_id;
+- custom client properties
+
+It's S2S method.
+
+### Query Parameters
+
+| Parameter   | Type   | Required | Description         |
+|-------------|--------|----------|---------------------|
+| shop_id     | String | true     | Your API key        |
+| shop_secret | String | true     | Your API secret key |
+| phone       | String | true     | User's phone        |
+| email       | String | true     | User's email        |
+| loyalty_id  | String | true     | User's loyalty_id   |
+| external_id | String | true     | User's external_id  |
+
+

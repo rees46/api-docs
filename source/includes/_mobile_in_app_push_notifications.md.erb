@@ -1,0 +1,238 @@
+# In App Notifications
+
+This document provides detailed guidelines for integrating and configuring in-app notifications for Android and iOS platforms.
+
+To configure in-app notifications, follow a two-step process:
+
+1. SDK Initialization
+2. Alert Management (programmatic or via admin panel)
+
+## iOS
+
+For iOS you'll need to add `parentViewController` as an optional parameter during SDK initialization.
+
+### SDK initialization
+
+```swift
+/*
+
+SDK initialization example with parentViewController. Initialize the SDK first, then set up the notificationWidget to manage in-app notifications.
+
+parentViewController - parameter required for alerts
+
+needReInitialization - pop-ups are delivered only during the initialization phase, when this parameter's value is true it triggers reinitialization
+
+stream - parameter is required if you are going to use alerts
+
+*/
+
+let sdk = createPersonalizationSDK(
+  shopId: "YOUR_SHOP_ID",
+  apiDomain: "YOUR_API_DOMEN"
+  parentViewController: rootViewController,
+  needReInitialization = true,
+  stream: "ios",
+  onError: { error in
+    print("Initialization error: \(error.localizedDescription)")
+  }
+)
+
+guard let notificationWidget = sdk.getNotificationWidget() else {
+  print("Notification widget not available")
+  return
+}
+
+/*
+
+Alert managment in iOS SDK
+
+titleText - required
+messageText - required
+imageUrl - optional
+confirmButtonText - optional
+dismissButtonText - optional
+
+*/
+
+notificationWidget?.showTopDialog(
+  titleText: "title",
+  messageText: "message",
+  imageUrl: "image url",
+  confirmButtonText: "custom confirm button text",
+  dismissButtonText: "custom dismiss button text",
+  onConfirmButtonClick: {
+  print("confirm clicked")
+  }
+)
+
+notificationWidget?.showAlert(
+  titleText: "title",
+  messageText: "message",
+  imageUrl: "image url",
+  confirmButtonText: "custom confirm button text",
+  dismissButtonText: "custom dismiss button text",
+  onConfirmButtonClick: {
+  print("confirm clicked")
+  }
+)
+
+notificationWidget?.showBottomDialog(
+  titleText: "title",
+  messageText: "message",
+  imageUrl: "image url",
+  confirmButtonText: "custom confirm button text",
+  dismissButtonText: "custom dismiss button text",
+  onConfirmButtonClick: {
+  print("confirm clicked")
+  }
+)
+
+```
+
+### initialization parameters for iOS
+
+| Parameter            | Category    | Description                                                                                                                        |
+|----------------------|-------------|------------------------------------------------------------------------------------------------------------------------------------|
+| shopId               | required    | Your shop ID                                                                                                                       |
+| apiDomain            | required    | API endpoint for URL request creation                                                                                              |
+| parentViewController | optional    | This parameter must be provided if you want to enable alerts                                                                       |
+| needReInitialization | required    | Pop-ups are delivered only during the initialization phase, and this flag triggers the necessary reinitialization to receive them. |
+| stream               | conditional | Platform specific value "ios" must be passed if alerts are enabled (parentViewController parameter is provided)                    |
+
+### Alert management
+
+| Parameter            | Category | Description              |
+|----------------------|----------|--------------------------|
+| titleText            | required | Alert title              |
+| messageText          | required | Message body             |
+| imageUrl             | optional | Image link               |
+| confirmButtonText    | optional | Confirmation button text |
+| dismissButtonText    | optional | Dismissal button text    |
+| onConfirmButtonClick | optional | Closes push by default   |
+
+
+## Android
+
+Initialize the SDK **before** using any alert functionality.
+
+### SDK initialization and alert management
+
+To enable alerts in your Android App you'll have to initialize `fragmentManager` separately.
+
+Supported Alert Types:
+
+1. Alert dialog
+2. Bottom dialog
+3. Top dialog
+
+```kotlin
+/*
+
+Initialize the SDK first, then set up the fragmentManagers.
+
+shopId - your shop ID
+
+context - the part that provides access to the core resources of your App
+
+needReInitialization - pop-ups are delivered only during the initialization phase, when this parameter's value is true it triggers reinitialization
+
+stream - parameter is required if you are going to use alerts
+
+*/
+
+sdk.initialize(
+  context = "YOUR_CONTEXT",
+  shopId = "YOUR_SHOP_ID",
+  needReInitialization = true
+)
+
+sdk.initializeFragmentManager(
+  fragmentManager = supportFragmentManager,
+  stream = "android"
+)
+
+/*
+
+Popup invocation examples. These examples illustrate how to invoke different types of dialogs:
+top dialog, bottom dialog, full-screen dialog, and alert dialog.
+
+Parameters:
+
+title – notification title (required)
+
+message – notification message (required)
+
+imageUrl – image link (optional)
+
+buttonConfirmText – confirmation button text (optional)
+
+buttonDeclineText – decline button text (optional)
+
+buttonConfirmColor – confirmation button color (optional)
+
+buttonDeclineColor – decline button color (optional)
+
+*/
+
+
+sdk.inAppNotificationManager.showTopDialog(
+  title = TITLE,
+  message = MESSAGE,
+  imageUrl = IMAGE_URL,
+  buttonConfirmText = BUTTON_CONFIRM_TEXT,
+  buttonDeclineText = BUTTON_DECLINE_TEXT,
+  buttonConfirmColor = CONFIRM_BUTTON_COLOR,
+  buttonDeclineColor = DECLINE_BUTTON_COLOR,
+) {
+  // handle positive button click action
+}
+
+sdk.inAppNotificationManager.showBottomDialog(
+  title = TITLE,
+  message = MESSAGE,
+  imageUrl = IMAGE_URL,
+  buttonConfirmText = BUTTON_CONFIRM_TEXT,
+  buttonDeclineText = BUTTON_DECLINE_TEXT,
+  buttonConfirmColor = CONFIRM_BUTTON_COLOR,
+  buttonDeclineColor = DECLINE_BUTTON_COLOR,
+) {
+  // handle positive button click action
+}
+
+sdk.inAppNotificationManager.showFullScreenDialog(
+  title = TITLE,
+  message = MESSAGE,
+  imageUrl = IMAGE_URL,
+  buttonConfirmText = BUTTON_CONFIRM_TEXT,
+  buttonDeclineText = BUTTON_DECLINE_TEXT,
+  buttonConfirmColor = CONFIRM_BUTTON_COLOR,
+  buttonDeclineColor = DECLINE_BUTTON_COLOR,
+) {
+  // handle positive button click action
+}
+
+sdk.inAppNotificationManager.showAlertDialog(
+  title = TITLE,
+  message = MESSAGE,
+  imageUrl = IMAGE_URL,
+  buttonConfirmText = BUTTON_CONFIRM_TEXT,
+  buttonDeclineText = BUTTON_DECLINE_TEXT,
+  buttonConfirmColor = CONFIRM_BUTTON_COLOR,
+  buttonDeclineColor = DECLINE_BUTTON_COLOR,
+) {
+  // handle positive button click action
+}
+
+```
+
+### initialization parameters for Android
+
+| Parameter            | Category    | Description                                                                                                                        |
+|----------------------|-------------|------------------------------------------------------------------------------------------------------------------------------------|
+| shopId               | required    | Your shop ID                                                                                                                       |
+| context              | required    | The part that provides access to the core resources of your App                                                                    |
+| needReInitialization | required    | Pop-ups are delivered only during the initialization phase, and this flag triggers the necessary reinitialization to receive them. |
+| stream               | conditional | Platform specific value "android" must be passed if the fragmentManager was initialized                                            |
+
+The `fragmentManager` must be initialized separately if you want to enable alerts.
+

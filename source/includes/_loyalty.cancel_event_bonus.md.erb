@@ -1,0 +1,40 @@
+## Cancel reward bonus
+
+> Request example
+
+```shell
+curl 'https://<%= config[:api_endpoint] %>/loyalty/basic/cancel' \
+    -X 'PATCH' \
+    -H 'Content-Type: application/json' \
+    --data-raw '{"identifier":"PHONE", "shop_id":"SHOP_ID", "shop_secret":"SHOP_SECRET", "id":"TRANSACTION_ID"}'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+    "status": "success"
+}
+```
+
+Method cancels a reward bonus which was created by `loyalty/basic/event_bonus` method. This method can cancel only reward bonuses which have `cancellable` flag. List of all reward bonuses can be received from `loyalty/bonuses/event_bonus_history` method.
+
+### HTTP Request
+
+`PATCH https://<%= config[:api_endpoint] %>/loyalty/basic/cancel`
+
+### Query Parameters
+
+| Parameter   | Required | Description                                      |
+|-------------|----------|--------------------------------------------------|
+| shop_id     | true     | Your API key                                     |
+| shop_secret | true     | Your API secret key                              |
+| identifier  | true     | User's phone number (loyalty program identifier) |
+| id          | true     | Transaction ID                                   |
+
+
+### API response
+
+| Name      | Type   | Description       |
+|-----------|--------|-------------------|
+| status    | String | Response status   |
