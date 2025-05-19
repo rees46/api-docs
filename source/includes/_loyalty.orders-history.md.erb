@@ -1,0 +1,75 @@
+## Order history
+
+> Headers
+
+```
+Content-type: application/json
+```
+
+> Body example
+
+```json
+{
+    "shop_id":         "...",
+    "shop_secret":     "...",
+    "identifier":        "..."
+}
+```
+
+> Request example
+
+```shell
+curl --header "Content-Type: application/json" \
+  --request GET \
+  --data-binary "@data.json" \
+  https://<%= config[:api_endpoint] %>/loyalty/checkout/history
+```
+
+```javascript
+// S2S only
+```
+```swift
+// S2S only
+```
+```java
+// S2S only
+```
+```kotlin
+// S2S only
+```
+```jsx
+// S2S only
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "success": true,
+  "payload": {
+    "orders": [
+      {
+        "id": "...",        // Order ID
+        "date": "...",      // Order date YYYY-MM-DD
+        "status": "...",    // Order status
+        "total": ...,       // Paid amount
+        "items": [
+          {
+            "id": "...",      // Product ID
+            "name": "...",    // Product name
+            "quantity": ...,  // Quantity (integer)
+            "price": ...      // Price per product after all discounts, offers and bonuses
+          }, ...
+        ]
+      }, ...
+    ],
+  }
+}
+```
+
+### HTTP Request
+
+`GET https://<%= config[:api_endpoint] %>/loyalty/checkout/history`
+
+Returns a list of loyalty member orders.
+
