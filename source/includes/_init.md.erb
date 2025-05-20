@@ -234,13 +234,13 @@ r46('init', 'SHOP_ID', 'STREAM', success, failure, options, isSpa);
 /*
 In the options parameter, custom domains can be configured
 through which API requests will be routed.
-host — custom value for API requests
-master_host — URL for CDN requests. If empty, the default value will be used
+api_host — custom value for API requests
+cdn_host — URL for CDN requests. If empty, the default value will be used
 pictures_host — will use the default value
 */
 r46('init', 'SHOP_ID', 'STREAM', null, null, {
-  host: 'api.custom.com',
-  master_host: '',
+  api_host: 'api.custom.com',
+  cdn_host: '',
   pictures_host: undefined,
 });
 ```
