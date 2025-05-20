@@ -40,6 +40,7 @@ includes:
   - loyalty.confirm.md.erb
   - loyalty.change.md.erb
   - loyalty.details.md.erb
+  - loyalty.orders-history.md.erb
   - loyalty.balance.md.erb
   - loyalty.history.md.erb
   - loyalty.event_bonus_history.md.erb
