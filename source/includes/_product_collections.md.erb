@@ -9,7 +9,26 @@ curl 'https://<%= config[:api_endpoint] %>/collection/ID?shop_id=...'
 ```
 
 ```javascript
-TODO
+/*
+
+To use product collections, add this code to your website page.
+
+You can find the collection ID in the dashboard.
+Go to the Merchandising section and look in the product collections list.
+
+Note: consoleLog is a global function on the window object.
+It is set like this: window.consoleLog = console.log.
+
+*/
+
+<div
+    class="rees46-collection-products-results"
+    data-collection-id="6"
+    data-collection-callback="consoleLog"
+    data-collection-error="consoleLog"
+    data-collection-location="London"
+></div>
+
 ```
 
 ```swift
