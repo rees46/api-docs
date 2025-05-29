@@ -554,119 +554,78 @@ The `sort_by` parameter defines how the search results are ordered. Below are th
 
 ### API response
 
-| Name               | Type             | Description                                                                                  |
-|--------------------|------------------|----------------------------------------------------------------------------------------------|
-| search_query       | string           | The search query string.                                                                     |
-| collections        | array            | List of collections to which the product belongs.                                            |
-| products_total     | integer          | Total number of products matching the search query.                                          |
-| products           | array of objects | Array of products matching the search query. Includes the following fields:                  |
-|                    |                  | * `name` (string)                                                                            |
-|                    |                  | * `url` (string)                                                                             |
-|                    |                  | * `description` (string)                                                                     |
-|                    |                  | * `category_ids` (array of integers)                                                         |
-|                    |                  | * `brand` (string)                                                                           |
-|                    |                  | * `fashion_sizes` (array of strings)                                                         |
-|                    |                  | * `fashion_feature` (string)                                                                 |
-|                    |                  | * `fashion_gender` (string)                                                                  |
-|                    |                  | * `fashion_wear_type` (string)                                                               |
-|                    |                  | * `sales_rate` (integer)                                                                     |
-|                    |                  | * `relative_sales_rate` (float)                                                              |
-|                    |                  | * `price_formatted` (string)                                                                 |
-|                    |                  | * `price_full_formatted` (string)                                                            |
-|                    |                  | * `picture` (string)                                                                         |
-|                    |                  | * `image_url` (string)                                                                       |
-|                    |                  | * `image_url_handle` (string)                                                                |
-|                    |                  | * `image_url_resized` (object)                                                               |
-|                    |                  | * `url_handle`(string)                                                                       |
-|                    |                  | * `group_id`(string)                                                                         |
-|                    |                  | * `_id` (string)                                                                             |
-| categories         | array of objects | List of product categories. Includes the following fields:                                   |
-|                    |                  | * `id` (string)                                                                              |
-|                    |                  | * `url` (string)                                                                             |
-|                    |                  | * `name` (string)                                                                            |
-|                    |                  | * `parent` (string)                                                                          |
-|                    |                  | * `url_handle` (string)                                                                      |
-|                    |                  | * `count` (integer)                                                                          |
-| price_range        | object           | Price range for the found products. Includes the following fields:                           |
-|                    |                  | * `min` (float)                                                                              |
-|                    |                  | * `max` (float)                                                                              |
-| price_ranges       | array of objects | Array of price ranges that contain products. Includes the following fields:                  |
-|                    |                  | * `from` (integer)                                                                           |
-|                    |                  | * `count` (integer)                                                                          |
-| price_median       | integer          | Median price of all products returned by the search                                          |
-| brands             | array of objects | List of product brands that match the search query. Includes the following fields:           |
-|                    |                  | * `name` (string)                                                                            |
-|                    |                  | * `count` (integer)                                                                          |
-| industrial_filters | object           | Filters for products based on size and other characteristics. Includes the following fields: |
-|                    |                  | * `fashion_sizes` (array of objects)                                                         |
-|                    |                  | * `size` (integer)                                                                           |
-|                    |                  | * `count` (integer)                                                                          |
-| html               | string           | HTML markup for displaying products on the page.                                             |
-| clarification      | boolean          | Flag indicating if query clarification is needed (e.g., if no exact matches are found).      |
-| requests_count     | integer          | The number of requests made to the API within the session.                                   |
+| Name               | Type             | Description                                                                               |
+|--------------------|------------------|-------------------------------------------------------------------------------------------|
+| search_query       | string           | The search query string.                                                                  |
+| collections        | array            | List of collections to which the product belongs.                                         |
+| products_total     | integer          | Total number of products matching the search query.                                       |
+| products           | array of objects | Array of products matching the search query. Each product includes:                       |
+|                    |                  | * `id` (string): External product ID                                                      |
+|                    |                  | * `_id` (string): Internal product ID                                                     |
+|                    |                  | * `name` (string): Product name                                                           |
+|                    |                  | * `url` (string): Absolute URL to product page                                            |
+|                    |                  | * `url_handle` (string): Relative URL to product page                                     |
+|                    |                  | * `description` (string): Product description                                             |
+|                    |                  | * `category_ids` (array of strings): Array of category IDs                                |
+|                    |                  | * `categories` (array of objects): Full category objects (see below)                      |
+|                    |                  | * `brand` (string): Product brand                                                         |
+|                    |                  | * `currency` (string): Currency symbol                                                    |
+|                    |                  | * `price` (number): Product price                                                         |
+|                    |                  | * `price_full` (number): Full price without discount or promo                             |
+|                    |                  | * `price_formatted` (string): Price with currency symbol                                  |
+|                    |                  | * `price_full_formatted` (string): Full price with currency symbol                        |
+|                    |                  | * `oldprice` (number, optional): Previous price                                           |
+|                    |                  | * `discount_percent` (number, optional): Discount percentage                              |
+|                    |                  | * `sales_rate` (integer): Absolute popularity                                             |
+|                    |                  | * `relative_sales_rate` (float): Relative popularity                                      |
+|                    |                  | * `stock_quantity` (integer, optional): Stock count                                       |
+|                    |                  | * `barcode` (string, optional): Product barcode                                           |
+|                    |                  | * `rating` (number, optional): Product rating (1–5)                                       |
+|                    |                  | * `fashion_sizes` (array of strings): Available sizes                                     |
+|                    |                  | * `fashion_feature` (string): Style or cut                                                |
+|                    |                  | * `fashion_gender` (string): Gender target (e.g. men, women)                              |
+|                    |                  | * `fashion_wear_type` (string): Type of clothing                                          |
+|                    |                  | * `model` (string, optional): Product model name or number                                |
+|                    |                  | * `picture` (string): Product thumbnail image URL                                         |
+|                    |                  | * `image_url` (string): Full-size image URL                                               |
+|                    |                  | * `image_url_handle` (string): Relative image path                                        |
+|                    |                  | * `image_url_resized` (object): Object with resized image versions (keys: 120, 140, etc.) |
+|                    |                  | * `group_id` (string): ID of product variant group                                        |
+| categories         | array of objects | List of product categories. Each object includes:                                         |
+|                    |                  | * `id` (string): Category ID                                                              |
+|                    |                  | * `name` (string): Category name                                                          |
+|                    |                  | * `url` (string): Full URL to category                                                    |
+|                    |                  | * `url_handle` (string): Relative URL                                                     |
+|                    |                  | * `parent` (string): ID of the parent category                                            |
+|                    |                  | * `count` (integer): Number of products in this category                                  |
+| price_range        | object           | Price range for the found products. Includes:                                             |
+|                    |                  | * `min` (float): Minimum price                                                            |
+|                    |                  | * `max` (float): Maximum price                                                            |
+| price_ranges       | array of objects | Array of price ranges. Includes:                                                          |
+|                    |                  | * `from` (integer): Starting price                                                        |
+|                    |                  | * `count` (integer): Number of products in this price range                               |
+| price_median       | integer          | Median price of all products returned by the search (excluding price = 0)                 |
+| brands             | array of objects | List of product brands. Each object includes:                                             |
+|                    |                  | * `name` (string): Brand name                                                             |
+|                    |                  | * `count` (integer): Number of matching products                                          |
+| industrial_filters | object           | Filters for dimensions or size. Returned only if relevant. May include:                   |
+|                    |                  | * `fashion_sizes` (array of objects): Includes size and count                             |
+|                    |                  | * `size` (string)                                                                         |
+|                    |                  | * `count` (integer)                                                                       |
+| html               | string           | HTML markup of product block.                                                             |
+| clarification      | boolean          | Indicates if clarification is needed due to lack of exact matches.                        |
+| requests_count     | integer          | Number of API requests in current session.                                                |
 
 
 <aside class="notice">
+
 Fields price_range, price_ranges, and price_median ignore products with a price of zero during aggregation.
 
 For example, if the product prices are: 0, 10, and 100, the API response will return a minimum price of 10 instead of 0.
+
+Some fields may be excluded from the response if the product does not contain relevant data (e.g., brand, fashion sizes, rating).
+
 </aside>
-
-### Descriptions of Nested Fields in the API Response
-
- **products**
-
-| Field                | Type             | Description                                      |
-|----------------------|------------------|--------------------------------------------------|
-| name                 | string           | Product name                                     |
-| url                  | string           | Absolute product URL                             |
-| description          | string           | Short product description                        |
-| category_ids         | array of strings | Array of associated category IDs                 |
-| brand                | string           | Product brand name                               |
-| sales_rate           | integer          | Product's absolute popularity score              |
-| relative_sales_rate  | float            | Product's relative popularity                    |
-| price_formatted      | string           | Display price with currency symbol               |
-| price_full_formatted | string           | Full (non-discounted) price with currency symbol |
-| picture              | string (URL)     | Product thumbnail image URL                      |
-| image_url            | string (URL)     | Full-size image URL                              |
-| image_url_handle     | string           | Relative path to product image                   |
-| image_url_resized    | object           | Object with resized images                       |
-| url_handle           | string           | Relative product URL                             |
-| group_id             | string           | ID of product group (aggregated variations)      |
-| _id                  | string           | Internal ID                                      |
-
-**categories**
-
-| Field      | Type    | Description                         |
-|------------|---------|-------------------------------------|
-| id         | string  | Category ID                         |
-| name       | string  | Category name                       |
-| url        | string  | Full URL to category                |
-| parent     | string  | ID of the parent category           |
-| url_handle | string  | Relative URL path to the category   |
-| count      | integer | Number of products in this category |
-
-**brands**
-
-| Field   | Type     | Description                           |
-|---------|----------|---------------------------------------|
-| name    | string   | Brand name                            |
-| count   | integer  | Number of products for this brand     |
-
-**price_range**
-
-| Field | Type   | Description              |
-|-------|--------|--------------------------|
-| min   | float  | Minimum price in results |
-| max   | float  | Maximum price in results |
-
-**price_ranges**
-
-| Field | Type    | Description                                        |
-|-------|---------|----------------------------------------------------|
-| from  | integer | Start of price range                               |
-| count | integer | Number of products in this price range             |
-
 
 ## Search queries with zero results
 
