@@ -29,6 +29,33 @@ It is set like this: window.consoleLog = console.log.
     data-collection-location="London"
 ></div>
 
+
+/*
+  shop_id         - Your API key
+  did             - (Optional) Device ID obtained via SDK init
+  location        - (Optional) Location
+  email           - (Optional) Email address
+  phone           - (Optional) Phone number
+  external_id     - (Optional) External ID from your system
+  loyalty_id      - (Optional) Loyalty program identifier
+  COLLECTION_ID - Product collection ID from the dashboard
+*/
+
+<%= config[:js_sdk_name] %>("collection", "COLLECTION_ID", {
+  shop_id: "YOUR_SHOP_ID",
+  did: "DEVICE_ID",
+  location: "LOCATION",
+  email: "EMAIL",
+  phone: "PHONE",
+  external_id: "EXTERNAL_ID",
+  loyalty_id: "LOYALTY_ID"
+}, function(response) {
+  /* The functionality of rendering a product collection block */
+}, function(error) {
+  /* Error handling logic if something goes wrong */
+});
+
+
 ```
 
 ```swift
