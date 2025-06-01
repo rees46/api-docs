@@ -31,14 +31,14 @@ It is set like this: window.consoleLog = console.log.
 
 
 /*
-  shop_id         - Your API key
+  shop_id         – (Optional) Your API key. If not provided, the value is automatically set during initialization
   did             - (Optional) Device ID obtained via SDK init
   location        - (Optional) Location
   email           - (Optional) Email address
   phone           - (Optional) Phone number
   external_id     - (Optional) External ID from your system
   loyalty_id      - (Optional) Loyalty program identifier
-  COLLECTION_ID - Product collection ID from the dashboard
+  COLLECTION_ID   - Product collection ID from the dashboard
 */
 
 <%= config[:js_sdk_name] %>("collection", "COLLECTION_ID", {
@@ -139,15 +139,15 @@ You can find the product collection ID in the Product Collections section of the
 
 ### Query Parameters
 
-| Parameter   | Required | Description                                      |
-|-------------|----------|--------------------------------------------------|
-| shop_id     | true     | Your API key                                     |
-| did         | false    | Device ID. You get it from `init` method in SDK. |
-| location    | false    | User's location                                  |
-| email       | false    | User's  email address                            |
-| phone       | false    | User's  phone number                             |
-| external_id | false    | User's  external_id                              |
-| loyalty_id  | false    | User's  loyalty_id                               |
+| Parameter   | Required | Description                                     |
+|-------------|----------|-------------------------------------------------|
+| shop_id     | true     | Your API key                                    |
+| did         | false    | Device ID. You get it from `init` method in SDK |
+| location    | false    | User's location                                 |
+| email       | false    | User's  email address                           |
+| phone       | false    | User's  phone number                            |
+| external_id | false    | User's  external_id                             |
+| loyalty_id  | false    | User's  loyalty_id                              |
 
 
 ### API response
