@@ -801,7 +801,7 @@ purchase
 	.put(Params.Parameter.DELIVERY_ADDRESS, YOUR_DELIVERY_ADDRESS)
 	.put(new Params.RecommendedBy(Params.RecommendedBy.TYPE.RECOMMENDATION, YOUR_RECOMMENDATION_CODE));
 
-REES46.track(Params.TrackEvent.PURCHASE, purchase);
+sdk.track(Params.TrackEvent.PURCHASE, purchase);
 ```
 ```jsx
 sdk.track("purchase", {

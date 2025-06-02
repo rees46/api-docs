@@ -49,6 +49,8 @@ set :android_sdk_package_code, 'kameleoon'
 set :service_name, 'Kameleoon'
 set :logo, 'kameleoon.logo.svg'
 set :favicon, 'kameleoon.favicon.ico'
+set :css_handler, 'kameleoon'
+set :kotlin_package, 'com.kameleoon:kameleoon-sdk'
 
 # Build Configuration
 configure :build do
