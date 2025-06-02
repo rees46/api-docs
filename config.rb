@@ -51,6 +51,8 @@ set :rn_sdk_package_code, '@rees46'
 set :service_name, 'REES46'
 set :logo, 'r46.logo.png'
 set :favicon, 'r46.favicon.ico'
+set :css_handler, 'rees46'
+set :kotlin_package, 'com.rees46:rees46-sdk'
 
 # Build Configuration
 configure :build do
