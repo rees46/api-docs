@@ -43,7 +43,7 @@ end
 ```kotlin
 // 1. Add to dependencies:
 dependencies {
-    implementation 'com.rees46:rees46-sdk:+'
+    implementation '<%= config[:kotlin_package] %>:+'
 }
 
 // 2. Append to your project build.gradle
@@ -79,7 +79,7 @@ plugins {
 }
 
 dependencies {
-    implementation 'com.rees46:rees46-sdk:+'
+    implementation '<%= config[:kotlin_package] %>:+'
     implementation 'com.google.dagger:dagger:DAGGER_VERSION'
     kapt 'com.google.dagger:dagger-compiler:DAGGER_COMPILER_VERSION'
 }
@@ -348,7 +348,7 @@ private <%= config[:android_sdk_package_code] %> <%= config[:android_sdk_package
 @Override
 public void onCreate() {
   super.onCreate();
-	rees46 = <%= config[:android_sdk_package_code] %>.initialize(getApplicationContext(), SHOP_ID, API_DOMAIN);
+	sdk = <%= config[:android_sdk_package_code] %>.initialize(getApplicationContext(), SHOP_ID, API_DOMAIN);
 }
 ```
 
