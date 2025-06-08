@@ -1,0 +1,58 @@
+## Check QR-code for OTP
+
+> Headers
+
+```
+Content-type: application/json
+```
+
+> Body example
+
+```json
+{
+    "shop_id":        "...",
+    "shop_secret":    "...",
+    "code":           "..."
+}
+```
+
+> Request example
+
+```shell
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data-binary "@data.json" \
+  https://<%= config[:api_endpoint] %>/loyalty/qr/check
+```
+
+```javascript
+// S2S only
+```
+```swift
+// S2S only
+```
+```java
+// S2S only
+```
+```kotlin
+// S2S only
+```
+```jsx
+// S2S only
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "success": true,
+  "payload": null
+}
+```
+
+### HTTP Request
+
+`POST https://<%= config[:api_endpoint] %>/loyalty/qr/check`
+
+Check OTP QR-code. Returns code 200 on success and 4xx on invalid code or request data.
+

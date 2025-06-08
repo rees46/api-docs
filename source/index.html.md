@@ -40,6 +40,8 @@ includes:
   - loyalty.confirm.md.erb
   - loyalty.change.md.erb
   - loyalty.promos.cart.md.erb
+  - loyalty.qr.get.md.erb
+  - loyalty.qr.check.md.erb
   - loyalty.details.md.erb
   - loyalty.orders-history.md.erb
   - loyalty.balance.md.erb
