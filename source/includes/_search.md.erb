@@ -554,67 +554,91 @@ The `sort_by` parameter defines how the search results are ordered. Below are th
 
 ### API response
 
-| Name               | Type             | Description                                                                               |
-|--------------------|------------------|-------------------------------------------------------------------------------------------|
-| search_query       | string           | The search query string.                                                                  |
-| collections        | array            | List of collections to which the product belongs.                                         |
-| products_total     | integer          | Total number of products matching the search query.                                       |
-| products           | array of objects | Array of products matching the search query. Each product includes:                       |
-|                    |                  | * `id` (string): External product ID                                                      |
-|                    |                  | * `_id` (string): Internal product ID                                                     |
-|                    |                  | * `name` (string): Product name                                                           |
-|                    |                  | * `url` (string): Absolute URL to product page                                            |
-|                    |                  | * `url_handle` (string): Relative URL to product page                                     |
-|                    |                  | * `description` (string): Product description                                             |
-|                    |                  | * `category_ids` (array of strings): Array of category IDs                                |
-|                    |                  | * `categories` (array of objects): Full category objects (see below)                      |
-|                    |                  | * `brand` (string): Product brand                                                         |
-|                    |                  | * `currency` (string): Currency symbol                                                    |
-|                    |                  | * `price` (number): Product price                                                         |
-|                    |                  | * `price_full` (number): Full price without discount or promo                             |
-|                    |                  | * `price_formatted` (string): Price with currency symbol                                  |
-|                    |                  | * `price_full_formatted` (string): Full price with currency symbol                        |
-|                    |                  | * `oldprice` (number, optional): Previous price                                           |
-|                    |                  | * `discount_percent` (number, optional): Discount percentage                              |
-|                    |                  | * `sales_rate` (integer): Absolute popularity                                             |
-|                    |                  | * `relative_sales_rate` (float): Relative popularity                                      |
-|                    |                  | * `stock_quantity` (integer, optional): Stock count                                       |
-|                    |                  | * `barcode` (string, optional): Product barcode                                           |
-|                    |                  | * `rating` (number, optional): Product rating (1–5)                                       |
-|                    |                  | * `fashion_sizes` (array of strings): Available sizes                                     |
-|                    |                  | * `fashion_feature` (string): Style or cut                                                |
-|                    |                  | * `fashion_gender` (string): Gender target (e.g. men, women)                              |
-|                    |                  | * `fashion_wear_type` (string): Type of clothing                                          |
-|                    |                  | * `model` (string, optional): Product model name or number                                |
-|                    |                  | * `picture` (string): Product thumbnail image URL                                         |
-|                    |                  | * `image_url` (string): Full-size image URL                                               |
-|                    |                  | * `image_url_handle` (string): Relative image path                                        |
-|                    |                  | * `image_url_resized` (object): Object with resized image versions (keys: 120, 140, etc.) |
-|                    |                  | * `group_id` (string): ID of product variant group                                        |
-| categories         | array of objects | List of product categories. Each object includes:                                         |
-|                    |                  | * `id` (string): Category ID                                                              |
-|                    |                  | * `name` (string): Category name                                                          |
-|                    |                  | * `url` (string): Full URL to category                                                    |
-|                    |                  | * `url_handle` (string): Relative URL                                                     |
-|                    |                  | * `parent` (string): ID of the parent category                                            |
-|                    |                  | * `count` (integer): Number of products in this category                                  |
-| price_range        | object           | Price range for the found products. Includes:                                             |
-|                    |                  | * `min` (float): Minimum price                                                            |
-|                    |                  | * `max` (float): Maximum price                                                            |
-| price_ranges       | array of objects | Array of price ranges. Includes:                                                          |
-|                    |                  | * `from` (integer): Starting price                                                        |
-|                    |                  | * `count` (integer): Number of products in this price range                               |
-| price_median       | integer          | Median price of all products returned by the search (excluding price = 0)                 |
-| brands             | array of objects | List of product brands. Each object includes:                                             |
-|                    |                  | * `name` (string): Brand name                                                             |
-|                    |                  | * `count` (integer): Number of matching products                                          |
-| industrial_filters | object           | Filters for dimensions or size. Returned only if relevant. May include:                   |
-|                    |                  | * `fashion_sizes` (array of objects): Includes size and count                             |
-|                    |                  | * `size` (string)                                                                         |
-|                    |                  | * `count` (integer)                                                                       |
-| html               | string           | HTML markup of product block.                                                             |
-| clarification      | boolean          | Indicates if clarification is needed due to lack of exact matches.                        |
-| requests_count     | integer          | Number of API requests in current session.                                                |
+### API response
+
+| Name               | Type             | Description                                                                                  |
+|--------------------|------------------|----------------------------------------------------------------------------------------------|
+| search_query       | string           | The search query string.                                                                     |
+| collections        | array            | List of collections to which the product belongs.                                            |
+| products_total     | integer          | Total number of products matching the search query.                                          |
+| products           | array of objects | Array of products matching the search query. Each product includes:                          |
+|                    |                  | * `id` (string): External product ID                                                         |
+|                    |                  | * `_id` (number): Internal product ID                                                        |
+|                    |                  | * `name` (string): Product name                                                              |
+|                    |                  | * `url` (string): Absolute URL to product page                                               |
+|                    |                  | * `url_handle` (string): Relative URL to product page                                        |
+|                    |                  | * `description` (string, optional): Product description                                      |
+|                    |                  | * `category_ids` (array of strings): Array of category IDs                                   |
+|                    |                  | * `categories` (array of objects): Full category objects (see below)                         |
+|                    |                  | * `brand` (string, optional): Product brand                                                  |
+|                    |                  | * `brand_picture` (string, optional): Brand logo                                             |
+|                    |                  | * `currency` (string): Currency symbol                                                       |
+|                    |                  | * `price` (number): Current product price                                                    |
+|                    |                  | * `price_full` (number): Full price without discount or promo                                |
+|                    |                  | * `price_formatted` (string): Price with currency symbol                                     |
+|                    |                  | * `price_full_formatted` (string): Full price with currency symbol                           |
+|                    |                  | * `oldprice` (number, optional): Previous price                                              |
+|                    |                  | * `oldprice_full` (number, optional): Previous full price                                    |
+|                    |                  | * `oldprice_formatted` (string, optional): Previous price formatted                          |
+|                    |                  | * `oldprice_full_formatted` (string, optional): Full previous price formatted                |
+|                    |                  | * `promocode` (string, optional): Applied promo code                                         |
+|                    |                  | * `price_with_promocode` (number, optional): Price with promo code applied                   |
+|                    |                  | * `price_with_promocode_formatted` (string, optional): Promo price formatted                 |
+|                    |                  | * `discount_percent` (number, optional): Discount percentage                                 |
+|                    |                  | * `discount` (number, optional): Absolute discount amount                                    |
+|                    |                  | * `discount_formatted` (string, optional): Discount amount formatted                         |
+|                    |                  | * `picture` (string): Product thumbnail image URL                                            |
+|                    |                  | * `image_url` (string, optional): Full-size image URL                                        |
+|                    |                  | * `image_url_handle` (string, optional): Relative image path                                 |
+|                    |                  | * `image_url_resized` (object, optional): Resized versions, keys may include: 120, 140, etc. |
+|                    |                  | * `stock_quantity` (integer, optional): Stock count                                          |
+|                    |                  | * `quantity` (number, optional): Total available quantity                                    |
+|                    |                  | * `barcode` (string, optional): Product barcode                                              |
+|                    |                  | * `rating` (number, optional): Product rating (1–5)                                          |
+|                    |                  | * `is_new` (boolean, optional): Indicates if the product is marked as new                    |
+|                    |                  | * `gift` (boolean, optional): Whether this product comes as a gift                           |
+|                    |                  | * `installment` (number, optional): Installment amount if available                          |
+|                    |                  | * `fashion_sizes` (array of strings, optional): Available sizes                              |
+|                    |                  | * `fashion_original_sizes` (array of strings, optional): Original manufacturer sizes         |
+|                    |                  | * `fashion_colors` (array of strings, optional): Available colors                            |
+|                    |                  | * `fashion_feature` (string, optional): Style or cut                                         |
+|                    |                  | * `fashion_gender` (string, optional): Gender target                                         |
+|                    |                  | * `fashion_wear_type` (string, optional): Type of clothing                                   |
+|                    |                  | * `model` (string, optional): Product model name or number                                   |
+|                    |                  | * `sales_rate` (number): Absolute popularity                                                 |
+|                    |                  | * `relative_sales_rate` (float): Relative popularity                                         |
+|                    |                  | * `params` (array of objects, optional): Additional parameters                               |
+|                    |                  | * `group_id` (string, optional): ID of product variant group                                 |
+|                    |                  | * `deeplink_android` (string, optional): Android deep link                                   |
+|                    |                  | * `deeplink_ios` (string, optional): iOS deep link                                           |
+|                    |                  | * `leftovers` (string, optional): Leftovers                                                  |
+|                    |                  | * `location_ids` (array of strings, optional): Location IDs                                  |
+|                    |                  | * `debug` (object, optional): Internal debugging data                                        |
+| categories         | array of objects | List of product categories. Each object includes:                                            |
+|                    |                  | * `id` (string): Category ID                                                                 |
+|                    |                  | * `name` (string): Category name                                                             |
+|                    |                  | * `url` (string): Full URL to category                                                       |
+|                    |                  | * `url_handle` (string): Relative URL                                                        |
+|                    |                  | * `parent` (string): ID of the parent category                                               |
+|                    |                  | * `count` (integer): Number of products in this category                                     |
+| price_range        | object           | Price range for the found products. Includes:                                                |
+|                    |                  | * `min` (float): Minimum price                                                               |
+|                    |                  | * `max` (float): Maximum price                                                               |
+| price_ranges       | array of objects | Array of price ranges. Each object includes:                                                 |
+|                    |                  | * `from` (integer): Starting price                                                           |
+|                    |                  | * `count` (integer): Number of products in this price range                                  |
+| price_median       | integer          | Median price of all products returned by the search (excluding products with price = 0)      |
+| brands             | array of objects | List of product brands. Each object includes:                                                |
+|                    |                  | * `name` (string): Brand name                                                                |
+|                    |                  | * `count` (integer): Number of matching products                                             |
+| industrial_filters | object           | Filters for dimensions or size. Returned only if relevant. May include:                      |
+|                    |                  | * `fashion_sizes` (array of objects): Includes size and count                                |
+|                    |                  | * `size` (string)                                                                            |
+|                    |                  | * `count` (integer)                                                                          |
+| html               | string           | HTML markup of product block.                                                                |
+| clarification      | boolean          | Indicates if clarification is needed due to lack of exact matches.                           |
+| requests_count     | integer          | Number of API requests in current session.                                                   |
+
 
 
 <aside class="notice">
