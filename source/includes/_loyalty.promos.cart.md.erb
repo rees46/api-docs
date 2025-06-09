@@ -1,0 +1,69 @@
+## Promos for a shopping cart
+
+> Headers
+
+```
+Content-type: application/json
+```
+
+> Body example
+
+```json
+{
+    "shop_id":        "...",
+    "shop_secret":    "...",
+    "identifier":     "...",
+    "payment_type":   "...",
+    "promo_code":     "...",
+    "location_id":    "...",
+    "charge_bonuses": true,
+    "cart_items": [
+      {"product_id": "...", "price": 1000, "quantity": 4},
+      {"product_id": "...", "price": 2000, "quantity": 1}
+    ]
+}
+```
+
+> Request example
+
+```shell
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data-binary "@data.json" \
+  https://<%= config[:api_endpoint] %>/loyalty/promos/cart
+```
+
+```javascript
+// S2S only
+```
+```swift
+// S2S only
+```
+```java
+// S2S only
+```
+```kotlin
+// S2S only
+```
+```jsx
+// S2S only
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "success": true,
+  "payload": [
+    {"id": 1, "name": "...", "description": "..."},
+    {"id": 2, "name": "...", "description": "..."}
+  ]
+}
+```
+
+### HTTP Request
+
+`POST https://<%= config[:api_endpoint] %>/loyalty/promos/cart`
+
+Analyzes a shopping cart and returns a list of promos which meet conditions.
+

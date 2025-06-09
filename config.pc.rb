@@ -51,6 +51,8 @@ set :rn_sdk_package_code, '@personaclick'
 set :service_name, 'PersonaClick'
 set :logo, 'pc.logo.png'
 set :favicon, 'pc.favicon.ico'
+set :css_handler, 'personaclick'
+set :kotlin_package, 'com.personaclick:personaclick-sdk'
 
 # Build Configuration
 configure :build do
