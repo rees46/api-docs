@@ -617,10 +617,14 @@ The `sort_by` parameter defines how the search results are ordered. Below are th
 | categories         | array of objects | List of product categories. Each object includes:                                            |
 |                    |                  | * `id` (string): Category ID                                                                 |
 |                    |                  | * `name` (string): Category name                                                             |
-|                    |                  | * `url` (string): Full URL to category                                                       |
-|                    |                  | * `url_handle` (string): Relative URL                                                        |
-|                    |                  | * `parent` (string): ID of the parent category                                               |
-|                    |                  | * `count` (integer): Number of products in this category                                     |
+|                    |                  | * `url` (string, optional): Full URL to category                                             |
+|                    |                  | * `url_handle` (string, optional): Relative URL to category                                  |
+|                    |                  | * `alias` (string, optional): Alternative identifier for the category                        |
+|                    |                  | * `level` (string, optional): Nesting level in the category hierarchy                        |
+|                    |                  | * `name_with_parent` (string, optional): Category name including parent hierarchy            |
+|                    |                  | * `parent_external_id` (string, optional): External ID of the parent category                |
+|                    |                  | * `parent` (string, optional): Internal ID of the parent category                            |
+|                    |                  | * `count` (integer, optional): Number of products in this category                           |
 | price_range        | object           | Price range for the found products. Includes:                                                |
 |                    |                  | * `min` (float): Minimum price                                                               |
 |                    |                  | * `max` (float): Maximum price                                                               |
