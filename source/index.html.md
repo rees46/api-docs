@@ -34,6 +34,7 @@ includes:
   - loyalty.md.erb
   - loyalty.join.md.erb
   - loyalty.status.md.erb
+  - loyalty.quit.md.erb
   - loyalty.estimate.md.erb
   - loyalty.apply.md.erb
   - loyalty.cancel.md.erb

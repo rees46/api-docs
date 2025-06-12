@@ -1,0 +1,71 @@
+## Quit loyalty program
+
+> Headers
+
+```
+Content-type: application/json
+```
+
+> Body example
+
+```json
+{
+    "shop_id": "...",
+    "shop_secret": "...",
+    "identifier": "PHONE",
+}
+```
+
+> Request example
+
+```shell
+curl --header "Content-Type: application/json" \
+  --request DELETE \
+  --data-binary "@data.json" \
+  https://<%= config[:api_endpoint] %>/loyalty/members/destroy
+```
+
+```javascript
+// S2S only
+```
+
+```swift
+// S2S only
+```
+
+```java
+// S2S only
+```
+
+```kotlin
+// S2S only
+```
+
+```jsx
+// S2S only
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "success": true,
+  "payload": null
+}
+```
+
+### HTTP Request
+
+`DELETE https://<%= config[:api_endpoint] %>/loyalty/members/destroy`
+
+Method deletes loyalty member profile from database by identifier (phone number). Loyalty level and bonuses will not be deleted immediately to prevent accident data loss, but member won't be able to receive membership benefits on next purchases.
+
+### Query Parameters
+
+| Parameter   | Required | Description         |
+|-------------|----------|---------------------|
+| shop_id     | true     | Your API key        |
+| shop_secret | true     | Your API secret key |
+| identifier  | true     | User's phone number |
+
+
