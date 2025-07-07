@@ -66,3 +66,7 @@ If client failed to pay for order and don't plan to proceed, you have to cancel 
 
 Just send the same payload to `loyalty/checkout/cancel` to refund bonuses.
 
+Specifics:
+
+1. Cancels a specific event bonus if it has the cancellable flag
+2. Only works with bonuses created via event_bonus

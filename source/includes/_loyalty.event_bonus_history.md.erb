@@ -37,6 +37,10 @@ curl 'https://<%= config[:api_endpoint] %>/loyalty/bonuses/event_bonus_history?s
 
 Method return member's bonuses history which were created with `loyalty/basic/event_bonus` method only. This allows to cancel some bonuses by ID using `loyalty/bonuses/cancel` method.
 
+Specifics:
+
+1. Indicates which bonuses can be canceled via the cancel method (cancellable: true)
+
 ### HTTP Request
 
 `GET https://<%= config[:api_endpoint] %>/loyalty/bonuses/event_bonus_history`

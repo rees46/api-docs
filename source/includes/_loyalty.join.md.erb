@@ -68,6 +68,12 @@ curl --header "Content-Type: application/json" \
 
 Method to register a user as a member of loyalty program. Server-to-server integration method only.
 
+Specifics:
+
+1. The user is registered even if the loyalty program is currently inactive
+2. If the user is already a member, the method still returns "success": true and doesn't change their data
+3. At least the phone field is required; email is optional but should be passed if available
+
 ### Query Parameters
 
 | Parameter   | Required | Description                               |
