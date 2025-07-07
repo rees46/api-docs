@@ -717,28 +717,25 @@ curl 'https://<%= config[:api_endpoint] %>/push' \
 });
 
 // Custom order tracking
-r46('track', 'purchase', {
-    'email': "john.doe@examplemail.com",
-    'phone': "4400114527199",
-    'products': [
-        {'id': 37, 'price': 318, 'amount': 1},
-    ],
-    'custom': {
-        'date_start': '2024-03-01',
-        'date_finish': '2024-03-11',
-        'duration': 11,
-        'route': 'Moscow - Берлин',
-        'route_start': 'Moscow',
-        'route_finish': 'Berlin',
-        'tour_class': 'Lux',
-        'adults_count': 2,
-        'children_count': 1,
-        'infants_count': 1,
-        'deck': 'lower',
-        'rooms': '334,335'
+<%= config[:js_sdk_name] %>('track', 'purchase', {
+     "email": "***@example.com",
+     "phone": "***",
+     "items": [
+     {
+        "id": 1,
+        "amount": 1,
+        "price": 1450
     },
-    'order': 'N318',
-    'order_price': 29999
+    {
+        "id": 3,
+        "amount": 1,
+        "price": 1290
+    }
+  ],
+     "order": "order_001",
+     "order_price": 2740,
+     "order_delivery": 400,
+     "order_discount": 0
 });
 ```
 
