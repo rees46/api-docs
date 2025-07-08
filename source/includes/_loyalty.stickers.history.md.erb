@@ -1,0 +1,53 @@
+## Stickers history
+> Request example
+
+```shell
+curl 'https://<%= config[:api_endpoint] %>/loyalty/stickers/history?shop_id=SHOP_ID&shop_secret=SHOP_SECRET&identifier=PHONE&offset=0&limit=20'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+    "campaign_id": 113,
+    "campaign_code": "...",
+    "campaign_name": "...",
+    "campaign_status": "...",
+    "used_in_order": "...",
+    "issued_by_order": "...",
+    "created_at": "2025-01-14 13:00:12"
+  },
+  {
+    "campaign_id": 2,
+    "campaign_code": "...",
+    "campaign_name": "...",
+    "campaign_status": "...",
+    "used_in_order": "...",
+    "issued_by_order": "...",
+    "created_at": "2025-01-13 13:00:12"
+  },
+  ...
+]
+```
+
+Method returns member's stickers usage history
+
+### HTTP Request
+
+`GET https://<%= config[:api_endpoint] %>/loyalty/stickers/history`
+
+### Query Parameters
+
+| Parameter   | Required | Description               |
+|-------------|----------|---------------------------|
+| shop_id     | true     | Your API key              |
+| shop_secret | true     | Your API secret key       |
+| identifier  | true     | User's phone (identifier) |
+| offset      | false    | Offset, min 0             |
+| limit       | false    | Limit, max 50             |
+
+
+
+
+
