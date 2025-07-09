@@ -44,25 +44,51 @@ curl --header "Content-Type: application/json" \
 > The above command returns JSON structured like this:
 
 ```json
+/*
+ * API Response Example:
+ *
+ * Root Level:
+ *   status: string - Operation status ("success" or "error")
+ *   payload: object - Contains orders data
+ *
+ * Orders Array:
+ *   orders[].id: string - Unique order ID (alphanumeric)
+ *   orders[].date: string - Order date in YYYY-MM-DD format
+ *   orders[].status: string - Current status ("confirmed", "completed", etc.)
+ *   orders[].total: float - Final paid amount (2 decimal places)
+ *
+ * Items Array:
+ *   items[].id: string - Product ID (numeric string)
+ *   items[].name: string - Full product name with brand
+ *   items[].quantity: float - Item count (supports .0 decimals)
+ *   items[].price: float - Unit price after discounts
+ */
+
 {
-  "success": true,
+  "status": "success",
   "payload": {
     "orders": [
       {
-        "id": "...",        // Order ID
-        "date": "...",      // Order date YYYY-MM-DD
-        "status": "...",    // Order status
-        "total": ...,       // Paid amount
+        "id": "order66",
+        "date": "2025-06-09",
+        "status": "confirmed",
+        "total": 5502.0,
         "items": [
           {
-            "id": "...",      // Product ID
-            "name": "...",    // Product name
-            "quantity": ...,  // Quantity (integer)
-            "price": ...      // Price per product after all discounts, offers and bonuses
-          }, ...
+            "id": "17520",
+            "name": "Smartphone Lenovo P70",
+            "quantity": 4.0,
+            "price": 917.0
+          },
+          {
+            "id": "17515",
+            "name": "Smartphone Nokia 2 Dual Sim",
+            "quantity": 1.0,
+            "price": 1834.0
+          }
         ]
-      }, ...
-    ],
+      }
+    ]
   }
 }
 ```
