@@ -95,7 +95,7 @@ curl --header "Content-Type: application/json" \
 
 `POST https://<%= config[:api_endpoint] %>/loyalty/checkout/apply`
 
-When clients proceed to the payment step, execute the this method to charge for bonuses and get the final payment value.
+When clients proceed to the payment step, execute the method to charge for bonuses and get the final payment value.
 
 If `charge_bonuses` parameter is missing or `false`, only offers and discounts will be applied. Bonuses will not be calculated in the final order value and charged.
 
