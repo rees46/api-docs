@@ -1,0 +1,47 @@
+## Stickers balance
+> Request example
+
+```shell
+curl 'https://<%= config[:api_endpoint] %>/loyalty/stickers/balance?shop_id=SHOP_ID&shop_secret=SHOP_SECRET&identifier=PHONE'
+```
+
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+    "campaign_id": 113,
+    "campaign_code": "...",
+    "campaign_name": "...",
+    "campaign_status": "...",
+    "amount": 13
+  },
+  {
+    "campaign_id": 2,
+    "campaign_code": "...",
+    "campaign_name": "...",
+    "campaign_status": "...",
+    "amount": 24
+  },
+  ...
+]
+```
+
+Method returns member's stickers balance
+
+### HTTP Request
+
+`GET https://<%= config[:api_endpoint] %>/loyalty/stickers/balance`
+
+### Query Parameters
+
+| Parameter   | Required | Description               |
+|-------------|----------|---------------------------|
+| shop_id     | true     | Your API key              |
+| shop_secret | true     | Your API secret key       |
+| identifier  | true     | User's phone (identifier) |
+
+
+
+
+

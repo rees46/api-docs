@@ -34,11 +34,13 @@ includes:
   - loyalty.md.erb
   - loyalty.join.md.erb
   - loyalty.status.md.erb
+  - loyalty.quit.md.erb
   - loyalty.estimate.md.erb
   - loyalty.apply.md.erb
   - loyalty.cancel.md.erb
   - loyalty.confirm.md.erb
   - loyalty.change.md.erb
+  - loyalty.promos.index.md.erb
   - loyalty.promos.cart.md.erb
   - loyalty.qr.get.md.erb
   - loyalty.qr.check.md.erb
@@ -50,6 +52,8 @@ includes:
   - loyalty.event_bonus.md.erb
   - loyalty.cancel_event_bonus.md.erb
   - loyalty.referral.md.erb
+  - loyalty.stickers.balance.md.erb
+  - loyalty.stickers.history.md.erb
   - loyalty.otp-send.md.erb
   - loyalty.otp-check.md.erb
   - nps.md.erb

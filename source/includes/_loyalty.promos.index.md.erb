@@ -1,0 +1,47 @@
+## List of all active promotions
+
+> Request example
+
+```shell
+curl https://<%= config[:api_endpoint] %>/loyalty/promos?shop_id=...&shop_secret=...
+```
+
+```javascript
+// S2S only
+```
+```swift
+// S2S only
+```
+```java
+// S2S only
+```
+```kotlin
+// S2S only
+```
+```jsx
+// S2S only
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "success": true,
+  "payload": [
+    {"id": 1, "name": "...", "description": "...", "start_date": "...", "finish_date": "...", "stream": "..." },
+    {"id": 2, "name": "...", "description": "...", "start_date": "...", "finish_date": "...", "stream": null }
+  ]
+}
+```
+
+### HTTP Request
+
+`GET https://<%= config[:api_endpoint] %>/loyalty/promos`
+
+Returns list of all active promotions sorted by finish date (ascending).
+
+| Parameter   | Type   | Required | Description                                                                  |
+|-------------|--------|----------|------------------------------------------------------------------------------|
+| shop_id     | String | true     | Your API key                                                                 |
+| shop_secret | String | true     | Your API secret key                                                          |
+| stream      | String | false    | Stream to filter promos for different devices. Omit if you don't use streams |
