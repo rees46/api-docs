@@ -554,110 +554,141 @@ The `sort_by` parameter defines how the search results are ordered. Below are th
 
 ### API response
 
-| Name                   | Type              | Description                                                                                                        |
-|------------------------|-------------------|--------------------------------------------------------------------------------------------------------------------|
-| **brands**             | array             | Array with information about brands. Each object has the following properties:                                     |
-|                        |                   | * name – brand name (string)                                                                                       |
-|                        |                   | * picture – brand picture (string)                                                                                 |
-| **categories**         | array             | Array with information about categories. Each object has the following properties:                                 |
-|                        |                   | * alias – category alias (string)                                                                                  |
-|                        |                   | * id – category id (string)                                                                                        |
-|                        |                   | * name – category name (string)                                                                                    |
-|                        |                   | * parent – parent category id (string)                                                                             |
-|                        |                   | * url – category url (string)                                                                                      |
-|                        |                   | * url_handle – relative category url (string)                                                                      |
-|                        |                   | * parent_external_id – external ID of parent category (string)                                                     |
-|                        |                   | * level – nesting level in hierarchy (string)                                                                      |
-|                        |                   | * name_with_parent – name including parent path (string)                                                           |
-|                        |                   | * count – number of products in the category (integer)                                                             |
-| **filters**            | array             | Array with information about filters. Each object has the following properties:                                    |
-|                        |                   | * **filter** – filter object. Has the following properties:                                                        |
-|                        |                   | * count – total count of products with this filter (number)                                                        |
-|                        |                   | * **values** – array of objects. Each has:                                                                         |
-|                        |                   | * value – value label (string)                                                                                     |
-|                        |                   | * count – count of products with this value (number)                                                               |
-| **industrial_filters** | array             | Array with information about industrial filters. For example: colors and fashion_sizes                             |
-|                        |                   | * **colors** – array of objects:                                                                                   |
-|                        |                   | * color (string)                                                                                                   |
-|                        |                   | * count (number)                                                                                                   |
-|                        |                   | * **fashion_sizes** – array of objects:                                                                            |
-|                        |                   | * size (string)                                                                                                    |
-|                        |                   | * count (number)                                                                                                   |
-| **price_range**        | object            | Min and max price of products. Has the following properties:                                                       |
-|                        |                   | * min – min price (number)                                                                                         |
-|                        |                   | * max – max price (number)                                                                                         |
-| **products**           | array             | Array with information about products. Each object has the following properties:                                   |
-|                        |                   | * id – product ID (string)                                                                                         |
-|                        |                   | * _id – internal product ID (string)                                                                               |
-|                        |                   | * name – product name (string)                                                                                     |
-|                        |                   | * description – product description (string)                                                                       |
-|                        |                   | * url – product URL (string)                                                                                       |
-|                        |                   | * url_handle – relative URL (string)                                                                               |
-|                        |                   | * category_ids – array of category IDs (array of strings)                                                          |
-|                        |                   | * **categories** – array of objects. Each includes:                                                                |
-|                        |                   | * id, name, parent, parent_external_id, alias, url, url_handle, level, name_with_parent                            |
-|                        |                   | * brand – product brand (string)                                                                                   |
-|                        |                   | * brand_picture – brand image URL (string)                                                                         |
-|                        |                   | * currency – product currency (string)                                                                             |
-|                        |                   | * price – product price (number)                                                                                   |
-|                        |                   | * price_full – full product price (number)                                                                         |
-|                        |                   | * price_formatted – formatted price (string)                                                                       |
-|                        |                   | * price_full_formatted – formatted full price (string)                                                             |
-|                        |                   | * oldprice – previous price (number)                                                                               |
-|                        |                   | * oldprice_full – previous full price (number)                                                                     |
-|                        |                   | * oldprice_formatted – formatted previous price (string)                                                           |
-|                        |                   | * oldprice_full_formatted – formatted previous full price (string)                                                 |
-|                        |                   | * promocode – promo code (string)                                                                                  |
-|                        |                   | * price_with_promocode – discounted price (number)                                                                 |
-|                        |                   | * price_with_promocode_formatted – formatted discounted price (string)                                             |
-|                        |                   | * discount – absolute discount (number)                                                                            |
-|                        |                   | * discount_formatted – formatted discount (string)                                                                 |
-|                        |                   | * discount_percent – discount percentage (number)                                                                  |
-|                        |                   | * picture – product image (string)                                                                                 |
-|                        |                   | * image_url – full-size image URL (string)                                                                         |
-|                        |                   | * image_url_handle – image path (string)                                                                           |
-|                        |                   | * **image_url_resized** – object with resized image URLs (e.g. 120, 140, original)                                 |
-|                        |                   | * stock_quantity – stock count (integer)                                                                           |
-|                        |                   | * quantity – total quantity (number)                                                                               |
-|                        |                   | * barcode – product barcode (string)                                                                               |
-|                        |                   | * model – product model (string)                                                                                   |
-|                        |                   | * rating – rating (number)                                                                                         |
-|                        |                   | * is_new – is new (boolean)                                                                                        |
-|                        |                   | * gift – is gift (boolean)                                                                                         |
-|                        |                   | * installment – installment amount (number)                                                                        |
-|                        |                   | * fashion_sizes – array of sizes (array of strings)                                                                |
-|                        |                   | * fashion_original_sizes – manufacturer sizes (array of strings)                                                   |
-|                        |                   | * fashion_colors – array of colors (array of strings)                                                              |
-|                        |                   | * fashion_feature – style feature (string)                                                                         |
-|                        |                   | * fashion_gender – gender (string)                                                                                 |
-|                        |                   | * fashion_wear_type – clothing type (string)                                                                       |
-|                        |                   | * **params** – array of product parameters. Each has:                                                              |
-|                        |                   | * name (string), value (string or number), type (string), unit (string)                                            |
-|                        |                   | * group_id – product group ID (string)                                                                             |
-|                        |                   | * location_ids – array of location IDs (array of strings)                                                          |
-|                        |                   | * deeplink_android – Android deep link (string)                                                                    |
-|                        |                   | * deeplink_ios – iOS deep link (string)                                                                            |
-|                        |                   | * sales_rate – sales rate (number)                                                                                 |
-|                        |                   | * relative_sales_rate – relative popularity (number)                                                               |
-|                        |                   | * leftovers – leftovers (string)                                                                                   |
-|                        |                   | * **debug** – debug object (if `debug=true`). Contains:                                                            |
-|                        |                   | * _score (number)                                                                                                  |
-|                        |                   | * matched_queries (array of strings)                                                                               |
-|                        |                   | * explanation (object)                                                                                             |
-|                        |                   | * **score** (object): search_score, script_score, source_score, etc.                                               |
-|                        |                   | * expression (string)                                                                                              |
-|                        |                   | * search_fields (object)                                                                                           |
-|                        |                   | * sku_scores (array)                                                                                               |
-| products_total         | number            | Total count of products                                                                                            |
-| search_query           | string            | Search query                                                                                                       |
-| book_authors           | array             | Reserved                                                                                                           |
-| keywords               | array             | Reserved                                                                                                           |
-| queries                | array             | Reserved                                                                                                           |
-| virtual_categories     | array             | Reserved                                                                                                           |
-| **locations**          | object of objects | A map of aggregated locations. Each key is an internal index (string), and the value is an object with:            |
-|                        |                   | * id - Matches the external_id of the location                                                                     |
-|                        |                   | * name - location name, e.g., an address                                                                           |
-|                        |                   | * type - Type of the location, for example "store". If no value was provided during import, the type will be null. |
+This table outlines the full set of fields that the API **can** return.
+The actual contents of the response depend on multiple factors, including:
+– whether the corresponding fields were included during product import,
+– whether the extended=true parameter is set,
+– whether filters are applied,
+– and how the request is structured overall.
+
+| Name               | Type              | Description                                                                                  |
+|--------------------|-------------------|----------------------------------------------------------------------------------------------|
+| search_query       | string            | **Search query string**                                                                      |
+| products_total     | number            | **Total number of found products**                                                           |
+| products           | array of objects  | **List of products**, each with:                                                             |
+|                    |                   | * **id** – Product external ID                                                               |
+|                    |                   | * **_id** – Product internal ID                                                              |
+|                    |                   | * **name** – Product name                                                                    |
+|                    |                   | * **description** – Product description                                                      |
+|                    |                   | * **url** – Full product URL                                                                 |
+|                    |                   | * **url_handle** – Relative product URL                                                      |
+|                    |                   | * **category_ids** – List of category IDs                                                    |
+|                    |                   | * *categories – Array of category objects:*                                                  |
+|                    |                   | ** id – Category ID                                                                          |
+|                    |                   | ** name – Category name                                                                      |
+|                    |                   | ** parent – Parent category ID                                                               |
+|                    |                   | ** parent_id – Parent id                                                                     |
+|                    |                   | ** url – Full category URL                                                                   |
+|                    |                   | ** url_handle – Relative category URL                                                        |
+|                    |                   | ** alias – Category alias                                                                    |
+|                    |                   | ** level – Nesting level                                                                     |
+|                    |                   | ** name_with_parent – Category name with parent                                              |
+|                    |                   | ** parent_external_id – External ID of parent                                                |
+|                    |                   | * **brand** – Product brand name                                                             |
+|                    |                   | * **brand_picture** – URL of brand logo                                                      |
+|                    |                   | * **price** – Current product price                                                          |
+|                    |                   | * **price_full** – Full product price                                                        |
+|                    |                   | * **price_formatted** – Formatted price                                                      |
+|                    |                   | * **oldprice** – Old price                                                                   |
+|                    |                   | * **oldprice_formatted** – Formatted old price                                               |
+|                    |                   | * **promocode** – Promo code                                                                 |
+|                    |                   | * **price_with_promocode** – Price after promo                                               |
+|                    |                   | * **discount** – Discount value                                                              |
+|                    |                   | * **discount_percent** – Discount percent                                                    |
+|                    |                   | * **picture** – Product thumbnail                                                            |
+|                    |                   | * **image_url** – Full-size image URL                                                        |
+|                    |                   | * **image_url_handle** – Relative path to image                                              |
+|                    |                   | * *image_url_resized* – Object with resized versions:                                        |
+|                    |                   | ** 120 – URL for 120px image                                                                 |
+|                    |                   | ** 140 – URL for 140px image                                                                 |
+|                    |                   | ** original - URL for original image                                                         |
+|                    |                   | * **stock_quantity** – Quantity in stock                                                     |
+|                    |                   | * **quantity** – Total quantity                                                              |
+|                    |                   | * **barcode** – Product barcode                                                              |
+|                    |                   | * **model** – Product model                                                                  |
+|                    |                   | * **rating** – Product rating                                                                |
+|                    |                   | * **is_new** – Indicates new product                                                         |
+|                    |                   | * **gift** – Indicates gift                                                                  |
+|                    |                   | * **installment** – Installment amount                                                       |
+|                    |                   | * **fashion_sizes** – Available sizes                                                        |
+|                    |                   | * **fashion_original_sizes** – Original sizes from manufacturer                              |
+|                    |                   | * **fashion_colors** – Available colors                                                      |
+|                    |                   | * **fashion_feature** – Style feature                                                        |
+|                    |                   | * **fashion_gender** – Gender category                                                       |
+|                    |                   | * **fashion_wear_type** – Wear type                                                          |
+|                    |                   | * *params* – Product parameters:                                                             |
+|                    |                   | ** name – Parameter name                                                                     |
+|                    |                   | ** value – Parameter value                                                                   |
+|                    |                   | ** type – Parameter type                                                                     |
+|                    |                   | ** unit – Unit of measure                                                                    |
+|                    |                   | * **group_id** – Product group ID                                                            |
+|                    |                   | * **location_ids** – List of location IDs                                                    |
+|                    |                   | * **deeplink_android** – Android deeplink                                                    |
+|                    |                   | * **deeplink_ios** – iOS deeplink                                                            |
+|                    |                   | * **sales_rate** – Absolute sales rate                                                       |
+|                    |                   | * **relative_sales_rate** – Relative sales popularity                                        |
+|                    |                   | * **leftovers** – Remaining stock                                                            |
+| debug              | object            | **Debug information object (available only if debug=true)**                                  |
+|                    |                   | * **matched_queries** – List of queries that matched the product (array)                     |
+|                    |                   | * **fields** – Internal Elasticsearch fields (object)                                        |
+|                    |                   | * **_score** – Raw score provided by Elasticsearch (number)                                  |
+|                    |                   | * **_explanation** – Explanation of score calculation (object)                               |
+|                    |                   | * *score* – Object containing calculated score breakdown:                                    |
+|                    |                   | ** search_score – Number of search points (number)                                           |
+|                    |                   | ** script_score – Score calculated by custom script (number)                                 |
+|                    |                   | ** product_price_margin – Price margin value of the current product (number)                 |
+|                    |                   | ** price_margin_weight – Weight of price margin in total score (number)                      |
+|                    |                   | ** product_relative_sales_rate – Relative sales rate of the current product (number)         |
+|                    |                   | ** sales_rate_weight – Weight of relative sales rate in total score (number)                 |
+|                    |                   | ** shop_weight – Constant value of 50 (number)                                               |
+|                    |                   | ** product_weight – Value from weights.LOCATION_ID; defaults to 0 if not set (number)        |
+|                    |                   | ** total – Final score (search_score × script_score) (number)                                |
+|                    |                   | ** expression – Formula used to calculate script_score (string)                              |
+| price_range        | object            | **Price range object**                                                                       |
+|                    |                   | * min – Minimum price                                                                        |
+|                    |                   | * max – Maximum price                                                                        |
+| price_ranges       | array             | **List of price buckets**                                                                    |
+|                    |                   | * from – Lower bound of price range                                                          |
+|                    |                   | * count – Product count in range                                                             |
+| price_median       | number            | **Median product price**                                                                     |
+| brands             | array             | **List of brands**, each with:                                                               |
+|                    |                   | * name – Brand name                                                                          |
+|                    |                   | * count – Number of products                                                                 |
+| categories         | array             | **List of categories**, each with:                                                           |
+|                    |                   | * id – Category ID                                                                           |
+|                    |                   | * name – Category name                                                                       |
+|                    |                   | * url – Full URL                                                                             |
+|                    |                   | * url_handle – Relative URL                                                                  |
+|                    |                   | * alias – Alias                                                                              |
+|                    |                   | * level – Nesting level                                                                      |
+|                    |                   | * name_with_parent – Name with parent                                                        |
+|                    |                   | * parent – Parent ID                                                                         |
+|                    |                   | * parent_external_id – External parent ID                                                    |
+|                    |                   | * count – Product count in category                                                          |
+| industrial_filters | object            | **Industrial filters object**                                                                |
+|                    |                   | * *colors* – List of colors:                                                                 |
+|                    |                   | ** color – Color value                                                                       |
+|                    |                   | ** count – Product count with this color                                                     |
+|                    |                   | * *fashion_sizes* – List of sizes:                                                           |
+|                    |                   | ** size – Size label                                                                         |
+|                    |                   | ** count – Product count with this size                                                      |
+| filters            | array             | **List of custom filters**, each with:                                                       |
+|                    |                   | * filter – Filter name                                                                       |
+|                    |                   | * count – Product count                                                                      |
+|                    |                   | * *values* – Filter values:                                                                  |
+|                    |                   | ** value – Value label                                                                       |
+|                    |                   | ** count – Product count                                                                     |
+| locations          | object of objects | **Map of aggregated locations**, where each key is an internal index and value is an object: |
+|                    |                   | * id – Matches the external_id of the location                                               |
+|                    |                   | * name – Human-readable location name (e.g. address)                                         |
+|                    |                   | * type – Type of location, e.g. "store" (may be null if not set during import)               |
+| clarification      | boolean           | **Indicates if clarification was applied**                                                   |
+| requests_count     | number            | **Number of API requests in current session**                                                |
+| html               | string            | **HTML block for rendering products**                                                        |
+| book_authors       | array             | **Reserved**                                                                                 |
+| keywords           | array             | **Reserved**                                                                                 |
+| queries            | array             | **Reserved**                                                                                 |
+| virtual_categories | array             | **Reserved**                                                                                 |
 
 
 <aside class="notice">
