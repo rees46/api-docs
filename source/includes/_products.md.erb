@@ -102,38 +102,39 @@ There is a response limit: a response can contain no more than ten thousand item
 
 ### Query Parameters
 
-| Parameter         | Required | Description                                                                                                                          |
-|-------------------|----------|--------------------------------------------------------------------------------------------------------------------------------------|
-| did               | true     | Device ID. You get it from `init` method in SDK.                                                                                     |
-| shop_id           | true     | Your API key                                                                                                                         |
-| sid               | true     | Temporary user session ID                                                                                                            |
-| limit             | false    | Limit of results                                                                                                                     |
-| page              | false    | Page of results                                                                                                                      |
-| locations         | false    | Comma separated list of locations IDs                                                                                                |
-| brands            | false    | Comma separated list of brands to filter                                                                                             |
-| merchants         | false    | Comma separated list of merchants to filter                                                                                          |
-| categories        | false    | Comma separated list of categories to filter                                                                                         |
-| filters           | false    | Optional escaped JSON string with filter parameters. For example: `{"bluetooth":["yes"],"offers":["15% cashback"],"weight":["1.6"]}` |
-| filters_search_by | false    | Available options for filter: name, quantity, popularity                                                                             |
-| sort_by           | false    | Sort products by parameter. Possible values: `popularity`, `price`, `new` (string or array of strings)                               |
-| sort_dir          | false    | Sorting direction. Possible values: `asc`, `desc` (string or array of strings)                                                       |
-| extended          | false    | If `true`, the response will include additional product fields (boolean)                                                             |
-| available         | false    | If `true`, only available (in-stock) products will be returned (boolean)                                                             |
-| collapse          | false    | If `true`, similar SKUs will be collapsed into a single product model (boolean)                                                      |
-| with_locations    | false    | If `true`, the response will include location information (boolean)                                                                  |
-| brand_limit       | false    | Maximum number of brands in response (number)                                                                                        |
-| category_limit    | false    | Maximum number of categories in response (number)                                                                                    |
-| price_min         | false    | Minimal price (number)                                                                                                               |
-| price_max         | false    | Maximal price (number)                                                                                                               |
-| email             | false    | User's email (string)                                                                                                                |
-| phone             | false    | User's phone (string)                                                                                                                |
-| loyalty_id        | false    | User's loyalty program ID (string)                                                                                                   |
-| external_id       | false    | User's external ID (string)                                                                                                          |
-| telegram_id       | false    | User's telegram ID (string)                                                                                                          |
-| fashion_sizes     | false    | Sizes for a certain types of products. Clothes, for example (string or comma-separated values)                                       |
-| ring_sizes        | false    | Field for sizes of rings (string or comma-separated values)                                                                          |
-| bracelet_sizes    | false    | Field for sizes of bracelets (string or comma-separated values)                                                                      |
-| chain_sizes       | false    | Field for sizes of chains (string or comma-separated values)                                                                         |
+| Parameter          | Required | Description                                                                                                                                                   |
+|--------------------|----------|---------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| did                | true     | Device ID. You get it from `init` method in SDK.                                                                                                              |
+| shop_id            | true     | Your API key                                                                                                                                                  |
+| sid                | true     | Temporary user session ID                                                                                                                                     |
+| limit              | false    | Limit of results                                                                                                                                              |
+| page               | false    | Page of results                                                                                                                                               |
+| locations          | false    | Comma separated list of locations IDs                                                                                                                         |
+| brands             | false    | Comma separated list of brands to filter                                                                                                                      |
+| merchants          | false    | Comma separated list of merchants to filter                                                                                                                   |
+| categories         | false    | Comma separated list of categories to filter                                                                                                                  |
+| filters            | false    | Optional escaped JSON string with filter parameters. For example: `{"bluetooth":["yes"],"offers":["15% cashback"],"weight":["1.6"]}`                          |
+| filters_search_by  | false    | Specifies which field to use for searching within filter values (not products themselves). Available options for filter: name, quantity, popularity, priority |
+| sort_by            | false    | Sort products by parameter. Possible values: `price`,`sales_rate`,`date`,`price_margin`,`discount`,`rating`, `relevance`,`popular`                            |
+| sort_dir           | false    | Sorting direction. Possible values: `asc`, `desc`                                                                                                             |
+| extended           | false    | If `true`, the response will include additional product fields (boolean). Default value: false                                                                |
+| available          | false    | If `true`, only available (in-stock) products will be returned (boolean). Default value: true                                                                 |
+| collapse           | false    | If `true`, similar SKUs will be collapsed into a single product model (boolean). Default value: true                                                          |
+| with_locations     | false    | If `true`, the response will include location information (boolean). Default value: false                                                                     |
+| brand_limit        | false    | Maximum number of brands in response (number)                                                                                                                 |
+| category_limit     | false    | Maximum number of categories in response (number)                                                                                                             |
+| price_min          | false    | Minimal price (number)                                                                                                                                        |
+| price_max          | false    | Maximal price (number)                                                                                                                                        |
+| email              | false    | User's email (string)                                                                                                                                         |
+| phone              | false    | User's phone (string)                                                                                                                                         |
+| loyalty_id         | false    | User's loyalty program ID (string)                                                                                                                            |
+| external_id        | false    | User's external ID (string)                                                                                                                                   |
+| telegram_id        | false    | User's telegram ID (string)                                                                                                                                   |
+| fashion_sizes      | false    | Sizes for a certain types of products. Clothes, for example (string)                                                                                          |
+| ring_sizes         | false    | Field for sizes of rings (string)                                                                                                                             |
+| bracelet_sizes     | false    | Field for sizes of bracelets (string)                                                                                                                         |
+| chain_sizes        | false    | Field for sizes of chains (string)                                                                                                                            |
+
 
 ### API response
 
