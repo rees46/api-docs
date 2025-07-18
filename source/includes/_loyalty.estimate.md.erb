@@ -16,6 +16,7 @@ Content-type: application/json
     "payment_type":   "...",
     "promo_code":     "...",
     "charge_bonuses": true,
+    "current_time":   "17:31",
     "cart_items": [
       {"product_id": "...", "price": 1000, "quantity": 4},
       {"product_id": "...", "price": 2000, "quantity": 1}
@@ -100,6 +101,8 @@ Method estimates discounts and bonuses usage for the shopping cart.
 This is the first operation in the checkout process. POS or website sends this request with the client's shopping cart and receives calculated order value with discounts. This operation doesn't charge for bonuses and can be requested several times safely.
 
 If `charge_bonuses` is missing or `false`, only offers and discounts will be applied. Bonuses will not be calculated.
+
+If `current_time` is missing or in incorrect format, current time in project's time zone will be used. Value format: `HH:MM` (24h mode).
 
 When clients proceed to the payment step, execute the next method `apply` to charge for bonuses and get the final payment value.
 
