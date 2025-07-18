@@ -99,6 +99,8 @@ When clients proceed to the payment step, execute the this method to charge for 
 
 If `charge_bonuses` parameter is missing or `false`, only offers and discounts will be applied. Bonuses will not be calculated in the final order value and charged.
 
+If `current_time` is missing or in incorrect format, current time in project's time zone will be used. Value format: `HH:MM` (24h mode).
+
 This method requires `order_id` parameter to apply bonuses and save results in our database.
 
 This method actually charges a client for bonuses so it's not safe to execute it several times for the same `order_id` or `identifier`.
