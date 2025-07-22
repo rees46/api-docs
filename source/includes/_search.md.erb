@@ -594,10 +594,11 @@ The `sort_by` parameter defines how the search results are ordered. Below are th
 
 This table outlines the full set of fields that the API **can** return.
 The actual contents of the response depend on multiple factors, including:
-– whether the corresponding fields were included during product import,
-– whether the extended=true parameter is set,
-– whether filters are applied,
-– and how the request is structured overall.
+
+1. Whether the corresponding fields were included during product import
+2. Whether the extended=true parameter is set
+3. Whether filters are applied
+4. How the request is structured overall
 
 #### Root-Level Fields
 
@@ -625,70 +626,70 @@ The actual contents of the response depend on multiple factors, including:
 
 #### Fields inside products
 
-| Name                   | Type             | Description                                                                                  |
-|------------------------|------------------|----------------------------------------------------------------------------------------------|
-| id                     | string \| number | Product external ID                                                                          |
-| _id                    | string           | Product internal ID                                                                          |
-| name                   | string           | Product name                                                                                 |
-| description            | string           | Product description                                                                          |
-| url                    | string           | Full product URL                                                                             |
-| url_handle             | string           | Relative product URL                                                                         |
-| category_ids           | array[string]    | List of category IDs                                                                         |
-| categories             | array[object]    | Array of category objects                                                                    |
-| brand                  | string           | Product brand name                                                                           |
-| brand_picture          | string           | URL of brand logo                                                                            |
-| price                  | number           | Current product price                                                                        |
-| price_full             | number           | Full product price                                                                           |
-| price_formatted        | string           | Formatted price                                                                              |
-| oldprice               | number           | Old price                                                                                    |
-| oldprice_formatted     | string           | Formatted old price                                                                          |
-| promocode              | string           | Promo code                                                                                   |
-| price_with_promocode   | number           | Price after promo                                                                            |
-| discount               | number           | Discount value                                                                               |
-| discount_percent       | number           | Discount percent                                                                             |
-| picture                | string           | Product thumbnail                                                                            |
-| image_url              | string           | Full-size image URL                                                                          |
-| image_url_handle       | string           | Relative path to image                                                                       |
-| image_url_resized      | object           | Object with resized versions (keys = height in px, for example 120, 140, 160, ..., original) |
-| stock_quantity         | number           | Quantity in stock                                                                            |
-| quantity               | number           | Total quantity                                                                               |
-| barcode                | string           | Product barcode                                                                              |
-| model                  | string           | Product model                                                                                |
-| rating                 | number           | Product rating                                                                               |
-| is_new                 | boolean          | Indicates new product                                                                        |
-| gift                   | boolean          | Indicates gift                                                                               |
-| installment            | number           | Installment amount                                                                           |
-| fashion_sizes          | array[string]    | Available sizes                                                                              |
-| fashion_original_sizes | array[string]    | Original sizes from manufacturer                                                             |
-| fashion_colors         | array[string]    | Available colors                                                                             |
-| fashion_feature        | string           | Style feature                                                                                |
-| fashion_gender         | string           | Gender category                                                                              |
-| fashion_wear_type      | string           | Wear type                                                                                    |
-| params                 | array[object]    | Product parameters (may be missing if no parameters exist)                                   |
-| group_id               | string           | Product group ID                                                                             |
-| location_ids           | array[string]    | List of location IDs                                                                         |
-| deeplink_android       | string           | Android deeplink                                                                             |
-| deeplink_ios           | string           | iOS deeplink                                                                                 |
-| sales_rate             | number           | Absolute sales rate                                                                          |
-| relative_sales_rate    | number           | Relative sales popularity                                                                    |
-| leftovers              | string           | Remaining stock                                                                              |
-| currency               | string           | Currency symbol for product price (for example, "₽")                                         |
-| debug                  | object           | Debug information object (returned only if debug=true)                                       |
+| Name                   | Type          | Description                                                                                  |
+|------------------------|---------------|----------------------------------------------------------------------------------------------|
+| id                     | string        | Product external ID                                                                          |
+| _id                    | string        | Product internal ID                                                                          |
+| name                   | string        | Product name                                                                                 |
+| description            | string        | Product description                                                                          |
+| url                    | string        | Full product URL                                                                             |
+| url_handle             | string        | Relative product URL                                                                         |
+| category_ids           | array[string] | List of category IDs                                                                         |
+| categories             | array[object] | Array of category objects                                                                    |
+| brand                  | string        | Product brand name                                                                           |
+| brand_picture          | string        | URL of brand logo                                                                            |
+| price                  | number        | Current product price                                                                        |
+| price_full             | number        | Full product price                                                                           |
+| price_formatted        | string        | Formatted price                                                                              |
+| oldprice               | number        | Old price                                                                                    |
+| oldprice_formatted     | string        | Formatted old price                                                                          |
+| promocode              | string        | Promo code                                                                                   |
+| price_with_promocode   | number        | Price after promo                                                                            |
+| discount               | number        | Discount value                                                                               |
+| discount_percent       | number        | Discount percent                                                                             |
+| picture                | string        | Product thumbnail                                                                            |
+| image_url              | string        | Full-size image URL                                                                          |
+| image_url_handle       | string        | Relative path to image                                                                       |
+| image_url_resized      | object        | Object with resized versions (keys = height in px, for example 120, 140, 160, ..., original) |
+| stock_quantity         | number        | Quantity in stock                                                                            |
+| quantity               | number        | Total quantity                                                                               |
+| barcode                | string        | Product barcode                                                                              |
+| model                  | string        | Product model                                                                                |
+| rating                 | number        | Product rating                                                                               |
+| is_new                 | boolean       | Indicates new product                                                                        |
+| gift                   | boolean       | Indicates gift                                                                               |
+| installment            | number        | Installment amount                                                                           |
+| fashion_sizes          | array[string] | Available sizes                                                                              |
+| fashion_original_sizes | array[string] | Original sizes from manufacturer                                                             |
+| fashion_colors         | array[string] | Available colors                                                                             |
+| fashion_feature        | string        | Style feature                                                                                |
+| fashion_gender         | string        | Gender category                                                                              |
+| fashion_wear_type      | string        | Wear type                                                                                    |
+| params                 | array[object] | Product parameters (may be missing if no parameters exist)                                   |
+| group_id               | string        | Product group ID                                                                             |
+| location_ids           | array[string] | List of location IDs                                                                         |
+| deeplink_android       | string        | Android deeplink                                                                             |
+| deeplink_ios           | string        | iOS deeplink                                                                                 |
+| sales_rate             | number        | Absolute sales rate                                                                          |
+| relative_sales_rate    | number        | Relative sales popularity                                                                    |
+| leftovers              | string        | Remaining stock                                                                              |
+| currency               | string        | Currency symbol for product price (for example, "₽")                                         |
+| debug                  | object        | Debug information object (returned only if debug=true)                                       |
 
 #### Fields inside products.categories
 
-| Name                | Type   | Description                            |
-|---------------------|--------|----------------------------------------|
-| id                  | string | Category ID                            |
-| name                | string | Category name                          |
-| parent              | string | Parent category ID                     |
-| parent_id           | string | Parent ID (alternative)                |
-| url                 | string | Full category URL                      |
-| url_handle          | string | Relative category URL                  |
-| alias               | string | Category alias                         |
-| level               | string | Nesting level                          |
-| name_with_parent    | string | Category name with parent              |
-| parent_external_id  | string | External ID of parent                  |
+| Name               | Type   | Description               |
+|--------------------|--------|---------------------------|
+| id                 | string | Category ID               |
+| name               | string | Category name             |
+| parent             | string | Parent category ID        |
+| parent_id          | string | Parent ID                 |
+| url                | string | Full category URL         |
+| url_handle         | string | Relative category URL     |
+| alias              | string | Category alias            |
+| level              | string | Nesting level             |
+| name_with_parent   | string | Category name with parent |
+| parent_external_id | string | External ID of parent     |
 
 #### Fields inside root categories
 
@@ -701,12 +702,6 @@ The actual contents of the response depend on multiple factors, including:
 | url_handle | string | Relative category URL                       |
 | level      | string | Nesting level (for example, "1", "2")       |
 | count      | number | Number of products in category              |
-
-#### Fields inside products.image_url_resized
-
-| Name  | Type   | Description                                              |
-|-------|--------|----------------------------------------------------------|
-| [px]  | string | Image URL for given height in px (or original)           |
 
 #### Fields inside products.params
 
