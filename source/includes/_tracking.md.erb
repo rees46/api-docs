@@ -1190,15 +1190,22 @@ Before tracking custom events, register it in "Settings > Custom events".
 Custom event can be tracked in simple mode (just event name) and advanced mode (with 3 optional parameters).
 
 
-| Parameter | Type        | Requirement      | Description      |
-|-----------|-------------|------------------|------------------|
-| category  | String      | optional         | Event category   |
-| label     | String      | optional         | Event label      |
-| value     | Integer     | optional         | Event value      |
-| time*     | Timestamp   | optional         | Event time       |
+| Parameter | Type                                                                             | Requirement | Description    |
+|-----------|----------------------------------------------------------------------------------|-------------|----------------|
+| category  | String                                                                           | optional    | Event category |
+| label     | String                                                                           | optional    | Event label    |
+| value     | Integer                                                                          | optional    | Event value    |
+| time*     | Timestamp                                                                        | optional    | Event time     |
+| payload*  | int, float, date, string, bool, Array(an contain int, float, date, string, bool) | optional    | Custom data    |
 
 <aside class="notice">
- * - works only in Curl method
+<p>* <strong>time</strong> — works only with the <code>Curl</code> method.</p>
+<p>* <strong>payload</strong> — payload data is available in chain templates. To access it, use <code>args.payload.PAYLOAD_OBJECT_KEY</code>.</p>
+</aside>
+
+<p></p>
+<aside class="warning">
+<p>* <strong>payload</strong> — objects passed as parameter values will be ignored.</p>
 </aside>
 
 ## User received on mobile push
