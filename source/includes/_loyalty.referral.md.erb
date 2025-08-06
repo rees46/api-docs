@@ -12,7 +12,16 @@ curl 'https://<%= config[:api_endpoint] %>/loyalty/referral/code?shop_id=SHOP_ID
   "status": "success",
   "payload": {
     "message": "Success",
-    "code": "XXX-YYY-ZZZ"
+    "codes": [
+      {
+        "referral_program_id": 1,
+        "code": "XXX-YYY-ZZZ"
+      },
+      {
+        "referral_program_id": 2,
+        "code": "#mastermain"
+      }
+    ]
   }
 }
 ```
