@@ -1,0 +1,58 @@
+## Join to a referral program
+
+> Headers
+
+```
+Content-type: application/json
+```
+
+> Body example
+
+```json
+{
+    "shop_id": "...",
+    "shop_secret": "...",
+    "identifier": "PHONE",
+    "id": ...
+}
+```
+
+> Request example
+
+```shell
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data-binary "@data.json" \
+  https://<%= config[:api_endpoint] %>/loyalty/referral/join
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "status": "success",
+  "payload": {
+    "code": "..."
+  }
+}
+```
+
+Adds a person to a referral program. Works only if the user is joined to loyalty program before.
+
+### HTTP Request
+
+
+`POST https://<%= config[:api_endpoint] %>/loyalty/referral/join`
+### Query Parameters
+
+| Parameter   | Required | Description               |
+|-------------|----------|---------------------------|
+| shop_id     | true     | Your API key              |
+| shop_secret | true     | Your API secret key       |
+| identifier  | true     | User's phone (identifier) |
+| id          | true     | Referral program ID       |
+
+
+
+
+

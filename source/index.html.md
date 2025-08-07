@@ -51,7 +51,8 @@ includes:
   - loyalty.event_bonus_history.md.erb
   - loyalty.event_bonus.md.erb
   - loyalty.cancel_event_bonus.md.erb
-  - loyalty.referral.md.erb
+  - loyalty.referral.join.md.erb
+  - loyalty.referral.code.md.erb
   - loyalty.stickers.balance.md.erb
   - loyalty.stickers.history.md.erb
   - loyalty.otp-send.md.erb
