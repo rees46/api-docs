@@ -532,7 +532,7 @@ It's S2S method.
 ## Purge profile
 
 ```shell
-# By phone number
+# Purge using phone number
 curl --location --request DELETE 'https://<%= config[:api_endpoint] %>/profile/purge' \
 --header 'Content-Type: application/json' \
 --header 'Cookie: did=7Hvlb6ftsK; r46_debug=true' \
@@ -542,7 +542,7 @@ curl --location --request DELETE 'https://<%= config[:api_endpoint] %>/profile/p
     "phone": "..."
 }'
 
-# By phone
+# Purge using email
 curl --location --request DELETE 'https://<%= config[:api_endpoint] %>/profile/purge' \
 --header 'Content-Type: application/json' \
 --header 'Cookie: did=7Hvlb6ftsK; r46_debug=true' \
