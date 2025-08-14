@@ -44,41 +44,94 @@ curl --header "Content-Type: application/json" \
 > The above command returns JSON structured like this:
 
 ```json
+
+/*
+ * API Response Structure Documentation (with Type Annotations):
+ *
+ * Root Object:
+ *   status: string - Operation status ("success" or "error")
+ *   payload: object - Contains all order data
+ *
+ * Order Summary:
+ *   order_id: string - Unique order identifier (format: alphanumeric)
+ *   identifier: string - Customer loyalty ID (format: phone/email)
+ *   payment_type: string|null - Payment method identifier or null
+ *   products_total: float - Total item count (decimal supported)
+ *
+ * Financial Summary:
+ *   order_total: float - Grand total before discounts (2 decimal places)
+ *   saved_total: float - Total savings (discounts + bonuses)
+ *   saved_by_discounts: float - Savings from discount offers
+ *   saved_by_bonuses: float - Savings from loyalty points
+ *   order_to_pay: float - Final amount due (order_total - saved_total)
+ *
+ * Loyalty Points:
+ *   order_bonuses_to_charge: float - Points redeemed
+ *   bonuses_balance: integer - Remaining points balance
+ *   bonuses_reward: integer - Points to be awarded
+ *   bonuses_referrer_reward: integer - Points awarded to referrer
+ *
+ * Item Object:
+ *   uniqid: string - Unique product ID
+ *   quantity: float - Item count (supports decimal quantities)
+ *   price: float - Unit price (2 decimal places)
+ *   total: float - Line item total (price × quantity)
+ *
+ * Item Flags (all boolean):
+ *   discountable - Eligible for discounts
+ *   bonusable - Eligible for points redemption
+ *   rewardable - Eligible for points earning
+ *
+ * Applied Discounts (all float):
+ *   paid_with_offers - Special offers amount
+ *   paid_with_discounts - Regular discounts amount
+ *   paid_with_referral_discounts - Referral program discounts
+ *   paid_with_bonuses - Amount covered by loyalty points
+ *
+ * Purchase Limits (all float):
+ *   max_discountable_amount - Maximum allowable discount
+ *   max_payable_by_bonuses - Maximum payable with points
+ *
+ * Final Calculations (all float):
+ *   total_after_discounts - Final line item amount
+ *   total_after_discounts_per_product - Final unit price
+ */
+
 {
-  "success": true,
+  "status": "success",
   "payload": {
-    "order_id": "...",              // (string) Order ID
-    "identifier": "...",            // (string) Loyalty member identifier
-    "payment_type": "...",          // (string) Payment type
-    "products_total": ...,          // (integer) Total products in the cart
-    "order_total": ...,             // (decimal) Order total value (initial)
-    "saved_total": ...,             // (decimal) Money saved total (discounts and bonuses)
-    "saved_by_discounts": ...,      // (decimal) Money saved by discounts and offers
-    "saved_by_bonuses": ...,        // (decimal) Money saved by bonuses
-    "order_to_pay": ...,            // (decimal) Order total to pay after discounts
-    "order_bonuses_to_charge": ..., // (integer) Total bonuses used in this order
-    "bonuses_reward": ...,          // (integer) Bonuses amount to be rewarded after the purchase
+    "order_id": "ORDER ID",
+    "identifier": "PHONE NUMBER",
+    "payment_type": null,
+    "products_total": 5.0,
+    "order_total": 6000.0,
+    "saved_total": 498.0,
+    "saved_by_discounts": 0,
+    "saved_by_bonuses": 498.0,
+    "order_to_pay": 5502.0,
+    "order_bonuses_to_charge": 498.0,
+    "bonuses_balance": 500,
+    "bonuses_reward": 274,
+    "bonuses_referrer_reward": 0,
     "items": [
       {
-        "uniqid": "...",                          // (string) Item ID
-        "quantity": ...,                          // (integer) Quantity
-        "price": ...,                             // (decimal) Initial product price
-        "total": ...,                             // (decimal) Total value of a position (price * quantity)
-        "discountable": ...,                      //(bool) Allowed for discounts
-        "bonusable": ...,                         // (bool) Allowed for bonuses
-        "rewardable": ...,                        // (bool) Allowed to be rewarded with bonuses
-        "paid_with_offers": ...,                  // (decimal) Paid with offers
-        "paid_with_offers_per_product": ...,      // (decimal) Paid with offers per 1 item
-        "paid_with_discounts": ...,               // (decimal) Paid with discounts
-        "paid_with_discounts_per_product": ...,   // (decimal) Paid with discounts
-        "paid_with_bonuses": ...,                 // (decimal) Paid with bonuses
-        "paid_with_bonuses_per_product": ...,     // (decimal) Paid with bonuses
-        "bonuses_used": ...,                      // (integer) Bonuses used for this position
-        "bonuses_used_per_product": ...,          // (integer) Bonuses used per 1 pcs of this product
-        "total_after_discounts": ...              // (decimal) To paid with money after all discounts
-      },
-      ...
-    ],
+        "uniqid": "17520",
+        "quantity": 4.0,
+        "price": 1000.0,
+        "total": 4000.0,
+        "discountable": true,
+        "bonusable": true,
+        "rewardable": true,
+        "paid_with_offers": 0,
+        "paid_with_discounts": 0,
+        "paid_with_referral_discounts": 0,
+        "paid_with_bonuses": 332.0,
+        "max_discountable_amount": 3600.0,
+        "max_payable_by_bonuses": 400.0,
+        "total_after_discounts": 3668.0,
+        "total_after_discounts_per_product": 917.0
+      }
+    ]
   }
 }
 ```
