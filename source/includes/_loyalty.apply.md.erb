@@ -64,12 +64,23 @@ curl --header "Content-Type: application/json" \
     "saved_total": 1000,
     "saved_by_discounts": 400,
     "saved_by_bonuses": 600,
+    "saved_by_offers": 0,
     "order_to_pay": 5000,
     "order_bonuses_to_charge": 500,
+    "bonuses_balance": 1000,
     "bonuses_reward": 500,
+    "bonuses_referrer_reward": 0,
+    "referrer_identifier": "...",
+    "referral_program": 21,
+    "applied_promotions": [],
+    "rewarded_stickers": {},
+    "used_stickers": {},
+    "stickers_balance": {},
+    "promo_codes": [],
+    "promo_codes_failed": [],
     "items": [
-      {
-        "product_id": "...",
+       {
+        "uniqid": "...",
         "quantity": 4,
         "price": 1000,
         "total": 4000,
@@ -78,13 +89,30 @@ curl --header "Content-Type: application/json" \
         "rewardable": true,
         "paid_with_offers": 0,
         "paid_with_offers_per_product": 0,
+        "paid_with_referral_discounts": 0,
+        "paid_with_referral_discounts_per_product": 0,
         "paid_with_discounts": 500,
         "paid_with_discounts_per_product": 100,
         "paid_with_bonuses": 500,
         "paid_with_bonuses_per_product": 100,
+        "bonuses_reward": 400,
+        "bonuses_reward_per_product": 100,
+        "bonuses_reward_loyalty_program": {
+          "total": 40,
+          "per_product": 10
+        },
+        "bonuses_reward_referral_program": {
+          "total": 80,
+          "per_product": 20
+        },
+        "bonuses_reward_promotions": {
+          "33": { "total": 100, "per_product": 25 },
+          "17": { "total": 180, "per_product": 45 }
+        },
         "bonuses_used": 500,
         "bonuses_used_per_product": 125,
-        "total_after_discounts": 3500
+        "total_after_discounts": 3500,
+        "total_after_discounts_per_product": 875
       },
       ...
     ]
