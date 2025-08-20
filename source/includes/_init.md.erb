@@ -114,31 +114,41 @@ apply plugin: 'com.google.gms.google-services'
 ```
 
 ```jsx
-// If you are using version 1.8 or above, you don't need to use permissions like SCHEDULE_EXACT_ALARM or USE_EXACT_ALARM.
-// The notifee dependency introduced in version 1.7.1 also isn't required starting from version 1.8 of the SDK.
+/* If you are using version 1.8 or above, you don't need to use permissions like SCHEDULE_EXACT_ALARM or USE_EXACT_ALARM. */
 
-// Add required packages:
-yarn add <%= config[:rn_sdk_package_code] %>/react-native-sdk
+/* Add required packages: */
+
+yarn add <%= config[:rn_sdk_package_code] %>/rn-sdk
 yarn add @react-native-async-storage/async-storage
 yarn add react-native-device-info
 
-// For push notifications also add:
-yarn add react-native-push-notification
+/* For push notifications also add: */
+
 yarn add @react-native-firebase/app
 yarn add @react-native-firebase/messaging
+yarn add @notifee/react-native
 
-// On application launch initialize the SDK:
-import <%= config[:rn_sdk_package_name] %> from '<%= config[:rn_sdk_package_code] %>/react-native-sdk';
-...
-// The parameter autoSendPushToken is responsible for automatically sending the push notification token upon initialization.
-// Its default value is true, meaning the token will be sent automatically.
-// Set it to false if you want to manage token sending manually.
+/* On application launch initialize the SDK: */
+
+import <%= config[:rn_sdk_package_name] %> from '<%= config[:rn_sdk_package_code] %>/rn-sdk';
+
+/*
+   The parameter autoSendPushToken is responsible for automatically sending the push notification token upon initialization.
+   Its default value is true, meaning the token will be sent automatically.
+   Set it to false if you want to manage token sending manually.
+*/
+
 const sdk = new <%= config[:rn_sdk_package_name] %>("YOUR_SHOP_ID", "stream", "debug", autoSendPushToken);
 
-// Initialization is async, so you have a method to test, if SDK is initialized or not:
+/* Initialization is async, so you have a method to test, if SDK is initialized or not: */
+
 sdk.isInit(); // returns true/false
 
-// To collect push tokens, you have to make some adjustments to the app:
+/*
+
+To collect push tokens, you need to make some platform-specific adjustments.
+
+*/
 
 // ** For iOS:
 
