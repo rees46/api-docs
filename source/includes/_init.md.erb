@@ -263,6 +263,14 @@ apiDomain – API domain for server communication.
 enableLogs – Optional parameter. Enables logs for debugging purposes during development.
 parentViewController – Optional parameter. Without it, in-app notifications will not be displayed.
 needReInitialization – Optional parameter. Allows reinitialization of the SDK and clears local storage.
+sendAdvertisingId – Optional parameter. Default value is false. If set to true, the SDK will attempt to send the Apple Advertising Identifier (IDFA).
+
+Important:
+
+If you set sendAdvertisingId to true, you must add the NSUserTrackingUsageDescription key to your application's Info.plist file. This is a mandatory requirement.
+
+When sendAdvertisingId is true and the NSUserTrackingUsageDescription key is present in Info.plist, the iOS SDK will automatically handle requesting user permission to access IDFA.
+
 
 */
 
@@ -274,6 +282,7 @@ sdk = createPersonalizationSDK(
   enableLogs: true,
   parentViewController: (window?.rootViewController)!,
   needReInitialization: true,
+  sendAdvertisingId: true,
   { error in
       // Assign the SDK instance to a global variable for reuse across the application.
       globalSDK = self.sdk
