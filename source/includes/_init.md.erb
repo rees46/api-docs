@@ -118,7 +118,7 @@ apply plugin: 'com.google.gms.google-services'
 
 /* Add required packages: */
 
-yarn add @<%= config[:rn_sdk_package_code] %>/rn-sdk
+yarn add <%= config[:rn_sdk_package_code] %>/rn-sdk
 yarn add @react-native-async-storage/async-storage
 yarn add react-native-device-info
 
@@ -130,7 +130,7 @@ yarn add @notifee/react-native
 
 /* On application launch initialize the SDK: */
 
-import <%= config[:rn_sdk_package_name] %> from '@<%= config[:rn_sdk_package_code] %>/rn-sdk';
+import <%= config[:rn_sdk_package_name] %> from '<%= config[:rn_sdk_package_code] %>/rn-sdk';
 
 /*
    The parameter autoSendPushToken is responsible for automatically sending the push notification token upon initialization.
