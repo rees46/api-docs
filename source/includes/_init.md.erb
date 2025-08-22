@@ -418,7 +418,13 @@ If you initialize the iOS SDK without the optional parameter parentViewControlle
 **Stream-Specific Initialization:**
 
   - If a specific value is provided for the stream parameter (e.g., "android"), only popups with a matching stream value will be initialized.
-  Popups with other stream values (e.g., "web", "ios") will not be initialized..
+  Popups with other stream values (e.g., "web", "ios") will not be initialized.
+
+**Multiple Streams:**
+
+- The `stream` field in the popup settings now supports multiple values, separated by commas (e.g., "web,android,ios").
+- A popup will be initialized if the incoming `stream` parameter matches any of the values specified in the settings.
+
 
 ### API response
 
