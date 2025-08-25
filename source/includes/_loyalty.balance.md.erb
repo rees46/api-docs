@@ -8,11 +8,32 @@ curl 'https://<%= config[:api_endpoint] %>/loyalty/bonuses/balance?shop_id=SHOP_
 > The above command returns JSON structured like this:
 
 ```json
+/*
+ * API Response Structure:
+ *
+ * Root Level:
+ *   status: string - "success" or "error"
+ *   payload: object - Main data container
+ *
+ * Balance Object:
+ *   active: integer - Available bonus points
+ *   pending: integer - Pending activation points
+ *   expiring: integer - Soon-to-expire points
+ *   expire_in: string - Expiration date (YYYY-MM-DD)
+ *   expiring_transactions: array - List of expiring bonus transactions
+ */
+
 {
-    "active": 123,
-    "pending": 456,
-    "expiring": 789,
-    "expire_in": "2030-12-12"
+    "status": "success",
+    "payload": {
+        "balance": {
+            "active": 276,
+            "pending": 0,
+            "expiring": 0,
+            "expire_in": "2025-07-18",
+            "expiring_transactions": []
+        }
+    }
 }
 ```
 
