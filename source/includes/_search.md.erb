@@ -28,7 +28,7 @@ There is a response limit: a response can contain no more than ten thousand item
   sid: "SID",
   type: "instant_search",
   search_query: "electronics",
-  locations: ["location1", "location2"],
+  locations: [{location1}, {location2}],
   excluded_merchants: ["merchant1,merchant2"],
   excluded_brands: ["samsung", "hp"],
   collapse: false
@@ -399,7 +399,7 @@ For example, if the product prices are: 0, 10, and 100, the API response will re
   extended: true,
   sort_by: "price",
   order: "asc",
-  locations: ["Berlin", "Paris"],
+  locations: [{location1}, {location2}],
   brands: ["brand", "anotherbrand"],
   price_min: 100,
   price_max: 1000,
