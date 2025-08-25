@@ -10,7 +10,6 @@ There is a response limit: a response can contain no more than ten thousand item
 
 ```javascript
 /*
-
 - did: Unique device identifier. Obtained from the SDK init method.
 - shop_id: API key used for authorization.
 - sid: Temporary user session ID.
@@ -25,11 +24,11 @@ There is a response limit: a response can contain no more than ten thousand item
 
 <%= config[:js_sdk_name] %>("suggest", {
   did: "DID",
-  shop_id: "your-shop-id",
+  shop_id: "SHOP_ID",
   sid: "SID",
   type: "instant_search",
-  search_query: "to be or not to be",
-  locations: ["Berlin", "Paris"],
+  search_query: "electronics",
+  locations: ["location1", "location2"],
   excluded_merchants: ["merchant1,merchant2"],
   excluded_brands: ["samsung", "hp"],
   collapse: false
@@ -364,63 +363,52 @@ For example, if the product prices are: 0, 10, and 100, the API response will re
 
 ```javascript
 /*
-Explanation of the parameters used in this example:
-
 - did: Unique device identifier. Obtained from the SDK init method.
 - shop_id: API key used for authorization.
 - sid: Temporary user session ID.
 - type: Request type. For full search use "full_search".
 - search_query: The search query entered by the user.
-- page: The current page number of search results (custom parameter for pagination).
-- limit: The number of results per page.
-- offset: Offset of results. Useful for pagination (alternative to page).
 - category_limit: Defines how many categories should be returned for sidebar filters.
 - categories: Comma-separated list of category IDs to filter results.
 - extended: When true, provides extended full search results (recommended).
 - sort_by: Sorting parameter. Possible values: popular, price, discount, sales_rate, date, price_margin, rating, relevance.
 - order: Sorting direction. Possible values: asc or desc (default).
-- locations: Comma-separated list of location IDs. Restricts search to given locations.
-- brands: Comma-separated list of brands to filter results.
-- filters: Escaped JSON object with filter parameters. Example: {"bluetooth":["yes"],"weight":["1.6"]}.
+- locations: List of locations to restrict search results.
+- brands: List of brands to filter results.
 - price_min: Minimum price filter.
 - price_max: Maximum price filter.
-- colors: Comma-separated list of colors to filter results.
-- fashion_sizes: Comma-separated list of fashion sizes.
-- exclude: Comma-separated list of product IDs to exclude from results.
-- email: Used only in S2S integration if user session is not available (not used in mobile SDK).
-- no_clarification: Disables clarified search. For internal use only.
-- merchants: Comma-separated list of merchants to include in results.
-- excluded_merchants: Comma-separated list of merchants to exclude. Works only with merchants in locations field.
-- excluded_brands: Comma-separated list of brands (lowercase) to exclude. Example: ["samsung","hp"].
+- colors: List of colors to filter results.
+- fashion_sizes: List of fashion sizes.
+- exclude: List of product IDs to exclude from results.
+- merchants: List of merchants to include in results.
+- excluded_merchants: List of merchants to exclude. Works only with merchants in locations field.
+- excluded_brands: List of brands (lowercase) to exclude. Example: ["samsung","hp"].
 - filters_search_by: Defines sorting of filter options (name, quantity, popularity). Overrides global dashboard settings.
 - brand_limit: Limits the number of brands returned in the response. Default: 1000.
 - collapse: If false, products with the same group_id are not collapsed and appear separately.
 */
 
 <%= config[:js_sdk_name] %>("search", {
-  did: "device-12345",
-  shop_id: "your-shop-id",
-  sid: "session-67890",
+  did: "DID",
+  shop_id: "SHOP_ID",
+  sid: "Session ID",
   type: "full_search",
-  search_query: "to be or not to be",
-  page: 2,
-  limit: 15,
-  categories: [1, 146, 100500],
+  search_query: "shoes",
+  categories: [313, 14, 40],
   category_limit: 10,
   extended: true,
   sort_by: "price",
   order: "asc",
-  locations: "1,2,3",
-  brands: ["alas", "poor", "yorick"],
-  filters: {"bluetooth":["yes"],"weight":["1.6"]},
+  locations: ["Berlin", "Paris"],
+  brands: ["brand", "anotherbrand"],
   price_min: 100,
   price_max: 1000,
-  colors: ["black","white"],
-  fashion_sizes: ["L", "XXL"],
-  exclude: ["123", "456"],
+  colors: ["black", "white"],
+  fashion_sizes: ["42", "44"],
+  exclude: ["PRODUCT_ID", "ANOTHER_PRODUCT_ID"],
   merchants: ["merchant1", "merchant2"],
-  excluded_merchants: ["merchant3,merchant4"],
-  excluded_brands: ["samsung", "hp"],
+  excluded_merchants: ["merchant3", "merchant4"],
+  excluded_brands: ["theotherbrand"],
   filters_search_by: "popularity",
   brand_limit: 50,
   collapse: false
