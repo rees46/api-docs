@@ -9,11 +9,35 @@ There is a response limit: a response can contain no more than ten thousand item
 ## Instant search
 
 ```javascript
-<%= config[:js_sdk_name] %>("suggest", {search_query: "To be or not to be"}, function(response) {
-  // the functionality of rendering a block of instant search
+/*
+- did: Unique device identifier. Obtained from the SDK init method.
+- shop_id: API key used for authorization.
+- sid: Temporary user session ID.
+- type: Request type. For instant search use "instant_search".
+- search_query: The search query entered by the user.
+- locations: Comma-separated list of location IDs. Limits the search to the specified locations.
+- search_scope: Whitelist of parameters (comma-separated) to be used in search. If empty, all common parameters are included by default.
+- excluded_merchants: Comma-separated list of merchants whose products should be excluded. Works only together with merchants in the locations field.
+- excluded_brands: List of brands in lowercase to be excluded from search. Example: ["samsung", "hp"].
+- collapse: If set to false, products with the same group_id will not be collapsed and will appear separately in search results.
+*/
+
+<%= config[:js_sdk_name] %>("suggest", {
+  did: "DID",
+  shop_id: "SHOP_ID",
+  sid: "SID",
+  type: "instant_search",
+  search_query: "electronics",
+  locations: [{location1}, {location2}],
+  excluded_merchants: ["merchant1,merchant2"],
+  excluded_brands: ["samsung", "hp"],
+  collapse: false
+}, function(response) {
+  // handle the response: for example, render instant search results
 }, function(error) {
-  // when something went wrong
+  // handle the error: logging or showing a message to the user
 });
+
 ```
 ```swift
 // Instant search
@@ -178,11 +202,11 @@ sdk.searchBlank()
 | sid                 | true     | Temporary user session ID.                                                                                                                                                                                                                                                                      |
 | type                | true     | In this case: "instant_search".                                                                                                                                                                                                                                                                 |
 | search_query        | true     | Search query.                                                                                                                                                                                                                                                                                   |
-| locations           | false    | Comma separated list of locations IDs.                                                                                                                                                                                                                                                          |
+| locations           | false    | Comma separated list of locations IDs inside of array.                                                                                                                                                                                                                                          |
 | search_scope        | false    | The whitelist of parameters separated by commas. There are two types: common parameters and subparameters for books. If empty, all common parameters are considered included by default. If there are no book subparameters in the request, the search of book parameters won't be initialized. |
 | excluded_merchants* | false    | A comma-separated list of merchants. Products from these merchants will be excluded from the search results                                                                                                                                                                                     |
-| collapse            | false    | When set to `false`, products with the same `group_id` will not be collapsed into a single entry and will appear as separate items in the search results                                                                                                                                        |                                                                                                                                                                                                                                                                                                                 |
-| excluded_brands     | false    | A list of brands in lowercase, separated by commas                                                                                                                                                                                                                                              |
+| excluded_brands*    | false    | A comma-separated list of brands excluded from search. If an array is empty, no brands will be excluded from search. Example: `[samsung", "hp"]`                                                                                                                                                |
+| collapse            | false    | When set to `false`, products with the same `group_id` will not be collapsed into a single entry and will appear as separate items in the search results                                                                                                                                        |
 | debug               | false    | Add this parameter with a value of true to activate debug mode. Requires cookie to be present in the request. Cookie value: <%= config[:js_sdk_name] %>_debug=1                                                                                                                                 |
 
 <aside class="warning">
@@ -338,11 +362,62 @@ For example, if the product prices are: 0, 10, and 100, the API response will re
 ## Full search
 
 ```javascript
-<%= config[:js_sdk_name] %>("search", {search_query: "To be or not to be", page: 2, limit: 15, brands: ["Alas", "poor", "Yorick"], categories: [1, 146, 100500], filters: {'key':['value'], 'key':['value']}, merchants: ['merchant1', 'merchant2'],fashion_sizes:['L','XXL'], sort_by: "price", order: "asc"}, function(response) {
-  // the functionality of rendering a block of full search
+/*
+- did: Unique device identifier. Obtained from the SDK init method.
+- shop_id: API key used for authorization.
+- sid: Temporary user session ID.
+- type: Request type. For full search use "full_search".
+- search_query: The search query entered by the user.
+- category_limit: Defines how many categories should be returned for sidebar filters.
+- categories: Comma-separated list of category IDs to filter results.
+- extended: When true, provides extended full search results (recommended).
+- sort_by: Sorting parameter. Possible values: popular, price, discount, sales_rate, date, price_margin, rating, relevance.
+- order: Sorting direction. Possible values: asc or desc (default).
+- locations: List of locations to restrict search results.
+- brands: List of brands to filter results.
+- price_min: Minimum price filter.
+- price_max: Maximum price filter.
+- colors: List of colors to filter results.
+- fashion_sizes: List of fashion sizes.
+- exclude: List of product IDs to exclude from results.
+- merchants: List of merchants to include in results.
+- excluded_merchants: List of merchants to exclude. Works only with merchants in locations field.
+- excluded_brands: List of brands (lowercase) to exclude. Example: ["samsung","hp"].
+- filters_search_by: Defines sorting of filter options (name, quantity, popularity). Overrides global dashboard settings.
+- brand_limit: Limits the number of brands returned in the response. Default: 1000.
+- collapse: If false, products with the same group_id are not collapsed and appear separately.
+*/
+
+<%= config[:js_sdk_name] %>("search", {
+  did: "DID",
+  shop_id: "SHOP_ID",
+  sid: "Session ID",
+  type: "full_search",
+  search_query: "shoes",
+  categories: [313, 14, 40],
+  category_limit: 10,
+  extended: true,
+  sort_by: "price",
+  order: "asc",
+  locations: [{location1}, {location2}],
+  brands: ["brand", "anotherbrand"],
+  price_min: 100,
+  price_max: 1000,
+  colors: ["black", "white"],
+  fashion_sizes: ["42", "44"],
+  exclude: ["PRODUCT_ID", "ANOTHER_PRODUCT_ID"],
+  merchants: ["merchant1", "merchant2"],
+  excluded_merchants: ["merchant3", "merchant4"],
+  excluded_brands: ["theotherbrand"],
+  filters_search_by: "popularity",
+  brand_limit: 50,
+  collapse: false
+}, function(response) {
+  // handle the response: for example, render full search results
 }, function(error) {
-  // when something went wrong
+  // handle the error: logging or showing a message to the user
 });
+
 ```
 ```swift
 // Basic full search
@@ -550,10 +625,10 @@ sdk.search({type: 'full_search', search_query: 'string', filters_search_by: 'pop
 | no_clarification    | false    | Disable clarified search (true, false, default: false). Don't use it. God mode only                                                                             |
 | merchants           | false    | Comma separated list of merchants                                                                                                                               |
 | excluded_merchants* | false    | A comma-separated list of merchants. Products from these merchants will be excluded from the search results                                                     |
+| excluded_brands*    | false    | A comma-separated list of brands excluded from search. If an array is empty, no brands will be excluded from search. Example: `["samsung", "hp"]`               |
 | filters_search_by   | false    | Available options for filter: name, quantity, popularity.If this parameter in query global settings from dashboard are ignored                                  |
 | brand_limit         | false    | This parameter allows limiting the number of brands aggregated in the response. The default limit is 1000                                                       |
 | collapse            | false    | When set to `false`, products with the same `group_id` will not be collapsed into a single entry and will appear as separate items in the search results.       |
-| excluded_brands*    | false    | A list of brands in lowercase, separated by commas                                                                                                              |
 | debug               | false    | Add this parameter with a value of true to activate debug mode. Requires cookie to be present in the request. Cookie value: <%= config[:js_sdk_name] %>_debug=1 |
 
 
