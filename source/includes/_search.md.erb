@@ -10,9 +10,6 @@ There is a response limit: a response can contain no more than ten thousand item
 
 ```javascript
 /*
-- did: Unique device identifier. Obtained from the SDK init method.
-- shop_id: API key used for authorization.
-- sid: Temporary user session ID.
 - type: Request type. For instant search use "instant_search".
 - search_query: The search query entered by the user.
 - locations: Comma-separated list of location IDs. Limits the search to the specified locations.
@@ -23,13 +20,10 @@ There is a response limit: a response can contain no more than ten thousand item
 */
 
 <%= config[:js_sdk_name] %>("suggest", {
-  did: "DID",
-  shop_id: "SHOP_ID",
-  sid: "SID",
   type: "instant_search",
   search_query: "electronics",
   locations: [{location1}, {location2}],
-  excluded_merchants: ["merchant1,merchant2"],
+  excluded_merchants: ["merchant1", "merchant2"],
   excluded_brands: ["samsung", "hp"],
   collapse: false
 }, function(response) {
@@ -37,7 +31,6 @@ There is a response limit: a response can contain no more than ten thousand item
 }, function(error) {
   // handle the error: logging or showing a message to the user
 });
-
 ```
 ```swift
 // Instant search
@@ -363,9 +356,6 @@ For example, if the product prices are: 0, 10, and 100, the API response will re
 
 ```javascript
 /*
-- did: Unique device identifier. Obtained from the SDK init method.
-- shop_id: API key used for authorization.
-- sid: Temporary user session ID.
 - type: Request type. For full search use "full_search".
 - search_query: The search query entered by the user.
 - category_limit: Defines how many categories should be returned for sidebar filters.
@@ -386,36 +376,33 @@ For example, if the product prices are: 0, 10, and 100, the API response will re
 - filters_search_by: Defines sorting of filter options (name, quantity, popularity). Overrides global dashboard settings.
 - brand_limit: Limits the number of brands returned in the response. Default: 1000.
 - collapse: If false, products with the same group_id are not collapsed and appear separately.
-*/
+  */
 
 <%= config[:js_sdk_name] %>("search", {
-  did: "DID",
-  shop_id: "SHOP_ID",
-  sid: "Session ID",
-  type: "full_search",
-  search_query: "shoes",
-  categories: [313, 14, 40],
-  category_limit: 10,
-  extended: true,
-  sort_by: "price",
-  order: "asc",
-  locations: [{location1}, {location2}],
-  brands: ["brand", "anotherbrand"],
-  price_min: 100,
-  price_max: 1000,
-  colors: ["black", "white"],
-  fashion_sizes: ["42", "44"],
-  exclude: ["PRODUCT_ID", "ANOTHER_PRODUCT_ID"],
-  merchants: ["merchant1", "merchant2"],
-  excluded_merchants: ["merchant3", "merchant4"],
-  excluded_brands: ["theotherbrand"],
-  filters_search_by: "popularity",
-  brand_limit: 50,
-  collapse: false
-}, function(response) {
-  // handle the response: for example, render full search results
-}, function(error) {
-  // handle the error: logging or showing a message to the user
+    type: "full_search",
+    search_query: "shoes",
+    categories: [313, 14, 40],
+    category_limit: 10,
+    extended: true,
+    sort_by: "price",
+    order: "asc",
+    locations: [{location1}, {location2}],
+    brands: ["brand", "anotherbrand"],
+    price_min: 100,
+    price_max: 1000,
+    colors: ["black", "white"],
+    fashion_sizes: ["42", "44"],
+    exclude: ["PRODUCT_ID", "ANOTHER_PRODUCT_ID"],
+    merchants: ["merchant1", "merchant2"],
+    excluded_merchants: ["merchant3", "merchant4"],
+    excluded_brands: ["theotherbrand"],
+    filters_search_by: "popularity",
+    brand_limit: 50,
+    collapse: false
+    }, function(response) {
+    // handle the response: for example, render full search results
+    }, function(error) {
+    // handle the error: logging or showing a message to the user
 });
 
 ```
