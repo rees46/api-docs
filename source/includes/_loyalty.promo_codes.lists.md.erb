@@ -1,0 +1,42 @@
+## List of promo codes lists
+
+```shell
+curl https://<%= config[:api_endpoint] %>/promo_codes?shop_id=SHOPID&shop_secret=SHOP_SECRET
+```
+
+> The above command returns JSON structured like this:
+
+```json
+[
+  {
+    "id": 3184,
+    "name": "Abandoned cart trigger discount codes",
+    "available": 3744
+  }
+]
+```
+
+This method returns list of existing promo codes lists with count of available promo codes in each list.
+
+### HTTP Request
+
+`GET https://<%= config[:api_endpoint] %>/promo_codes`
+
+### Query Parameters
+
+| Parameter   | Required  | Type    | Description                                                                  |
+|-------------|-----------|---------|------------------------------------------------------------------------------|
+| shop_id     | true      | string  | Your API key                                                                 |
+| shop_secret | true      | string  | Your API secret key                                                          |
+| active      | false     | integer | Return only lists with at least 1 free code (value `1`)                      |
+| exclude     | false     | string  | Comma separated list of IDs of lists to exclude                              |
+| include     | false     | string  | Comma separated list of IDs of lists to include in result (excludes others)  |
+| offset      | false     | integer | Offset for pagination. Default: `0`                                          |
+| limit       | false     | integer | Limit for pagination. Default: `1000`                                        |
+
+
+### Errors
+
+When promo secret key is wrong, method returns 403 error.
+
+

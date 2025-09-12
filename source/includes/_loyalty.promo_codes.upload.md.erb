@@ -1,0 +1,48 @@
+## Upload promo codes
+
+> Headers
+
+```
+Content-type: application/json
+```
+
+> Body example
+
+```json
+{
+    "shop_id": "...",
+    "shop_secret": "...",
+    "id": "...",
+    "codes": [ "code1", "code2", "code3" ]
+}
+```
+
+> Request example
+
+```shell
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data-binary "@data.json" \
+  https://<%= config[:api_endpoint] %>/promo_codes
+```
+
+Method uploads list of unique promo codes to the selected list. All non-unique promo codes will be excluded.
+
+
+### HTTP Request
+
+`POST https://<%= config[:api_endpoint] %>/promo_codes`
+
+`Content-Type: application/json`
+
+### Query Parameters
+
+| Parameter    | Required  | Description         |
+|--------------|-----------|---------------------|
+| shop_id      | true      | Your API key        |
+| shop_secret  | true      | Your API secret key |
+| id           | true      | Promo codes list ID |
+| codes        | true      | List of promo codes |
+
+
+
