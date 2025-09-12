@@ -1,0 +1,72 @@
+## Generate certificate
+
+> Headers
+
+```
+Content-type: application/json
+```
+
+> Body example
+
+```json
+{
+    "shop_id": "...",
+    "shop_secret": "...",
+    "identifier": "buyer phone number",
+    "nominal": 1000,
+    "code": "certificate pool code"
+}
+```
+
+> Request example
+
+```shell
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data-binary "@data.json" \
+  https://<%= config[:api_endpoint] %>/loyalty/certificates/create
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "status": "success",
+  "payload": {
+      "status": "created",
+      "code": "...",
+      "balance": 5000,
+      "nominal": 5000,
+      "personal": false,
+      "activated_date": "...",
+      "expiration_date": "...",
+      "deactivated_date": "...",
+      "expiration_days": 30,
+      "certificate_pool_code": "...",
+      "streams": ["..."],
+      "min_order_value": 50,
+      "payable_order_share": 90
+    }
+}
+```
+
+Adds a person to a referral program. Works only if the user is joined to loyalty program before.
+
+### HTTP Request
+
+
+`POST https://<%= config[:api_endpoint] %>/loyalty/certificates/create`
+### Query Parameters
+
+| Parameter   | Required | Description                                                |
+|-------------|----------|------------------------------------------------------------|
+| shop_id     | true     | Your API key                                               |
+| shop_secret | true     | Your API secret key                                        |
+| identifier  | true     | Buyer's phone (identifier)                                 |
+| code        | true     | Certificate pool code                                      |
+| nominal     | false    | Overwrite pool's nominal for pools with a flexible nominal |
+
+
+
+
+

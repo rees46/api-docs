@@ -30,33 +30,44 @@ includes:
   - segments.md.erb
   - orders.md.erb
   - promocodes.md.erb
-  - bonuses.md.erb
   - loyalty.md.erb
-  - loyalty.join.md.erb
-  - loyalty.status.md.erb
-  - loyalty.quit.md.erb
-  - loyalty.estimate.md.erb
-  - loyalty.apply.md.erb
-  - loyalty.cancel.md.erb
-  - loyalty.confirm.md.erb
-  - loyalty.change.md.erb
+  - loyalty.membership.md.erb
+  - loyalty.membership.join.md.erb
+  - loyalty.membership.status.md.erb
+  - loyalty.membership.quit.md.erb
+  - loyalty.bonuses.md.erb
+  - loyalty.bonuses.balance.md.erb
+  - loyalty.bonuses.history.md.erb
+  - loyalty.bonuses.event_bonus_history.md.erb
+  - loyalty.bonuses.event_bonus.md.erb
+  - loyalty.bonuses.cancel_event_bonus.md.erb
+  - loyalty.bonuses.import.md.erb
+  - loyalty.checkout.md.erb
+  - loyalty.checkout.estimate.md.erb
+  - loyalty.checkout.apply.md.erb
+  - loyalty.checkout.cancel.md.erb
+  - loyalty.checkout.confirm.md.erb
+  - loyalty.checkout.change.md.erb
+  - loyalty.checkout.details.md.erb
+  - loyalty.checkout.orders-history.md.erb
+  - loyalty.promos.md.erb
   - loyalty.promos.index.md.erb
   - loyalty.promos.cart.md.erb
-  - loyalty.qr.get.md.erb
-  - loyalty.qr.check.md.erb
-  - loyalty.details.md.erb
-  - loyalty.orders-history.md.erb
-  - loyalty.balance.md.erb
-  - loyalty.history.md.erb
-  - loyalty.event_bonus_history.md.erb
-  - loyalty.event_bonus.md.erb
-  - loyalty.cancel_event_bonus.md.erb
+
+  - loyalty.referral.md.erb
   - loyalty.referral.join.md.erb
   - loyalty.referral.code.md.erb
+  - loyalty.stickers.md.erb
   - loyalty.stickers.balance.md.erb
   - loyalty.stickers.history.md.erb
-  - loyalty.otp-send.md.erb
-  - loyalty.otp-check.md.erb
+  - loyalty.stickers.history.md.erb
+  - loyalty.certificates.md.erb
+  - loyalty.certificates.create.md.erb
+  - loyalty.otp.md.erb
+  - loyalty.otp.send.md.erb
+  - loyalty.otp.check.md.erb
+  - loyalty.otp.qr.get.md.erb
+  - loyalty.otp.qr.check.md.erb
   - nps.md.erb
   - sms.md.erb
   - multi_messaging.md.erb
