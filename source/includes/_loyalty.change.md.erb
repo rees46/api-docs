@@ -126,4 +126,8 @@ When client partially returns some products from an order, it's needed to recalc
 
 Send an updated list of client's cart to refund bonuses and calculate how much money to refund.
 
+Specifics:
 
+1. Recalculates the order in case of product returns or replacements
+2. Adjusts money and bonuses, including possible refunds
+3. Returns the delta (negative for refund, positive for extra payment)

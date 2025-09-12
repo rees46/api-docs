@@ -60,6 +60,12 @@ curl --header "Content-Type: application/json" \
 
 Method deletes loyalty member profile from database by identifier (phone number). Loyalty level and bonuses will not be deleted immediately to prevent accident data loss, but member won't be able to receive membership benefits on next purchases.
 
+Specifics:
+
+1. After this method is called, the user is no longer considered a loyalty member
+2. Bonuses and loyalty level are preserved internally for safety but become inactive and inaccessible for use
+
+
 ### Query Parameters
 
 | Parameter   | Required | Description         |

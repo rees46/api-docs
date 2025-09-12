@@ -81,6 +81,11 @@ curl https://<%= config[:api_endpoint] %>/loyalty/members/status?shop_id=...&sho
 
 Returns the member's status in the loyalty program: member or not, current level and level expiration date.
 
+Specifics:
+
+1. The method only accepts the identifier as a phone number (email is not supported)
+2. If the user is not a member, the response is still "success": true with "member": false
+
 ### Query Parameters
 
 | Parameter   | Required | Description                               |
