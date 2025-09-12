@@ -1,0 +1,37 @@
+## Fetch promo code
+
+```shell
+curl https://<%= config[:api_endpoint] %>/promo_codes/fetch?did=DEVICE_ID&shop_id=SHOPID&id=PROMOCODE_LIST_ID
+```
+
+```javascript
+<%= config[:js_sdk_name] %>("get_promo_code", {id: PROMOCODE_LIST_ID}, success_callback, error_callback);
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{"code":  "UNIQUE_CODE"}
+```
+
+Method provides service for unique promo codes fetching.
+
+Note: unique promo codes are limited. Store fetched promo code during user's session.
+
+
+### HTTP Request
+
+`GET https://<%= config[:api_endpoint] %>/promo_codes/fetch`
+
+### Query Parameters
+
+| Parameter | Required | Description                                      |
+|-----------|----------|--------------------------------------------------|
+| did       | true     | Device ID. You get it from `init` method in SDK. |
+| shop_id   | true     | Your API key                                     |
+| id        | true     | Promo codes list ID                              |
+| sid       | false    | Temporary user session ID                        |
+
+### Errors
+
+When promo codes list is empty, method returns 404 error.

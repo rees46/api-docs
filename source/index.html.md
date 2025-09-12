@@ -29,7 +29,6 @@ includes:
   - crm.md.erb
   - segments.md.erb
   - orders.md.erb
-  - promocodes.md.erb
   - loyalty.md.erb
   - loyalty.membership.md.erb
   - loyalty.membership.join.md.erb
@@ -53,7 +52,6 @@ includes:
   - loyalty.promos.md.erb
   - loyalty.promos.index.md.erb
   - loyalty.promos.cart.md.erb
-
   - loyalty.referral.md.erb
   - loyalty.referral.join.md.erb
   - loyalty.referral.code.md.erb
@@ -63,6 +61,14 @@ includes:
   - loyalty.stickers.history.md.erb
   - loyalty.certificates.md.erb
   - loyalty.certificates.create.md.erb
+  - loyalty.certificates.activate.md.erb
+  - loyalty.certificates.balance.md.erb
+  - loyalty.promo_codes.md.erb
+  - loyalty.promo_codes.lists.md.erb
+  - loyalty.promo_codes.fetch.md.erb
+  - loyalty.promo_codes.upload.md.erb
+  - loyalty.promo_codes.cleanup.md.erb
+  - loyalty.promo_codes.delete.md.erb
   - loyalty.otp.md.erb
   - loyalty.otp.send.md.erb
   - loyalty.otp.check.md.erb

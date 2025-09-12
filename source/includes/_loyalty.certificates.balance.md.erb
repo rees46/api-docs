@@ -1,4 +1,4 @@
-## Generate certificate
+## Certificate balance
 
 > Headers
 
@@ -12,19 +12,13 @@ Content-type: application/json
 {
     "shop_id": "...",
     "shop_secret": "...",
-    "identifier": "buyer phone number",
-    "nominal": 1000,
-    "code": "certificate pool code"
 }
 ```
 
 > Request example
 
 ```shell
-curl --header "Content-Type: application/json" \
-  --request POST \
-  --data-binary "@data.json" \
-  https://<%= config[:api_endpoint] %>/loyalty/certificates/create
+curl https://<%= config[:api_endpoint] %>/loyalty/certificates/:code/balance?shop_id=...&shop_secret=...
 ```
 
 > The above command returns JSON structured like this:
@@ -33,7 +27,7 @@ curl --header "Content-Type: application/json" \
 {
   "status": "success",
   "payload": {
-      "status": "created",
+      "status": "active",
       "code": "...",
       "balance": 5000,
       "nominal": 5000,
@@ -50,21 +44,18 @@ curl --header "Content-Type: application/json" \
 }
 ```
 
-Creates a new inactive certificate in the selected pool.
+Returns certificate's status, balance and main properties.
 
 ### HTTP Request
 
 
-`POST https://<%= config[:api_endpoint] %>/loyalty/certificates/create`
+`GET https://<%= config[:api_endpoint] %>/loyalty/certificates/:code/balance`
 ### Query Parameters
 
 | Parameter   | Required | Description                                                         |
 |-------------|----------|---------------------------------------------------------------------|
 | shop_id     | true     | Your API key                                                        |
 | shop_secret | true     | Your API secret key                                                 |
-| identifier  | true     | Buyer's phone (identifier)                                          |
-| code        | true     | Certificate pool code                                               |
-| nominal     | false    | Overwrite certificate's nominal (for pools with a flexible nominal) |
 
 
 

@@ -1,0 +1,51 @@
+## Delete promo codes
+
+```shell
+curl --header "Content-Type: application/json"
+  --request DELETE
+  --data '{
+    "shop_id": "SHOP_ID",
+    "shop_secret": "SHOP_SECRET",
+    "promo_code_list_id": "1",
+    "codes": ["code1", "code2"]
+  }'
+  https://<%= config[:api_endpoint] %>/promo_codes/delete
+
+
+```
+
+```javascript
+// Not implemented
+```
+
+```swift
+// Not implemented
+```
+
+```kotlin
+// Not implemented
+```
+
+```java
+// Not implemented
+```
+
+```jsx
+// Not implemented
+```
+
+`DELETE https://<%= config[:api_endpoint] %>/promo_codes/delete`
+
+### Query Parameters
+
+| Parameter          | Type   | Required | Description                     |
+|--------------------|--------|----------|---------------------------------|
+| promo_code_list_Id | String | true     | Id of the list with promo codes |
+| codes              | Array  | true     | An array with promo codes       |
+
+### Response parameters
+
+| Parameter       | Type    | Description                               |
+|-----------------|---------|-------------------------------------------|
+| delete_count    | Integer | Number of deleted promo codes             |
+| not_found_count | Integer | Number of promo codes that were not found |
