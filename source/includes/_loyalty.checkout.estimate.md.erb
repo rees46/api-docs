@@ -15,6 +15,7 @@ Content-type: application/json
     "identifier":     "...",
     "payment_type":   "...",
     "promo_codes":    ["...", "..."],
+    "certificates":   ["...", "..."],
     "charge_bonuses": true,
     "current_time":   "17:31",
     "cart_items": [
@@ -60,11 +61,12 @@ curl --header "Content-Type: application/json" \
     "payment_type": "...",
     "products_total": 5,
     "order_total": 6000,
-    "saved_total": 1000,
+    "saved_total": 1100,
     "saved_by_discounts": 400,
     "saved_by_bonuses": 600,
     "saved_by_offers": 0,
-    "order_to_pay": 5000,
+    "saved_by_certificates": 100,
+    "order_to_pay": 4900,
     "order_bonuses_to_charge": 500,
     "bonuses_balance": 1000,
     "bonuses_reward": 500,
@@ -77,6 +79,8 @@ curl --header "Content-Type: application/json" \
     "stickers_balance": {},
     "promo_codes": [],
     "promo_codes_failed": [],
+    "certificates": [],
+    "certificates_failed": [],
     "items": [
        {
         "uniqid": "...",
@@ -94,6 +98,8 @@ curl --header "Content-Type: application/json" \
         "paid_with_discounts_per_product": 100,
         "paid_with_bonuses": 500,
         "paid_with_bonuses_per_product": 100,
+        "paid_with_certificates": 100,
+        "paid_with_certificates_per_product": 25,
         "bonuses_reward": 400,
         "bonuses_reward_per_product": 100,
         "bonuses_reward_loyalty_program": {
@@ -108,6 +114,7 @@ curl --header "Content-Type: application/json" \
           "33": { "total": 100, "per_product": 25 },
           "17": { "total": 180, "per_product": 45 }
         },
+        "certificates": { /* internal info */ },
         "bonuses_used": 500,
         "bonuses_used_per_product": 125,
         "total_after_discounts": 3500,
