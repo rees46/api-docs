@@ -1,0 +1,66 @@
+## Certificate transactions
+
+> Headers
+
+```
+Content-type: application/json
+```
+
+> Body example
+
+```json
+{
+    "shop_id": "...",
+    "shop_secret": "...",
+}
+```
+
+> Request example
+
+```shell
+curl https://<%= config[:api_endpoint] %>/loyalty/certificates/:code/transactions?shop_id=...&shop_secret=...
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "status": "success",
+  "payload": [
+    {
+      "id": 333746,
+      "amount": -300,
+      "event": "order",
+      "order_id": "773",
+      "identifier": "",
+      "product_id": "17"
+    },
+    {
+      "id": 333746,
+      "amount": 100,
+      "event": "refund",
+      "order_id": "773",
+      "identifier": "",
+      "product_id": "17"
+    }
+  ]
+}
+```
+
+Returns certificate's transactions history
+
+### HTTP Request
+
+
+`GET https://<%= config[:api_endpoint] %>/loyalty/certificates/:code/transactions`
+### Query Parameters
+
+| Parameter   | Required | Description                                                         |
+|-------------|----------|---------------------------------------------------------------------|
+| shop_id     | true     | Your API key                                                        |
+| shop_secret | true     | Your API secret key                                                 |
+
+
+
+
+
