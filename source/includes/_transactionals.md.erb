@@ -48,13 +48,13 @@ curl --location --request POST 'https://<%= config[:api_endpoint] %>/transact' \
 
 ### Query Parameters
 
-| Parameter   | Required | Description                         |
-|-------------|----------|-------------------------------------|
-| shop_id     | true     | Your shop id                        |
-| shop_secret | true     | Your shop secret                    |
-| code        | true     | Your transactional message code     |
-| email       | true     | Client's email                      |
-| variables   | false    | Object with custom data for message |
+| Parameter   | Required | Description                                                           |
+|-------------|----------|-----------------------------------------------------------------------|
+| shop_id     | true     | Your shop id                                                          |
+| shop_secret | true     | Your shop secret                                                      |
+| code        | true     | Your transactional message code                                       |
+| email       | true     | Client's email                                                        |
+| variables   | false    | Object with custom data for message. This parameter must be an object |
 
 <aside class="notice">
 Limits: max count - 10 files, max common weight - 10 mb.

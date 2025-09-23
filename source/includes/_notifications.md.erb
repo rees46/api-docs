@@ -103,9 +103,14 @@ Do not use very old `date_from`: the method is slow and large period can slow do
 ```shell
 curl https://<%= config[:api_endpoint] %>/notifications/:code
 
-Response format:
+Response example:
 
-{"200"}
+{
+    "status": "success",
+    "payload": {
+        "messages": []
+    }
+}
 
 ```
 
@@ -129,6 +134,26 @@ Response format:
 // REST API only. See cURL.
 ```
 
-Endpoint: `GET https://<%= config[:api_endpoint] %>/notifications/:code`
+### Query Parameters
+
+
+| Parameter   | Required | Description                                                                                                |
+|-------------|----------|------------------------------------------------------------------------------------------------------------|
+| shop_id     | true     | Your shop id                                                                                               |
+| shop_secret | true     | Your shop secret                                                                                           |
+| code        | true     | Your transactional message code                                                                            |
+| type        | true     | Transactional message type. Options: `email`,`web_push`, `mobile_push`,`sms`,`telegram`,`whatsapp`,`multi` |
 
 The 'code' part is contained in the response from `GET https://<%= config[:api_endpoint] %>/transact`.
+
+### HTTP Response
+
+
+| HTTP status code | Response body                                            | Description                                                                                  |
+|------------------|----------------------------------------------------------|----------------------------------------------------------------------------------------------|
+| 200              | {"status": "success", "payload": {"messages":[]}}        | The request was successful.                                                                  |
+| 4xx (400-499)    | {"status": "error", "message": "Error description text"} | The request was unsuccessful. See the reason in the `message` property of the response body. |
+
+
+Endpoint: `GET https://<%= config[:api_endpoint] %>/notifications/:code`
+
