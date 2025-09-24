@@ -10,3 +10,6 @@ bundle exec middleman build
 
 rsync -av ./build/ refapi@10.22.0.21:reference.api.personaclick.com/public/
 rsync -av --delete ./build/ refapi@10.22.0.21:reference.api.personaclick.com/public/
+
+rsync -av ./build/ refapi@10.22.0.23:reference.api.personaclick.com/public/
+rsync -av --delete ./build/ refapi@10.22.0.23:reference.api.personaclick.com/public/
