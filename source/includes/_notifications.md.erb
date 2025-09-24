@@ -137,12 +137,12 @@ Response example:
 ### Query Parameters
 
 
-| Parameter   | Required | Description                                                                                                |
-|-------------|----------|------------------------------------------------------------------------------------------------------------|
-| shop_id     | true     | Your shop id                                                                                               |
-| shop_secret | true     | Your shop secret                                                                                           |
-| code        | true     | Your transactional message code                                                                            |
-| type        | true     | Transactional message type. Options: `email`,`web_push`, `mobile_push`,`sms`,`telegram`,`whatsapp`,`multi` |
+| Parameter   | Required | Description                                             |
+|-------------|----------|---------------------------------------------------------|
+| shop_id     | true     | Your shop id                                            |
+| shop_secret | true     | Your shop secret                                        |
+| code        | true     | Your transactional message code                         |
+| type        | true     | Message type. Options: `bulk`, `chain`, `transactional` |
 
 The 'code' part is contained in the response from `GET https://<%= config[:api_endpoint] %>/transact`.
 
