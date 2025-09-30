@@ -1,0 +1,50 @@
+## Block certificate
+
+> Headers
+
+```
+Content-type: application/json
+```
+
+> Body example
+
+```json
+{
+    "shop_id": "...",
+    "shop_secret": "..."
+}
+```
+
+> Request example
+
+```shell
+curl --header "Content-Type: application/json" \
+  --request PATCH \
+  --data-binary "@data.json" \
+  https://<%= config[:api_endpoint] %>/loyalty/certificates/:code/block
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "status": "success"
+}
+```
+
+Permanently blocks a certificate. Blocked certificate can't be restored.
+
+### HTTP Request
+
+`PATCH https://<%= config[:api_endpoint] %>/loyalty/certificates/:code/block`
+### Query Parameters
+
+| Parameter        | Required | Description                                                         |
+|------------------|----------|---------------------------------------------------------------------|
+| shop_id          | true     | Your API key                                                        |
+| shop_secret      | true     | Your API secret key                                                 |
+
+
+
+
+
