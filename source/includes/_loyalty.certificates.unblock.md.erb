@@ -1,4 +1,4 @@
-## Block certificate
+## Unblock certificate
 
 > Headers
 
@@ -21,7 +21,7 @@ Content-type: application/json
 curl --header "Content-Type: application/json" \
   --request PATCH \
   --data-binary "@data.json" \
-  https://<%= config[:api_endpoint] %>/loyalty/certificates/:code/block
+  https://<%= config[:api_endpoint] %>/loyalty/certificates/:code/unblock
 ```
 
 > The above command returns JSON structured like this:
@@ -32,11 +32,11 @@ curl --header "Content-Type: application/json" \
 }
 ```
 
-Temporarily blocks a certificate. Blocked certificate can be unblocked.
+Unblocks blocked certificate.
 
 ### HTTP Request
 
-`PATCH https://<%= config[:api_endpoint] %>/loyalty/certificates/:code/block`
+`PATCH https://<%= config[:api_endpoint] %>/loyalty/certificates/:code/unblock`
 ### Query Parameters
 
 | Parameter        | Required | Description                                                         |

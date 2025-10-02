@@ -64,6 +64,7 @@ includes:
   - loyalty.certificates.activate.md.erb
   - loyalty.certificates.deactivate.md.erb
   - loyalty.certificates.block.md.erb
+  - loyalty.certificates.unblock.md.erb
   - loyalty.certificates.balance.md.erb
   - loyalty.certificates.transactions.md.erb
   - loyalty.promo_codes.md.erb
