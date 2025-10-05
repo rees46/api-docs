@@ -1,0 +1,67 @@
+## User's certificates
+
+> Headers
+
+```
+Content-type: application/json
+```
+
+> Request example
+
+```shell
+curl https://<%= config[:api_endpoint] %>/loyalty/certificates/by-user?shop_id=...&shop_secret=...&identifier=...
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "status": "success",
+  "payload": [
+    {
+      "id": 333,
+      "status": "created",
+      "code": "abc---asdsaf3-...",
+      "nominal": 5000,
+      "balance": 3980,
+      "owner_identifier": "...",
+      "owner_name": "...",
+      "buyer_identifier": "...",
+      "created_date": "...",
+      "activated_date": "...",
+      "expiration_date": "...",
+      "pool": {
+        "id": 17,
+        "status": "active",
+        "flexible_nominal": 6000,
+        "personal": true,
+        "expiration_days": 30,
+        "min_order_value": 1000,
+        "payable_order_share": 70,
+        "exclude_products": [{... }, {... }, ...]
+      }
+    },
+    ...
+  ]
+}
+```
+
+Returns list of all user's certificates.
+
+### HTTP Request
+
+
+`GET https://<%= config[:api_endpoint] %>/loyalty/certificates/by-user`
+
+### Query Parameters
+
+| Parameter   | Required | Description             |
+|-------------|----------|-------------------------|
+| shop_id     | true     | Your API key            |
+| shop_secret | true     | Your API secret key     |
+| identifier  | true     | Customer's phone number |
+
+
+
+
+
