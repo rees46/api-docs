@@ -6,19 +6,10 @@
 Content-type: application/json
 ```
 
-> Body example
-
-```json
-{
-    "shop_id": "...",
-    "shop_secret": "...",
-}
-```
-
 > Request example
 
 ```shell
-curl https://<%= config[:api_endpoint] %>/loyalty/certificates/:code/transactions?shop_id=...&shop_secret=...
+curl https://<%= config[:api_endpoint] %>/loyalty/certificates/transactions?shop_id=...&shop_secret=...&code=...
 ```
 
 > The above command returns JSON structured like this:
@@ -52,14 +43,15 @@ Returns certificate's transactions history
 ### HTTP Request
 
 
-`GET https://<%= config[:api_endpoint] %>/loyalty/certificates/:code/transactions`
+`GET https://<%= config[:api_endpoint] %>/loyalty/certificates/transactions`
+
 ### Query Parameters
 
 | Parameter   | Required | Description                                                         |
 |-------------|----------|---------------------------------------------------------------------|
 | shop_id     | true     | Your API key                                                        |
 | shop_secret | true     | Your API secret key                                                 |
-
+| code        | true     | Certificate code                                                    |
 
 
 
