@@ -14,6 +14,7 @@ Content-type: application/json
     "shop_secret": "...",
     "owner_identifier": "owner phone number for personal certificates",
     "owner_name": "buyer phone number for personal certificates",
+    "code": "...", // Certificate code
     "nominal": 1000 // For pools with flexible nominal
 }
 ```
@@ -24,7 +25,7 @@ Content-type: application/json
 curl --header "Content-Type: application/json" \
   --request PATCH \
   --data-binary "@data.json" \
-  https://<%= config[:api_endpoint] %>/loyalty/certificates/:code/activate
+  https://<%= config[:api_endpoint] %>/loyalty/certificates/activate
 ```
 
 > The above command returns JSON structured like this:
@@ -57,13 +58,14 @@ Activates new certificate.
 ### HTTP Request
 
 
-`PATCH https://<%= config[:api_endpoint] %>/loyalty/certificates/:code/activate`
+`PATCH https://<%= config[:api_endpoint] %>/loyalty/certificates/activate`
 ### Query Parameters
 
 | Parameter        | Required | Description                                                         |
 |------------------|----------|---------------------------------------------------------------------|
 | shop_id          | true     | Your API key                                                        |
 | shop_secret      | true     | Your API secret key                                                 |
+| code             | true     | Certificate code                                                    |
 | owner_identifier | false    | Owner's phone (identifier, required for personal certificates)      |
 | owner_name       | false    | Owner's name (may be required for personal certificates)            |
 | nominal          | false    | Overwrite certificate's nominal (for pools with a flexible nominal) |

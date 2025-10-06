@@ -11,7 +11,8 @@ Content-type: application/json
 ```json
 {
     "shop_id": "...",
-    "shop_secret": "..."
+    "shop_secret": "...",
+    "code": "..."
 }
 ```
 
@@ -21,7 +22,7 @@ Content-type: application/json
 curl --header "Content-Type: application/json" \
   --request PATCH \
   --data-binary "@data.json" \
-  https://<%= config[:api_endpoint] %>/loyalty/certificates/:code/unblock
+  https://<%= config[:api_endpoint] %>/loyalty/certificates/unblock
 ```
 
 > The above command returns JSON structured like this:
@@ -36,14 +37,14 @@ Unblocks blocked certificate.
 
 ### HTTP Request
 
-`PATCH https://<%= config[:api_endpoint] %>/loyalty/certificates/:code/unblock`
+`PATCH https://<%= config[:api_endpoint] %>/loyalty/certificates/unblock`
 ### Query Parameters
 
-| Parameter        | Required | Description                                                         |
-|------------------|----------|---------------------------------------------------------------------|
-| shop_id          | true     | Your API key                                                        |
-| shop_secret      | true     | Your API secret key                                                 |
-
+| Parameter   | Required | Description                                                         |
+|-------------|----------|---------------------------------------------------------------------|
+| shop_id     | true     | Your API key                                                        |
+| shop_secret | true     | Your API secret key                                                 |
+| code        | true     | Certificate code                                                    |
 
 
 
