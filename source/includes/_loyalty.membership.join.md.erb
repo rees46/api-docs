@@ -31,7 +31,15 @@ curl --header "Content-Type: application/json" \
 ```
 
 ```javascript
-// S2S only
+// Works only if frontend loyalty support is activated
+// Contact our support to activate
+const data = {
+    phone: '...',
+    email: '...',
+    firstName: '...',
+    lastName: '...'
+};
+<%= config[:js_sdk_name] %>("loyalty", 'join', data, success_callback, error_callback);
 ```
 
 ```swift

@@ -7,7 +7,10 @@ curl https://<%= config[:api_endpoint] %>/loyalty/members/status?shop_id=...&sho
 ```
 
 ```javascript
-// S2S only
+// Works only if frontend loyalty support is activated
+// Contact our support to activate
+const phone = '...';
+<%= config[:js_sdk_name] %>("loyalty", 'status', phone, success_callback, error_callback);
 ```
 
 ```swift
