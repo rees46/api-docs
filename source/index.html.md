@@ -60,6 +60,7 @@ includes:
   - loyalty.stickers.history.md.erb
   - loyalty.stickers.history.md.erb
   - loyalty.certificates.md.erb
+  - loyalty.certificates.index.md.erb
   - loyalty.certificates.create.md.erb
   - loyalty.certificates.activate.md.erb
   - loyalty.certificates.deactivate.md.erb
