@@ -46,7 +46,7 @@ curl https://<%= config[:api_endpoint] %>/loyalty/certificates?shop_id=...&shop_
 }
 ```
 
-Returns list of pool's certificates filtered by state and dates.
+Returns list of pool's certificates filtered by date of provided event.
 
 ### HTTP Request
 
@@ -55,20 +55,20 @@ Returns list of pool's certificates filtered by state and dates.
 
 ### Query Parameters
 
-| Parameter   | Required | Description                                  |
-|-------------|----------|----------------------------------------------|
-| shop_id     | true     | Your API key                                 |
-| shop_secret | true     | Your API secret key                          |
-| code        | true     | Certificate pool code                        |
-| state       | true     | Certificate state: created, active, inactive |
-| date_from   | true     | Start of period (YYYY-MM-DD)                 |
-| date_to     | true     | End of period (YYYY-MM-DD)                   |
+| Parameter   | Required | Description                                              |
+|-------------|----------|----------------------------------------------------------|
+| shop_id     | true     | Your API key                                             |
+| shop_secret | true     | Your API secret key                                      |
+| code        | true     | Certificate pool code                                    |
+| event       | true     | Certificate state event: created, activated, deactivated |
+| date_from   | true     | Start of period (YYYY-MM-DD)                             |
+| date_to     | true     | End of period (YYYY-MM-DD)                               |
 
 Filter by period depends on provided state:
 
 - for `created` it will filter by created date;
-- for `active` it will filter by activation date;
-- for `inactive` it will filter by deactivation date.
+- for `activated` it will filter by activation date;
+- for `deactivated` it will filter by deactivation date.
 
 
 
