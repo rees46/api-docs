@@ -85,6 +85,7 @@ includes:
   - multi_messaging.md.erb
   - url_shortener.md.erb
   - products.md.erb
+  - products.subscriptions.md.erb
   - categories.md.erb
   - notifications.md.erb
   - chats.md.erb
