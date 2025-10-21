@@ -34,6 +34,7 @@ curl https://<%= config[:api_endpoint] %>/products/subscribers/stock?shop_id=...
     "sku":            "SKU",
     "model":          "MODEL",
     "barcode":        "BARCODE",
+    "group_id":       null,
     "properties":     {...}
   },
   {
@@ -45,6 +46,7 @@ curl https://<%= config[:api_endpoint] %>/products/subscribers/stock?shop_id=...
     "sku":            "SKU",
     "model":          "MODEL",
     "barcode":        "BARCODE",
+    "group_id":       "GROUP ID",
     "properties":     {...}
   }
 ]
@@ -75,6 +77,7 @@ Returns list of products and a number of subscribers for each product in stock.
 | sku           | String | SKU                                                                          |
 | model         | String | Product's model                                                              |
 | barcode       | String | Product's barcode                                                            |
+| group_id      | String | Product's group ID (for products with variants)                              |
 | properties    | String | Product's properties of this current subscription (like shoes size or color) |
 
 
@@ -112,7 +115,8 @@ curl https://<%= config[:api_endpoint] %>/products/subscribers/price?shop_id=...
     "last_name":      "LAST NAME",
     "sku":            "SKU",
     "model":          "MODEL",
-    "barcode":        "BARCODE"
+    "barcode":        "BARCODE",
+    "group_id":       "GROUP ID"
   },
   {
     "subscribed_at":  "DATETIME",
@@ -122,7 +126,8 @@ curl https://<%= config[:api_endpoint] %>/products/subscribers/price?shop_id=...
     "last_name":      "LAST NAME",
     "sku":            "SKU",
     "model":          "MODEL",
-    "barcode":        "BARCODE"
+    "barcode":        "BARCODE",
+    "group_id":       null
   }
 ]
 ```
@@ -142,16 +147,17 @@ Returns list of products and a number of subscribers for each product's price dr
 
 ### Response details
 
-| Parameter     | Type   | Description                                                                  |
-|---------------|--------|------------------------------------------------------------------------------|
-| subscribed_at | String | Datetime with time zone                                                      |
-| email         | String | Client's email                                                               |
-| phone         | String | Client's phone                                                               |
-| first_name    | String | Client's first name                                                          |
-| last_name     | String | Client's last name                                                           |
-| sku           | String | SKU                                                                          |
-| model         | String | Product's model                                                              |
-| barcode       | String | Product's barcode                                                            |
+| Parameter     | Type   | Description                                     |
+|---------------|--------|-------------------------------------------------|
+| subscribed_at | String | Datetime with time zone                         |
+| email         | String | Client's email                                  |
+| phone         | String | Client's phone                                  |
+| first_name    | String | Client's first name                             |
+| last_name     | String | Client's last name                              |
+| sku           | String | SKU                                             |
+| model         | String | Product's model                                 |
+| barcode       | String | Product's barcode                               |
+| group_id      | String | Product's group ID (for products with variants) |
 
 
 
