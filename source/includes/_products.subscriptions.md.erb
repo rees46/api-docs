@@ -1,0 +1,274 @@
+
+## Get subscriptions for products in stock
+
+```shell
+curl https://<%= config[:api_endpoint] %>/products/subscribers/stock?shop_id=...&shop_secret=...
+```
+
+```javascript
+// No implementation. See CURL
+```
+
+```swift
+// No implementation. See CURL
+```
+
+```kotlin
+// No implementation. See CURL
+```
+
+```java
+// No implementation. See CURL
+```
+
+> REST method returns this JSON structure
+
+```json
+[
+  {
+    "subscribed_at":  "DATETIME",
+    "email":          "EMAIL",
+    "phone":          "PHONE",
+    "first_name":     "FIRST NAME",
+    "last_name":      "LAST NAME",
+    "sku":            "SKU",
+    "model":          "MODEL",
+    "barcode":        "BARCODE",
+    "group_id":       null,
+    "properties":     {...}
+  },
+  {
+    "subscribed_at":  "DATETIME",
+    "email":          "EMAIL",
+    "phone":          "PHONE",
+    "first_name":     "FIRST NAME",
+    "last_name":      "LAST NAME",
+    "sku":            "SKU",
+    "model":          "MODEL",
+    "barcode":        "BARCODE",
+    "group_id":       "GROUP ID",
+    "properties":     {...}
+  }
+]
+```
+
+Returns list of products and a number of subscribers for each product in stock.
+
+`GET https://<%= config[:api_endpoint] %>/products/subscribers/stock`
+
+### Query Parameters
+
+| Parameter   | Type      | Required   | Description               |
+|-------------|-----------|------------|---------------------------|
+| shop_id     | String    | true       | Your API key              |
+| shop_secret | String    | true       | Shop secret key           |
+| date_from   | String    | true       | Date in format YYYY-MM-DD |
+| date_to     | String    | true       | Date in format YYYY-MM-DD |
+
+### Response details
+
+| Parameter     | Type   | Description                                                                  |
+|---------------|--------|------------------------------------------------------------------------------|
+| subscribed_at | String | Datetime with time zone                                                      |
+| email         | String | Client's email                                                               |
+| phone         | String | Client's phone                                                               |
+| first_name    | String | Client's first name                                                          |
+| last_name     | String | Client's last name                                                           |
+| sku           | String | SKU                                                                          |
+| model         | String | Product's model                                                              |
+| barcode       | String | Product's barcode                                                            |
+| group_id      | String | Product's group ID (for products with variants)                              |
+| properties    | String | Product's properties of this current subscription (like shoes size or color) |
+
+
+## Get subscriptions for products price drop
+
+```shell
+curl https://<%= config[:api_endpoint] %>/products/subscribers/price?shop_id=...&shop_secret=...
+```
+
+```javascript
+// No implementation. See CURL
+```
+
+```swift
+// No implementation. See CURL
+```
+
+```kotlin
+// No implementation. See CURL
+```
+
+```java
+// No implementation. See CURL
+```
+
+> REST method returns this JSON structure
+
+```json
+[
+  {
+    "subscribed_at":  "DATETIME",
+    "email":          "EMAIL",
+    "phone":          "PHONE",
+    "first_name":     "FIRST NAME",
+    "last_name":      "LAST NAME",
+    "sku":            "SKU",
+    "model":          "MODEL",
+    "barcode":        "BARCODE",
+    "group_id":       "GROUP ID"
+  },
+  {
+    "subscribed_at":  "DATETIME",
+    "email":          "EMAIL",
+    "phone":          "PHONE",
+    "first_name":     "FIRST NAME",
+    "last_name":      "LAST NAME",
+    "sku":            "SKU",
+    "model":          "MODEL",
+    "barcode":        "BARCODE",
+    "group_id":       null
+  }
+]
+```
+
+Returns list of products and a number of subscribers for each product's price drop.
+
+`GET https://<%= config[:api_endpoint] %>/products/subscribers/price`
+
+### Query Parameters
+
+| Parameter   | Type   | Required | Description               |
+|-------------|--------|----------|---------------------------|
+| shop_id     | String | true     | Your API key              |
+| shop_secret | String | true     | Shop secret key           |
+| date_from   | String | true     | Date in format YYYY-MM-DD |
+| date_to     | String | true     | Date in format YYYY-MM-DD |
+
+### Response details
+
+| Parameter     | Type   | Description                                     |
+|---------------|--------|-------------------------------------------------|
+| subscribed_at | String | Datetime with time zone                         |
+| email         | String | Client's email                                  |
+| phone         | String | Client's phone                                  |
+| first_name    | String | Client's first name                             |
+| last_name     | String | Client's last name                              |
+| sku           | String | SKU                                             |
+| model         | String | Product's model                                 |
+| barcode       | String | Product's barcode                               |
+| group_id      | String | Product's group ID (for products with variants) |
+
+
+
+## Get status of subscription for "Back in Stock" trigger
+
+```shell
+// No implementation. See JavaScript
+```
+
+```javascript
+<%= config[:js_sdk_name] %>("check_trigger", "product_price_decrease", params, success, error);
+```
+
+```swift
+sdk.subscribeForBackInStock(
+  id: "PRODUCT_ID",
+  email: "USER_EMAIL",
+  phone: "USER_PHONE",
+  fashionSize: "PRODUCT_SIZE",
+  fashionColor: "PRODUCT_COLOR",
+  barcode: "PRODUCT_BARCODE"
+)
+```
+
+```kotlin
+// No implementation. See JavaScript
+```
+
+```java
+// No implementation. See JavaScript
+```
+
+> API method returns this boolean status
+
+
+Returns boolean status of subscription.
+
+`GET https://<%= config[:api_endpoint] %>/products/check_product_available_subscription`
+
+### Query Parameters
+
+| Parameter    | Type          | Required | Description                           |
+|--------------|---------------|----------|---------------------------------------|
+| item_id      | string/number | true     | Product ID                            |
+| shop_secret  | string        | true     | Shop secret                           |
+| shop_id      | string        | true     | Shop ID                               |
+| did*         | string        | false    | Device ID                             |
+| external_id* | string        | false    | External ID                           |
+| email*       | string 	      | false    | Email for subscription checking       |
+| phone*       | string 	      | false    | Phone for subscription checking       |
+| loyalty_id*  | string 	      | false    | Loyalty ID for subscription checking  |
+| telegram_id* | string 	      | false    | Telegram ID for subscription checking |
+
+<aside class="notice">
+At least one of identifiers (marked by *) must present in request: email, phone, etc. It's used to identify user.
+</aside>
+
+<aside class="warning">
+ Parameters marked by * are optional. But at least one of them must be present in your request.
+</aside>
+
+
+## Get status of subscription for product price drop
+
+```shell
+// No implementation. See JavaScript
+```
+
+```javascript
+<%= config[:js_sdk_name] %>("check_trigger", "product_available", params, success, error);
+```
+
+```swift
+// No implementation. See JavaScript
+```
+
+```kotlin
+// No implementation. See JavaScript
+```
+
+```java
+// No implementation. See JavaScript
+```
+
+> API method returns this boolean status
+
+
+Returns boolean status of subscription.
+
+`GET https://<%= config[:api_endpoint] %>/products/check_price_drop_subscription`
+
+### Query Parameters
+
+| Parameter    | Type          | Required | Description                                                                                |
+|--------------|---------------|----------|--------------------------------------------------------------------------------------------|
+| item_id      | string/number | true     | Product ID                                                                                 |
+| shop_secret  | string        | true     | Shop secret                                                                                |
+| shop_id      | string        | true     | Shop ID                                                                                    |
+| did*         | string        | false    | Device ID                                                                                  |
+| external_id* | string        | false    | External ID                                                                                |
+| email*       | string 	     | false    | Email for subscription checking                                                            |
+| phone*       | string 	     | false    | Phone for subscription checking                                                            |
+| loyalty_id*  | string 	     | false    | Loyalty ID for subscription checking                                                       |
+| telegram_id* | string 	     | false    | Telegram ID for subscription checking                                                      |
+
+
+<aside class="notice">
+At least one of identifiers (marked by *) must present in request: email, phone, etc. It's used to identify user.
+</aside>
+
+<aside class="warning">
+ Parameters marked by * are optional. But at least one of them must be present in your request. It's used to identify user.
+</aside>
+
