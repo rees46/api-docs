@@ -33,7 +33,7 @@ GEM
     execjs (2.10.0)
     fast_blank (1.0.1)
     fastimage (2.4.0)
-    ffi (1.17.2-arm64-darwin)
+    ffi (1.17.2)
     haml (6.3.0)
       temple (>= 0.8.2)
       thor
@@ -142,7 +142,7 @@ GEM
     webrick (1.9.1)
 
 PLATFORMS
-  arm64-darwin-22
+  ruby
 
 DEPENDENCIES
   middleman (~> 4.4)
@@ -156,7 +156,7 @@ DEPENDENCIES
   webrick
 
 RUBY VERSION
-   ruby 3.2.2p53
+   ruby 3.2.2
 
 BUNDLED WITH
-   2.4.16
+   2.2.22
