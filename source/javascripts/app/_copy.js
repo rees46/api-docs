@@ -1,6 +1,6 @@
 function copyToClipboard(container) {
   const el = document.createElement('textarea');
-  el.value = container.textContent.replace(/\n$/, '');
+  el.value = container.textContent;
   document.body.appendChild(el);
   el.select();
   document.execCommand('copy');
