@@ -1,0 +1,32 @@
+x-environment: &environment
+  env_file:
+    - path: ./.env.example
+      required: true
+    - path: ./.env
+      required: false
+
+networks:
+  rees46:
+    name: rees46
+    driver: bridge
+
+services:
+  api-docs:
+    <<: *environment
+    image: ghcr.io/rees46/api-docs:latest
+    build:
+      context: .
+      target: base
+      args:
+        BUNDLE_WITHOUT: ''
+    ports:
+      - '${PORT_PUBLIC:-8080}:80'
+    networks:
+      - rees46
+    develop:
+      watch:
+        - action: sync
+          path: .
+          target: /app
+        - action: rebuild
+          path: ./Gemfile.lock

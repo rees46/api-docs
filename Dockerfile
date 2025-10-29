@@ -1,20 +1,40 @@
-FROM ruby:2.7-slim
+FROM ruby:2.7.5-slim AS base
 
-WORKDIR /srv/slate
+ARG BUNDLE_WITHOUT="test:development"
+ENV BUNDLE_WITHOUT="${BUNDLE_WITHOUT}"
 
-VOLUME /srv/slate/source
-EXPOSE 4567
+RUN apt-get update && \
+  apt-get install -y --no-install-recommends \
+  build-essential \
+  nodejs && \
+  apt-get autoremove -y && \
+  rm -rf /var/lib/apt/lists/*
 
-COPY . /srv/slate
+WORKDIR /app
 
-RUN apt-get update \
-    && apt-get install -y --no-install-recommends \
-        build-essential \
-        nodejs \
-    && gem install bundler -v 2.4.22\
-    && bundle install \
-    && apt-get remove -y build-essential \
-    && apt-get autoremove -y \
-    && rm -rf /var/lib/apt/lists/*
+COPY Gemfile Gemfile.lock ./
+
+RUN BUNDLER_VERSION=$(grep -A 1 "BUNDLED WITH" Gemfile.lock | tail -1 | tr -d ' ') && \
+  gem install bundler -v "$BUNDLER_VERSION"
+
+RUN bundle install
+
+COPY . .
 
 CMD ["bundle", "exec", "middleman", "server", "--watcher-force-polling"]
+
+FROM base AS build
+
+ARG BUNDLE_WITHOUT="test:development"
+ENV BUNDLE_WITHOUT="${BUNDLE_WITHOUT}"
+
+RUN ./configure.sh r46 && bundle exec middleman build && mv build /opt/rees46
+RUN ./configure.sh kameleoon && bundle exec middleman build && mv build /opt/kameleoon
+RUN ./configure.sh pc && bundle exec middleman build && mv build /opt/personaclick
+
+FROM nginx:1 AS prod
+
+ENV CLIENT=rees46
+
+COPY --from=build /opt /usr/share/nginx/html
+COPY ./config/nginx.conf /etc/nginx/templates/default.conf.template
