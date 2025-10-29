@@ -19,6 +19,8 @@ services:
       target: base
       args:
         BUNDLE_WITHOUT: ''
+    profiles:
+      - ''
     ports:
       - '${PORT_PUBLIC:-8080}:80'
     networks:
