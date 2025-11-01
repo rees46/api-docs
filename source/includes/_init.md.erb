@@ -120,7 +120,38 @@ apply plugin: 'com.google.gms.google-services'
 
 yarn add <%= config[:rn_sdk_package_code] %>/rn-sdk
 yarn add @react-native-async-storage/async-storage
+
+/*  Starting from 4.0.0 we support [Expo](https://expo.dev). This means that 'react-native-device-info' no longer is required.*/
+
+/* If your application doesn't use Expo:*/
+
 yarn add react-native-device-info
+
+/* If your application uses Expo, use this function to create a unique ID for each app Installation or create your own implementation*/
+
+import * as Application from 'expo-application'
+import * as SecureStore from 'expo-secure-store'
+import 'react-native-get-random-values'
+import { v4 as uuidv4 } from 'uuid'
+
+async function getDeviceId() {
+  if (Application.getAndroidId) {
+    return Application.getAndroidId()
+  }
+
+  let uniqueId = await SecureStore.getItemAsync('uniqueId')
+  if (!uniqueId) {
+    uniqueId = uuidv4()
+    await SecureStore.setItemAsync('uniqueId', uniqueId)
+  }
+
+  return uniqueId
+}
+/* RN SDK initialization with Expo will look like this:*/
+
+const rnsdk = new <%= config[:rn_sdk_package_code] %>('YOUR_SHOP_ID', 'stream', false, true, {
+  id: await getDeviceId(),
+});
 
 /* For push notifications also add: */
 
@@ -138,7 +169,13 @@ import <%= config[:rn_sdk_package_name] %> from '<%= config[:rn_sdk_package_code
    Set it to false if you want to manage token sending manually.
 */
 
-const sdk = new <%= config[:rn_sdk_package_name] %>("YOUR_SHOP_ID", "stream", "debug", autoSendPushToken);
+const sdk = new <%= config[:rn_sdk_package_name] %>("YOUR_SHOP_ID", "stream", "debug", "autoSendPushToken");
+
+/* RN SDK initialization with Expo will look like this. You can use your own function implementation to create a unique ID for each application installation*/
+
+const sdk = new <%= config[:rn_sdk_package_code] %>('YOUR_SHOP_ID', 'stream', false, true, {
+  id: await getDeviceId(),
+});
 
 /* Initialization is async, so you have a method to test, if SDK is initialized or not: */
 
