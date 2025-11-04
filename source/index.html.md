@@ -51,6 +51,7 @@ includes:
   - loyalty.checkout.orders-history.md.erb
   - loyalty.promos.md.erb
   - loyalty.promos.index.md.erb
+  - loyalty.promos.for-client.md.erb
   - loyalty.promos.cart.md.erb
   - loyalty.referral.md.erb
   - loyalty.referral.join.md.erb

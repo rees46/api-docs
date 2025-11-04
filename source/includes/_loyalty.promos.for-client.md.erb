@@ -1,0 +1,84 @@
+## Promotions for a client
+
+> Headers
+
+```
+Content-type: application/json
+```
+
+> Body example
+
+```json
+{
+    "shop_id":        "...",
+    "did":            "...",
+    "seance":         "...",
+    "email":          "...",
+    "phone":          "...",
+    "external_id":    "...",
+    "stream":         "...",
+    "promo_codes":    ["..."],
+    "location_id":    "...",
+    "charge_bonuses": true,
+    "cart_items": [
+      {"product_id": "...", "price": 1000, "quantity": 4},
+      {"product_id": "...", "price": 2000, "quantity": 1}
+    ]
+}
+```
+
+> Request example
+
+```shell
+curl --header "Content-Type: application/json" \
+  --request POST \
+  --data-binary "@data.json" \
+  https://<%= config[:api_endpoint] %>/loyalty/promos/for-client
+```
+
+```javascript
+// Not implemented yet
+```
+```swift
+// Not implemented yet
+```
+```java
+// Not implemented yet
+```
+```kotlin
+// Not implemented yet
+```
+```jsx
+// Not implemented yet
+```
+
+> The above command returns JSON structured like this:
+
+```json
+{
+  "success": true,
+  "payload": [
+    {"id": 1, "name": "...", "description": "...", "badge_label": "...", "badge_color": "..." },
+    {"id": 2, "name": "...", "description": "...", "badge_label": "...", "badge_color": "..." }
+  ]
+}
+```
+
+### HTTP Request
+
+`POST https://<%= config[:api_endpoint] %>/loyalty/promos/for-client`
+
+Returns list of all active promotions for the current user.
+
+| Parameter   | Type     | Required | Description                                                                  |
+|-------------|----------|----------|------------------------------------------------------------------------------|
+| shop_id     | String   | true     | Your API key                                                                 |
+| stream      | String   | false    | Stream to filter promos for different devices. Omit if you don't use streams |
+| location_id | String   | false    | Location ID                                                                  |
+| did*        | string   | false    | Device ID                                                                    |
+| external_id | string   | false    | External ID                                                                  |
+| email       | string 	 | false    | Email                                                                        |
+| phone       | string 	 | false    | Phone                                                                        |
+| loyalty_id  | string 	 | false    | Loyalty ID                                                                   |
+| telegram_id | string 	 | false    | Telegram ID                                                                  |
+| cart_items  | Array    | false    | Current shopping cart                                                        |
