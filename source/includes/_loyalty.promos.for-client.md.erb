@@ -70,15 +70,18 @@ curl --header "Content-Type: application/json" \
 
 Returns list of all active promotions for the current user.
 
-| Parameter   | Type     | Required | Description                                                                  |
-|-------------|----------|----------|------------------------------------------------------------------------------|
-| shop_id     | String   | true     | Your API key                                                                 |
-| stream      | String   | false    | Stream to filter promos for different devices. Omit if you don't use streams |
-| location_id | String   | false    | Location ID                                                                  |
-| did*        | string   | false    | Device ID                                                                    |
-| external_id | string   | false    | External ID                                                                  |
-| email       | string 	 | false    | Email                                                                        |
-| phone       | string 	 | false    | Phone                                                                        |
-| loyalty_id  | string 	 | false    | Loyalty ID                                                                   |
-| telegram_id | string 	 | false    | Telegram ID                                                                  |
-| cart_items  | Array    | false    | Current shopping cart                                                        |
+| Parameter      | Type     | Required | Description                                                                  |
+|----------------|----------|----------|------------------------------------------------------------------------------|
+| shop_id        | String   | true     | Your API key                                                                 |
+| stream         | String   | false    | Stream to filter promos for different devices. Omit if you don't use streams |
+| location_id    | String   | false    | Location ID                                                                  |
+| did*           | string   | false    | Device ID                                                                    |
+| external_id    | string   | false    | External ID                                                                  |
+| email          | string 	 | false    | Email                                                                        |
+| phone          | string 	 | false    | Phone                                                                        |
+| loyalty_id     | string 	 | false    | Loyalty ID                                                                   |
+| telegram_id    | string 	 | false    | Telegram ID                                                                  |
+| seance         | string 	 | false    | User's session from SDK                                                      |
+| cart_items     | Array    | false    | Current shopping cart                                                        |
+| promo_codes    | Array    | false    | If user have promo codes, you can send it to filter related promotions       |
+| charge_bonuses | Boolean  | false    | If user have bonuses, you can set it to true to filter related promotions    |
