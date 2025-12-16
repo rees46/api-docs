@@ -59,7 +59,6 @@ includes:
   - loyalty.stickers.md.erb
   - loyalty.stickers.balance.md.erb
   - loyalty.stickers.history.md.erb
-  - loyalty.stickers.history.md.erb
   - loyalty.certificates.md.erb
   - loyalty.certificates.index.md.erb
   - loyalty.certificates.create.md.erb
