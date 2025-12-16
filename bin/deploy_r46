@@ -8,5 +8,5 @@ set -e
 
 bundle exec middleman build
 
-rsync -av -e 'ssh -p 21212' ./build/ refapi@88.99.63.38:reference.api.rees46.com/public/
-rsync -av -e 'ssh -p 21212' --delete ./build/ refapi@88.99.63.38:reference.api.rees46.com/public/
+rsync -av -e 'ssh -p 22' ./build/ refapi@94.228.126.211:reference.api.rees46.com/public/
+rsync -av -e 'ssh -p 22' --delete ./build/ refapi@94.228.126.211:reference.api.rees46.com/public/
