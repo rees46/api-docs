@@ -813,7 +813,7 @@ sdk.track("purchase", {
   order_price: 29999
 });
 
-// Custom order tracking
+// Custom order properties tracking
 sdk.track('purchase', {
   'email': "john.doe@examplemail.com",
   'phone': "4400114527199",
@@ -1080,12 +1080,23 @@ curl 'https://<%= config[:api_endpoint] %>/push/custom' \
 // Simple tracking
 <%= config[:js_sdk_name] %>("track", "my_event");
 
+// Tracking with extra parameters
+<%= config[:js_sdk_name] %>("track", "my_event", {
+    "category": "event category",
+    "label": "event label",
+    "value": 100
+});
+
 // Tracking with custom parameters
 <%= config[:js_sdk_name] %>("track", "my_event", {
-    category: "event category",
-    label: "event label",
-    value: 100
+    "category": "event category",
+    "label": "event label",
+    "value": 100,
+    "custom_param_1": "my param",
+    "other_custom_param_2": 365,
+    "and_bool_custom_param_3": false
 });
+
 ```
 
 ```swift
