@@ -1,0 +1,49 @@
+## Probability to purchase
+
+```shell
+curl https://<%= config[:api_endpoint] %>/predict/probability-to-purchase?shop_id=SHOPID&did=DEVICE_ID
+```
+
+```javascript
+// TBD
+```
+
+```swift
+// TBD
+```
+
+```kotlin
+// TBD
+```
+
+```java
+// TBD
+```
+
+```jsx
+// TBD
+```
+
+> API response example:
+
+```json
+
+{
+  "probability": 33,
+  "message": "...",
+  "did": "..."
+}
+```
+
+
+Tries to predict visitor's probability to purchase according to user's behavior.
+
+`GET https://<%= config[:api_endpoint] %>/predict/probability-to-purchase`
+
+### Query Parameters
+
+| Parameter                    | Type   | Required   | Description                                                                                                  |
+|------------------------------|--------|------------|--------------------------------------------------------------------------------------------------------------|
+| shop_id                      | String | true       | Your API key                                                                                                 |
+| did                          | String | true       | Device ID                                                                                                    |
+

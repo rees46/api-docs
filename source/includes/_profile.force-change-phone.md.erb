@@ -1,0 +1,45 @@
+## Force change phone
+
+```shell
+curl -d "shop_id=SHOPID&shop_secret=SHOP_SECRET&new_phone=NEW_PHONE&old_phone=OLD_PHONE" https://<%= config[:api_endpoint] %>/profile/force_change_phone
+```
+
+```javascript
+// Not supported
+```
+
+```swift
+// Not supported
+```
+
+```kotlin
+// Not supported
+```
+
+```java
+// Not supported
+```
+
+```jsx
+// Not supported
+```
+
+Force change phone of user with `old_phone` to `new_phone`. If a user with `new_phone` exists, removes phone from that user.
+
+If user with `old_phone` is not found, returns 404.
+
+<aside class="notice">
+Use it carefully, because wrong usage of this method can lose old profile data. Mass uncontrolled action can break everything.
+</aside>
+
+It's S2S method.
+
+### Query Parameters
+
+| Parameter                    | Type   | Required | Description                                                                                                  |
+|------------------------------|--------|----------|--------------------------------------------------------------------------------------------------------------|
+| shop_id                      | String | true     | Your API key                                                                                                 |
+| shop_secret                  | String | true     | Your API secret key                                                                                          |
+| new_phone                    | String | true     | User's new phone                                                                                             |
+| old_phone                    | String | true     | User's current phone                                                                                         |
+| i_understand_what_i_am_doing | String | true     | Must present with any `true` value (`true`, `"true"`, `1`, `yes`, `believe me I know what I am doing`, etc). |

@@ -1,0 +1,69 @@
+## Purge profile
+
+```shell
+# Purge using phone number
+curl --location --request DELETE 'https://<%= config[:api_endpoint] %>/profile/purge' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: did=7Hvlb6ftsK; r46_debug=true' \
+--data '{
+    "shop_id": "...",
+    "shop_secret": "...",
+    "phone": "..."
+}'
+
+# Purge using email
+curl --location --request DELETE 'https://<%= config[:api_endpoint] %>/profile/purge' \
+--header 'Content-Type: application/json' \
+--header 'Cookie: did=7Hvlb6ftsK; r46_debug=true' \
+--data '{
+    "shop_id": "...",
+    "shop_secret": "...",
+    "email": "..."
+}'
+```
+
+```javascript
+// Not supported
+```
+
+```swift
+// Not supported
+```
+
+```kotlin
+// Not supported
+```
+
+```java
+// Not supported
+```
+
+```jsx
+// Not supported
+```
+
+Remove all personal data by `phone`, `email`, `loyalty_id` or `external_id`:
+
+- phone;
+- email;
+- first_name;
+- last_name;
+- middle_name;
+- loyalty_id;
+- external_id;
+- custom client properties
+
+It's S2S method.
+
+### Query Parameters
+
+| Parameter   | Type   | Required | Description         |
+|-------------|--------|----------|---------------------|
+| shop_id     | String | true     | Your API key        |
+| shop_secret | String | true     | Your API secret key |
+| phone       | String | true     | User's phone        |
+| email       | String | true     | User's email        |
+| loyalty_id  | String | true     | User's loyalty_id   |
+| external_id | String | true     | User's external_id  |
+
+
