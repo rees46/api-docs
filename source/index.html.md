@@ -88,7 +88,6 @@ includes:
   - predict.md.erb
   - predict.probability-to-purchase.md.erb
   - nps.md.erb
-  - sms.md.erb
   - multi_messaging.md.erb
   - url_shortener.md.erb
   - products.md.erb
