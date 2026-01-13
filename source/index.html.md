@@ -25,6 +25,11 @@ includes:
   - mobile_push_notifications.md.erb
   - mobile_in_app_push_notifications.md.erb
   - profile.md.erb
+  - profile.set.md.erb
+  - profile.get.md.erb
+  - profile.force-change-email.md.erb
+  - profile.force-change-phone.md.erb
+  - profile.purge.md.erb
   - audience.md.erb
   - crm.md.erb
   - segments.md.erb
@@ -80,6 +85,8 @@ includes:
   - loyalty.otp.check.md.erb
   - loyalty.otp.qr.get.md.erb
   - loyalty.otp.qr.check.md.erb
+  - predict.md.erb
+  - predict.probability-to-purchase.md.erb
   - nps.md.erb
   - sms.md.erb
   - multi_messaging.md.erb

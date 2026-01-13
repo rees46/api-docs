@@ -1,0 +1,46 @@
+## Force change email
+
+```shell
+curl -d "shop_id=SHOPID&shop_secret=SHOP_SECRET&new_email=NEW_EMAIL&old_email=OLD_EMAIL" https://<%= config[:api_endpoint] %>/profile/force_change_email
+```
+
+```javascript
+// Not supported
+```
+
+```swift
+// Not supported
+```
+
+```kotlin
+// Not supported
+```
+
+```java
+// Not supported
+```
+
+```jsx
+// Not supported
+```
+
+Force change email of user with `old_email` to `new_email`. If a user with `new_email` exists, removes email from that user.
+
+If user with `old_email` is not found, returns 404.
+
+<aside class="notice">
+Use it carefully, because wrong usage of this method can lose old profile data. Mass uncontrolled action can break everything.
+</aside>
+
+It's S2S method.
+
+### Query Parameters
+
+| Parameter                    | Type   | Required   | Description                                                                                                  |
+|------------------------------|--------|------------|--------------------------------------------------------------------------------------------------------------|
+| shop_id                      | String | true       | Your API key                                                                                                 |
+| shop_secret                  | String | true       | Your API secret key                                                                                          |
+| new_email                    | String | true       | User's new email                                                                                             |
+| old_email                    | String | true       | User's current email                                                                                         |
+| i_understand_what_i_am_doing | String | true       | Must present with any `true` value (`true`, `"true"`, `1`, `yes`, `believe me I know what I am doing`, etc). |
+
