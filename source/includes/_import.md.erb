@@ -47,3 +47,58 @@ This method allows to  update categories that were put in the request.
 It updates existing categories or creates a new one.
 
 It does not modify categories that were not included in the request.
+
+## Delete categories
+
+
+```shell
+
+curl -X DELETE https://<%= config[:api_endpoint] %>/import/categories \
+  -H "Content-Type: application/json" \
+  -d '{
+    "shop_id": "YOUR_SHOP_ID",
+    "shop_secret": "YOUR_SHOP_SECRET",
+    "categories": ["CATEGORY_STRING", "CATEGORY_STRING", "CATEGORY_STRING"]
+  }'
+
+
+```
+
+```javascript
+
+No implementation needed
+
+```
+
+```swift
+No implementation needed
+```
+
+```kotlin
+No implementaion needed
+```
+
+```java
+No implementaion needed
+```
+
+```jsx
+No implementation needed
+```
+### HTTP Request
+
+`DELETE https://<%= config[:api_endpoint] %>/import/categories`
+
+### Query Parameters
+
+| Parameter   | Required | Description                                                         |
+|-------------|----------|---------------------------------------------------------------------|
+| shop_id     | true     | Your API key                                                        |
+| shop_secret | true     | Your secret key                                                     |
+| categories  | true     | An array of category external IDs (strings) that you want to delete |
+
+This method allows deleting categories specified in the request.
+
+Categories are deleted by their external IDs.
+
+Categories that were not included in the request are not modified.
