@@ -151,6 +151,16 @@ StoriesView storiesView = new StoriesView(this, "STORY BLOCK CODE");
 <%= config[:android_sdk_package_name] %>.initializeStoriesView(storiesView);
 
 ```
+```jsx
+import <%= config[:rn_sdk_package_name] %> from '<%= config[:rn_sdk_package_code] %>/react-native-sdk';
+import { Platform } from 'react-native';
+
+const sdk = new <%= config[:rn_sdk_package_name] %>(
+  'YOUR_API_KEY',
+  Platform.OS,        // 'ios' or 'android'
+  true                // debug mode enabled (true or false)
+);
+```
 
 ## Show stories block on request
 
@@ -206,6 +216,55 @@ public func collectionView(_ collectionView: UICollectionView, didSelectItemAt i
     // indexPath.row is the index of the chosen element
     // showStoriesByUserClick tries to get a story from the stories array, and then renders it
 }
+```
+```jsx
+
+/* Due to the asynchronized SDK initialization it is reccomended to wait until SDK is ready */
+
+if (sdk.isInit()) {
+  // SDK is ready
+}
+/*  Getting the list of stories */
+
+const response = await sdk.getStories('STORIES_CODE');
+if (response && response.stories) {
+  const allStories = response.stories;
+}
+
+/* Display of the list of stories */
+
+<StoriesList
+  sdk={sdk}
+  code="STORIES_CODE"
+  onStoryPress={(story, index, settings) => {
+    // Processing the user's choice of story on press
+  }}
+/>
+
+
+/* Displaying a single story
+
+  Parameters:
+  - visible: whether the story viewer is shown
+  - stories: an array of stories fetched from the server
+  - initialStoryIndex: the index of the story that will be displayed first
+  - settings: story style settings
+  - onClose: callback triggered when the story viewer is closed
+  - sdk: links the component to the SDK to interact with the API
+  - code: story set code
+*/
+
+<StoryViewer
+  visible={storiesVisible}
+  stories={allStories}
+  initialStoryIndex={0}
+  settings={storiesSettings}
+  onClose={() => setStoriesVisible(false)}
+  sdk={sdk}
+  code="STORIES_CODE"
+/>
+
+
 ```
 
 After initializing the SDK, you can request a block of stories. To start initialization, follow the [instructions](#stories-initialization) in the Stories initialization section.
@@ -329,6 +388,23 @@ stories.settings.products_button_font_family = Typeface.DEFAULT_BOLD;
 
 
 ```jsx
+
+/* Customizing story styles
+
+  You can use SDK default font and color themes,
+  or provide your own settings object to override them
+
+*/
+
+<StoryViewer
+  visible={storiesVisible}
+  stories={allStories}
+  initialStoryIndex={0}
+  settings={YOUR_CUSTOM_SETTINGS}
+  onClose={() => setStoriesVisible(false)}
+  sdk={sdk}
+  code="STORIES_CODE"
+/>
 ```
 After initializing the SDK, you can set the desired style configuration for the fonts and buttons of the Stories block.
 
