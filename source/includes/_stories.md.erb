@@ -152,6 +152,9 @@ StoriesView storiesView = new StoriesView(this, "STORY BLOCK CODE");
 
 ```
 ```jsx
+
+/* This is an example of SDK initialization, you need to do it once for your app. You don't need another instance of SDK to use stories */
+
 import <%= config[:rn_sdk_package_name] %> from '<%= config[:rn_sdk_package_code] %>/react-native-sdk';
 import { Platform } from 'react-native';
 
@@ -160,6 +163,13 @@ const sdk = new <%= config[:rn_sdk_package_name] %>(
   Platform.OS,        // 'ios' or 'android'
   true                // debug mode enabled (true or false)
 );
+
+
+/* Due to the asynchronous SDK initialization it is recommended to wait until SDK is ready */
+
+if (sdk.isInit()) {
+  // SDK is ready
+}
 ```
 
 ## Show stories block on request
@@ -219,19 +229,30 @@ public func collectionView(_ collectionView: UICollectionView, didSelectItemAt i
 ```
 ```jsx
 
-/* Due to the asynchronized SDK initialization it is reccomended to wait until SDK is ready */
+/*
+     Getting the list of stories
 
-if (sdk.isInit()) {
-  // SDK is ready
-}
-/*  Getting the list of stories */
+    sdk.getStories('STORIES_CODE'); - SDK method that performs an API request to fetch a specific stories block identified by STORIES_CODE
+    const allStories = response.stories; - content of the API response, requested stories block
+
+ */
 
 const response = await sdk.getStories('STORIES_CODE');
 if (response && response.stories) {
   const allStories = response.stories;
 }
 
-/* Display of the list of stories */
+/*
+
+    Display of the list of stories
+
+    UI component displaying all the requested stories:
+
+    sdk={sdk} - there you have to place your initialized SDK variable. It provides access to data loading, tracking, and internal logic required by the component.
+    code="STORIES_CODE" -  STORIES_CODE this will tell the component which stories block the SDK will be handling
+
+
+*/
 
 <StoriesList
   sdk={sdk}
@@ -252,6 +273,15 @@ if (response && response.stories) {
   - onClose: callback triggered when the story viewer is closed
   - sdk: links the component to the SDK to interact with the API
   - code: story set code
+
+  Variables assigned to the parameters:
+
+  storiesVisible - UI display state, true or false
+  allStories - variable that contains an API response
+  storiesSettings - default styles configuration, containing styles for things like title font color or border color. You can create  your own variable to add your custom styles
+  sdk={sdk} - there you have to place your initialized SDK variable. It will handle display process.
+  code="STORIES_CODE" -  STORIES_CODE this will tell the component which stories block the SDK will be handling
+
 */
 
 <StoryViewer
@@ -394,6 +424,22 @@ stories.settings.products_button_font_family = Typeface.DEFAULT_BOLD;
   You can use SDK default font and color themes,
   or provide your own settings object to override them
 
+   Parameters:
+  - visible: whether the story viewer is shown
+  - stories: an array of stories fetched from the server
+  - initialStoryIndex: the index of the story that will be displayed first
+  - settings: story style settings
+  - onClose: callback triggered when the story viewer is closed
+  - sdk: links the component to the SDK to interact with the API
+  - code: story set code
+
+  Variables assigned to the parameters:
+
+  storiesVisible - UI display state, true or false
+  allStories - variable that contains an API response
+  storiesSettings - default styles configuration, containing styles for things like title font color or border color. You can create  your own variable to add your custom styles
+  sdk={sdk} - there you have to place your initialized SDK variable. It will handle display process.
+  code="STORIES_CODE" -  STORIES_CODE this will tell the component which stories block the SDK will be handling
 */
 
 <StoryViewer
