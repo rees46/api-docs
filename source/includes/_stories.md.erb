@@ -295,9 +295,88 @@ if (response && response.stories) {
 />
 
 
+/* Example of stories implementation in the App */
+
+import React, { useEffect, useState } from 'react';
+import { View, Button } from 'react-native';
+
+// We are assuming that SDK had been already initialized
+
+// UI components from SDK
+import { StoriesList, StoryViewer } from '<%= config[:rn_sdk_package_code] %>/react-native-sdk';
+
+export default function StoriesExample() {
+  const [stories, setStories] = useState([]);
+  const [viewerVisible, setViewerVisible] = useState(false);
+  const [startIndex, setStartIndex] = useState(0);
+
+  /**
+   * Step 1: load stories from API
+   */
+  useEffect(() => {
+    async function loadStories() {
+      const response = await sdk.getStories('STORIES_CODE');
+      setStories(response?.stories || []);
+    }
+
+    loadStories();
+  }, []);
+
+  /**
+   * Step 2: render UI
+   */
+  return (
+    <View style={{ flex: 1 }}>
+      {/* Stories list */}
+      <StoriesList
+        sdk={sdk}
+        code="STORIES_CODE"
+        onStoryPress={(story, index) => {
+          setStartIndex(index);
+          setViewerVisible(true);
+        }}
+      />
+
+      {/* Optional manual trigger */}
+      <Button
+        title="Open first story"
+        disabled={stories.length === 0}
+        onPress={() => {
+          setStartIndex(0);
+          setViewerVisible(true);
+        }}
+      />
+
+      {/* Story viewer */}
+      <StoryViewer
+        visible={viewerVisible}
+        stories={stories}
+        initialStoryIndex={startIndex}
+        onClose={() => setViewerVisible(false)}
+        sdk={sdk}
+        code="STORIES_CODE"
+      />
+    </View>
+  );
+}
+
+
 ```
 
 After initializing the SDK, you can request a block of stories. To start initialization, follow the [instructions](#stories-initialization) in the Stories initialization section.
+
+For an RN SDK usage of stories blocks will look like this:
+
+1. We are assuming you already have SDK initialized in your app. If not, an example of initialization have been provided
+2. The key features that have to be present in your App are: SDK methode usage to request stories from backend, usage of the UI components that provided by SDK
+3. const response = await sdk.getStories('STORIES_CODE'); - the illustration of the method that requests specified stories from backend, the UI components will be handling response from this method according to internal logic of SDK
+4. You'll have to import the following components from SDK and then use them in your App: StoriesList, StoryViewer. Import from SDK:
+   import {
+   StoriesList,
+   StoryViewer
+   } from '<%= config[:rn_sdk_package_code] %>/react-native-sdk';
+
+5. Look up the example of stories implementation in the App using RN SDK.
 
 
 ## Font setup
