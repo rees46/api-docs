@@ -1,7 +1,7 @@
 ## Probability to purchase
 
 ```shell
-curl https://<%= config[:api_endpoint] %>/predict/probability-to-purchase?shop_id=SHOPID&did=DEVICE_ID
+curl https://<%= config[:api_endpoint] %>/predict/probability-to-purchase?shop_id=SHOPID&did=$DEVICE_ID&email=$EMAIL&phone=$PHONE&telegram_id=$TELEGRAM_ID&loyalty_id=$LOYALTY_ID
 ```
 
 ```javascript
@@ -30,8 +30,7 @@ curl https://<%= config[:api_endpoint] %>/predict/probability-to-purchase?shop_i
 
 {
   "probability": 33,
-  "message": "...",
-  "did": "..."
+  "user_id": "..."
 }
 ```
 
@@ -45,5 +44,12 @@ Tries to predict visitor's probability to purchase according to user's behavior.
 | Parameter                    | Type   | Required   | Description                                                                                                  |
 |------------------------------|--------|------------|--------------------------------------------------------------------------------------------------------------|
 | shop_id                      | String | true       | Your API key                                                                                                 |
-| did                          | String | true       | Device ID                                                                                                    |
+| did*                         | String | true       | Device ID                                                                                                    |
+| email*                       | String | true       | Email                                                                                                        |
+| phone*                       | String | true       | Phone                                                                                                        |
+| telegram_id*                 | String | true       | Telegram ID                                                                                                  |
+| loyalty_id*                  | String | true       | Loyalty ID                                                                                                   |
 
+<aside class="notice">
+  At least one of identifiers (marked by *) must present in request: did, email, phone, loyalty_id or telegram_id. It's used to identify user.
+</aside>
