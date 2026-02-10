@@ -22,7 +22,7 @@ Content-type: application/json
     "current_time":   "17:31",
     "cart_items": [
       {"product_id": "...", "price": 1000, "quantity": 4},
-      {"product_id": "...", "price": 2000, "quantity": 1}
+      {"product_id": "...", "price": 2000, "quantity": 1, "discountable": false, "bonusable": false, "rewardable": false }
     ]
 }
 ```
@@ -142,3 +142,13 @@ If `current_time` is missing or in incorrect format, current time in project's t
 
 When clients proceed to the payment step, execute the next method `apply` to charge for bonuses and get the final payment value.
 
+###
+
+Optional parameters for every single product in the cart can disable some mechanics in the calculation process:
+
+- `"bonusable": false` - forbid to use bonuses for the product;
+- `"discountable": false` - forbid to use discounts for the product;
+- `"rewardable": false` - forbid bonuses reward for the product.
+
+Note: if imported product has a flag which deactivates reward, discounts or bonuses usage, setting a flag to `true` here will not overwrite restrictions from product feed.
+So the main use-case for these parameters: to disable reward, discounts and bonuses usage per product, but not to enable it.
