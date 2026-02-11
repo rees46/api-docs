@@ -144,3 +144,14 @@ This method requires `order_id` parameter to apply bonuses and save results in o
 This method actually charges a client for bonuses so it's not safe to execute it several times for the same `order_id` or `identifier`.
 
 If client decided to not pay for the order, use "order status sync" operation to cancel the order and refund bonuses charged in this operation.
+
+### Manually disable loyalty mechanics per product
+
+Optional parameters for every single product in the cart can disable some mechanics in the calculation process:
+
+- `"bonusable": false` - forbid to use bonuses for the product;
+- `"discountable": false` - forbid to use discounts for the product;
+- `"rewardable": false` - forbid bonuses reward for the product.
+
+Note: if imported product has a flag which deactivates reward, discounts or bonuses usage, setting a flag to `true` here will not overwrite restrictions from product feed.
+So the main use-case for these parameters: to disable reward, discounts and bonuses usage per product, but not to enable it.
