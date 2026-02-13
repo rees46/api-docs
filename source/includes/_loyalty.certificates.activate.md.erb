@@ -34,12 +34,13 @@ curl --header "Content-Type: application/json" \
 {
   "status": "success",
   "payload": {
-      "status": "active",
+      "status": "active", // Or "scheduled" for postponed activation
       "code": "...",
       "balance": 1000,
       "nominal": 1000,
       "personal": false,
       "activated_date": "...",
+      "planned_activation_date": "...",
       "expiration_date": "...",
       "deactivated_date": "...",
       "owner_identifier": "...",
