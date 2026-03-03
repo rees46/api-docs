@@ -13,8 +13,36 @@ curl https://<%= config[:api_endpoint] %>/slider?shop_id=...&code=...&did=...&em
 ```
 
 ```javascript
-// S2S only.
+/* You can use standard implementation by integrating the following block into your page */
+
+ <div class="<%= config[:android_sdk_package_code] %>-slider" data-slider-code="SLIDER_CODE"></div>
+
+/*
+
+Standalone rendering (get raw data). The following example is provided with assumption that SDK was already imported and initialized.
+
+Make sure that valid SLIDER_CODE was provided. This is a requirement. Returns JSON data with slider payload. Use this mode if you need to implement your own slider rendering and handle the data yourself.
+
+*/
+
+<%= config[:js_sdk_name] %>('slider', {code: "SLIDER_CODE"}, r => console.log(r))
+
+/*
+
+Custom rendering into a specified block with configurable settings.
+
+In this case, two parameters are required: code and block.
+
+block — ID of the element where the slider will be embedded.
+
+config — optional parameter for slider configuration.
+
+*/
+
+<%= config[:js_sdk_name] %>('slider', {code: 'demoshop_main', block: '<%= config[:android_sdk_package_code] %>-slider', config: {dotBgColor: 'red', dotActiveBgColor: 'green', dotHoverBgColor: 'yellow'}})
+
 ```
+
 
 ```swift
 // S2S only.
