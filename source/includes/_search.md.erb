@@ -249,6 +249,7 @@ sdk.searchBlank()
 | Name                   | Type              | Description                                                                                                                                                                                           |
 |:-----------------------|:------------------|:------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
 | search_query           | string            | Search query                                                                                                                                                                                          |
+| search_query_original  | string            | Original search query. An original request is often changed by the platform to fix typos or an incorrect keyboard layout. This field shows what the original query was                                |
 | categories             | array             | Array with information about categories. Each object has the following properties:                                                                                                                    |
 |                        |                   | * id – category id (string)                                                                                                                                                                           |
 |                        |                   | * name – category name (string)                                                                                                                                                                       |
@@ -666,26 +667,27 @@ The actual contents of the response depend on multiple factors, including:
 
 #### Root-Level Fields
 
-| Name               | Type             | Description                                                                                  |
-|--------------------|------------------|----------------------------------------------------------------------------------------------|
-| search_query       | string           | Search query string                                                                          |
-| products_total     | number           | Total number of found products                                                               |
-| products           | array of objects | List of products                                                                             |
-| price_range        | object           | Price range object                                                                           |
-| price_ranges       | array            | List of price buckets                                                                        |
-| price_median       | number           | Median product price                                                                         |
-| brands             | array            | List of brands                                                                               |
-| categories         | array            | List of categories                                                                           |
-| collections        | array            | List of collections (present even if empty)                                                  |
-| industrial_filters | object           | Industrial filters object                                                                    |
-| filters            | array            | List of custom filters                                                                       |
-| locations          | array of objects | Map of aggregated locations                                                                  |
-| clarification      | boolean          | Indicates if clarification was applied                                                       |
-| requests_count     | number           | Number of API requests in current session                                                    |
-| html               | string           | HTML block for rendering products                                                            |
-| book_authors       | array            | Reserved                                                                                     |
-| keywords           | array            | Reserved                                                                                     |
-| queries            | array            | Reserved                                                                                     |
+| Name                  | Type             | Description                                                                                                                                                            |
+|-----------------------|------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| search_query          | string           | Search query string                                                                                                                                                    |
+| search_query_original | string           | Original search query. An original request is often changed by the platform to fix typos or an incorrect keyboard layout. This field shows what the original query was |
+| products_total        | number           | Total number of found products                                                                                                                                         |
+| products              | array of objects | List of products                                                                                                                                                       |
+| price_range           | object           | Price range object                                                                                                                                                     |
+| price_ranges          | array            | List of price buckets                                                                                                                                                  |
+| price_median          | number           | Median product price                                                                                                                                                   |
+| brands                | array            | List of brands                                                                                                                                                         |
+| categories            | array            | List of categories                                                                                                                                                     |
+| collections           | array            | List of collections (present even if empty)                                                                                                                            |
+| industrial_filters    | object           | Industrial filters object                                                                                                                                              |
+| filters               | array            | List of custom filters                                                                                                                                                 |
+| locations             | array of objects | Map of aggregated locations                                                                                                                                            |
+| clarification         | boolean          | Indicates if clarification was applied                                                                                                                                 |
+| requests_count        | number           | Number of API requests in current session                                                                                                                              |
+| html                  | string           | HTML block for rendering products                                                                                                                                      |
+| book_authors          | array            | Reserved                                                                                                                                                               |
+| keywords              | array            | Reserved                                                                                                                                                               |
+| queries               | array            | Reserved                                                                                                                                                               |
 
 #### Fields inside products
 
