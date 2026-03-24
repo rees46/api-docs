@@ -315,15 +315,15 @@ Parameters:
 `popup` — the popup data object.
 `manual` (boolean) — if set to true, skips the wasPopupShown check (i.e., the popup will be displayed even if it has already been shown before).
 
-| Field           | Type                                                                   | Description                                               |
-|-----------------|------------------------------------------------------------------------|-----------------------------------------------------------|
-| id              | number                                                                 | Unique popup identifier                                   |
-| channels        | string[]                                                               | Channels for which the popup is intended (e.g., web_push) |
-| position        | 'centered' \| 'top' \| 'slide_right' \| 'slide_left' \| 'fixed_bottom' | Popup position                                            |
-| delay           | number                                                                 | Delay before showing in seconds                           |
-| html            | string                                                                 | HTML content of the popup                                 |
-| components      | string \| object                                                       | JSON with components (header, text, button, image)        |
-| web_push_system | '0' \| '1'                                                             | Flag indicating system web push                           |
-| popup_actions   | string (JSON)                                                          | Actions for popup elements (link, close, subscribe)       |
+| Field           | Type                                                           | Description                                               |
+|-----------------|----------------------------------------------------------------|-----------------------------------------------------------|
+| id              | number                                                         | Unique popup identifier                                   |
+| channels        | string[]                                                       | Channels for which the popup is intended (e.g., web_push) |
+| position        | 'centered', 'top', 'slide_right', 'slide_left', 'fixed_bottom' | Popup position                                            |
+| delay           | number                                                         | Delay before showing in seconds                           |
+| html            | string                                                         | HTML content of the popup                                 |
+| components      | string                                                         | JSON with components (header, text, button, image)        |
+| web_push_system | '0'  or '1'                                                    | Flag indicating system web push                           |
+| popup_actions   | string (JSON)                                                  | Actions for popup elements (link, close, subscribe)       |
 
 
