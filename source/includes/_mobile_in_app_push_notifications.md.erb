@@ -236,3 +236,94 @@ sdk.inAppNotificationManager.showAlertDialog(
 
 The `fragmentManager` must be initialized separately if you want to enable alerts.
 
+## RN SDK
+
+```jsx
+
+/* The following examples are provided assuming that you had already initialized RN SDK */
+
+/* Automode */
+
+import <%= config[:rn_sdk_package_name] %>, { SdkPopupOverlay } from '<%= config[:rn_sdk_package_code] %>/react-native-sdk';
+
+const rnsdk = new <%= config[:rn_sdk_package_name] %>('YOUR_SHOP_ID', 'Stream');
+
+function App() {
+  return (
+    <>
+      {/* Your App content */}
+      <YourApp />
+
+      {/* Popup display component */}
+      <SdkPopupOverlay sdk={rnsdk} />
+    </>
+  );
+}
+
+
+/* Delegate mode */
+
+import React, { useEffect } from 'react';
+import <%= config[:rn_sdk_package_name] %> from '<%= config[:rn_sdk_package_code] %>/react-native-sdk';
+import { showCustomPopup } from './customPopup';
+
+const rnsdk = new  <%= config[:rn_sdk_package_name] %>('your_shop_id', 'Stream');
+
+export default function App() {
+  useEffect(() => {
+    rnsdk.popupPresentationDelegate = async (popup, sdk) => {
+      // Your custom component for popup
+      await showCustomPopup(popup);
+
+      // Alert the SDK that popup had been displayed
+      await sdk.trackPopupShown(popup.id);
+    };
+  }, []);
+
+  return <YourApp />;
+}
+```
+
+The SDK provides two popup handling modes: automatic and delegated. In automatic mode, the SDK fully manages popup display, while in delegated mode, the application is responsible for rendering the popup via a provided callback.
+
+In **Auto mode**, the SDK monitors incoming popups, evaluates display conditions (for example, ensuring the popup has not been shown within the last 60 seconds), sends the popup/showed tracking event, and renders the popup using the built-in SdkPopupOverlay component.
+
+Requirements:
+
+1. The <SdkPopupOverlay sdk={rnsdk} /> component must be rendered within the application's React tree.
+2. The SDK must be properly initialized and passed to the sdk prop.
+
+In **Delegate mode**, the application takes full control over popup rendering (for example, to use a custom UI). To enable this behavior, you can assign a popupPresentationDelegate handler. In this mode, the SDK does not display popups automatically; instead, it passes the popup data to your callback for manual handling.
+
+Important:
+
+The SDK does not automatically send the popup/showed tracking event.
+The application must explicitly call sdk.trackPopupShown(popup.id) after the popup is actually displayed to the user. This ensures accurate analytics and proper TTL enforcement (a 60-second interval between displays).
+
+SDK Methods for Popup Handling
+
+`trackPopupShown(popupId)`
+Sends a popup impression event to the server and stores a flag in AsyncStorage with a TTL of 60 seconds. This method must be called in Delegate mode after the popup has actually been shown to the user.
+
+`await rnsdk.trackPopupShown(1619);`
+
+`checkAndShowPopup(popup, manual)`
+An internal SDK method used to initiate popup display. It can also be triggered manually for testing purposes (as shown in earlier examples).
+
+Parameters:
+
+`popup` — the popup data object.
+`manual` (boolean) — if set to true, skips the wasPopupShown check (i.e., the popup will be displayed even if it has already been shown before).
+
+| Field           | Type                                                                   | Description                                               |
+|-----------------|------------------------------------------------------------------------|-----------------------------------------------------------|
+| id              | number                                                                 | Unique popup identifier                                   |
+| channels        | string[]                                                               | Channels for which the popup is intended (e.g., web_push) |
+| position        | 'centered' \| 'top' \| 'slide_right' \| 'slide_left' \| 'fixed_bottom' | Popup position                                            |
+| delay           | number                                                                 | Delay before showing in seconds                           |
+| html            | string                                                                 | HTML content of the popup                                 |
+| components      | string \| object                                                       | JSON with components (header, text, button, image)        |
+| web_push_system | '0' \| '1'                                                             | Flag indicating system web push                           |
+| popup_actions   | string (JSON)                                                          | Actions for popup elements (link, close, subscribe)       |
+
+
