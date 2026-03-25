@@ -38,7 +38,6 @@ includes:
   - predict.probability-to-purchase.md.erb
   - nps.md.erb
   - multi_messaging.md.erb
-  - url_shortener.md.erb
   - products.md.erb
   - products.subscriptions.md.erb
   - categories.md.erb
