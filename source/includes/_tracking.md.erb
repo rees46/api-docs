@@ -1617,3 +1617,65 @@ track(event, story_id, slide_id) {
 |           |        | * `html` - HTML markup of the popup                                                                      |
 |           |        | * `web_push_system` - Indicates whether the popup is used for web push notifications (`true` or `false`) |
 |           |        | * `popup_actions` - JSON object containing additional actions linked to the popup                        |
+
+## User viewed a banner in slider
+
+When user view an banner in slider, you have to send event to API with code and type parameters.
+
+```shell
+// No implementation
+```
+
+```javascript
+<%= config[:js_sdk_name] %>("track", "banner_view", {
+    "recommended_code": "4",
+    "banner_id": "7"
+});
+```
+
+```swift
+// No implementation
+```
+
+```kotlin
+// No implementation
+```
+
+```java
+// No implementation
+```
+
+```jsx
+// No implementation
+```
+
+## User clicked a banner in slider
+
+When user click an banner in slider, you have to send event to API with code and type parameters.
+
+```shell
+// No implementation
+```
+
+```javascript
+<%= config[:js_sdk_name] %>("track", "banner_click", {
+    "recommended_code": "4",
+    "banner_id": "7"
+});
+```
+
+```swift
+// No implementation
+```
+
+```kotlin
+// No implementation
+```
+
+```java
+// No implementation
+```
+
+```jsx
+// No implementation
+```
