@@ -20,7 +20,6 @@ includes:
   - search.md.erb
   - subscriptions.md.erb
   - triggers.md.erb
-  - transactionals.md.erb
   - mobile_push_tokens.md.erb
   - mobile_push_notifications.md.erb
   - mobile_in_app_push_notifications.md.erb
@@ -37,7 +36,6 @@ includes:
   - predict.md.erb
   - predict.probability-to-purchase.md.erb
   - nps.md.erb
-  - multi_messaging.md.erb
   - products.md.erb
   - products.subscriptions.md.erb
   - categories.md.erb
