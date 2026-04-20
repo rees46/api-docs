@@ -714,3 +714,34 @@ No implementation yet
 No implementation needed
 ```
 Setting up the text for a message that the user will see after successfully copying the promocode can be done by changing the default text in the **data-promocode-copy-text** attribute.
+
+## Open links in WebView
+
+
+```kotlin
+No implementation yet
+```
+
+```swift
+ let webmanager = RWebViewManager()
+ webmanager.openURL(link, needOpeningWebView: true, from: self){result in
+  switch result{
+  case .success:
+    print("URL successfully opened")
+    self.closeStory()
+  case .failure(let error):
+    print("Failed to open URL: \(error.localizedDescription)")
+  }
+}
+```
+`RWebViewManager` abstracts the work with WebView and simplifies opening links for developers using the SDK.
+How it works:
+- The SDK provides an API for opening links within the application.
+- The application calls the `openURL(...)` method, passing a link and the flag `needOpeningWebView: true` (to explicitly indicate that WebView should be used).
+- Inside `RWebViewManager`, the SDK:
+  - Can create a `WKWebView` and load the page into it.
+  - Can use `SFSafariViewController` if WebView is not needed.
+  - Can handle redirects, cookies, authentication, and other web mechanisms.
+- Completion handler:
+  - `.success` means that the WebView opened without any issues.
+  - `.failure(let error)` indicates a page loading error.
