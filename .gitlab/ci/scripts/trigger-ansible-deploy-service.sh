@@ -31,6 +31,7 @@ curl_args=(
   --form "ref=${DEPLOY_REF}"
   --form "variables[FORCE_RUN]=true"
   --form "variables[DEPLOY_SERVICE]=${SERVICE_NAME}"
+  --form "variables[IMAGE_TAG]=${IMAGE_TAG:-latest}"
 )
 
 if [ "${CI_DEPLOY_ENABLED:-false}" != "true" ]; then
