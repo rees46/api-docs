@@ -1,5 +1,6 @@
 #!/usr/bin/env sh
 # Set image tag variables from branch (matches rees46/workflow docker-publish.yaml).
+# DEPLOY_REF defaults to main: ansible-deploy has no stage branch.
 # Exports DEPLOY_REF for ansible-deploy trigger.
 set -eu
 
@@ -17,13 +18,13 @@ case "${branch}" in
   stage)
     TAG_PREFIX="stage-"
     TAG_SUFFIX="stage"
-    DEPLOY_REF="${DEPLOY_REF:-stage}"
+    DEPLOY_REF="${DEPLOY_REF:-main}"
     ;;
   *)
-    echo "Branch '${branch}' — using stage tags / ansible-deploy ref=stage" >&2
+    echo "Branch '${branch}' — using stage image tags; ansible-deploy ref=main" >&2
     TAG_PREFIX="stage-"
     TAG_SUFFIX="stage"
-    DEPLOY_REF="${DEPLOY_REF:-stage}"
+    DEPLOY_REF="${DEPLOY_REF:-main}"
     ;;
 esac
 
