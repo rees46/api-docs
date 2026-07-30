@@ -1,6 +1,7 @@
 build:
   stage: build
   extends: .docker_dind
+  timeout: 30m
   script:
     - sh .gitlab/ci/scripts/build.sh
   rules:
